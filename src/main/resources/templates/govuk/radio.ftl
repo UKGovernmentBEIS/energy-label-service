@@ -15,22 +15,9 @@
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
   <#local fieldName=spring.status.expression>
-  <#local mandatory=((validation[spring.status.path].mandatory)!false)>
-  <#local questionText=questionMapping[spring.status.path].questionText!label>
-  <#local primaryHintText=questionMapping[spring.status.path].primaryHintText!"">
-  <#local furtherHintTitle=questionMapping[spring.status.path].furtherGuidanceTitle!"">
-  <#local furtherHintText=questionMapping[spring.status.path].furtherGuidanceText!"">
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=questionText legendHeadingClass="govuk-fieldset__legend--m" mandatory=mandatory>
-      <#if primaryHintText?has_content>
-        <span id="${id}-hint" class="govuk-hint">
-          ${primaryHintText}
-        </span>
-      </#if>
-      <#if furtherHintTitle?has_content>
-        <@furtherGuidance.details summaryTitle=furtherHintTitle summaryText=furtherHintText/>
-      </#if>
+    <@radioFieldset.fieldset legendHeading=label legendHeadingClass="govuk-fieldset__legend--m" mandatory=mandatory>
       <#if hasError>
         <span id="${id}-error" class="govuk-error-message">
           ${errorList?join(" ")}
@@ -42,8 +29,8 @@
         <#list radioItems?keys as item>
           <#assign isSelected = spring.stringStatusValue == item>
           <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="${id}" name="${fieldName}" type="radio" value="${item}" <#if isSelected>checked="checked"</#if> <#if hiddenContentId?has_content>data-aria-controls="${hiddenContentId}"</#if>>
-            <label class="govuk-label govuk-radios__label" for="${id}">
+          <input class="govuk-radios__input" id="${id}-${item}" name="${fieldName}" type="radio" value="${item}" <#if isSelected>checked="checked"</#if> <#if hiddenContentId?has_content>data-aria-controls="${hiddenContentId}"</#if>>
+            <label class="govuk-label govuk-radios__label" for="${id}-${item}">
               ${radioItems[item]}
             </label>
           </div>

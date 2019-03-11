@@ -2,11 +2,13 @@ package uk.co.fivium.elp.categories.lamps.model;
 
 import javax.validation.constraints.NotBlank;
 
-public class LampsFormNoNamesConsumption {
+public class LampsFormNoSupplierModelConsumption {
 
   @NotBlank
   private String efficiencyRating;
 
+  @NotBlank
+  private String templateType;
 
   public String getEfficiencyRating() {
     return efficiencyRating;
@@ -16,6 +18,11 @@ public class LampsFormNoNamesConsumption {
     this.efficiencyRating = efficiencyRating;
   }
 
-  // "rating"
+  public String getTemplateType() {
+    return templateType;
+  }
 
+  public void setTemplateType(String templateType) {
+    this.templateType = templateType;
+  }
 }

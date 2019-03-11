@@ -10,6 +10,7 @@ public class TemplateUtils {
 
   private static final String SVG_ELEMENT_ID = "Layer_1";
   private static final String SVG_RATING_INCREMENT_ATTR_NAME = "data-rating-increment";
+  private static final String SVG_MULTILINE_CHARS_PER_ROW_ATTR_NAME = "data-supplier-model-chars-per-row";
 
   public static Element getSvgElement(Document document){
    return getElementById(document, SVG_ELEMENT_ID);
@@ -40,6 +41,26 @@ public class TemplateUtils {
 
   public static void setText(Document document, String elementId, String textValue) {
     TemplateUtils.getElementById(document, elementId).text(textValue); // TODO check this is escaping text
+  }
+
+  public static void setMultilineText(Document document, String elementId, String textValue) {
+    String charsPerRowAttr = getAttributeByName(getSvgElement(document), SVG_MULTILINE_CHARS_PER_ROW_ATTR_NAME);
+    int charsPerRow = Integer.parseInt(charsPerRowAttr);
+
+    Element line1 = getElementById(document, elementId + "Line1");
+    Element line2 = getElementById(document, elementId + "Line2");
+
+    // TODO try to split on space first to preserve words
+    if (textValue.length() <= charsPerRow) {
+      line1.text(""); // clear out row
+      line2.text(textValue);
+    } else {
+      String line1Text = textValue.substring(0, charsPerRow);
+      String line2Text = textValue.substring(charsPerRow);
+
+      line1.text(line1Text);
+      line2.text(line2Text);
+    }
   }
 
   public static void setRatingArrow(Document document, String parentElementId, RatingClass rating, RatingClassRange ratingClassRange) {

@@ -2,17 +2,17 @@ package uk.co.fivium.elp.categories.lamps.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-public class LampsFormNoNames {
+public class LampsFormNoSupplierModel {
 
   @NotBlank
   private String efficiencyRating;
 
-  @NotNull
   @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 3 digits long")
   private String energyConsumption;
 
+  @NotBlank
+  private String templateType;
 
   public String getEfficiencyRating() {
     return efficiencyRating;
@@ -30,8 +30,11 @@ public class LampsFormNoNames {
     this.energyConsumption = energyConsumption;
   }
 
+  public String getTemplateType() {
+    return templateType;
+  }
 
-  // setText(templateDom, "kwh", form.getEnergyConsumption());
-  // "rating"
-
+  public void setTemplateType(String templateType) {
+    this.templateType = templateType;
+  }
 }

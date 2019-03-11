@@ -17,7 +17,6 @@ public class LampsForm {
   @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 3 digits long")
   private String energyConsumption;
 
-
   public String getSupplierName() {
     return supplierName;
   }
@@ -50,10 +49,4 @@ public class LampsForm {
     this.energyConsumption = energyConsumption;
   }
 
-
-
-  // setText(templateDom, "supplier", form.getSupplierName());
-  // setText(templateDom, "model", form.getModelName());
-  // setText(templateDom, "kwh", form.getEnergyConsumption());
-  // "rating" - A++ to E
 }
