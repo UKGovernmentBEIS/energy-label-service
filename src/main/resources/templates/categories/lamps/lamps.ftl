@@ -1,7 +1,7 @@
 <#include '../../layout.ftl'>
 
 <@defaultPage title="Energy Label Prototype" pageHeading="Lamps">
-  <@form.govukForm "/categories/lamps">
+  <@form.govukForm submitUrl>
 
     <@govukTextInput.textInput path="form.supplierName" label="Supplier's name or trade mark"/>
     <@govukTextInput.textInput path="form.modelName" label="Supplier's model identifier"/>

@@ -1,5 +1,7 @@
 package uk.co.fivium.elp.categories.lamps.controller;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
 import java.util.Arrays;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.elp.categories.lamps.model.LampSubCategory;
+import uk.co.fivium.elp.categories.lamps.model.LampSubCategoryForm;
 import uk.co.fivium.elp.categories.lamps.model.LampsForm;
 import uk.co.fivium.elp.categories.lamps.model.LampsFormNoSupplierModel;
 import uk.co.fivium.elp.categories.lamps.model.LampsFormNoSupplierModelConsumption;
 import uk.co.fivium.elp.categories.lamps.model.TemplateType;
 import uk.co.fivium.elp.categories.lamps.service.LampsService;
 import uk.co.fivium.elp.model.RatingClassRange;
+import uk.co.fivium.elp.mvc.ReverseRouter;
 import uk.co.fivium.elp.renderer.PdfRenderer;
 import uk.co.fivium.elp.util.ControllerUtils;
 import uk.co.fivium.elp.util.StreamUtils;
 
 @Controller
-@RequestMapping("/categories")
+@RequestMapping("/categories/lamps")
 public class LampsController {
 
   private final PdfRenderer pdfRenderer;
@@ -35,16 +40,42 @@ public class LampsController {
     this.lampsService = lampsService;
   }
 
+  @GetMapping("/")
+  public ModelAndView renderLampSubCategories(@ModelAttribute("form") LampSubCategoryForm form) {
+    return getSubCategory();
+  }
+
+  @PostMapping("/")
+  @ResponseBody
+  public ModelAndView handleLampSubCategoriesSubmit(@Valid @ModelAttribute("form") LampSubCategoryForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSubCategory();
+    }
+    else {
+      LampSubCategory subCategory = LampSubCategory.valueOf(form.getSubCategory());
+      return new ModelAndView("redirect:" + subCategory.getNextSateUrl());
+    }
+  }
+
+  private ModelAndView getSubCategory() {
+    ModelAndView modelAndView = new ModelAndView("categories/lamps/lampsSubCategory");
+    modelAndView.addObject("subCategories",
+        Arrays.stream(LampSubCategory.values())
+        .collect(StreamUtils.toLinkedHashMap(Enum::name, LampSubCategory::getDisplayName))
+    );
+    return modelAndView;
+  }
+
   @GetMapping("/lamps")
   public ModelAndView renderLamps(@ModelAttribute("form") LampsForm form) {
-    return getModelAndView("categories/lamps/lamps");
+    return getLamps();
   }
 
   @PostMapping("/lamps")
   @ResponseBody
   public Object handleLampsSubmit(@Valid @ModelAttribute("form") LampsForm form, BindingResult bindingResult) throws Exception {
     if (bindingResult.hasErrors()) {
-      return getModelAndView("categories/lamps/lamps");
+      return getLamps();
     }
     else {
       Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
@@ -53,15 +84,15 @@ public class LampsController {
   }
 
   @GetMapping("/lamps-excluding-name-model")
-  public ModelAndView renderLamps(@ModelAttribute("form") LampsFormNoSupplierModel form) {
-    return getModelAndView("categories/lamps/lampsExcludingNameModel");
+  public ModelAndView renderLampsExNameModel(@ModelAttribute("form") LampsFormNoSupplierModel form) {
+    return getLampsExNameModel();
   }
 
   @PostMapping("/lamps-excluding-name-model")
   @ResponseBody
-  public Object handleLampsSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModel form, BindingResult bindingResult) throws Exception {
+  public Object handleLampsExNameModelSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModel form, BindingResult bindingResult) throws Exception {
     if (bindingResult.hasErrors()) {
-      return getModelAndView("categories/lamps/lampsExcludingNameModel");
+      return getLampsExNameModel();
     }
     else {
       Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
@@ -70,15 +101,15 @@ public class LampsController {
   }
 
   @GetMapping("/lamps-excluding-name-model-consumption")
-  public ModelAndView renderLamps(@ModelAttribute("form") LampsFormNoSupplierModelConsumption form) {
-    return getModelAndView("categories/lamps/lampsExcludingNameModelConsumption");
+  public ModelAndView renderLampsExNameModelConsumption(@ModelAttribute("form") LampsFormNoSupplierModelConsumption form) {
+    return getLampsExNameModelConsumption();
   }
 
   @PostMapping("/lamps-excluding-name-model-consumption")
   @ResponseBody
-  public Object handleLampsSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModelConsumption form, BindingResult bindingResult) throws Exception {
+  public Object handleLampsExNameModelConsumptionSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModelConsumption form, BindingResult bindingResult) throws Exception {
     if (bindingResult.hasErrors()) {
-      return getModelAndView("categories/lamps/lampsExcludingNameModelConsumption");
+      return getLampsExNameModelConsumption();
     }
     else {
       Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
@@ -86,17 +117,32 @@ public class LampsController {
     }
   }
 
-  private ModelAndView getModelAndView(String view) {
-    RatingClassRange efficiencyRatingRange = LampsService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
+  private ModelAndView getLamps() {
+    ModelAndView modelAndView = new ModelAndView("categories/lamps/lamps");
+    addCommonObjects(modelAndView, ReverseRouter.route(on(LampsController.class).renderLamps(null)));
+    return modelAndView;
+  }
 
-    ModelAndView modelAndView = new ModelAndView(view);
+  private ModelAndView getLampsExNameModel() {
+    ModelAndView modelAndView = new ModelAndView("categories/lamps/lampsExcludingNameModel");
+    addCommonObjects(modelAndView, ReverseRouter.route(on(LampsController.class).renderLampsExNameModel(null)));
+    return modelAndView;
+  }
+
+  private ModelAndView getLampsExNameModelConsumption() {
+    ModelAndView modelAndView = new ModelAndView("categories/lamps/lampsExcludingNameModelConsumption");
+    addCommonObjects(modelAndView, ReverseRouter.route(on(LampsController.class).renderLampsExNameModelConsumption(null)));
+    return modelAndView;
+  }
+
+  private void addCommonObjects(ModelAndView modelAndView, String submitUrl) {
+    RatingClassRange efficiencyRatingRange = LampsService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
     modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     modelAndView.addObject("templateType",
         Arrays.stream(TemplateType.values())
-        .collect(StreamUtils.toLinkedHashMap(Enum::name, TemplateType::getDisplayName))
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, TemplateType::getDisplayName))
     );
-
-    return modelAndView;
+    modelAndView.addObject("submitUrl", submitUrl);
   }
 
 }

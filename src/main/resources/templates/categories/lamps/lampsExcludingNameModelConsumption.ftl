@@ -1,7 +1,7 @@
 <#include '../../layout.ftl'>
 
 <@defaultPage title="Energy Label Prototype" pageHeading="Lamps">
-  <@form.govukForm "/categories/lamps-excluding-name-model-consumption">
+  <@form.govukForm submitUrl>
 
     <@govukSelect.select path="form.efficiencyRating" label="Energy efficiency class of the application" options=efficiencyRating/>
 
