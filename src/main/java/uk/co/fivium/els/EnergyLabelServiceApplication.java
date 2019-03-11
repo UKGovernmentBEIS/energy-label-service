@@ -6,14 +6,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class EnergyLabelPrototypeApplication extends SpringBootServletInitializer {
+public class EnergyLabelServiceApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(EnergyLabelPrototypeApplication.class);
+		return application.sources(EnergyLabelServiceApplication.class);
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(EnergyLabelPrototypeApplication.class, args);
+		SpringApplication.run(EnergyLabelServiceApplication.class, args);
 	}
 }

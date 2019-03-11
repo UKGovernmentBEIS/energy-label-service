@@ -1,5 +1,7 @@
 package uk.co.fivium.els.categories.washingmachines.controller;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.washingmachines.model.WashingMachinesForm;
 import uk.co.fivium.els.categories.washingmachines.service.WashingMachinesService;
 import uk.co.fivium.els.model.RatingClassRange;
+import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
@@ -42,8 +45,7 @@ public class WashingMachinesController {
   public Object handleWashingMachinesSubmit(@Valid @ModelAttribute("form") WashingMachinesForm form, BindingResult bindingResult) throws Exception {
     if (bindingResult.hasErrors()) {
       return getModelAndView();
-    }
-    else {
+    } else {
       Resource pdf = pdfRenderer.render(washingMachinesService.generateHtml(form, WashingMachinesService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "washing-machines-label.pdf");
     }
@@ -56,6 +58,7 @@ public class WashingMachinesController {
     ModelAndView modelAndView = new ModelAndView("categories/washing-machines/washingMachines");
     modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     modelAndView.addObject("spinDryingEfficiencyRating", StreamUtils.ratingRangeToSelectionMap(spinEfficiencyRange));
+    modelAndView.addObject("submitUrl", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null)));
 
     return modelAndView;
   }

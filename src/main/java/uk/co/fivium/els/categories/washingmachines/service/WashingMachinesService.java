@@ -29,6 +29,7 @@ public class WashingMachinesService {
 
     Document templateDom = templateParserService.parseTemplate(legislationCategory.getTemplatePath());
 
+    // TODO multiline
     TemplateUtils.setText(templateDom, "supplier", form.getSupplierName());
     TemplateUtils.setText(templateDom, "model", form.getModelName());
     TemplateUtils.setText(templateDom, "kwhAnnum", form.getAnnualEnergyConsumption());

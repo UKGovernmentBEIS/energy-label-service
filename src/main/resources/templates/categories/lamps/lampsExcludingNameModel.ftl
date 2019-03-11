@@ -1,4 +1,5 @@
 <#include '../../layout.ftl'>
+<#include '../../generateLabelButton.ftl'>
 
 <@defaultPage title="Energy Label Prototype" pageHeading="Lamps">
   <@form.govukForm submitUrl>
@@ -9,7 +10,7 @@
 
     <@govukRadios.radio path="form.templateType" label="Which type of label should be generated? " radioItems=templateType />
 
-    <@govukButton.button buttonText="Generate Label" buttonClass="govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8"/>
+    <@generateLabelButton/>
   </@form.govukForm>
 
 </@defaultPage>
