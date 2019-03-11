@@ -1,0 +1,20 @@
+{
+  "name": "energy-label-generator",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get your application up and running.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/fiviumuk/energy-label-generator",
+  "devDependencies": {
+    "autoprefixer": "^9.4.2",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4"
+  }
+}
