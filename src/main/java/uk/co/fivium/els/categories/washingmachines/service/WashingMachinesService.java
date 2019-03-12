@@ -29,10 +29,10 @@ public class WashingMachinesService {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(legislationCategory.getTemplatePath()));
 
-    // TODO multiline
+
     return templatePopulator
-        .setText("supplier", form.getSupplierName())
-        .setText("model", form.getModelName())
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
         .setText("lAnnum", form.getAnnualWaterConsumption())
         .setText("kg", form.getCapacity())
