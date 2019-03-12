@@ -10,7 +10,7 @@ script:
 - chmod +x gradlew
 - ./gradlew bootJar
 
-deploy-dev:
+deploy:
   provider: cloudfoundry
   api: https://api.london.cloud.service.gov.uk
   username: tech@fivium.co.uk
