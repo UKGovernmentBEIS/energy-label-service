@@ -6,11 +6,11 @@ import uk.co.fivium.els.model.FieldPrompt;
 public class LampsFormNoSupplierModelConsumption {
 
   @FieldPrompt("Energy efficiency class of the application")
-  @NotBlank
+  @NotBlank(message = "Select an energy efficiency class")
   private String efficiencyRating;
 
   @FieldPrompt("What type of label should be generated?")
-  @NotBlank
+  @NotBlank(message = "Select what type of label should be generated")
   private String templateType;
 
   public String getEfficiencyRating() {

@@ -7,19 +7,19 @@ import uk.co.fivium.els.model.FieldPrompt;
 public class LampsForm {
 
   @FieldPrompt("Supplier's name or trade mark")
-  @NotBlank // TODO max length?
+  @NotBlank(message = "Enter a supplier name or trade mark") // TODO max length?
   private String supplierName;
 
   @FieldPrompt("Supplier's model identifier")
-  @NotBlank
+  @NotBlank(message = "Enter a supplier model identifier")
   private String modelName;
 
   @FieldPrompt("Energy efficiency class of the application")
-  @NotBlank
+  @NotBlank(message = "Select an energy efficiency class")
   private String efficiencyRating;
 
   @FieldPrompt("Weighted energy consumption (EC) in kWh per 1 000 hours, rounded up to the nearest integer")
-  @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 3 digits long")
+  @Digits(integer = 3, fraction = 0, message = "Enter an energy consumption, up to 3 digits long")
   private String energyConsumption;
 
   public String getSupplierName() {

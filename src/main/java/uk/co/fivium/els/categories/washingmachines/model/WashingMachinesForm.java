@@ -7,39 +7,39 @@ import uk.co.fivium.els.model.FieldPrompt;
 public class WashingMachinesForm {
 
   @FieldPrompt("Supplier's name or trade mark")
-  @NotBlank // TODO max length?
+  @NotBlank(message = "Enter a supplier name or trade mark") // TODO max length?
   private String supplierName;
 
   @FieldPrompt("Supplier's model identifier")
-  @NotBlank
+  @NotBlank(message = "Enter a supplier model identifier")
   private String modelName;
 
   @FieldPrompt("Energy efficiency class indicator")
-  @NotBlank
+  @NotBlank(message = "Select an energy efficiency class")
   private String efficiencyRating;
 
   @FieldPrompt("Weighted energy consumption (EC) in kWh per 1 000 hours, rounded up to the nearest integer")
-  @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 3 digits long")
+  @Digits(integer = 3, fraction = 0, message = "Enter a weighted energy consumption, up to 3 digits long")
   private String annualEnergyConsumption;
 
   @FieldPrompt("Weighted annual water consumption (AWC) in litres per year, rounded to the nearest integer [L/annum]")
-  @Digits(integer = 5, fraction = 0, message = "Must be a whole number up to 5 digits long")
+  @Digits(integer = 5, fraction = 0, message = "Enter a weighted annual water consumption, up to 5 digits long")
   private String annualWaterConsumption;
 
   @FieldPrompt("Rated capacity in kg, for the standard 60°C cotton programme at full load or the standard 40°C cotton programme at full load [kg]")
-  @Digits(integer = 2, fraction = 1) // TODO message
+  @Digits(integer = 2, fraction = 1, message = "Enter a rated capacity, up to 2 digits long with an optional decimal place")
   private String capacity;
 
   @FieldPrompt("Spin-drying efficiency class")
-  @NotBlank
+  @NotBlank(message = "Select a spin-drying efficiency class")
   private String spinDryingEfficiencyRating;
 
   @FieldPrompt("Airborne acoustical noise emissions during the washing phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
-  @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 2 digits long")
+  @Digits(integer = 3, fraction = 0, message = "Enter a noise emission during the washing phase, up to 5 digits long")
   private String washingNoiseEmissions;
 
   @FieldPrompt("Airborne acoustical noise emissions during the spinning phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
-  @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 2 digits long")
+  @Digits(integer = 3, fraction = 0, message = "Enter a noise emission during the spinning phase, up to 5 digits long")
   private String spinningNoiseEmissions;
 
   public String getSupplierName() {

@@ -2,6 +2,7 @@
 <#include '../../generateLabelButton.ftl'>
 
 <@defaultPage pageHeading="Lamps">
+  <@govukErrorSummary.errorSummary errorItems=errorList/>
   <@form.govukForm submitUrl>
 
     <@govukTextInput.textInput path="form.supplierName"/>
