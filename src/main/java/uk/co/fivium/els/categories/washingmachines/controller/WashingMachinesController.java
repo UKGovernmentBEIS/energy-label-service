@@ -2,11 +2,14 @@ package uk.co.fivium.els.categories.washingmachines.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import java.util.Collections;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +47,7 @@ public class WashingMachinesController {
   @ResponseBody
   public Object handleWashingMachinesSubmit(@Valid @ModelAttribute("form") WashingMachinesForm form, BindingResult bindingResult) throws Exception {
     if (bindingResult.hasErrors()) {
-      return getModelAndView();
+      return getModelAndView(bindingResult.getFieldErrors());
     } else {
       Resource pdf = pdfRenderer.render(washingMachinesService.generateHtml(form, WashingMachinesService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "washing-machines-label.pdf");
@@ -52,6 +55,10 @@ public class WashingMachinesController {
   }
 
   private ModelAndView getModelAndView() {
+    return getModelAndView(Collections.emptyList());
+  }
+
+  private ModelAndView getModelAndView(List<FieldError> errorList) {
     RatingClassRange efficiencyRatingRange = WashingMachinesService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
     RatingClassRange spinEfficiencyRange = WashingMachinesService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange();
 
@@ -59,8 +66,11 @@ public class WashingMachinesController {
     modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     modelAndView.addObject("spinDryingEfficiencyRating", StreamUtils.ratingRangeToSelectionMap(spinEfficiencyRange));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null)));
+    ControllerUtils.addErrorSummary(modelAndView, errorList);
 
     return modelAndView;
   }
+
+
 
 }

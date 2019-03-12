@@ -8,11 +8,11 @@
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
-  <#local mandatory=((validation[spring.status.path].mandatory)!false)>
+  <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
     <label class="govuk-label" for="${id}">
-      ${label}
+      ${fieldPrompt}
     </label>
     <#if hasError>
       <span id="${id}-error" class="govuk-error-message">

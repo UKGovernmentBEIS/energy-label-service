@@ -12,6 +12,7 @@
 <#import 'govuk/panel.ftl' as govukPanel>
 <#import 'govuk/radio.ftl' as govukRadios>
 <#import 'govuk/select.ftl' as govukSelect>
+<#import 'govuk/textInput.ftl' as govukTextInput>
 
 <#function springUrl url>
   <#local springUrl>
