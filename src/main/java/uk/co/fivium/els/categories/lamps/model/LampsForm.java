@@ -2,19 +2,24 @@ package uk.co.fivium.els.categories.lamps.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import uk.co.fivium.els.model.FieldPrompt;
 
 public class LampsForm {
 
-  @NotBlank // TODO max length?
+  @FieldPrompt("Supplier's name or trade mark")
+  @NotBlank(message = "Enter a supplier name or trade mark") // TODO max length?
   private String supplierName;
 
-  @NotBlank
+  @FieldPrompt("Supplier's model identifier")
+  @NotBlank(message = "Enter a supplier model identifier")
   private String modelName;
 
-  @NotBlank
+  @FieldPrompt("Energy efficiency class of the application")
+  @NotBlank(message = "Select an energy efficiency class")
   private String efficiencyRating;
 
-  @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 3 digits long")
+  @FieldPrompt("Weighted energy consumption (EC) in kWh per 1 000 hours, rounded up to the nearest integer")
+  @Digits(integer = 3, fraction = 0, message = "Enter an energy consumption, up to 3 digits long")
   private String energyConsumption;
 
   public String getSupplierName() {

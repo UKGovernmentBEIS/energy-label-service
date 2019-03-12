@@ -1,13 +1,16 @@
 package uk.co.fivium.els.categories.lamps.model;
 
 import javax.validation.constraints.NotBlank;
+import uk.co.fivium.els.model.FieldPrompt;
 
 public class LampsFormNoSupplierModelConsumption {
 
-  @NotBlank
+  @FieldPrompt("Energy efficiency class of the application")
+  @NotBlank(message = "Select an energy efficiency class")
   private String efficiencyRating;
 
-  @NotBlank
+  @FieldPrompt("What type of label should be generated?")
+  @NotBlank(message = "Select what type of label should be generated")
   private String templateType;
 
   public String getEfficiencyRating() {

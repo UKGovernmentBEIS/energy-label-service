@@ -18,7 +18,7 @@
   <#local fieldName=spring.status.expression>
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--m" mandatory=mandatory>
+    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" mandatory=mandatory>
       <#if hasError>
         <span id="${id}-error" class="govuk-error-message">
           ${errorList?join(" ")}
@@ -59,7 +59,7 @@
   <#local displayValue=spring.status.displayValue>
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--m" mandatory=true>
+    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" mandatory=true>
       <#if hasError>
         <span id="${id}-error" class="govuk-error-message">
           ${errorList?join(" ")}
