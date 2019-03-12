@@ -3,3 +3,4 @@ applications:
     memory: 512M
     instances: 2
     buildpack: java_buildpack
+    path: build/libs/energy-label-service-SNAPSHOT.jar
