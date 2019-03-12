@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - openjdk8
+before_install:
+  - nvm install --lts
+install:
+  - npm install
+script:
+  - npx gulp buildAll
+  - ./gradlew bootJar
