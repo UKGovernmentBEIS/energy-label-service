@@ -8,7 +8,7 @@ import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
-import uk.co.fivium.els.util.TemplateUtils;
+import uk.co.fivium.els.service.TemplatePopulator;
 
 @Service
 public class ReversibleAirConditionerService {
@@ -25,15 +25,14 @@ public class ReversibleAirConditionerService {
 
   public Document generateHtml(ReversibleAirConditionersForm form, LegislationCategory legislationCategory) {
 
-    Document templateDom = templateParserService.parseTemplate(legislationCategory.getTemplatePath());
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(legislationCategory.getTemplatePath()));
 
-    TemplateUtils.setText(templateDom, "supplier", form.getSupplierName());
-    TemplateUtils.setText(templateDom, "model", form.getModelIdentifier());
-    TemplateUtils.setRatingArrow(templateDom, "seerRating", RatingClass.valueOf(form.getOverallEfficiencyClass()), legislationCategory.getPrimaryRatingRange());
-
-    // TODO all the rest
-
-    return templateDom;
+    return templatePopulator
+        .setText("supplier", form.getSupplierName())
+        .setText("model", form.getModelIdentifier())
+        .setRatingArrow("seerRating", RatingClass.valueOf(form.getOverallEfficiencyClass()), legislationCategory.getPrimaryRatingRange())
+        // TODO all the rest
+        .getPopulatedDocument();
   }
 
 

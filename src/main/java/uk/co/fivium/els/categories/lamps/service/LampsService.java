@@ -11,7 +11,7 @@ import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
-import uk.co.fivium.els.util.TemplateUtils;
+import uk.co.fivium.els.service.TemplatePopulator;
 
 @Service
 public class LampsService {
@@ -27,44 +27,46 @@ public class LampsService {
     this.templateParserService = templateParserService;
   }
 
-  public void setMultilineText(Document document, String elementId, String textValue) {
-    // get
-  }
-
   public Document generateHtml(LampsForm form, LegislationCategory legislationCategory) {
-    Document template = templateParserService.parseTemplate(legislationCategory.getTemplatePath());
-    TemplateUtils.setMultilineText(template, "supplier", form.getSupplierName());
-    TemplateUtils.setMultilineText(template, "model", form.getModelName());
-    TemplateUtils.setRatingArrow(template, "rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-    TemplateUtils.setText(template, "kwh", form.getEnergyConsumption());
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(legislationCategory.getTemplatePath()));
 
-    return template;
+    return templatePopulator
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("kwh", form.getEnergyConsumption())
+        .getPopulatedDocument();
   }
 
   public Document generateHtml(LampsFormNoSupplierModel form, LegislationCategory legislationCategory) {
     TemplateType templateType = TemplateType.valueOf(form.getTemplateType());
-    Document template;
+    TemplatePopulator templatePopulator;
+
     if (templateType == TemplateType.COLOUR) {
-      template = templateParserService.parseTemplate("labels/lamps/excluding-name-model/lamps-excluding-name-model.svg");
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps/excluding-name-model/lamps-excluding-name-model.svg"));
     } else {
-      template = templateParserService.parseTemplate("labels/lamps/excluding-name-model/lamps-excluding-name-model-bw.svg");
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps/excluding-name-model/lamps-excluding-name-model-bw.svg"));
     }
 
-    TemplateUtils.setRatingArrow(template, "rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-    TemplateUtils.setText(template, "kwh", form.getEnergyConsumption());
-    return template;
+    return templatePopulator
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("kwh", form.getEnergyConsumption())
+        .getPopulatedDocument();
   }
 
   public Document generateHtml(LampsFormNoSupplierModelConsumption form, LegislationCategory legislationCategory) {
     TemplateType templateType = TemplateType.valueOf(form.getTemplateType());
-    Document template;
+    TemplatePopulator templatePopulator;
+
     if (templateType == TemplateType.COLOUR) {
-      template = templateParserService.parseTemplate("labels/lamps/excluding-name-model-consumption/lamps-excluding-name-model-consumption.svg");
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps/excluding-name-model-consumption/lamps-excluding-name-model-consumption.svg"));
     } else {
-      template = templateParserService.parseTemplate("labels/lamps/excluding-name-model-consumption/lamps-excluding-name-model-consumption-bw.svg");
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps/excluding-name-model-consumption/lamps-excluding-name-model-consumption-bw.svg"));
     }
-    TemplateUtils.setRatingArrow(template, "rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-    return template;
+
+    return templatePopulator
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .getPopulatedDocument();
   }
 
 }

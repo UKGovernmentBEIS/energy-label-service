@@ -7,8 +7,8 @@ import uk.co.fivium.els.categories.washingmachines.model.WashingMachinesForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
+import uk.co.fivium.els.service.TemplatePopulator;
 import uk.co.fivium.els.service.TemplateParserService;
-import uk.co.fivium.els.util.TemplateUtils;
 
 @Service
 public class WashingMachinesService {
@@ -27,22 +27,20 @@ public class WashingMachinesService {
 
   public Document generateHtml(WashingMachinesForm form, LegislationCategory legislationCategory) {
 
-    Document templateDom = templateParserService.parseTemplate(legislationCategory.getTemplatePath());
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(legislationCategory.getTemplatePath()));
 
     // TODO multiline
-    TemplateUtils.setText(templateDom, "supplier", form.getSupplierName());
-    TemplateUtils.setText(templateDom, "model", form.getModelName());
-    TemplateUtils.setText(templateDom, "kwhAnnum", form.getAnnualEnergyConsumption());
-    TemplateUtils.setText(templateDom, "lAnnum", form.getAnnualWaterConsumption());
-    TemplateUtils.setText(templateDom, "kg", form.getCapacity());
-    TemplateUtils.setText(templateDom, "washDb", form.getWashingNoiseEmissions());
-    TemplateUtils.setText(templateDom, "spinDb", form.getSpinningNoiseEmissions());
-
-    TemplateUtils.applyRatingCssClass(templateDom, "spinClass", RatingClass.valueOf(form.getSpinDryingEfficiencyRating()));
-
-    TemplateUtils.setRatingArrow(templateDom, "rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-
-    return templateDom;
+    return templatePopulator
+        .setText("supplier", form.getSupplierName())
+        .setText("model", form.getModelName())
+        .setText("kwhAnnum", form.getAnnualEnergyConsumption())
+        .setText("lAnnum", form.getAnnualWaterConsumption())
+        .setText("kg", form.getCapacity())
+        .setText("washDb", form.getWashingNoiseEmissions())
+        .setText("spinDb", form.getSpinningNoiseEmissions())
+        .applyRatingCssClass("spinClass", RatingClass.valueOf(form.getSpinDryingEfficiencyRating()))
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .getPopulatedDocument();
   }
 
 }
