@@ -1,7 +1,7 @@
 <#include '../../layout.ftl'>
 <#include '../../generateLabelButton.ftl'>
 
-<@defaultPage title="Energy Label Prototype" pageHeading="Lamps">
+<@defaultPagepageHeading="Lamps">
   <@form.govukForm submitUrl>
 
     <@govukSelect.select path="form.efficiencyRating" label="Energy efficiency class of the application" options=efficiencyRating/>

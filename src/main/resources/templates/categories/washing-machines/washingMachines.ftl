@@ -1,7 +1,7 @@
 <#include '../../layout.ftl'>
 <#include '../../generateLabelButton.ftl'>
 
-<@defaultPage title="Energy Label Prototype" pageHeading="Washing machines">
+<@defaultPage pageHeading="Washing machines">
   <@form.govukForm submitUrl>
 
     <@govukTextInput.textInput path="form.supplierName" label="Supplier's name or trade mark"/>

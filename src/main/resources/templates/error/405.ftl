@@ -1,6 +1,6 @@
 <#include '../layout.ftl'>
 
-<@defaultPage title="Page not found" pageHeading="Page not found">
+<@defaultPage pageHeading="Page not found">
   <p class="govuk-body">
     If you typed the web address, check it is correct.
   </p>

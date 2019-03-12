@@ -14,7 +14,7 @@
   <div class="govuk-header__container govuk-width-container">
 
     <div class="govuk-header__logo">
-      <a href="#" class="govuk-header__link govuk-header__link--homepage">
+      <a href="#TODO" class="govuk-header__link govuk-header__link--homepage">
         <span class="govuk-header__logotype">
           <svg role="presentation" focusable="false" class="govuk-header__logotype-crown" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 132 97" height="40px" width="47px">
             <g id="g3111-1">
@@ -593,8 +593,8 @@
       </a>
     </div>
     <div class="govuk-header__content">
-      <a href="#" class="govuk-header__link govuk-header__link--service-name">
-        Energy Label Generator Prototype
+      <a href="#TODO" class="govuk-header__link govuk-header__link--service-name">
+        Create energy labels
       </a>
       <button type="button" role="button" class="govuk-header__menu-button js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
       <nav>

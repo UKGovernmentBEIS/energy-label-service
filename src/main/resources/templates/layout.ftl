@@ -25,7 +25,6 @@
 </#function>
 
 <#macro defaultPage
-  title
   pageHeading=""
   errorCheck=false
   caption=""
@@ -44,7 +43,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title><#if errorCheck=true>Error: </#if>${title} - Energy Label Generator Prototype</title>
+  <title><#if errorCheck=true>Error: </#if>Create energy labels</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0c0c" />
   <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<@spring.url'/assets/govuk-frontend/assets/images/favicon.ico'/>" type="image/x-icon" />

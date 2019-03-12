@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@defaultPage title="Energy Label Prototype" pageHeading="Reversible air conditioners">
+<@defaultPage pageHeading="Reversible air conditioners">
   <@form.govukForm "/air-conditioners/non-duct/reversible-air-conditioners">
 
     <@govukTextInput.textInput path="form.supplierName" label="Supplier's name or trade mark"/>
