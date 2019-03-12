@@ -1,0 +1,1 @@
+For this template, you can add the classes dryingClassA through to dryingClassG to the dryingClass element to make the applicable drying class rating larger and bold. This should be in addition to the cls-44 class already on the element.

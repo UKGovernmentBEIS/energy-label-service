@@ -1,0 +1,1 @@
+For this template, you can add the classes spinClassA through to spinClassG to the spinClass element to make the applicable spin class rating larger and bold. This should be in addition to the cls-36 class already on the element.
