@@ -1,0 +1,1 @@
+For the condenser tumble dryers template, you can add the classes condensationEfficiencyClassA through to condensationEfficiencyClassG to the condensationEfficiency element to make the applicable condensation efficiency rating larger and bold. This should be in addition to the cls-70 class already on the element.
