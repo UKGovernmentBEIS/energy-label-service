@@ -1,0 +1,1 @@
+For these templates, if the user has selected "Visible power switch puts the television in a condition with power consumption not exceeding 0.01 Watts", add the hasPowerSwitch class to the powerSwitch element
