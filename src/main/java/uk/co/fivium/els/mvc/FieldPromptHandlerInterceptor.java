@@ -28,7 +28,6 @@ public class FieldPromptHandlerInterceptor implements HandlerInterceptor {
     }
   }
 
-
   private Map<String, String> getFieldPromptMapping(Object form) {
     Map<String, String> fieldPrompts = new HashMap<>();
     Class<?> formClass = form.getClass();

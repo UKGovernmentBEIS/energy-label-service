@@ -1,12 +1,12 @@
 <#include '../../layout.ftl'>
 <#include '../../generateLabelButton.ftl'>
 
-<@defaultPagepageHeading="Lamps">
+<@defaultPage pageHeading="Lamps">
   <@form.govukForm submitUrl>
 
-    <@govukSelect.select path="form.efficiencyRating" label="Energy efficiency class of the application" options=efficiencyRating/>
+    <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
 
-    <@govukRadios.radio path="form.templateType" label="Which type of label should be generated? " radioItems=templateType />
+    <@govukRadios.radio path="form.templateType" radioItems=templateType />
 
     <@generateLabelButton/>
   </@form.govukForm>

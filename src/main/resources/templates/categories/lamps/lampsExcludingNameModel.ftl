@@ -4,11 +4,11 @@
 <@defaultPage pageHeading="Lamps">
   <@form.govukForm submitUrl>
 
-    <@govukSelect.select path="form.efficiencyRating" label="Energy efficiency class of the application" options=efficiencyRating/>
+    <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
 
-    <@govukTextInput.textInput path="form.energyConsumption" label="Weighted energy consumption (EC) in kWh per 1 000 hours, rounded up to the nearest integer"/>
+    <@govukTextInput.textInput path="form.energyConsumption"/>
 
-    <@govukRadios.radio path="form.templateType" label="Which type of label should be generated? " radioItems=templateType />
+    <@govukRadios.radio path="form.templateType" radioItems=templateType />
 
     <@generateLabelButton/>
   </@form.govukForm>
