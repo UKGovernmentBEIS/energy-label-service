@@ -2,33 +2,43 @@ package uk.co.fivium.els.categories.washingmachines.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import uk.co.fivium.els.model.FieldPrompt;
 
 public class WashingMachinesForm {
 
+  @FieldPrompt("Supplier's name or trade mark")
   @NotBlank // TODO max length?
   private String supplierName;
 
+  @FieldPrompt("Supplier's model identifier")
   @NotBlank
   private String modelName;
 
+  @FieldPrompt("Energy efficiency class indicator")
   @NotBlank
   private String efficiencyRating;
 
+  @FieldPrompt("Weighted energy consumption (EC) in kWh per 1 000 hours, rounded up to the nearest integer")
   @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 3 digits long")
   private String annualEnergyConsumption;
 
+  @FieldPrompt("Weighted annual water consumption (AWC) in litres per year, rounded to the nearest integer [L/annum]")
   @Digits(integer = 5, fraction = 0, message = "Must be a whole number up to 5 digits long")
   private String annualWaterConsumption;
 
+  @FieldPrompt("Rated capacity in kg, for the standard 60°C cotton programme at full load or the standard 40°C cotton programme at full load [kg]")
   @Digits(integer = 2, fraction = 1) // TODO message
   private String capacity;
 
+  @FieldPrompt("Spin-drying efficiency class")
   @NotBlank
   private String spinDryingEfficiencyRating;
 
+  @FieldPrompt("Airborne acoustical noise emissions during the washing phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
   @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 2 digits long")
   private String washingNoiseEmissions;
 
+  @FieldPrompt("Airborne acoustical noise emissions during the spinning phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
   @Digits(integer = 3, fraction = 0, message = "Must be a whole number up to 2 digits long")
   private String spinningNoiseEmissions;
 

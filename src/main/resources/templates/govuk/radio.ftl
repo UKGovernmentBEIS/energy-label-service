@@ -14,10 +14,11 @@
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
+  <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
   <#local fieldName=spring.status.expression>
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=label legendHeadingClass="govuk-fieldset__legend--m" mandatory=mandatory>
+    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--m" mandatory=mandatory>
       <#if hasError>
         <span id="${id}-error" class="govuk-error-message">
           ${errorList?join(" ")}
@@ -53,11 +54,12 @@
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
+  <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
   <#local fieldName=spring.status.expression>
   <#local displayValue=spring.status.displayValue>
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=label legendHeadingClass="govuk-fieldset__legend--m" mandatory=true>
+    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--m" mandatory=true>
       <#if hasError>
         <span id="${id}-error" class="govuk-error-message">
           ${errorList?join(" ")}
