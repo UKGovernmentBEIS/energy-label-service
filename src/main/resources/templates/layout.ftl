@@ -6,16 +6,12 @@
 <#import 'govuk/footer.ftl' as govukFooter>
 <#import 'govuk/breadcrumbs.ftl' as govukBreadcrumbs>
 <#import 'govuk/button.ftl' as govukButton>
-<#import 'govuk/checkboxes.ftl' as govukCheckboxes>
-<#import 'govuk/dateInput.ftl' as govukDateInput>
 <#import 'govuk/details.ftl' as govukDetails>
 <#import 'govuk/errorSummary.ftl' as govukErrorSummary>
 <#import 'govuk/fieldset.ftl' as govukFieldset>
-<#import 'govuk/numberInput.ftl' as govukNumberInput>
 <#import 'govuk/panel.ftl' as govukPanel>
 <#import 'govuk/radio.ftl' as govukRadios>
 <#import 'govuk/select.ftl' as govukSelect>
-<#import 'govuk/textInput.ftl' as govukTextInput>
 
 <#function springUrl url>
   <#local springUrl>
