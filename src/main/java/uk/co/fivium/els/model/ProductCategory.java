@@ -9,22 +9,22 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 
 public enum ProductCategory {
 
-  AIR_CONDITIONERS("Air Conditioners", "reverse-route-here"),
-  DISHWASHERS("Dishwashers", "reverse-route-here"),
-  DOMESTIC_OVENS("Domestic ovens", "reverse-route-here"),
-  FRIDGES_AND_FREEZERS("Fridges and freezers", "reverse-route-here"),
+  AIR_CONDITIONERS("Air Conditioners", "/not-yet-implemented"),
+  DISHWASHERS("Dishwashers", "/not-yet-implemented"),
+  DOMESTIC_OVENS("Domestic ovens", "/not-yet-implemented"),
+  FRIDGES_AND_FREEZERS("Fridges and freezers", "/not-yet-implemented"),
   LAMPS("Lamps", ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null))),
-  LOCAL_SPACE_HEATERS("Local space heaters", "reverse-route-here"),
-  REFRIGERATED_STORAGE_CABINETS("Professional refrigerated storage cabinets", "reverse-route-here"),
-  RANGE_HOODS("Range hoods", "reverse-route-here"),
-  SOLID_FUEL_BOILERS("Solid fuel boilers", "reverse-route-here"),
-  SPACE_HEATERS("Space heaters", "reverse-route-here"),
-  TELEVISIONS("Televisions", "reverse-route-here"),
-  TUMBLE_DRYERS("Tumble dryers", "reverse-route-here"),
-  TYRES("Tyres", "reverse-route-here"),
+  LOCAL_SPACE_HEATERS("Local space heaters", "/not-yet-implemented"),
+  REFRIGERATED_STORAGE_CABINETS("Professional refrigerated storage cabinets", "/not-yet-implemented"),
+  RANGE_HOODS("Range hoods", "/not-yet-implemented"),
+  SOLID_FUEL_BOILERS("Solid fuel boilers", "/not-yet-implemented"),
+  SPACE_HEATERS("Space heaters", "/not-yet-implemented"),
+  TELEVISIONS("Televisions", "/not-yet-implemented"),
+  TUMBLE_DRYERS("Tumble dryers", "/not-yet-implemented"),
+  TYRES("Tyres", "/not-yet-implemented"),
   VENTILATION_UNITS("Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))),
   WASHING_MACHINES("Washing machines", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))),
-  WATER_HEATERS("Water heaters", "reverse-route-here");
+  WATER_HEATERS("Water heaters", "/not-yet-implemented");
 
   private final String displayName;
   private final String nextStateUrl;

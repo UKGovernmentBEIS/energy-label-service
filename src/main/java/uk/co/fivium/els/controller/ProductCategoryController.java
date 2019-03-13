@@ -48,6 +48,14 @@ public class ProductCategoryController {
 
   }
 
+  // TODO remove route and template once all categories are completed
+  @GetMapping("/not-yet-implemented")
+  public ModelAndView renderNotYetImplemented() {
+    ModelAndView modelAndView = new ModelAndView("notYetImplemented");
+    breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Not yet implemented");
+    return modelAndView;
+  }
+
   private ModelAndView getModelAndView() {
     ModelAndView modelAndView = new ModelAndView("productCategory");
     modelAndView.addObject("categories",
