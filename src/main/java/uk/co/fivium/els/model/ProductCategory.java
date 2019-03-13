@@ -3,6 +3,7 @@ package uk.co.fivium.els.model;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
+import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
 import uk.co.fivium.els.categories.washingmachines.controller.WashingMachinesController;
 import uk.co.fivium.els.mvc.ReverseRouter;
 
@@ -21,7 +22,7 @@ public enum ProductCategory {
   TELEVISIONS("Televisions", "reverse-route-here"),
   TUMBLE_DRYERS("Tumble dryers", "reverse-route-here"),
   TYRES("Tyres", "reverse-route-here"),
-  VENTILATION_UNITS("Ventilation units", "reverse-route-here"),
+  VENTILATION_UNITS("Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))),
   WASHING_MACHINES("Washing machines", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))),
   WATER_HEATERS("Water heaters", "reverse-route-here");
 
