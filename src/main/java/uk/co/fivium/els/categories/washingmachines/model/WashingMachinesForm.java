@@ -2,16 +2,19 @@ package uk.co.fivium.els.categories.washingmachines.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 import uk.co.fivium.els.model.FieldPrompt;
 
 public class WashingMachinesForm {
 
   @FieldPrompt("Supplier's name or trade mark")
-  @NotBlank(message = "Enter a supplier name or trade mark") // TODO max length?
+  @NotBlank(message = "Enter a supplier name or trade mark")
+  @Length(max = 30, message = "Supplier name or trade mark must be 30 characters or less")
   private String supplierName;
 
   @FieldPrompt("Supplier's model identifier")
   @NotBlank(message = "Enter a supplier model identifier")
+  @Length(max = 30, message = "Supplier model identifier must be 30 characters or less")
   private String modelName;
 
   @FieldPrompt("Energy efficiency class indicator")
@@ -35,11 +38,11 @@ public class WashingMachinesForm {
   private String spinDryingEfficiencyRating;
 
   @FieldPrompt("Airborne acoustical noise emissions during the washing phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
-  @Digits(integer = 3, fraction = 0, message = "Enter a noise emission during the washing phase, up to 5 digits long")
+  @Digits(integer = 3, fraction = 0, message = "Enter a noise emission during the washing phase, up to 3 digits long")
   private String washingNoiseEmissions;
 
   @FieldPrompt("Airborne acoustical noise emissions during the spinning phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
-  @Digits(integer = 3, fraction = 0, message = "Enter a noise emission during the spinning phase, up to 5 digits long")
+  @Digits(integer = 3, fraction = 0, message = "Enter a noise emission during the spinning phase, up to 3 digits long")
   private String spinningNoiseEmissions;
 
   public String getSupplierName() {

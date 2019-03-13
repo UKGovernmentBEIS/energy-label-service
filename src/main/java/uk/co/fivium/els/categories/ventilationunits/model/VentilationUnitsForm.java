@@ -1,17 +1,20 @@
 package uk.co.fivium.els.categories.ventilationunits.model;
 
-import uk.co.fivium.els.model.FieldPrompt;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+import uk.co.fivium.els.model.FieldPrompt;
 
 public class VentilationUnitsForm {
 
   @FieldPrompt("Supplier's name or trade mark")
-  @NotBlank(message = "Enter a supplier name or trade mark") // TODO max length?
+  @NotBlank(message = "Enter a supplier name or trade mark")
+  @Length(max = 30, message = "Supplier name or trade mark must be 30 characters or less")
   private String supplierName;
 
   @FieldPrompt("Supplier's model identifier")
   @NotBlank(message = "Enter a supplier model identifier")
+  @Length(max = 30, message = "Supplier model identifier must be 30 characters or less")
   private String modelName;
 
   @FieldPrompt("Energy efficiency indicator for an 'average' climate")
