@@ -1,4 +1,6 @@
 # Energy Label Service
+[![Build Status](https://travis-ci.org/UKGovernmentBEIS/beis-mspsds.svg?branch=master)](https://travis-ci.org/UKGovernmentBEIS/beis-mspsds)
+
 Digital service allowing users to generate energy labels for a variety of products
 
 ## Running locally
