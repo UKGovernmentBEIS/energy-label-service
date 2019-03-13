@@ -63,6 +63,7 @@ public class VentilationUnitsController {
       Arrays.stream(VentilationUnitSubCategory.values())
         .collect(StreamUtils.toLinkedHashMap(Enum::name, VentilationUnitSubCategory::getDisplayName))
     );
+    modelAndView.addObject("submitUrl", ReverseRouter.route(on(VentilationUnitsController.class).handleVentilationUnitSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
     return modelAndView;
   }
 

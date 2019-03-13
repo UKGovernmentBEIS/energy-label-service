@@ -15,7 +15,7 @@ public class VentilationUnitsForm {
   private String modelName;
 
   @FieldPrompt("Energy efficiency indicator for an 'average' climate")
-  @NotBlank(message = "Select an energy efficiency class")
+  @NotBlank(message = "Select an energy efficiency indicator")
   private String efficiencyRating;
 
   @FieldPrompt("Sound power level (LWA) in dB rounded to the nearest integer")

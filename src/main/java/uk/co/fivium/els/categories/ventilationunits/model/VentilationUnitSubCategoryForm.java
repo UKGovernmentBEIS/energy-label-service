@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class VentilationUnitSubCategoryForm {
 
-  @NotBlank
+  @NotBlank(message = "Select a type of ventilation unit")
   private String subCategory;
 
   public String getSubCategory() {
