@@ -7,25 +7,25 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 
 public enum LampSubCategory {
 
-  LAMPS("Lamps", ReverseRouter.route(on(LampsController.class).renderLamps(null))),
-  LAMPS_EX_NAME_MODEL("Lamps with suppliers name/trademark and model identifier included on the packaging",
+  LAMPS("Label with supplier's name/trademark, model identifier, energy rating and weighted energy consumption", ReverseRouter.route(on(LampsController.class).renderLamps(null))),
+  LAMPS_EX_NAME_MODEL("Label with energy rating and weighted energy consumption only",
       ReverseRouter.route(on(LampsController.class).renderLampsExNameModel(null))),
-  LAMPS_EX_NAME_MODEL_CONSUMPTION("Lamps with suppliers name/trademark, model identifier and weighted energy consumption included on the packaging",
+  LAMPS_EX_NAME_MODEL_CONSUMPTION("Label with energy rating only",
       ReverseRouter.route(on(LampsController.class).renderLampsExNameModelConsumption(null)));
 
   private final String displayName;
-  private final String nextSateUrl;
+  private final String nextStateUrl;
 
-  LampSubCategory(String displayName, String nextSateUrl) {
+  LampSubCategory(String displayName, String nextStateUrl) {
     this.displayName = displayName;
-    this.nextSateUrl = nextSateUrl;
+    this.nextStateUrl = nextStateUrl;
   }
 
   public String getDisplayName() {
     return displayName;
   }
 
-  public String getNextSateUrl() {
-    return nextSateUrl;
+  public String getNextStateUrl() {
+    return nextStateUrl;
   }
 }

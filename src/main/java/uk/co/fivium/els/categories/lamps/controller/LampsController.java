@@ -56,7 +56,7 @@ public class LampsController {
     }
     else {
       LampSubCategory subCategory = LampSubCategory.valueOf(form.getSubCategory());
-      return new ModelAndView("redirect:" + subCategory.getNextSateUrl());
+      return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
     }
   }
 

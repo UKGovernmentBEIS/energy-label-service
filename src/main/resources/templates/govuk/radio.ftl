@@ -8,7 +8,7 @@
 <#--If using a split radio group then you need to wrap the radio group in a conditional class and data-module div in the form template so that the show/hide content works across radio items-->
 <#--Setting splitList to true against each radio item in a split group will ignore the above mentioned div in the macro.-->
 <#--If splitList is false the radio group is considered to not have hidden content and the radio grouping will work as standard.-->
-<#macro radio path radioItems label="" inline=true hiddenContentId="" splitList=false>
+<#macro radio path radioItems label="" inline=true hiddenContentId="" splitList=false legendHeadingClass="govuk-fieldset__legend--s" legendSize="h1">
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
@@ -18,7 +18,7 @@
   <#local fieldName=spring.status.expression>
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" mandatory=mandatory>
+    <@radioFieldset.fieldset legendHeading=fieldPrompt legendSize=legendSize legendHeadingClass=legendHeadingClass mandatory=mandatory>
       <#if hasError>
         <span id="${id}-error" class="govuk-error-message">
           ${errorList?join(" ")}
