@@ -8,9 +8,9 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 public enum LampSubCategory {
 
   LAMPS("Lamps", ReverseRouter.route(on(LampsController.class).renderLamps(null))),
-  LAMPS_EX_NAME_MODEL("Lamps with suppliers name/trademark and model identifier included on the packaging",
+  LAMPS_EX_NAME_MODEL("Lamps with supplier's name/trademark and model identifier included on the packaging",
       ReverseRouter.route(on(LampsController.class).renderLampsExNameModel(null))),
-  LAMPS_EX_NAME_MODEL_CONSUMPTION("Lamps with suppliers name/trademark, model identifier and weighted energy consumption included on the packaging",
+  LAMPS_EX_NAME_MODEL_CONSUMPTION("Lamps with supplier's name/trademark, model identifier and weighted energy consumption included on the packaging",
       ReverseRouter.route(on(LampsController.class).renderLampsExNameModelConsumption(null)));
 
   private final String displayName;
