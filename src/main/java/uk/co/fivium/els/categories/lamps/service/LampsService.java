@@ -17,8 +17,7 @@ import uk.co.fivium.els.service.TemplatePopulator;
 public class LampsService {
 
   public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
-      RatingClassRange.of(RatingClass.APP, RatingClass.E),
-      "labels/lamps/lamps.svg");
+      RatingClassRange.of(RatingClass.APP, RatingClass.E));
 
   private final TemplateParserService templateParserService;
 
@@ -28,7 +27,7 @@ public class LampsService {
   }
 
   public Document generateHtml(LampsForm form, LegislationCategory legislationCategory) {
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(legislationCategory.getTemplatePath()));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps/lamps.svg"));
 
     return templatePopulator
         .setMultilineText("supplier", form.getSupplierName())

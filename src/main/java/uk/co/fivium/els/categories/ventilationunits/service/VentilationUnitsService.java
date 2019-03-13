@@ -3,7 +3,6 @@ package uk.co.fivium.els.categories.ventilationunits.service;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitSubCategory;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitsForm;
 import uk.co.fivium.els.model.LegislationCategory;
@@ -16,8 +15,7 @@ import uk.co.fivium.els.service.TemplatePopulator;
 public class VentilationUnitsService {
 
   public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
-    RatingClassRange.of(RatingClass.AP, RatingClass.G),
-    "labels/ventilation-units/unidirectional-ventilation-unit.svg");
+    RatingClassRange.of(RatingClass.AP, RatingClass.G));
 
   private final TemplateParserService templateParserService;
 
