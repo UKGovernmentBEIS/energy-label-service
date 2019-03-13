@@ -27,7 +27,7 @@
   captionClass="govuk-caption-xl"
   twoThirdsColumn=true
   headingCssClass="govuk-heading-xl"
-  breadcrumbsNav=false
+  <#--breadcrumbMap=""-->
   backLink=false
   phaseBanner=true
   pageTitle=""
@@ -76,7 +76,7 @@
   <@govukHeader.header currentUserView/>
 
   <div class="govuk-width-container">
-    <#--Phase Banner-->
+
     <#if phaseBanner>
       <div class="govuk-phase-banner">
         <p class="govuk-phase-banner__content">
@@ -86,8 +86,8 @@
       </div>
     </#if>
 
-    <#if breadcrumbsNav>
-      <@govukBreadcrumbs.breadcrumbs/>
+    <#if breadcrumbMap?has_content>
+      <@govukBreadcrumbs.breadcrumbs breadcrumbMap/>
     </#if>
 
     <#if backLink>

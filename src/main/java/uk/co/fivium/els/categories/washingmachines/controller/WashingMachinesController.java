@@ -21,6 +21,7 @@ import uk.co.fivium.els.categories.washingmachines.service.WashingMachinesServic
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
+import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -30,12 +31,15 @@ public class WashingMachinesController {
 
   private final PdfRenderer pdfRenderer;
   private final WashingMachinesService washingMachinesService;
+  private final BreadcrumbService breadcrumbService;
 
   @Autowired
   public WashingMachinesController(PdfRenderer pdfRenderer,
-                                   WashingMachinesService washingMachinesService) {
+                                   WashingMachinesService washingMachinesService,
+                                   BreadcrumbService breadcrumbService) {
     this.pdfRenderer = pdfRenderer;
     this.washingMachinesService = washingMachinesService;
+    this.breadcrumbService = breadcrumbService;
   }
 
   @GetMapping("/washing-machines")
@@ -67,6 +71,7 @@ public class WashingMachinesController {
     modelAndView.addObject("spinDryingEfficiencyRating", StreamUtils.ratingRangeToSelectionMap(spinEfficiencyRange));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null)));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
+    breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Washing machines");
 
     return modelAndView;
   }
