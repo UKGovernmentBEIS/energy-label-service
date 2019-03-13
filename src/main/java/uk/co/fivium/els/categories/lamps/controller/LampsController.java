@@ -27,6 +27,7 @@ import uk.co.fivium.els.categories.lamps.service.LampsService;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
+import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -36,11 +37,13 @@ public class LampsController {
 
   private final PdfRenderer pdfRenderer;
   private final LampsService lampsService;
+  private final BreadcrumbService breadcrumbService;
 
   @Autowired
-  public LampsController(PdfRenderer pdfRenderer, LampsService lampsService) {
+  public LampsController(PdfRenderer pdfRenderer, LampsService lampsService, BreadcrumbService breadcrumbService) {
     this.pdfRenderer = pdfRenderer;
     this.lampsService = lampsService;
+    this.breadcrumbService = breadcrumbService;
   }
 
   @GetMapping("/")
@@ -67,6 +70,7 @@ public class LampsController {
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LampSubCategory::getDisplayName))
     );
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(LampsController.class).handleLampSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
+    breadcrumbService.addBreadcrumbToModel(modelAndView, "Lamps", ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null)));
     return modelAndView;
   }
 
@@ -124,18 +128,21 @@ public class LampsController {
   private ModelAndView getLamps(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/lamps/lamps");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).renderLamps(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with supplier's name, model identifier, rating and energy consumption");
     return modelAndView;
   }
 
   private ModelAndView getLampsExNameModel(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/lamps/lampsExcludingNameModel");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).renderLampsExNameModel(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with energy rating and weighted energy consumption only");
     return modelAndView;
   }
 
   private ModelAndView getLampsExNameModelConsumption(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/lamps/lampsExcludingNameModelConsumption");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).renderLampsExNameModelConsumption(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with energy rating only");
     return modelAndView;
   }
 
@@ -148,6 +155,7 @@ public class LampsController {
             .collect(StreamUtils.toLinkedHashMap(Enum::name, TemplateType::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, "Lamps", ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null)));
   }
 
 }

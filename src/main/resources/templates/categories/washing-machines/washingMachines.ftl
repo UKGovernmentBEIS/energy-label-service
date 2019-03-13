@@ -1,8 +1,7 @@
 <#include '../../layout.ftl'>
 <#include '../../generateLabelButton.ftl'>
 
-<@defaultPage pageHeading="Washing machines">
-  <@govukErrorSummary.errorSummary errorItems=errorList/>
+<@defaultPage pageHeading="Washing machines" errorItems=errorList>
   <@form.govukForm submitUrl>
 
     <@govukTextInput.textInput path="form.supplierName"/>

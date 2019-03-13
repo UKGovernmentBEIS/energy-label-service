@@ -1,8 +1,8 @@
 <#include '../../layout.ftl'>
 
-<#assign title="What type of lamp label do you need?">
+<#assign title="What type of label do you need for this lamp?">
 
-<@defaultPage pageTitle=title>
+<@defaultPage pageTitle=title errorItems=errorList>
   <@form.govukForm submitUrl>
 
     <@govukRadios.radio path="form.subCategory" radioItems=subCategories label=title legendHeadingClass="govuk-fieldset__legend--xl"/>
