@@ -1,4 +1,4 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105mm" height="200mm" viewBox="0 0 297.64001 566.92999" data-rating-increment="17.7" data-supplier-model-chars-per-row="25">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105mm" height="200mm" viewBox="0 0 297.64001 566.92999" data-rating-increment="23.1667" data-supplier-model-chars-per-row="25">
   <defs>
     <style>
       .cls-1, .cls-21, .cls-22, .cls-24, .cls-25, .cls-27, .cls-28, .cls-29, .cls-30 {
@@ -21,7 +21,7 @@
         fill: #fff200;
       }
 
-      .cls-51, .cls-52, .cls-55, .cls-56, .cls-6 {
+      .cls-51, .cls-52, .cls-57, .cls-58, .cls-6 {
         fill: #fff;
       }
 
@@ -29,11 +29,11 @@
         font-size: 12px;
       }
 
-      .cls-13, .cls-17, .cls-18, .cls-42, .cls-54, .cls-57, .cls-58, .cls-7 {
+      .cls-13, .cls-17, .cls-18, .cls-42, .cls-54, .cls-55, .cls-56, .cls-7 {
         fill: #231f20;
       }
 
-      .cls-13, .cls-18, .cls-56, .cls-57, .cls-58, .cls-7 {
+      .cls-13, .cls-18, .cls-54, .cls-55, .cls-58, .cls-7 {
         font-family: Calibri;
       }
 
@@ -77,12 +77,12 @@
         font-size: 20px;
       }
 
-      .cls-17, .cls-42, .cls-51, .cls-52, .cls-55 {
+      .cls-17, .cls-42, .cls-51, .cls-52, .cls-57 {
         font-family: Calibri-Bold, Calibri;
         font-weight: 700;
       }
 
-      .cls-18, .cls-56 {
+      .cls-18, .cls-58 {
         font-size: 15px;
       }
 
@@ -236,16 +236,16 @@
         letter-spacing: 0.01101em;
       }
 
-      .cls-55 {
-        font-size: 24px;
+      .cls-54 {
+        font-size: 10.9046px;
       }
 
-      .cls-57 {
+      .cls-55 {
         font-size: 15.52px;
       }
 
-      .cls-58 {
-        font-size: 10.9046px;
+      .cls-57 {
+        font-size: 24px;
       }
     </style>
     <clipPath id="clip-path">
@@ -264,10 +264,10 @@
       <rect class="cls-1" x="26.575" y="174.828" width="98.278" height="157.18098"/>
     </clipPath>
     <clipPath id="clip-path-14">
-      <rect class="cls-1" x="26.575" y="174.828" width="98.278" height="155.82599"/>
+      <rect class="cls-1" x="26.575" y="174.828" width="107.23899" height="203.54199"/>
     </clipPath>
   </defs>
-  <title>heat-pump-space-heaters</title>
+  <title>heat-pump-space-heaters-2019</title>
   <g class="cls-2">
     <path class="cls-3" d="M24.0691,16.166v-2a11.7328,11.7328,0,0,0-4.847,1.199,8.94493,8.94493,0,0,0-3.486,3.026,10.03567,10.03567,0,0,0-1.571,5.679V542.861a11.72523,11.72523,0,0,0,1.199,4.846,8.94088,8.94088,0,0,0,3.026,3.487,10.03328,10.03328,0,0,0,5.679,1.571h249.5a11.72477,11.72477,0,0,0,4.846-1.199,8.94834,8.94834,0,0,0,3.487-3.026,10.03579,10.03579,0,0,0,1.571-5.679V24.07007a11.72489,11.72489,0,0,0-1.199-4.846,8.9403,8.9403,0,0,0-3.026-3.487,10.03558,10.03558,0,0,0-5.679-1.571h-249.5v4h249.5a6.04592,6.04592,0,0,1,3.46.899,4.73306,4.73306,0,0,1,1.355,1.397,7.1815,7.1815,0,0,1,.95,2.468,8.2401,8.2401,0,0,1,.124.878c.008.103.012.18.013.226l.002.044v.003l1.189-.011h-1.189v.011l1.189-.011h-1.189V542.861a6.044,6.044,0,0,1-.899,3.46,4.71289,4.71289,0,0,1-1.398,1.355,7.1712,7.1712,0,0,1-2.467.95,7.98148,7.98148,0,0,1-.878.124c-.103.008-.181.012-.226.014l-.044.001h-.003l.011,1.191v-1.191h-.011l.011,1.191v-1.191h-249.5a6.04356,6.04356,0,0,1-3.46-.899,4.70964,4.70964,0,0,1-1.355-1.397,7.20526,7.20526,0,0,1-.951-2.46795,8.14846,8.14846,0,0,1-.123-.87805c-.008-.103-.012-.18-.014-.226l-.001-.044v-.003l-1.193.011h1.193v-.011l-1.193.011h1.193V24.07007a6.046,6.046,0,0,1,.899-3.46,4.70921,4.70921,0,0,1,1.397-1.355,7.18171,7.18171,0,0,1,2.468-.95,7.95158,7.95158,0,0,1,.878-.124c.103-.008.18-.012.226-.014l.044-.001h.003l-.011-1.18995V18.166h.011l-.011-1.18995V16.166Z"/>
     <rect class="cls-4" x="26.965" y="26.492" width="71.139" height="48.06"/>
@@ -467,63 +467,59 @@
     <rect class="cls-39" x="214.44299" y="378.37" width="6.593" height="6.59399"/>
   </g>
   <text class="cls-18" transform="translate(224.87305 424.50714)"><tspan class="cls-41">k</tspan><tspan x="6.69922" y="0">W</tspan></text>
-  <text class="cls-42" transform="translate(26.88818 541.5462)">2015</text>
+  <text class="cls-42" transform="translate(26.88818 541.5462)">2019</text>
   <text class="cls-42" transform="translate(231.51855 541.5462)">811/2013</text>
   <g class="cls-43">
     <rect class="cls-6" x="-31.256" y="174.828" width="156.109" height="155.826"/>
   </g>
   <g class="cls-44">
-    <rect class="cls-6" x="-31.256" y="174.828" width="156.109" height="155.82599"/>
-    <polygon class="cls-5" points="-31.256 227.972 -31.256 242.156 98.349 242.156 105.374 235.065 98.349 227.972 -31.256 227.972"/>
-    <polygon class="cls-45" points="-31.256 210.277 -31.256 224.46 94.49 224.46 101.516 217.369 94.49 210.277 -31.256 210.277"/>
-    <polygon class="cls-46" points="-31.256 192.555 -31.256 206.738 90.633 206.738 97.657 199.647 90.633 192.555 -31.256 192.555"/>
-    <polygon class="cls-47" points="-31.256 174.828 -31.256 189.01 86.791 189.01 93.816 181.919 86.791 174.828 -31.256 174.828"/>
-    <polygon class="cls-48" points="-31.256 245.684 -31.256 259.866 102.397 259.866 109.429 252.776 102.397 245.684 -31.256 245.684"/>
-    <polygon class="cls-49" points="-31.256 263.373 -31.256 277.557 106.25 277.557 113.285 270.465 106.25 263.373 -31.256 263.373"/>
-    <polygon class="cls-50" points="-31.256 281.071 -31.256 295.252 110.103 295.252 117.14 288.16 110.103 281.071 -31.256 281.071"/>
-    <polygon class="cls-50" points="-31.256 298.771 -31.256 312.952 113.957 312.952 120.996 305.865 113.957 298.771 -31.256 298.771"/>
-    <polygon class="cls-50" points="-31.256 316.47 -31.256 330.654 117.809 330.654 124.853 323.562 117.809 316.47 -31.256 316.47"/>
+    <polygon class="cls-5" points="-36.529 244.245 -36.529 262.772 104.894 262.772 112.559 253.51 104.894 244.245 -36.529 244.245"/>
+    <polygon class="cls-45" points="-36.529 221.132 -36.529 239.658 100.683 239.658 108.349 230.396 100.683 221.132 -36.529 221.132"/>
+    <polygon class="cls-46" points="-36.529 197.983 -36.529 216.509 96.474 216.509 104.139 207.247 96.474 197.983 -36.529 197.983"/>
+    <polygon class="cls-47" points="-36.529 174.828 -36.529 193.353 92.282 193.353 99.947 184.09 92.282 174.828 -36.529 174.828"/>
+    <polygon class="cls-48" points="-36.529 267.381 -36.529 285.906 109.31 285.906 116.984 276.645 109.31 267.381 -36.529 267.381"/>
+    <polygon class="cls-49" points="-36.529 290.487 -36.529 309.014 113.515 309.014 121.191 299.751 113.515 290.487 -36.529 290.487"/>
+    <polygon class="cls-50" points="-36.529 313.604 -36.529 332.127 117.719 332.127 125.398 322.864 117.719 313.604 -36.529 313.604"/>
   </g>
   <text class="cls-51" transform="translate(33.9917 186.52765)"> </text>
-  <text class="cls-51" transform="translate(37.15576 186.52765)">A</text>
-  <text class="cls-52" transform="translate(45.63232 181.8714)"><tspan class="cls-53">+</tspan><tspan x="4.15479" y="0">+</tspan></text>
+  <text class="cls-51" transform="translate(37.15576 188.5296)">A</text>
+  <text class="cls-52" transform="translate(45.63232 183.8714)"><tspan class="cls-53">++</tspan><tspan x="8.30957" y="0">+</tspan></text>
   <text class="cls-51" transform="translate(33.9917 204.18683)"> </text>
-  <text class="cls-51" transform="translate(37.15576 204.18683)">A</text>
-  <text class="cls-52" transform="translate(45.63232 199.53058)">+</text>
+  <text class="cls-51" transform="translate(37.15576 212.18097)">A</text>
+  <text class="cls-52" transform="translate(45.63232 207.53058)">++</text>
   <text class="cls-51" transform="translate(33.9917 223.83527)"> </text>
-  <text class="cls-51" transform="translate(37.15576 221.83331)">A</text>
   <text class="cls-51" transform="translate(33.9917 239.47345)"> </text>
-  <text class="cls-51" transform="translate(37.15576 239.47345)">B</text>
-  <text class="cls-51" transform="translate(33.9917 257.12726)"> </text>
-  <text class="cls-51" transform="translate(37.15576 257.12726)">C</text>
-  <text class="cls-51" transform="translate(33.9917 274.78107)"> </text>
-  <text class="cls-51" transform="translate(37.15576 274.78107)">D</text>
-  <text class="cls-51" transform="translate(33.9917 292.43488)"> </text>
-  <text class="cls-51" transform="translate(37.15576 292.43488)">E</text>
-  <text class="cls-51" transform="translate(33.9917 310.0755)"> </text>
-  <text class="cls-51" transform="translate(37.15576 310.0755)">F</text>
-  <text class="cls-51" transform="translate(33.9917 327.72882)"> </text>
-  <text class="cls-51" transform="translate(37.15576 327.72882)">G</text>
-  <g id="mediumTemperatureRating">
-    <polyline id="mediumTemperatureRatingArrow" class="cls-54" points="131.33 181.93 147.97 165.12 184.96 165.12 184.96 199.02 148.25 199.02 131.33 181.93"/>
-    <text id="mediumTemperatureRatingLetter" class="cls-55" transform="translate(142.66992 189.17023)">A</text>
-    <text id="mediumTemperatureRatingPlusses" class="cls-56" transform="translate(158.62988 181.0799)">++</text>
-  </g>
-  <g id="lowTemperatureRating">
-    <polyline id="lowTemperatureRatingArrow" class="cls-54" points="196.55 181.93 213.19 165.12 250.19 165.12 250.19 199.02 213.48 199.02 196.55 181.93"/>
-    <text id="lowTemperatureRatingLetter" class="cls-55" transform="translate(207.88965 189.17023)">A</text>
-    <text id="lowTemperatureRatingPlusses" class="cls-56" transform="translate(223.84961 181.0799)">++</text>
-  </g>
-  <text id="mediumTemperatureColderKw" class="cls-57" transform="translate(141.58984 367.51007)">X</text>
-  <text id="mediumTemperatureAverageKw" class="cls-17" transform="translate(141.62012 386.50031)">X</text>
-  <text id="mediumTemperatureWarmerKw" class="cls-57" transform="translate(141.58984 405.50031)">X</text>
-  <text id="lowTemperatureColderKw" class="cls-57" transform="translate(224.87012 367.51007)">X</text>
-  <text id="lowTemperatureAverageKw" class="cls-17" transform="translate(224.87012 386.50031)">X</text>
-  <text id="lowTemperatureWarmerKw" class="cls-57" transform="translate(224.87012 405.50031)">X</text>
+  <text class="cls-51" transform="translate(37.15576 235.46906)">A</text>
+  <text class="cls-52" transform="translate(45.63916 230.81085)">+</text>
+  <text class="cls-51" transform="translate(33.9917 257.13214)"> </text>
+  <text class="cls-51" transform="translate(37.15576 258.12628)">A</text>
+  <text class="cls-51" transform="translate(33.9917 274.77228)"> </text>
+  <text class="cls-51" transform="translate(37.15576 281.77228)">B</text>
+  <text class="cls-51" transform="translate(33.9917 292.42609)"> </text>
+  <text class="cls-51" transform="translate(33.9917 310.06573)"> </text>
+  <text class="cls-51" transform="translate(37.15576 305.06769)">C</text>
+  <text class="cls-51" transform="translate(33.9917 327.7337)"> </text>
+  <text class="cls-51" transform="translate(37.15576 327.7337)">D</text>
   <text id="insideDb" class="cls-17" transform="translate(41.60986 425.64972)">X</text>
   <text id="outsideDb" class="cls-17" transform="translate(41.60986 511.76984)">X</text>
-  <text id="supplierLine2" class="cls-58" transform="translate(26.75977 106.30011)">X</text>
-  <text id="supplierLine1" class="cls-58" transform="translate(26.75977 95.21906)">X</text>
-  <text id="modelLine2" class="cls-58" transform="translate(152.4414 106.30011)">X</text>
-  <text id="modelLine1" class="cls-58" transform="translate(152.4414 95.21906)">X</text>
+  <text id="supplierLine2" class="cls-54" transform="translate(26.75961 106.29999)">X</text>
+  <text id="supplierLine1" class="cls-54" transform="translate(26.75961 95.21894)">X</text>
+  <text id="modelLine2" class="cls-54" transform="translate(152.44126 106.29999)">X</text>
+  <text id="modelLine1" class="cls-54" transform="translate(152.44126 95.21894)">X</text>
+  <text id="mediumTemperatureColderKw" class="cls-55" transform="translate(141.58984 367.51007)">X</text>
+  <text id="mediumTemperatureAverageKw" class="cls-17" transform="translate(141.62012 386.50031)">X</text>
+  <text id="mediumTemperatureWarmerKw" class="cls-55" transform="translate(141.58984 405.50031)">X</text>
+  <text id="lowTemperatureColderKw" class="cls-55" transform="translate(224.87012 367.51007)">X</text>
+  <text id="lowTemperatureAverageKw" class="cls-17" transform="translate(224.87012 386.50031)">X</text>
+  <text id="lowTemperatureWarmerKw" class="cls-55" transform="translate(224.87012 405.50031)">X</text>
+  <g id="mediumTemperatureRating">
+    <polyline id="mediumTemperatureRatingArrow" class="cls-56" points="131.33 184.085 147.97 167.275 184.96 167.275 184.96 201.175 148.25 201.175 131.33 184.085"/>
+    <text id="mediumTemperatureRatingLetter" class="cls-57" transform="translate(142.66992 191.32523)">A</text>
+    <text id="mediumTemperatureRatingPlusses" class="cls-58" transform="translate(158.62988 183.23489)">+++</text>
+  </g>
+  <g id="lowTemperatureRating">
+    <polyline id="lowTemperatureRatingArrow" class="cls-56" points="196.55 184.085 213.19 167.275 250.19 167.275 250.19 201.175 213.48 201.175 196.55 184.085"/>
+    <text id="lowTemperatureRatingLetter" class="cls-57" transform="translate(207.88965 191.32523)">A</text>
+    <text id="lowTemperatureRatingPlusses" class="cls-58" transform="translate(223.84961 183.23489)">+++</text>
+  </g>
 </svg>
