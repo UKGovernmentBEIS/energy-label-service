@@ -30,7 +30,8 @@
   headingCssClass="govuk-heading-xl"
   breadcrumbsNav=false
   backLink=false
-  phaseBanner=false>
+  phaseBanner=true
+  pageTitle="">
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
   <#local heading=pageHeading?has_content>
@@ -40,7 +41,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title><#if errorCheck=true>Error: </#if>Create energy labels</title>
+  <title><#if errorCheck=true>Error: </#if><#if pageTitle?has_content>${pageTitle} - <#elseif pageHeading?has_content>${pageHeading} - </#if>Create energy labels - GOV.UK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0c0c" />
   <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<@spring.url'/assets/govuk-frontend/assets/images/favicon.ico'/>" type="image/x-icon" />
@@ -79,7 +80,7 @@
     <#if phaseBanner>
       <div class="govuk-phase-banner">
         <p class="govuk-phase-banner__content">
-          <strong class="govuk-tag govuk-phase-banner__content__tag ">alpha</strong>
+          <strong class="govuk-tag govuk-phase-banner__content__tag ">beta</strong>
           <span class="govuk-phase-banner__text">This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.</span>
         </p>
       </div>
