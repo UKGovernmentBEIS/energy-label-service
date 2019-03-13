@@ -2,7 +2,7 @@
 
 <#assign title="What type of ventilation unit do you need a label for?">
 
-<@defaultPage pageTitle=title>
+<@defaultPage pageTitle=title errorItems=errorList>
   <@form.govukForm submitUrl>
 
     <@govukRadios.radio path="form.subCategory" radioItems=subCategories label=title legendHeadingClass="govuk-fieldset__legend--xl"/>

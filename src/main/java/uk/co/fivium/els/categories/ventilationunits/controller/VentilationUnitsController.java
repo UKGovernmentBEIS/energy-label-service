@@ -24,6 +24,7 @@ import uk.co.fivium.els.categories.ventilationunits.service.VentilationUnitsServ
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
+import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -33,11 +34,13 @@ public class VentilationUnitsController {
 
   private final PdfRenderer pdfRenderer;
   private final VentilationUnitsService ventilationUnitsService;
+  private final BreadcrumbService breadcrumbService;
 
   @Autowired
-  public VentilationUnitsController(PdfRenderer pdfRenderer, VentilationUnitsService ventilationUnitsService) {
+  public VentilationUnitsController(PdfRenderer pdfRenderer, VentilationUnitsService ventilationUnitsService, BreadcrumbService breadcrumbService) {
     this.pdfRenderer = pdfRenderer;
     this.ventilationUnitsService = ventilationUnitsService;
+    this.breadcrumbService = breadcrumbService;
   }
 
   @GetMapping("/")
@@ -64,6 +67,7 @@ public class VentilationUnitsController {
         .collect(StreamUtils.toLinkedHashMap(Enum::name, VentilationUnitSubCategory::getDisplayName))
     );
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(VentilationUnitsController.class).handleVentilationUnitSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
+    breadcrumbService.addBreadcrumbToModel(modelAndView, "Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null)));
     return modelAndView;
   }
 
@@ -104,12 +108,14 @@ public class VentilationUnitsController {
   private ModelAndView getUnidirectionalVentilationUnits(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/ventilation-units/unidirectionalVentilationUnits");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(VentilationUnitsController.class).renderUnidirectionalVentilationUnits(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Unidirectional ventilation units");
     return modelAndView;
   }
 
   private ModelAndView getBidirectionalVentilationUnits(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/ventilation-units/bidirectionalVentilationUnits");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(VentilationUnitsController.class).renderBidirectionalVentilationUnits(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Bidirectional ventilation units");
     return modelAndView;
   }
 
@@ -118,6 +124,7 @@ public class VentilationUnitsController {
     modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, "Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null)));
   }
 
 }
