@@ -35,7 +35,7 @@ public class ProductCategoryController {
       return getModelAndView();
     } else {
       ProductCategory subCategory = ProductCategory.valueOf(form.getCategory());
-      return new ModelAndView("redirect:" + subCategory.getNextSateUrl());
+      return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
     }
 
   }
