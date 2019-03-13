@@ -1,8 +1,7 @@
 <#include '../../layout.ftl'>
 <#include '../../generateLabelButton.ftl'>
 
-<@defaultPage pageHeading="Lamps">
-  <@govukErrorSummary.errorSummary errorItems=errorList/>
+<@defaultPage pageHeading="Lamps" errorItems=errorList>
   <@form.govukForm submitUrl>
 
     <@govukTextInput.textInput path="form.supplierName"/>
