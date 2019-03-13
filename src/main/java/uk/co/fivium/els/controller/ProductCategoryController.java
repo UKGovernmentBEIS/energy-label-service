@@ -52,7 +52,7 @@ public class ProductCategoryController {
   @GetMapping("/not-yet-implemented")
   public ModelAndView renderNotYetImplemented() {
     ModelAndView modelAndView = new ModelAndView("notYetImplemented");
-    breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Not yet implemented");
+    breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Not available");
     return modelAndView;
   }
 
