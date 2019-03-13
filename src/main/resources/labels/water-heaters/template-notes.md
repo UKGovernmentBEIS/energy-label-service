@@ -1,0 +1,1 @@
+For templates which give the user the option to select "Able to work only during off-peak hours", add the hasOffPeakMode class to the offPeakMode element if it's selected

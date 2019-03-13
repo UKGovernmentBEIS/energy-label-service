@@ -2,7 +2,7 @@
   <defs>
     <style>
       #powerSwitch {
-        visibility: hiddenx;
+        visibility: hidden;
       }
 
       #powerSwitch.hasPowerSwitch {
