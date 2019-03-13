@@ -1,9 +1,11 @@
 <#include '../../layout.ftl'>
 
-<@defaultPage>
-  <@form.govukForm "/categories/lamps/">
+<#assign title="What type of lamp label do you need?">
 
-    <@govukRadios.radio path="form.subCategory" radioItems=subCategories label="What type of label do you need?" legendHeadingClass="govuk-fieldset__legend--xl"/>
+<@defaultPage pageTitle=title>
+  <@form.govukForm submitUrl>
+
+    <@govukRadios.radio path="form.subCategory" radioItems=subCategories label=title legendHeadingClass="govuk-fieldset__legend--xl"/>
 
     <@govukButton.button buttonText="Continue" buttonClass="govuk-button"/>
   </@form.govukForm>

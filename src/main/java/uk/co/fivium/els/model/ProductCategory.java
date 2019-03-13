@@ -27,18 +27,18 @@ public enum ProductCategory {
   WATER_HEATERS("Water heaters", "reverse-route-here");
 
   private final String displayName;
-  private final String nextSateUrl;
+  private final String nextStateUrl;
 
-  ProductCategory(String displayName, String nextSateUrl) {
+  ProductCategory(String displayName, String nextStateUrl) {
     this.displayName = displayName;
-    this.nextSateUrl = nextSateUrl;
+    this.nextStateUrl = nextStateUrl;
   }
 
   public String getDisplayName() {
     return displayName;
   }
 
-  public String getNextSateUrl() {
-    return nextSateUrl;
+  public String getNextStateUrl() {
+    return nextStateUrl;
   }
 }

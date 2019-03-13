@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class LampSubCategoryForm {
 
-  @NotBlank
+  @NotBlank(message = "Select a type of label")
   private String subCategory;
 
   public String getSubCategory() {

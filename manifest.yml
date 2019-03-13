@@ -1,5 +1,5 @@
 applications:
-  - name: energy-label-service
+  - name: energy-label-service-dev
     memory: 1G
     instances: 1
     buildpack: java_buildpack
