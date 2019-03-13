@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<#assign title="What type of ventilation unit label do you need?">
+<#assign title="What type of ventilation unit do you need a label for?">
 
 <@defaultPage pageTitle=title>
   <@form.govukForm submitUrl>
