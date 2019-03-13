@@ -1,0 +1,6 @@
+applications:
+  - name: energy-label-service-qa
+    memory: 1G
+    instances: 1
+    buildpack: java_buildpack
+    path: build/libs/energy-label-service-SNAPSHOT.jar
