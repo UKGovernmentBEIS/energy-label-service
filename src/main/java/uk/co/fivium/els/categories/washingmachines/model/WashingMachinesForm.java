@@ -38,11 +38,11 @@ public class WashingMachinesForm {
   private String spinDryingEfficiencyRating;
 
   @FieldPrompt("Airborne acoustical noise emissions during the washing phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
-  @Digits(integer = 2, fraction = 0, message = "Enter a noise emission during the washing phase, up to 3 digits long")
+  @Digits(integer = 2, fraction = 0, message = "Enter a noise emission during the washing phase, up to 2 digits long")
   private String washingNoiseEmissions;
 
   @FieldPrompt("Airborne acoustical noise emissions during the spinning phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
-  @Digits(integer = 2, fraction = 0, message = "Enter a noise emission during the spinning phase, up to 3 digits long")
+  @Digits(integer = 2, fraction = 0, message = "Enter a noise emission during the spinning phase, up to 2 digits long")
   private String spinningNoiseEmissions;
 
   public String getSupplierName() {

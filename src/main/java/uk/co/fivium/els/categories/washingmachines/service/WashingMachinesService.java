@@ -15,8 +15,7 @@ public class WashingMachinesService {
 
   public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
       RatingClassRange.of(RatingClass.APPP, RatingClass.D),
-      RatingClassRange.of(RatingClass.A, RatingClass.G), // spin class
-      "labels/washing-machines/washing-machines.svg");
+      RatingClassRange.of(RatingClass.A, RatingClass.G)); // spin class
 
   private final TemplateParserService templateParserService;
 
@@ -27,7 +26,7 @@ public class WashingMachinesService {
 
   public Document generateHtml(WashingMachinesForm form, LegislationCategory legislationCategory) {
 
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(legislationCategory.getTemplatePath()));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/washing-machines/washing-machines.svg"));
 
 
     return templatePopulator

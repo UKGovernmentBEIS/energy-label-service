@@ -13,8 +13,8 @@ import uk.co.fivium.els.service.TemplatePopulator;
 @Service
 public class ReversibleAirConditionerService {
 
-  public static final LegislationCategory LEGISLATION_CATEGORY_JAN2019 = LegislationCategory.of(RatingClassRange.of(RatingClass.APPP, RatingClass.D),
-      "labels/air-conditioners/non-duct/reversible-air-conditioners-2019.svg");
+  public static final LegislationCategory LEGISLATION_CATEGORY_JAN2019 = LegislationCategory.of(
+      RatingClassRange.of(RatingClass.APPP, RatingClass.D));
 
   private final TemplateParserService templateParserService;
 
@@ -25,8 +25,7 @@ public class ReversibleAirConditionerService {
 
   public Document generateHtml(ReversibleAirConditionersForm form, LegislationCategory legislationCategory) {
 
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(legislationCategory.getTemplatePath()));
-
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/reversible-air-conditioners-2019.svg"));
     return templatePopulator
         .setText("supplier", form.getSupplierName())
         .setText("model", form.getModelIdentifier())
