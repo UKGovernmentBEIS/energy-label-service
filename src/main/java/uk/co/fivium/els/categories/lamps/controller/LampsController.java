@@ -66,6 +66,7 @@ public class LampsController {
         Arrays.stream(LampSubCategory.values())
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LampSubCategory::getDisplayName))
     );
+    modelAndView.addObject("submitUrl", ReverseRouter.route(on(LampsController.class).handleLampSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
     return modelAndView;
   }
 

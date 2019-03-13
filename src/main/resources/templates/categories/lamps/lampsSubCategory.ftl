@@ -3,7 +3,7 @@
 <#assign title="What type of label do you need for this lamp?">
 
 <@defaultPage pageTitle=title errorItems=errorList>
-  <@form.govukForm "/categories/lamps/">
+  <@form.govukForm submitUrl>
 
     <@govukRadios.radio path="form.subCategory" radioItems=subCategories label=title legendHeadingClass="govuk-fieldset__legend--xl"/>
 
