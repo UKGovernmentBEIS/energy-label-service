@@ -4,6 +4,7 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
+import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
 import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
 import uk.co.fivium.els.categories.washingmachines.controller.WashingMachinesController;
 import uk.co.fivium.els.mvc.ReverseRouter;
@@ -21,7 +22,7 @@ public enum ProductCategory implements Category {
   SOLID_FUEL_BOILERS("Solid fuel boilers", "/not-yet-implemented"),
   SPACE_HEATERS("Space heaters", "/not-yet-implemented"),
   TELEVISIONS("Televisions", "/not-yet-implemented"),
-  TUMBLE_DRYERS("Tumble dryers", "/not-yet-implemented"),
+  TUMBLE_DRYERS("Tumble dryers", ReverseRouter.route(on(TumbleDryersController.class).renderTumbleDryerSubCategories(null))),
   TYRES("Tyres", "/not-yet-implemented"),
   VENTILATION_UNITS("Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))),
   WASHING_MACHINES("Washing machines", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))),
