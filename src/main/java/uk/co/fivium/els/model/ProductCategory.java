@@ -5,6 +5,7 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
 import uk.co.fivium.els.categories.washingmachines.controller.WashingMachinesController;
+import uk.co.fivium.els.categories.waterheaters.controller.WaterHeatersController;
 import uk.co.fivium.els.mvc.ReverseRouter;
 
 public enum ProductCategory {
@@ -24,7 +25,7 @@ public enum ProductCategory {
   TYRES("Tyres", "/not-yet-implemented"),
   VENTILATION_UNITS("Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))),
   WASHING_MACHINES("Washing machines", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))),
-  WATER_HEATERS("Water heaters", "/not-yet-implemented");
+  WATER_HEATERS("Water heaters", ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null)));
 
   private final String displayName;
   private final String nextStateUrl;
