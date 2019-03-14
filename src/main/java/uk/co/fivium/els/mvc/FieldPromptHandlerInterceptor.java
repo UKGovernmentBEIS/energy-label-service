@@ -1,11 +1,11 @@
 package uk.co.fivium.els.mvc;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.model.FieldPrompt;
@@ -32,14 +32,14 @@ public class FieldPromptHandlerInterceptor implements HandlerInterceptor {
     Map<String, String> fieldPrompts = new HashMap<>();
     Class<?> formClass = form.getClass();
 
-    for (Field field : formClass.getDeclaredFields()) {
+    ReflectionUtils.doWithFields(formClass, (field -> {
       String name = field.getName();
       FieldPrompt fieldPromptAnnotation = field.getAnnotation(FieldPrompt.class);
       if(fieldPromptAnnotation != null) {
         String prompt = fieldPromptAnnotation.value();
         fieldPrompts.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, prompt);
       }
-    }
+    }));
 
     return fieldPrompts;
   }

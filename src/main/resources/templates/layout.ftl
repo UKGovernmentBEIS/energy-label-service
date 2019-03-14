@@ -14,6 +14,8 @@
 <#import 'govuk/select.ftl' as govukSelect>
 <#import 'govuk/textInput.ftl' as govukTextInput>
 
+<#import 'common.ftl' as common>
+
 <#function springUrl url>
   <#local springUrl>
     <@spring.url url/>
@@ -27,11 +29,10 @@
   captionClass="govuk-caption-xl"
   twoThirdsColumn=true
   headingCssClass="govuk-heading-xl"
-  <#--breadcrumbMap=""-->
   backLink=false
   phaseBanner=true
   pageTitle=""
-  errorItems=[]>
+  >
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
   <#local heading=pageHeading?has_content>
@@ -41,7 +42,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title><#if errorItems?has_content>Error: </#if><#if pageTitle?has_content>${pageTitle} - <#elseif pageHeading?has_content>${pageHeading} - </#if>Create energy labels - GOV.UK</title>
+  <title><#if errorList?has_content>Error: </#if><#if pageTitle?has_content>${pageTitle} - <#elseif pageHeading?has_content>${pageHeading} - </#if>Create energy labels - GOV.UK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0c0c" />
   <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<@spring.url'/assets/govuk-frontend/assets/images/favicon.ico'/>" type="image/x-icon" />
@@ -98,7 +99,10 @@
       <#if twoThirdsColumn>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">
-            <@govukErrorSummary.errorSummary errorItems=errorItems/>
+            <#if errorList?has_content>
+              <@govukErrorSummary.errorSummary errorItems=errorList/>
+            </#if>
+
             <#if caption?has_content>
               <span class="${captionClass}">${caption}</span>
             </#if>

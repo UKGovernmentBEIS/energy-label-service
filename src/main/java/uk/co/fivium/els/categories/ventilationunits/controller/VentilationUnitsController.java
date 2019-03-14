@@ -2,23 +2,24 @@ package uk.co.fivium.els.categories.ventilationunits.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitSubCategory;
-import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitSubCategoryForm;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitsForm;
 import uk.co.fivium.els.categories.ventilationunits.service.VentilationUnitsService;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -32,6 +33,8 @@ import uk.co.fivium.els.util.StreamUtils;
 @RequestMapping("/categories/ventilation-units")
 public class VentilationUnitsController {
 
+  private static final String BREADCRUMB_STAGE_TEXT = "Ventilation units";
+
   private final PdfRenderer pdfRenderer;
   private final VentilationUnitsService ventilationUnitsService;
   private final BreadcrumbService breadcrumbService;
@@ -44,31 +47,30 @@ public class VentilationUnitsController {
   }
 
   @GetMapping("/")
-  public ModelAndView renderVentilationUnitsSubCategories(@ModelAttribute("form") VentilationUnitSubCategoryForm form) {
-    return getSubCategory();
+  public ModelAndView renderVentilationUnitsSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
+    return getVentilationUnitsSubCategory(Collections.emptyList());
   }
 
   @PostMapping("/")
   @ResponseBody
-  public ModelAndView handleVentilationUnitSubCategoriesSubmit(@Valid @ModelAttribute("form") VentilationUnitSubCategoryForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getSubCategory();
-    }
-    else {
-      VentilationUnitSubCategory subCategory = VentilationUnitSubCategory.valueOf(form.getSubCategory());
-      return new ModelAndView("redirect:" + subCategory.getNextSateUrl());
+  public ModelAndView handleVentilationUnitSubCategoriesSubmit(@ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", VentilationUnitSubCategory.getNoSelectionErrorMessage());
+      return getVentilationUnitsSubCategory(bindingResult.getFieldErrors());
+    } else {
+      VentilationUnitSubCategory subCategory = VentilationUnitSubCategory.valueOf(form.getCategory());
+      return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
     }
   }
 
-  private ModelAndView getSubCategory() {
-    ModelAndView modelAndView = new ModelAndView("categories/ventilation-units/ventilationUnitsSubCategory");
-    modelAndView.addObject("subCategories",
-      Arrays.stream(VentilationUnitSubCategory.values())
-        .collect(StreamUtils.toLinkedHashMap(Enum::name, VentilationUnitSubCategory::getDisplayName))
+  private ModelAndView getVentilationUnitsSubCategory(List<FieldError> errors) {
+    return ControllerUtils.getCategorySelectionModelAndView(VentilationUnitSubCategory.getCategoryQuestionText(),
+        VentilationUnitSubCategory.values(),
+        errors,
+        ReverseRouter.route(on(VentilationUnitsController.class).handleVentilationUnitSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
+        BREADCRUMB_STAGE_TEXT,
+        breadcrumbService
     );
-    modelAndView.addObject("submitUrl", ReverseRouter.route(on(VentilationUnitsController.class).handleVentilationUnitSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null)));
-    return modelAndView;
   }
 
   @GetMapping("/unidirectional-ventilation-units")
@@ -124,7 +126,7 @@ public class VentilationUnitsController {
     modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null)));
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null)));
   }
 
 }

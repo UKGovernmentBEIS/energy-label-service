@@ -62,6 +62,18 @@ public class TemplatePopulator {
     return this;
   }
 
+  public TemplatePopulator applyCssClassToId(String elementId, String addedClass) {
+    TemplateUtils.getElementById(template, elementId).addClass(addedClass);
+
+    return this;
+  }
+
+  public TemplatePopulator removeElementById(String elementId) {
+    TemplateUtils.getElementById(template, elementId).remove();
+
+    return this;
+  }
+
   public Document getPopulatedDocument() {
     return template;
   }

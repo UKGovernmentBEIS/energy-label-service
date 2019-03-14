@@ -6,19 +6,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.lamps.model.LampSubCategory;
-import uk.co.fivium.els.categories.lamps.model.LampSubCategoryForm;
 import uk.co.fivium.els.categories.lamps.model.LampsForm;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModel;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModelConsumption;
@@ -35,6 +37,8 @@ import uk.co.fivium.els.util.StreamUtils;
 @RequestMapping("/categories/lamps")
 public class LampsController {
 
+  private static final String BREADCRUMB_STAGE_TEXT = "Lamps";
+
   private final PdfRenderer pdfRenderer;
   private final LampsService lampsService;
   private final BreadcrumbService breadcrumbService;
@@ -47,31 +51,30 @@ public class LampsController {
   }
 
   @GetMapping("/")
-  public ModelAndView renderLampSubCategories(@ModelAttribute("form") LampSubCategoryForm form) {
-    return getSubCategory();
+  public ModelAndView renderLampSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
+    return getLampsSubCategory(Collections.emptyList());
   }
 
   @PostMapping("/")
   @ResponseBody
-  public ModelAndView handleLampSubCategoriesSubmit(@Valid @ModelAttribute("form") LampSubCategoryForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getSubCategory();
-    }
-    else {
-      LampSubCategory subCategory = LampSubCategory.valueOf(form.getSubCategory());
+  public ModelAndView handleLampSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", LampSubCategory.getNoSelectionErrorMessage());
+      return getLampsSubCategory(bindingResult.getFieldErrors());
+    } else {
+      LampSubCategory subCategory = LampSubCategory.valueOf(form.getCategory());
       return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
     }
   }
 
-  private ModelAndView getSubCategory() {
-    ModelAndView modelAndView = new ModelAndView("categories/lamps/lampsSubCategory");
-    modelAndView.addObject("subCategories",
-        Arrays.stream(LampSubCategory.values())
-        .collect(StreamUtils.toLinkedHashMap(Enum::name, LampSubCategory::getDisplayName))
+  private ModelAndView getLampsSubCategory(List<FieldError> errors) {
+    return ControllerUtils.getCategorySelectionModelAndView(LampSubCategory.getCategoryQuestionText(),
+        LampSubCategory.values(),
+        errors,
+        ReverseRouter.route(on(LampsController.class).handleLampSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
+        BREADCRUMB_STAGE_TEXT,
+        breadcrumbService
     );
-    modelAndView.addObject("submitUrl", ReverseRouter.route(on(LampsController.class).handleLampSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Lamps", ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null)));
-    return modelAndView;
   }
 
   @GetMapping("/lamps")
@@ -155,7 +158,7 @@ public class LampsController {
             .collect(StreamUtils.toLinkedHashMap(Enum::name, TemplateType::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Lamps", ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null)));
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null)));
   }
 
 }
