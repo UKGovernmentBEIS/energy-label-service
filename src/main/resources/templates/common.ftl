@@ -12,7 +12,7 @@
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
 <#macro standardProductForm title includeSupplierNameModel=true>
-  <@defaultPage pageHeading=title errorItems=errorList>
+  <@defaultPage pageHeading=title>
     <@form.govukForm submitUrl>
 
       <#if includeSupplierNameModel>

@@ -10,6 +10,7 @@
       .dryingClassG #dryingClassGLetter {
         font-size: 16.5px;
         font-weight: 700;
+        font-family: Calibri-Bold, Calibri;
       }
 
       .cls-1, .cls-12, .cls-18, .cls-21, .cls-22, .cls-23, .cls-25, .cls-26, .cls-3, .cls-4 {

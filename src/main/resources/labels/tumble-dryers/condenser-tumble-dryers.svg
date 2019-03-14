@@ -10,6 +10,7 @@
       .condensationEfficiencyClassG #condensationEfficiencyClassGLetter {
         font-size: 16.5px;
         font-weight: 700;
+        font-family: Calibri-Bold, Calibri;
       }      
 
       .cls-1, .cls-11, .cls-12, .cls-14, .cls-22, .cls-23, .cls-3, .cls-38, .cls-42, .cls-43, .cls-45, .cls-48, .cls-52, .cls-53, .cls-54 {
