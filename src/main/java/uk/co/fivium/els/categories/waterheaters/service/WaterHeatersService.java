@@ -1,5 +1,7 @@
 package uk.co.fivium.els.categories.waterheaters.service;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +29,17 @@ public class WaterHeatersService {
   public Document generateHtml(HeatPumpWaterHeatersForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/heat-pump-water-heaters.svg"));
 
-    if (form.getSoundPowerLevelIndoors() != "") {
-      templatePopulator = templatePopulator
-        .applyCssClassToId("insideDbSection", "hasInsideDb")
-        .setText("insideDb", form.getSoundPowerLevelIndoors());
+    if (StringUtils.isBlank(form.getSoundPowerLevelIndoors())) {
+      templatePopulator.removeElementById("insideDbSection");
+
+    } else {
+      templatePopulator
+          .applyCssClassToId("insideDbSection", "hasInsideDb")
+          .setText("insideDb", form.getSoundPowerLevelIndoors());
     }
-    // TODO Investigate why the text inside the invisible element isn't being hidden in the PDF, and if fixed, remove the below
-    else {
-      templatePopulator = templatePopulator.removeElementById("insideDbSection");
+
+    if (BooleanUtils.isTrue(form.getCanRunOffPeakOnly())) {
+     templatePopulator.applyCssClassToId("offPeakMode","hasOffPeakMode");
     }
 
     return templatePopulator

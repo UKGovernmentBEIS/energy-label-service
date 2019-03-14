@@ -22,4 +22,6 @@
       <@govukTextInput.textInput path="form.warmerGjAnnum"/>
     </@govukFieldset.fieldset>
 
+    <@govukRadios.radioYesNo path="form.canRunOffPeakOnly"/>
+
 </@common.standardProductForm>

@@ -1,11 +1,11 @@
 package uk.co.fivium.els.categories.waterheaters.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.model.FieldPrompt;
 
 public class HeatPumpWaterHeatersForm extends StandardTemplateForm30Char {
 
@@ -18,29 +18,30 @@ public class HeatPumpWaterHeatersForm extends StandardTemplateForm30Char {
   private String efficiencyRating;
 
   @FieldPrompt("Colder climate conditions")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for colder climate conditions")
+  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for colder climate conditions, up to 4 digits long")
   private String colderKwhAnnum;
 
   @FieldPrompt("Average climate conditions")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for average climate conditions")
+  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for average climate conditions, up to 4 digits long")
   private String averageKwhAnnum;
 
   @FieldPrompt("Warmer climate conditions")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for warmer climate conditions")
+  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for warmer climate conditions, up to 4 digits long")
   private String warmerKwhAnnum;
 
   @FieldPrompt("Colder climate conditions")
-  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for colder climate conditions")
+  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for colder climate conditions, up to 2 digits long")
   private String colderGjAnnum;
 
   @FieldPrompt("Average climate conditions")
-  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for average climate conditions")
+  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for average climate conditions, up to 2 digits long")
   private String averageGjAnnum;
 
   @FieldPrompt("Warmer climate conditions")
-  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for warmer climate conditions")
+  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for warmer climate conditions, up to 2 digits long")
   private String warmerGjAnnum;
 
+  // TODO indicate optional on form, can be done by checking for a pattern annotation, or new '@Optional' one
   @FieldPrompt("Sound power level, indoors dB")
   @Pattern(regexp = "[0-9]{0,2}", message = "Enter the outdoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
@@ -48,6 +49,10 @@ public class HeatPumpWaterHeatersForm extends StandardTemplateForm30Char {
   @FieldPrompt("Sound power level, outdoors dB")
   @Digits(integer = 2, fraction = 0, message = "Enter the outdoors sound power level, up to 2 digits long")
   private String soundPowerLevelOutdoors;
+
+  @FieldPrompt("Can the heat pump be set to work only during off-peak hours?")
+  @NotNull(message = "Specify if the heat pump can be set to work only during off-peak hours")
+  private Boolean canRunOffPeakOnly;
 
   public String getDeclaredLoadProfile() {
     return declaredLoadProfile;
@@ -129,6 +134,12 @@ public class HeatPumpWaterHeatersForm extends StandardTemplateForm30Char {
     this.soundPowerLevelOutdoors = soundPowerLevelOutdoors;
   }
 
-  //TODO peak hours tickbox
+  public Boolean getCanRunOffPeakOnly() {
+    return canRunOffPeakOnly;
+  }
+
+  public void setCanRunOffPeakOnly(Boolean canRunOffPeakOnly) {
+    this.canRunOffPeakOnly = canRunOffPeakOnly;
+  }
 
 }
