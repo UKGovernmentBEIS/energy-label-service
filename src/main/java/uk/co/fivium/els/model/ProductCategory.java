@@ -7,6 +7,7 @@ import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
 import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
 import uk.co.fivium.els.categories.washingmachines.controller.WashingMachinesController;
+import uk.co.fivium.els.categories.waterheaters.controller.WaterHeatersController;
 import uk.co.fivium.els.mvc.ReverseRouter;
 
 public enum ProductCategory implements Category {
@@ -26,7 +27,7 @@ public enum ProductCategory implements Category {
   TYRES("Tyres", "/not-yet-implemented"),
   VENTILATION_UNITS("Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))),
   WASHING_MACHINES("Washing machines", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))),
-  WATER_HEATERS("Water heaters", "/not-yet-implemented");
+  WATER_HEATERS("Water heaters", ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null)));
 
   public static String getCategoryQuestionText() {
     return "What type of item do you need a label for?";
