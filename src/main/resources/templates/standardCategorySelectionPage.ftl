@@ -1,9 +1,7 @@
 <#include './layout.ftl'>
 
-<#assign title="What type of item do you need a label for?">
-
 <@defaultPage pageTitle=title>
-  <@form.govukForm "/categories">
+  <@form.govukForm submitUrl>
 
     <@govukRadios.radio path="form.category" radioItems=categories label=title legendHeadingClass="govuk-fieldset__legend--xl"/>
 
