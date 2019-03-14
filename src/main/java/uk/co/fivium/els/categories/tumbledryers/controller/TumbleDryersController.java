@@ -2,24 +2,25 @@ package uk.co.fivium.els.categories.tumbledryers.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.tumbledryers.model.CondenserTumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerSubCategory;
-import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerSubCategoryForm;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.service.TumbleDryersService;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -33,6 +34,8 @@ import uk.co.fivium.els.util.StreamUtils;
 @RequestMapping("/categories/tumble-dryers")
 public class TumbleDryersController {
 
+  private static final String BREADCRUMB_STAGE_TEXT = "Tumble dryers";
+
   private final PdfRenderer pdfRenderer;
   private final TumbleDryersService tumbleDryersService;
   private final BreadcrumbService breadcrumbService;
@@ -45,31 +48,30 @@ public class TumbleDryersController {
   }
 
   @GetMapping("/")
-  public ModelAndView renderTumbleDryerSubCategories(@ModelAttribute("form") TumbleDryerSubCategoryForm form) {
-    return getSubCategory();
+  public ModelAndView renderTumbleDryerSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
+    return getSubCategory(Collections.emptyList());
   }
 
   @PostMapping("/")
   @ResponseBody
-  public ModelAndView handleTumbleDryerSubCategoriesSubmit(@Valid @ModelAttribute("form") TumbleDryerSubCategoryForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getSubCategory();
-    }
-    else {
-      TumbleDryerSubCategory subCategory = TumbleDryerSubCategory.valueOf(form.getSubCategory());
+  public ModelAndView handleTumbleDryerSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", TumbleDryerSubCategory.getNoSelectionErrorMessage());
+      return getSubCategory(bindingResult.getFieldErrors());
+    } else {
+      TumbleDryerSubCategory subCategory = TumbleDryerSubCategory.valueOf(form.getCategory());
       return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
     }
   }
 
-  private ModelAndView getSubCategory() {
-    ModelAndView modelAndView = new ModelAndView("categories/tumble-dryers/tumbleDryersSubCategory");
-    modelAndView.addObject("subCategories",
-      Arrays.stream(TumbleDryerSubCategory.values())
-        .collect(StreamUtils.toLinkedHashMap(Enum::name, TumbleDryerSubCategory::getDisplayName))
+  private ModelAndView getSubCategory(List<FieldError> errors) {
+    return ControllerUtils.getCategorySelectionModelAndView(TumbleDryerSubCategory.getCategoryQuestionText(),
+        TumbleDryerSubCategory.values(),
+        errors,
+        ReverseRouter.route(on(TumbleDryersController.class).handleTumbleDryerSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
+        BREADCRUMB_STAGE_TEXT,
+        breadcrumbService
     );
-    modelAndView.addObject("submitUrl", ReverseRouter.route(on(TumbleDryersController.class).handleTumbleDryerSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Tumble dryers", ReverseRouter.route(on(TumbleDryersController.class).renderTumbleDryerSubCategories(null)));
-    return modelAndView;
   }
 
   @GetMapping("/air-vented-tumble-dryers")
