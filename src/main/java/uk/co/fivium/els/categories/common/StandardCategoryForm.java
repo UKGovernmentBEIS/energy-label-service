@@ -1,10 +1,7 @@
-package uk.co.fivium.els.model;
+package uk.co.fivium.els.categories.common;
 
-import javax.validation.constraints.NotBlank;
+public class StandardCategoryForm {
 
-public class ProductCategoryForm {
-
-  @NotBlank
   private String category;
 
   public String getCategory() {
@@ -14,4 +11,5 @@ public class ProductCategoryForm {
   public void setCategory(String category) {
     this.category = category;
   }
+
 }
