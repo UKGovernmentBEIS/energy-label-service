@@ -3,9 +3,9 @@ package uk.co.fivium.els.categories.tumbledryers.service;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.tumbledryers.model.AirVentedTumbleDryersForm;
+import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerSubCategory;
+import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.model.CondenserTumbleDryersForm;
-import uk.co.fivium.els.categories.tumbledryers.model.GasFiredTumbleDryersForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -26,8 +26,14 @@ public class TumbleDryersService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(AirVentedTumbleDryersForm form, LegislationCategory legislationCategory) {
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/air-vented-tumble-dryers.svg"));
+  public Document generateHtml(TumbleDryersForm form, LegislationCategory legislationCategory, TumbleDryerSubCategory subCategory) {
+    TemplatePopulator templatePopulator;
+    if (subCategory == TumbleDryerSubCategory.AIR_VENTED_TUMBLE_DRYERS) {
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/air-vented-tumble-dryers.svg"));
+    }
+    else {
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/gas-fired-tumble-dryers.svg"));
+    }
 
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
@@ -53,21 +59,6 @@ public class TumbleDryersService {
       .setText("kg", form.getRatedCapacity())
       .setText("db", form.getSoundPowerLevel())
       .applyRatingCssClass("condensationEfficiencyClass", RatingClass.valueOf(form.getCondensationEfficiencyRating()))
-      .getPopulatedDocument();
-  }
-
-
-  public Document generateHtml(GasFiredTumbleDryersForm form, LegislationCategory legislationCategory) {
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/gas-fired-tumble-dryers.svg"));
-
-    return templatePopulator
-      .setMultilineText("supplier", form.getSupplierName())
-      .setMultilineText("model", form.getModelName())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .setText("kwhAnnum", form.getEnergyConsumption())
-      .setText("minCycle", form.getCycleTime())
-      .setText("kg", form.getRatedCapacity())
-      .setText("db", form.getSoundPowerLevel())
       .getPopulatedDocument();
   }
 

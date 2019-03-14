@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.tumbledryers.model.CondenserTumbleDryersForm;
-import uk.co.fivium.els.categories.tumbledryers.model.GasFiredTumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerSubCategory;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerSubCategoryForm;
-import uk.co.fivium.els.categories.tumbledryers.model.AirVentedTumbleDryersForm;
+import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.service.TumbleDryersService;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
@@ -74,18 +73,18 @@ public class TumbleDryersController {
   }
 
   @GetMapping("/air-vented-tumble-dryers")
-  public ModelAndView renderAirVentedTumbleDryers(@ModelAttribute("form") AirVentedTumbleDryersForm form) {
+  public ModelAndView renderAirVentedTumbleDryers(@ModelAttribute("form") TumbleDryersForm form) {
     return getAirVentedTumbleDryers(Collections.emptyList());
   }
 
   @PostMapping("/air-vented-tumble-dryers")
   @ResponseBody
-  public Object handleAirVentedTumbleDryersSubmit(@Valid @ModelAttribute("form") AirVentedTumbleDryersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleAirVentedTumbleDryersSubmit(@Valid @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) throws Exception {
     if (bindingResult.hasErrors()) {
       return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtml(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtml(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, TumbleDryerSubCategory.AIR_VENTED_TUMBLE_DRYERS));
       return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
     }
   }
@@ -108,18 +107,18 @@ public class TumbleDryersController {
   }
 
   @GetMapping("/gas-fired-tumble-dryers")
-  public ModelAndView renderGasFiredTumbleDryers(@ModelAttribute("form") GasFiredTumbleDryersForm form) {
+  public ModelAndView renderGasFiredTumbleDryers(@ModelAttribute("form") TumbleDryersForm form) {
     return getGasFiredTumbleDryers(Collections.emptyList());
   }
 
   @PostMapping("/gas-fired-tumble-dryers")
   @ResponseBody
-  public Object handleGasFiredTumbleDryersSubmit(@Valid @ModelAttribute("form") GasFiredTumbleDryersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleGasFiredTumbleDryersSubmit(@Valid @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) throws Exception {
     if (bindingResult.hasErrors()) {
       return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtml(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtml(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, TumbleDryerSubCategory.GAS_FIRED_TUMBLE_DRYERS));
       return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
     }
   }

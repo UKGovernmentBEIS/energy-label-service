@@ -1,11 +1,5 @@
 <#include '../../layout.ftl'>
-<#include '../../generateLabelButton.ftl'>
-
-<@defaultPage pageHeading="Gas-fired tumble dryers" errorItems=errorList>
-  <@form.govukForm submitUrl>
-
-    <@govukTextInput.textInput path="form.supplierName"/>
-    <@govukTextInput.textInput path="form.modelName"/>
+<@common.standardProductForm "Gas-fired tumble dryers">
 
     <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
 
@@ -17,7 +11,4 @@
 
     <@govukTextInput.textInput path="form.soundPowerLevel"/>
 
-    <@generateLabelButton/>
-  </@form.govukForm>
-
-</@defaultPage>
+</@common.standardProductForm>
