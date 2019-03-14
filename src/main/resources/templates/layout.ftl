@@ -14,6 +14,8 @@
 <#import 'govuk/select.ftl' as govukSelect>
 <#import 'govuk/textInput.ftl' as govukTextInput>
 
+<#import 'common.ftl' as common>
+
 <#function springUrl url>
   <#local springUrl>
     <@spring.url url/>
