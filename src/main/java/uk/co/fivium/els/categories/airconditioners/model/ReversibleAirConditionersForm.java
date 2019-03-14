@@ -6,6 +6,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import org.springframework.format.annotation.NumberFormat;
 
+// TODO switch to standard form pattern once templates are done
 @GroupSequenceProvider(ReversibleAirConditionersFormSequenceProvider.class)
 public class ReversibleAirConditionersForm {
 

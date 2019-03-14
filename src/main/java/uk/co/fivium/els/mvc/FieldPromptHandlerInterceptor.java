@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,7 +33,9 @@ public class FieldPromptHandlerInterceptor implements HandlerInterceptor {
     Map<String, String> fieldPrompts = new HashMap<>();
     Class<?> formClass = form.getClass();
 
-    for (Field field : formClass.getDeclaredFields()) {
+    Field[] fields = ArrayUtils.addAll(formClass.getDeclaredFields(), formClass.getSuperclass().getDeclaredFields());
+
+    for (Field field : fields) {
       String name = field.getName();
       FieldPrompt fieldPromptAnnotation = field.getAnnotation(FieldPrompt.class);
       if(fieldPromptAnnotation != null) {

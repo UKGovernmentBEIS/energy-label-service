@@ -2,20 +2,10 @@ package uk.co.fivium.els.categories.washingmachines.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
+import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
 import uk.co.fivium.els.model.FieldPrompt;
 
-public class WashingMachinesForm {
-
-  @FieldPrompt("Supplier's name or trade mark")
-  @NotBlank(message = "Enter a supplier name or trade mark")
-  @Length(max = 30, message = "Supplier name or trade mark must be 30 characters or less")
-  private String supplierName;
-
-  @FieldPrompt("Supplier's model identifier")
-  @NotBlank(message = "Enter a supplier model identifier")
-  @Length(max = 30, message = "Supplier model identifier must be 30 characters or less")
-  private String modelName;
+public class WashingMachinesForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency class")
@@ -44,22 +34,6 @@ public class WashingMachinesForm {
   @FieldPrompt("Airborne acoustical noise emissions during the spinning phase for the standard 60°C cotton programme at full load expressed in dB(A) re 1pW")
   @Digits(integer = 2, fraction = 0, message = "Enter a noise emission during the spinning phase, up to 2 digits long")
   private String spinningNoiseEmissions;
-
-  public String getSupplierName() {
-    return supplierName;
-  }
-
-  public void setSupplierName(String supplierName) {
-    this.supplierName = supplierName;
-  }
-
-  public String getModelName() {
-    return modelName;
-  }
-
-  public void setModelName(String modelName) {
-    this.modelName = modelName;
-  }
 
   public String getEfficiencyRating() {
     return efficiencyRating;
