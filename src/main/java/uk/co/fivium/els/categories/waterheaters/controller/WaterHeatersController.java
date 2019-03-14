@@ -1,16 +1,28 @@
 package uk.co.fivium.els.categories.waterheaters.controller;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import javax.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
 import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterSubCategory;
-import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterSubCategoryForm;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
@@ -19,16 +31,11 @@ import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
-import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
-
 @Controller
 @RequestMapping("/categories/water-heaters")
 public class WaterHeatersController {
+
+  private final String BREADCRUMB_STAGE_TEXT = "Water heaters and storage tanks";
 
   private final PdfRenderer pdfRenderer;
   private final WaterHeatersService waterHeatersService;
@@ -42,31 +49,30 @@ public class WaterHeatersController {
   }
 
   @GetMapping("/")
-  public ModelAndView renderWaterHeatersSubCategories(@ModelAttribute("form") WaterHeaterSubCategoryForm form) {
-    return getSubCategory();
+  public ModelAndView renderWaterHeatersSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
+    return getVentilationUnitsSubCategory(Collections.emptyList());
   }
 
   @PostMapping("/")
   @ResponseBody
-  public ModelAndView handleWaterHeatersSubCategoriesSubmit(@Valid @ModelAttribute("form") WaterHeaterSubCategoryForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getSubCategory();
-    }
-    else {
-      WaterHeaterSubCategory subCategory = WaterHeaterSubCategory.valueOf(form.getSubCategory());
+  public ModelAndView handleWaterHeatersSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", WaterHeaterSubCategory.getNoSelectionErrorMessage());
+      return getVentilationUnitsSubCategory(bindingResult.getFieldErrors());
+    } else {
+      WaterHeaterSubCategory subCategory = WaterHeaterSubCategory.valueOf(form.getCategory());
       return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
     }
   }
 
-  private ModelAndView getSubCategory() {
-    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterHeatersSubCategory");
-    modelAndView.addObject("subCategories",
-      Arrays.stream(WaterHeaterSubCategory.values())
-        .collect(StreamUtils.toLinkedHashMap(Enum::name, WaterHeaterSubCategory::getDisplayName))
+  private ModelAndView getVentilationUnitsSubCategory(List<FieldError> errors) {
+    return ControllerUtils.getCategorySelectionModelAndView(WaterHeaterSubCategory.getCategoryQuestionText(),
+        WaterHeaterSubCategory.values(),
+        errors,
+        ReverseRouter.route(on(WaterHeatersController.class).handleWaterHeatersSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
+        BREADCRUMB_STAGE_TEXT,
+        breadcrumbService
     );
-    modelAndView.addObject("submitUrl", ReverseRouter.route(on(WaterHeatersController.class).handleWaterHeatersSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Water heaters and storage tanks", ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null)));
-    return modelAndView;
   }
 
   @GetMapping("/heat-pump-water-heaters")
@@ -102,6 +108,6 @@ public class WaterHeatersController {
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Water heaters and storage tanks", ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null)));
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null)));
   }
 }
