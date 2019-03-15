@@ -374,10 +374,10 @@
     <text id="ratingLetter" class="cls-39" transform="translate(222.41016 171.57996)">A</text>
     <text id="ratingPlusses" class="cls-40" transform="translate(241.40039 162.37)">+++</text>
   </g>
-  <text id="supplierLineTwo" class="cls-41" transform="translate(25.50977 119.05017)">X</text>
-  <text id="supplierLineOne" class="cls-41" transform="translate(25.50977 102.79181)">X</text>
-  <text id="modelLineTwo" class="cls-41" transform="translate(164.41016 119.05017)">X</text>
-  <text id="modelLineOne" class="cls-41" transform="translate(164.41016 102.79181)">X</text>
+  <text id="supplierLine2" class="cls-41" transform="translate(25.50977 119.05017)">X</text>
+  <text id="supplierLine1" class="cls-41" transform="translate(25.50977 102.79181)">X</text>
+  <text id="modelLine2" class="cls-41" transform="translate(164.41016 119.05017)">X</text>
+  <text id="modelLine1" class="cls-41" transform="translate(164.41016 102.79181)">X</text>
   <text id="kwhAnnum" class="cls-42" transform="translate(221 422.4696)" text-anchor="middle">X</text>
   <text id="fridgeLitres" class="cls-43" transform="translate(79 577.16003)" text-anchor="end">X</text>
   <text id="freezerLitres" class="cls-43" transform="translate(164 577.16003)" text-anchor="end">X</text>
