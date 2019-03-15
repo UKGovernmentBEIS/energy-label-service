@@ -3,7 +3,7 @@ package uk.co.fivium.els.categories.ventilationunits.model;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.FieldPrompt;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class VentilationUnitsForm extends StandardTemplateForm30Char {
 
