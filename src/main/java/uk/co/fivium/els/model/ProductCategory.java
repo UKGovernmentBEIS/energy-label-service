@@ -8,6 +8,7 @@ import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
+import uk.co.fivium.els.categories.televisions.controller.TelevisionController;
 import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
 import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
 import uk.co.fivium.els.categories.washingmachines.controller.WashingMachinesController;
@@ -62,7 +63,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "TELEVISIONS",
           "Televisions",
-          "/not-yet-implemented"))
+          ReverseRouter.route(on(TelevisionController.class).renderTelevisionsFrom(null))))
       .add(new CategoryItem(
           "TUMBLE_DRYERS",
           "Tumble dryers",

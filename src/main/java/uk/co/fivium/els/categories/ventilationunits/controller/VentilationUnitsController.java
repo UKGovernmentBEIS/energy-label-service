@@ -25,7 +25,6 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
-import uk.co.fivium.els.util.StreamUtils;
 
 @Controller
 @RequestMapping("/categories/ventilation-units")
@@ -114,7 +113,7 @@ public class VentilationUnitsController {
 
   private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl) {
     RatingClassRange efficiencyRatingRange = VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
-    modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null)));
