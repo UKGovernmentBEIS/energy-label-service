@@ -5,7 +5,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
+@StaticProductText("<p>To generate a label for a television, enter the product information in the form below.</p>" +
+    "<p>Energy labels for televisions should be at least 60mm x 120mm when printed. This label should then be displayed so that it is easily readable and clearly associated with the product.</p>")
 public class TelevisionsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("When was or will your product placed on the market?")

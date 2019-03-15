@@ -63,6 +63,7 @@ public class ControllerUtils {
     );
     ControllerUtils.addErrorSummary(modelAndView, errors);
     modelAndView.addObject("submitUrl", submitUrl);
+    modelAndView.addObject("categoryGuidanceText", category.getGuidanceText());
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, breadcrumbTitle);
     return modelAndView;
   }

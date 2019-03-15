@@ -43,7 +43,8 @@ public class LampsCategory implements Category {
 
   @Override
   public String getGuidanceText() {
-    return "TODO";
+    return "<p>To generate an energy label for a lamp, select what you want on the label below and enter the product information on the next page.</p>" +
+        "<p>Energy labels for lamps should be at least 36mm x 76mm when printed, unless the packaging is not large enough to accommodate this. This label can be displayed either in colour or in black and white.</p>";
   }
 
   @Override

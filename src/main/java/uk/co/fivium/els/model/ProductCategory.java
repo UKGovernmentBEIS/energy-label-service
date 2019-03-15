@@ -100,7 +100,7 @@ public class ProductCategory implements Category {
 
   @Override
   public String getGuidanceText() {
-    return "tesasdasd";
+    return null;
   }
 
   @Override

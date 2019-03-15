@@ -34,7 +34,8 @@ public class WaterHeaterCategory implements Category {
 
   @Override
   public String getGuidanceText() {
-    return "TODO";
+    return "<p>To generate a label for a conventional water heater, solar water heater, heat pump water heater, hot water storage tank, or a package label associated with any of the above, select your label type below and enter the relevant information on the next page.</p>" +
+        "<p>Energy labels for products should be 105mm x 200mm while package labels should be 210mm x 297mm. The label, for either the package, the product, or both as required, should be displayed at the point of sale so that it is easily readable and clearly associated with the product.</p>";
   }
 
   @Override

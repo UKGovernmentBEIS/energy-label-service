@@ -38,7 +38,8 @@ public class VentilationUnitCategory implements Category {
 
   @Override
   public String getGuidanceText() {
-    return "TODO";
+    return "<p>To generate a label for a unidirectional or bidirectional ventilation unit, select your label type below and enter the relevant information on the next page.</p>" +
+        "<p>Energy labels for ventilation unites should be at least 75mm x 150mm when printed. This label should then be displayed so that it is easily readable and clearly associated with the product.</p>";
   }
 
   @Override
