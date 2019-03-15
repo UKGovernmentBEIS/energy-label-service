@@ -5,13 +5,11 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.StandardCategoryForm;
-import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitSubCategory;
+import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitCategory;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitsForm;
 import uk.co.fivium.els.categories.ventilationunits.service.VentilationUnitsService;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -54,18 +52,11 @@ public class VentilationUnitsController {
   @PostMapping("/")
   @ResponseBody
   public ModelAndView handleVentilationUnitSubCategoriesSubmit(@ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    if (StringUtils.isBlank(form.getCategory())) {
-      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", VentilationUnitSubCategory.getNoSelectionErrorMessage());
-      return getVentilationUnitsSubCategory(bindingResult.getFieldErrors());
-    } else {
-      VentilationUnitSubCategory subCategory = VentilationUnitSubCategory.valueOf(form.getCategory());
-      return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
-    }
+    return ControllerUtils.handleSubCategorySubmit(VentilationUnitCategory.GET, form, bindingResult, (this::getVentilationUnitsSubCategory));
   }
 
   private ModelAndView getVentilationUnitsSubCategory(List<FieldError> errors) {
-    return ControllerUtils.getCategorySelectionModelAndView(VentilationUnitSubCategory.getCategoryQuestionText(),
-        VentilationUnitSubCategory.values(),
+    return ControllerUtils.getCategorySelectionModelAndView(VentilationUnitCategory.GET,
         errors,
         ReverseRouter.route(on(VentilationUnitsController.class).handleVentilationUnitSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
         BREADCRUMB_STAGE_TEXT,
@@ -85,7 +76,7 @@ public class VentilationUnitsController {
       return getUnidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(ventilationUnitsService.generateHtml(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, VentilationUnitSubCategory.UNIDIRECTIONAL_VENTILATION_UNITS));
+      Resource pdf = pdfRenderer.render(ventilationUnitsService.generateHtmlUnidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "ventilation-units-label.pdf");
     }
   }
@@ -102,7 +93,7 @@ public class VentilationUnitsController {
       return getBidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(ventilationUnitsService.generateHtml(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, VentilationUnitSubCategory.BIDIRECTIONAL_VENTILATION_UNITS));
+      Resource pdf = pdfRenderer.render(ventilationUnitsService.generateHtmlBidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "ventilation-units-label.pdf");
     }
   }

@@ -6,13 +6,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.StandardCategoryForm;
-import uk.co.fivium.els.categories.lamps.model.LampSubCategory;
+import uk.co.fivium.els.categories.lamps.model.LampsCategory;
 import uk.co.fivium.els.categories.lamps.model.LampsForm;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModel;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModelConsumption;
@@ -58,18 +56,11 @@ public class LampsController {
   @PostMapping("/")
   @ResponseBody
   public ModelAndView handleLampSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    if (StringUtils.isBlank(form.getCategory())) {
-      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", LampSubCategory.getNoSelectionErrorMessage());
-      return getLampsSubCategory(bindingResult.getFieldErrors());
-    } else {
-      LampSubCategory subCategory = LampSubCategory.valueOf(form.getCategory());
-      return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
-    }
+    return ControllerUtils.handleSubCategorySubmit(LampsCategory.GET, form, bindingResult, (this::getLampsSubCategory));
   }
 
   private ModelAndView getLampsSubCategory(List<FieldError> errors) {
-    return ControllerUtils.getCategorySelectionModelAndView(LampSubCategory.getCategoryQuestionText(),
-        LampSubCategory.values(),
+    return ControllerUtils.getCategorySelectionModelAndView(LampsCategory.GET,
         errors,
         ReverseRouter.route(on(LampsController.class).handleLampSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
         BREADCRUMB_STAGE_TEXT,

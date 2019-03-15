@@ -2,7 +2,10 @@ package uk.co.fivium.els.model;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import com.google.common.collect.ImmutableList;
+import java.util.List;
 import uk.co.fivium.els.categories.common.Category;
+import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
@@ -11,52 +14,97 @@ import uk.co.fivium.els.categories.washingmachines.controller.WashingMachinesCon
 import uk.co.fivium.els.categories.waterheaters.controller.WaterHeatersController;
 import uk.co.fivium.els.mvc.ReverseRouter;
 
-public enum ProductCategory implements Category {
+public class ProductCategory implements Category {
 
-  AIR_CONDITIONERS("Air Conditioners", "/not-yet-implemented"),
-  DISHWASHERS("Dishwashers", ReverseRouter.route(on(DishwashersController.class).renderDishwashers(null ))),
-  DOMESTIC_OVENS("Domestic ovens", "/not-yet-implemented"),
-  FRIDGES_AND_FREEZERS("Fridges and freezers", "/not-yet-implemented"),
-  LAMPS("Lamps", ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null))),
-  LOCAL_SPACE_HEATERS("Local space heaters", "/not-yet-implemented"),
-  REFRIGERATED_STORAGE_CABINETS("Professional refrigerated storage cabinets", "/not-yet-implemented"),
-  RANGE_HOODS("Range hoods", "/not-yet-implemented"),
-  SOLID_FUEL_BOILERS("Solid fuel boilers", "/not-yet-implemented"),
-  SPACE_HEATERS("Space heaters", "/not-yet-implemented"),
-  TELEVISIONS("Televisions", "/not-yet-implemented"),
-  TUMBLE_DRYERS("Tumble dryers", ReverseRouter.route(on(TumbleDryersController.class).renderTumbleDryerSubCategories(null))),
-  TYRES("Tyres", "/not-yet-implemented"),
-  VENTILATION_UNITS("Ventilation units", ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))),
-  WASHING_MACHINES("Washing machines", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))),
-  WATER_HEATERS("Water heaters", ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null)));
+  public static final Category GET = new ProductCategory();
 
-  public static String getCategoryQuestionText() {
+  private static List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
+      .add(new CategoryItem(
+          "AIR_CONDITIONERS",
+          "Air Conditioners",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "DISHWASHERS",
+          "Dishwashers",
+          ReverseRouter.route(on(DishwashersController.class).renderDishwashers(null))))
+      .add(new CategoryItem(
+          "DOMESTIC_OVENS",
+          "Domestic ovens",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "FRIDGES_AND_FREEZERS",
+          "Fridges and freezers",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "LAMPS",
+          "Lamps",
+          ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null))))
+      .add(new CategoryItem(
+          "LOCAL_SPACE_HEATERS",
+          "Local space heaters",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "REFRIGERATED_STORAGE_CABINETS",
+          "Professional refrigerated storage cabinets",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "RANGE_HOODS",
+          "Range hoods",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "SOLID_FUEL_BOILERS",
+          "Solid fuel boilers",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "SPACE_HEATERS",
+          "Space heaters",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "TELEVISIONS",
+          "Televisions",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "TUMBLE_DRYERS",
+          "Tumble dryers",
+          ReverseRouter.route(on(TumbleDryersController.class).renderTumbleDryerSubCategories(null))))
+      .add(new CategoryItem(
+          "TYRES",
+          "Tyres",
+          "/not-yet-implemented"))
+      .add(new CategoryItem(
+          "VENTILATION_UNITS",
+          "Ventilation units",
+          ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))))
+      .add(new CategoryItem(
+          "WASHING_MACHINES",
+          "Washing machines",
+          ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))))
+      .add(new CategoryItem(
+          "WATER_HEATERS",
+          "Water heaters",
+          ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null))))
+      .build();
+
+  private ProductCategory(){}
+
+  @Override
+  public String getCategoryQuestionText() {
     return "What type of item do you need a label for?";
   }
 
-  public static String getNoSelectionErrorMessage() {
+  @Override
+  public String getNoSelectionErrorMessage() {
     return "Select a type of item";
   }
 
-  private final String displayName;
-  private final String nextStateUrl;
-
-  ProductCategory(String displayName, String nextStateUrl) {
-    this.displayName = displayName;
-    this.nextStateUrl = nextStateUrl;
-  }
-
-  public String getDisplayName() {
-    return displayName;
-  }
-
-  public String getNextStateUrl() {
-    return nextStateUrl;
+  @Override
+  public String getGuidanceText() {
+    return "tesasdasd";
   }
 
   @Override
-  public String getName() {
-    return this.name();
+  public List<CategoryItem> getCategoryItems() {
+    return subCategories;
   }
 
 }

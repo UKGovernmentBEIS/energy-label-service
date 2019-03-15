@@ -5,13 +5,11 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.tumbledryers.model.CondenserTumbleDryersForm;
-import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerSubCategory;
+import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerCategory;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.service.TumbleDryersService;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -55,18 +53,11 @@ public class TumbleDryersController {
   @PostMapping("/")
   @ResponseBody
   public ModelAndView handleTumbleDryerSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    if (StringUtils.isBlank(form.getCategory())) {
-      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", TumbleDryerSubCategory.getNoSelectionErrorMessage());
-      return getSubCategory(bindingResult.getFieldErrors());
-    } else {
-      TumbleDryerSubCategory subCategory = TumbleDryerSubCategory.valueOf(form.getCategory());
-      return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
-    }
+    return ControllerUtils.handleSubCategorySubmit(TumbleDryerCategory.GET, form, bindingResult, (this::getSubCategory));
   }
 
   private ModelAndView getSubCategory(List<FieldError> errors) {
-    return ControllerUtils.getCategorySelectionModelAndView(TumbleDryerSubCategory.getCategoryQuestionText(),
-        TumbleDryerSubCategory.values(),
+    return ControllerUtils.getCategorySelectionModelAndView(TumbleDryerCategory.GET,
         errors,
         ReverseRouter.route(on(TumbleDryersController.class).handleTumbleDryerSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
         BREADCRUMB_STAGE_TEXT,
@@ -86,7 +77,7 @@ public class TumbleDryersController {
       return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtml(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, TumbleDryerSubCategory.AIR_VENTED_TUMBLE_DRYERS));
+      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
     }
   }
@@ -103,7 +94,7 @@ public class TumbleDryersController {
       return getCondenserTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtml(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
     }
   }
@@ -120,7 +111,7 @@ public class TumbleDryersController {
       return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtml(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, TumbleDryerSubCategory.GAS_FIRED_TUMBLE_DRYERS));
+      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
     }
   }
