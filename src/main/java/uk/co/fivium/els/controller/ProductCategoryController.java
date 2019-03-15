@@ -5,12 +5,10 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,18 +44,11 @@ public class ProductCategoryController {
 
   @PostMapping("/categories")
   public ModelAndView handleCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    if (StringUtils.isBlank(form.getCategory())) {
-      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", ProductCategory.getNoSelectionErrorMessage());
-      return getProductCategories(bindingResult.getFieldErrors());
-    } else {
-      ProductCategory category = ProductCategory.valueOf(form.getCategory());
-      return new ModelAndView("redirect:" + category.getNextStateUrl());
-    }
+    return ControllerUtils.handleSubCategorySubmit(ProductCategory.GET, form, bindingResult, (this::getProductCategories));
   }
 
   private ModelAndView getProductCategories(List<FieldError> errors) {
-    return ControllerUtils.getCategorySelectionModelAndView(ProductCategory.getCategoryQuestionText(),
-        ProductCategory.values(),
+    return ControllerUtils.getCategorySelectionModelAndView(ProductCategory.GET,
         errors,
         ReverseRouter.route(on(ProductCategoryController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
         BREADCRUMB_STAGE_TEXT,

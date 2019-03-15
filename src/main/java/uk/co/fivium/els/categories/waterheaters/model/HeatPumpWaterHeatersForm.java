@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.FieldPrompt;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class HeatPumpWaterHeatersForm extends StandardTemplateForm30Char {
 

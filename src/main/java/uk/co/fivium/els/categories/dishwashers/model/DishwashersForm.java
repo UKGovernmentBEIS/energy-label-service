@@ -1,11 +1,14 @@
 package uk.co.fivium.els.categories.dishwashers.model;
 
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.FieldPrompt;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
+@StaticProductText("<p>To generate an energy label for a domestic dishwasher, enter the product information into the form below.</p>" +
+    "<p>Energy labels for domestic dishwashers should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.</p>")
 public class DishwashersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class indicator")

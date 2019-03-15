@@ -6,13 +6,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
-import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterSubCategory;
+import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterCategory;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
@@ -56,18 +54,11 @@ public class WaterHeatersController {
   @PostMapping("/")
   @ResponseBody
   public ModelAndView handleWaterHeatersSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    if (StringUtils.isBlank(form.getCategory())) {
-      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required", WaterHeaterSubCategory.getNoSelectionErrorMessage());
-      return getVentilationUnitsSubCategory(bindingResult.getFieldErrors());
-    } else {
-      WaterHeaterSubCategory subCategory = WaterHeaterSubCategory.valueOf(form.getCategory());
-      return new ModelAndView("redirect:" + subCategory.getNextStateUrl());
-    }
+    return ControllerUtils.handleSubCategorySubmit(WaterHeaterCategory.GET, form, bindingResult, (this::getVentilationUnitsSubCategory));
   }
 
   private ModelAndView getVentilationUnitsSubCategory(List<FieldError> errors) {
-    return ControllerUtils.getCategorySelectionModelAndView(WaterHeaterSubCategory.getCategoryQuestionText(),
-        WaterHeaterSubCategory.values(),
+    return ControllerUtils.getCategorySelectionModelAndView(WaterHeaterCategory.GET,
         errors,
         ReverseRouter.route(on(WaterHeatersController.class).handleWaterHeatersSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
         BREADCRUMB_STAGE_TEXT,
@@ -101,7 +92,7 @@ public class WaterHeatersController {
 
   private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl) {
     RatingClassRange efficiencyRatingRange = WaterHeatersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
-    modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("loadProfile",
       Arrays.stream(LoadProfile.values())

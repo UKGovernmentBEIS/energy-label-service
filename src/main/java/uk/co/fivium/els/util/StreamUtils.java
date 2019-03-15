@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import uk.co.fivium.els.model.RatingClass;
-import uk.co.fivium.els.model.RatingClassRange;
 
 public class StreamUtils {
 
@@ -22,11 +20,14 @@ public class StreamUtils {
     );
   }
 
-  // TODO move
-  public static Map<String, String> ratingRangeToSelectionMap(RatingClassRange ratingClassRange) {
-    return ratingClassRange.getApplicableRatings().stream()
-        .collect(toLinkedHashMap(Enum::name, RatingClass::getDisplayValue));
-
+  public static <T, K, U> Collector<T, ?, Map<K, U>> toLinkedMergingHashMap(Function<? super T, ? extends K> keyMapper,
+                                                                     Function<? super T, ? extends U> valueMapper) {
+    return Collectors.toMap(
+        keyMapper,
+        valueMapper,
+        (u, v) -> u,
+        LinkedHashMap::new
+    );
   }
 
 }

@@ -23,7 +23,6 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
-import uk.co.fivium.els.util.StreamUtils;
 
 @Controller
 @RequestMapping("/categories")
@@ -67,8 +66,8 @@ public class WashingMachinesController {
     RatingClassRange spinEfficiencyRange = WashingMachinesService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange();
 
     ModelAndView modelAndView = new ModelAndView("categories/washing-machines/washingMachines");
-    modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
-    modelAndView.addObject("spinDryingEfficiencyRating", StreamUtils.ratingRangeToSelectionMap(spinEfficiencyRange));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
+    modelAndView.addObject("spinDryingEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(spinEfficiencyRange));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null)));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Washing machines");
