@@ -92,7 +92,7 @@ public class WaterHeatersController {
 
   private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl) {
     RatingClassRange efficiencyRatingRange = WaterHeatersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
-    modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("loadProfile",
       Arrays.stream(LoadProfile.values())

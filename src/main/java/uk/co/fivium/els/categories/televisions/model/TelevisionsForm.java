@@ -1,13 +1,16 @@
 package uk.co.fivium.els.categories.televisions.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class TelevisionsForm extends StandardTemplateForm30Char {
+
+  @FieldPrompt("When was or will your product placed on the market?")
+  @NotBlank(message = "Specify when your product was or will be on the market")
+  private String applicableLegislation;
 
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator")
@@ -32,6 +35,14 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   @FieldPrompt("Visible screen size in diagonal in inches")
   @Digits(integer = 3, fraction = 0, message = "Enter the screen size in inches, up to 3 digits long")
   private String screenSizeInch;
+
+  public String getApplicableLegislation() {
+    return applicableLegislation;
+  }
+
+  public void setApplicableLegislation(String applicableLegislation) {
+    this.applicableLegislation = applicableLegislation;
+  }
 
   public String getEfficiencyRating() {
     return efficiencyRating;

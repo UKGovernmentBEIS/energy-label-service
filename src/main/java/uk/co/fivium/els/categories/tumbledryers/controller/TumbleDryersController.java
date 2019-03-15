@@ -26,7 +26,6 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
-import uk.co.fivium.els.util.StreamUtils;
 
 @Controller
 @RequestMapping("/categories/tumble-dryers")
@@ -127,7 +126,7 @@ public class TumbleDryersController {
     ModelAndView modelAndView = new ModelAndView("categories/tumble-dryers/condenserTumbleDryers");
     RatingClassRange condensationEfficiencyRating = TumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange();
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(TumbleDryersController.class).renderCondenserTumbleDryers(null)));
-    modelAndView.addObject("condensationEfficiencyRating", StreamUtils.ratingRangeToSelectionMap(condensationEfficiencyRating));
+    modelAndView.addObject("condensationEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(condensationEfficiencyRating));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Condenser tumble dryers");
     return modelAndView;
   }
@@ -141,7 +140,7 @@ public class TumbleDryersController {
 
   private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl) {
     RatingClassRange efficiencyRatingRange = TumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
-    modelAndView.addObject("efficiencyRating", StreamUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
     breadcrumbService.addBreadcrumbToModel(modelAndView, "Tumble dryers", ReverseRouter.route(on(TumbleDryersController.class).renderTumbleDryerSubCategories(null)));
