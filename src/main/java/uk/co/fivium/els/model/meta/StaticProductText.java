@@ -1,12 +1,12 @@
-package uk.co.fivium.els.model;
+package uk.co.fivium.els.model.meta;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FieldPrompt {
+public @interface StaticProductText {
   String value();
 }

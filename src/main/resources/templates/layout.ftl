@@ -110,6 +110,16 @@
             <#if heading>
               <h1 class="${headingCssClass}">${pageHeading}</h1>
             </#if>
+
+            <#if staticProductText?has_content>
+              <div class="govuk-inset-text">
+                ${staticProductText?no_esc}
+                <p>
+                  You can also <a class="govuk-link" href="/not-yet-implemented">generate a nested arrow</a> for products sold via the internet.
+                </p>
+              </div>
+            </#if>
+
             <#nested>
           </div>
         <#--<#elseif twoThirdsOneColumn>-->

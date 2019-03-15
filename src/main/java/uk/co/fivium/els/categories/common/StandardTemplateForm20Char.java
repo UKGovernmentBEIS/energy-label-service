@@ -2,7 +2,7 @@ package uk.co.fivium.els.categories.common;
 
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
-import uk.co.fivium.els.model.FieldPrompt;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 /**
  * Standard form elements for Lamp templates which only allow 20 chars for supplier name/model fields
