@@ -1,7 +1,7 @@
 package uk.co.fivium.els.categories.dishwashers.model;
 
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.FieldPrompt;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;

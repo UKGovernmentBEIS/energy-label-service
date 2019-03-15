@@ -3,7 +3,6 @@ package uk.co.fivium.els.categories.ventilationunits.service;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitSubCategory;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitsForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
@@ -24,20 +23,22 @@ public class VentilationUnitsService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(VentilationUnitsForm form, LegislationCategory legislationCategory, VentilationUnitSubCategory ventilationUnitSubCategory) {
-    TemplatePopulator templatePopulator;
-    if (ventilationUnitSubCategory == VentilationUnitSubCategory.UNIDIRECTIONAL_VENTILATION_UNITS) {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/ventilation-units/unidirectional-ventilation-unit.svg"));
-    } else {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/ventilation-units/bidirectional-ventilation-unit.svg"));
-    }
+  public Document generateHtmlUnidirectional(VentilationUnitsForm form, LegislationCategory legislationCategory) {
+    return generateHtml(form, legislationCategory, "labels/ventilation-units/unidirectional-ventilation-unit.svg");
+  }
 
+  public Document generateHtmlBidirectional(VentilationUnitsForm form, LegislationCategory legislationCategory) {
+    return generateHtml(form, legislationCategory, "labels/ventilation-units/bidirectional-ventilation-unit.svg");
+  }
+
+  private Document generateHtml(VentilationUnitsForm form, LegislationCategory legislationCategory, String templatePath) {
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
     return templatePopulator
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .setMultilineText("supplier", form.getSupplierName())
-      .setMultilineText("model", form.getModelName())
-      .setText("db", form.getSoundPowerLevel())
-      .setText("m3h", form.getMaxFlowRate())
-      .getPopulatedDocument();
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
+        .setText("db", form.getSoundPowerLevel())
+        .setText("m3h", form.getMaxFlowRate())
+        .getPopulatedDocument();
   }
 }

@@ -1,7 +1,7 @@
 package uk.co.fivium.els.categories.lamps.model;
 
 import javax.validation.constraints.NotBlank;
-import uk.co.fivium.els.model.FieldPrompt;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class LampsFormNoSupplierModelConsumption {
 
