@@ -1,10 +1,10 @@
-package uk.co.fivium.els.categories.householdrefrigeratingappliances.service;
+package uk.co.fivium.els.categories.refrigeratingappliances.service;
 
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.householdrefrigeratingappliances.model.FridgesFreezersForm;
-import uk.co.fivium.els.categories.householdrefrigeratingappliances.model.WineStorageAppliancesForm;
+import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
+import uk.co.fivium.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -12,7 +12,7 @@ import uk.co.fivium.els.service.TemplateParserService;
 import uk.co.fivium.els.service.TemplatePopulator;
 
 @Service
-public class HouseholdRefrigeratingAppliancesService {
+public class RefrigeratingAppliancesService {
 
   public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
     RatingClassRange.of(RatingClass.APPP, RatingClass.G));
@@ -20,7 +20,7 @@ public class HouseholdRefrigeratingAppliancesService {
   private final TemplateParserService templateParserService;
 
   @Autowired
-  public HouseholdRefrigeratingAppliancesService(TemplateParserService templateParserService) {
+  public RefrigeratingAppliancesService(TemplateParserService templateParserService) {
     this.templateParserService = templateParserService;
   }
 

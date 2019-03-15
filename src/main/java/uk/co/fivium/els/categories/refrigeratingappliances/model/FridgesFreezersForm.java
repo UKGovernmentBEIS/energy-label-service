@@ -1,15 +1,14 @@
-package uk.co.fivium.els.categories.householdrefrigeratingappliances.model;
-
-import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.FieldPrompt;
+package uk.co.fivium.els.categories.refrigeratingappliances.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
-  @FieldPrompt("Energy efficiency indicator for an 'average' climate")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @FieldPrompt("Energy efficiency class")
+  @NotBlank(message = "Select an energy efficiency class")
   private String efficiencyRating;
 
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")
