@@ -4,6 +4,7 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
+import uk.co.fivium.els.categories.householdrefrigeratingappliances.controller.HouseholdRefrigeratingAppliancesController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
 import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
@@ -16,7 +17,7 @@ public enum ProductCategory implements Category {
   AIR_CONDITIONERS("Air Conditioners", "/not-yet-implemented"),
   DISHWASHERS("Dishwashers", ReverseRouter.route(on(DishwashersController.class).renderDishwashers(null ))),
   DOMESTIC_OVENS("Domestic ovens", "/not-yet-implemented"),
-  FRIDGES_AND_FREEZERS("Fridges and freezers", "/not-yet-implemented"),
+  FRIDGES_AND_FREEZERS("Household refrigerating appliances", ReverseRouter.route(on(HouseholdRefrigeratingAppliancesController.class).renderHouseholdRefrigeratingAppliancesSubCategories(null))),
   LAMPS("Lamps", ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null))),
   LOCAL_SPACE_HEATERS("Local space heaters", "/not-yet-implemented"),
   REFRIGERATED_STORAGE_CABINETS("Professional refrigerated storage cabinets", "/not-yet-implemented"),
