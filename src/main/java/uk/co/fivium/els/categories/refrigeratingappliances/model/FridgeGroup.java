@@ -1,4 +1,5 @@
 package uk.co.fivium.els.categories.refrigeratingappliances.model;
 
-public interface FridgeGroup {
-}
+import javax.validation.groups.Default;
+
+public interface FridgeGroup extends Default {}

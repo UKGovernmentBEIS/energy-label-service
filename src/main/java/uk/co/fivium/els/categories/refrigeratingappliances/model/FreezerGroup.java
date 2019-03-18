@@ -1,4 +1,5 @@
 package uk.co.fivium.els.categories.refrigeratingappliances.model;
 
-public interface FreezerGroup {
-}
+import javax.validation.groups.Default;
+
+public interface FreezerGroup extends Default {}
