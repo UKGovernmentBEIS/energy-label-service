@@ -3,6 +3,7 @@ package uk.co.fivium.els.categories.refrigeratingappliances.service;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerStarRating;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
 import uk.co.fivium.els.model.LegislationCategory;
@@ -35,13 +36,30 @@ public class RefrigeratingAppliancesService {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-d-to-g.svg"));
     }
 
+    if (form.getRatedCompartment()) {
+      templatePopulator = templatePopulator
+        .setText("freezerLitres", form.getRatedVolume())
+        .applyCssClassToId("starRating", FreezerStarRating.valueOf(form.getStarRating()).getTemplateStarRatingClassName());
+    }
+    else {
+      templatePopulator = templatePopulator
+        .setText("freezerLitres", "-");
+    }
+
+    if (form.getNonRatedCompartment()) {
+      templatePopulator = templatePopulator
+        .setText("fridgeLitres", form.getNonRatedVolume());
+    }
+    else {
+      templatePopulator = templatePopulator
+        .setText("fridgeLitres", "-");
+    }
+
     return templatePopulator
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
-      .setText("fridgeLitres", form.getNonRatedVolume())
-      .setText("freezerLitres", form.getRatedVolume())
       .setText("db", form.getNoiseEmissions())
       .getPopulatedDocument();
   }

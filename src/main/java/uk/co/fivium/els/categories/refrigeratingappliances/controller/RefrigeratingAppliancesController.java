@@ -2,6 +2,7 @@ package uk.co.fivium.els.categories.refrigeratingappliances.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.StandardCategoryForm;
+import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerStarRating;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.RefrigeratingAppliancesCategory;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
@@ -26,6 +28,7 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
+import uk.co.fivium.els.util.StreamUtils;
 
 @Controller
 @RequestMapping("/categories/household-refrigerating-appliances")
@@ -101,6 +104,10 @@ public class RefrigeratingAppliancesController {
   private ModelAndView getFridgesFreezers(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/household-refrigerating-appliances/fridgesFreezers");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(RefrigeratingAppliancesController.class).renderFridgesFreezers(null)));
+    modelAndView.addObject("starRating",
+      Arrays.stream(FreezerStarRating.values())
+        .collect(StreamUtils.toLinkedHashMap(Enum::name, FreezerStarRating::getDisplayValue))
+    );
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Household fridges and freezers");
     return modelAndView;
   }
