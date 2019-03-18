@@ -19,11 +19,11 @@ public class RangeHoodsService {
 
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JAN2018 = SelectableLegislationCategory.of(
       "JAN2018",
-      "Between 1 January 2018 and 31 December 2019",
+      "From 1 January 2018",
       RatingClassRange.of(RatingClass.APP, RatingClass.E));
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JAN2020 = SelectableLegislationCategory.of(
       "JAN2020",
-      "From 1 January 2020",
+      "From 1 January 2020 (or from 1 January 2018, if the product has an A+++ rating)",
       RatingClassRange.of(RatingClass.APPP, RatingClass.D));
 
   public static final List<SelectableLegislationCategory> LEGISLATION_CATEGORIES = new ImmutableList.Builder<SelectableLegislationCategory>()
