@@ -45,7 +45,12 @@ public class TemplatePopulator {
   }
 
   public TemplatePopulator setRatingArrow(String parentElementId, RatingClass rating, RatingClassRange ratingClassRange) {
-    String yAxisTransform = String.valueOf(calculateYAxisTransform(rating, ratingClassRange));
+    return setRatingArrow(parentElementId, rating, ratingClassRange, SVG_RATING_INCREMENT_ATTR_NAME);
+  }
+
+  public TemplatePopulator setRatingArrow(String parentElementId, RatingClass rating, RatingClassRange ratingClassRange, String ratingIncrementAttrName) {
+    double ratingIncrementValue = getRatingIncrementValue(ratingIncrementAttrName);
+    String yAxisTransform = String.valueOf(calculateYAxisTransform(rating, ratingClassRange, ratingIncrementValue));
 
     Element svgGroupElement = TemplateUtils.getElementById(template, parentElementId);
     svgGroupElement.attr("transform", String.format("translate(0,%s)", yAxisTransform));
@@ -78,19 +83,18 @@ public class TemplatePopulator {
     return template;
   }
 
-  private double getRatingIncrementValue() {
-    String ratingIncrementAttr = TemplateUtils.getAttributeByName(TemplateUtils.getSvgElement(template), SVG_RATING_INCREMENT_ATTR_NAME);
+  private double getRatingIncrementValue(String ratingIncrementAttrName) {
+    String ratingIncrementAttr = TemplateUtils.getAttributeByName(TemplateUtils.getSvgElement(template), ratingIncrementAttrName);
     return Double.parseDouble(ratingIncrementAttr);
   }
 
-  private double calculateYAxisTransform(RatingClass selectedRating, RatingClassRange ratingClassRange) {
+  private double calculateYAxisTransform(RatingClass selectedRating, RatingClassRange ratingClassRange, double ratingIncrementValue) {
     RatingClass maxRating = ratingClassRange.getHighestRating();
 
     if(selectedRating == maxRating) {
       return 0;
     } else {
       int incrementFactor = selectedRating.ordinal() - maxRating.ordinal();
-      double ratingIncrementValue = getRatingIncrementValue();
       // multiply the attr value by the index
       return ratingIncrementValue * incrementFactor;
     }
