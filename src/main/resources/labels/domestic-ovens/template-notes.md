@@ -1,0 +1,1 @@
+If the user has provided forced-air convection figures, add the hasForcedAirSection class to forcedAirSection. This section is hidden by default.

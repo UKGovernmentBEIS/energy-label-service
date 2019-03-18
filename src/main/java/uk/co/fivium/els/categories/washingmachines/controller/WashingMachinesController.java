@@ -48,7 +48,7 @@ public class WashingMachinesController {
 
   @PostMapping("/washing-machines")
   @ResponseBody
-  public Object handleWashingMachinesSubmit(@Valid @ModelAttribute("form") WashingMachinesForm form, BindingResult bindingResult) throws Exception {
+  public Object handleWashingMachinesSubmit(@Valid @ModelAttribute("form") WashingMachinesForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {

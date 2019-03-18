@@ -48,7 +48,7 @@ public class DishwashersController {
 
   @PostMapping("/dishwashers")
   @ResponseBody
-  public Object handleDishwashersSubmit(@Valid @ModelAttribute("form") DishwashersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleDishwashersSubmit(@Valid @ModelAttribute("form") DishwashersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {

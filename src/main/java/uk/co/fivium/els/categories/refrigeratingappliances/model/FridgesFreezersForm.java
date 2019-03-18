@@ -2,9 +2,13 @@ package uk.co.fivium.els.categories.refrigeratingappliances.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
+@GroupSequenceProvider(RefrigeratingAppliancesFormSequenceProvider.class)
 public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class")
@@ -15,13 +19,25 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
   private String annualEnergyConsumption;
 
+  @FieldPrompt("Does this model have at least one refrigerator compartment?")
+  @NotNull
+  private Boolean nonRatedCompartment;
+
   @FieldPrompt("Sum of the storage volumes of all compartments that do not merit a star rating (i.e. operating temperature > – 6 °C) in litres")
-  @Digits(integer = 3, fraction = 0, message = "Enter the total volume of compartments that do not merit a star rating, up to 3 digits long")
+  @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that do not merit a star rating, up to 3 digits long")
   private String nonRatedVolume;
 
+  @FieldPrompt("Does this model have at least one freezer compartment?")
+  @NotNull
+  private Boolean ratedCompartment;
+
   @FieldPrompt("Sum of the storage volumes of all frozen-food storage compartments that merit a star rating (i.e. operating temperature ≤ – 6 °C) in litres")
-  @Digits(integer = 3, fraction = 0, message = "Enter the total volume of compartments that merit a star rating, up to 3 digits long")
+  @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that merit a star rating, up to 3 digits long")
   private String ratedVolume;
+
+  @FieldPrompt("Star rating of the compartments")
+  @NotBlank(groups = FreezerGroup.class, message = "Select a star rating")
+  private String starRating;
 
   @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emissions, up to 2 digits long")
@@ -65,5 +81,29 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   public void setNoiseEmissions(String noiseEmissions) {
     this.noiseEmissions = noiseEmissions;
+  }
+
+  public Boolean getNonRatedCompartment() {
+    return nonRatedCompartment;
+  }
+
+  public void setNonRatedCompartment(Boolean nonRatedCompartment) {
+    this.nonRatedCompartment = nonRatedCompartment;
+  }
+
+  public Boolean getRatedCompartment() {
+    return ratedCompartment;
+  }
+
+  public void setRatedCompartment(Boolean ratedCompartment) {
+    this.ratedCompartment = ratedCompartment;
+  }
+
+  public String getStarRating() {
+    return starRating;
+  }
+
+  public void setStarRating(String starRating) {
+    this.starRating = starRating;
   }
 }

@@ -10,6 +10,7 @@
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local mandatory=((validation[spring.status.path].mandatory)!false)>
   <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
+  <#local fieldWidth=fieldWidthMapping[spring.status.path]!>
 
   <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
     <label class="govuk-label" for="${id}">
@@ -24,6 +25,6 @@
     </#if>
     <#--inputWidth e.g. Fixed Width = govuk-input--width-50-->
     <#--Fluid Width = govuk-!-width-two-thirds-->
-    <input class="govuk-input <#if hasError>govuk-input--error </#if> ${inputWidth}" id="${id}" name="${spring.status.expression}" type="text" value="${spring.stringStatusValue}">
+    <input class="govuk-input <#if fieldWidth?has_content>govuk-input--width-${fieldWidth} </#if> <#if hasError>govuk-input--error </#if>" id="${id}" name="${spring.status.expression}" type="text" value="${spring.stringStatusValue}">
   </div>
 </#macro>

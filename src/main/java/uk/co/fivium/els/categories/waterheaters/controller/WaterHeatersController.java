@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
 import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterCategory;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
+import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
@@ -31,9 +32,9 @@ import uk.co.fivium.els.util.StreamUtils;
 
 @Controller
 @RequestMapping("/categories/water-heaters")
-public class WaterHeatersController {
+public class WaterHeatersController extends CategoryController {
 
-  private final String BREADCRUMB_STAGE_TEXT = "Water heaters and storage tanks";
+  private static final String BREADCRUMB_STAGE_TEXT = "Water heaters and storage tanks";
 
   private final PdfRenderer pdfRenderer;
   private final WaterHeatersService waterHeatersService;
@@ -41,30 +42,12 @@ public class WaterHeatersController {
 
   @Autowired
   public WaterHeatersController(PdfRenderer pdfRenderer, WaterHeatersService waterHeatersService, BreadcrumbService breadcrumbService) {
+    super(BREADCRUMB_STAGE_TEXT, breadcrumbService, WaterHeaterCategory.GET, WaterHeatersController.class);
     this.pdfRenderer = pdfRenderer;
     this.waterHeatersService = waterHeatersService;
     this.breadcrumbService = breadcrumbService;
   }
 
-  @GetMapping("/")
-  public ModelAndView renderWaterHeatersSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
-    return getVentilationUnitsSubCategory(Collections.emptyList());
-  }
-
-  @PostMapping("/")
-  @ResponseBody
-  public ModelAndView handleWaterHeatersSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    return ControllerUtils.handleSubCategorySubmit(WaterHeaterCategory.GET, form, bindingResult, (this::getVentilationUnitsSubCategory));
-  }
-
-  private ModelAndView getVentilationUnitsSubCategory(List<FieldError> errors) {
-    return ControllerUtils.getCategorySelectionModelAndView(WaterHeaterCategory.GET,
-        errors,
-        ReverseRouter.route(on(WaterHeatersController.class).handleWaterHeatersSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
-        BREADCRUMB_STAGE_TEXT,
-        breadcrumbService
-    );
-  }
 
   @GetMapping("/heat-pump-water-heaters")
   public ModelAndView renderHeatPumpWaterHeaters(@ModelAttribute("form") HeatPumpWaterHeatersForm form) {
@@ -73,13 +56,30 @@ public class WaterHeatersController {
 
   @PostMapping("/heat-pump-water-heaters")
   @ResponseBody
-  public Object handleHeatPumpWaterHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpWaterHeatersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleHeatPumpWaterHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpWaterHeatersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getHeatPumpWaterHeaters(bindingResult.getFieldErrors());
     }
     else {
       Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+    }
+  }
+
+  @GetMapping("/hot-water-storage-tanks")
+  public ModelAndView renderHotWaterStorageTanks(@ModelAttribute("form") HotWaterStorageTanksForm form) {
+    return getHotWaterStorageTanks(Collections.emptyList());
+  }
+
+  @PostMapping("/hot-water-storage-tanks")
+  @ResponseBody
+  public Object handleHotWaterStorageTanksSubmit(@Valid @ModelAttribute("form") HotWaterStorageTanksForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getHotWaterStorageTanks(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return ControllerUtils.serveResource(pdf, "hot-water-tanks-label.pdf");
     }
   }
 
@@ -87,6 +87,13 @@ public class WaterHeatersController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/heatPumpWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump water heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getHotWaterStorageTanks(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/hotWaterStorageTanks");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHotWaterStorageTanks(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Hot water storage tanks");
     return modelAndView;
   }
 
@@ -99,6 +106,6 @@ public class WaterHeatersController {
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
-    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null)));
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(WaterHeatersController.class).renderCategories(null)));
   }
 }

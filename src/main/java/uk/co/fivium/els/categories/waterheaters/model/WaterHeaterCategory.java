@@ -7,6 +7,7 @@ import java.util.List;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.ventilationunits.controller.VentilationUnitsController;
+import uk.co.fivium.els.categories.waterheaters.controller.WaterHeatersController;
 import uk.co.fivium.els.mvc.ReverseRouter;
 
 public class WaterHeaterCategory implements Category {
@@ -17,7 +18,11 @@ public class WaterHeaterCategory implements Category {
       .add(new CategoryItem(
           "HEAT_PUMP_WATER_HEATERS",
           "Heat pump water heaters",
-          ReverseRouter.route(on(VentilationUnitsController.class).renderUnidirectionalVentilationUnits(null))))
+          ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null))))
+      .add(new CategoryItem(
+          "HOT_WATER_STORAGE_TANKS",
+          "Hot water storage tanks",
+          ReverseRouter.route(on(WaterHeatersController.class).renderHotWaterStorageTanks(null))))
       .build();
 
   private WaterHeaterCategory(){}
