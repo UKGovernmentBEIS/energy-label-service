@@ -51,7 +51,7 @@ public class VentilationUnitsController extends CategoryController {
 
   @PostMapping("/unidirectional-ventilation-units")
   @ResponseBody
-  public Object handleUnidirectionalVentilationUnitsSubmit(@Valid @ModelAttribute("form") VentilationUnitsForm form, BindingResult bindingResult) throws Exception {
+  public Object handleUnidirectionalVentilationUnitsSubmit(@Valid @ModelAttribute("form") VentilationUnitsForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getUnidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
@@ -68,7 +68,7 @@ public class VentilationUnitsController extends CategoryController {
 
   @PostMapping("/bidirectional-ventilation-units")
   @ResponseBody
-  public Object handleBidirectionalVentilationUnitsSubmit(@Valid @ModelAttribute("form") VentilationUnitsForm form, BindingResult bindingResult) throws Exception {
+  public Object handleBidirectionalVentilationUnitsSubmit(@Valid @ModelAttribute("form") VentilationUnitsForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getBidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }

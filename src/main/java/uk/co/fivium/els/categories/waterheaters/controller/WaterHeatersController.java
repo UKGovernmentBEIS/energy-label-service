@@ -56,7 +56,7 @@ public class WaterHeatersController extends CategoryController {
 
   @PostMapping("/heat-pump-water-heaters")
   @ResponseBody
-  public Object handleHeatPumpWaterHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpWaterHeatersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleHeatPumpWaterHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpWaterHeatersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getHeatPumpWaterHeaters(bindingResult.getFieldErrors());
     }
@@ -73,7 +73,7 @@ public class WaterHeatersController extends CategoryController {
 
   @PostMapping("/hot-water-storage-tanks")
   @ResponseBody
-  public Object handleHotWaterStorageTanksSubmit(@Valid @ModelAttribute("form") HotWaterStorageTanksForm form, BindingResult bindingResult) throws Exception {
+  public Object handleHotWaterStorageTanksSubmit(@Valid @ModelAttribute("form") HotWaterStorageTanksForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getHotWaterStorageTanks(bindingResult.getFieldErrors());
     }

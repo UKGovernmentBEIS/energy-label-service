@@ -49,26 +49,6 @@ public class LampsController extends CategoryController {
     this.breadcrumbService = breadcrumbService;
   }
 
-//  @GetMapping("")
-//  public ModelAndView renderLampSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
-//    return getLampsSubCategory(Collections.emptyList());
-//  }
-//
-//  @PostMapping("")
-//  @ResponseBody
-//  public ModelAndView handleLampSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-//    return ControllerUtils.handleSubCategorySubmit(LampsCategory.GET, form, bindingResult, (this::getLampsSubCategory));
-//  }
-//
-//  private ModelAndView getLampsSubCategory(List<FieldError> errors) {
-//    return ControllerUtils.getCategorySelectionModelAndView(LampsCategory.GET,
-//        errors,
-//        ReverseRouter.route(on(CategoryController.class).handleLampSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
-//        BREADCRUMB_STAGE_TEXT,
-//        breadcrumbService
-//    );
-//  }
-
   @GetMapping("/lamps")
   public ModelAndView renderLamps(@ModelAttribute("form") LampsForm form) {
     return getLamps(Collections.emptyList());

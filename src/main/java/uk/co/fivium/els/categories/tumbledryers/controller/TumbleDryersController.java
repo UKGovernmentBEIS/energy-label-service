@@ -52,7 +52,7 @@ public class TumbleDryersController extends CategoryController {
 
   @PostMapping("/air-vented-tumble-dryers")
   @ResponseBody
-  public Object handleAirVentedTumbleDryersSubmit(@Valid @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleAirVentedTumbleDryersSubmit(@Valid @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
     }
@@ -69,7 +69,7 @@ public class TumbleDryersController extends CategoryController {
 
   @PostMapping("/condenser-tumble-dryers")
   @ResponseBody
-  public Object handleCondenserTumbleDryersSubmit(@Valid @ModelAttribute("form") CondenserTumbleDryersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleCondenserTumbleDryersSubmit(@Valid @ModelAttribute("form") CondenserTumbleDryersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getCondenserTumbleDryers(bindingResult.getFieldErrors());
     }
@@ -86,7 +86,7 @@ public class TumbleDryersController extends CategoryController {
 
   @PostMapping("/gas-fired-tumble-dryers")
   @ResponseBody
-  public Object handleGasFiredTumbleDryersSubmit(@Valid @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleGasFiredTumbleDryersSubmit(@Valid @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
     }
