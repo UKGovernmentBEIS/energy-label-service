@@ -18,7 +18,7 @@ public class TelevisionsService {
 
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JAN2017 = SelectableLegislationCategory.of(
       "JAN2017",
-      "Between 1 January 2017 and 31 December 2019",
+      "From 1 January 2017",
       RatingClassRange.of(RatingClass.APP, RatingClass.E));
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JAN2020 = SelectableLegislationCategory.of(
       "JAN2020",
