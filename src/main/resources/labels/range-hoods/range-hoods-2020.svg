@@ -28,181 +28,181 @@
       }
 
       .cls-1, .cls-13, .cls-17, .cls-23, .cls-24, .cls-26, .cls-28, .cls-30, .cls-31, .cls-32, .cls-33 {
-      fill: none;
+        fill: none;
       }
 
       .cls-2 {
-      fill: #fff200;
+        fill: #fff200;
       }
 
       .cls-3 {
-      fill: #bfd730;
+        fill: #bfd730;
       }
 
       .cls-4 {
-      fill: #50b848;
+        fill: #50b848;
       }
 
       .cls-5 {
-      fill: #00a651;
+        fill: #00a651;
       }
 
       .cls-6 {
-      fill: #fdb913;
+        fill: #fdb913;
       }
 
       .cls-7 {
-      fill: #f37021;
+        fill: #f37021;
       }
 
       .cls-8 {
-      fill: #ed1c24;
+        fill: #ed1c24;
       }
 
       .cls-9 {
-      clip-path: url(#clip-path);
+        clip-path: url(#clip-path);
       }
 
       .cls-10, .cls-11, .cls-12, .cls-35, .cls-36 {
-      fill: #fff;
+        fill: #fff;
       }
 
       .cls-11 {
-      font-size: 10.3892px;
+        font-size: 10.3892px;
       }
 
       .cls-11, .cls-12 {
-      font-family: MyriadPro-Bold, Myriad Pro;
+        font-family: MyriadPro-Bold, Myriad Pro;
       }
 
       .cls-11, .cls-12, .cls-18, .cls-19, .cls-35, .cls-37, .cls-38 {
-      font-weight: 700;
+        font-weight: 700;
       }
 
       .cls-12 {
-      font-size: 6.9261px;
+        font-size: 6.9261px;
       }
 
       .cls-13, .cls-17, .cls-26, .cls-28, .cls-30, .cls-31, .cls-32, .cls-33 {
-      stroke: #00aeef;
+        stroke: #00aeef;
       }
 
       .cls-13 {
-      stroke-width: 3px;
+        stroke-width: 3px;
       }
 
       .cls-14 {
-      clip-path: url(#clip-path-3);
+        clip-path: url(#clip-path-3);
       }
 
       .cls-15 {
-      fill: #034ea2;
+        fill: #034ea2;
       }
 
       .cls-16 {
-      fill: #00aeef;
+        fill: #00aeef;
       }
 
       .cls-18, .cls-20 {
-      font-size: 8px;
+        font-size: 8px;
       }
 
       .cls-18, .cls-19, .cls-20, .cls-21, .cls-34, .cls-37, .cls-38, .cls-39 {
-      fill: #231f20;
+        fill: #231f20;
       }
 
       .cls-18, .cls-19, .cls-35, .cls-37, .cls-38 {
-      font-family: Calibri-Bold, Calibri;
+        font-family: Calibri-Bold, Calibri;
       }
 
       .cls-19 {
-      font-size: 10.4747px;
+        font-size: 10.4747px;
       }
 
       .cls-20, .cls-21, .cls-36, .cls-39 {
-      font-family: Calibri;
+        font-family: Calibri;
       }
 
       .cls-21 {
-      font-size: 6px;
+        font-size: 6px;
       }
 
       .cls-22 {
-      clip-path: url(#clip-path-7);
+        clip-path: url(#clip-path-7);
       }
 
       .cls-23 {
-      stroke: #fff;
-      stroke-width: 1.676px;
+        stroke: #fff;
+        stroke-width: 1.676px;
       }
 
       .cls-24 {
-      stroke: #44c8f5;
-      stroke-width: 1.915px;
+        stroke: #44c8f5;
+        stroke-width: 1.915px;
       }
 
       .cls-24, .cls-26, .cls-28, .cls-32, .cls-33 {
-      stroke-linecap: round;
+        stroke-linecap: round;
       }
 
       .cls-24, .cls-30, .cls-31, .cls-32, .cls-33 {
-      stroke-linejoin: round;
+        stroke-linejoin: round;
       }
 
       .cls-25 {
-      fill: #8ed8f8;
+        fill: #8ed8f8;
       }
 
       .cls-26 {
-      stroke-width: 0.529px;
+        stroke-width: 0.529px;
       }
 
       .cls-27 {
-      clip-path: url(#clip-path-9);
+        clip-path: url(#clip-path-9);
       }
 
       .cls-28 {
-      stroke-width: 0.689px;
+        stroke-width: 0.689px;
       }
 
       .cls-29 {
-      clip-path: url(#clip-path-10);
+        clip-path: url(#clip-path-10);
       }
 
       .cls-30 {
-      stroke-width: 0.991px;
+        stroke-width: 0.991px;
       }
 
       .cls-31 {
-      stroke-width: 0.803px;
+        stroke-width: 0.803px;
       }
 
       .cls-32 {
-      stroke-width: 0.714px;
+        stroke-width: 0.714px;
       }
 
       .cls-33 {
-      stroke-width: 0.434px;
+        stroke-width: 0.434px;
       }
 
       .cls-35 {
-      font-size: 17px;
+        font-size: 17px;
       }
 
       .cls-36 {
-      font-size: 12px;
+        font-size: 12px;
       }
 
       .cls-37 {
-      font-size: 21px;
+        font-size: 21px;
       }
 
       .cls-38 {
-      font-size: 11.5px;
+        font-size: 11.5px;
       }
 
       .cls-39 {
-      font-size: 11px;
+        font-size: 11px;
       }
     </style>
     <clipPath id="clip-path">
