@@ -14,7 +14,7 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 public class BreadcrumbService {
 
   private static final String BREADCRUMB_MODEL_AND_VIEW_ATTRIBUTE = "breadcrumbMap";
-  private static final String GOVUK_SERVICE_HOMEPAGE_URL = "https://www.gov.uk/"; // TODO once provided
+  private static final String GOVUK_SERVICE_HOMEPAGE_URL = "/"; // TODO once provided
 
 
   /**

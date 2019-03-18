@@ -20,9 +20,14 @@ public class RootController {
   }
 
   @GetMapping("/")
-  public ModelAndView redirectToCategories() {
-    return ReverseRouter.redirect(on(ProductCategoryController.class).renderCategories(null));
+  public ModelAndView renderStartPage() {
+    ModelAndView modelAndView = new ModelAndView("startPage");
+    return modelAndView;
   }
+// TODO Revert back to redirecting to categories once we don't need the temporary start page
+//  public ModelAndView redirectToCategories() {
+//    return ReverseRouter.redirect(on(ProductCategoryController.class).renderCategories(null));
+//  }
 
   // TODO remove route and template once all categories are completed
   @GetMapping("/not-yet-implemented")
