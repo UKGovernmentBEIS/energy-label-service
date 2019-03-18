@@ -1,12 +1,11 @@
 package uk.co.fivium.els.categories.domesticovens.model;
 
-import org.hibernate.validator.group.GroupSequenceProvider;
-import uk.co.fivium.els.categories.common.StandardTemplateForm40Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.co.fivium.els.categories.common.StandardTemplateForm40Char;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 @GroupSequenceProvider(DomesticOvensFormSequenceProvider.class)
 public class DomesticOvensForm extends StandardTemplateForm40Char {

@@ -1,4 +1,6 @@
 package uk.co.fivium.els.categories.domesticovens.model;
 
-public interface FanOvenGroup {
+import javax.validation.groups.Default;
+
+public interface FanOvenGroup extends Default {
 }

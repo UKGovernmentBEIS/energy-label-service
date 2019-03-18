@@ -1,10 +1,11 @@
 package uk.co.fivium.els.categories.domesticovens.model;
 
+import javax.validation.constraints.Digits;
+import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
-import javax.validation.constraints.Digits;
-
-public class GasOvensForm extends DomesticOvensForm{
+@GroupSequenceProvider(GasOvensFormSequenceProvider.class)
+public class GasOvensForm extends DomesticOvensForm {
 
   @FieldPrompt("Energy consumption per cycle expressed in MJ/cycle: heating function (conventional)")
   @Digits(integer = 1, fraction = 2, message = "Enter the consumption per cycle of the heating function, 1 digit with up to 2 decimal places")
