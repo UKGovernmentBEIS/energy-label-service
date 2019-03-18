@@ -36,9 +36,7 @@ public class ReverseRouter {
     Map<String, Object> allUriVariables = new HashMap<>();
     if (expandUriVariablesFromRequest) {
       RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-      if (requestAttributes == null) {
-        LOGGER.error("Cannot expand request parameters when RequestAttributes is null");
-      } else {
+      if (requestAttributes != null) {
         Map<String, Object> requestAttributeMap = (Map<String, Object>) requestAttributes.getAttribute(
             HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, RequestAttributes.SCOPE_REQUEST);
 

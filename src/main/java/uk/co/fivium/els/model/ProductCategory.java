@@ -36,11 +36,11 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "FRIDGES_AND_FREEZERS",
           "Fridges and freezers",
-          ReverseRouter.route(on(RefrigeratingAppliancesController.class).renderRefrigeratingAppliancesSubCategories(null))))
+          ReverseRouter.route(on(RefrigeratingAppliancesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "LAMPS",
           "Lamps",
-          ReverseRouter.route(on(LampsController.class).renderLampSubCategories(null))))
+          ReverseRouter.route(on(LampsController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "LOCAL_SPACE_HEATERS",
           "Local space heaters",
@@ -68,7 +68,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "TUMBLE_DRYERS",
           "Tumble dryers",
-          ReverseRouter.route(on(TumbleDryersController.class).renderTumbleDryerSubCategories(null))))
+          ReverseRouter.route(on(TumbleDryersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "TYRES",
           "Tyres",
@@ -76,7 +76,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "VENTILATION_UNITS",
           "Ventilation units",
-          ReverseRouter.route(on(VentilationUnitsController.class).renderVentilationUnitsSubCategories(null))))
+          ReverseRouter.route(on(VentilationUnitsController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "WASHING_MACHINES",
           "Washing machines",
@@ -84,7 +84,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "WATER_HEATERS",
           "Water heaters",
-          ReverseRouter.route(on(WaterHeatersController.class).renderWaterHeatersSubCategories(null))))
+          ReverseRouter.route(on(WaterHeatersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .build();
 
   private ProductCategory(){}

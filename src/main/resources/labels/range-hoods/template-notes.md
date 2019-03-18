@@ -1,0 +1,1 @@
+For fluid dynamic efficiency class, lighting efficiency class and grease filtering efficiency class, add secondaryRatingClassA through to secondaryRatingClassG to the element to make the appropriate letter large and bold

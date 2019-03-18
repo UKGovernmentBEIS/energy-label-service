@@ -21,8 +21,10 @@ import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerStarRating;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.RefrigeratingAppliancesCategory;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
+import uk.co.fivium.els.categories.refrigeratingappliances.model.RefrigeratingAppliancesCategory;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.service.RefrigeratingAppliancesService;
+import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
@@ -32,7 +34,7 @@ import uk.co.fivium.els.util.StreamUtils;
 
 @Controller
 @RequestMapping("/categories/household-refrigerating-appliances")
-public class RefrigeratingAppliancesController {
+public class RefrigeratingAppliancesController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Household refrigerating appliances";
 
@@ -42,29 +44,10 @@ public class RefrigeratingAppliancesController {
 
   @Autowired
   public RefrigeratingAppliancesController(PdfRenderer pdfRenderer, RefrigeratingAppliancesService householdRefrigeratingAppliancesService, BreadcrumbService breadcrumbService) {
+    super(BREADCRUMB_STAGE_TEXT, breadcrumbService, RefrigeratingAppliancesCategory.GET, RefrigeratingAppliancesController.class);
     this.pdfRenderer = pdfRenderer;
     this.householdRefrigeratingAppliancesService = householdRefrigeratingAppliancesService;
     this.breadcrumbService = breadcrumbService;
-  }
-
-  @GetMapping("/")
-  public ModelAndView renderRefrigeratingAppliancesSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
-    return getRefrigeratingAppliancesSubCategory(Collections.emptyList());
-  }
-
-  @PostMapping("/")
-  @ResponseBody
-  public ModelAndView handleRefrigeratingApplianceSubCategoriesSubmit(@ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    return ControllerUtils.handleSubCategorySubmit(RefrigeratingAppliancesCategory.GET, form, bindingResult, this::getRefrigeratingAppliancesSubCategory);
-  }
-
-  private ModelAndView getRefrigeratingAppliancesSubCategory(List<FieldError> errors) {
-    return ControllerUtils.getCategorySelectionModelAndView(RefrigeratingAppliancesCategory.GET,
-        errors,
-        ReverseRouter.route(on(RefrigeratingAppliancesController.class).handleRefrigeratingApplianceSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
-        BREADCRUMB_STAGE_TEXT,
-        breadcrumbService
-    );
   }
 
   @GetMapping("/household-refrigerating-appliances")
@@ -74,7 +57,7 @@ public class RefrigeratingAppliancesController {
 
   @PostMapping("/household-refrigerating-appliances")
   @ResponseBody
-  public Object handleFridgesFreezersSubmit(@Valid @ModelAttribute("form") FridgesFreezersForm form, BindingResult bindingResult) throws Exception {
+  public Object handleFridgesFreezersSubmit(@Valid @ModelAttribute("form") FridgesFreezersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getFridgesFreezers(bindingResult.getFieldErrors());
     }
@@ -91,7 +74,7 @@ public class RefrigeratingAppliancesController {
 
   @PostMapping("/wine-storage-appliances")
   @ResponseBody
-  public Object handleWineStorageAppliancesSubmit(@Valid @ModelAttribute("form") WineStorageAppliancesForm form, BindingResult bindingResult) throws Exception {
+  public Object handleWineStorageAppliancesSubmit(@Valid @ModelAttribute("form") WineStorageAppliancesForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     }
@@ -125,7 +108,7 @@ public class RefrigeratingAppliancesController {
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
-        RefrigeratingAppliancesController.class).renderRefrigeratingAppliancesSubCategories(null)));
+        RefrigeratingAppliancesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
   }
 
 }
