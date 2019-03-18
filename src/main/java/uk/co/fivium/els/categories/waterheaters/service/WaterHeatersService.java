@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
@@ -53,6 +54,18 @@ public class WaterHeatersService {
       .setText("averageGjAnnum", form.getAverageGjAnnum())
       .setText("warmerGjAnnum", form.getWarmerGjAnnum())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(HotWaterStorageTanksForm form, LegislationCategory legislationCategory){
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/hot-water-storage-tanks.svg"));
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("watts", form.getStandingLoss())
+      .setText("litres", form.getVolume())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .getPopulatedDocument();
   }

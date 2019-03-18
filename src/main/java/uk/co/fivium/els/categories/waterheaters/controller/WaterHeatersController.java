@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
 import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterCategory;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
@@ -79,7 +80,24 @@ public class WaterHeatersController {
     }
     else {
       Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+    }
+  }
+
+  @GetMapping("/hot-water-storage-tanks")
+  public ModelAndView renderHotWaterStorageTanks(@ModelAttribute("form") HotWaterStorageTanksForm form) {
+    return getHotWaterStorageTanks(Collections.emptyList());
+  }
+
+  @PostMapping("/hot-water-storage-tanks")
+  @ResponseBody
+  public Object handleHotWaterStorageTanksSubmit(@Valid @ModelAttribute("form") HotWaterStorageTanksForm form, BindingResult bindingResult) throws Exception {
+    if (bindingResult.hasErrors()) {
+      return getHotWaterStorageTanks(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return ControllerUtils.serveResource(pdf, "hot-water-tanks-label.pdf");
     }
   }
 
@@ -87,6 +105,13 @@ public class WaterHeatersController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/heatPumpWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump water heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getHotWaterStorageTanks(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/hotWaterStorageTanks");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHotWaterStorageTanks(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Hot water storage tanks");
     return modelAndView;
   }
 
