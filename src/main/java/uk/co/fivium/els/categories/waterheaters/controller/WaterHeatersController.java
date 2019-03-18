@@ -49,16 +49,16 @@ public class WaterHeatersController {
 
   @GetMapping("/")
   public ModelAndView renderWaterHeatersSubCategories(@ModelAttribute("form") StandardCategoryForm form) {
-    return getVentilationUnitsSubCategory(Collections.emptyList());
+    return getWaterHeatersSubCategory(Collections.emptyList());
   }
 
   @PostMapping("/")
   @ResponseBody
   public ModelAndView handleWaterHeatersSubCategoriesSubmit(@Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
-    return ControllerUtils.handleSubCategorySubmit(WaterHeaterCategory.GET, form, bindingResult, (this::getVentilationUnitsSubCategory));
+    return ControllerUtils.handleSubCategorySubmit(WaterHeaterCategory.GET, form, bindingResult, (this::getWaterHeatersSubCategory));
   }
 
-  private ModelAndView getVentilationUnitsSubCategory(List<FieldError> errors) {
+  private ModelAndView getWaterHeatersSubCategory(List<FieldError> errors) {
     return ControllerUtils.getCategorySelectionModelAndView(WaterHeaterCategory.GET,
         errors,
         ReverseRouter.route(on(WaterHeatersController.class).handleWaterHeatersSubCategoriesSubmit(null, ReverseRouter.emptyBindingResult())),
