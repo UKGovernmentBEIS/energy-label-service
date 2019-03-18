@@ -1,13 +1,27 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60mm" height="120mm" viewBox="0 0 170.08 340.16" data-rating-increment="13.3833" data-supplier-model-chars-per-row="12">
   <defs>
     <style>
-      .secondaryRatingClassA #classALetter,
-      .secondaryRatingClassB #classBLetter,
-      .secondaryRatingClassC #classCLetter,
-      .secondaryRatingClassD #classDLetter,
-      .secondaryRatingClassE #classELetter,
-      .secondaryRatingClassF #classFLetter,
-      .secondaryRatingClassG #classGLetter {
+      .fluidDynamicClassA #fluidDynamicClassALetter,
+      .fluidDynamicClassB #fluidDynamicClassBLetter,
+      .fluidDynamicClassC #fluidDynamicClassCLetter,
+      .fluidDynamicClassD #fluidDynamicClassDLetter,
+      .fluidDynamicClassE #fluidDynamicClassELetter,
+      .fluidDynamicClassF #fluidDynamicClassFLetter,
+      .fluidDynamicClassG #fluidDynamicClassGLetter,
+      .lightingClassA #lightingClassALetter,
+      .lightingClassB #lightingClassBLetter,
+      .lightingClassC #lightingClassCLetter,
+      .lightingClassD #lightingClassDLetter,
+      .lightingClassE #lightingClassELetter,
+      .lightingClassF #lightingClassFLetter,
+      .lightingClassG #lightingClassGLetter,
+      .greaseFilteringClassA #greaseFilteringClassALetter,
+      .greaseFilteringClassB #greaseFilteringClassBLetter,
+      .greaseFilteringClassC #greaseFilteringClassCLetter,
+      .greaseFilteringClassD #greaseFilteringClassDLetter,
+      .greaseFilteringClassE #greaseFilteringClassELetter,
+      .greaseFilteringClassF #greaseFilteringClassFLetter,
+      .greaseFilteringClassG #greaseFilteringClassGLetter{
         font-size: 11.5px;
         font-weight: 700;
         font-family: Calibri-Bold, Calibri;
@@ -350,15 +364,15 @@
   <text id="db" class="cls-40" transform="translate(132.07031 299.62973)">X</text>
   <text id="fluidDynamicClass" class="cls-22" transform="translate(28.3 298.03989)" text-anchor="middle">
     <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
-    <tspan id="classALetter">A</tspan><tspan id="classBLetter">B</tspan><tspan id="classCLetter">C</tspan><tspan id="classDLetter">D</tspan><tspan id="classELetter">E</tspan><tspan id="classFLetter">F</tspan><tspan id="classGLetter">G</tspan>    
+    <tspan id="fluidDynamicClassALetter">A</tspan><tspan id="fluidDynamicClassBLetter">B</tspan><tspan id="fluidDynamicClassCLetter">C</tspan><tspan id="fluidDynamicClassDLetter">D</tspan><tspan id="fluidDynamicClassELetter">E</tspan><tspan id="fluidDynamicClassFLetter">F</tspan><tspan id="fluidDynamicClassGLetter">G</tspan>
   </text>
   <text id="lightingClass" class="cls-22" transform="translate(66.30976 298.03989)" text-anchor="middle">
     <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
-    <tspan id="classALetter">A</tspan><tspan id="classBLetter">B</tspan><tspan id="classCLetter">C</tspan><tspan id="classDLetter">D</tspan><tspan id="classELetter">E</tspan><tspan id="classFLetter">F</tspan><tspan id="classGLetter">G</tspan>      
+    <tspan id="lightingClassALetter">A</tspan><tspan id="lightingClassBLetter">B</tspan><tspan id="lightingClassCLetter">C</tspan><tspan id="lightingClassDLetter">D</tspan><tspan id="lightingClassELetter">E</tspan><tspan id="lightingClassFLetter">F</tspan><tspan id="lightingClassGLetter">G</tspan>
   </text>
   <text id="greaseFilteringClass" class="cls-22" transform="translate(103.92988 299.62973)" text-anchor="middle">
     <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
-    <tspan id="classALetter">A</tspan><tspan id="classBLetter">B</tspan><tspan id="classCLetter">C</tspan><tspan id="classDLetter">D</tspan><tspan id="classELetter">E</tspan><tspan id="classFLetter">F</tspan><tspan id="classGLetter">G</tspan>      
+    <tspan id="greaseFilteringClassALetter">A</tspan><tspan id="greaseFilteringClassBLetter">B</tspan><tspan id="greaseFilteringClassCLetter">C</tspan><tspan id="greaseFilteringClassDLetter">D</tspan><tspan id="greaseFilteringClassELetter">E</tspan><tspan id="greaseFilteringClassFLetter">F</tspan><tspan id="greaseFilteringClassGLetter">G</tspan>
   </text>
   <text id="supplierLine2" class="cls-41" transform="translate(11.16992 65.14044)">X</text>
   <text id="supplierLine1" class="cls-41" transform="translate(11.16992 54.05939)">X</text>
