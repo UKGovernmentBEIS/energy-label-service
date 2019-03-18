@@ -35,7 +35,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that merit a star rating, up to 3 digits long")
   private String ratedVolume;
 
-  @FieldPrompt("Star rating of the comparments")
+  @FieldPrompt("Star rating of the compartments")
   @NotBlank(groups = FreezerGroup.class, message = "Select a star rating")
   private String starRating;
 

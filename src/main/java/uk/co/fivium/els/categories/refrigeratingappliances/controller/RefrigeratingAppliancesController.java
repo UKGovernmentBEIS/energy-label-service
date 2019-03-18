@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.fivium.els.categories.common.StandardCategoryForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerStarRating;
-import uk.co.fivium.els.categories.refrigeratingappliances.model.RefrigeratingAppliancesCategory;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.RefrigeratingAppliancesCategory;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
@@ -50,12 +48,12 @@ public class RefrigeratingAppliancesController extends CategoryController {
     this.breadcrumbService = breadcrumbService;
   }
 
-  @GetMapping("/household-refrigerating-appliances")
+  @GetMapping("/household-fridges-and-freezers")
   public ModelAndView renderFridgesFreezers(@ModelAttribute("form") FridgesFreezersForm form) {
     return getFridgesFreezers(Collections.emptyList());
   }
 
-  @PostMapping("/household-refrigerating-appliances")
+  @PostMapping("/household-fridges-and-freezers")
   @ResponseBody
   public Object handleFridgesFreezersSubmit(@Valid @ModelAttribute("form") FridgesFreezersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {

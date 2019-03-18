@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm "Household refrigerating appliances">
+<@common.standardProductForm "Household fridges and freezers">
   <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
   <@govukTextInput.textInput path="form.annualEnergyConsumption"/>
   <@govukRadios.radioYesNo path="form.nonRatedCompartment" inline=false hiddenQuestionsWithYesSelected=true>

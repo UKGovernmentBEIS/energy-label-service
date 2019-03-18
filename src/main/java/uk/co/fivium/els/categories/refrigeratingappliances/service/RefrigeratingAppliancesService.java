@@ -37,21 +37,21 @@ public class RefrigeratingAppliancesService {
     }
 
     if (form.getRatedCompartment()) {
-      templatePopulator = templatePopulator
+      templatePopulator
         .setText("freezerLitres", form.getRatedVolume())
         .applyCssClassToId("starRating", FreezerStarRating.valueOf(form.getStarRating()).getTemplateStarRatingClassName());
     }
     else {
-      templatePopulator = templatePopulator
+      templatePopulator
         .setText("freezerLitres", "-");
     }
 
     if (form.getNonRatedCompartment()) {
-      templatePopulator = templatePopulator
+      templatePopulator
         .setText("fridgeLitres", form.getNonRatedVolume());
     }
     else {
-      templatePopulator = templatePopulator
+      templatePopulator
         .setText("fridgeLitres", "-");
     }
 
