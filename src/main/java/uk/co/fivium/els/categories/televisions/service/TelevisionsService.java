@@ -47,8 +47,7 @@ public class TelevisionsService {
     }
 
     if (form.getPowerSwitch()) {
-      templatePopulator = templatePopulator
-        .applyCssClassToId("powerSwitch", "hasPowerSwitch");
+      templatePopulator.applyCssClassToId("powerSwitch", "hasPowerSwitch");
     }
 
     return templatePopulator
