@@ -11,8 +11,8 @@ import uk.co.fivium.els.model.meta.StaticProductText;
     "<p>Energy labels for televisions should be at least 60mm x 120mm when printed. This label should then be displayed so that it is easily readable and clearly associated with the product.</p>")
 public class TelevisionsForm extends StandardTemplateForm30Char {
 
-  @FieldPrompt("When was or will your product placed on the market?")
-  @NotBlank(message = "Specify when your product was or will be on the market")
+  @FieldPrompt("When was the product first placed on the market?")
+  @NotBlank(message = "Specify when your product was first placed on the market")
   private String applicableLegislation;
 
   @FieldPrompt("Energy efficiency class indicator")
