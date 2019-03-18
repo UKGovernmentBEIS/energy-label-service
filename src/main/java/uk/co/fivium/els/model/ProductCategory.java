@@ -7,6 +7,7 @@ import java.util.List;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
+import uk.co.fivium.els.categories.rangehoods.controller.RangeHoodsController;
 import uk.co.fivium.els.categories.refrigeratingappliances.controller.RefrigeratingAppliancesController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.televisions.controller.TelevisionController;
@@ -52,7 +53,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "RANGE_HOODS",
           "Range hoods",
-          "/not-yet-implemented"))
+          ReverseRouter.route(on(RangeHoodsController.class).renderRangeHoodsForm(null))))
       .add(new CategoryItem(
           "SOLID_FUEL_BOILERS",
           "Solid fuel boilers",
