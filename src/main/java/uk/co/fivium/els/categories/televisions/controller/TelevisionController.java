@@ -42,18 +42,18 @@ public class TelevisionController {
   }
 
   @GetMapping("/televisions")
-  public ModelAndView renderTelevisionsFrom(@ModelAttribute("form") TelevisionsForm form) {
-    return getTelevisionsFrom(Collections.emptyList());
+  public ModelAndView renderTelevisionsForm(@ModelAttribute("form") TelevisionsForm form) {
+    return getTelevisionsForm(Collections.emptyList());
   }
 
   @PostMapping("/televisions")
   @ResponseBody
-  public Object handleTelevisionsFromSubmit(@Valid @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
+  public Object handleTelevisionsFormSubmit(@Valid @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
 
     ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), TelevisionsService.LEGISLATION_CATEGORIES, bindingResult);
 
     if (bindingResult.hasErrors()) {
-      return getTelevisionsFrom(bindingResult.getFieldErrors());
+      return getTelevisionsForm(bindingResult.getFieldErrors());
     }
     else {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
@@ -63,11 +63,11 @@ public class TelevisionController {
   }
 
 
-  private ModelAndView getTelevisionsFrom(List<FieldError> errorList) {
+  private ModelAndView getTelevisionsForm(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/televisions/televisions");
     modelAndView.addObject("legislationYears", ControllerUtils.legislationYearSelection(TelevisionsService.LEGISLATION_CATEGORIES));
     modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(TelevisionsService.LEGISLATION_CATEGORIES));
-    modelAndView.addObject("submitUrl", ReverseRouter.route(on(TelevisionController.class).handleTelevisionsFromSubmit(null, ReverseRouter.emptyBindingResult())));
+    modelAndView.addObject("submitUrl", ReverseRouter.route(on(TelevisionController.class).handleTelevisionsFormSubmit(null, ReverseRouter.emptyBindingResult())));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT);
     return modelAndView;

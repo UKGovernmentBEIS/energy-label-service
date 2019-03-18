@@ -64,7 +64,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "TELEVISIONS",
           "Televisions",
-          ReverseRouter.route(on(TelevisionController.class).renderTelevisionsFrom(null))))
+          ReverseRouter.route(on(TelevisionController.class).renderTelevisionsForm(null))))
       .add(new CategoryItem(
           "TUMBLE_DRYERS",
           "Tumble dryers",

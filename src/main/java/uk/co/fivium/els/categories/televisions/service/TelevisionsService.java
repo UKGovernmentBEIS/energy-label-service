@@ -46,6 +46,11 @@ public class TelevisionsService {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/televisions/televisions-2020.svg"));
     }
 
+    if (form.getPowerSwitch()) {
+      templatePopulator = templatePopulator
+        .applyCssClassToId("powerSwitch", "hasPowerSwitch");
+    }
+
     return templatePopulator
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setMultilineText("supplier", form.getSupplierName())
@@ -54,7 +59,6 @@ public class TelevisionsService {
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("cm", form.getScreenSizeCm())
       .setText("inch", form.getScreenSizeInch())
-      .applyCssClassToId("powerSwitch", "hasPowerSwitch")
       .getPopulatedDocument();
   }
 }
