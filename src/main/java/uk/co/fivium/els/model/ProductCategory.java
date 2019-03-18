@@ -7,6 +7,7 @@ import java.util.List;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
+import uk.co.fivium.els.categories.domesticovens.controller.DomesticOvensController;
 import uk.co.fivium.els.categories.refrigeratingappliances.controller.RefrigeratingAppliancesController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.televisions.controller.TelevisionController;
@@ -32,7 +33,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "DOMESTIC_OVENS",
           "Domestic ovens",
-          "/not-yet-implemented"))
+          ReverseRouter.route(on(DomesticOvensController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "FRIDGES_AND_FREEZERS",
           "Fridges and freezers",
