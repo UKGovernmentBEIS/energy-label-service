@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
-import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
+import uk.co.fivium.els.categories.waterheaters.model.*;
 import uk.co.fivium.els.categories.common.LoadProfile;
-import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterCategory;
-import uk.co.fivium.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
 import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.LegislationCategory;
@@ -67,6 +64,23 @@ public class WaterHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/solar-water-heaters")
+  public ModelAndView renderSolarWaterHeaters(@ModelAttribute("form") SolarWaterHeatersForm form) {
+    return getSolarWaterHeaters(Collections.emptyList());
+  }
+
+  @PostMapping("/solar-water-heaters")
+  @ResponseBody
+  public Object handleSolarWaterHeatersSubmit(@Valid @ModelAttribute("form") SolarWaterHeatersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSolarWaterHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+    }
+  }
+
   @GetMapping("/hot-water-storage-tanks")
   public ModelAndView renderHotWaterStorageTanks(@ModelAttribute("form") HotWaterStorageTanksForm form) {
     return getHotWaterStorageTanks(Collections.emptyList());
@@ -105,6 +119,13 @@ public class WaterHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/heatPumpWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump water heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getSolarWaterHeaters(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/solarWaterHeaters");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderSolarWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Solar water heaters");
     return modelAndView;
   }
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
+import uk.co.fivium.els.categories.waterheaters.model.SolarWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.co.fivium.els.categories.common.LoadProfile;
 import uk.co.fivium.els.model.LegislationCategory;
@@ -60,6 +61,24 @@ public class WaterHeatersService {
       .setText("averageGjAnnum", form.getAverageGjAnnum())
       .setText("warmerGjAnnum", form.getWarmerGjAnnum())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(SolarWaterHeatersForm form, LegislationCategory legislationCategory){
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/solar-water-heaters.svg"));
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("colderKwhAnnum", form.getColderKwhAnnum())
+      .setText("averageKwhAnnum", form.getAverageKwhAnnum())
+      .setText("warmerKwhAnnum", form.getWarmerKwhAnnum())
+      .setText("colderGjAnnum", form.getColderGjAnnum())
+      .setText("averageGjAnnum", form.getAverageGjAnnum())
+      .setText("warmerGjAnnum", form.getWarmerGjAnnum())
+      .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .getPopulatedDocument();
   }
