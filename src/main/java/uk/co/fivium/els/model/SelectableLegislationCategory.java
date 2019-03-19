@@ -15,11 +15,15 @@ public class SelectableLegislationCategory extends LegislationCategory {
   }
 
   public static SelectableLegislationCategory of(String id, String displayName, RatingClassRange primaryRatingRange) {
-    return new SelectableLegislationCategory(id, displayName, primaryRatingRange);
+    return new SelectableLegislationCategory(id, displayName, primaryRatingRange, null);
   }
 
-  public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange) {
-    super(primaryRatingRange, null);
+  public static SelectableLegislationCategory of(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
+    return new SelectableLegislationCategory(id, displayName, primaryRatingRange, secondaryRatingRange);
+  }
+
+  public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
+    super(primaryRatingRange, secondaryRatingRange);
     this.id = id;
     this.displayName = displayName;
   }

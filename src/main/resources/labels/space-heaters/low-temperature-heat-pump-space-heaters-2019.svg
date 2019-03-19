@@ -509,21 +509,21 @@
   <text class="cls-53" transform="translate(36.94482 298.30109)">C</text>
   <text class="cls-53" transform="translate(36.6084 320.21808)">D</text>
   <text class="cls-54" transform="translate(48.06543 228.68292)">+</text>
-  <g id="rating">
-    <polyline id="ratingArrow" class="cls-56" points="208.26 184.28 224.9 167.47 270.94 167.47 270.94 201.37 225.21 201.37 208.26 184.28"/>
-    <text id="ratingLetter" class="cls-57" transform="translate(222.42969 191.51984)">A</text>
-    <text id="ratingPlusses" class="cls-58" transform="translate(238.40039 183.42999)">+++</text>
+  <g id="lowTemperatureRating">
+    <polyline id="lowTemperatureRatingArrow" class="cls-56" points="208.26 184.28 224.9 167.47 270.94 167.47 270.94 201.37 225.21 201.37 208.26 184.28"/>
+    <text id="lowTemperatureRatingLetter" class="cls-57" transform="translate(222.42969 191.51984)">A</text>
+    <text id="lowTemperatureRatingPlusses" class="cls-58" transform="translate(238.40039 183.42999)">+++</text>
   </g>
   <text transform="translate(170.62012 374.63019)">
-    <tspan id="colderKw" class="cls-34">X</tspan>
+    <tspan id="lowTemperatureColderKw" class="cls-34">X</tspan>
     <tspan class="cls-35">kW</tspan>
   </text>
   <text transform="translate(170.62012 399.19952)">
-    <tspan id="averageKw" class="cls-43">X</tspan>
+    <tspan id="lowTemperatureAverageKw" class="cls-43">X</tspan>
     <tspan class="cls-38">kW</tspan>    
   </text>
   <text transform="translate(170.62012 419.84015)">
-    <tspan id="warmerKw" class="cls-34">X</tspan>
+    <tspan id="lowTemperatureWarmerKw" class="cls-34">X</tspan>
     <tspan class="cls-38">kW</tspan>
   </text> 
   <g id="insideDbSection">
