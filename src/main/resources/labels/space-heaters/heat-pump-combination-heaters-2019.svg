@@ -1,6 +1,14 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105mm" height="200mm" viewBox="0 0 297.64001 566.92999" data-rating-increment="22.5833" data-supplier-model-chars-per-row="25">
   <defs>
     <style>
+      #offPeakMode {
+        visibility: hidden;
+      }
+
+      #offPeakMode.hasOffPeakMode {
+        visibility: visible;
+      }
+      
       .cls-1, .cls-42, .cls-43, .cls-45, .cls-46, .cls-58, .cls-59, .cls-60, .cls-61 {
         fill: none;
       }
