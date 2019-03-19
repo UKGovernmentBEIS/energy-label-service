@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm title="Heat pump water heaters">
+<@common.standardProductForm title="Low-temperature heat pump heaters">
 
     <@govukRadios.radio path="form.applicableLegislation" radioItems=legislationYears/>
 
