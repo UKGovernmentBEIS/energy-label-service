@@ -1,4 +1,4 @@
-package uk.co.fivium.els.categories.waterheaters.model;
+package uk.co.fivium.els.categories.common;
 
 public enum LoadProfile {
   XXXS("3XS"),
