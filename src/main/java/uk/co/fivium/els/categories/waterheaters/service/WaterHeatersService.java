@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
+import uk.co.fivium.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -19,6 +20,11 @@ public class WaterHeatersService {
 
   public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
     RatingClassRange.of(RatingClass.AP, RatingClass.F));
+
+  public static final LegislationCategory LEGISLATION_CATEGORY_SOLAR_PACKAGES = LegislationCategory.of(
+    RatingClassRange.of(RatingClass.APPP, RatingClass.G),
+    RatingClassRange.of(RatingClass.AP, RatingClass.G)
+  );
 
   private final TemplateParserService templateParserService;
 
@@ -67,6 +73,27 @@ public class WaterHeatersService {
       .setText("watts", form.getStandingLoss())
       .setText("litres", form.getVolume())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(WaterSolarPackagesForm form, LegislationCategory legislationCategory){
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/packages-of-water-heater-and-solar-device.svg"));
+
+    if (form.getSolarCollector()) {
+      templatePopulator.applyCssClassToId("solarCollector", "hasSolarCollector");
+    }
+
+    if (form.getStorageTank()) {
+      templatePopulator.applyCssClassToId("hotWaterStorageTank", "hasHotWaterStorageTank");
+    }
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getPackageEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setText("waterHeatingRatingLetter", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getLetter())
+      .setText("waterHeatingRatingPlusses", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getPlusses())
       .getPopulatedDocument();
   }
 }

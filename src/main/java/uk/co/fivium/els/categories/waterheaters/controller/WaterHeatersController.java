@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
-import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
-import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
-import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterCategory;
+import uk.co.fivium.els.categories.waterheaters.model.*;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
@@ -83,23 +82,48 @@ public class WaterHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/packages-of-water-heater-and-solar-device")
+  public ModelAndView renderWaterSolarPackages(@ModelAttribute("form") WaterSolarPackagesForm form) {
+    return getWaterSolarPackages(Collections.emptyList());
+  }
+
+  @PostMapping("/packages-of-water-heater-and-solar-device")
+  @ResponseBody
+  public Object handleWaterSolarPackagesSubmit(@Valid @ModelAttribute("form") WaterSolarPackagesForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getWaterSolarPackages(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
+      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+    }
+  }
+
   private ModelAndView getHeatPumpWaterHeaters(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/heatPumpWaterHeaters");
-    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null)));
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump water heaters");
     return modelAndView;
   }
 
   private ModelAndView getHotWaterStorageTanks(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/hotWaterStorageTanks");
-    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHotWaterStorageTanks(null)));
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHotWaterStorageTanks(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Hot water storage tanks");
     return modelAndView;
   }
 
-  private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl) {
-    RatingClassRange efficiencyRatingRange = WaterHeatersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
-    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
+  private ModelAndView getWaterSolarPackages(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterSolarPackages");
+
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackages(null)), WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
+    modelAndView.addObject("secondaryEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES.getSecondaryRatingRange()));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Packages of water heater and solar device");
+    return modelAndView;
+  }
+
+  private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl, LegislationCategory legislationCategory) {
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(legislationCategory.getPrimaryRatingRange()));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("loadProfile",
       Arrays.stream(LoadProfile.values())
