@@ -64,6 +64,23 @@ public class WaterHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/conventional-water-heaters")
+  public ModelAndView renderConventionalWaterHeaters(@ModelAttribute("form") ConventionalWaterHeatersForm form) {
+    return getConventionalWaterHeaters(Collections.emptyList());
+  }
+
+  @PostMapping("/conventional-water-heaters")
+  @ResponseBody
+  public Object handleConventionalWaterHeatersSubmit(@Valid @ModelAttribute("form") ConventionalWaterHeatersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getConventionalWaterHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+    }
+  }
+
   @GetMapping("/solar-water-heaters")
   public ModelAndView renderSolarWaterHeaters(@ModelAttribute("form") SolarWaterHeatersForm form) {
     return getSolarWaterHeaters(Collections.emptyList());
@@ -119,6 +136,13 @@ public class WaterHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/heatPumpWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump water heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getConventionalWaterHeaters(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/conventionalWaterHeaters");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderConventionalWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Conventional water heaters");
     return modelAndView;
   }
 

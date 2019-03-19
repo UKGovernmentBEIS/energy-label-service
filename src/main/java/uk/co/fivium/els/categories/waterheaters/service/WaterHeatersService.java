@@ -5,10 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
-import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
-import uk.co.fivium.els.categories.waterheaters.model.SolarWaterHeatersForm;
-import uk.co.fivium.els.categories.waterheaters.model.WaterSolarPackagesForm;
+import uk.co.fivium.els.categories.waterheaters.model.*;
 import uk.co.fivium.els.categories.common.LoadProfile;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
@@ -61,6 +58,24 @@ public class WaterHeatersService {
       .setText("averageGjAnnum", form.getAverageGjAnnum())
       .setText("warmerGjAnnum", form.getWarmerGjAnnum())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(ConventionalWaterHeatersForm form, LegislationCategory legislationCategory){
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/conventional-water-heaters.svg"));
+
+    if (BooleanUtils.isTrue(form.getOffPeak())) {
+      templatePopulator.applyCssClassToId("offPeakMode","hasOffPeakMode");
+    }
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("kwhAnnum", form.getKwhAnnum())
+      .setText("gjAnnum", form.getGjAnnum())
+      .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .getPopulatedDocument();
   }

@@ -16,6 +16,10 @@ public class WaterHeaterCategory implements Category {
 
   private static List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
       .add(new CategoryItem(
+        "CONVENTIONAL_WATER_HEATERS",
+        "Conventional water heaters",
+        ReverseRouter.route(on(WaterHeatersController.class).renderConventionalWaterHeaters(null))))
+      .add(new CategoryItem(
           "HEAT_PUMP_WATER_HEATERS",
           "Heat pump water heaters",
           ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null))))
