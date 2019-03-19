@@ -22,6 +22,10 @@ public class SpaceHeaterCategory implements Category {
           "LOW_TEMPERATURE_HEAT_PUMP_SPACE_HEATERS",
           "Low-temperature heat pump space heaters",
           ReverseRouter.route(on(SpaceHeatersController.class).renderLowTemperatureHeatPumpSpaceHeaters(null))))
+      .add(new CategoryItem(
+        "HEAT_PUMP_COMBINATION_HEATERS",
+        "Heat pump combination heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderHeatPumpCombinationHeaters(null))))
       .build();
 
   private SpaceHeaterCategory(){}

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
-import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
+import uk.co.fivium.els.categories.common.LoadProfile;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;

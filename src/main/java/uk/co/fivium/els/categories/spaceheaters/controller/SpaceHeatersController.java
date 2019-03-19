@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.common.LoadProfile;
+import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.SpaceHeaterCategory;
@@ -28,6 +30,8 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
+import uk.co.fivium.els.util.StreamUtils;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/categories/space-heaters")
@@ -106,6 +110,39 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/heat-pump-combination-heaters")
+  public ModelAndView renderHeatPumpCombinationHeaters(@ModelAttribute("form") HeatPumpCombinationHeatersForm form) {
+    return getHeatPumpCombinationHeaters(Collections.emptyList());
+  }
+
+  @PostMapping("/heat-pump-combination-heaters")
+  @ResponseBody
+  public Object handleHeatPumpCombinationHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpCombinationHeatersForm form, BindingResult bindingResult) {
+
+    if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getSpaceHeatingEfficiencyRating())) {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      if (!LegislationCategory.isPrimaryRatingClassValid(form.getSpaceHeatingEfficiencyRating(), category)) {
+        bindingResult.rejectValue("spaceHeatingEfficiencyRating", "spaceHeatingEfficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
+      }
+    }
+
+    if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getWaterHeatingEfficiencyRating())) {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      if (!LegislationCategory.isSecondaryRatingClassValid(form.getWaterHeatingEfficiencyRating(), category)) {
+        bindingResult.rejectValue("waterHeatingEfficiencyRating", "waterHeatingEfficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
+      }
+    }
+
+    if (bindingResult.hasErrors()) {
+      return getHeatPumpCombinationHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }
+  }
+
   private ModelAndView getLowTemperatureHeatPumpSpaceHeaters(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/space-heaters/lowTemperatureHeatPumpSpaceHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderLowTemperatureHeatPumpSpaceHeaters(null)));
@@ -120,10 +157,22 @@ public class SpaceHeatersController extends CategoryController {
     return modelAndView;
   }
 
+  private ModelAndView getHeatPumpCombinationHeaters(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/heatPumpCombinationHeaters");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderHeatPumpCombinationHeaters(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump combination heaters");
+    return modelAndView;
+  }
+
   private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl) {
     modelAndView.addObject("legislationYears", ControllerUtils.legislationYearSelection(SpaceHeatersService.LEGISLATION_CATEGORIES));
     modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(SpaceHeatersService.LEGISLATION_CATEGORIES));
+    modelAndView.addObject("secondaryEfficiencyRating", ControllerUtils.combinedLegislationCategorySecondaryRangesToSelectionMap(SpaceHeatersService.LEGISLATION_CATEGORIES));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
+    modelAndView.addObject("loadProfile",
+      Arrays.stream(LoadProfile.values())
+        .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
+    );
     modelAndView.addObject("submitUrl", submitUrl);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
         SpaceHeatersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
