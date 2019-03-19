@@ -1,13 +1,10 @@
 package uk.co.fivium.els.categories.spaceheaters.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class LowTemperatureHeatPumpSpaceHeatersForm extends StandardTemplateForm50Char {
 

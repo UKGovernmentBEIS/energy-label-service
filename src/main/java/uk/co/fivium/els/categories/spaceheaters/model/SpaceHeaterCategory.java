@@ -1,15 +1,13 @@
 package uk.co.fivium.els.categories.spaceheaters.model;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.spaceheaters.controller.SpaceHeatersController;
-import uk.co.fivium.els.categories.waterheaters.controller.WaterHeatersController;
 import uk.co.fivium.els.mvc.ReverseRouter;
-
-import java.util.List;
-
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 public class SpaceHeaterCategory implements Category {
 
@@ -40,7 +38,7 @@ public class SpaceHeaterCategory implements Category {
 
   @Override
   public String getGuidanceText() {
-    return "<p>To generate a label for a space heater, or a package label, select your label type below and enter the relevant information on the next page.</p>" +
+    return "<p>To generate a label for a boiler space heater, cogeneration space heater, heat pump space heater, low-temperature heat pump, boiler combination heater, heat pump combination heater, or a package label associated with any of the above, select your label type below and enter the relevant information on the next page.</p>" +
         "<p>Energy labels for products should be 105mm x 200mm while package labels should be 210mm x 297mm. The label, for either the package, the product, or both as required, should be displayed at the point of sale so that it is easily readable and clearly associated with the product.</p>";
   }
 
