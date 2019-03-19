@@ -1,32 +1,33 @@
 package uk.co.fivium.els.categories.spaceheaters.controller;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
+import java.util.Collections;
+import java.util.List;
+import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.SpaceHeaterCategory;
 import uk.co.fivium.els.categories.spaceheaters.service.SpaceHeatersService;
-import uk.co.fivium.els.categories.televisions.service.TelevisionsService;
 import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.LegislationCategory;
-import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
-
-import javax.validation.Valid;
-import java.util.Collections;
-import java.util.List;
-
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 @Controller
 @RequestMapping("/categories/space-heaters")
@@ -52,16 +53,20 @@ public class SpaceHeatersController extends CategoryController {
     return getLowTemperatureHeatPumpSpaceHeaters(Collections.emptyList());
   }
 
-  @PostMapping("/low-temperature-heat-pump-space-heaters")
-  @ResponseBody
-  public Object handleLowTemperatureHeatPumpSpaceHeatersSubmit(@Valid @ModelAttribute("form") LowTemperatureHeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
-
+  private void validateLowTempEfficiencyRating(LowTemperatureHeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
     if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getLowTempEfficiencyRating())) {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
       if (!LegislationCategory.isPrimaryRatingClassValid(form.getLowTempEfficiencyRating(), category)) {
         bindingResult.rejectValue("lowTempEfficiencyRating", "lowTempEfficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
       }
     }
+  }
+
+  @PostMapping("/low-temperature-heat-pump-space-heaters")
+  @ResponseBody
+  public Object handleLowTemperatureHeatPumpSpaceHeatersSubmit(@Valid @ModelAttribute("form") LowTemperatureHeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
+
+    validateLowTempEfficiencyRating(form, bindingResult);
 
     if (bindingResult.hasErrors()) {
       return getLowTemperatureHeatPumpSpaceHeaters(bindingResult.getFieldErrors());
@@ -82,12 +87,7 @@ public class SpaceHeatersController extends CategoryController {
   @ResponseBody
   public Object handleHeatPumpSpaceHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
 
-    if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getLowTempEfficiencyRating())) {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
-      if (!LegislationCategory.isPrimaryRatingClassValid(form.getLowTempEfficiencyRating(), category)) {
-        bindingResult.rejectValue("lowTempEfficiencyRating", "lowTempEfficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
-      }
-    }
+    validateLowTempEfficiencyRating(form, bindingResult);
 
     if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getMediumTempEfficiencyRating())) {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
