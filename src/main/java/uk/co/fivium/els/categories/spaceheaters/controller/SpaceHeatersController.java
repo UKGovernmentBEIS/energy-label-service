@@ -31,8 +31,8 @@ import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
-
 import java.util.Arrays;
+
 @Controller
 @RequestMapping("/categories/space-heaters")
 public class SpaceHeatersController extends CategoryController {
