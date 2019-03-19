@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
-import uk.co.fivium.els.categories.waterheaters.model.LoadProfile;
+import uk.co.fivium.els.categories.common.LoadProfile;
 import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterCategory;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
 import uk.co.fivium.els.controller.CategoryController;

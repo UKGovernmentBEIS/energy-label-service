@@ -581,6 +581,7 @@
   <g id="waterHeatingRating">
     <polyline id="waterHeatingRatingArrow" class="cls-53" points="230.74 184.88 243.38 172.12 270.96 172.12 270.96 197.86 243.61 197.86 230.74 184.88"/>
     <text id="waterHeatingRatingLetter" class="cls-54" transform="translate(239.24023 190.55011)">A</text>
+    <text id="waterHeatingRatingPlusses" class="cls-55" transform="translate(251.57031 184.59015)"></text>
   </g>
   <text id="declaredLoadProfile" class="cls-56" transform="translate(182.09961 154.49005)">X</text>
   <text transform="translate(223.08984 381.26007)">

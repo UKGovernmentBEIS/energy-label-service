@@ -5,8 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.LoadProfile;
 import uk.co.fivium.els.categories.domesticovens.model.DomesticOvensForm;
 import uk.co.fivium.els.categories.domesticovens.model.GasOvensForm;
+import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
@@ -100,6 +102,43 @@ public class SpaceHeatersService {
       .setText("lowTemperatureColderKw", form.getLowTempColderHeatOutput())
       .setText("lowTemperatureAverageKw", form.getLowTempAverageHeatOutput())
       .setText("lowTemperatureWarmerKw", form.getLowTempWarmerHeatOutput())
+      .setText("outsideDb", form.getSoundPowerLevelOutdoors())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(HeatPumpCombinationHeatersForm form, LegislationCategory legislationCategory) {
+
+    TemplatePopulator templatePopulator;
+    if (legislationCategory == LEGISLATION_CATEGORY_JAN2015) {
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/space-heaters/heat-pump-combination-heaters-2015.svg"));
+    }
+    else {
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/space-heaters/heat-pump-combination-heaters-2019.svg"));
+    }
+
+    if (StringUtils.isNotBlank(form.getSoundPowerLevelIndoors())) {
+      templatePopulator
+        .applyCssClassToId("insideDbSection", "hasInsideDb")
+        .setText("insideDb", form.getSoundPowerLevelIndoors());
+    }
+    else {
+      templatePopulator.removeElementById("insideDbSection");
+    }
+
+    if (!form.getOffPeak()) {
+      templatePopulator
+        .removeElementById("offPeakMode");
+    }
+
+    return templatePopulator
+      .setRatingArrow("spaceHeatingRating", RatingClass.valueOf(form.getSpaceHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange(), "data-rating-increment-space-heating")
+      .setRatingArrow("waterHeatingRating", RatingClass.valueOf(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("colderKw", form.getColderHeatOutput())
+      .setText("averageKw", form.getAverageHeatOutput())
+      .setText("warmerKw", form.getWarmerHeatOutput())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .getPopulatedDocument();
   }
