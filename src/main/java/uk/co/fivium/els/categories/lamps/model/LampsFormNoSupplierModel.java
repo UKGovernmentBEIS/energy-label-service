@@ -2,9 +2,10 @@ package uk.co.fivium.els.categories.lamps.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
-public class LampsFormNoSupplierModel {
+public class LampsFormNoSupplierModel extends InternetLabellingForm {
 
   @FieldPrompt("Energy efficiency class of the application")
   @NotBlank(message = "Select an energy efficiency class")

@@ -12,14 +12,21 @@
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
 <#macro standardProductForm title includeSupplierNameModel=true>
-  <@defaultPage pageHeading=title>
-    <@form.govukForm submitUrl>
+
+  <@defaultPage pageHeading=title showInsetText=true>
+    <@form.govukForm submitUrl + modeQueryParam!"">
 
       <#if includeSupplierNameModel>
         <@supplierNameModel/>
       </#if>
 
       <#nested/>
+
+      <#if labelMode?has_content && labelMode == 'INTERNET'>
+        <@govukTextInput.textInput path="form.productPriceHeightPx"/>
+        <@govukRadios.radio path="form.labelOrientation" radioItems=internetLabelOrientationOptions/>
+        <@govukRadios.radio path="form.labelFormat" radioItems=internetLabelFormatOptions/>
+      </#if>
 
       <@generateLabelButton/>
 

@@ -4,18 +4,21 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.televisions.model.TelevisionsForm;
 import uk.co.fivium.els.categories.televisions.service.TelevisionsService;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
@@ -49,19 +52,33 @@ public class TelevisionController {
   @PostMapping("/televisions")
   @ResponseBody
   public Object handleTelevisionsFormSubmit(@Valid @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
+    return doIfValid(form, bindingResult, (form1 -> {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
+      Resource pdf = pdfRenderer.render(televisionsService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "televisions-label.pdf");
+    }));
+  }
 
+  @PostMapping(value = "/televisions", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelTelevisionsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
+    return doIfValid(form, bindingResult, (form1 -> {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
+      Resource pdf = pdfRenderer.render(televisionsService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "televisions-label.pdf");
+    }));
+  }
+
+  // TODO doent need to take in form?
+  private Object doIfValid(TelevisionsForm form, BindingResult bindingResult, Function<TelevisionsForm, Object> function) {
     ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), TelevisionsService.LEGISLATION_CATEGORIES, bindingResult);
-
     if (bindingResult.hasErrors()) {
       return getTelevisionsForm(bindingResult.getFieldErrors());
     }
     else {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
-      Resource pdf = pdfRenderer.render(televisionsService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "televisions-label.pdf");
+      return function.apply(form);
     }
   }
-
 
   private ModelAndView getTelevisionsForm(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/televisions/televisions");

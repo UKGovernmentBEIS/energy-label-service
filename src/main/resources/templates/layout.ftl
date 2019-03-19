@@ -32,6 +32,7 @@
   backLink=false
   phaseBanner=true
   pageTitle=""
+  showInsetText=false
   >
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
@@ -103,21 +104,29 @@
               <@govukErrorSummary.errorSummary errorItems=errorList/>
             </#if>
 
-            <#if caption?has_content>
-              <span class="${captionClass}">${caption}</span>
+            <#if labelMode?has_content && labelMode=='INTERNET'>
+              <span class="${captionClass}">Internet label</span>
             </#if>
             <#--GOVUK heading class names https://design-system.service.gov.uk/styles/typography/-->
             <#if heading>
               <h1 class="${headingCssClass}">${pageHeading}</h1>
             </#if>
 
-            <#if staticProductText?has_content>
-              <div class="govuk-inset-text">
-                ${staticProductText?no_esc}
-                <p>
-                  You can also <a class="govuk-link" href="/not-yet-implemented">generate a nested arrow</a> for products sold via the internet.
-                </p>
-              </div>
+              <#if showInsetText>
+                <div class="govuk-inset-text">
+                  <#if staticProductText?has_content>
+                    ${staticProductText?no_esc}
+                  </#if>
+                  <#if labelMode?has_content && labelMode=='INTERNET'>
+                    <p>
+                      You can also <a class="govuk-link" href="?mode=ENERGY">generate a full energy label</a>.
+                    </p>
+                  <#else>
+                    <p>
+                      You can also <a class="govuk-link" href="?mode=INTERNET">generate a nested arrow</a> for products sold via the internet.
+                    </p>
+                  </#if>
+                </div>
             </#if>
 
             <#nested>

@@ -11,12 +11,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.lamps.model.LampsCategory;
 import uk.co.fivium.els.categories.lamps.model.LampsForm;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModel;
@@ -54,9 +56,9 @@ public class LampsController extends CategoryController {
     return getLamps(Collections.emptyList());
   }
 
-  @PostMapping("/lamps")
+  @PostMapping(value = "/lamps")
   @ResponseBody
-  public Object handleLampsSubmit(@Valid @ModelAttribute("form") LampsForm form, BindingResult bindingResult) throws Exception {
+  public Object handleLampsSubmit(@Validated @ModelAttribute("form") LampsForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getLamps(bindingResult.getFieldErrors());
     }
@@ -66,6 +68,19 @@ public class LampsController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/lamps", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelLampsSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LampsForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getLamps(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
+      return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+    }
+  }
+
+
   @GetMapping("/lamps-excluding-name-model")
   public ModelAndView renderLampsExNameModel(@ModelAttribute("form") LampsFormNoSupplierModel form) {
     return getLampsExNameModel(Collections.emptyList());
@@ -73,7 +88,7 @@ public class LampsController extends CategoryController {
 
   @PostMapping("/lamps-excluding-name-model")
   @ResponseBody
-  public Object handleLampsExNameModelSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModel form, BindingResult bindingResult) throws Exception {
+  public Object handleLampsExNameModelSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModel form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
@@ -102,7 +117,7 @@ public class LampsController extends CategoryController {
 
   private ModelAndView getLamps(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/lamps/lamps");
-    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).renderLamps(null)));
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).handleLampsSubmit(null, ReverseRouter.emptyBindingResult())));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with supplier's name, model identifier, rating and energy consumption");
     return modelAndView;
   }
