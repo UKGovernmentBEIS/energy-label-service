@@ -51,6 +51,13 @@ public class ControllerUtils {
         .collect(StreamUtils.toLinkedMergingHashMap(Enum::name, RatingClass::getDisplayValue));
   }
 
+  public static Map<String, String> combinedLegislationCategorySecondaryRangesToSelectionMap(List<SelectableLegislationCategory> legislationCategories) {
+    return legislationCategories.stream()
+      .flatMap(r -> r.getSecondaryRatingRange().getApplicableRatings().stream())
+      .sorted(Comparator.comparing(Enum::ordinal))
+      .collect(StreamUtils.toLinkedMergingHashMap(Enum::name, RatingClass::getDisplayValue));
+  }
+
   public static Map<String, String> legislationYearSelection(List<SelectableLegislationCategory> legislationCategories) {
     return legislationCategories.stream()
         .collect(StreamUtils.toLinkedHashMap(SelectableLegislationCategory::getId, SelectableLegislationCategory::getDisplayName));

@@ -10,6 +10,11 @@ public class LegislationCategory {
     return legislationCategory.getPrimaryRatingRange().getApplicableRatings().contains(rating);
   }
 
+  public static Boolean isSecondaryRatingClassValid(String ratingClass, LegislationCategory legislationCategory) {
+    RatingClass rating = RatingClass.valueOf(ratingClass);
+    return legislationCategory.getSecondaryRatingRange().getApplicableRatings().contains(rating);
+  }
+
   public static LegislationCategory of(RatingClassRange primaryRatingRange) {
     return new LegislationCategory(primaryRatingRange, null);
   }
