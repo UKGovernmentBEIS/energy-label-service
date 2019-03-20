@@ -1,0 +1,1 @@
+If the user provides a value for indirect heat output, add the hasIndirectHeatSection class to the indirectHeatSection element.
