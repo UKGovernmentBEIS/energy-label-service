@@ -56,7 +56,9 @@ public class TemplatePopulator {
     svgGroupElement.attr("transform", String.format("translate(0,%s)", yAxisTransform));
 
     setText(parentElementId+"Letter", rating.getLetter());
-    setText(parentElementId+"Plusses", rating.getPlusses());
+    if (!rating.getPlusses().isEmpty()) {
+      setText(parentElementId + "Plusses", rating.getPlusses());
+    }
 
     return this;
   }
