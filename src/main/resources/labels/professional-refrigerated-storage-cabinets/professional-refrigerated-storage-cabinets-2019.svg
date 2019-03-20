@@ -413,8 +413,8 @@
   <text id="kwhAnnum" class="cls-46" transform="translate(243.08984 442.82996)" text-anchor="middle">X</text>
   <text id="fridgeLitres" class="cls-2" transform="translate(85.33984 577.16003)" text-anchor="end">-</text>
   <text id="freezerLitres" class="cls-2" transform="translate(173.20996 577.16003)" text-anchor="end">-</text>
-  <text id="supplierLineTwo" class="cls-47" transform="translate(25.50977 119.05017)">X</text>
-  <text id="supplierLineOne" class="cls-47" transform="translate(25.50977 102.79181)">X</text>
-  <text id="modelLineTwo" class="cls-47" transform="translate(164.41016 119.05017)">X</text>
-  <text id="modelLineOne" class="cls-47" transform="translate(164.41016 102.79181)">X</text>
+  <text id="supplierLine2" class="cls-47" transform="translate(25.50977 119.05017)">X</text>
+  <text id="supplierLine1" class="cls-47" transform="translate(25.50977 102.79181)">X</text>
+  <text id="modelLine2" class="cls-47" transform="translate(164.41016 119.05017)">X</text>
+  <text id="modelLine1" class="cls-47" transform="translate(164.41016 102.79181)">X</text>
 </svg>

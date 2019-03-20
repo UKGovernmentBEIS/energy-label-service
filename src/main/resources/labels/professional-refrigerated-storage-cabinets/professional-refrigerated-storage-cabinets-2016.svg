@@ -390,8 +390,8 @@
       <text class="cls-43" transform="translate(215.96973 578.79968)">40°C-40%</text>
     </g>
   </g>
-  <text id="supplierLineTwo" class="cls-44" transform="translate(25.50977 119.05017)">X</text>
-  <text id="supplierLineOne" class="cls-44" transform="translate(25.50977 102.79181)">X</text>
-  <text id="modelLineTwo" class="cls-44" transform="translate(164.41016 119.05017)">X</text>
-  <text id="modelLineOne" class="cls-44" transform="translate(164.41016 102.79181)">X</text>
+  <text id="supplierLine2" class="cls-44" transform="translate(25.50977 119.05017)">X</text>
+  <text id="supplierLine1" class="cls-44" transform="translate(25.50977 102.79181)">X</text>
+  <text id="modelLine2" class="cls-44" transform="translate(164.41016 119.05017)">X</text>
+  <text id="modelLine1" class="cls-44" transform="translate(164.41016 102.79181)">X</text>
 </svg>

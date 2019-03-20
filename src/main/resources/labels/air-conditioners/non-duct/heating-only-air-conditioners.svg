@@ -702,9 +702,9 @@
   <text id="colderKwhAnnum" class="cls-71" transform="translate(234.95996 355.47003)">X</text>
   <text id="insideDb" class="cls-72" transform="translate(48 427.31964)">X</text>
   <text id="outsideDb" class="cls-72" transform="translate(48 503.80011)">X</text>
-  <text id="supplierLineTwo" class="cls-29" transform="translate(24.94008 99.20996)">X</text>
-  <text id="supplierLineOne" class="cls-29" transform="translate(24.94008 87.18945)">X</text>
-  <text id="modelLineTwo" class="cls-29" transform="translate(147.40053 99.20996)">X</text>
-  <text id="modelLineOne" class="cls-29" transform="translate(147.40053 87.18945)">X</text>
+  <text id="supplierLine2" class="cls-29" transform="translate(24.94008 99.20996)">X</text>
+  <text id="supplierLine1" class="cls-29" transform="translate(24.94008 87.18945)">X</text>
+  <text id="modelLine2" class="cls-29" transform="translate(147.40053 99.20996)">X</text>
+  <text id="modelLine1" class="cls-29" transform="translate(147.40053 87.18945)">X</text>
   <text class="cls-73" transform="translate(24.91341 525.93555)">ENE<tspan class="cls-74" x="12.97656" y="0">R</tspan><tspan x="17.24609" y="0">GIA · ЕНЕРГИЯ · ΕΝΕΡΓΕΙΑ · ENE</tspan><tspan class="cls-74" x="119.75" y="0">R</tspan><tspan x="124.01953" y="0">GI</tspan><tspan class="cls-75" x="131.08203" y="0">J</tspan><tspan x="133.49609" y="0">A · ENE</tspan><tspan class="cls-74" x="156.73828" y="0">R</tspan><tspan class="cls-76" x="161.00781" y="0">G</tspan><tspan x="165.9375" y="0">Y · ENE</tspan><tspan class="cls-74" x="188.44922" y="0">R</tspan><tspan x="192.71875" y="0">GIE · ENE</tspan><tspan class="cls-74" x="222.30078" y="0">R</tspan><tspan x="226.57031" y="0">GI</tspan></text>
 </svg>
