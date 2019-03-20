@@ -15,11 +15,15 @@ public class AirConditionersCategory implements Category {
   public static final Category GET = new AirConditionersCategory();
 
   private static final List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
-      .add(new CategoryItem(
-          "REVERSIBLE_DUCTLESS_AIR_CONDITIONERS",
-          "Reversible ductless air conditioners",
-          ReverseRouter.route(on(AirConditionersController.class).renderReversibleDuctlessAirConditioners(null))))
-      .build();
+    .add(new CategoryItem(
+      "COOLING_DUCTLESS_AIR_CONDITIONERS",
+      "Cooling-only ductless air conditioners",
+      ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctlessAirConditioners(null))))
+    .add(new CategoryItem(
+        "REVERSIBLE_DUCTLESS_AIR_CONDITIONERS",
+        "Reversible ductless air conditioners",
+        ReverseRouter.route(on(AirConditionersController.class).renderReversibleDuctlessAirConditioners(null))))
+    .build();
 
   private AirConditionersCategory(){}
 

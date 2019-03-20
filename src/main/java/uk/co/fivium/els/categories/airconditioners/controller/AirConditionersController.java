@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.airconditioners.model.AirConditionersCategory;
+import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
 import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
 import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -45,6 +46,24 @@ public class AirConditionersController extends CategoryController {
     this.breadcrumbService = breadcrumbService;
   }
 
+  @GetMapping("/non-duct/cooling-only-air-conditioners")
+  public ModelAndView renderCoolingDuctlessAirConditioners(@ModelAttribute("form") CoolingDuctlessAirConditionersForm form) {
+    return getCoolingDuctlessAirConditioners(Collections.emptyList());
+  }
+
+  @PostMapping("/non-duct/cooling-only-air-conditioners")
+  @ResponseBody
+  public Object handleCoolingDuctlessAirConditionersSubmit(@Valid @ModelAttribute("form") CoolingDuctlessAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCoolingDuctlessAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
+      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+    }
+
+  }
+
   @GetMapping("/non-duct/reversible-air-conditioners")
   public ModelAndView renderReversibleDuctlessAirConditioners(@ModelAttribute("form") ReversibleDuctlessAirConditionersForm form) {
     return getReversibleDuctlessAirConditioners(Collections.emptyList());
@@ -58,9 +77,16 @@ public class AirConditionersController extends CategoryController {
     }
     else {
       Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
-      return ControllerUtils.serveResource(pdf, "reversible-air-conditioners.pdf");
+      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
     }
 
+  }
+
+  private ModelAndView getCoolingDuctlessAirConditioners(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/coolingDuctlessAirConditioners");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctlessAirConditioners(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Cooling-only ductless air conditioners");
+    return modelAndView;
   }
 
   private ModelAndView getReversibleDuctlessAirConditioners(List<FieldError> errorList) {

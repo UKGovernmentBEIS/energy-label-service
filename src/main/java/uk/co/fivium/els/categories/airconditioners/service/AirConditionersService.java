@@ -3,6 +3,7 @@ package uk.co.fivium.els.categories.airconditioners.service;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
 import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
@@ -21,6 +22,22 @@ public class AirConditionersService {
   @Autowired
   public AirConditionersService(TemplateParserService templateParserService) {
     this.templateParserService = templateParserService;
+  }
+
+  public Document generateHtml(CoolingDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {
+
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/cooling-only-air-conditioners.svg"));
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("kw", form.getCoolingModeDesignLoad())
+      .setText("seer", form.getCoolingModeSeer())
+      .setText("kwhAnnum", form.getCoolingAnnualEnergyConsumption())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setText("insideDb", form.getSoundPowerLevelIndoors())
+      .setText("outsideDb", form.getSoundPowerLevelOutdoors())
+      .getPopulatedDocument();
   }
 
   public Document generateHtml(ReversibleDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {

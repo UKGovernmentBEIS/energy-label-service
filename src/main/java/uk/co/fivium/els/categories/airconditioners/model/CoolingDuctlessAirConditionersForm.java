@@ -1,13 +1,11 @@
 package uk.co.fivium.els.categories.airconditioners.model;
 
-import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
-@GroupSequenceProvider(HeatingDuctlessAirConditionersFormSequenceProvider.class)
 public class CoolingDuctlessAirConditionersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Energy efficiency class for cooling")
