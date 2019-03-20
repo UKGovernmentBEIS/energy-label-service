@@ -25,7 +25,7 @@ public class ReversibleAirConditionerService {
 
   public Document generateHtml(ReversibleAirConditionersForm form, LegislationCategory legislationCategory) {
 
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/reversible-air-conditioners-2019.svg"));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/reversible-air-conditioners.svg"));
     return templatePopulator
         .setText("supplier", form.getSupplierName())
         .setText("model", form.getModelIdentifier())

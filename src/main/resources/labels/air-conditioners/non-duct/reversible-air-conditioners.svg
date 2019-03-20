@@ -1,4 +1,4 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120mm" height="210mm" viewBox="0 0 340.16 595.28003" data-rating-increment="21.7323">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120mm" height="210mm" viewBox="0 0 340.16 595.28003" data-rating-increment="21.7323" data-supplier-model-chars-per-row="25">
   <defs>
     <style>
       .cls-1, .cls-11, .cls-12, .cls-13, .cls-21, .cls-22, .cls-23, .cls-24, .cls-25, .cls-28, .cls-3, .cls-30, .cls-31, .cls-33, .cls-34, .cls-35, .cls-4, .cls-51, .cls-6, .cls-8, .cls-9 {
@@ -695,32 +695,10 @@
     <text class="cls-60" transform="translate(28.61865 297.24976)"><tspan xml:space="preserve"> C</tspan></text>
     <text class="cls-60" transform="translate(28.271 319.11206)"><tspan xml:space="preserve"> D</tspan></text>
   </g>
-  <text class="cls-66" transform="translate(108.82471 155.49976)"><tspan xml:space="preserve"> A</tspan></text>
-  <text class="cls-67" transform="translate(123.51807 147.8269)"><tspan class="cls-68">++</tspan><tspan x="7.78223" y="0">+</tspan></text>
-  <text class="cls-67" transform="translate(135.21338 147.8269)">+</text>
-  <text class="cls-66" transform="translate(108.82471 451.24292)"><tspan xml:space="preserve"> F</tspan></text>
-  <text class="cls-66" transform="translate(108.82471 484.0271)"><tspan xml:space="preserve"> G</tspan></text>
-  <g class="cls-69">
-    <text class="cls-66" transform="translate(207.58984 155.60718)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-67" transform="translate(222.2832 147.93481)"><tspan class="cls-70">++</tspan><tspan x="7.78223" y="0">+</tspan></text>
-    <text class="cls-67" transform="translate(233.97852 147.93481)">+</text>
-  </g>
-  <g class="cls-69">
-    <text class="cls-66" transform="translate(207.58984 221.17456)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-67" transform="translate(222.2832 213.51392)">+</text>
-    <text class="cls-67" transform="translate(226.18164 213.51392)">+</text>
-    <text class="cls-66" transform="translate(207.58984 253.95776)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-67" transform="translate(222.2832 246.28491)">+</text>
-    <text class="cls-66" transform="translate(207.58984 286.74146)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-66" transform="translate(207.58984 320.21362)"><tspan xml:space="preserve"> B</tspan></text>
-    <text class="cls-66" transform="translate(207.58984 352.9978)"><tspan xml:space="preserve"> C</tspan></text>
-    <text class="cls-66" transform="translate(207.58984 385.78198)"><tspan xml:space="preserve"> D</tspan></text>
-    <text class="cls-66" transform="translate(207.58984 418.56616)"><tspan xml:space="preserve"> E</tspan></text>
-    <text class="cls-66" transform="translate(207.58984 451.35034)"><tspan xml:space="preserve"> F</tspan></text>
-    <text class="cls-66" transform="translate(207.58984 484.13452)"><tspan xml:space="preserve"> G</tspan></text>
-  </g>
-  <text id="supplier" class="cls-71" transform="translate(26.75977 113.38989)">X</text>
-  <text id="model" class="cls-71" transform="translate(178.58008 113.38989)">X</text>
+  <text id="supplierLine1" class="cls-71" transform="translate(26.75977 101.38989)">X</text>
+  <text id="supplierLine2" class="cls-71" transform="translate(26.75977 113.38989)">X</text>
+  <text id="modelLine1" class="cls-71" transform="translate(178.58008 101.38989)">X</text>
+  <text id="modelLine2" class="cls-71" transform="translate(178.58008 113.38989)">X</text>
   <g id="seerRating">
     <polyline id="seerRatingArrow" class="cls-72" points="106.53 183.69 119.68 170.42 137.68 170.42 137.68 197.41 120.1 197.41 106.53 183.69"/>
     <text id="seerRatingLetter" class="cls-73" transform="translate(114.18018 187.94019)">A</text>
