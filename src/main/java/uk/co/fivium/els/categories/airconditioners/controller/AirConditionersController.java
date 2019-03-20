@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.airconditioners.model.AirConditionersCategory;
 import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctlessAirConditionersForm;
 import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
 import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -64,6 +65,24 @@ public class AirConditionersController extends CategoryController {
 
   }
 
+  @GetMapping("/non-duct/heating-only-air-conditioners")
+  public ModelAndView renderHeatingDuctlessAirConditioners(@ModelAttribute("form") HeatingDuctlessAirConditionersForm form) {
+    return getHeatingDuctlessAirConditioners(Collections.emptyList());
+  }
+
+  @PostMapping("/non-duct/heating-only-air-conditioners")
+  @ResponseBody
+  public Object handleCoolingDuctlessAirConditionersSubmit(@Valid @ModelAttribute("form") HeatingDuctlessAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getHeatingDuctlessAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
+      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+    }
+
+  }
+
   @GetMapping("/non-duct/reversible-air-conditioners")
   public ModelAndView renderReversibleDuctlessAirConditioners(@ModelAttribute("form") ReversibleDuctlessAirConditionersForm form) {
     return getReversibleDuctlessAirConditioners(Collections.emptyList());
@@ -86,6 +105,13 @@ public class AirConditionersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/coolingDuctlessAirConditioners");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctlessAirConditioners(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Cooling-only ductless air conditioners");
+    return modelAndView;
+  }
+
+  private ModelAndView getHeatingDuctlessAirConditioners(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/heatingDuctlessAirConditioners");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderHeatingDuctlessAirConditioners(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Heating-only ductless air conditioners");
     return modelAndView;
   }
 
