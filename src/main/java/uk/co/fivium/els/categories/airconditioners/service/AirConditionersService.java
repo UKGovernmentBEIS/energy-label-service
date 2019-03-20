@@ -53,7 +53,7 @@ public class AirConditionersService {
         .setRatingArrow("colderRating", RatingClass.valueOf(form.getColderHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
     }
     else {
-      templatePopulator.removeElementById("colderScopRating");
+      templatePopulator.removeElementById("colderRating");
     }
 
     if (form.getWarmerConditions()) {
@@ -64,7 +64,7 @@ public class AirConditionersService {
         .setRatingArrow("warmerRating", RatingClass.valueOf(form.getWarmerHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
     }
     else {
-      templatePopulator.removeElementById("warmerScopRating");
+      templatePopulator.removeElementById("warmerRating");
     }
 
     return templatePopulator
