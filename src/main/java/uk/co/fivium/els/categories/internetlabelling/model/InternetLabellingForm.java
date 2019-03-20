@@ -13,12 +13,12 @@ public class InternetLabellingForm {
   private String productPriceHeightPx;
 
   @FieldPrompt("Label orientation")
-  @NotBlank(groups = InternetLabellingGroup.class)
+  @NotBlank(groups = InternetLabellingGroup.class, message = "Select a label orientation")
   @InternetLabelModeField
   private String labelOrientation;
 
   @FieldPrompt("Label format")
-  @NotBlank(groups = InternetLabellingGroup.class)
+  @NotBlank(groups = InternetLabellingGroup.class, message = "Select a label format")
   @InternetLabelModeField
   private String labelFormat;
 

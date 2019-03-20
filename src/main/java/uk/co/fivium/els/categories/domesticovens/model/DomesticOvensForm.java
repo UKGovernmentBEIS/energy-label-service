@@ -3,15 +3,19 @@ package uk.co.fivium.els.categories.domesticovens.model;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.co.fivium.els.categories.common.StandardTemplateForm40Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
 @GroupSequenceProvider(DomesticOvensFormSequenceProvider.class)
 public class DomesticOvensForm extends StandardTemplateForm40Char {
 
   @FieldPrompt("The energy efficiency class of the cavity")
-  @NotBlank(message = "Select an energy efficiency class")
+  @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Usable volume of the cavity in litres (L)")
@@ -23,7 +27,7 @@ public class DomesticOvensForm extends StandardTemplateForm40Char {
   private String conventionalKwhConsumption;
 
   @FieldPrompt("Is this a forced air convection oven?")
-  @NotNull
+  @NotNull(message = "Specify if this is a forced air convection oven?")
   private Boolean isFanOven;
 
   @FieldPrompt("Energy consumption per cycle expressed in kWh/cycle: Forced air convection (if available) ")
