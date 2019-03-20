@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.lamps.model.LampsCategory;
 import uk.co.fivium.els.categories.lamps.model.LampsForm;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModel;
@@ -33,6 +34,7 @@ import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
+//TODO cut down on duplication here. All labels are essentially the same. Internet label may also only be needed on sub category page
 @Controller
 @RequestMapping("/categories/lamps")
 public class LampsController extends CategoryController {
@@ -42,13 +44,15 @@ public class LampsController extends CategoryController {
   private final PdfRenderer pdfRenderer;
   private final LampsService lampsService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
   @Autowired
-  public LampsController(PdfRenderer pdfRenderer, LampsService lampsService, BreadcrumbService breadcrumbService) {
+  public LampsController(PdfRenderer pdfRenderer, LampsService lampsService, BreadcrumbService breadcrumbService, InternetLabelService internetLabelService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, LampsCategory.GET, LampsController.class);
     this.pdfRenderer = pdfRenderer;
     this.lampsService = lampsService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
   @GetMapping("/lamps")
@@ -56,7 +60,7 @@ public class LampsController extends CategoryController {
     return getLamps(Collections.emptyList());
   }
 
-  @PostMapping(value = "/lamps")
+  @PostMapping("/lamps")
   @ResponseBody
   public Object handleLampsSubmit(@Validated @ModelAttribute("form") LampsForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
@@ -75,11 +79,9 @@ public class LampsController extends CategoryController {
       return getLamps(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
     }
   }
-
 
   @GetMapping("/lamps-excluding-name-model")
   public ModelAndView renderLampsExNameModel(@ModelAttribute("form") LampsFormNoSupplierModel form) {
@@ -98,6 +100,17 @@ public class LampsController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/lamps-excluding-name-model", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelLampsExNameModelSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LampsFormNoSupplierModel form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getLampsExNameModel(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
+    }
+  }
+
   @GetMapping("/lamps-excluding-name-model-consumption")
   public ModelAndView renderLampsExNameModelConsumption(@ModelAttribute("form") LampsFormNoSupplierModelConsumption form) {
     return getLampsExNameModelConsumption(Collections.emptyList());
@@ -105,13 +118,24 @@ public class LampsController extends CategoryController {
 
   @PostMapping("/lamps-excluding-name-model-consumption")
   @ResponseBody
-  public Object handleLampsExNameModelConsumptionSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModelConsumption form, BindingResult bindingResult) throws Exception {
+  public Object handleLampsExNameModelConsumptionSubmit(@Valid @ModelAttribute("form") LampsFormNoSupplierModelConsumption form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
       Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/lamps-excluding-name-model-consumption", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelLampsExNameModelConsumptionSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LampsFormNoSupplierModelConsumption form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
     }
   }
 

@@ -4,7 +4,7 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.Supplier;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.televisions.model.TelevisionsForm;
 import uk.co.fivium.els.categories.televisions.service.TelevisionsService;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
@@ -36,12 +37,14 @@ public class TelevisionController {
   private final PdfRenderer pdfRenderer;
   private final TelevisionsService televisionsService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
   @Autowired
-  public TelevisionController(PdfRenderer pdfRenderer, TelevisionsService televisionsService, BreadcrumbService breadcrumbService) {
+  public TelevisionController(PdfRenderer pdfRenderer, TelevisionsService televisionsService, BreadcrumbService breadcrumbService, InternetLabelService internetLabelService) {
     this.pdfRenderer = pdfRenderer;
     this.televisionsService = televisionsService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
   @GetMapping("/televisions")
@@ -52,7 +55,7 @@ public class TelevisionController {
   @PostMapping("/televisions")
   @ResponseBody
   public Object handleTelevisionsFormSubmit(@Valid @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (form1 -> {
+    return doIfValid(form, bindingResult, (() -> {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
       Resource pdf = pdfRenderer.render(televisionsService.generateHtml(form, category));
       return ControllerUtils.serveResource(pdf, "televisions-label.pdf");
@@ -62,21 +65,19 @@ public class TelevisionController {
   @PostMapping(value = "/televisions", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelTelevisionsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (form1 -> {
+    return doIfValid(form, bindingResult, (() -> {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
-      Resource pdf = pdfRenderer.render(televisionsService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "televisions-label.pdf");
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "televisions");
     }));
   }
 
-  // TODO doent need to take in form?
-  private Object doIfValid(TelevisionsForm form, BindingResult bindingResult, Function<TelevisionsForm, Object> function) {
+  private Object doIfValid(TelevisionsForm form, BindingResult bindingResult, Supplier<Object> supplier) {
     ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), TelevisionsService.LEGISLATION_CATEGORIES, bindingResult);
     if (bindingResult.hasErrors()) {
       return getTelevisionsForm(bindingResult.getFieldErrors());
     }
     else {
-      return function.apply(form);
+      return supplier.get();
     }
   }
 
