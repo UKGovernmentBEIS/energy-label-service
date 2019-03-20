@@ -707,15 +707,15 @@
   <text id="seerKw" class="cls-75" transform="translate(85.04004 342.32007)">X</text>
   <text id="seer" class="cls-75" transform="translate(85.04004 357.28003)">X</text>
   <text id="seerKwhAnnum" class="cls-75" transform="translate(85.04004 372.28003)">X</text>
-  <g id="averageScopRating">
-    <polyline id="averageScopRatingArrow" class="cls-72" points="205.31 183.69 218.47 170.42 236.47 170.42 236.47 197.41 218.89 197.41 205.31 183.69"/>
-    <text id="averageScopRatingLetter" class="cls-73" transform="translate(212.96973 187.94019)">A</text>
-    <text id="averageScopRatingPlusses" class="cls-74" transform="translate(222.74023 180.42993)">+++</text>
-  </g>
   <g id="warmerScopRating">
-    <polyline id="warmerScopRatingArrow" class="cls-72" points="242.732 183.69 255.892 170.42 273.892 170.42 273.892 197.41 256.312 197.41 242.732 183.69"/>
-    <text id="warmerScopRatingLetter" class="cls-73" transform="translate(250.39173 187.94019)">A</text>
-    <text id="warmerScopRatingPlusses" class="cls-74" transform="translate(260.16224 180.42993)">+++</text>
+    <polyline id="warmerScopRatingArrow" class="cls-72" points="205.31 183.69 218.47 170.42 236.47 170.42 236.47 197.41 218.89 197.41 205.31 183.69"/>
+    <text id="warmerScopRatingLetter" class="cls-73" transform="translate(212.96973 187.94019)">A</text>
+    <text id="warmerScopRatingPlusses" class="cls-74" transform="translate(222.74023 180.42993)">+++</text>
+  </g>
+  <g id="averageScopRating">
+    <polyline id="averageScopRatingArrow" class="cls-72" points="242.732 183.69 255.892 170.42 273.892 170.42 273.892 197.41 256.312 197.41 242.732 183.69"/>
+    <text id="averageScopRatingLetter" class="cls-73" transform="translate(250.39173 187.94019)">A</text>
+    <text id="averageScopRatingPlusses" class="cls-74" transform="translate(260.16224 180.42993)">+++</text>
   </g>
   <g id="colderScopRating">
     <polyline id="colderScopRatingArrow" class="cls-72" points="279.465 183.69 292.625 170.42 310.625 170.42 310.625 197.41 293.045 197.41 279.465 183.69"/>
