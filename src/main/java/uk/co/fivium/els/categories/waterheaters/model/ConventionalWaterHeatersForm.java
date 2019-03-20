@@ -29,8 +29,8 @@ public class ConventionalWaterHeatersForm extends StandardTemplateForm30Char {
   @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
-  @FieldPrompt("Is the heater able to only operate during off-peak hours?")
-  @NotNull(message = "Specify if off-peak-only operation is supported")
+  @FieldPrompt("Can the heater be set to work only during off-peak hours?")
+  @NotNull(message = "Specify if off-peak operation is supported")
   private Boolean offPeak;
 
   public String getDeclaredLoadProfile() {

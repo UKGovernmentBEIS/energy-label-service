@@ -13,11 +13,11 @@ public class WaterSolarPackagesForm extends StandardTemplateForm50Char {
   private String declaredLoadProfile;
 
   @FieldPrompt("Water heating energy efficiency class of the water heater")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator for the water heater")
   private String heaterEfficiencyRating;
 
   @FieldPrompt("Water heating energy efficiency class of the package of water heater and solar device")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator for the package of water heater and solar device")
   private String packageEfficiencyRating;
 
   @FieldPrompt("May a solar collector be included in the package of water heater and solar device?")
@@ -25,7 +25,7 @@ public class WaterSolarPackagesForm extends StandardTemplateForm50Char {
   private Boolean solarCollector;
 
   @FieldPrompt("May a hot water storage tank be included in the package of water heater and solar device?")
-  @NotNull(message = "Specify if a solar collector may be included")
+  @NotNull(message = "Specify if a hot water storage tank may be included")
   private Boolean storageTank;
 
   public String getDeclaredLoadProfile() {
