@@ -23,7 +23,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @NotNull
   private Boolean nonRatedCompartment;
 
-  @FieldPrompt("Sum of the storage volumes of all compartments that do not merit a star rating (i.e. operating temperature > – 6 °C) in litres")
+  @FieldPrompt("Sum of the storage volumes of all compartments that do not merit a star rating (i.e. operating temperature over minus 6°C) in litres")
   @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that do not merit a star rating, up to 3 digits long")
   private String nonRatedVolume;
 
@@ -31,7 +31,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @NotNull
   private Boolean ratedCompartment;
 
-  @FieldPrompt("Sum of the storage volumes of all frozen-food storage compartments that merit a star rating (i.e. operating temperature ≤ – 6 °C) in litres")
+  @FieldPrompt("Sum of the storage volumes of all frozen-food storage compartments that merit a star rating (i.e. operating temperature less than or equal to minus 6°C) in litres")
   @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that merit a star rating, up to 3 digits long")
   private String ratedVolume;
 

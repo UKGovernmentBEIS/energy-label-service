@@ -18,13 +18,12 @@
           </h3>
         </#if>
       </#if>
-      <#if productGuidanceText?has_content>
-        <div class="govuk-inset-text">
-          ${productGuidanceText?no_esc}
-        </div>
-      </#if>
     </legend>
-
+    <#if productGuidanceText?has_content>
+      <div class="govuk-inset-text">
+        ${productGuidanceText?no_esc}
+          </div>
+    </#if>
     <#nested>
 
   </fieldset>

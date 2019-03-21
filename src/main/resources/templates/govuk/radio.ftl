@@ -32,8 +32,8 @@
           <#list radioItems?keys as item>
             <#assign isSelected = spring.stringStatusValue == item>
             <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="${id}-${item}" name="${fieldName}" type="radio" value="${item}" <#if isSelected>checked="checked"</#if> <#if hiddenContentId?has_content>data-aria-controls="${hiddenContentId}"</#if>>
-              <label class="govuk-label govuk-radios__label" for="${id}-${item}">
+            <input class="govuk-radios__input" id="${id}<#if item?counter != 1>-${item}</#if>" name="${fieldName}" type="radio" value="${item}" <#if isSelected>checked="checked"</#if> <#if hiddenContentId?has_content>data-aria-controls="${hiddenContentId}"</#if>>
+              <label class="govuk-label govuk-radios__label" for="${id}<#if item?counter != 1>-${item}</#if>">
                 ${radioItems[item]}
               </label>
             </div>
