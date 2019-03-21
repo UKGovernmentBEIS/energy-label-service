@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
 import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.MultipleClimateGroupForm;
 import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
@@ -45,27 +46,7 @@ public class AirConditionersService {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/heating-only-air-conditioners.svg"));
 
-    if (form.getColderConditions()) {
-      templatePopulator
-        .setText("colderKw", form.getColderHeatingDesignLoad())
-        .setText("colderScop", form.getColderScop())
-        .setText("colderKwhAnnum", form.getColderAnnualEnergyConsumption())
-        .setRatingArrow("colderRating", RatingClass.valueOf(form.getColderHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-    }
-    else {
-      templatePopulator.removeElementById("colderRating");
-    }
-
-    if (form.getWarmerConditions()) {
-      templatePopulator
-        .setText("warmerKw", form.getWarmerHeatingDesignLoad())
-        .setText("warmerScop", form.getWarmerScop())
-        .setText("warmerKwhAnnum", form.getWarmerAnnualEnergyConsumption())
-        .setRatingArrow("warmerRating", RatingClass.valueOf(form.getWarmerHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-    }
-    else {
-      templatePopulator.removeElementById("warmerRating");
-    }
+    applyMultipleClimateSection(templatePopulator, form, legislationCategory);
 
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
@@ -83,27 +64,7 @@ public class AirConditionersService {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/reversible-air-conditioners.svg"));
 
-    if (form.getColderConditions()) {
-      templatePopulator
-        .setText("colderScopKw", form.getColderHeatingDesignLoad())
-        .setText("colderScop", form.getColderScop())
-        .setText("colderScopKwhAnnum", form.getColderAnnualEnergyConsumption())
-        .setRatingArrow("colderScopRating", RatingClass.valueOf(form.getColderHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-    }
-    else {
-      templatePopulator.removeElementById("colderScopRating");
-    }
-
-    if (form.getWarmerConditions()) {
-      templatePopulator
-        .setText("warmerScopKw", form.getWarmerHeatingDesignLoad())
-        .setText("warmerScop", form.getWarmerScop())
-        .setText("warmerScopKwhAnnum", form.getWarmerAnnualEnergyConsumption())
-        .setRatingArrow("warmerScopRating", RatingClass.valueOf(form.getWarmerHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
-    }
-    else {
-      templatePopulator.removeElementById("warmerScopRating");
-    }
+    applyMultipleClimateSection(templatePopulator, form, legislationCategory);
 
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
@@ -119,6 +80,30 @@ public class AirConditionersService {
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .getPopulatedDocument();
+  }
+
+  private void applyMultipleClimateSection(TemplatePopulator templatePopulator, MultipleClimateGroupForm form, LegislationCategory legislationCategory) {
+    if (form.getColderConditions()) {
+      templatePopulator
+          .setText("colderScopKw", form.getColderHeatingDesignLoad())
+          .setText("colderScop", form.getColderScop())
+          .setText("colderScopKwhAnnum", form.getColderAnnualEnergyConsumption())
+          .setRatingArrow("colderScopRating", RatingClass.valueOf(form.getColderHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
+    }
+    else {
+      templatePopulator.removeElementById("colderScopRating");
+    }
+
+    if (form.getWarmerConditions()) {
+      templatePopulator
+          .setText("warmerScopKw", form.getWarmerHeatingDesignLoad())
+          .setText("warmerScop", form.getWarmerScop())
+          .setText("warmerScopKwhAnnum", form.getWarmerAnnualEnergyConsumption())
+          .setRatingArrow("warmerScopRating", RatingClass.valueOf(form.getWarmerHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
+    }
+    else {
+      templatePopulator.removeElementById("warmerScopRating");
+    }
   }
 
 }
