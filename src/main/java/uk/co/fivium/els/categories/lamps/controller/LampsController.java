@@ -142,7 +142,7 @@ public class LampsController extends CategoryController {
   private ModelAndView getLamps(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/lamps/lamps");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).handleLampsSubmit(null, ReverseRouter.emptyBindingResult())));
-    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with supplier's name, model identifier, rating and energy consumption");
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with supplier's name, model identification code, rating and energy consumption");
     return modelAndView;
   }
 
@@ -171,6 +171,7 @@ public class LampsController extends CategoryController {
             .collect(StreamUtils.toLinkedHashMap(Enum::name, TemplateType::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
+    super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
         LampsController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
   }

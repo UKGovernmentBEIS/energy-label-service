@@ -24,7 +24,7 @@
     <#if productGuidanceText?has_content>
       <div class="govuk-inset-text">
         ${productGuidanceText?no_esc}
-          </div>
+      </div>
     </#if>
     <#nested>
 
