@@ -2,13 +2,13 @@
   <defs>
     <style>
       #climateClass>* {
-        visibility: hidden;
+        display: none;
       }
 
       #climateClass.climateClass3 #class3,
       #climateClass.climateClass4 #class4,
-      #climateClass.climateClass5 #class5 { 
-        visibility: visible 
+      #climateClass.climateClass5 #class5 {
+        display: inline;
       }
 
       .cls-1, .cls-11, .cls-13, .cls-22, .cls-25, .cls-4, .cls-5, .cls-9 {
