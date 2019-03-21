@@ -68,19 +68,19 @@ public class ReversibleDuctlessAirConditionersForm extends StandardTemplateForm5
   private Boolean colderConditions;
 
   @FieldPrompt("Energy efficiency class for Colder heating season")
-  @NotBlank(groups = WarmerClimateGroup.class, message = "Select an energy efficiency indicator for colder climate conditions")
+  @NotBlank(groups = ColderClimateGroup.class, message = "Select an energy efficiency indicator for colder climate conditions")
   private String colderHeatingEfficiencyRating;
 
   @FieldPrompt("Design load for heating in colder climate conditions in kW")
-  @Digits(groups = WarmerClimateGroup.class, integer = 2, fraction = 1, message = "Enter the design load for colder climate conditions, up to 2 digits with an optional decimal place")
+  @Digits(groups = ColderClimateGroup.class, integer = 2, fraction = 1, message = "Enter the design load for colder climate conditions, up to 2 digits with an optional decimal place")
   private String colderHeatingDesignLoad;
 
   @FieldPrompt("Seasonal coefficient of performance in colder climate conditions (SCOP value)")
-  @Digits(groups = WarmerClimateGroup.class, integer = 1, fraction = 1, message = "Enter the SCOP value for colder climate conditions, 1 digit with an optional decimal place")
+  @Digits(groups = ColderClimateGroup.class, integer = 1, fraction = 1, message = "Enter the SCOP value for colder climate conditions, 1 digit with an optional decimal place")
   private String colderScop;
 
   @FieldPrompt("Annual energy consumption in kWh per year in colder climate conditions")
-  @Digits(groups = WarmerClimateGroup.class, integer = 4, fraction = 0,message = "Enter the annual energy consumption for colder climate conditions, up to 4 digits")
+  @Digits(groups = ColderClimateGroup.class, integer = 4, fraction = 0,message = "Enter the annual energy consumption for colder climate conditions, up to 4 digits")
   private String colderAnnualEnergyConsumption;
 
   @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re1 pW")

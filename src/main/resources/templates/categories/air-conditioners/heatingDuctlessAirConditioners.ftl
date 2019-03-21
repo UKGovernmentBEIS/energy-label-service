@@ -2,6 +2,9 @@
 
 <@common.standardProductForm "Heating-only ductless air conditioners">
 
+  <@govukTextInput.textInput path="form.soundPowerLevelIndoors"/>
+  <@govukTextInput.textInput path="form.soundPowerLevelOutdoors"/>
+
   <@govukFieldset.fieldset legendHeading="Average climate conditions">
     <@govukSelect.select path="form.averageHeatingEfficiencyRating" options=efficiencyRating/>
     <@govukTextInput.textInput path="form.averageHeatingDesignLoad"/>
@@ -26,8 +29,5 @@
       <@govukTextInput.textInput path="form.colderAnnualEnergyConsumption"/>
     </@govukRadios.radioYesNo>
   </@govukFieldset.fieldset>
-
-  <@govukTextInput.textInput path="form.soundPowerLevelIndoors"/>
-  <@govukTextInput.textInput path="form.soundPowerLevelOutdoors"/>
 
 </@common.standardProductForm>
