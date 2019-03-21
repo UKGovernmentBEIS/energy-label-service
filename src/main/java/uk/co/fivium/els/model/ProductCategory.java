@@ -4,6 +4,8 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
+
+import uk.co.fivium.els.categories.airconditioners.controller.AirConditionersController;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
@@ -28,7 +30,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "AIR_CONDITIONERS",
           "Air Conditioners",
-          "/not-yet-implemented"))
+          ReverseRouter.route(on(AirConditionersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "DISHWASHERS",
           "Dishwashers",
@@ -52,7 +54,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "REFRIGERATED_STORAGE_CABINETS",
           "Professional refrigerated storage cabinets",
-          "/not-yet-implemented"))
+          ReverseRouter.route(on(ProfessionalRefrigeratedStorageCabinetsController.class).renderProfessionalRefrigeratedStorageCabinetsForm(null))))
       .add(new CategoryItem(
           "RANGE_HOODS",
           "Range hoods",

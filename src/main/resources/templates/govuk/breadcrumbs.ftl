@@ -6,7 +6,7 @@
       <ol class="govuk-breadcrumbs__list">
       <#list crumbMap as key, value>
         <#if key?is_last>
-          <li class="govuk-breadcrumbs__list-item" aria-current="${key}">${key}</li>
+          <li class="govuk-breadcrumbs__list-item" aria-current="true">${key}</li>
         <#else>
           <li class="govuk-breadcrumbs__list-item">
           <a class="govuk-breadcrumbs__link" href="${value}">${key}</a>
