@@ -1,14 +1,13 @@
 package uk.co.fivium.els.categories.airconditioners.model;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import uk.co.fivium.els.categories.airconditioners.controller.AirConditionersController;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.mvc.ReverseRouter;
-
-import java.util.List;
-
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 public class AirConditionersCategory implements Category {
 
@@ -42,9 +41,8 @@ public class AirConditionersCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
-    return "<p>Lorem ipsum.</p>" +
-        "<p>Dolor sit amet.</p>";
+  public String getCommonProductGuidanceText() {
+    return "Energy labels for single or double duct air conditioners, heating or cooling-only air conditioners, the label should be at least 100mm x 200mm when printed";
   }
 
   @Override

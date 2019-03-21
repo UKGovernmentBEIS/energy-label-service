@@ -177,6 +177,7 @@ public class WaterHeatersController extends CategoryController {
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
+    super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(WaterHeatersController.class).renderCategories(null)));
   }
 }

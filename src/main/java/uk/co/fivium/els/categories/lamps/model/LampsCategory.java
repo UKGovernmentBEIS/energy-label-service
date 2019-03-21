@@ -44,7 +44,7 @@ public class LampsCategory implements Category {
   // Lamps are a special case where the internet label link should be on the subcategory guidance page since the subcategories are not separate products,
   // variants of the same 'type' of product
   @Override
-  public String getGuidanceText() {
+  public String getCommonProductGuidanceText() {
     return "<p>To generate an energy label for a lamp, select what you want on the label below and enter the product information on the next page.</p>" +
         "<p>Energy labels for lamps should be at least 36mm x 76mm when printed, unless the packaging is not large enough to accommodate this. This label can be displayed either in colour or in black and white.</p>" +
         "<p>You can also <a class=\"govuk-link\" href=\"lamps?mode=INTERNET\">generate a nested arrow</a> for products sold via the internet.</p>";

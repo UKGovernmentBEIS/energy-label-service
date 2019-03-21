@@ -37,9 +37,8 @@ public class DomesticOvenCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
-    return "<p>To generate a label for an electric oven or a gas oven, select your label type below and enter the relevant information on the next page.</p>" +
-        "<p>Energy labels for domestic ovens should be at least 85mm x 170mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.</p>";
+  public String getCommonProductGuidanceText() {
+    return "Energy labels for domestic ovens should be at least 85mm x 170mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.";
   }
 
   @Override

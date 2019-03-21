@@ -114,9 +114,6 @@
 
               <#if showInsetText>
                 <div class="govuk-inset-text">
-                  <#if staticProductText?has_content>
-                    ${staticProductText?no_esc}
-                  </#if>
                   <#if labelMode?has_content && labelMode=='INTERNET'>
                     <p>
                       You can also <a class="govuk-link" href="?mode=ENERGY">generate a full energy label</a>.
@@ -128,6 +125,7 @@
                   </#if>
                 </div>
             </#if>
+
 
             <#nested>
           </div>

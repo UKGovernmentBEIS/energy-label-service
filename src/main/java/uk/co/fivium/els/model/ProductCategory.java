@@ -106,7 +106,7 @@ public class ProductCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
+  public String getCommonProductGuidanceText() {
     return null;
   }
 

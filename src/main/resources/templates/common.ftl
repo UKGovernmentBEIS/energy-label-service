@@ -26,6 +26,18 @@ Includes the wrapping form element, the generate label button and optionally the
         <@govukTextInput.textInput path="form.productPriceHeightPx"/>
         <@govukRadios.radio path="form.labelOrientation" radioItems=internetLabelOrientationOptions/>
         <@govukRadios.radio path="form.labelFormat" radioItems=internetLabelFormatOptions/>
+      <#else>
+        <#if staticProductText?has_content>
+          <div class="govuk-inset-text">
+            ${staticProductText?no_esc}
+          </div>
+        </#if>
+
+        <#if commonProductGuidance?has_content>
+          <div class="govuk-inset-text">
+            ${commonProductGuidance?no_esc}
+          </div>
+        </#if>
       </#if>
 
       <@generateLabelButton/>
