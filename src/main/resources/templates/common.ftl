@@ -6,7 +6,11 @@
 </#macro>
 
 <#macro generateLabelButton>
-  <@govukButton.button buttonText="Generate label" buttonClass="govuk-button"/>
+  <@govukButton.button buttonText="Download PDF label" buttonClass="govuk-button"/>
+</#macro>
+
+<#macro generateInternetLabelButton>
+  <@govukButton.button buttonText="Download internet label" buttonClass="govuk-button"/>
 </#macro>
 
 <#-- Template for standard product forms.
@@ -26,6 +30,7 @@ Includes the wrapping form element, the generate label button and optionally the
         <@govukTextInput.textInput path="form.productPriceHeightPx"/>
         <@govukRadios.radio path="form.labelOrientation" radioItems=internetLabelOrientationOptions/>
         <@govukRadios.radio path="form.labelFormat" radioItems=internetLabelFormatOptions/>
+        <@generateInternetLabelButton/>
       <#else>
         <#if staticProductText?has_content>
           <div class="govuk-inset-text">
@@ -38,9 +43,9 @@ Includes the wrapping form element, the generate label button and optionally the
             ${commonProductGuidance?no_esc}
           </div>
         </#if>
-      </#if>
 
-      <@generateLabelButton/>
+        <@generateLabelButton/>
+      </#if>
 
     </@form.govukForm>
   </@defaultPage>

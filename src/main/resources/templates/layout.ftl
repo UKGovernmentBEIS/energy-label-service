@@ -116,7 +116,7 @@
                 <div class="govuk-inset-text">
                   <#if labelMode?has_content && labelMode=='INTERNET'>
                     <p>
-                      You can also <a class="govuk-link" href="?mode=ENERGY">generate a full energy label</a>.
+                      For a full energy label you can print you can <a class="govuk-link" href="?mode=ENERGY">generate a PDF energy label</a>.
                     </p>
                   <#else>
                     <p>
