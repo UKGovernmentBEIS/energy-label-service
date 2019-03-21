@@ -120,7 +120,7 @@
                     </p>
                   <#else>
                     <p>
-                      You can also <a class="govuk-link" href="?mode=INTERNET">generate a nested arrow</a> for products sold via the internet.
+                      Fill in this form to get an energy label you can print. If the product will be shown on a website, you must also <a class="govuk-link" href="?mode=INTERNET">get an online version of the label</a>.
                     </p>
                   </#if>
                 </div>

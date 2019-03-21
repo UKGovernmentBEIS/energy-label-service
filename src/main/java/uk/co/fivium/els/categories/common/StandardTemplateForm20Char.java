@@ -15,9 +15,9 @@ public class StandardTemplateForm20Char extends InternetLabellingForm {
   @Length(max = 20, message = "Supplier name or trade mark must be 20 characters or less")
   private String supplierName;
 
-  @FieldPrompt("Supplier's model identifier")
-  @NotBlank(message = "Enter a supplier model identifier")
-  @Length(max = 20, message = "Supplier model identifier must be 20 characters or less")
+  @FieldPrompt("Supplier's model identification code")
+  @NotBlank(message = "Enter a supplier model identification code")
+  @Length(max = 20, message = "Supplier model identification code must be 20 characters or less")
   private String modelName;
 
   public String getSupplierName() {

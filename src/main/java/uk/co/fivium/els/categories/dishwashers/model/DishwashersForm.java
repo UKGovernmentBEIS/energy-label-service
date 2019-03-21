@@ -25,7 +25,7 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   @Digits(integer = 4, fraction = 0, message = "Enter an annual water consumption, up to 4 digits long")
   private String annualWaterConsumption;
 
-  @FieldPrompt("Rated capacity in standard place settings, for the standard cleaning cycle")
+  @FieldPrompt("Rated capacity for the standard cleaning cycle")
   @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long")
   private String capacity;
 

@@ -22,20 +22,20 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
   private String annualEnergyConsumption;
 
-  @FieldPrompt("Does this model have at least one refrigerator compartment?")
-  @NotNull
+  @FieldPrompt("Does the model have any fridge compartments? <br /> A fridge compartment has no star rating and a temperature above minus 6 degrees centigrade")
+  @NotNull(message = "Specify if the model has any fridge compartments")
   private Boolean nonRatedCompartment;
 
-  @FieldPrompt("Sum of the storage volumes of all compartments that do not merit a star rating (i.e. operating temperature over minus 6°C) in litres")
-  @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that do not merit a star rating, up to 3 digits long")
+  @FieldPrompt("Total storage volume of fridge compartments in litres (l)")
+  @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total storage volume of fridge compartments in litres up to 3 digits long")
   private String nonRatedVolume;
 
-  @FieldPrompt("Does this model have at least one freezer compartment?")
-  @NotNull
+  @FieldPrompt("Does the model have any freezer compartments? <br /> A freezer compartment has a star rating between 1 and 4, and a temperature of minus 6 degrees centigrade or below")
+  @NotNull(message = "Specify if the model has any freezer compartments")
   private Boolean ratedCompartment;
 
-  @FieldPrompt("Sum of the storage volumes of all frozen-food storage compartments that merit a star rating (i.e. operating temperature less than or equal to minus 6°C) in litres")
-  @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that merit a star rating, up to 3 digits long")
+  @FieldPrompt("Total storage volume of freezer compartments in litres (l)")
+  @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of freezer compartments in litres, up to 3 digits long")
   private String ratedVolume;
 
   @FieldPrompt("Star rating of the compartments")

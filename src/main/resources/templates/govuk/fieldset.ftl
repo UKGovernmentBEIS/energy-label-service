@@ -8,15 +8,15 @@
     <#if legendHeading?has_content>
       <#if legendSize="h1">
         <h1 class="govuk-fieldset__heading">
-        ${legendHeading} <#if !mandatory>(optional)</#if>
+        ${legendHeading?no_esc} <#if !mandatory>(optional)</#if>
         </h1>
       <#elseif legendSize="h2">
         <h2 class="govuk-fieldset__heading">
-        ${legendHeading} <#if !mandatory>(optional)</#if>
+        ${legendHeading?no_esc} <#if !mandatory>(optional)</#if>
         </h2>
       <#elseif legendSize="h3">
         <h3 class="govuk-fieldset__heading">
-        ${legendHeading} <#if !mandatory>(optional)</#if>
+        ${legendHeading?no_esc} <#if !mandatory>(optional)</#if>
         </h3>
       </#if>
     </#if>
