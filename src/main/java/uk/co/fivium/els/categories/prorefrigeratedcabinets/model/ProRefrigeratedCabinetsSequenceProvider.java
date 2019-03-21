@@ -1,18 +1,17 @@
-package uk.co.fivium.els.categories.professionalrefrigeratedstoragecabinets.model;
+package uk.co.fivium.els.categories.prorefrigeratedcabinets.model;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerGroup;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgeGroup;
-import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfessionalRefrigeratedStorageCabinetsSequenceProvider implements DefaultGroupSequenceProvider<ProfessionalRefrigeratedStorageCabinetsForm> {
+public class ProRefrigeratedCabinetsSequenceProvider implements DefaultGroupSequenceProvider<ProRefrigeratedCabinetsForm> {
 
   @Override
-  public List<Class<?>> getValidationGroups(ProfessionalRefrigeratedStorageCabinetsForm form) {
+  public List<Class<?>> getValidationGroups(ProRefrigeratedCabinetsForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
     if (form != null) {
@@ -24,7 +23,7 @@ public class ProfessionalRefrigeratedStorageCabinetsSequenceProvider implements 
       }
     }
 
-    sequence.add(ProfessionalRefrigeratedStorageCabinetsForm.class);
+    sequence.add(ProRefrigeratedCabinetsForm.class);
     return sequence;
   }
 }

@@ -78,7 +78,7 @@ public class AirConditionersController extends CategoryController {
       return getCoolingDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "cooling-only-air-conditioner");
+      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "cooling-only-air-conditioners");
     }
   }
 
@@ -106,7 +106,7 @@ public class AirConditionersController extends CategoryController {
       return getHeatingDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getAverageHeatingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "heating-only-air-conditioner");
+      return internetLabelService.generateInternetLabel(form, form.getAverageHeatingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "heating-only-air-conditioners");
     }
   }
 
@@ -134,7 +134,7 @@ public class AirConditionersController extends CategoryController {
       return getReversibleDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "reversible-air-conditioner");
+      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "reversible-air-conditioners");
     }
   }
 

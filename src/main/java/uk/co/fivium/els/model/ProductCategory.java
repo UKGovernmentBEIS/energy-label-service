@@ -10,7 +10,7 @@ import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
 import uk.co.fivium.els.categories.domesticovens.controller.DomesticOvensController;
-import uk.co.fivium.els.categories.professionalrefrigeratedstoragecabinets.controller.ProfessionalRefrigeratedStorageCabinetsController;
+import uk.co.fivium.els.categories.prorefrigeratedcabinets.controller.ProRefrigeratedCabinetsController;
 import uk.co.fivium.els.categories.rangehoods.controller.RangeHoodsController;
 import uk.co.fivium.els.categories.refrigeratingappliances.controller.RefrigeratingAppliancesController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
@@ -54,7 +54,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "REFRIGERATED_STORAGE_CABINETS",
           "Professional refrigerated storage cabinets",
-          ReverseRouter.route(on(ProfessionalRefrigeratedStorageCabinetsController.class).renderProfessionalRefrigeratedStorageCabinetsForm(null))))
+          ReverseRouter.route(on(ProRefrigeratedCabinetsController.class).renderProfessionalRefrigeratedStorageCabinetsForm(null))))
       .add(new CategoryItem(
           "RANGE_HOODS",
           "Range hoods",

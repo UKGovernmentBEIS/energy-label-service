@@ -1,11 +1,11 @@
-package uk.co.fivium.els.categories.professionalrefrigeratedstoragecabinets.service;
+package uk.co.fivium.els.categories.prorefrigeratedcabinets.service;
 
 import com.google.common.collect.ImmutableList;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.professionalrefrigeratedstoragecabinets.model.ClimateClass;
-import uk.co.fivium.els.categories.professionalrefrigeratedstoragecabinets.model.ProfessionalRefrigeratedStorageCabinetsForm;
+import uk.co.fivium.els.categories.prorefrigeratedcabinets.model.ClimateClass;
+import uk.co.fivium.els.categories.prorefrigeratedcabinets.model.ProRefrigeratedCabinetsForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -16,7 +16,7 @@ import uk.co.fivium.els.service.TemplatePopulator;
 import java.util.List;
 
 @Service
-public class ProfessionalRefrigeratedStorageCabinetsService {
+public class ProRefrigeratedCabinetsService {
 
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JUL2016 = SelectableLegislationCategory.of(
       "JUN2018",
@@ -35,14 +35,14 @@ public class ProfessionalRefrigeratedStorageCabinetsService {
   private final TemplateParserService templateParserService;
 
   @Autowired
-  public ProfessionalRefrigeratedStorageCabinetsService(TemplateParserService templateParserService) {
+  public ProRefrigeratedCabinetsService(TemplateParserService templateParserService) {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(ProfessionalRefrigeratedStorageCabinetsForm form, LegislationCategory legislationCategory) {
+  public Document generateHtml(ProRefrigeratedCabinetsForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
-    if (legislationCategory == ProfessionalRefrigeratedStorageCabinetsService.LEGISLATION_CATEGORY_JUL2016) {
+    if (legislationCategory == ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_JUL2016) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/professional-refrigerated-storage-cabinets/professional-refrigerated-storage-cabinets-2016.svg"));
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/professional-refrigerated-storage-cabinets/professional-refrigerated-storage-cabinets-2019.svg"));
