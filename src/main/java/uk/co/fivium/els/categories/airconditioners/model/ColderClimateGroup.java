@@ -1,3 +1,5 @@
 package uk.co.fivium.els.categories.airconditioners.model;
 
-public interface ColderClimateGroup { }
+import javax.validation.groups.Default;
+
+public interface ColderClimateGroup extends Default { }
