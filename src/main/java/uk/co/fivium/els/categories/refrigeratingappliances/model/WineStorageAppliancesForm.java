@@ -2,13 +2,17 @@ package uk.co.fivium.els.categories.refrigeratingappliances.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class WineStorageAppliancesForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class")
-  @NotBlank(message = "Select an energy efficiency class")
+  @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")

@@ -11,12 +11,15 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerStarRating;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.RefrigeratingAppliancesCategory;
@@ -39,13 +42,18 @@ public class RefrigeratingAppliancesController extends CategoryController {
   private final PdfRenderer pdfRenderer;
   private final RefrigeratingAppliancesService householdRefrigeratingAppliancesService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
   @Autowired
-  public RefrigeratingAppliancesController(PdfRenderer pdfRenderer, RefrigeratingAppliancesService householdRefrigeratingAppliancesService, BreadcrumbService breadcrumbService) {
+  public RefrigeratingAppliancesController(PdfRenderer pdfRenderer,
+                                           RefrigeratingAppliancesService householdRefrigeratingAppliancesService,
+                                           BreadcrumbService breadcrumbService,
+                                           InternetLabelService internetLabelService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, RefrigeratingAppliancesCategory.GET, RefrigeratingAppliancesController.class);
     this.pdfRenderer = pdfRenderer;
     this.householdRefrigeratingAppliancesService = householdRefrigeratingAppliancesService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
   @GetMapping("/household-fridges-and-freezers")
@@ -65,6 +73,17 @@ public class RefrigeratingAppliancesController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/household-fridges-and-freezers", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelFridgesFreezersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") FridgesFreezersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getFridgesFreezers(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, "household-refrigerating-appliances");
+    }
+  }
+
   @GetMapping("/wine-storage-appliances")
   public ModelAndView renderWineStorageAppliances(@ModelAttribute("form") WineStorageAppliancesForm form) {
     return getWineStorageAppliances(Collections.emptyList());
@@ -79,6 +98,17 @@ public class RefrigeratingAppliancesController extends CategoryController {
     else {
       Resource pdf = pdfRenderer.render(householdRefrigeratingAppliancesService.generateHtml(form));
       return ControllerUtils.serveResource(pdf, "wine-storage-appliances-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/wine-storage-appliances", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelWineStorageAppliancesSubmit(@Valid @ModelAttribute("form") WineStorageAppliancesForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getWineStorageAppliances(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, "wine-storage-appliances");
     }
   }
 
