@@ -1,15 +1,13 @@
 package uk.co.fivium.els.categories.domesticovens.model;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.domesticovens.controller.DomesticOvensController;
-import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
 import uk.co.fivium.els.mvc.ReverseRouter;
-
-import java.util.List;
-
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 public class DomesticOvenCategory implements Category {
 

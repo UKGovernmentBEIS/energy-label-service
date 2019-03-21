@@ -10,7 +10,7 @@
 
     <@govukTextInput.textInput path="form.soundPowerLevelOutdoors"/>
 
-    <@govukFieldset.fieldset legendHeading="The total rated heat output for low temperature application, in kW">
+    <@govukFieldset.fieldset legendHeading="The total rated heat output for low temperature application, in kW" showInInternetLabelling=false>
       <@govukTextInput.textInput path="form.lowTempColderHeatOutput"/>
       <@govukTextInput.textInput path="form.lowTempAverageHeatOutput"/>
       <@govukTextInput.textInput path="form.lowTempWarmerHeatOutput"/>

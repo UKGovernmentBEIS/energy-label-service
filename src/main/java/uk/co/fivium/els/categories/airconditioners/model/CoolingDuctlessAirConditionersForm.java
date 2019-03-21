@@ -1,15 +1,18 @@
 package uk.co.fivium.els.categories.airconditioners.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
+import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class CoolingDuctlessAirConditionersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Energy efficiency class for cooling")
-  @NotBlank(message = "Select an energy efficiency indicator for cooling")
+  @NotBlank(message = "Select an energy efficiency indicator for cooling", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String coolingEfficiencyRating;
 
   @FieldPrompt("Cooling mode: design load in kW")

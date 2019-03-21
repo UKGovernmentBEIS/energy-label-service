@@ -2,14 +2,18 @@ package uk.co.fivium.els.categories.airconditioners.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
 @GroupSequenceProvider(ReversibleDuctlessAirConditionersFormSequenceProvider.class)
 public class ReversibleDuctlessAirConditionersForm extends MultipleClimateGroupForm {
 
   @FieldPrompt("Energy efficiency class for cooling")
-  @NotBlank(message = "Select an energy efficiency indicator for cooling")
+  @NotBlank(message = "Select an energy efficiency indicator for cooling", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String coolingEfficiencyRating;
 
   @FieldPrompt("Cooling mode: design load in kW")

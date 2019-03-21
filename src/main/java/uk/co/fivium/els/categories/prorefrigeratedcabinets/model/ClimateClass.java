@@ -1,4 +1,4 @@
-package uk.co.fivium.els.categories.professionalrefrigeratedstoragecabinets.model;
+package uk.co.fivium.els.categories.prorefrigeratedcabinets.model;
 
 public enum ClimateClass {
   THREE("3", "climateClass3"),

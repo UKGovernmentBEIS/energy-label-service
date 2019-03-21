@@ -1,10 +1,12 @@
 package uk.co.fivium.els.categories.dishwashers.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
+import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
 @StaticProductText("<p>To generate an energy label for a domestic dishwasher, enter the product information into the form below.</p>" +
@@ -12,7 +14,8 @@ import uk.co.fivium.els.model.meta.StaticProductText;
 public class DishwashersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class indicator")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")

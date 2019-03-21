@@ -1,4 +1,4 @@
-package uk.co.fivium.els.categories.professionalrefrigeratedstoragecabinets.model;
+package uk.co.fivium.els.categories.prorefrigeratedcabinets.model;
 
 import javax.validation.groups.Default;
 

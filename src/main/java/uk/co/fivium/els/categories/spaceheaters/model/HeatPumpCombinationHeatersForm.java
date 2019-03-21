@@ -1,17 +1,20 @@
 package uk.co.fivium.els.categories.spaceheaters.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.groups.Default;
+import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class HeatPumpCombinationHeatersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market")
+  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String applicableLegislation;
 
   @FieldPrompt("Declared load profile")
@@ -19,7 +22,8 @@ public class HeatPumpCombinationHeatersForm extends StandardTemplateForm50Char {
   private String declaredLoadProfile;
 
   @FieldPrompt("The seasonal space heating energy efficiency class")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String spaceHeatingEfficiencyRating;
 
   @FieldPrompt("The water heating energy efficiency class")

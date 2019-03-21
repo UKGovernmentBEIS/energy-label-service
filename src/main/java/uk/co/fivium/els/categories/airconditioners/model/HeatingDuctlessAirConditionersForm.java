@@ -2,14 +2,18 @@ package uk.co.fivium.els.categories.airconditioners.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
 @GroupSequenceProvider(HeatingDuctlessAirConditionersFormSequenceProvider.class)
 public class HeatingDuctlessAirConditionersForm extends MultipleClimateGroupForm {
 
   @FieldPrompt("Energy efficiency class for Average heating season")
-  @NotBlank(message = "Select an energy efficiency indicator for average climate conditions")
+  @NotBlank(message = "Select an energy efficiency indicator for average climate conditions", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String averageHeatingEfficiencyRating;
 
   @FieldPrompt("Design load for heating in average climate conditions in kW")
