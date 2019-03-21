@@ -19,11 +19,11 @@ import java.util.List;
 public class ProfessionalRefrigeratedStorageCabinetsService {
 
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JUL2016 = SelectableLegislationCategory.of(
-      "JAN2018",
+      "JUN2018",
       "From 1 July 2016",
       RatingClassRange.of(RatingClass.A, RatingClass.G));
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JUL2019 = SelectableLegislationCategory.of(
-      "JAN2020",
+      "JUN2020",
       "From 1 July 2019",
       RatingClassRange.of(RatingClass.APPP, RatingClass.G));
 
