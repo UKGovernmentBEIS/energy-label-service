@@ -1,4 +1,4 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105mm" height="200mm" viewBox="0 0 297.64001 566.92999" data-rating-increment="17.6875" data-supplier-model-chars-per-row="25">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105.00078mm" height="200.0003mm" viewBox="0 0 297.64001 566.92999" data-rating-increment="22.5333" data-supplier-model-chars-per-row="25">
   <defs>
     <style>
       #combinationBoiler,
@@ -11,7 +11,7 @@
         display: inline;
       }
 
-      .cls-1, .cls-3, .cls-39, .cls-4, .cls-52 {
+      .cls-1, .cls-3, .cls-39, .cls-4, .cls-55 {
         fill: none;
       }
 
@@ -19,7 +19,7 @@
         clip-path: url(#clip-path);
       }
 
-      .cls-3, .cls-39, .cls-52 {
+      .cls-3, .cls-39, .cls-55 {
         stroke: #00aeef;
       }
 
@@ -60,7 +60,7 @@
         clip-path: url(#clip-path-6);
       }
 
-      .cls-12, .cls-47, .cls-48, .cls-50, .cls-51, .cls-59, .cls-61, .cls-62 {
+      .cls-12, .cls-47, .cls-48, .cls-50, .cls-51, .cls-53, .cls-62, .cls-64, .cls-65 {
         fill: #fff;
       }
 
@@ -156,7 +156,7 @@
         fill: #034ea2;
       }
 
-      .cls-36, .cls-56 {
+      .cls-36, .cls-59 {
         fill: #00aeef;
       }
 
@@ -200,7 +200,7 @@
         font-size: 19px;
       }
 
-      .cls-47, .cls-48, .cls-50, .cls-51, .cls-53, .cls-61, .cls-63 {
+      .cls-47, .cls-48, .cls-50, .cls-51, .cls-53, .cls-54, .cls-56, .cls-64, .cls-66 {
         font-family: Calibri-Bold, Calibri;
         font-weight: 700;
       }
@@ -214,63 +214,71 @@
       }
 
       .cls-50 {
-        font-size: 14px;
+        font-size: 16px;
+      }
+
+      .cls-51, .cls-53 {
+        font-size: 9.328px;
       }
 
       .cls-51 {
-        font-size: 8.162px;
+        letter-spacing: 0.01em;
       }
 
       .cls-52 {
-        stroke-width: 2px;
-      }
-
-      .cls-53 {
-        font-size: 10px;
-      }
-
-      .cls-53, .cls-54, .cls-60, .cls-63, .cls-64 {
-        fill: #231f20;
+        letter-spacing: -0.00005em;
       }
 
       .cls-54 {
-        font-size: 30px;
+        font-size: 10px;
       }
 
-      .cls-54, .cls-62, .cls-64 {
-        font-family: Calibri;
+      .cls-54, .cls-56, .cls-57, .cls-63, .cls-66, .cls-67 {
+        fill: #231f20;
       }
 
       .cls-55 {
-        clip-path: url(#clip-path-60);
+        stroke-width: 2px;
       }
 
-      .cls-56, .cls-59 {
-        fill-rule: evenodd;
+      .cls-56, .cls-57 {
+        font-size: 30px;
       }
 
-      .cls-57 {
-        clip-path: url(#clip-path-61);
+      .cls-57, .cls-65, .cls-67 {
+        font-family: Calibri;
       }
 
       .cls-58 {
-        fill: #00b9f2;
+        clip-path: url(#clip-path-59);
+      }
+
+      .cls-59, .cls-62 {
+        fill-rule: evenodd;
+      }
+
+      .cls-60 {
+        clip-path: url(#clip-path-60);
       }
 
       .cls-61 {
-        font-size: 24px;
-      }
-
-      .cls-62 {
-        font-size: 15px;
-      }
-
-      .cls-63 {
-        font-size: 45px;
+        fill: #00b9f2;
       }
 
       .cls-64 {
-        font-size: 11px;
+        font-size: 24px;
+      }
+
+      .cls-65 {
+        font-size: 15px;
+      }
+
+      .cls-66 {
+        font-size: 45px;
+      }
+
+      .cls-67 {
+        font-size: 11.03156px;
       }
     </style>
     <clipPath id="clip-path">
@@ -355,16 +363,16 @@
       <rect class="cls-1" x="26.964" y="26.36298" width="243.77999" height="48.18903"/>
     </clipPath>
     <clipPath id="clip-path-58">
-      <rect class="cls-1" x="26.513" y="175.11798" width="135.912" height="174.01601"/>
+      <rect class="cls-1" x="26.513" y="175.11899" width="145.089" height="155.47301"/>
     </clipPath>
-    <clipPath id="clip-path-60">
+    <clipPath id="clip-path-59">
       <rect class="cls-1" x="47.364" y="470.771" width="29.822" height="27.617"/>
     </clipPath>
-    <clipPath id="clip-path-61">
+    <clipPath id="clip-path-60">
       <rect class="cls-1" x="123.908" y="466.82199" width="36.061" height="35.124"/>
     </clipPath>
   </defs>
-  <title>solid-fuel-boilers-2017</title>
+  <title>solid-fuel-boilers-2019</title>
   <g class="cls-2">
     <path class="cls-3" d="M24.0691,16.16577s-7.904,0-7.904,7.90405v518.791s0,7.904,7.904,7.904h249.5s7.904,0,7.904-7.904V24.06982s0-7.90405-7.904-7.90405Z"/>
     <line class="cls-4" x1="33.0593" y1="123.7561" x2="29.1123" y2="123.7561"/>
@@ -628,85 +636,81 @@
     <path class="cls-36" d="M242.38159,63.64642l-.733,2.444h-1.606l2.731-8.623h1.986l2.769,8.623h-1.669l-.772-2.444Zm2.441-1.189-.67-2.124c-.165-.525-.304-1.113-.431-1.612h-.025c-.126.499-.253,1.1-.404,1.612l-.658,2.124Z"/>
   </g>
   <line class="cls-39" x1="26.5135" y1="112.0929" x2="271.18149" y2="112.0929"/>
-  <rect class="cls-12" x="26.513" y="175.11798" width="135.912" height="174.01601"/>
-  <polygon class="cls-40" points="26.513 210.226 26.513 224.383 105.301 224.383 112.313 217.304 105.301 210.226 26.513 210.226"/>
-  <polygon class="cls-41" points="26.513 192.504 26.513 206.661 97.137 206.661 104.146 199.582 97.137 192.504 26.513 192.504"/>
-  <polygon class="cls-42" points="26.513 175.119 26.513 188.956 88.975 188.956 95.985 181.879 89.29 175.119 26.513 175.119"/>
-  <polygon class="cls-37" points="26.513 227.921 26.513 242.077 113.655 242.077 120.675 234.998 113.655 227.921 26.513 227.921"/>
-  <polygon class="cls-43" points="26.513 245.645 26.513 259.802 121.815 259.802 128.836 252.723 121.815 245.645 26.513 245.645"/>
-  <polygon class="cls-44" points="26.513 263.336 26.513 277.492 129.972 277.492 137 270.412 129.972 263.336 26.513 263.336"/>
-  <polygon class="cls-45" points="26.513 281.033 26.513 295.186 138.133 295.186 145.159 288.112 138.133 281.033 26.513 281.033"/>
-  <polygon class="cls-45" points="26.513 298.73 26.513 312.888 146.289 312.888 153.322 305.81 146.289 298.73 26.513 298.73"/>
-  <polygon class="cls-45" points="26.513 316.432 26.513 330.588 154.032 330.588 161.521 323.51 154.032 316.432 26.513 316.432"/>
-  <rect class="cls-1" y="0.00098" width="297.638" height="566.92902"/>
+  <rect class="cls-12" x="26.513" y="175.11899" width="145.089" height="155.47301"/>
+  <polygon class="cls-40" points="26.513 220.315 26.513 240.007 114.33 240.007 124.083 230.161 114.33 220.315 26.513 220.315"/>
+  <polygon class="cls-41" points="26.513 197.788 26.513 217.48 102.972 217.48 112.724 207.634 102.972 197.788 26.513 197.788"/>
+  <polygon class="cls-42" points="26.513 175.262 26.513 194.953 91.618 194.953 101.369 185.108 91.618 175.262 26.513 175.262"/>
+  <polygon class="cls-37" points="26.513 242.843 26.513 262.534 125.949 262.534 135.714 252.689 125.949 242.843 26.513 242.843"/>
+  <polygon class="cls-43" points="26.513 265.369 26.513 285.062 137.298 285.062 147.066 275.216 137.298 265.369 26.513 265.369"/>
+  <polygon class="cls-44" points="26.513 287.896 26.513 307.586 148.648 307.586 158.419 297.74 148.648 287.896 26.513 287.896"/>
+  <polygon class="cls-45" points="26.513 310.42 26.513 330.11 159.997 330.11 169.771 320.268 159.997 310.42 26.513 310.42"/>
   <g class="cls-46">
-    <text class="cls-47" transform="translate(203.81543 167.15753)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-48" transform="translate(220.48828 162.1004)"><tspan class="cls-49">+</tspan><tspan x="6.60449" y="0">+</tspan></text>
-    <text class="cls-48" transform="translate(233.72266 162.1004)">+</text>
-    <text class="cls-47" transform="translate(203.95801 190.65948)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-48" transform="translate(219.99902 185.60236)">+</text>
-    <text class="cls-48" transform="translate(226.61621 185.60236)">+</text>
-    <text class="cls-47" transform="translate(203.95801 213.91827)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-47" transform="translate(203.59668 236.62335)"><tspan xml:space="preserve"> A</tspan></text>
-    <text class="cls-47" transform="translate(203.78711 260.25909)"><tspan xml:space="preserve"> B</tspan></text>
-    <text class="cls-47" transform="translate(203.78711 283.51544)"><tspan xml:space="preserve"> C</tspan></text>
-    <text class="cls-47" transform="translate(203.42578 307.01788)"><tspan xml:space="preserve"> D</tspan></text>
-    <text class="cls-47" transform="translate(203.42578 330.16046)"><tspan xml:space="preserve"> E</tspan></text>
-    <text class="cls-47" transform="translate(206.92188 353.56866)">F</text>
-    <text class="cls-47" transform="translate(206.92188 376.99542)">G</text>
-    <text class="cls-48" transform="translate(219.99902 208.86115)">+</text>
+    <text class="cls-47" transform="translate(234.52441 167.63019)"><tspan xml:space="preserve"> A</tspan></text>
+    <text class="cls-48" transform="translate(251.19727 162.57306)"><tspan class="cls-49">+</tspan><tspan x="6.60449" y="0">+</tspan></text>
+    <text class="cls-48" transform="translate(264.43164 162.57306)">+</text>
+    <text class="cls-47" transform="translate(234.66699 191.13214)"><tspan xml:space="preserve"> A</tspan></text>
+    <text class="cls-48" transform="translate(250.70703 186.07501)">+</text>
+    <text class="cls-48" transform="translate(257.32422 186.07501)">+</text>
+    <text class="cls-47" transform="translate(234.66699 214.39093)"><tspan xml:space="preserve"> A</tspan></text>
+    <text class="cls-47" transform="translate(234.30566 237.09601)"><tspan xml:space="preserve"> A</tspan></text>
+    <text class="cls-47" transform="translate(234.49609 260.73175)"><tspan xml:space="preserve"> B</tspan></text>
+    <text class="cls-47" transform="translate(234.49609 283.9881)"><tspan xml:space="preserve"> C</tspan></text>
+    <text class="cls-47" transform="translate(234.13477 307.49054)"><tspan xml:space="preserve"> D</tspan></text>
+    <text class="cls-47" transform="translate(234.13477 330.63312)"><tspan xml:space="preserve"> E</tspan></text>
+    <text class="cls-47" transform="translate(237.63086 354.04132)">F</text>
+    <text class="cls-47" transform="translate(237.63086 377.46808)">G</text>
+    <text class="cls-48" transform="translate(250.70703 209.3338)">+</text>
   </g>
-  <text class="cls-50" transform="translate(33.9873 186.53253)"><tspan xml:space="preserve"> A</tspan></text>
-  <text class="cls-51" transform="translate(45.63574 181.87042)">+</text>
-  <text class="cls-51" transform="translate(49.79004 181.87042)">+</text>
-  <text class="cls-50" transform="translate(33.9873 204.18243)"><tspan xml:space="preserve"> A</tspan></text>
-  <text class="cls-51" transform="translate(45.63574 199.52032)">+</text>
-  <text class="cls-50" transform="translate(33.9873 223.83234)"> </text>
-  <text class="cls-50" transform="translate(37.15137 221.83038)">A</text>
-  <text class="cls-50" transform="translate(33.9873 239.48419)"><tspan xml:space="preserve"> B</tspan></text>
-  <text class="cls-50" transform="translate(33.9873 257.13849)"><tspan xml:space="preserve"> C</tspan></text>
-  <text class="cls-50" transform="translate(33.9873 274.7923)"><tspan xml:space="preserve"> D</tspan></text>
-  <text class="cls-50" transform="translate(33.9873 292.44659)"><tspan xml:space="preserve"> E</tspan></text>
-  <text class="cls-50" transform="translate(33.9873 310.09991)"><tspan xml:space="preserve"> F</tspan></text>
-  <text class="cls-50" transform="translate(33.9873 327.75421)"><tspan xml:space="preserve"> G</tspan></text>
-  <g class="cls-2">
-    <path class="cls-52" d="M115.2952,348.3237s-7.904,0-7.904,7.904v69.058s0,7.904,7.904,7.904h147.61s7.904,0,7.904-7.904v-69.058s0-7.904-7.904-7.904Z"/>
-  </g>
-  <text class="cls-53" transform="translate(26.89258 541.54816)">2017</text>
-  <text class="cls-53" transform="translate(226.45215 541.54816)">2015/1187</text>
-  <rect class="cls-1" y="0.00098" width="297.638" height="566.92902"/>
+  <text class="cls-50" transform="translate(33.34863 192.15851)"> </text>
+  <text class="cls-50" transform="translate(36.96484 190.15851)">A</text>
+  <text class="cls-51" transform="translate(46.66113 184.83038)">+<tspan class="cls-52" x="4.73926" y="0">+</tspan></text>
+  <text class="cls-53" transform="translate(56.15723 184.83038)">+</text>
+  <text class="cls-50" transform="translate(33.34863 214.65851)"> </text>
+  <text class="cls-50" transform="translate(36.96484 212.65851)">A</text>
+  <text class="cls-53" transform="translate(46.66113 207.33038)">+</text>
+  <text class="cls-53" transform="translate(51.40918 207.33038)">+</text>
+  <text class="cls-50" transform="translate(33.34863 237.15851)"> </text>
+  <text class="cls-50" transform="translate(36.96484 235.15851)">A</text>
+  <text class="cls-53" transform="translate(46.66113 229.83038)">+</text>
+  <text class="cls-50" transform="translate(33.34863 257.65851)"><tspan xml:space="preserve"> A</tspan></text>
+  <text class="cls-50" transform="translate(33.34863 280.1546)"><tspan xml:space="preserve"> B</tspan></text>
+  <text class="cls-50" transform="translate(33.34863 302.6507)"><tspan xml:space="preserve"> C</tspan></text>
+  <text class="cls-50" transform="translate(33.34863 325.14679)"><tspan xml:space="preserve"> D</tspan></text>
+  <text class="cls-54" transform="translate(26.89258 541.54816)">2019</text>
+  <text class="cls-54" transform="translate(226.45215 541.54816)">2015/1187</text>
+  <path class="cls-55" d="M115.2952,348.3237s-7.904,0-7.904,7.904v69.058s0,7.904,7.904,7.904h147.61s7.904,0,7.904-7.904v-69.058s0-7.904-7.904-7.904Z"/>
+  <text class="cls-56" transform="translate(189.51563 404.88116)"> </text>
   <g id="combinationBoiler">
     <rect class="cls-36" x="53.64091" y="473.08839" width="15.83417" height="1.97302" transform="translate(-2.16251 0.28582) rotate(-0.26144)"/>
-    <g class="cls-55">
-      <path class="cls-56" d="M56.1573,474.07449a2.6162,2.6162,0,0,0-2.597-2.639,2.58924,2.58924,0,0,0-2.597,2.639,2.617,2.617,0,0,0,2.597,2.64,2.64505,2.64505,0,0,0,2.597-2.64"/>
-      <path class="cls-56" d="M72.1525,474.07449a2.61683,2.61683,0,0,0-2.597-2.639,2.58923,2.58923,0,0,0-2.597,2.639,2.617,2.617,0,0,0,2.597,2.64,2.64572,2.64572,0,0,0,2.597-2.64"/>
-      <path class="cls-56" d="M64.8381,474.07449a3.28714,3.28714,0,0,0-3.306-3.305,3.24345,3.24345,0,0,0-3.253,3.305,3.27746,3.27746,0,0,0,3.253,3.306,3.322,3.322,0,0,0,3.306-3.306"/>
+    <g class="cls-58">
+      <path class="cls-59" d="M56.1573,474.07449a2.6162,2.6162,0,0,0-2.597-2.639,2.58924,2.58924,0,0,0-2.597,2.639,2.617,2.617,0,0,0,2.597,2.64,2.64505,2.64505,0,0,0,2.597-2.64"/>
+      <path class="cls-59" d="M72.1525,474.07449a2.61683,2.61683,0,0,0-2.597-2.639,2.58923,2.58923,0,0,0-2.597,2.639,2.617,2.617,0,0,0,2.597,2.64,2.64572,2.64572,0,0,0,2.597-2.64"/>
+      <path class="cls-59" d="M64.8381,474.07449a3.28714,3.28714,0,0,0-3.306-3.305,3.24345,3.24345,0,0,0-3.253,3.305,3.27746,3.27746,0,0,0,3.253,3.306,3.322,3.322,0,0,0,3.306-3.306"/>
       <path class="cls-36" d="M64.8367,474.07449a3.28754,3.28754,0,0,0-3.305-3.305,3.24345,3.24345,0,0,0-3.253,3.305,3.27746,3.27746,0,0,0,3.253,3.306,3.32239,3.32239,0,0,0,3.305-3.306"/>
       <rect class="cls-36" x="60.412" y="474.12699" width="2.291" height="8.477"/>
-      <path class="cls-56" d="M68.5705,487.4259a7.0192,7.0192,0,1,0-7.036,7.314,7.15427,7.15427,0,0,0,7.036-7.314"/>
-      <path class="cls-56" d="M67.1977,491.72219s3.786.514,3.786,1.919v4.746h6.202l-.017-5.705c-.528-6-3.509-6.96-8.798-8.637l-1.635-.472.036.738-19.408-.107v7.358l19.834-.16v.32"/>
+      <path class="cls-59" d="M68.5705,487.4259a7.0192,7.0192,0,1,0-7.036,7.314,7.15427,7.15427,0,0,0,7.036-7.314"/>
+      <path class="cls-59" d="M67.1977,491.72219s3.786.514,3.786,1.919v4.746h6.202l-.017-5.705c-.528-6-3.509-6.96-8.798-8.637l-1.635-.472.036.738-19.408-.107v7.358l19.834-.16v.32"/>
     </g>
-    <path class="cls-52" d="M35.8024,442.26859s-7.904,0-7.904,7.904v69.058s0,7.904,7.904,7.904h53.464s7.905,0,7.905-7.904v-69.058s0-7.904-7.905-7.904Z"/>
+    <path class="cls-55" d="M35.8024,442.26859s-7.904,0-7.904,7.904v69.058s0,7.904,7.904,7.904h53.464s7.905,0,7.905-7.904v-69.058s0-7.904-7.905-7.904Z"/>
   </g>
-  <rect class="cls-1" y="0.00098" width="297.638" height="566.92902"/>
   <g id="cogenerationBoiler">
-    <path class="cls-52" d="M115.2952,442.26859s-7.904,0-7.904,7.904v69.058s0,7.904,7.904,7.904h53.464s7.905,0,7.905-7.904v-69.058s0-7.904-7.905-7.904Z"/>
-    <g class="cls-57">
-      <path class="cls-58" d="M159.97031,484.71209c0,9.518-8.072,17.234-18.031,17.234s-18.031-7.716-18.031-17.234c0-9.517,8.072-17.234,18.031-17.234s18.031,7.717,18.031,17.234"/>
-      <path class="cls-59" d="M139.4935,466.8223h6.522c-2.115,4.877-4.275,9.708-6.147,14.831,2.847-1.456,5.62-2.987,8.497-4.414-1.595,5.991-3.243,11.928-4.774,17.984.912-.264,1.54-.817,2.499-1.034a4.43881,4.43881,0,0,1-.575,1.009c-1.417,2.05-2.833,4.202-4.223,6.306-.093.14-.179.338-.35.403-.624-3.12-1.339-6.147-1.949-9.282.773.548,1.172,1.474,1.949,2.018.581-3.896,1.19-7.762,1.799-11.628-2.964,1.448-5.966,3.076-8.971,4.566,1.854-6.974,3.795-13.86,5.723-20.759"/>
+    <path class="cls-55" d="M115.2952,442.26859s-7.904,0-7.904,7.904v69.058s0,7.904,7.904,7.904h53.464s7.905,0,7.905-7.904v-69.058s0-7.904-7.905-7.904Z"/>
+    <g class="cls-60">
+      <path class="cls-61" d="M159.97031,484.71209c0,9.518-8.072,17.234-18.031,17.234s-18.031-7.716-18.031-17.234c0-9.517,8.072-17.234,18.031-17.234s18.031,7.717,18.031,17.234"/>
+      <path class="cls-62" d="M139.4935,466.8223h6.522c-2.115,4.877-4.275,9.708-6.147,14.831,2.847-1.456,5.62-2.987,8.497-4.414-1.595,5.991-3.243,11.928-4.774,17.984.912-.264,1.54-.817,2.499-1.034a4.43881,4.43881,0,0,1-.575,1.009c-1.417,2.05-2.833,4.202-4.223,6.306-.093.14-.179.338-.35.403-.624-3.12-1.339-6.147-1.949-9.282.773.548,1.172,1.474,1.949,2.018.581-3.896,1.19-7.762,1.799-11.628-2.964,1.448-5.966,3.076-8.971,4.566,1.854-6.974,3.795-13.86,5.723-20.759"/>
     </g>
   </g>
   <g id="rating">
-    <polyline id="ratingArrow" class="cls-60" points="208.26 181.87 224.9 165.06 270.94 165.06 270.94 198.96 225.21 198.96 208.26 181.87"/>
-    <text id="ratingLetter" class="cls-61" transform="translate(221.01953 189.11017)">A</text>
-    <text id="ratingPlusses" class="cls-62" transform="translate(236.98047 181.01984)">++</text>
+    <polyline id="ratingArrow" class="cls-63" points="208.26 185.1 224.9 168.29 270.94 168.29 270.94 202.2 225.21 202.2 208.26 185.1"/>
+    <text id="ratingLetter" class="cls-64" transform="translate(221.01953 192.34015)">A</text>
+    <text id="ratingPlusses" class="cls-65" transform="translate(236.98047 184.24982)">+++</text>
   </g>
   <text transform="translate(190.22998 404.87042)" text-anchor="middle">
-    <tspan id="kw" class="cls-63">X</tspan>
-    <tspan class="cls-54">kW</tspan>
+    <tspan id="kw" class="cls-66">X</tspan>
+    <tspan class="cls-57">kW</tspan>
   </text>
-  <text id="supplierLine2" class="cls-64" transform="translate(26.89258 106.22784)">X</text>
-  <text id="supplierLine1" class="cls-64" transform="translate(26.89258 94.96564)">X</text>
-  <text id="modelLine2" class="cls-64" transform="translate(153.07031 106.22784)">X</text>
-  <text id="modelLine1" class="cls-64" transform="translate(153.07031 94.96564)">X</text>
+  <text id="supplierLine2" class="cls-67" transform="translate(26.7599 106.30006)">X</text>
+  <text id="supplierLine1" class="cls-67" transform="translate(26.7599 95.03785)">X</text>
+  <text id="modelLine2" class="cls-67" transform="translate(152.93763 106.30006)">X</text>
+  <text id="modelLine1" class="cls-67" transform="translate(152.93763 95.03785)">X</text>
 </svg>
