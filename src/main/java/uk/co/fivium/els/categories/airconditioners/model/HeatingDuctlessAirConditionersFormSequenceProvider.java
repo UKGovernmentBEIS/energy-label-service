@@ -5,22 +5,22 @@ import java.util.List;
 import org.apache.commons.lang3.BooleanUtils;
 import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
 
-public class ReversibleAirConditionersFormSequenceProvider implements DefaultGroupSequenceProvider<ReversibleAirConditionersForm> {
+public class HeatingDuctlessAirConditionersFormSequenceProvider implements DefaultGroupSequenceProvider<HeatingDuctlessAirConditionersForm> {
 
   @Override
-  public List<Class<?>> getValidationGroups(ReversibleAirConditionersForm form) {
+  public List<Class<?>> getValidationGroups(HeatingDuctlessAirConditionersForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
     if (form != null) {
-      if (BooleanUtils.isTrue(form.getWamerScopAvailable())) {
+      if (BooleanUtils.isTrue(form.getWarmerConditions())) {
         sequence.add(WarmerClimateGroup.class);
       }
-      if (BooleanUtils.isTrue(form.getColderScopAvailable())) {
+      if (BooleanUtils.isTrue(form.getColderConditions())) {
         sequence.add(ColderClimateGroup.class);
       }
     }
 
-    sequence.add(ReversibleAirConditionersForm.class);
+    sequence.add(HeatingDuctlessAirConditionersForm.class);
     return sequence;
   }
 }
