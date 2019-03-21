@@ -655,14 +655,14 @@
     <rect class="cls-44" x="200.534" y="360.61398" width="11.339" height="11.339"/>
     <rect class="cls-64" x="238.077" y="360.61398" width="11.339" height="11.339"/>
   </g>
-  <g id="warmerRating">
-    <polyline id="warmerRatingArrow" class="cls-61" points="153.24 161.92 166.39 148.65 184.39 148.65 184.39 175.64 166.82 175.64 153.24 161.92"/>
-    <text id="warmerRatingLetter" class="cls-53" transform="translate(160.88965 166.17023)">A</text>
-    <text id="warmerRatingPlusses" class="cls-70" transform="translate(170.66992 158.65997)">+++</text>
+  <g id="warmerScopRating">
+    <polyline id="warmerScopRatingArrow" class="cls-61" points="153.24 161.92 166.39 148.65 184.39 148.65 184.39 175.64 166.82 175.64 153.24 161.92"/>
+    <text id="warmerScopRatingLetter" class="cls-53" transform="translate(160.88965 166.17023)">A</text>
+    <text id="warmerScopRatingPlusses" class="cls-70" transform="translate(170.66992 158.65997)">+++</text>
   </g>
-  <text id="warmerKw" class="cls-71" transform="translate(160.63965 329.47003)">X</text>
+  <text id="warmerScopKw" class="cls-71" transform="translate(160.63965 329.47003)">X</text>
   <text id="warmerScop" class="cls-71" transform="translate(160.63965 342.44952)">X</text>
-  <text id="warmerKwhAnnum" class="cls-71" transform="translate(160.63965 355.47003)">X</text>
+  <text id="warmerScopKwhAnnum" class="cls-71" transform="translate(160.63965 355.47003)">X</text>
   <g id="averageRating">
     <polyline id="averageRatingArrow" class="cls-61" points="190.66 161.92 203.81 148.65 221.81 148.65 221.81 175.64 204.24 175.64 190.66 161.92"/>
     <text id="averageRatingLetter" class="cls-53" transform="translate(198.30957 166.17023)">A</text>
@@ -671,14 +671,14 @@
   <text id="averageKw" class="cls-71" transform="translate(196.63965 329.47003)">X</text>
   <text id="averageScop" class="cls-71" transform="translate(196.63965 342.44952)">X</text>
   <text id="averageKwhAnnum" class="cls-71" transform="translate(196.63965 355.47003)">X</text>
-  <g id="colderRating">
-    <polyline id="colderRatingArrow" class="cls-61" points="228.76 161.92 241.91 148.65 259.91 148.65 259.91 175.64 242.33 175.64 228.76 161.92"/>
-    <text id="colderRatingLetter" class="cls-53" transform="translate(236.41016 166.17023)">A</text>
-    <text id="colderRatingPlusses" class="cls-70" transform="translate(246.17969 158.65997)">+++</text>
+  <g id="colderScopRating">
+    <polyline id="colderScopRatingArrow" class="cls-61" points="228.76 161.92 241.91 148.65 259.91 148.65 259.91 175.64 242.33 175.64 228.76 161.92"/>
+    <text id="colderScopRatingLetter" class="cls-53" transform="translate(236.41016 166.17023)">A</text>
+    <text id="colderScopRatingPlusses" class="cls-70" transform="translate(246.17969 158.65997)">+++</text>
   </g>
-  <text id="colderKw" class="cls-71" transform="translate(234.95996 329.47003)">X</text>
+  <text id="colderScopKw" class="cls-71" transform="translate(234.95996 329.47003)">X</text>
   <text id="colderScop" class="cls-71" transform="translate(234.95996 342.44952)">X</text>
-  <text id="colderKwhAnnum" class="cls-71" transform="translate(234.95996 355.47003)">X</text>
+  <text id="colderScopKwhAnnum" class="cls-71" transform="translate(234.95996 355.47003)">X</text>
   <text id="insideDb" class="cls-72" transform="translate(48 427.31964)">X</text>
   <text id="outsideDb" class="cls-72" transform="translate(48 503.80011)">X</text>
   <text id="supplierLine2" class="cls-29" transform="translate(24.94008 99.20996)">X</text>
