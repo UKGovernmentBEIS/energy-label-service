@@ -13,6 +13,7 @@ import uk.co.fivium.els.categories.domesticovens.controller.DomesticOvensControl
 import uk.co.fivium.els.categories.rangehoods.controller.RangeHoodsController;
 import uk.co.fivium.els.categories.refrigeratingappliances.controller.RefrigeratingAppliancesController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
+import uk.co.fivium.els.categories.solidfuelboilers.controller.SolidFuelBoilersController;
 import uk.co.fivium.els.categories.spaceheaters.controller.SpaceHeatersController;
 import uk.co.fivium.els.categories.televisions.controller.TelevisionController;
 import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
@@ -61,7 +62,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "SOLID_FUEL_BOILERS",
           "Solid fuel boilers",
-          "/not-yet-implemented"))
+          ReverseRouter.route(on(SolidFuelBoilersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "SPACE_HEATERS",
           "Space heaters",
