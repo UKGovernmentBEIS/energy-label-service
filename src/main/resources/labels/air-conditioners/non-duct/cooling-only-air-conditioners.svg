@@ -528,8 +528,8 @@
   <text id="kwhAnnum" class="cls-65" transform="translate(220.58008 384.80011)" text-anchor="middle">X</text>
   <text id="insideDb" class="cls-65" transform="translate(41.18994 492.72003)">X</text>
   <text id="outsideDb" class="cls-65" transform="translate(120.83984 492.72003)">X</text>
-  <text id="supplierLine2" class="cls-16" transform="translate(25.301 99.11652)" text-anchor="middle">X</text>
-  <text id="supplierLine1" class="cls-16" transform="translate(25.301 84.82501)" text-anchor="middle">X</text>
-  <text id="modelLine2" class="cls-16" transform="translate(151.37034 99.11652)" text-anchor="middle">X</text>
-  <text id="modelLine1" class="cls-16" transform="translate(151.37034 84.82501)" text-anchor="middle">X</text>
+  <text id="supplierLine2" class="cls-16" transform="translate(25.301 99.11652)">X</text>
+  <text id="supplierLine1" class="cls-16" transform="translate(25.301 84.82501)">X</text>
+  <text id="modelLine2" class="cls-16" transform="translate(151.37034 99.11652)">X</text>
+  <text id="modelLine1" class="cls-16" transform="translate(151.37034 84.82501)">X</text>
 </svg>

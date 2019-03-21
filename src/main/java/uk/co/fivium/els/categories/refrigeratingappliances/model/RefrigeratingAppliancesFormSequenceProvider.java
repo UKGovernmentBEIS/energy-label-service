@@ -2,9 +2,6 @@ package uk.co.fivium.els.categories.refrigeratingappliances.model;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
-import uk.co.fivium.els.categories.airconditioners.model.ColderClimateGroup;
-import uk.co.fivium.els.categories.airconditioners.model.ReversibleAirConditionersForm;
-import uk.co.fivium.els.categories.airconditioners.model.WarmerClimateGroup;
 
 import java.util.ArrayList;
 import java.util.List;
