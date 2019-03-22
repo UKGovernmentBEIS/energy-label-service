@@ -10,12 +10,15 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitCategory;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitsForm;
 import uk.co.fivium.els.categories.ventilationunits.service.VentilationUnitsService;
@@ -35,13 +38,18 @@ public class VentilationUnitsController extends CategoryController {
   private final PdfRenderer pdfRenderer;
   private final VentilationUnitsService ventilationUnitsService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
   @Autowired
-  public VentilationUnitsController(PdfRenderer pdfRenderer, VentilationUnitsService ventilationUnitsService, BreadcrumbService breadcrumbService) {
+  public VentilationUnitsController(PdfRenderer pdfRenderer,
+                                    VentilationUnitsService ventilationUnitsService,
+                                    BreadcrumbService breadcrumbService,
+                                    InternetLabelService internetLabelService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, VentilationUnitCategory.GET, VentilationUnitsController.class);
     this.pdfRenderer = pdfRenderer;
     this.ventilationUnitsService = ventilationUnitsService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
   @GetMapping("/unidirectional-ventilation-units")
@@ -61,6 +69,17 @@ public class VentilationUnitsController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/unidirectional-ventilation-units", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelUnidirectionalVentilationUnitsSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") VentilationUnitsForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getUnidirectionalVentilationUnits(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, "ventilation-units");
+    }
+  }
+
   @GetMapping("/bidirectional-ventilation-units")
   public ModelAndView renderBidirectionalVentilationUnits(@ModelAttribute("form") VentilationUnitsForm form) {
     return getBidirectionalVentilationUnits(Collections.emptyList());
@@ -75,6 +94,17 @@ public class VentilationUnitsController extends CategoryController {
     else {
       Resource pdf = pdfRenderer.render(ventilationUnitsService.generateHtmlBidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "ventilation-units-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/bidirectional-ventilation-units", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelBidirectionalVentilationUnitsSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") VentilationUnitsForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getBidirectionalVentilationUnits(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, "ventilation-units");
     }
   }
 

@@ -21,7 +21,7 @@ public class VentilationUnitCategory implements Category {
       .add(new CategoryItem(
           "BIDIRECTIONAL_VENTILATION_UNITS",
           "Bidirectional ventilation units",
-          ReverseRouter.route(on(VentilationUnitsController.class).renderUnidirectionalVentilationUnits(null))))
+          ReverseRouter.route(on(VentilationUnitsController.class).renderBidirectionalVentilationUnits(null))))
       .build();
 
   private VentilationUnitCategory(){}

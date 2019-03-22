@@ -2,13 +2,17 @@ package uk.co.fivium.els.categories.ventilationunits.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class VentilationUnitsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency indicator for an 'average' climate")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Sound power level (LWA) in dB rounded to the nearest integer")
