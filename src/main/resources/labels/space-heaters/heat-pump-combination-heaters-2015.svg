@@ -1,14 +1,6 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105mm" height="200mm" viewBox="0 0 297.64001 566.92999" data-rating-increment-space-heating="17.6875" data-rating-increment-water-heating="22.5833" data-supplier-model-chars-per-row="25">
   <defs>
     <style>
-      #offPeakMode {
-        visibility: hidden;
-      }
-
-      #offPeakMode.hasOffPeakMode {
-        visibility: visible;
-      }
-      
       .cls-1, .cls-44, .cls-45, .cls-47, .cls-48, .cls-58, .cls-59, .cls-60, .cls-61 {
         fill: none;
       }
@@ -594,7 +586,7 @@
   <text id="declaredLoadProfile" class="cls-56" transform="translate(182.09961 154.49005)">X</text>
   <text transform="translate(223.08984 381.26007)">
     <tspan id="colderKw" class="cls-33">X</tspan> <tspan class="cls-42">kW</tspan>
-  </text>  
+  </text>
   <text transform="translate(223.08984 402.43976)">
     <tspan id="averageKw" class="cls-41">X</tspan> <tspan class="cls-51">kW</tspan>
   </text>

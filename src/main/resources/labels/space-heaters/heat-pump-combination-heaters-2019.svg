@@ -1,14 +1,6 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105mm" height="200mm" viewBox="0 0 297.64001 566.92999" data-rating-increment-space-heating="22.5833" data-rating-increment-water-heating="22.5833" data-supplier-model-chars-per-row="25">
   <defs>
     <style>
-      #offPeakMode {
-        visibility: hidden;
-      }
-
-      #offPeakMode.hasOffPeakMode {
-        visibility: visible;
-      }
-      
       .cls-1, .cls-42, .cls-43, .cls-45, .cls-46, .cls-58, .cls-59, .cls-60, .cls-61 {
         fill: none;
       }
@@ -593,13 +585,13 @@
   <text id="declaredLoadProfile" class="cls-56" transform="translate(182.09961 154.49005)">X</text>
   <text transform="translate(223.08984 381.26007)">
     <tspan id="colderKw" class="cls-31">X</tspan> <tspan class="cls-40">kW</tspan>
-  </text>  
+  </text>
   <text transform="translate(223.08984 402.43976)">
     <tspan id="averageKw" class="cls-39">X</tspan> <tspan class="cls-49">kW</tspan>
   </text>
   <text transform="translate(223.08984 421.42999)">
     <tspan id="warmerKw" class="cls-31">X</tspan> <tspan class="cls-40">kW</tspan>
-  </text>  
+  </text>
   <g id="insideDbSection">
     <text class="cls-39" transform="translate(60.60693 424.89777)"> </text>
     <text class="cls-40" transform="translate(63.99756 424.89777)">dB</text>
