@@ -9,6 +9,7 @@ import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
 import uk.co.fivium.els.categories.domesticovens.controller.DomesticOvensController;
+import uk.co.fivium.els.categories.localspaceheaters.controller.LocalSpaceHeatersController;
 import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.prorefrigeratedcabinets.controller.ProRefrigeratedCabinetsController;
 import uk.co.fivium.els.categories.rangehoods.controller.RangeHoodsController;
@@ -45,7 +46,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "LOCAL_SPACE_HEATERS",
           "Local space heaters",
-          "/not-yet-implemented"))
+          ReverseRouter.route(on(LocalSpaceHeatersController.class).renderLocalSpaceHeaters(null))))
       .add(new CategoryItem(
           "DOMESTIC_OVENS",
           "Ovens",
