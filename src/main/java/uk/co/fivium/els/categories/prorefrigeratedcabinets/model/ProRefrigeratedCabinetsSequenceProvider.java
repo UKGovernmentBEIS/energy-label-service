@@ -1,12 +1,9 @@
 package uk.co.fivium.els.categories.prorefrigeratedcabinets.model;
 
-import org.apache.commons.lang3.BooleanUtils;
-import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
-import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerGroup;
-import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgeGroup;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.BooleanUtils;
+import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
 
 public class ProRefrigeratedCabinetsSequenceProvider implements DefaultGroupSequenceProvider<ProRefrigeratedCabinetsForm> {
 
