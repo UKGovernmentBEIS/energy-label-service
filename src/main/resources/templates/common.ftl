@@ -6,7 +6,7 @@
 </#macro>
 
 <#macro generateLabelButton>
-  <@govukButton.button buttonText="Download PDF label" buttonClass="govuk-button"/>
+  <@govukButton.button buttonText="Download label" buttonClass="govuk-button"/>
 </#macro>
 
 <#macro generateInternetLabelButton>
