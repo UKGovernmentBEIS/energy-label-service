@@ -24,10 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.LoadProfile;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
-import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
-import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
-import uk.co.fivium.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
-import uk.co.fivium.els.categories.spaceheaters.model.SpaceHeaterCategory;
+import uk.co.fivium.els.categories.spaceheaters.model.*;
 import uk.co.fivium.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.LegislationCategory;
@@ -61,6 +58,86 @@ public class SpaceHeatersController extends CategoryController {
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
   }
+
+  @GetMapping("/boiler-space-heaters")
+  public ModelAndView renderBoilerSpaceHeaters(@ModelAttribute("form") BoilerSpaceHeatersForm form) {
+    return getBoilerSpaceHeaters(Collections.emptyList());
+  }
+
+  @PostMapping("/boiler-space-heaters")
+  @ResponseBody
+  public Object handleBoilerSpaceHeatersSubmit(@Valid @ModelAttribute("form") BoilerSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidBoiler(form, bindingResult, (category -> {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }));
+  }
+
+  @PostMapping(value = "/boiler-space-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelBoilerSpaceHeatersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") BoilerSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidBoiler(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "space-heaters")));
+  }
+
+  private Object doIfValidBoiler(BoilerSpaceHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
+
+    if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getEfficiencyRating())) {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      if (!LegislationCategory.isPrimaryRatingClassValid(form.getEfficiencyRating(), category)) {
+        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
+      }
+    }
+
+    if (bindingResult.hasErrors()) {
+      return getBoilerSpaceHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      return function.apply(category);
+    }
+  }
+
+
+
+  @GetMapping("/cogeneration-space-heaters")
+  public ModelAndView renderCogenerationSpaceHeaters(@ModelAttribute("form") CogenerationSpaceHeatersForm form) {
+    return getCogenerationSpaceHeaters(Collections.emptyList());
+  }
+
+  @PostMapping("/cogeneration-space-heaters")
+  @ResponseBody
+  public Object handleCogenerationSpaceHeatersSubmit(@Valid @ModelAttribute("form") CogenerationSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidCogeneration(form, bindingResult, (category -> {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }));
+  }
+
+  @PostMapping(value = "/cogeneration-space-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelCogenerationSpaceHeatersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") CogenerationSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidCogeneration(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "space-heaters")));
+  }
+
+  private Object doIfValidCogeneration(CogenerationSpaceHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
+
+    if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getEfficiencyRating())) {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      if (!LegislationCategory.isPrimaryRatingClassValid(form.getEfficiencyRating(), category)) {
+        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
+      }
+    }
+
+    if (bindingResult.hasErrors()) {
+      return getCogenerationSpaceHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      return function.apply(category);
+    }
+  }
+
+
 
   @GetMapping("/low-temperature-heat-pump-space-heaters")
   public ModelAndView renderLowTemperatureHeatPumpSpaceHeaters(@ModelAttribute("form") LowTemperatureHeatPumpSpaceHeatersForm form) {
@@ -184,6 +261,20 @@ public class SpaceHeatersController extends CategoryController {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
       return function.apply(category);
     }
+  }
+
+  private ModelAndView getBoilerSpaceHeaters(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/boilerSpaceHeaters");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerSpaceHeaters(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Boiler space heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getCogenerationSpaceHeaters(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/cogenerationSpaceHeaters");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderCogenerationSpaceHeaters(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Cogeneration space heaters");
+    return modelAndView;
   }
 
   private ModelAndView getLowTemperatureHeatPumpSpaceHeaters(List<FieldError> errorList) {

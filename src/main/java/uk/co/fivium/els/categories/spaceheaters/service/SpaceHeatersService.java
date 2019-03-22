@@ -6,9 +6,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.fivium.els.categories.common.LoadProfile;
-import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
-import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
-import uk.co.fivium.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
+import uk.co.fivium.els.categories.spaceheaters.model.*;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -21,21 +19,21 @@ import java.util.List;
 @Service
 public class SpaceHeatersService {
 
-  public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JAN2015 = SelectableLegislationCategory.of(
-    "JAN2015",
-    "From 1 January 2015",
+  public static final SelectableLegislationCategory LEGISLATION_CATEGORY_SEP2015 = SelectableLegislationCategory.of(
+    "SEP2015",
+    "From 26 September 2015",
     RatingClassRange.of(RatingClass.APP, RatingClass.G),
     RatingClassRange.of(RatingClass.A, RatingClass.G));
 
-  public static final SelectableLegislationCategory LEGISLATION_CATEGORY_JAN2019 = SelectableLegislationCategory.of(
-    "JAN2019",
-    "From 1 January 2019",
+  public static final SelectableLegislationCategory LEGISLATION_CATEGORY_SEP2019 = SelectableLegislationCategory.of(
+    "SEP2019",
+    "From 26 September 2019",
     RatingClassRange.of(RatingClass.APPP, RatingClass.D),
     RatingClassRange.of(RatingClass.AP, RatingClass.F));
 
   public static final List<SelectableLegislationCategory> LEGISLATION_CATEGORIES = new ImmutableList.Builder<SelectableLegislationCategory>()
-    .add(LEGISLATION_CATEGORY_JAN2015)
-    .add(LEGISLATION_CATEGORY_JAN2019)
+    .add(LEGISLATION_CATEGORY_SEP2015)
+    .add(LEGISLATION_CATEGORY_SEP2019)
     .build();
 
   private final TemplateParserService templateParserService;
@@ -45,9 +43,53 @@ public class SpaceHeatersService {
     this.templateParserService = templateParserService;
   }
 
+  public Document generateHtml(BoilerSpaceHeatersForm form, LegislationCategory legislationCategory) {
+    String templatePath;
+    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+      templatePath = "labels/space-heaters/boiler-space-heaters-2015.svg";
+    }
+    else {
+      templatePath = "labels/space-heaters/boiler-space-heaters-2019.svg";
+    }
+
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("kw", form.getHeatOutput())
+      .setText("db", form.getSoundPowerLevelIndoors())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(CogenerationSpaceHeatersForm form, LegislationCategory legislationCategory) {
+    String templatePath;
+    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+      templatePath = "labels/space-heaters/cogeneration-space-heaters-2015.svg";
+    }
+    else {
+      templatePath = "labels/space-heaters/cogeneration-space-heaters-2019.svg";
+    }
+
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
+
+    if (form.getElectricityGeneration()) {
+      templatePopulator.applyCssClassToId("additionalElectricityGeneration", "hasAdditionalElectricityGeneration");
+    }
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("kw", form.getHeatOutput())
+      .setText("db", form.getSoundPowerLevelIndoors())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .getPopulatedDocument();
+  }
+
   public Document generateHtml(LowTemperatureHeatPumpSpaceHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
-    if (legislationCategory == LEGISLATION_CATEGORY_JAN2015) {
+    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
       templatePath = "labels/space-heaters/low-temperature-heat-pump-space-heaters-2015.svg";
     }
     else {
@@ -58,7 +100,7 @@ public class SpaceHeatersService {
 
   public Document generateHtml(HeatPumpSpaceHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
-    if (legislationCategory == LEGISLATION_CATEGORY_JAN2015) {
+    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
       templatePath = "labels/space-heaters/heat-pump-space-heaters-2015.svg";
     }
     else {
@@ -106,7 +148,7 @@ public class SpaceHeatersService {
   public Document generateHtml(HeatPumpCombinationHeatersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
-    if (legislationCategory == LEGISLATION_CATEGORY_JAN2015) {
+    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/space-heaters/heat-pump-combination-heaters-2015.svg"));
     }
     else {
