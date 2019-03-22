@@ -4,7 +4,7 @@
 
     <@govukRadios.radio path="form.applicableLegislation" radioItems=legislationYears/>
 
-    <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
+    <@govukSelect.select path="form.lowTempEfficiencyRating" options=efficiencyRating/>
 
     <@govukTextInput.textInput path="form.soundPowerLevelIndoors"/>
 
