@@ -102,32 +102,15 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
     return hiddenFields;
   }
 
-//  private List<String> getInternetLabellingFields(Object form) {
-//    List<String> internetLabellingFields = new ArrayList<>();
-//    Class<?> formClass = form.getClass();
-//
-//    ReflectionUtils.doWithFields(formClass, (field -> {
-//      String name = field.getName();
-//      InternetLabelModeField internetLabelAnnotation = field.getAnnotation(InternetLabelModeField.class);
-//      if(internetLabelAnnotation != null) {
-//
-//        internetLabellingFields.add(FORM_MODEL_ATTRIBUTE_NAME + "." + name);
-//      }
-//    }));
-//
-//    return internetLabellingFields;
-//  }
-
-  private Map<String, String> getFieldPromptMapping(Object form) {
-    Map<String, String> fieldPrompts = new HashMap<>();
+  private Map<String, FieldPrompt> getFieldPromptMapping(Object form) {
+    Map<String, FieldPrompt> fieldPrompts = new HashMap<>();
     Class<?> formClass = form.getClass();
 
     ReflectionUtils.doWithFields(formClass, (field -> {
       String name = field.getName();
       FieldPrompt fieldPromptAnnotation = field.getAnnotation(FieldPrompt.class);
       if(fieldPromptAnnotation != null) {
-        String prompt = fieldPromptAnnotation.value();
-        fieldPrompts.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, prompt);
+        fieldPrompts.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, fieldPromptAnnotation);
       }
     }));
 
