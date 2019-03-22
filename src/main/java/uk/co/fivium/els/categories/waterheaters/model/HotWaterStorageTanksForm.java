@@ -1,15 +1,18 @@
 package uk.co.fivium.els.categories.waterheaters.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
+import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class HotWaterStorageTanksForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Water heating energy efficiency class")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Standing loss in W")

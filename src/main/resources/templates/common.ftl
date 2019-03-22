@@ -6,7 +6,7 @@
 </#macro>
 
 <#macro generateLabelButton>
-  <@govukButton.button buttonText="Download PDF label" buttonClass="govuk-button"/>
+  <@govukButton.button buttonText="Download label" buttonClass="govuk-button"/>
 </#macro>
 
 <#macro generateInternetLabelButton>
@@ -32,13 +32,12 @@ Includes the wrapping form element, the generate label button and optionally the
         <@govukRadios.radio path="form.labelFormat" radioItems=internetLabelFormatOptions/>
         <@generateInternetLabelButton/>
       <#else>
+
         <#if staticProductText?has_content>
           <div class="govuk-inset-text">
             ${staticProductText?no_esc}
           </div>
-        </#if>
-
-        <#if commonProductGuidance?has_content>
+        <#elseif commonProductGuidance?has_content>
           <div class="govuk-inset-text">
             ${commonProductGuidance?no_esc}
           </div>

@@ -42,7 +42,7 @@ public class SpaceHeaterCategory implements Category {
 
   @Override
   public String getCommonProductGuidanceText() {
-    return "Energy labels for products should be 105mm x 200mm while package labels should be 210mm x 297mm. The label, for either the package, the product, or both as required, should be displayed at the point of sale so that it is easily readable and clearly associated with the product.";
+    return "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. The size must be 105mm x 200mm on the product or 210mm x 297mm on packaging.";
   }
 
   @Override

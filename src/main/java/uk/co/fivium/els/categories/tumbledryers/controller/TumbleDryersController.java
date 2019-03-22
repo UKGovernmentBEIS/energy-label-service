@@ -10,12 +10,15 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.tumbledryers.model.CondenserTumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerCategory;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryersForm;
@@ -36,13 +39,18 @@ public class TumbleDryersController extends CategoryController {
   private final PdfRenderer pdfRenderer;
   private final TumbleDryersService tumbleDryersService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
   @Autowired
-  public TumbleDryersController(PdfRenderer pdfRenderer, TumbleDryersService tumbleDryersService, BreadcrumbService breadcrumbService) {
+  public TumbleDryersController(PdfRenderer pdfRenderer,
+                                TumbleDryersService tumbleDryersService,
+                                BreadcrumbService breadcrumbService,
+                                InternetLabelService internetLabelService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, TumbleDryerCategory.GET, TumbleDryersController.class);
     this.pdfRenderer = pdfRenderer;
     this.tumbleDryersService = tumbleDryersService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
   @GetMapping("/air-vented-tumble-dryers")
@@ -59,6 +67,17 @@ public class TumbleDryersController extends CategoryController {
     else {
       Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/air-vented-tumble-dryers", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelAirVentedTumbleDryersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, "tumble-dryers");
     }
   }
 
@@ -79,6 +98,17 @@ public class TumbleDryersController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/condenser-tumble-dryers", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelCondenserTumbleDryersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") CondenserTumbleDryersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCondenserTumbleDryers(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, "tumble-dryers");
+    }
+  }
+
   @GetMapping("/gas-fired-tumble-dryers")
   public ModelAndView renderGasFiredTumbleDryers(@ModelAttribute("form") TumbleDryersForm form) {
     return getGasFiredTumbleDryers(Collections.emptyList());
@@ -93,6 +123,17 @@ public class TumbleDryersController extends CategoryController {
     else {
       Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/gas-fired-tumble-dryers", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelGasFiredDryersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") TumbleDryersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, "tumble-dryers");
     }
   }
 

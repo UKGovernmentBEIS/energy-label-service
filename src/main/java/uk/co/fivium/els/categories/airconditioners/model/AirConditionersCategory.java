@@ -42,7 +42,7 @@ public class AirConditionersCategory implements Category {
 
   @Override
   public String getCommonProductGuidanceText() {
-    return "Energy labels for single or double duct air conditioners, heating or cooling-only air conditioners, the label should be at least 100mm x 200mm when printed";
+    return "The label must be at least 100mm x 200mm when printed.";
   }
 
   @Override

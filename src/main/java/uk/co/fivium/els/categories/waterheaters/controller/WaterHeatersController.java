@@ -11,14 +11,22 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.fivium.els.categories.waterheaters.model.*;
 import uk.co.fivium.els.categories.common.LoadProfile;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
+import uk.co.fivium.els.categories.waterheaters.model.ConventionalWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
+import uk.co.fivium.els.categories.waterheaters.model.SolarWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.WaterHeaterCategory;
+import uk.co.fivium.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
 import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.LegislationCategory;
@@ -37,13 +45,18 @@ public class WaterHeatersController extends CategoryController {
   private final PdfRenderer pdfRenderer;
   private final WaterHeatersService waterHeatersService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
   @Autowired
-  public WaterHeatersController(PdfRenderer pdfRenderer, WaterHeatersService waterHeatersService, BreadcrumbService breadcrumbService) {
+  public WaterHeatersController(PdfRenderer pdfRenderer,
+                                WaterHeatersService waterHeatersService,
+                                BreadcrumbService breadcrumbService,
+                                InternetLabelService internetLabelService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, WaterHeaterCategory.GET, WaterHeatersController.class);
     this.pdfRenderer = pdfRenderer;
     this.waterHeatersService = waterHeatersService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
 
@@ -64,6 +77,17 @@ public class WaterHeatersController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/heat-pump-water-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelHeatPumpWaterHeatersSubmit(@Validated(InternetLabellingGroup.class)@ModelAttribute("form") HeatPumpWaterHeatersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getHeatPumpWaterHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "heat-pump-water-heaters");
+    }
+  }
+
   @GetMapping("/conventional-water-heaters")
   public ModelAndView renderConventionalWaterHeaters(@ModelAttribute("form") ConventionalWaterHeatersForm form) {
     return getConventionalWaterHeaters(Collections.emptyList());
@@ -78,6 +102,17 @@ public class WaterHeatersController extends CategoryController {
     else {
       Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
       return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/conventional-water-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelConventionalWaterHeatersSubmit(@Validated(InternetLabellingGroup.class)@ModelAttribute("form") ConventionalWaterHeatersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getConventionalWaterHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "conventional-water-heaters");
     }
   }
 
@@ -98,6 +133,17 @@ public class WaterHeatersController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/solar-water-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelSolarWaterHeatersSubmit(@Validated(InternetLabellingGroup.class)@ModelAttribute("form") SolarWaterHeatersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSolarWaterHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "solar-water-heaters");
+    }
+  }
+
   @GetMapping("/hot-water-storage-tanks")
   public ModelAndView renderHotWaterStorageTanks(@ModelAttribute("form") HotWaterStorageTanksForm form) {
     return getHotWaterStorageTanks(Collections.emptyList());
@@ -115,6 +161,17 @@ public class WaterHeatersController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/hot-water-storage-tanks", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelHotWaterStorageTanksSubmit(@Validated(InternetLabellingGroup.class)@ModelAttribute("form") HotWaterStorageTanksForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getHotWaterStorageTanks(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "hot-water-storage-tanks");
+    }
+  }
+
   @GetMapping("/packages-of-water-heater-and-solar-device")
   public ModelAndView renderWaterSolarPackages(@ModelAttribute("form") WaterSolarPackagesForm form) {
     return getWaterSolarPackages(Collections.emptyList());
@@ -129,6 +186,17 @@ public class WaterHeatersController extends CategoryController {
     else {
       Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
       return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/packages-of-water-heater-and-solar-device", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelWaterSolarPackagesSubmit(@Validated(InternetLabellingGroup.class)@ModelAttribute("form") WaterSolarPackagesForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getWaterSolarPackages(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES, "package-water-heaters");
     }
   }
 

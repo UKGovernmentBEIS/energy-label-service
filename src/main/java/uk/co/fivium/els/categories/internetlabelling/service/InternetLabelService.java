@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabelFormat;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
+import uk.co.fivium.els.renderer.JpegRenderer;
 import uk.co.fivium.els.renderer.PngRenderer;
 import uk.co.fivium.els.service.TemplatePopulator;
 import uk.co.fivium.els.util.ControllerUtils;
@@ -22,10 +24,12 @@ import uk.co.fivium.els.util.ControllerUtils;
 public class InternetLabelService {
 
   private final PngRenderer pngRenderer;
+  private final JpegRenderer jpegRenderer;
 
   @Autowired
-  public InternetLabelService(PngRenderer pngRenderer) {
+  public InternetLabelService(PngRenderer pngRenderer, JpegRenderer jpegRenderer) {
     this.pngRenderer = pngRenderer;
+    this.jpegRenderer = jpegRenderer;
   }
 
   private Document generateInternetLabelHtml(InternetLabellingForm form, String ratingClass, LegislationCategory legislationCategory) {
@@ -61,8 +65,16 @@ public class InternetLabelService {
   }
 
   public ResponseEntity generateInternetLabel(InternetLabellingForm form, String ratingClass, LegislationCategory legislationCategory, String filenamePrefix) {
-    // TODO jpeg
-    return ControllerUtils.serveResource(pngRenderer.render(generateInternetLabelHtml(form, ratingClass, legislationCategory)), filenamePrefix + "-internet-label.png");
+
+    Document label = generateInternetLabelHtml(form, ratingClass, legislationCategory);
+    InternetLabelFormat format = InternetLabelFormat.valueOf(form.getLabelFormat());
+
+    if (format == InternetLabelFormat.PNG) {
+      return ControllerUtils.serveResource(pngRenderer.render(label), filenamePrefix + "-internet-label.png");
+    } else {
+      return ControllerUtils.serveResource(jpegRenderer.render(label), filenamePrefix + "-internet-label.jpg");
+    }
+
   }
 
 }
