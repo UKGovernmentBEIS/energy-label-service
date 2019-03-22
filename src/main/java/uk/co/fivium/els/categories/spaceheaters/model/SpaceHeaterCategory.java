@@ -15,25 +15,25 @@ public class SpaceHeaterCategory implements Category {
 
   private static List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
       .add(new CategoryItem(
-        "COGENERATION_SPACE_HEATERS",
-        "Cogeneration space heaters",
-        ReverseRouter.route(on(SpaceHeatersController.class).renderCogenerationSpaceHeaters(null))))
+          "BOILER_SPACE_HEATERS",
+          "Boiler space heaters",
+          ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerSpaceHeaters(null))))
       .add(new CategoryItem(
-        "BOILER_SPACE_HEATERS",
-        "Boiler space heaters",
-        ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerSpaceHeaters(null))))
+          "COGENERATION_SPACE_HEATERS",
+          "Cogeneration space heaters",
+          ReverseRouter.route(on(SpaceHeatersController.class).renderCogenerationSpaceHeaters(null))))
       .add(new CategoryItem(
           "HEAT_PUMP_SPACE_HEATERS",
           "Heat pump space heaters (except low-temperature heat pumps)",
           ReverseRouter.route(on(SpaceHeatersController.class).renderHeatPumpSpaceHeaters(null))))
       .add(new CategoryItem(
+          "HEAT_PUMP_COMBINATION_HEATERS",
+          "Heat pump combination heaters",
+          ReverseRouter.route(on(SpaceHeatersController.class).renderHeatPumpCombinationHeaters(null))))
+      .add(new CategoryItem(
           "LOW_TEMPERATURE_HEAT_PUMP_SPACE_HEATERS",
           "Low-temperature heat pump space heaters",
           ReverseRouter.route(on(SpaceHeatersController.class).renderLowTemperatureHeatPumpSpaceHeaters(null))))
-      .add(new CategoryItem(
-        "HEAT_PUMP_COMBINATION_HEATERS",
-        "Heat pump combination heaters",
-        ReverseRouter.route(on(SpaceHeatersController.class).renderHeatPumpCombinationHeaters(null))))
       .build();
 
   private SpaceHeaterCategory(){}

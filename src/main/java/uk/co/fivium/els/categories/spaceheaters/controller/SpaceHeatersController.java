@@ -80,14 +80,7 @@ public class SpaceHeatersController extends CategoryController {
   }
 
   private Object doIfValidBoiler(BoilerSpaceHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
-
-    if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getEfficiencyRating())) {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
-      if (!LegislationCategory.isPrimaryRatingClassValid(form.getEfficiencyRating(), category)) {
-        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
-      }
-    }
-
+    commonBoilerCogenValidation(form.getApplicableLegislation(), form.getEfficiencyRating(), bindingResult);
     if (bindingResult.hasErrors()) {
       return getBoilerSpaceHeaters(bindingResult.getFieldErrors());
     }
@@ -120,14 +113,7 @@ public class SpaceHeatersController extends CategoryController {
   }
 
   private Object doIfValidCogeneration(CogenerationSpaceHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
-
-    if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getEfficiencyRating())) {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
-      if (!LegislationCategory.isPrimaryRatingClassValid(form.getEfficiencyRating(), category)) {
-        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
-      }
-    }
-
+    commonBoilerCogenValidation(form.getApplicableLegislation(), form.getEfficiencyRating(), bindingResult);
     if (bindingResult.hasErrors()) {
       return getCogenerationSpaceHeaters(bindingResult.getFieldErrors());
     }
@@ -137,6 +123,14 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  private void commonBoilerCogenValidation(String applicableLegislation, String efficiencyRating, BindingResult bindingResult) {
+    if (!StringUtils.isBlank(applicableLegislation) && !StringUtils.isBlank(efficiencyRating)) {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(applicableLegislation, SpaceHeatersService.LEGISLATION_CATEGORIES);
+      if (!LegislationCategory.isPrimaryRatingClassValid(efficiencyRating, category)) {
+        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
+      }
+    }
+  }
 
 
   @GetMapping("/low-temperature-heat-pump-space-heaters")

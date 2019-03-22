@@ -26,7 +26,7 @@ public class BoilerSpaceHeatersForm extends StandardTemplateForm50Char {
   private String heatOutput;
 
   @FieldPrompt("Sound power level, indoors dB")
-  @Digits(integer = 2, fraction = 0, message = "Enter the outdoors sound power level, up to 2 digits long")
+  @Digits(integer = 2, fraction = 0, message = "Enter the sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
   public String getApplicableLegislation() {
