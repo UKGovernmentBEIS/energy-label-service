@@ -1,21 +1,23 @@
 package uk.co.fivium.els.categories.localspaceheaters.model;
 
-import org.hibernate.validator.group.GroupSequenceProvider;
-import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-import uk.co.fivium.els.model.meta.StaticProductText;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
+import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
+import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("<p>To generate a label for a local space heater, enter the product information in the form below.</p>" +
-  "<p>Energy labels for local space heaters should be at least 105mm x 200mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.</p>")
+@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 105mm x 200mm when printed.")
 @GroupSequenceProvider(LocalSpaceHeatersFormSequenceProvider.class)
 public class LocalSpaceHeatersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("The energy efficiency class of the model")
-  @NotBlank(message = "Select an energy efficiency class")
+  @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("The direct heat output in kW")

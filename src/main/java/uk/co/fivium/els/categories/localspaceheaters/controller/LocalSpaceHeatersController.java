@@ -1,12 +1,24 @@
 package uk.co.fivium.els.categories.localspaceheaters.controller;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
+import java.util.Collections;
+import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.localspaceheaters.model.LocalSpaceHeatersForm;
 import uk.co.fivium.els.categories.localspaceheaters.service.LocalSpaceHeatersService;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -15,12 +27,6 @@ import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 
-import javax.validation.Valid;
-import java.util.Collections;
-import java.util.List;
-
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
-
 @Controller
 @RequestMapping("/categories")
 public class LocalSpaceHeatersController {
@@ -28,14 +34,17 @@ public class LocalSpaceHeatersController {
   private final PdfRenderer pdfRenderer;
   private final LocalSpaceHeatersService localSpaceHeatersService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
   @Autowired
   public LocalSpaceHeatersController(PdfRenderer pdfRenderer,
                                      LocalSpaceHeatersService localSpaceHeatersService,
-                                     BreadcrumbService breadcrumbService) {
+                                     BreadcrumbService breadcrumbService,
+                                     InternetLabelService internetLabelService) {
     this.pdfRenderer = pdfRenderer;
     this.localSpaceHeatersService = localSpaceHeatersService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
   @GetMapping("/local-space-heaters")
@@ -51,6 +60,16 @@ public class LocalSpaceHeatersController {
     } else {
       Resource pdf = pdfRenderer.render(localSpaceHeatersService.generateHtml(form));
       return ControllerUtils.serveResource(pdf, "local-space-heaters-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/local-space-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelLocalSpaceHeatersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LocalSpaceHeatersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getModelAndView(bindingResult.getFieldErrors());
+    } else {
+      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LocalSpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, "local-space-heaters");
     }
   }
 
