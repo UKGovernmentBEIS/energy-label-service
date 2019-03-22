@@ -22,7 +22,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
   private String annualEnergyConsumption;
 
-  @FieldPrompt("Does the model have any fridge compartments? <br /> A fridge compartment has no star rating and a temperature above minus 6 degrees centigrade")
+  @FieldPrompt(value = "Does the model have any fridge compartments?", hintText = "A fridge compartment has no star rating and a temperature above minus 6 degrees centigrade")
   @NotNull(message = "Specify if the model has any fridge compartments")
   private Boolean nonRatedCompartment;
 
@@ -30,7 +30,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total storage volume of fridge compartments in litres up to 3 digits long")
   private String nonRatedVolume;
 
-  @FieldPrompt("Does the model have any freezer compartments? <br /> A freezer compartment has a star rating between 1 and 4, and a temperature of minus 6 degrees centigrade or below")
+  @FieldPrompt(value = "Does the model have any freezer compartments?", hintText = "A freezer compartment has a star rating between 1 and 4, and a temperature of minus 6 degrees centigrade or below")
   @NotNull(message = "Specify if the model has any freezer compartments")
   private Boolean ratedCompartment;
 

@@ -14,13 +14,14 @@
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
-  <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
+  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].value())!label>
+  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText())!>
   <#local fieldName=spring.status.expression>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
 
   <#if !hiddenField>
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-      <@radioFieldset.fieldset legendHeading=fieldPrompt legendSize=legendSize legendHeadingClass=legendHeadingClass productGuidanceText=guidanceText mandatory=mandatory>
+      <@radioFieldset.fieldset legendHeading=fieldPrompt legendSize=legendSize legendHeadingClass=legendHeadingClass hintText=fieldHint hintTextId=id productGuidanceText=guidanceText mandatory=mandatory>
         <#if hasError>
           <span id="${id}-error" class="govuk-error-message">
             ${errorList?join(" ")}
@@ -57,14 +58,15 @@
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
-  <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
+  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].value())!label>
+  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText())!>
   <#local fieldName=spring.status.expression>
   <#local displayValue=spring.status.displayValue>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
 
   <#if !hiddenField>
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" mandatory=true>
+      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" hintText=fieldHint hintTextId=id mandatory=true>
         <#if hasError>
           <span id="${id}-error" class="govuk-error-message">
             ${errorList?join(" ")}
