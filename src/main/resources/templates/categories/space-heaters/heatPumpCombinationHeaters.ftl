@@ -15,7 +15,7 @@
 
     <@govukRadios.radioYesNo path="form.offPeak"/>
 
-    <@govukFieldset.fieldset legendHeading="The total rated heat output in kW">
+    <@govukFieldset.fieldset legendHeading="The total rated heat output in kW" showInInternetLabelling=false>
       <@govukTextInput.textInput path="form.colderHeatOutput"/>
       <@govukTextInput.textInput path="form.averageHeatOutput"/>
       <@govukTextInput.textInput path="form.warmerHeatOutput"/>

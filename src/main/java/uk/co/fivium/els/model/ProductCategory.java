@@ -4,16 +4,16 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
-
 import uk.co.fivium.els.categories.airconditioners.controller.AirConditionersController;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.dishwashers.controller.DishwashersController;
 import uk.co.fivium.els.categories.domesticovens.controller.DomesticOvensController;
 import uk.co.fivium.els.categories.localspaceheaters.controller.LocalSpaceHeatersController;
+import uk.co.fivium.els.categories.lamps.controller.LampsController;
+import uk.co.fivium.els.categories.prorefrigeratedcabinets.controller.ProRefrigeratedCabinetsController;
 import uk.co.fivium.els.categories.rangehoods.controller.RangeHoodsController;
 import uk.co.fivium.els.categories.refrigeratingappliances.controller.RefrigeratingAppliancesController;
-import uk.co.fivium.els.categories.lamps.controller.LampsController;
 import uk.co.fivium.els.categories.spaceheaters.controller.SpaceHeatersController;
 import uk.co.fivium.els.categories.televisions.controller.TelevisionController;
 import uk.co.fivium.els.categories.tumbledryers.controller.TumbleDryersController;
@@ -29,16 +29,12 @@ public class ProductCategory implements Category {
   private static List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
       .add(new CategoryItem(
           "AIR_CONDITIONERS",
-          "Air Conditioners",
+          "Air conditioners",
           ReverseRouter.route(on(AirConditionersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "DISHWASHERS",
           "Dishwashers",
           ReverseRouter.route(on(DishwashersController.class).renderDishwashers(null))))
-      .add(new CategoryItem(
-          "DOMESTIC_OVENS",
-          "Domestic ovens",
-          ReverseRouter.route(on(DomesticOvensController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "FRIDGES_AND_FREEZERS",
           "Fridges and freezers",
@@ -52,13 +48,17 @@ public class ProductCategory implements Category {
           "Local space heaters",
           ReverseRouter.route(on(LocalSpaceHeatersController.class).renderLocalSpaceHeaters(null))))
       .add(new CategoryItem(
-          "REFRIGERATED_STORAGE_CABINETS",
-          "Professional refrigerated storage cabinets",
-          ReverseRouter.route(on(ProfessionalRefrigeratedStorageCabinetsController.class).renderProfessionalRefrigeratedStorageCabinetsForm(null))))
+          "DOMESTIC_OVENS",
+          "Ovens",
+          ReverseRouter.route(on(DomesticOvensController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "RANGE_HOODS",
           "Range hoods",
           ReverseRouter.route(on(RangeHoodsController.class).renderRangeHoodsForm(null))))
+      .add(new CategoryItem(
+          "REFRIGERATED_STORAGE_CABINETS",
+          "Refrigerated storage cabinets for professional use",
+          ReverseRouter.route(on(ProRefrigeratedCabinetsController.class).renderProfessionalRefrigeratedStorageCabinetsForm(null))))
       .add(new CategoryItem(
           "SOLID_FUEL_BOILERS",
           "Solid fuel boilers",
@@ -106,7 +106,7 @@ public class ProductCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
+  public String getCommonProductGuidanceText() {
     return null;
   }
 

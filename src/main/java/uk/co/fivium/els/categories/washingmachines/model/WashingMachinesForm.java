@@ -6,8 +6,7 @@ import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("<p>To generate a label for a household washing machine, enter the product information in the form below.</p>" +
-    "<p>Energy labels for washing machines should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.</p>")
+@StaticProductText("Energy labels for washing machines should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.")
 public class WashingMachinesForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class indicator")

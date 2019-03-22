@@ -16,14 +16,14 @@
         font-size: 72px;
       }
 
-      .rating1 { fill: #00A651; }
-      .rating2 { fill: #50B848; }
-      .rating3 { fill: #BFD730; }
-      .rating4 { fill: #FFF200; }
-      .rating5 { fill: #FDB913; }
-      .rating6 { fill: #F37021; }
-      .rating7 { fill: #ED1C24; }   
-                    
+      .rating0 { fill: #00A651; }
+      .rating1 { fill: #50B848; }
+      .rating2 { fill: #BFD730; }
+      .rating3 { fill: #FFF200; }
+      .rating4 { fill: #FDB913; }
+      .rating5 { fill: #F37021; }
+      .rating6 { fill: #ED1C24; }
+
     </style>
   </defs>
   <title>internet-labelling-left</title>

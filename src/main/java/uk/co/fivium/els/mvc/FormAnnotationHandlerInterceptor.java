@@ -1,20 +1,30 @@
 package uk.co.fivium.els.mvc;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabelFormat;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabelOrientation;
+import uk.co.fivium.els.model.LabelMode;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.InternetLabelModeField;
 import uk.co.fivium.els.model.meta.StaticProductText;
+import uk.co.fivium.els.util.StreamUtils;
 
 @Service
 public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
@@ -32,9 +42,81 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
         modelAndView.addObject("fieldPromptMapping",  getFieldPromptMapping(form));
         getStaticProductText(form).ifPresent(t -> modelAndView.addObject("staticProductText", t));
         modelAndView.addObject("fieldWidthMapping", getFieldWidthMapping(form));
+        addInternetLabelModelObjects(request, modelAndView);
+
+        modelAndView.addObject("hiddenFields", getHiddenFields(form, modelAndView));
+
       }
     }
   }
+
+  private void addInternetLabelModelObjects(HttpServletRequest request, ModelAndView modelAndView) {
+
+    if (StringUtils.isNotBlank(request.getQueryString()) && request.getQueryString().contains("mode=INTERNET")) {
+      modelAndView.addObject("labelMode", LabelMode.INTERNET);
+      modelAndView.addObject("modeQueryParam", "?mode=INTERNET");
+    } else {
+      modelAndView.addObject("labelMode", LabelMode.ENERGY);
+    }
+
+
+    modelAndView.addObject("internetLabelFormatOptions",
+        Arrays.stream(InternetLabelFormat.values())
+          .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name))
+    );
+
+    modelAndView.addObject("internetLabelOrientationOptions",
+        Arrays.stream(InternetLabelOrientation.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, InternetLabelOrientation::getDisplayName))
+    );
+
+  }
+
+  private List<String> getHiddenFields(Object form, ModelAndView modelAndView) {
+
+    List<String> hiddenFields = new ArrayList<>();
+    Class<?> formClass = form.getClass();
+
+    LabelMode labelMode = (LabelMode) modelAndView.getModel().get("labelMode");
+    if (labelMode == LabelMode.ENERGY) {
+      // in energy mode hidden fields are those annotated with internetlabelfield
+      ReflectionUtils.doWithFields(formClass, (field -> {
+        String name = field.getName();
+        InternetLabelModeField internetLabelAnnotation = field.getAnnotation(InternetLabelModeField.class);
+        if(internetLabelAnnotation != null) {
+          hiddenFields.add(FORM_MODEL_ATTRIBUTE_NAME + "." + name);
+        }
+      }));
+
+    } else if (labelMode == LabelMode.INTERNET) {
+      // in internet mode hidden fields NOT annotated with interenetlabelfield or dual mode
+      ReflectionUtils.doWithFields(formClass, (field -> {
+        String name = field.getName();
+        InternetLabelModeField internetLabelAnnotation = field.getAnnotation(InternetLabelModeField.class);
+        DualModeField dualModeField = field.getAnnotation(DualModeField.class);
+        if(internetLabelAnnotation == null && dualModeField == null) {
+          hiddenFields.add(FORM_MODEL_ATTRIBUTE_NAME + "." + name);
+        }
+      }));
+    }
+    return hiddenFields;
+  }
+
+//  private List<String> getInternetLabellingFields(Object form) {
+//    List<String> internetLabellingFields = new ArrayList<>();
+//    Class<?> formClass = form.getClass();
+//
+//    ReflectionUtils.doWithFields(formClass, (field -> {
+//      String name = field.getName();
+//      InternetLabelModeField internetLabelAnnotation = field.getAnnotation(InternetLabelModeField.class);
+//      if(internetLabelAnnotation != null) {
+//
+//        internetLabellingFields.add(FORM_MODEL_ATTRIBUTE_NAME + "." + name);
+//      }
+//    }));
+//
+//    return internetLabellingFields;
+//  }
 
   private Map<String, String> getFieldPromptMapping(Object form) {
     Map<String, String> fieldPrompts = new HashMap<>();

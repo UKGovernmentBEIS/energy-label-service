@@ -7,12 +7,12 @@ import uk.co.fivium.els.model.meta.FieldPrompt;
 @GroupSequenceProvider(GasOvensFormSequenceProvider.class)
 public class GasOvensForm extends DomesticOvensForm {
 
-  @FieldPrompt("Energy consumption per cycle expressed in MJ/cycle: heating function (conventional)")
-  @Digits(integer = 1, fraction = 2, message = "Enter the consumption per cycle of the heating function, 1 digit with up to 2 decimal places")
+  @FieldPrompt("Energy consumption of the conventional heating function per cycle, in MJ/cycle")
+  @Digits(integer = 1, fraction = 2, message = "Enter the energy consumption of the conventional heating function per cycle as 1 digit with up to 2 decimal places")
   private String conventionalMjConsumption;
 
-  @FieldPrompt("Energy consumption per cycle expressed in MJ/cycle: Forced air convection (if available) ")
-  @Digits(groups = FanOvenGroup.class, integer = 1, fraction = 2, message = "Enter the consumption per cycle of the forced air convection, 1 digit with up to 2 decimal places")
+  @FieldPrompt("Energy consumption of the fan-forced heating function per cycle, in MJ/cycle")
+  @Digits(groups = FanOvenGroup.class, integer = 1, fraction = 2, message = "Enter the energy consumption of the fan-forced heating function per cycle as 1 digit with up to 2 decimal places")
   private String convectionMjConsumption;
 
   public String getConventionalMjConsumption() {

@@ -2,15 +2,19 @@ package uk.co.fivium.els.categories.spaceheaters.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.common.LoadProfile;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.co.fivium.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
@@ -31,7 +37,6 @@ import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
-import java.util.Arrays;
 
 @Controller
 @RequestMapping("/categories/space-heaters")
@@ -42,14 +47,19 @@ public class SpaceHeatersController extends CategoryController {
   private final PdfRenderer pdfRenderer;
   private final SpaceHeatersService spaceHeatersService;
   private final BreadcrumbService breadcrumbService;
+  private final InternetLabelService internetLabelService;
 
 
   @Autowired
-  public SpaceHeatersController(PdfRenderer pdfRenderer, SpaceHeatersService spaceHeatersService, BreadcrumbService breadcrumbService) {
+  public SpaceHeatersController(PdfRenderer pdfRenderer,
+                                SpaceHeatersService spaceHeatersService,
+                                BreadcrumbService breadcrumbService,
+                                InternetLabelService internetLabelService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, SpaceHeaterCategory.GET, SpaceHeatersController.class);
     this.pdfRenderer = pdfRenderer;
     this.spaceHeatersService = spaceHeatersService;
     this.breadcrumbService = breadcrumbService;
+    this.internetLabelService = internetLabelService;
   }
 
   @GetMapping("/low-temperature-heat-pump-space-heaters")
@@ -69,7 +79,19 @@ public class SpaceHeatersController extends CategoryController {
   @PostMapping("/low-temperature-heat-pump-space-heaters")
   @ResponseBody
   public Object handleLowTemperatureHeatPumpSpaceHeatersSubmit(@Valid @ModelAttribute("form") LowTemperatureHeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidLowTemp(form, bindingResult, (category -> {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }));
+  }
 
+  @PostMapping(value = "/low-temperature-heat-pump-space-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelLowTemperatureHeatPumpSpaceHeatersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LowTemperatureHeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidLowTemp(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getLowTempEfficiencyRating(), category, "space-heaters")));
+  }
+
+  private Object doIfValidLowTemp(LowTemperatureHeatPumpSpaceHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
     validateLowTempEfficiencyRating(form, bindingResult);
 
     if (bindingResult.hasErrors()) {
@@ -77,8 +99,7 @@ public class SpaceHeatersController extends CategoryController {
     }
     else {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
-      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+      return function.apply(category);
     }
   }
 
@@ -90,7 +111,19 @@ public class SpaceHeatersController extends CategoryController {
   @PostMapping("/heat-pump-space-heaters")
   @ResponseBody
   public Object handleHeatPumpSpaceHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidHeatPump(form, bindingResult, (category -> {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }));
+  }
 
+  @PostMapping(value = "/heat-pump-space-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelHeatPumpSpaceHeatersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") HeatPumpSpaceHeatersForm form, BindingResult bindingResult) {
+    return doIfValidHeatPump(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getLowTempEfficiencyRating(), category, "space-heaters")));
+  }
+
+  private Object doIfValidHeatPump(HeatPumpSpaceHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
     validateLowTempEfficiencyRating(form, bindingResult);
 
     if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getMediumTempEfficiencyRating())) {
@@ -105,8 +138,7 @@ public class SpaceHeatersController extends CategoryController {
     }
     else {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
-      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+      return function.apply(category);
     }
   }
 
@@ -118,7 +150,19 @@ public class SpaceHeatersController extends CategoryController {
   @PostMapping("/heat-pump-combination-heaters")
   @ResponseBody
   public Object handleHeatPumpCombinationHeatersSubmit(@Valid @ModelAttribute("form") HeatPumpCombinationHeatersForm form, BindingResult bindingResult) {
+    return doIfValidCombinationHeater(form, bindingResult, (category -> {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }));
+  }
 
+  @PostMapping(value = "/heat-pump-combination-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelHeatPumpCombinationHeatersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") HeatPumpCombinationHeatersForm form, BindingResult bindingResult) {
+    return doIfValidCombinationHeater(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getSpaceHeatingEfficiencyRating(), category, "space-heaters")));
+  }
+
+  private Object doIfValidCombinationHeater(HeatPumpCombinationHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
     if (!StringUtils.isBlank(form.getApplicableLegislation()) && !StringUtils.isBlank(form.getSpaceHeatingEfficiencyRating())) {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
       if (!LegislationCategory.isPrimaryRatingClassValid(form.getSpaceHeatingEfficiencyRating(), category)) {
@@ -138,8 +182,7 @@ public class SpaceHeatersController extends CategoryController {
     }
     else {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
-      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+      return function.apply(category);
     }
   }
 
@@ -174,6 +217,7 @@ public class SpaceHeatersController extends CategoryController {
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
+    super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
         SpaceHeatersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
   }

@@ -32,6 +32,7 @@
   backLink=false
   phaseBanner=true
   pageTitle=""
+  showInsetText=false
   >
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
@@ -103,22 +104,28 @@
               <@govukErrorSummary.errorSummary errorItems=errorList/>
             </#if>
 
-            <#if caption?has_content>
-              <span class="${captionClass}">${caption}</span>
+            <#if labelMode?has_content && labelMode=='INTERNET'>
+              <span class="${captionClass}">Internet label</span>
             </#if>
             <#--GOVUK heading class names https://design-system.service.gov.uk/styles/typography/-->
             <#if heading>
               <h1 class="${headingCssClass}">${pageHeading}</h1>
             </#if>
 
-            <#if staticProductText?has_content>
-              <div class="govuk-inset-text">
-                ${staticProductText?no_esc}
-                <p>
-                  You can also <a class="govuk-link" href="/not-yet-implemented">generate a nested arrow</a> for products sold via the internet.
-                </p>
-              </div>
+              <#if showInsetText>
+                <div class="govuk-inset-text">
+                  <#if labelMode?has_content && labelMode=='INTERNET'>
+                    <p>
+                      For a full energy label you can print you can <a class="govuk-link" href="?mode=ENERGY">generate a PDF energy label</a>.
+                    </p>
+                  <#else>
+                    <p>
+                      Fill in this form to get an energy label you can print. If the product will be shown on a website, you must also <a class="govuk-link" href="?mode=INTERNET">get an online version of the label</a>.
+                    </p>
+                  </#if>
+                </div>
             </#if>
+
 
             <#nested>
           </div>

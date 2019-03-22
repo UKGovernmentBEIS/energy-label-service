@@ -17,15 +17,15 @@ public class LampsCategory implements Category {
   private static List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
     .add(new CategoryItem(
         "LAMPS",
-        "Label with supplier's name/trademark, model identifier, energy rating and weighted energy consumption",
+        "The energy rating, weighted energy consumption, the supplier's name and model identification code",
         ReverseRouter.route(on(LampsController.class).renderLamps(null))))
     .add(new CategoryItem(
         "LAMPS_EX_NAME_MODEL",
-        "Label with energy rating and weighted energy consumption only",
+        "The energy rating and weighted energy consumption only",
         ReverseRouter.route(on(LampsController.class).renderLampsExNameModel(null))))
     .add(new CategoryItem(
         "LAMPS_EX_NAME_MODEL_CONSUMPTION",
-        "Label with energy rating only",
+        "The energy rating only",
         ReverseRouter.route(on(LampsController.class).renderLampsExNameModelConsumption(null))))
     .build();
 
@@ -33,18 +33,24 @@ public class LampsCategory implements Category {
 
   @Override
   public String getCategoryQuestionText() {
-    return "What type of label do you need for this lamp?";
+    return "What information should the label include about the lamp?";
   }
 
   @Override
   public String getNoSelectionErrorMessage() {
-    return "Select a type of label";
+    return "Select the information which should be included on the label";
+  }
+
+  // Lamps are a special case where the internet label link should also on the subcategory guidance page since the subcategories are not separate products,
+  // they are variants of the same 'type' of product
+  @Override
+  public String getCategoryPageGuidanceText() {
+    return "If the product will be shown on a website, you must also <a class=\"govuk-link\" href=\"lamps?mode=INTERNET\">get an online version of the label</a>";
   }
 
   @Override
-  public String getGuidanceText() {
-    return "<p>To generate an energy label for a lamp, select what you want on the label below and enter the product information on the next page.</p>" +
-        "<p>Energy labels for lamps should be at least 36mm x 76mm when printed, unless the packaging is not large enough to accommodate this. This label can be displayed either in colour or in black and white.</p>";
+  public String getCommonProductGuidanceText() {
+    return "Energy labels for lamps should be at least 36mm x 76mm when printed, unless the packaging is not large enough to accommodate this. This label can be displayed either in colour or in black and white.";
   }
 
   @Override
