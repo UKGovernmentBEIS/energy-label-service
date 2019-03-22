@@ -3,39 +3,42 @@ package uk.co.fivium.els.categories.refrigeratingappliances.model;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
 @GroupSequenceProvider(RefrigeratingAppliancesFormSequenceProvider.class)
 public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class")
-  @NotBlank(message = "Select an energy efficiency class")
+  @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
   private String annualEnergyConsumption;
 
-  @FieldPrompt("Does this model have at least one refrigerator compartment?")
-  @NotNull
+  @FieldPrompt("Does the model have any fridge compartments? <br /> A fridge compartment has no star rating and a temperature above minus 6 degrees centigrade")
+  @NotNull(message = "Specify if the model has any fridge compartments")
   private Boolean nonRatedCompartment;
 
-  @FieldPrompt("Sum of the storage volumes of all compartments that do not merit a star rating (i.e. operating temperature over minus 6°C) in litres")
-  @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that do not merit a star rating, up to 3 digits long")
+  @FieldPrompt("Total storage volume of fridge compartments in litres (l)")
+  @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total storage volume of fridge compartments in litres up to 3 digits long")
   private String nonRatedVolume;
 
-  @FieldPrompt("Does this model have at least one freezer compartment?")
-  @NotNull
+  @FieldPrompt("Does the model have any freezer compartments? <br /> A freezer compartment has a star rating between 1 and 4, and a temperature of minus 6 degrees centigrade or below")
+  @NotNull(message = "Specify if the model has any freezer compartments")
   private Boolean ratedCompartment;
 
-  @FieldPrompt("Sum of the storage volumes of all frozen-food storage compartments that merit a star rating (i.e. operating temperature less than or equal to minus 6°C) in litres")
-  @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of compartments that merit a star rating, up to 3 digits long")
+  @FieldPrompt("Total storage volume of freezer compartments in litres (l)")
+  @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of freezer compartments in litres, up to 3 digits long")
   private String ratedVolume;
 
-  @FieldPrompt("Star rating of the compartments")
+  @FieldPrompt("Star rating of the largest freezer compartment")
   @NotBlank(groups = FreezerGroup.class, message = "Select a star rating")
   private String starRating;
 

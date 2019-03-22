@@ -41,9 +41,8 @@ public class TumbleDryerCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
-    return "<p>To generate a label for an air-vented household tumble dryer, a condenser tumble dryer or a gas-fired tumble dryer, select your label type below and enter the relevant information on the next page.</p>" +
-        "<p>Energy labels for tumble dryers should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.</p>";
+  public String getCommonProductGuidanceText() {
+    return "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed.";
   }
 
   @Override

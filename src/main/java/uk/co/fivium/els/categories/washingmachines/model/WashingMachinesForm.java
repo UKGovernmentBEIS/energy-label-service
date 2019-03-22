@@ -2,16 +2,19 @@ package uk.co.fivium.els.categories.washingmachines.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("<p>To generate a label for a household washing machine, enter the product information in the form below.</p>" +
-    "<p>Energy labels for washing machines should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.</p>")
+@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed.")
 public class WashingMachinesForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class indicator")
-  @NotBlank(message = "Select an energy efficiency class")
+  @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Weighted energy consumption (EC) in kWh per 1 000 hours, rounded up to the nearest integer")

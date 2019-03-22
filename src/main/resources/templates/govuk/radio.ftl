@@ -16,36 +16,39 @@
   <#local errorList=spring.status.errorMessages>
   <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
   <#local fieldName=spring.status.expression>
+  <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
 
-  <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=fieldPrompt legendSize=legendSize legendHeadingClass=legendHeadingClass productGuidanceText=guidanceText mandatory=mandatory>
-      <#if hasError>
-        <span id="${id}-error" class="govuk-error-message">
-          ${errorList?join(" ")}
-        </span>
-      </#if>
-      <#if splitList=false>
-        <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="radios">
-      </#if>
-        <#list radioItems?keys as item>
-          <#assign isSelected = spring.stringStatusValue == item>
-          <div class="govuk-radios__item">
+  <#if !hiddenField>
+    <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
+      <@radioFieldset.fieldset legendHeading=fieldPrompt legendSize=legendSize legendHeadingClass=legendHeadingClass productGuidanceText=guidanceText mandatory=mandatory>
+        <#if hasError>
+          <span id="${id}-error" class="govuk-error-message">
+            ${errorList?join(" ")}
+          </span>
+        </#if>
+        <#if splitList=false>
+          <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="radios">
+        </#if>
+          <#list radioItems?keys as item>
+            <#assign isSelected = spring.stringStatusValue == item>
+            <div class="govuk-radios__item">
             <input class="govuk-radios__input" id="${id}<#if item?counter != 1>-${item}</#if>" name="${fieldName}" type="radio" value="${item}" <#if isSelected>checked="checked"</#if> <#if hiddenContentId?has_content>data-aria-controls="${hiddenContentId}"</#if>>
-            <label class="govuk-label govuk-radios__label" for="${id}<#if item?counter != 1>-${item}</#if>">
-              ${radioItems[item]}
-            </label>
-          </div>
-        </#list>
-        <#if hiddenContentId?has_content>
-          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="${hiddenContentId}">
-            <#nested/>
+              <label class="govuk-label govuk-radios__label" for="${id}<#if item?counter != 1>-${item}</#if>">
+                ${radioItems[item]}
+              </label>
+            </div>
+          </#list>
+          <#if hiddenContentId?has_content>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="${hiddenContentId}">
+              <#nested/>
+            </div>
+          </#if>
+        <#if splitList=false>
           </div>
         </#if>
-      <#if splitList=false>
-        </div>
-      </#if>
-    </@radioFieldset.fieldset>
-  </div>
+      </@radioFieldset.fieldset>
+    </div>
+  </#if>
 </#macro>
 
 <#macro radioYesNo path label="" inline=true hiddenQuestionsWithYesSelected=false hiddenQuestionsWithNoSelected=false>
@@ -57,38 +60,41 @@
   <#local fieldPrompt=fieldPromptMapping[spring.status.path]!label>
   <#local fieldName=spring.status.expression>
   <#local displayValue=spring.status.displayValue>
+  <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
 
-  <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-    <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" mandatory=true>
-      <#if hasError>
-        <span id="${id}-error" class="govuk-error-message">
-          ${errorList?join(" ")}
-        </span>
-      </#if>
-      <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="radios">
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="${id}" name="${fieldName}" type="radio" value="true"<#if displayValue == "true"> checked="checked"</#if> <#if hiddenQuestionsWithYesSelected=true>data-aria-controls="hidden-content-with-yes-selected-${id}"</#if>>
-          <label class="govuk-label govuk-radios__label" for="${id}">
-            Yes
-          </label>
-        </div>
-        <#if hiddenQuestionsWithYesSelected=true>
-          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="hidden-content-with-yes-selected-${id}">
-            <#nested/>
-          </div>
+  <#if !hiddenField>
+    <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
+      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" mandatory=true>
+        <#if hasError>
+          <span id="${id}-error" class="govuk-error-message">
+            ${errorList?join(" ")}
+          </span>
         </#if>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="no-label-${id}" name="${fieldName}" type="radio" value="false"<#if displayValue == "false"> checked="checked"</#if> <#if hiddenQuestionsWithNoSelected=true>data-aria-controls="hidden-content-with-no-selected-${id}"</#if>>
-          <label class="govuk-label govuk-radios__label" for="no-label-${id}">
-            No
-          </label>
-        </div>
-        <#if hiddenQuestionsWithNoSelected=true>
-          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="hidden-content-with-no-selected-${id}">
-            <#nested/>
+        <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="${id}" name="${fieldName}" type="radio" value="true"<#if displayValue == "true"> checked="checked"</#if> <#if hiddenQuestionsWithYesSelected=true>data-aria-controls="hidden-content-with-yes-selected-${id}"</#if>>
+            <label class="govuk-label govuk-radios__label" for="${id}">
+              Yes
+            </label>
           </div>
-        </#if>
-      </div>
-    </@radioFieldset.fieldset>
-  </div>
+          <#if hiddenQuestionsWithYesSelected=true>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="hidden-content-with-yes-selected-${id}">
+              <#nested/>
+            </div>
+          </#if>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="no-label-${id}" name="${fieldName}" type="radio" value="false"<#if displayValue == "false"> checked="checked"</#if> <#if hiddenQuestionsWithNoSelected=true>data-aria-controls="hidden-content-with-no-selected-${id}"</#if>>
+            <label class="govuk-label govuk-radios__label" for="no-label-${id}">
+              No
+            </label>
+          </div>
+          <#if hiddenQuestionsWithNoSelected=true>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="hidden-content-with-no-selected-${id}">
+              <#nested/>
+            </div>
+          </#if>
+        </div>
+      </@radioFieldset.fieldset>
+    </div>
+  </#if>
 </#macro>

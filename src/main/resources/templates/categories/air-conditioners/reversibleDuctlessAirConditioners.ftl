@@ -10,14 +10,14 @@
   <@govukTextInput.textInput path="form.soundPowerLevelIndoors"/>
   <@govukTextInput.textInput path="form.soundPowerLevelOutdoors"/>
 
-  <@govukFieldset.fieldset legendHeading="Average climate conditions">
+  <@govukFieldset.fieldset legendHeading="Average climate conditions" showInInternetLabelling=false>
     <@govukSelect.select path="form.averageHeatingEfficiencyRating" options=efficiencyRating/>
     <@govukTextInput.textInput path="form.averageHeatingDesignLoad"/>
     <@govukTextInput.textInput path="form.averageScop"/>
     <@govukTextInput.textInput path="form.averageAnnualEnergyConsumption"/>
   </@govukFieldset.fieldset>
 
-  <@govukFieldset.fieldset legendHeading="Warmer climate conditions">
+  <@govukFieldset.fieldset legendHeading="Warmer climate conditions" showInInternetLabelling=false>
     <@govukRadios.radioYesNo path="form.warmerConditions" inline=false hiddenQuestionsWithYesSelected=true>
       <@govukSelect.select path="form.warmerHeatingEfficiencyRating" options=efficiencyRating/>
       <@govukTextInput.textInput path="form.warmerHeatingDesignLoad"/>
@@ -26,7 +26,7 @@
     </@govukRadios.radioYesNo>
   </@govukFieldset.fieldset>
 
-  <@govukFieldset.fieldset legendHeading="Colder climate conditions">
+  <@govukFieldset.fieldset legendHeading="Colder climate conditions" showInInternetLabelling=false>
     <@govukRadios.radioYesNo path="form.colderConditions" inline=false hiddenQuestionsWithYesSelected=true>
       <@govukSelect.select path="form.colderHeatingEfficiencyRating" options=efficiencyRating/>
       <@govukTextInput.textInput path="form.colderHeatingDesignLoad"/>

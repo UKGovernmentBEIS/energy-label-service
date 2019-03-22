@@ -1,18 +1,20 @@
 package uk.co.fivium.els.categories.dishwashers.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
+import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("<p>To generate an energy label for a domestic dishwasher, enter the product information into the form below.</p>" +
-    "<p>Energy labels for domestic dishwashers should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.</p>")
+@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed.")
 public class DishwashersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class indicator")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")
@@ -23,7 +25,7 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   @Digits(integer = 4, fraction = 0, message = "Enter an annual water consumption, up to 4 digits long")
   private String annualWaterConsumption;
 
-  @FieldPrompt("Rated capacity in standard place settings, for the standard cleaning cycle")
+  @FieldPrompt("Rated capacity for the standard cleaning cycle")
   @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long")
   private String capacity;
 

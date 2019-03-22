@@ -37,9 +37,8 @@ public class RefrigeratingAppliancesCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
-    return "<p>To generate an energy label for a domestic fridge, freezer or wine cooler, select your product type below and enter the product information on the next page.</p>" +
-        "<p>Energy labels for domestic fridges, freezers or wine coolers should be at least 110mm x 220mm when printed. The label should then be displayed so that it is easily readable and clearly associated with the product.</p>";
+  public String getCommonProductGuidanceText() {
+    return "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 110mm x 220mm when printed.";
   }
 
   @Override

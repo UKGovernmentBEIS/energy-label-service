@@ -6,7 +6,7 @@ public interface Category {
 
   String getCategoryQuestionText();
   String getNoSelectionErrorMessage();
-  String getGuidanceText();
+  String getCommonProductGuidanceText();
   List<CategoryItem> getCategoryItems();
 
   default CategoryItem getCategoryItem(String id) {
@@ -14,5 +14,10 @@ public interface Category {
         .filter(c -> c.getId().equals(id))
         .findFirst()
         .orElseThrow(() -> new RuntimeException(String.format("Cannot find category item with id '%s'", id)));
+  }
+
+  // Currently only Lamps have help text on the category page
+  default String getCategoryPageGuidanceText() {
+    return null;
   }
 }

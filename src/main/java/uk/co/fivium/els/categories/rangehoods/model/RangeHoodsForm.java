@@ -1,22 +1,25 @@
 package uk.co.fivium.els.categories.rangehoods.model;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-
-@StaticProductText("<p>To generate a label for a range hood, enter the product information in the form below.</p>" +
-    "<p>Energy labels for range hoods should be at least 60mm x 120mm when printed. This label should then be displayed so that it is easily readable and clearly associated with the product.</p>")
+@StaticProductText("You must display the label so that it’s easy to see and clearly related to the product. It must be at least 110mm x 220mm when printed.")
 public class RangeHoodsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market")
+  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String applicableLegislation;
 
   @FieldPrompt("Energy efficiency class indicator")
-  @NotBlank(message = "Select an energy efficiency indicator")
+  @NotBlank(message = "Select an energy efficiency indicator" , groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String efficiencyRating;
 
   @FieldPrompt("Annual energy consumption - AEC hood (kWh/annum)")

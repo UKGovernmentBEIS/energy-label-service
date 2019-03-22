@@ -21,7 +21,7 @@ public class VentilationUnitCategory implements Category {
       .add(new CategoryItem(
           "BIDIRECTIONAL_VENTILATION_UNITS",
           "Bidirectional ventilation units",
-          ReverseRouter.route(on(VentilationUnitsController.class).renderUnidirectionalVentilationUnits(null))))
+          ReverseRouter.route(on(VentilationUnitsController.class).renderBidirectionalVentilationUnits(null))))
       .build();
 
   private VentilationUnitCategory(){}
@@ -37,9 +37,8 @@ public class VentilationUnitCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
-    return "<p>To generate a label for a unidirectional or bidirectional ventilation unit, select your label type below and enter the relevant information on the next page.</p>" +
-        "<p>Energy labels for ventilation unites should be at least 75mm x 150mm when printed. This label should then be displayed so that it is easily readable and clearly associated with the product.</p>";
+  public String getCommonProductGuidanceText() {
+    return "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 75mm x 150mm when printed.";
   }
 
   @Override

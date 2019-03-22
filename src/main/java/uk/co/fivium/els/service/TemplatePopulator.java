@@ -56,7 +56,9 @@ public class TemplatePopulator {
     svgGroupElement.attr("transform", String.format("translate(0,%s)", yAxisTransform));
 
     setText(parentElementId+"Letter", rating.getLetter());
-    setText(parentElementId+"Plusses", rating.getPlusses());
+    if (template.getElementById(parentElementId + "Plusses") != null) {
+      setText(parentElementId + "Plusses", rating.getPlusses());
+    }
 
     return this;
   }
@@ -77,6 +79,27 @@ public class TemplatePopulator {
     TemplateUtils.getElementById(template, elementId).remove();
 
     return this;
+  }
+
+  public TemplatePopulator scaleSvg(double scaleFactor) {
+
+    int width = Integer.parseInt(TemplateUtils.getSvgElement(template).attr("width"));
+    int height = Integer.parseInt(TemplateUtils.getSvgElement(template).attr("height"));
+
+    double scaledWidth = width * scaleFactor;
+    double scaledHeight = height * scaleFactor;
+
+    TemplateUtils.getSvgElement(template).attr("width", String.valueOf(scaledWidth));
+    TemplateUtils.getSvgElement(template).attr("height", String.valueOf(scaledHeight));
+
+    return this;
+  }
+
+  public TemplatePopulator transformInternetLabel(RatingClass selectedRating, RatingClassRange ratingClassRange) {
+   TemplateUtils.getElementById(template, "ratingArrow").addClass("rating" + calculateRatingColourIndex(selectedRating, ratingClassRange));
+    setText("ratingLetter", selectedRating.getLetter());
+    setText("ratingPlusses", selectedRating.getPlusses());
+   return this;
   }
 
   public Document getPopulatedDocument() {
@@ -100,5 +123,20 @@ public class TemplatePopulator {
     }
   }
 
+  private int calculateRatingColourIndex(RatingClass selectedRating, RatingClassRange ratingClassRange) {
+    RatingClass maxRating = ratingClassRange.getHighestRating();
+
+    if(selectedRating == maxRating) {
+      return 0;
+    } else {
+      int index = selectedRating.ordinal() - maxRating.ordinal();
+      // Cap index at 6, any 'lower' ratings are the same Red colour
+      if (index > 6) {
+        index = 6;
+      }
+      return index;
+    }
+
+  }
 
 }

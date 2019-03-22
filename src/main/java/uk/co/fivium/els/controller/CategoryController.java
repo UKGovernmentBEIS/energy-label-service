@@ -54,6 +54,10 @@ public class CategoryController {
     }
   }
 
+  public void addCommonProductGuidance(ModelAndView modelAndView) {
+    modelAndView.addObject("commonProductGuidance", category.getCommonProductGuidanceText());
+  }
+
   private ModelAndView getCategoryModelAndView(List<FieldError> errors) {
 
     ModelAndView modelAndView = new ModelAndView("standardCategorySelectionPage");
@@ -63,7 +67,7 @@ public class CategoryController {
     );
     ControllerUtils.addErrorSummary(modelAndView, errors);
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(controllerClass).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
-    modelAndView.addObject("categoryGuidanceText", category.getGuidanceText());
+    modelAndView.addObject("categoryGuidanceText", category.getCategoryPageGuidanceText());
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, stageText);
     return modelAndView;
   }

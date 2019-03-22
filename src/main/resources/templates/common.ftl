@@ -6,14 +6,19 @@
 </#macro>
 
 <#macro generateLabelButton>
-  <@govukButton.button buttonText="Generate label" buttonClass="govuk-button"/>
+  <@govukButton.button buttonText="Download label" buttonClass="govuk-button"/>
+</#macro>
+
+<#macro generateInternetLabelButton>
+  <@govukButton.button buttonText="Download internet label" buttonClass="govuk-button"/>
 </#macro>
 
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
 <#macro standardProductForm title includeSupplierNameModel=true>
-  <@defaultPage pageHeading=title>
-    <@form.govukForm submitUrl>
+
+  <@defaultPage pageHeading=title showInsetText=true>
+    <@form.govukForm submitUrl + modeQueryParam!"">
 
       <#if includeSupplierNameModel>
         <@supplierNameModel/>
@@ -21,7 +26,25 @@ Includes the wrapping form element, the generate label button and optionally the
 
       <#nested/>
 
-      <@generateLabelButton/>
+      <#if labelMode?has_content && labelMode == 'INTERNET'>
+        <@govukTextInput.textInput path="form.productPriceHeightPx"/>
+        <@govukRadios.radio path="form.labelOrientation" radioItems=internetLabelOrientationOptions/>
+        <@govukRadios.radio path="form.labelFormat" radioItems=internetLabelFormatOptions/>
+        <@generateInternetLabelButton/>
+      <#else>
+
+        <#if staticProductText?has_content>
+          <div class="govuk-inset-text">
+            ${staticProductText?no_esc}
+          </div>
+        <#elseif commonProductGuidance?has_content>
+          <div class="govuk-inset-text">
+            ${commonProductGuidance?no_esc}
+          </div>
+        </#if>
+
+        <@generateLabelButton/>
+      </#if>
 
     </@form.govukForm>
   </@defaultPage>
