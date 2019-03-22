@@ -9,7 +9,7 @@ import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("Energy labels for washing machines should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.")
+@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed.")
 public class WashingMachinesForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class indicator")

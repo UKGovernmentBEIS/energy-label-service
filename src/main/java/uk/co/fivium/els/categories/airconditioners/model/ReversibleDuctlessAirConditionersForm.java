@@ -7,7 +7,9 @@ import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
+@StaticProductText("The label must be at least 120mm x 210mm when printed")
 @GroupSequenceProvider(ReversibleDuctlessAirConditionersFormSequenceProvider.class)
 public class ReversibleDuctlessAirConditionersForm extends MultipleClimateGroupForm {
 

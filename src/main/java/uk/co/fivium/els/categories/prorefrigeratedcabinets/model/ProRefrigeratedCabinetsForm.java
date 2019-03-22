@@ -11,7 +11,7 @@ import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("Energy labels for professional refrigerated storage cabinets should be at least 110mm x 220mm when printed. This label should then be displayed so that it is easily readable and clearly associated with the product.")
+@StaticProductText("You must display the label so that it’s easy to see and clearly related to the product. It must be at least 110mm x 220mm when printed.")
 @GroupSequenceProvider(ProRefrigeratedCabinetsSequenceProvider.class)
 public class ProRefrigeratedCabinetsForm extends StandardTemplateForm30Char {
 

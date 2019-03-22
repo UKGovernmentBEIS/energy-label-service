@@ -10,7 +10,7 @@ import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("Energy labels for televisions should be at least 60mm x 120mm when printed. This label should then be displayed so that it is easily readable and clearly associated with the product.")
+@StaticProductText("You must display the label so that it’s easy to see and clearly related to the product. It must be at least 60mm x 120mm when printed.")
 public class TelevisionsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("When was the product first placed on the market?")

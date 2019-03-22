@@ -42,7 +42,7 @@ public class TumbleDryerCategory implements Category {
 
   @Override
   public String getCommonProductGuidanceText() {
-    return "Energy labels for tumble dryers should be at least 110mm x 220mm when printed. The label should then be attached to the front or top of the product so that it is clearly visible.";
+    return "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed.";
   }
 
   @Override

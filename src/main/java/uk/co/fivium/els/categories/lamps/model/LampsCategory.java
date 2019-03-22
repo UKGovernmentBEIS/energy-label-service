@@ -50,7 +50,7 @@ public class LampsCategory implements Category {
 
   @Override
   public String getCommonProductGuidanceText() {
-    return "Energy labels for lamps should be at least 36mm x 76mm when printed, unless the packaging is not large enough to accommodate this. This label can be displayed either in colour or in black and white.";
+    return "The label should usually be at least 36mm x 76mm when attached to packaging, but you can make it smaller if it doesn't fit. It can be full colour or black and white.";
   }
 
   @Override
