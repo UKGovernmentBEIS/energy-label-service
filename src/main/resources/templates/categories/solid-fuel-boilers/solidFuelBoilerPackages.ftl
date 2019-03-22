@@ -4,11 +4,11 @@
 
     <@govukSelect.select path="form.boilerEfficiencyRating" options=efficiencyRating/>
 
+    <@govukSelect.select path="form.packageEfficiencyRating" options=efficiencyRating/>
+
     <@govukRadios.radioYesNo path="form.solarCollector"/>
     <@govukRadios.radioYesNo path="form.hotWaterStorageTank"/>
     <@govukRadios.radioYesNo path="form.temperatureControl"/>
     <@govukRadios.radioYesNo path="form.spaceHeater"/>
-
-    <@govukSelect.select path="form.packageEfficiencyRating" options=efficiencyRating/>
 
 </@common.standardProductForm>

@@ -1,14 +1,13 @@
 package uk.co.fivium.els.categories.solidfuelboilers.model;
 
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import uk.co.fivium.els.categories.common.Category;
 import uk.co.fivium.els.categories.common.CategoryItem;
 import uk.co.fivium.els.categories.solidfuelboilers.controller.SolidFuelBoilersController;
 import uk.co.fivium.els.mvc.ReverseRouter;
-
-import java.util.List;
-
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 public class SolidFuelBoilerCategory implements Category {
 
@@ -38,9 +37,8 @@ public class SolidFuelBoilerCategory implements Category {
   }
 
   @Override
-  public String getGuidanceText() {
-    return "<p>To generate a label for a solid fuel boiler, or packages of a solid fuel boiler, supplementary heaters, temperature controls and solar devices select your label type below and enter the relevant information on the next page.</p>" +
-        "<p>Energy labels for products should be 105mm x 200mm while package labels should be 210mm x 297mm. The label, for either the package, the product, or both as required, should be displayed at the point of sale so that it is easily readable and clearly associated with the product.</p>";
+  public String getCommonProductGuidanceText() {
+    return "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be 105mm x 200mm on the product or 210mm x 297mm on packaging.";
   }
 
   @Override

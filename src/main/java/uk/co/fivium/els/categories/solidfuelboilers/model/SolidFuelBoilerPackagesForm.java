@@ -1,10 +1,12 @@
 package uk.co.fivium.els.categories.solidfuelboilers.model;
 
-import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
-import uk.co.fivium.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
+import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.model.meta.DualModeField;
+import uk.co.fivium.els.model.meta.FieldPrompt;
 
 public class SolidFuelBoilerPackagesForm extends StandardTemplateForm50Char {
 
@@ -29,7 +31,8 @@ public class SolidFuelBoilerPackagesForm extends StandardTemplateForm50Char {
   private Boolean spaceHeater;
 
   @FieldPrompt("Energy efficiency class of the package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices")
-  @NotBlank(message = "Select an energy efficiency indicator for the complete package")
+  @NotBlank(message = "Select an energy efficiency indicator for the complete package", groups = {Default.class, InternetLabellingGroup.class})
+  @DualModeField
   private String packageEfficiencyRating;
 
   public String getBoilerEfficiencyRating() {
