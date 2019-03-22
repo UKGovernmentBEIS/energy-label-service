@@ -103,7 +103,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
 
   @PostMapping(value = "/wine-storage-appliances", params = "mode=INTERNET")
   @ResponseBody
-  public Object handleInternetLabelWineStorageAppliancesSubmit(@Valid @ModelAttribute("form") WineStorageAppliancesForm form, BindingResult bindingResult) {
+  public Object handleInternetLabelWineStorageAppliancesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") WineStorageAppliancesForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     }
