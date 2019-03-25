@@ -63,6 +63,37 @@ public class SpaceHeatersService {
       .getPopulatedDocument();
   }
 
+  public Document generateHtml(BoilerCombinationHeatersForm form, LegislationCategory legislationCategory) {
+    String templatePath;
+    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+      templatePath = "labels/space-heaters/boiler-combination-heaters-2015.svg";
+    }
+    else {
+      templatePath = "labels/space-heaters/boiler-combination-heaters-2019.svg";
+    }
+
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
+
+    if (form.getOffPeak()) {
+      templatePopulator.applyCssClassToId("offPeakMode", "hasOffPeakMode");
+    }
+
+    if (StringUtils.isNotBlank(form.getSoundPowerLevelIndoors())) {
+      templatePopulator
+        .applyCssClassToId("dbSection", "hasDbSection")
+        .setText("db", form.getSoundPowerLevelIndoors());
+    }
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("kw", form.getHeatOutput())
+      .setText("db", form.getSoundPowerLevelIndoors())
+      .setRatingArrow("spaceHeatingRating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange(), "data-rating-increment-space-heating")
+      .setRatingArrow("waterHeatingRating", RatingClass.valueOf(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
+      .getPopulatedDocument();
+  }
+
   public Document generateHtml(CogenerationSpaceHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
     if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {

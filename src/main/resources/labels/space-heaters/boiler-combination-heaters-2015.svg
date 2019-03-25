@@ -502,8 +502,8 @@
     <text id="spaceHeatingRatingLetter" class="cls-39" transform="translate(107.29004 187.97003)">A</text>
     <text id="spaceHeatingRatingPlusses" class="cls-40" transform="translate(119.62012 182.01007)">++</text>
   </g>
-  <g id="waterHeatingRatingArrow">
-    <polyline id="waterHeatingRatingArrow-2" data-name="waterHeatingRatingArrow" class="cls-38" points="230.74 184.88 243.38 172.12 270.96 172.12 270.96 197.86 243.61 197.86 230.74 184.88"/>
+  <g id="waterHeatingRating">
+    <polyline id="waterHeatingRatingArrow" class="cls-38" points="230.74 184.88 243.38 172.12 270.96 172.12 270.96 197.86 243.61 197.86 230.74 184.88"/>
     <text id="waterHeatingRatingLetter" class="cls-39" transform="translate(239.24023 190.55011)">A</text>
     <text id="waterHeatingRatingPlusses" class="cls-39" transform="translate(250.85 190.55011)"> </text>
   </g>

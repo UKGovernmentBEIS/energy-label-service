@@ -90,7 +90,36 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/boiler-combination-heaters")
+  public ModelAndView renderBoilerCombinationHeaters(@ModelAttribute("form") BoilerCombinationHeatersForm form) {
+    return getBoilerCombinationHeaters(Collections.emptyList());
+  }
 
+  @PostMapping("/boiler-combination-heaters")
+  @ResponseBody
+  public Object handleBoilerCombinationHeatersSubmit(@Valid @ModelAttribute("form") BoilerCombinationHeatersForm form, BindingResult bindingResult) {
+    return doIfValidBoilerCombi(form, bindingResult, (category -> {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form, category));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }));
+  }
+
+  @PostMapping(value = "/boiler-combination-heaters", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelBoilerCombinationHeatersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") BoilerCombinationHeatersForm form, BindingResult bindingResult) {
+    return doIfValidBoilerCombi(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "space-heaters")));
+  }
+
+  private Object doIfValidBoilerCombi(BoilerCombinationHeatersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
+    commonBoilerCogenValidation(form.getApplicableLegislation(), form.getEfficiencyRating(), bindingResult);
+    if (bindingResult.hasErrors()) {
+      return getBoilerCombinationHeaters(bindingResult.getFieldErrors());
+    }
+    else {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SpaceHeatersService.LEGISLATION_CATEGORIES);
+      return function.apply(category);
+    }
+  }
 
   @GetMapping("/cogeneration-space-heaters")
   public ModelAndView renderCogenerationSpaceHeaters(@ModelAttribute("form") CogenerationSpaceHeatersForm form) {
@@ -261,6 +290,13 @@ public class SpaceHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/space-heaters/boilerSpaceHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerSpaceHeaters(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Boiler space heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getBoilerCombinationHeaters(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/boilerCombinationHeaters");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerCombinationHeaters(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Boiler combination heaters");
     return modelAndView;
   }
 

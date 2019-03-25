@@ -19,6 +19,10 @@ public class SpaceHeaterCategory implements Category {
           "Boiler space heaters",
           ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerSpaceHeaters(null))))
       .add(new CategoryItem(
+        "BOILER_COMBINATION_HEATERS",
+        "Boiler combination heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerCombinationHeaters(null))))
+      .add(new CategoryItem(
           "COGENERATION_SPACE_HEATERS",
           "Cogeneration space heaters",
           ReverseRouter.route(on(SpaceHeatersController.class).renderCogenerationSpaceHeaters(null))))
