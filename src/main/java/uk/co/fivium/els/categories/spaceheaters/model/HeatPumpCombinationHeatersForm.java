@@ -42,8 +42,8 @@ public class HeatPumpCombinationHeatersForm extends StandardTemplateForm50Char {
   @Digits(integer = 2, fraction = 0, message = "Enter the rated heat output for warmer climate conditions, up to 2 digits long")
   private String warmerHeatOutput;
 
-  // TODO indicate optional on form, can be done by checking for a pattern annotation, or new '@Optional' one
-  @FieldPrompt("Sound power level, indoors dB")
+  // TODO Create Digits variant which allows optional. Auto set (optional) in prompt
+  @FieldPrompt("Sound power level, indoors dB (optional)")
   @Pattern(regexp = "[0-9]{0,2}", message = "Enter the outdoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
