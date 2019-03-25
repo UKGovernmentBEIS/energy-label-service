@@ -99,7 +99,7 @@ cf --version
 
 echo "Installing cf blue-green deploy plugin"
 cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-cf install-plugin blue-green-deploy -r CF-Community
+cf install-plugin blue-green-deploy -r CF-Community -f
 
 echo "Logging in to Cloud Foundry"
 cf login -a $API -o $ORG -s $SPACE $USER $PASS
