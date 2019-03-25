@@ -4,3 +4,9 @@ applications:
     instances: 2
     buildpack: java_buildpack
     path: build/libs/energy-label-service-SNAPSHOT.jar
+    env:
+      SHOW_START_PAGE: false
+      #TODO update once known
+      HOME_PAGE_URL: https//gov.uk
+      ENABLE_GTM: true
+      GTM_TOKEN: changeme

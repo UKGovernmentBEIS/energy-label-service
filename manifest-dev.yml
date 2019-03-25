@@ -4,3 +4,7 @@ applications:
     instances: 1
     buildpack: java_buildpack
     path: build/libs/energy-label-service-SNAPSHOT.jar
+    env:
+      SHOW_START_PAGE: true
+      HOME_PAGE_URL: /
+      ENABLE_GTM: false
