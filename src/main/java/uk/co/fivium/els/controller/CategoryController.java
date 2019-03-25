@@ -39,9 +39,6 @@ public class CategoryController {
 
   @GetMapping("")
   public ModelAndView renderCategories(@ModelAttribute("form") StandardCategoryForm form) {
-    if (true) {
-      throw new RuntimeException("Testing blue-green smoke test rollback");
-    }
     return getCategoryModelAndView(Collections.emptyList());
   }
 

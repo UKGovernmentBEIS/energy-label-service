@@ -18,17 +18,17 @@ before_deploy:
   - chmod +x ci/smoke-test.sh
 
 deploy:
-#  - provider: cloudfoundry
-#    api: https://api.london.cloud.service.gov.uk
-#    username: tech+ci@fivium.co.uk
-#    password:
-#      secure: lTcJ/vx91bvLQwUpm3vAcUkOskmYs79tPICI7aupjCy+Gd0+9Ssv8loSbtyFgx40DCnLPGBICO+WEns/0zqNJvtO4ujUIiyqB/sTzw1dqTFVbpg82xRCzYqK33iaeX5DgF6GrcSWSzw4ZbAiTW7ssmAXtD0MczzMncb7KojPuNF0JNAmTfwrycY1SdNWJW4n7Z2o9+CP4iWUSPXBs2ds/Bf38drIkwgKgUxZf4UyR7SjgermPTqVZ3Pyo4oBdrINH6yUfZEsPxVrkfEBIVKFCzOOuvmoWm6ccgdtjdQJSSgkxFxnmTVhm80ILEKrOi2cn+x8d33FttjYyivIbYrYXlKXe2rOQaadi53W3zhNmYLgEpz/3YY9gPemmeNC7ni9fYnJ6p9jrSPKEqnLohrKSxbmUnpJR0ujYes0uWgsB5VVgYxTMPONtVykJAM2GkSFpkAD2RdQvcVRR77N6WvCqIg1FL3wthtxFY0/vAB1fnuQjwUAFI9PNP5jLzJo6uYvYY4ULhWaXg2pQlQiwWPBP41IgrGmVbV79PTCldCuwzN7uuhdiJH0lswLVertumv8OgUv+YtrwEvzDZEaz6wDtvbqshT7E01oQsnUMVeSYILevvRwG3EduVnmUA4Z6kjyWB4gx0aqQpd8mD0BRtz6D2lIx1i4fJY1HujiHkTRsVw=
-#    organization: beis-energy-label-service
-#    space: energy-label-service-dev
-#    manifest: manifest-dev.yml
-#    on:
-#      repo: UKGovernmentBEIS/energy-label-service
-#      branch: develop
+  - provider: cloudfoundry
+    api: https://api.london.cloud.service.gov.uk
+    username: tech+ci@fivium.co.uk
+    password:
+      secure: lTcJ/vx91bvLQwUpm3vAcUkOskmYs79tPICI7aupjCy+Gd0+9Ssv8loSbtyFgx40DCnLPGBICO+WEns/0zqNJvtO4ujUIiyqB/sTzw1dqTFVbpg82xRCzYqK33iaeX5DgF6GrcSWSzw4ZbAiTW7ssmAXtD0MczzMncb7KojPuNF0JNAmTfwrycY1SdNWJW4n7Z2o9+CP4iWUSPXBs2ds/Bf38drIkwgKgUxZf4UyR7SjgermPTqVZ3Pyo4oBdrINH6yUfZEsPxVrkfEBIVKFCzOOuvmoWm6ccgdtjdQJSSgkxFxnmTVhm80ILEKrOi2cn+x8d33FttjYyivIbYrYXlKXe2rOQaadi53W3zhNmYLgEpz/3YY9gPemmeNC7ni9fYnJ6p9jrSPKEqnLohrKSxbmUnpJR0ujYes0uWgsB5VVgYxTMPONtVykJAM2GkSFpkAD2RdQvcVRR77N6WvCqIg1FL3wthtxFY0/vAB1fnuQjwUAFI9PNP5jLzJo6uYvYY4ULhWaXg2pQlQiwWPBP41IgrGmVbV79PTCldCuwzN7uuhdiJH0lswLVertumv8OgUv+YtrwEvzDZEaz6wDtvbqshT7E01oQsnUMVeSYILevvRwG3EduVnmUA4Z6kjyWB4gx0aqQpd8mD0BRtz6D2lIx1i4fJY1HujiHkTRsVw=
+    organization: beis-energy-label-service
+    space: energy-label-service-dev
+    manifest: manifest-dev.yml
+    on:
+      repo: UKGovernmentBEIS/energy-label-service
+      branch: develop
 
   - provider: cloudfoundry
     api: https://api.london.cloud.service.gov.uk
@@ -55,5 +55,4 @@ deploy:
       delete=false
     on:
       repo: UKGovernmentBEIS/energy-label-service
-      branch: develop # for testing
-#      branch: master
+      branch: master
