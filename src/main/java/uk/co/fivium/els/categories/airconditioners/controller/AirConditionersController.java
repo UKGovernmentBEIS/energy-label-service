@@ -163,6 +163,34 @@ public class AirConditionersController extends CategoryController {
     }
   }
 
+  @GetMapping("/single-or-double-duct/heating-only-air-conditioners")
+  public ModelAndView renderHeatingDuctedAirConditioners(@ModelAttribute("form") HeatingDuctedAirConditionersForm form) {
+    return getHeatingDuctedAirConditioners(Collections.emptyList());
+  }
+
+  @PostMapping("/single-or-double-duct/heating-only-air-conditioners")
+  @ResponseBody
+  public Object handleHeatingDuctedAirConditionersSubmit(@Valid @ModelAttribute("form") HeatingDuctedAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getHeatingDuctedAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
+      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/single-or-double-duct/heating-only-air-conditioners", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelHeatingDuctedAirConditionersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") HeatingDuctedAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getHeatingDuctedAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getHeatingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "heating-only-air-conditioners");
+    }
+  }
+
   private ModelAndView getCoolingDuctlessAirConditioners(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/coolingDuctlessAirConditioners");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctlessAirConditioners(null)));
@@ -188,6 +216,13 @@ public class AirConditionersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/coolingDuctedAirConditioners");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctedAirConditioners(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Cooling-only ducted air conditioners");
+    return modelAndView;
+  }
+
+  private ModelAndView getHeatingDuctedAirConditioners(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/heatingDuctedAirConditioners");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderHeatingDuctedAirConditioners(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Heating-only ducted air conditioners");
     return modelAndView;
   }
 

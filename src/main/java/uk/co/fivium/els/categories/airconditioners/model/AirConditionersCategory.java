@@ -30,6 +30,10 @@ public class AirConditionersCategory implements Category {
         "COOLING_DUCTED_AIR_CONDITIONERS",
         "Cooling-only single- or double-duct air conditioners",
         ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctedAirConditioners(null))))
+    .add(new CategoryItem(
+        "HEATING_DUCTED_AIR_CONDITIONERS",
+        "Heating-only single- or double-duct air conditioners",
+        ReverseRouter.route(on(AirConditionersController.class).renderHeatingDuctedAirConditioners(null))))
     .build();
 
   private AirConditionersCategory(){}

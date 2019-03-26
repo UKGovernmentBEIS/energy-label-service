@@ -94,6 +94,21 @@ public class AirConditionersService {
       .getPopulatedDocument();
   }
 
+  public Document generateHtml(HeatingDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
+
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/ducted/heating-only-single-or-double-duct-air-conditioners.svg"));
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("kw", form.getHeatingKw())
+      .setText("cop", form.getCopRated())
+      .setText("kwhHour", form.getHeatingHourlyEnergyConsumption())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setText("db", form.getSoundPowerLevelIndoors())
+      .getPopulatedDocument();
+  }
+
   private void applyMultipleClimateSection(TemplatePopulator templatePopulator, MultipleClimateGroupForm form, LegislationCategory legislationCategory) {
     if (form.getColderConditions()) {
       templatePopulator
