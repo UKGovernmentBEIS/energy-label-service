@@ -4,6 +4,8 @@ applications:
     instances: 1
     buildpack: java_buildpack
     path: build/libs/energy-label-service-SNAPSHOT.jar
+    health-check-type: http
+    health-check-http-endpoint: /health
     env:
       SHOW_START_PAGE: true
       HOME_PAGE_URL: /
