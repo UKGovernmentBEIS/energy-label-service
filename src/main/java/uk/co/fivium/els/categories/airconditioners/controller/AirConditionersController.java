@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.fivium.els.categories.airconditioners.model.AirConditionersCategory;
-import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
-import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctlessAirConditionersForm;
-import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.*;
 import uk.co.fivium.els.categories.airconditioners.service.AirConditionersService;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
@@ -138,6 +135,34 @@ public class AirConditionersController extends CategoryController {
     }
   }
 
+  @GetMapping("/single-or-double-duct/cooling-only-air-conditioners")
+  public ModelAndView renderCoolingDuctedAirConditioners(@ModelAttribute("form") CoolingDuctedAirConditionersForm form) {
+    return getCoolingDuctedAirConditioners(Collections.emptyList());
+  }
+
+  @PostMapping("/single-or-double-duct/cooling-only-air-conditioners")
+  @ResponseBody
+  public Object handleCoolingDuctedAirConditionersSubmit(@Valid @ModelAttribute("form") CoolingDuctedAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCoolingDuctedAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
+      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/single-or-double-duct/cooling-only-air-conditioners", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelCoolingDuctedAirConditionersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") CoolingDuctedAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCoolingDuctedAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "cooling-only-air-conditioners");
+    }
+  }
+
   private ModelAndView getCoolingDuctlessAirConditioners(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/coolingDuctlessAirConditioners");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctlessAirConditioners(null)));
@@ -156,6 +181,13 @@ public class AirConditionersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/reversibleDuctlessAirConditioners");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderReversibleDuctlessAirConditioners(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Reversible ductless air conditioners");
+    return modelAndView;
+  }
+
+  private ModelAndView getCoolingDuctedAirConditioners(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/coolingDuctedAirConditioners");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctedAirConditioners(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Cooling-only ducted air conditioners");
     return modelAndView;
   }
 

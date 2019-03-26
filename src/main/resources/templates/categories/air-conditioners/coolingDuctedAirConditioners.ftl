@@ -1,13 +1,12 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm "Cooling-only ductless air conditioners">
+<@common.standardProductForm "Cooling-only single- or double-duct air conditioners">
 
   <@govukSelect.select path="form.coolingEfficiencyRating" options=efficiencyRating/>
-  <@govukTextInput.textInput path="form.coolingModeDesignLoad"/>
-  <@govukTextInput.textInput path="form.coolingModeSeer"/>
+  <@govukTextInput.textInput path="form.coolingKw"/>
+  <@govukTextInput.textInput path="form.eerRated"/>
   <@govukTextInput.textInput path="form.coolingHourlyEnergyConsumption"/>
 
   <@govukTextInput.textInput path="form.soundPowerLevelIndoors"/>
-  <@govukTextInput.textInput path="form.soundPowerLevelOutdoors"/>
 
 </@common.standardProductForm>

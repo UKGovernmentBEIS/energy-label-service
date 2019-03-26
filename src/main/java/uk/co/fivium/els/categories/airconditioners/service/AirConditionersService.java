@@ -3,10 +3,7 @@ package uk.co.fivium.els.categories.airconditioners.service;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
-import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctlessAirConditionersForm;
-import uk.co.fivium.els.categories.airconditioners.model.MultipleClimateGroupForm;
-import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.*;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -79,6 +76,21 @@ public class AirConditionersService {
       .setRatingArrow("averageScopRating", RatingClass.valueOf(form.getAverageHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(CoolingDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
+
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/ducted/cooling-only-single-or-double-duct-air-conditioners.svg"));
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("kw", form.getCoolingKw())
+      .setText("eer", form.getEerRated())
+      .setText("kwhHour", form.getCoolingHourlyEnergyConsumption())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setText("db", form.getSoundPowerLevelIndoors())
       .getPopulatedDocument();
   }
 
