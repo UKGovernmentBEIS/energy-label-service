@@ -36,6 +36,10 @@ public class SpaceHeatersService {
     .add(LEGISLATION_CATEGORY_SEP2019)
     .build();
 
+  public static final LegislationCategory LEGISLATION_CATEGORY_PACKAGES = LegislationCategory.of(
+    RatingClassRange.of(RatingClass.APPP, RatingClass.G)
+  );
+
   private final TemplateParserService templateParserService;
 
   @Autowired
@@ -210,6 +214,61 @@ public class SpaceHeatersService {
       .setText("averageKw", form.getAverageHeatOutput())
       .setText("warmerKw", form.getWarmerHeatOutput())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(SpaceHeaterPackagesForm form) {
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/space-heaters/packages-of-space-heater-temperature-control-and-solar-device.svg"));
+
+    if (form.getSolarCollector()) {
+      templatePopulator.applyCssClassToId("solarCollector", "hasSolarCollector");
+    }
+    if (form.getHotWaterStorageTank()) {
+      templatePopulator.applyCssClassToId("hotWaterStorageTank", "hasHotWaterStorageTank");
+    }
+    if (form.getTemperatureControl()) {
+      templatePopulator.applyCssClassToId("temperatureControl", "hasTemperatureControl");
+    }
+    if (form.getSpaceHeater()) {
+      templatePopulator.applyCssClassToId("supplementarySpaceHeater", "hasSupplementarySpaceHeater");
+    }
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getPackageEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
+      .setText("boilerRatingLetter", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getLetter())
+      .setText("boilerRatingPlusses", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getPlusses())
+      .getPopulatedDocument();
+  }
+
+  public Document generateHtml(CombinationHeaterPackagesForm form) {
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/space-heaters/packages-of-combination-heater-temperature-control-and-solar-device.svg"));
+
+    if (form.getSolarCollector()) {
+      templatePopulator.applyCssClassToId("solarCollector", "hasSolarCollector");
+    }
+    if (form.getHotWaterStorageTank()) {
+      templatePopulator.applyCssClassToId("hotWaterStorageTank", "hasHotWaterStorageTank");
+    }
+    if (form.getTemperatureControl()) {
+      templatePopulator.applyCssClassToId("temperatureControl", "hasTemperatureControl");
+    }
+    if (form.getSpaceHeater()) {
+      templatePopulator.applyCssClassToId("supplementarySpaceHeater", "hasSupplementarySpaceHeater");
+    }
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setRatingArrow("packageSpaceHeatingRating", RatingClass.valueOf(form.getPackageSpaceHeatingEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
+      .setRatingArrow("packageWaterHeatingRating", RatingClass.valueOf(form.getPackageWaterHeatingEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
+      .setText("heaterSpaceHeatingRatingLetter", RatingClass.valueOf(form.getSpaceHeaterEfficiencyRating()).getLetter())
+      .setText("heaterSpaceHeatingRatingPlusses", RatingClass.valueOf(form.getSpaceHeaterEfficiencyRating()).getPlusses())
+      .setText("heaterWaterHeatingRatingLetter", RatingClass.valueOf(form.getWaterHeaterEfficiencyRating()).getLetter())
+      .setText("heaterWaterHeatingRatingPlusses", RatingClass.valueOf(form.getWaterHeaterEfficiencyRating()).getPlusses())
+      .setText("heaterDeclaredLoadProfile", LoadProfile.valueOf(form.getHeaterDeclaredLoadProfile()).getDisplayName())
+      .setText("packageDeclaredLoadProfile", LoadProfile.valueOf(form.getPackageDeclaredLoadProfile()).getDisplayName())
       .getPopulatedDocument();
   }
 

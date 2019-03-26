@@ -286,6 +286,62 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/package-space-heater")
+  public ModelAndView renderSpaceHeaterPackages(@ModelAttribute("form") SpaceHeaterPackagesForm form) {
+    return getSpaceHeaterPackages(Collections.emptyList());
+  }
+
+  @PostMapping("/package-space-heater")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesSubmit(@Valid @ModelAttribute("form") SpaceHeaterPackagesForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeaterPackages(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/package-space-heater", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelSpaceHeaterPackagesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") SpaceHeaterPackagesForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeaterPackages(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES, "space-heater");
+    }
+  }
+
+  @GetMapping("/package-combination-heater")
+  public ModelAndView renderCombinationHeaterPackages(@ModelAttribute("form") CombinationHeaterPackagesForm form) {
+    return getCombinationHeaterPackages(Collections.emptyList());
+  }
+
+  @PostMapping("/package-combination-heater")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesSubmit(@Valid @ModelAttribute("form") CombinationHeaterPackagesForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeaterPackages(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(spaceHeatersService.generateHtml(form));
+      return ControllerUtils.serveResource(pdf, "space-heaters-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/package-combination-heater", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelCombinationHeaterPackagesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") CombinationHeaterPackagesForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeaterPackages(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getPackageSpaceHeatingEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES, "space-heater");
+    }
+  }
+
   private ModelAndView getBoilerSpaceHeaters(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/space-heaters/boilerSpaceHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderBoilerSpaceHeaters(null)));
@@ -325,6 +381,20 @@ public class SpaceHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/space-heaters/heatPumpCombinationHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderHeatPumpCombinationHeaters(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump combination heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getSpaceHeaterPackages(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackages");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackages(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Package space heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getCombinationHeaterPackages(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/combinationHeaterPackages");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackages(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Package combination heaters");
     return modelAndView;
   }
 
