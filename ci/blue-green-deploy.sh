@@ -70,21 +70,19 @@ else
 fi
 
 if [ -z $SMOKE_TEST ]; then
-  SMOKE_TEST="./smoke_test.yml"
-  echo "SMOKE_TEST Not set - using default: $SMOKE_TEST"
+  echo "SMOKE_TEST Not set - ignoring"
+else
+  echo "SMOKE_TEST = $SMOKE_TEST"
   ## Check that smoke test exists
   if [ ! -f $SMOKE_TEST ]; then
     echo "SMOKE_TEST: $SMOKE_TEST - does not exist - error"; ERROR="true"
+  else
+    SMOKE_TEST="--smoke-test $SMOKE_TEST"
   fi
-else
-  echo "SMOKE_TEST = $SMOKE_TEST"
 fi
 
-if [ -z $DELETE_OLD_APPS ]; then
-  DELETE_OLD_APPS="false"
-  echo "DELETE_OLD_APPS Not set - using default: $DELETE_OLD_APPS"
-else
-  echo "DELETE_OLD_APPS = $DELETE_OLD_APPS"
+if [ ! -z $DELETE_OLD_APPS ] && [ $DELETE_OLD_APPS = "true" ]; then
+  DELETE_OLD_APPS="--delete-old-apps"
 fi
 
 if [ ! -z $ERROR ]; then
@@ -105,18 +103,13 @@ echo "Logging in to Cloud Foundry"
 cf login -a $API -o $ORG -s $SPACE $USER $PASS
 
 echo "Starting Blue-Green Deploy"
-if [ -z $SMOKE_TEST ]; then
-  if [ DELETE_OLD_APPS == "true" ]; then
-    cf bgd $APP -f $MANIFEST --delete-old-apps
-  else
-    cf bgd $APP -f $MANIFEST
-  fi
-else
-  if [ DELETE_OLD_APPS == "true" ]; then
-    cf bgd $APP -f $MANIFEST --smoke-test $SMOKE_TEST --delete-old-apps
-  else
-    cf bgd $APP -f $MANIFEST --smoke-test $SMOKE_TEST
-  fi
-fi
+cf bgd $APP -f $MANIFEST $DELETE_OLD_APPS $SMOKE_TEST
 
-exit 0
+## Check return code and exit accordingly
+if [ $? != 0 ]; then
+  echo "Deploy failed - exit 1"
+  exit 1
+else
+  echo "Deploy succeeded - exit 0"
+  exit 0
+fi
