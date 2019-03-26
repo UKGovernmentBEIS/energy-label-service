@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm title="Boiler space heaters">
+<@common.standardProductForm title="Cogeneration space heaters">
 
     <@govukRadios.radio path="form.applicableLegislation" radioItems=legislationYears/>
 

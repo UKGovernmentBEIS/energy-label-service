@@ -79,7 +79,7 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
 
     LabelMode labelMode = (LabelMode) modelAndView.getModel().get("labelMode");
     if (labelMode == LabelMode.ENERGY) {
-      // in energy mode hidden fields are those annotated with internetlabelfield
+      // In energy mode, hidden fields are those annotated with InternetLabelModeField
       ReflectionUtils.doWithFields(formClass, (field -> {
         String name = field.getName();
         InternetLabelModeField internetLabelAnnotation = field.getAnnotation(InternetLabelModeField.class);
@@ -89,7 +89,7 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
       }));
 
     } else if (labelMode == LabelMode.INTERNET) {
-      // in internet mode hidden fields NOT annotated with interenetlabelfield or dual mode
+      // In internet mode, hidden fields are those NOT annotated with InternetLabelModeField or DualModeField
       ReflectionUtils.doWithFields(formClass, (field -> {
         String name = field.getName();
         InternetLabelModeField internetLabelAnnotation = field.getAnnotation(InternetLabelModeField.class);

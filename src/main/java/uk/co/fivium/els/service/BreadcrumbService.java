@@ -5,6 +5,7 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.controller.ProductCategoryController;
@@ -14,7 +15,9 @@ import uk.co.fivium.els.mvc.ReverseRouter;
 public class BreadcrumbService {
 
   private static final String BREADCRUMB_MODEL_AND_VIEW_ATTRIBUTE = "breadcrumbMap";
-  private static final String GOVUK_SERVICE_HOMEPAGE_URL = "/"; // TODO once provided
+
+  @Value("${app.home_page_url}")
+  private String serviceHomePageUrl;
 
 
   /**
@@ -55,7 +58,7 @@ public class BreadcrumbService {
    */
   public void addBreadcrumbToModel(ModelAndView modelAndView, Map<String, String> trail) {
     Map<String, String> breadcrumbTrail = new LinkedHashMap<>();
-    breadcrumbTrail.put("Home", GOVUK_SERVICE_HOMEPAGE_URL);
+    breadcrumbTrail.put("Home", serviceHomePageUrl);
     breadcrumbTrail.put("Product category", ReverseRouter.route(on(ProductCategoryController.class).renderCategories(null)));
     breadcrumbTrail.putAll(trail);
     modelAndView.addObject(BREADCRUMB_MODEL_AND_VIEW_ATTRIBUTE, breadcrumbTrail);
