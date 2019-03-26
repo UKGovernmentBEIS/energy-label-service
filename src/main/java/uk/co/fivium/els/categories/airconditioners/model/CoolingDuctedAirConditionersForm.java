@@ -17,7 +17,7 @@ public class CoolingDuctedAirConditionersForm extends StandardTemplateForm50Char
   private String coolingEfficiencyRating;
 
   @FieldPrompt("Rated capacity for cooling in kW")
-  @Digits(integer = 2, fraction = 1, message = "Enter therated capacity for cooling, up to 2 digits with an optional decimal place")
+  @Digits(integer = 2, fraction = 1, message = "Enter the rated capacity for cooling, up to 2 digits with an optional decimal place")
   private String coolingKw;
 
   @FieldPrompt("EERrated value")
