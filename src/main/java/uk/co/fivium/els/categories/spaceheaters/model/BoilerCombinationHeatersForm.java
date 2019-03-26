@@ -23,7 +23,7 @@ public class BoilerCombinationHeatersForm extends StandardTemplateForm50Char {
   private String applicableLegislation;
 
   @FieldPrompt("The seasonal space heating energy efficiency class")
-  @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
+  @NotBlank(message = "Select a space heating energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   private String efficiencyRating;
 
@@ -35,8 +35,7 @@ public class BoilerCombinationHeatersForm extends StandardTemplateForm50Char {
   @Digits(integer = 2, fraction = 0, message = "Enter the rated heat output, up to 2 digits long")
   private String heatOutput;
 
-  // TODO indicate optional on form, can be done by checking for a pattern annotation, or new '@Optional' one
-  @FieldPrompt("Sound power level, indoors dB")
+  @FieldPrompt("Sound power level, indoors dB (optional)")
   @Pattern(regexp = "[0-9]{0,2}", message = "Enter the outdoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
