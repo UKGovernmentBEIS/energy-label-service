@@ -47,7 +47,7 @@ public class ReversibleDuctlessAirConditionersForm extends MultipleClimateGroupF
   private String averageAnnualEnergyConsumption;
 
   @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re1 pW")
-  @Digits(integer = 2, fraction = 0, message = "Enter the outdoors sound power level, up to 2 digits long")
+  @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
   @FieldPrompt("Sound power levels for outdoor units expressed in dB(A) re1 pW")

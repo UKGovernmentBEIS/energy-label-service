@@ -35,7 +35,7 @@ public class LowTemperatureHeatPumpSpaceHeatersForm extends StandardTemplateForm
 
   // TODO Create Digits variant which allows optional. Auto set (optional) in prompt
   @FieldPrompt("Sound power level, indoors dB (optional)")
-  @Pattern(regexp = "[0-9]{0,2}", message = "Enter the outdoors sound power level, up to 2 digits long")
+  @Pattern(regexp = "[0-9]{0,2}", message = "Enter the indoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
   @FieldPrompt("Sound power level, outdoors dB")
