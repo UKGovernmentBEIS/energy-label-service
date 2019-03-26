@@ -191,6 +191,34 @@ public class AirConditionersController extends CategoryController {
     }
   }
 
+  @GetMapping("/single-or-double-duct/reversible-air-conditioners")
+  public ModelAndView renderReversibleDuctedAirConditioners(@ModelAttribute("form") ReversibleDuctedAirConditionersForm form) {
+    return getReversibleDuctedAirConditioners(Collections.emptyList());
+  }
+
+  @PostMapping("/single-or-double-duct/reversible-air-conditioners")
+  @ResponseBody
+  public Object handleReversibleDuctedAirConditionersSubmit(@Valid @ModelAttribute("form") ReversibleDuctedAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getReversibleDuctedAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
+      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+    }
+  }
+
+  @PostMapping(value = "/single-or-double-duct/reversible-air-conditioners", params = "mode=INTERNET")
+  @ResponseBody
+  public Object handleInternetLabelReversibleDuctedAirConditionersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") ReversibleDuctedAirConditionersForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getReversibleDuctedAirConditioners(bindingResult.getFieldErrors());
+    }
+    else {
+      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "reversible-air-conditioners");
+    }
+  }
+
   private ModelAndView getCoolingDuctlessAirConditioners(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/coolingDuctlessAirConditioners");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctlessAirConditioners(null)));
@@ -223,6 +251,13 @@ public class AirConditionersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/heatingDuctedAirConditioners");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderHeatingDuctedAirConditioners(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heating-only ducted air conditioners");
+    return modelAndView;
+  }
+
+  private ModelAndView getReversibleDuctedAirConditioners(List<FieldError> errorList) {
+    ModelAndView modelAndView = new ModelAndView("categories/air-conditioners/reversibleDuctedAirConditioners");
+    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(AirConditionersController.class).renderReversibleDuctedAirConditioners(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Reversible ducted air conditioners");
     return modelAndView;
   }
 

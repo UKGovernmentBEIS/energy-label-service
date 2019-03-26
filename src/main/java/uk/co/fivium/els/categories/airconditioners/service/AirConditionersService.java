@@ -109,6 +109,25 @@ public class AirConditionersService {
       .getPopulatedDocument();
   }
 
+  public Document generateHtml(ReversibleDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
+
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/ducted/reversible-single-or-double-duct-air-conditioners.svg"));
+
+    return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
+      .setText("copKw", form.getHeatingKw())
+      .setText("cop", form.getCopRated())
+      .setText("copKwhHour", form.getHeatingHourlyEnergyConsumption())
+      .setRatingArrow("copRating", RatingClass.valueOf(form.getHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setText("eerKw", form.getCoolingKw())
+      .setText("eer", form.getEerRated())
+      .setText("eerKwhHour", form.getCoolingHourlyEnergyConsumption())
+      .setRatingArrow("eerRating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setText("db", form.getSoundPowerLevelIndoors())
+      .getPopulatedDocument();
+  }
+
   private void applyMultipleClimateSection(TemplatePopulator templatePopulator, MultipleClimateGroupForm form, LegislationCategory legislationCategory) {
     if (form.getColderConditions()) {
       templatePopulator
