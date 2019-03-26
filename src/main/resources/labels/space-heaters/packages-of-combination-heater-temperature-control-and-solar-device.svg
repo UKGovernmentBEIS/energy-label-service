@@ -649,7 +649,7 @@
   <g id="heaterSpaceHeatingRating">
     <polyline id="heaterSpaceHeatingRatingArrow" class="cls-14" points="108.11 252 123.79 236.21 163.76 236.21 163.76 268.1 124.07 268.1 108.11 252"/>
     <text id="heaterSpaceHeatingRatingLetter" class="cls-40" transform="translate(119.4502 258.38025)">A</text>
-    <text id="heaterSpaceHeatingRatingLetterPlusses" class="cls-41" transform="translate(134.81006 251.28992)">+++</text>
+    <text id="heaterSpaceHeatingRatingPlusses" class="cls-41" transform="translate(134.81006 251.28992)">+++</text>
   </g>
   <g id="heaterWaterHeatingRating">
     <polyline id="heaterWaterHeatingRatingArrow" class="cls-14" points="108.11 310.39 123.79 294.6 163.76 294.6 163.76 326.49 124.07 326.49 108.11 310.39"/>
