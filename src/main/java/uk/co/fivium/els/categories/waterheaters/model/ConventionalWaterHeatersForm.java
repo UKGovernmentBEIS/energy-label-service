@@ -4,11 +4,17 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
+import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.co.fivium.els.categories.common.StandardTemplateForm30Char;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.co.fivium.els.categories.waterheaters.model.validation.ConsumptionUnitBoth;
+import uk.co.fivium.els.categories.waterheaters.model.validation.ConsumptionUnitGj;
+import uk.co.fivium.els.categories.waterheaters.model.validation.ConsumptionUnitKw;
+import uk.co.fivium.els.categories.waterheaters.model.validation.ConventionalWaterHeaterFormSequenceProvider;
 import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 
+@GroupSequenceProvider(ConventionalWaterHeaterFormSequenceProvider.class)
 public class ConventionalWaterHeatersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Declared load profile")
@@ -20,13 +26,26 @@ public class ConventionalWaterHeatersForm extends StandardTemplateForm30Char {
   @DualModeField
   private String efficiencyRating;
 
+  @FieldPrompt("How do you want to provide annual energy consumption?")
+  @NotBlank(message = "Specify how want to provide annual energy consumption")
+  private String consumptionUnit;
+
   @FieldPrompt("Annual electricity consumption in kWh/annum")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption, up to 4 digits long")
+  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption, up to 4 digits long", groups = ConsumptionUnitKw.class)
   private String kwhAnnum;
 
   @FieldPrompt("Annual fuel consumption in GJ/annum")
-  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption, up to 2 digits long")
+  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption, up to 2 digits long", groups = ConsumptionUnitGj.class)
   private String gjAnnum;
+
+  // These need to be separate otherwise the kw/gj fields above are treated as lists because they appear multiple times in the dom
+  @FieldPrompt("Annual electricity consumption in kWh/annum")
+  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption, up to 4 digits long", groups = ConsumptionUnitBoth.class)
+  private String bothKwhAnnum;
+
+  @FieldPrompt("Annual fuel consumption in GJ/annum")
+  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption, up to 2 digits long", groups = ConsumptionUnitBoth.class)
+  private String bothGjAnnum;
 
   @FieldPrompt("Sound power level, indoors dB")
   @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
@@ -52,6 +71,14 @@ public class ConventionalWaterHeatersForm extends StandardTemplateForm30Char {
     this.efficiencyRating = efficiencyRating;
   }
 
+  public String getConsumptionUnit() {
+    return consumptionUnit;
+  }
+
+  public void setConsumptionUnit(String consumptionUnit) {
+    this.consumptionUnit = consumptionUnit;
+  }
+
   public String getKwhAnnum() {
     return kwhAnnum;
   }
@@ -66,6 +93,22 @@ public class ConventionalWaterHeatersForm extends StandardTemplateForm30Char {
 
   public void setGjAnnum(String gjAnnum) {
     this.gjAnnum = gjAnnum;
+  }
+
+  public String getBothKwhAnnum() {
+    return bothKwhAnnum;
+  }
+
+  public void setBothKwhAnnum(String bothKwhAnnum) {
+    this.bothKwhAnnum = bothKwhAnnum;
+  }
+
+  public String getBothGjAnnum() {
+    return bothGjAnnum;
+  }
+
+  public void setBothGjAnnum(String bothGjAnnum) {
+    this.bothGjAnnum = bothGjAnnum;
   }
 
   public String getSoundPowerLevelIndoors() {
