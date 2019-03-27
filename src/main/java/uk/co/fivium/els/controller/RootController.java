@@ -28,7 +28,7 @@ public class RootController {
     if (startPageEnabled) {
       return new ModelAndView("startPage");
     } else {
-      return ReverseRouter.redirect(on(ProductCategoryController.class).renderCategories(null));
+      return ReverseRouter.redirect(on(UkOrEuController.class).renderUkOrEu(null));
     }
   }
 

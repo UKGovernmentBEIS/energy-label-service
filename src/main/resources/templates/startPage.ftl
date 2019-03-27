@@ -11,7 +11,7 @@
     This service replaces the EU energy label generator for products you make that are sold in the UK. If the product
     will be sold in the EU, you must <a href="https://ec.europa.eu/energy/en/eepf-labels" class="govuk-link">use the EU energy label generator</a>.
   </div>
-  <a href="/categories" role="button" draggable="false" class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">
+  <a href="/uk-or-eu" role="button" draggable="false" class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">
     Start now
   </a>
 </@defaultPage>
