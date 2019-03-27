@@ -1,6 +1,6 @@
 <#include './layout.ftl'>
 
-<@defaultPage pageHeading="Sorry, there is a problem with the service">
+<@defaultPage pageHeading="Sorry, there is a problem with the service" showBreadcrumbs=false>
   <p class="govuk-body">Try again later.</p>
   <#-- TODO support info. Possible error ref -->
   <p class="govuk-body">
