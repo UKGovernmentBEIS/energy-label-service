@@ -8,17 +8,17 @@ import uk.co.fivium.els.model.meta.InternetLabelModeField;
 public class InternetLabellingForm {
 
   @FieldPrompt("Enter height of the product price (in pixels)")
-  @Digits(integer = 2, fraction = 0, groups = InternetLabellingGroup.class, message = "Enter the height of the product price, up to 2 digits long")
+  @Digits(integer = 3, fraction = 0, groups = InternetLabellingGroup.class, message = "Enter the height of the product price, up to 3 digits long")
   @InternetLabelModeField
   private String productPriceHeightPx;
 
-  @FieldPrompt("Label orientation")
-  @NotBlank(groups = InternetLabellingGroup.class, message = "Select a label orientation")
+  @FieldPrompt("Arrow direction")
+  @NotBlank(groups = InternetLabellingGroup.class, message = "Select an arrow direction")
   @InternetLabelModeField
   private String labelOrientation;
 
-  @FieldPrompt("Label format")
-  @NotBlank(groups = InternetLabellingGroup.class, message = "Select a label format")
+  @FieldPrompt("Image format")
+  @NotBlank(groups = InternetLabellingGroup.class, message = "Select an image format")
   @InternetLabelModeField
   private String labelFormat;
 
