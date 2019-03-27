@@ -13,6 +13,6 @@
   </p>
 
   <p class="govuk-body">
-    You can still <a href="/categories">continue to create an energy label</a> if you need to - for example, if you're a retailer and the manufacturer has registered the product in the EPREL but not given you a copy of the energy label.
+    You can still <a href="/categories" clas="govuk-link">continue to create an energy label</a> if you need to - for example, if you're a retailer and the manufacturer has registered the product in the EPREL but not given you a copy of the energy label.
   </p>
 </@defaultPage>
