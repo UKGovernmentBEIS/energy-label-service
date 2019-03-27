@@ -69,12 +69,27 @@ public class WaterHeatersService {
       templatePopulator.applyCssClassToId("offPeakMode","hasOffPeakMode");
     }
 
+    EnergyConsumptionUnit energyConsumptionUnit = EnergyConsumptionUnit.valueOf(form.getConsumptionUnit());
+
+    if (energyConsumptionUnit == EnergyConsumptionUnit.KWH) {
+      templatePopulator
+          .setText("kwhAnnum", form.getKwhAnnum())
+          .removeElementById("gjAnnumGroup");
+
+    } else if (EnergyConsumptionUnit.GJ.name().equals(form.getConsumptionUnit())) {
+      templatePopulator
+          .setText("gjAnnum", form.getGjAnnum())
+          .removeElementById("kwAnnumGroup");
+    } else if (EnergyConsumptionUnit.BOTH.name().equals(form.getConsumptionUnit())) {
+      templatePopulator
+          .setText("kwhAnnum", form.getBothKwhAnnum())
+          .setText("gjAnnum", form.getBothGjAnnum());
+    }
+
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
-      .setText("kwhAnnum", form.getKwhAnnum())
-      .setText("gjAnnum", form.getGjAnnum())
       .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .getPopulatedDocument();

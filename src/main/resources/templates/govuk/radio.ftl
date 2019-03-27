@@ -100,3 +100,64 @@
     </div>
   </#if>
 </#macro>
+
+<#macro radioGroup path nestingPath="" label="" hiddenContent=true>
+  <@spring.bind path/>
+
+  <#local id=spring.status.expression?replace('[','')?replace(']','')>
+  <#local hasError=(spring.status.errorMessages?size > 0)>
+  <#local errorList=spring.status.errorMessages>
+  <#local fieldName=spring.status.expression>
+  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].value())!label>
+  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText())!>
+  <#local fieldName=spring.status.expression>
+  <#local displayValue=spring.status.displayValue>
+  <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
+
+  <#if !hiddenField>
+    <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
+      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" hintText=fieldHint hintTextId=id mandatory=true>
+        <#if hasError>
+          <span id="${id}-error" class="govuk-error-message">
+            <#list spring.status.errorMessages as errorMessage>
+              <#if errorMessage?has_content>
+                ${errorMessage}<br/>
+              </#if>
+            </#list>
+          </span>
+        </#if>
+        <div class="govuk-radios <#if hiddenContent>govuk-radios--conditional" data-module="radios"<#else>"</#if>>
+          <#nested/>
+          <#if nestingPath?has_content>
+            <@spring.bind nestingPath/>
+          </#if>
+        </div>
+      </@radioFieldset.fieldset>
+    </div>
+  </#if>
+</#macro>
+
+<#macro radioItem path itemMap>
+
+  <#local nested><#nested/></#local>
+
+  <@spring.bind path/>
+
+  <#local id=spring.status.expression?replace('[','')?replace(']','')>
+  <#local fieldName=spring.status.expression>
+
+  <#list itemMap as itemKey, itemValue>
+    <#assign isSelected = spring.stringStatusValue == itemKey>
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="${id}-${itemKey}" name="${fieldName}" type="radio" value="${itemKey}" <#if isSelected>checked="checked"</#if> <#if nested?has_content>data-aria-controls="${id}-${itemKey}-hidden"</#if>>
+      <label class="govuk-label govuk-radios__label" for="${id}-${itemKey}">
+        ${itemValue}
+        </label>
+    </div>
+    <#if nested?has_content>
+      <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="${id}-${itemKey}-hidden">
+        ${nested}
+      </div>
+    </#if>
+  </#list>
+</#macro>

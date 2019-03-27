@@ -22,6 +22,7 @@ import uk.co.fivium.els.categories.common.LoadProfile;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.waterheaters.model.ConventionalWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.EnergyConsumptionUnit;
 import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.co.fivium.els.categories.waterheaters.model.SolarWaterHeatersForm;
@@ -211,6 +212,11 @@ public class WaterHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/conventionalWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderConventionalWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Conventional water heaters");
+
+    modelAndView.addObject("energyUnitKw", Collections.singletonMap(EnergyConsumptionUnit.KWH.name(), EnergyConsumptionUnit.KWH.getDisplayName()));
+    modelAndView.addObject("energyUnitGj", Collections.singletonMap(EnergyConsumptionUnit.GJ.name(), EnergyConsumptionUnit.GJ.getDisplayName()));
+    modelAndView.addObject("energyUnitBoth", Collections.singletonMap(EnergyConsumptionUnit.BOTH.name(), EnergyConsumptionUnit.BOTH.getDisplayName()));
+
     return modelAndView;
   }
 
