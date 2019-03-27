@@ -43,6 +43,7 @@ public class UkOrEuController {
   @GetMapping("/uk-or-eu/eu")
   public ModelAndView renderEu() {
     ModelAndView modelAndView = new ModelAndView("eu");
+    modelAndView.addObject("backLinkUrl", ReverseRouter.route(on(UkOrEuController.class).renderUkOrEu(null)));
     return modelAndView;
   }
 
@@ -67,7 +68,7 @@ public class UkOrEuController {
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("title", "Are you selling this item in the UK or the EU?");
     modelAndView.addObject("options", options);
-    modelAndView.addObject("submitUrl", "");
+    modelAndView.addObject("submitUrl", ReverseRouter.route(on(UkOrEuController.class).renderUkOrEu(null)));
     return modelAndView;
   }
 }

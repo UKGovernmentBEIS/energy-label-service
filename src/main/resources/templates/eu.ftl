@@ -1,6 +1,6 @@
 <#include './layout.ftl'>
 
-<@defaultPage pageHeading="You need to register your product in the European Product Database for Energy Labelling (EPREL)" headingCssClass="govuk-heading-l">
+<@defaultPage pageHeading="You need to register your product in the European Product Database for Energy Labelling (EPREL)" headingCssClass="govuk-heading-l" backLinkUrl=backLinkUrl>
 
   <p class="govuk-body">
     Because you're selling your product in the EU, you need to

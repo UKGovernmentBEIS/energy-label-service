@@ -29,7 +29,7 @@
   captionClass="govuk-caption-xl"
   twoThirdsColumn=true
   headingCssClass="govuk-heading-xl"
-  backLink=false
+  backLinkUrl=""
   phaseBanner=true
   pageTitle=""
   showInsetText=false
@@ -92,8 +92,8 @@
       <@govukBreadcrumbs.breadcrumbs breadcrumbMap/>
     </#if>
 
-    <#if backLink>
-      <a href="#" class="govuk-back-link">Back</a>
+    <#if backLinkUrl?has_content>
+      <a href="${backLinkUrl}" class="govuk-back-link">Back</a>
     </#if>
 
     <main class="govuk-main-wrapper " id="main-content" role="main">
