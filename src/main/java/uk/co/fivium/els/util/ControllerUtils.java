@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
@@ -80,10 +79,11 @@ public class ControllerUtils {
     }
   }
 
-  public static void sendGoogleAnalyticsEvent(String clientId, GoogleAnalyticsEventCategory eventCategory, GoogleAnalyticsEventAction action, String eventLabel) {
+  public static void sendGoogleAnalyticsEvent(String jsClientId, GoogleAnalyticsEventCategory eventCategory, GoogleAnalyticsEventAction action, String eventLabel) {
     // We might not get a client ID if the user has JavaScript disabled or blocks the Google Analytics JS.
     // In that case, we generate a random client ID so we can track this event, but it won't be linked to the rest of
     // the user's actions in the service
+    String clientId = jsClientId;
     if(clientId.isEmpty()) {
       clientId = UUID.randomUUID().toString();
     }
