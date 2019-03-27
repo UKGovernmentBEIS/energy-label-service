@@ -1,6 +1,6 @@
 <#include './layout.ftl'>
 
-<@defaultPage pageHeading="Get an energy label">
+<@defaultPage pageHeading="Create an energy label">
   <p class="govuk-body">Get an energy label for products you make that are sold in the UK, such as light bulbs, heaters, televisions and ovens.</p>
   <p class="govuk-body">You usually need to show the label:</p>
   <ul class="govuk-list govuk-list--bullet">

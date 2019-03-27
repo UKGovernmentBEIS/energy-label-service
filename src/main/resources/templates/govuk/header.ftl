@@ -28,7 +28,7 @@
     </div>
     <div class="govuk-header__content">
       <a href="/" class="govuk-header__link govuk-header__link--service-name">
-        Get an energy label
+        Create an energy label
       </a>
     </div>
   </div>
