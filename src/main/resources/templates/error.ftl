@@ -4,6 +4,6 @@
   <p class="govuk-body">Try again later.</p>
   <#-- TODO support info. Possible error ref -->
   <p class="govuk-body">
-    You can contact us by phone on xxxxxxx, or email xxxx@xxxxx
+    You can contact us by email at <a class="govuk-link" href="mailto:energy-label-support@fivium.co.uk">energy-label-support@fivium.co.uk</a>
   </p>
 </@defaultPage>

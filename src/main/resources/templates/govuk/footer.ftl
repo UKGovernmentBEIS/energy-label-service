@@ -6,7 +6,7 @@
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <div class="govuk-footer__meta-custom">
           <p>
-            For any help or assistance with this service, please email: <a class="govuk-footer__link" href="mailto:to-be-confirmed@a.b.c">to-be-confirmed@a.b.c</a>
+            For any help or assistance with this service, please email <a class="govuk-footer__link" href="mailto:energy-label-support@fivium.co.uk">energy-label-support@fivium.co.uk</a>
           </p>
           Built by the
           <a href="https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy" class="govuk-footer__link">Department for Business, Energy &amp; Industrial Strategy</a>
