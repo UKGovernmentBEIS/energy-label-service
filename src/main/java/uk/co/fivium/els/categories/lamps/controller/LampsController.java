@@ -27,6 +27,8 @@ import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModelConsumpti
 import uk.co.fivium.els.categories.lamps.model.TemplateType;
 import uk.co.fivium.els.categories.lamps.service.LampsService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.GoogleAnalyticsEventAction;
+import uk.co.fivium.els.model.GoogleAnalyticsEventCategory;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.renderer.PdfRenderer;
@@ -68,6 +70,7 @@ public class LampsController extends CategoryController {
     }
     else {
       Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
+      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with supplier's name, model identification code, rating and energy consumption");
       return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
     }
   }
@@ -79,6 +82,7 @@ public class LampsController extends CategoryController {
       return getLamps(bindingResult.getFieldErrors());
     }
     else {
+      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with supplier's name, model identification code, rating and energy consumption");
       return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
     }
   }
@@ -96,6 +100,7 @@ public class LampsController extends CategoryController {
     }
     else {
       Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
+      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating and weighted energy consumption only");
       return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
     }
   }
@@ -107,6 +112,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
     else {
+      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating and weighted energy consumption only");
       return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
     }
   }
@@ -124,6 +130,7 @@ public class LampsController extends CategoryController {
     }
     else {
       Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
+      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating only");
       return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
     }
   }
@@ -135,6 +142,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
+      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating only");
       return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
     }
   }

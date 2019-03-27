@@ -46,6 +46,14 @@ Includes the wrapping form element, the generate label button and optionally the
         <@generateLabelButton/>
       </#if>
 
+    <input type="hidden" id="googleAnalyticsClientId" name="googleAnalyticsClientId" value="">
     </@form.govukForm>
+
+    <script>
+      ga(function(tracker) {
+          var clientId = tracker.get('clientId');
+          document.getElementById('googleAnalyticsClientId').value = clientId;
+      });
+    </script>
   </@defaultPage>
 </#macro>

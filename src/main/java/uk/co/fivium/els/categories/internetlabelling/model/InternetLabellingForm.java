@@ -22,6 +22,8 @@ public class InternetLabellingForm {
   @InternetLabelModeField
   private String labelFormat;
 
+  private String googleAnalyticsClientId;
+
   public String getProductPriceHeightPx() {
     return productPriceHeightPx;
   }
@@ -44,5 +46,13 @@ public class InternetLabellingForm {
 
   public void setLabelFormat(String labelFormat) {
     this.labelFormat = labelFormat;
+  }
+
+  public String getGoogleAnalyticsClientId() {
+    return googleAnalyticsClientId;
+  }
+
+  public void setGoogleAnalyticsClientId(String googleAnalyticsClientId) {
+    this.googleAnalyticsClientId = googleAnalyticsClientId;
   }
 }
