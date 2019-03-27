@@ -33,6 +33,7 @@
   phaseBanner=true
   pageTitle=""
   showInsetText=false
+  showBreadcrumbs=true
   >
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
@@ -88,7 +89,7 @@
       </div>
     </#if>
 
-    <#if breadcrumbMap?has_content>
+    <#if showBreadcrumbs && breadcrumbMap?has_content>
       <@govukBreadcrumbs.breadcrumbs breadcrumbMap/>
     </#if>
 
