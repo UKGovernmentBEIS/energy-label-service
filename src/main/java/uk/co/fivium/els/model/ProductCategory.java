@@ -77,10 +77,6 @@ public class ProductCategory implements Category {
           "Tumble dryers",
           ReverseRouter.route(on(TumbleDryersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
-          "TYRES",
-          "Tyres",
-          "/not-yet-implemented"))
-      .add(new CategoryItem(
           "VENTILATION_UNITS",
           "Ventilation units",
           ReverseRouter.route(on(VentilationUnitsController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
