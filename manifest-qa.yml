@@ -9,4 +9,4 @@ applications:
     env:
       SHOW_START_PAGE: true
       HOME_PAGE_URL: /
-      ENABLE_GTM: false
+      ENABLE_GOOGLE_ANALYTICS: false

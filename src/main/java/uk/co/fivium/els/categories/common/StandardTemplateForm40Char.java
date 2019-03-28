@@ -8,7 +8,7 @@ import uk.co.fivium.els.model.meta.FieldPrompt;
 /**
  * Standard form elements for a large templates allowing 50 char length supplier name/model fields
  */
-public class StandardTemplateForm40Char extends InternetLabellingForm {
+public class StandardTemplateForm40Char extends InternetLabellingForm implements SupplierNameForm {
 
   @FieldPrompt("Supplier's name or trade mark")
   @NotBlank(message = "Enter a supplier name or trade mark")

@@ -2,6 +2,12 @@ package uk.co.fivium.els.service;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import uk.co.fivium.els.categories.common.AnalyticsForm;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
+import uk.co.fivium.els.categories.common.ProcessedInternetLabelDocument;
+import uk.co.fivium.els.categories.common.SupplierNameForm;
+import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingForm;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.util.TemplateUtils;
@@ -104,6 +110,18 @@ public class TemplatePopulator {
 
   public Document getPopulatedDocument() {
     return template;
+  }
+
+  public ProcessedEnergyLabelDocument asProcessedEnergyLabel(ProductMetadata analyticsLabel, AnalyticsForm analyticsForm, SupplierNameForm supplierNameForm) {
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, analyticsForm.getGoogleAnalyticsClientId(), supplierNameForm.getSupplierName(), supplierNameForm.getModelName());
+  }
+
+  public ProcessedEnergyLabelDocument asProcessedEnergyLabel(ProductMetadata analyticsLabel, AnalyticsForm analyticsForm) {
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, analyticsForm.getGoogleAnalyticsClientId(), null, null);
+  }
+
+  public ProcessedInternetLabelDocument asProcessedInternetLabel(AnalyticsForm analyticsForm, InternetLabellingForm internetLabellingForm, String ratingClass, ProductMetadata label) {
+    return new ProcessedInternetLabelDocument(template, ratingClass, label, analyticsForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat());
   }
 
   private double getRatingIncrementValue(String ratingIncrementAttrName) {

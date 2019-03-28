@@ -1,12 +1,13 @@
 package uk.co.fivium.els.categories.lamps.service;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.lamps.model.LampsForm;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModel;
 import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModelConsumption;
 import uk.co.fivium.els.categories.lamps.model.TemplateType;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
@@ -26,7 +27,7 @@ public class LampsService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(LampsForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(LampsForm form, LegislationCategory legislationCategory) {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps/lamps.svg"));
 
     return templatePopulator
@@ -34,10 +35,10 @@ public class LampsService {
         .setMultilineText("model", form.getModelName())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
-        .getPopulatedDocument();
+        .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form, form);
   }
 
-  public Document generateHtml(LampsFormNoSupplierModel form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(LampsFormNoSupplierModel form, LegislationCategory legislationCategory) {
     TemplateType templateType = TemplateType.valueOf(form.getTemplateType());
     TemplatePopulator templatePopulator;
 
@@ -50,10 +51,10 @@ public class LampsService {
     return templatePopulator
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
-        .getPopulatedDocument();
+        .asProcessedEnergyLabel(ProductMetadata.LAMPS_RATING_CONSUMPTION, form);
   }
 
-  public Document generateHtml(LampsFormNoSupplierModelConsumption form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(LampsFormNoSupplierModelConsumption form, LegislationCategory legislationCategory) {
     TemplateType templateType = TemplateType.valueOf(form.getTemplateType());
     TemplatePopulator templatePopulator;
 
@@ -65,7 +66,7 @@ public class LampsService {
 
     return templatePopulator
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-        .getPopulatedDocument();
+        .asProcessedEnergyLabel(ProductMetadata.LAMPS_RATING, form);
   }
 
 }
