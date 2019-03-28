@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm "Cooling-only single- or double-duct air conditioners">
+<@common.standardProductForm "Cooling-only single or double duct air conditioners">
 
   <@govukSelect.select path="form.coolingEfficiencyRating" options=efficiencyRating/>
   <@govukTextInput.textInput path="form.coolingKw"/>
