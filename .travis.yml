@@ -8,7 +8,7 @@ install:
 script:
 - npx gulp buildAll
 - chmod +x gradlew
-- ./gradlew bootJar
+- ./gradlew test bootJar
 
 env:
   - secure: yHmxYCzgUl8jQKzUdinIcyUqvHmQCBmx4ZusD790l/zvyJv1qw7SNESyw7o/K+G9XuuumdNqtO6h+LK96QbdGDHZNhRUaIpoOaKyQpQgeeIst4zQbp2KsQ4eNZzBE6MfkOUifUu/T1irnFj7v7PZUufD39+QLNOsfFwZo/r2sONUTlevg7wNgGTcpqdm09W+XjNPn/ITWmT/uIwyjbgCXIp8Okk8ngB49eRMuknqn27R63Si5VmshPRLHFCwjaWQPxu/bCHg+0VkqLxYtL8m0aiY0kz921C/q/PN/KB3TkaCyqYCl6PQsgwZtC6yoPK+6eFnsPx67i1uN9N1+L6IatofAXdzcBM8RMCNtCLAAA0VcudD3DwZJUZAhwQc22eFVktqMotyViLQSGQaU3AZj6O4lZacvi9d0V4P0OoBw7lJiCvYJyRkHTpKbT6yUSD5nK39KtFNC532csMATKgVyaFk91rvPK3VKsqkqu22aS2M9KIW4Z5nimTq9ke/yHyZmZQP5ffLtb6Di+z6CfpkaQaZ+dgeA3IoOK4mb+Dcl/xC7zEoaOtTuGvum3UZK3TO2SplDcBkF1Sx4LuTElmAv3TLJvnN4DRfhLcrqI6iXnfKjtjDrLy0uiqlB5/9Ahp7LcGHv6R4q2NiQZlgTqWGYT+tXylaTminJ8fh6BwmXqw=

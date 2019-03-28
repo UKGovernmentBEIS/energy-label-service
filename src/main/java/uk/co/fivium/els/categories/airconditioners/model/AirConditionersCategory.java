@@ -26,6 +26,18 @@ public class AirConditionersCategory implements Category {
         "REVERSIBLE_DUCTLESS_AIR_CONDITIONERS",
         "Reversible ductless air conditioners",
         ReverseRouter.route(on(AirConditionersController.class).renderReversibleDuctlessAirConditioners(null))))
+    .add(new CategoryItem(
+        "COOLING_DUCTED_AIR_CONDITIONERS",
+        "Cooling-only single- or double-duct air conditioners",
+        ReverseRouter.route(on(AirConditionersController.class).renderCoolingDuctedAirConditioners(null))))
+    .add(new CategoryItem(
+        "HEATING_DUCTED_AIR_CONDITIONERS",
+        "Heating-only single- or double-duct air conditioners",
+        ReverseRouter.route(on(AirConditionersController.class).renderHeatingDuctedAirConditioners(null))))
+    .add(new CategoryItem(
+        "REVERSIBLE_DUCTED_AIR_CONDITIONERS",
+        "Reversible single- or double-duct air conditioners",
+        ReverseRouter.route(on(AirConditionersController.class).renderReversibleDuctedAirConditioners(null))))
     .build();
 
   private AirConditionersCategory(){}
