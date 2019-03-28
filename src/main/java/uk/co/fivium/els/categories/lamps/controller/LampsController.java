@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -27,34 +26,34 @@ import uk.co.fivium.els.categories.lamps.model.LampsFormNoSupplierModelConsumpti
 import uk.co.fivium.els.categories.lamps.model.TemplateType;
 import uk.co.fivium.els.categories.lamps.service.LampsService;
 import uk.co.fivium.els.controller.CategoryController;
-import uk.co.fivium.els.model.GoogleAnalyticsEventAction;
-import uk.co.fivium.els.model.GoogleAnalyticsEventCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
-//TODO cut down on duplication here. All labels are essentially the same. Internet label may also only be needed on sub category page
+//TODO cut down on duplication here. All labels are essentially the same
 @Controller
 @RequestMapping("/categories/lamps")
 public class LampsController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Lamps";
 
-  private final PdfRenderer pdfRenderer;
   private final LampsService lampsService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public LampsController(PdfRenderer pdfRenderer, LampsService lampsService, BreadcrumbService breadcrumbService, InternetLabelService internetLabelService) {
+  public LampsController(LampsService lampsService, BreadcrumbService breadcrumbService, InternetLabelService internetLabelService,
+                         ResponseService responseService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, LampsCategory.GET, LampsController.class);
-    this.pdfRenderer = pdfRenderer;
     this.lampsService = lampsService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/lamps")
@@ -69,9 +68,7 @@ public class LampsController extends CategoryController {
       return getLamps(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
-      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with supplier's name, model identification code, rating and energy consumption");
-      return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+      return responseService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -82,8 +79,7 @@ public class LampsController extends CategoryController {
       return getLamps(bindingResult.getFieldErrors());
     }
     else {
-      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with supplier's name, model identification code, rating and energy consumption");
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_FULL));
     }
   }
 
@@ -99,9 +95,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
-      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating and weighted energy consumption only");
-      return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+      return responseService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -112,8 +106,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
     else {
-      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating and weighted energy consumption only");
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_RATING_CONSUMPTION));
     }
   }
 
@@ -129,9 +122,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
-      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating only");
-      return ControllerUtils.serveResource(pdf, "lamps-label.pdf");
+      return responseService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -142,8 +133,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
-      ControllerUtils.sendGoogleAnalyticsEvent(form.getGoogleAnalyticsClientId(), GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, "Lamps - Label with energy rating only");
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, "lamps");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_RATING));
     }
   }
 

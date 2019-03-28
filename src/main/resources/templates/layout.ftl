@@ -49,7 +49,7 @@
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-136887405-1', 'auto');
+    ga('create', '${googleAnalyticsToken}', 'auto');
     ga('send', 'pageview');
   </script>
   <!-- End Google Analytics -->
@@ -70,10 +70,6 @@
 
   <!--[if IE 8]>
   <link rel="stylesheet" href="<@spring.url'/assets/static/css/main-ie8.css'/>">
-  <![endif]-->
-
-  <!--[if lt IE 9]>
-  <script src="<@spring.url'/html5-shiv/html5shiv.js'/>"></script>
   <![endif]-->
 
   <meta property="og:image" content="<@spring.url'/assets/images/govuk-opengraph-image.png'/>">

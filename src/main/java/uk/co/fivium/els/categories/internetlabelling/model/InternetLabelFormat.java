@@ -1,6 +1,16 @@
 package uk.co.fivium.els.categories.internetlabelling.model;
 
 public enum InternetLabelFormat {
-  JPEG,
-  PNG;
+  JPEG(".jpg"),
+  PNG(".png");
+
+  private final String fileExtension;
+
+  InternetLabelFormat(String fileExtension) {
+    this.fileExtension = fileExtension;
+  }
+
+  public String getFileExtension() {
+    return fileExtension;
+  }
 }

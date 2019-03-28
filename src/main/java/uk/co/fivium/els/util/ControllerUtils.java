@@ -3,27 +3,20 @@ package uk.co.fivium.els.util;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.model.LegislationCategory;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
-import uk.co.fivium.els.model.GoogleAnalyticsEventCategory;
-import uk.co.fivium.els.model.GoogleAnalyticsEventAction;
 
 public class ControllerUtils {
 
@@ -77,37 +70,6 @@ public class ControllerUtils {
         bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
       }
     }
-  }
-
-  public static void sendGoogleAnalyticsEvent(String jsClientId, GoogleAnalyticsEventCategory eventCategory, GoogleAnalyticsEventAction action, String eventLabel) {
-    // We might not get a client ID if the user has JavaScript disabled or blocks the Google Analytics JS.
-    // In that case, we generate a random client ID so we can track this event, but it won't be linked to the rest of
-    // the user's actions in the service
-    String clientId = jsClientId;
-    if(clientId.isEmpty()) {
-      clientId = UUID.randomUUID().toString();
-    }
-
-    final String uri = "https://www.google-analytics.com/collect";
-
-    RestTemplate restTemplate = new RestTemplate();
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-
-    // See https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#event for information on the
-    // params we're sending
-    map.add("v", "1");
-    map.add("tid", "UA-136887405-1");
-    map.add("cid", clientId);
-    map.add("t", "event");
-    map.add("ec", eventCategory.getDisplayValue());
-    map.add("ea", action.getDisplayValue());
-    map.add("el", eventLabel);
-
-    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-    ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
   }
 
 }

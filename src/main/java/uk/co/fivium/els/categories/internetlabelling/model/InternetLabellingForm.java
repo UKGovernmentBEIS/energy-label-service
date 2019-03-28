@@ -2,10 +2,11 @@ package uk.co.fivium.els.categories.internetlabelling.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import uk.co.fivium.els.categories.common.AnalyticsForm;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.InternetLabelModeField;
 
-public class InternetLabellingForm {
+public class InternetLabellingForm extends AnalyticsForm {
 
   @FieldPrompt("Enter height of the product price (in pixels)")
   @Digits(integer = 2, fraction = 0, groups = InternetLabellingGroup.class, message = "Enter the height of the product price, up to 2 digits long")
@@ -21,8 +22,6 @@ public class InternetLabellingForm {
   @NotBlank(groups = InternetLabellingGroup.class, message = "Select a label format")
   @InternetLabelModeField
   private String labelFormat;
-
-  private String googleAnalyticsClientId;
 
   public String getProductPriceHeightPx() {
     return productPriceHeightPx;
@@ -46,13 +45,5 @@ public class InternetLabellingForm {
 
   public void setLabelFormat(String labelFormat) {
     this.labelFormat = labelFormat;
-  }
-
-  public String getGoogleAnalyticsClientId() {
-    return googleAnalyticsClientId;
-  }
-
-  public void setGoogleAnalyticsClientId(String googleAnalyticsClientId) {
-    this.googleAnalyticsClientId = googleAnalyticsClientId;
   }
 }
