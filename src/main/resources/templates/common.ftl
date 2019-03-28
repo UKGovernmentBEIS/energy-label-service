@@ -49,11 +49,14 @@ Includes the wrapping form element, the generate label button and optionally the
     <input type="hidden" id="googleAnalyticsClientId" name="googleAnalyticsClientId" value="">
     </@form.govukForm>
 
-    <script>
-      ga(function(tracker) {
+    <#if googleAnalyticsEnabled>
+      <script>
+        ga(function(tracker) {
           var clientId = tracker.get('clientId');
           document.getElementById('googleAnalyticsClientId').value = clientId;
-      });
-    </script>
+        });
+      </script>
+    </#if>
+
   </@defaultPage>
 </#macro>

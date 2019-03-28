@@ -80,7 +80,7 @@ public class ResponseService {
 
     // Windows filename length limit
     if (sanitisedFilename.length() > 255) {
-      return sanitisedFilename.substring(155);
+      return sanitisedFilename.substring(0, 255);
     } else {
       return sanitisedFilename;
     }
