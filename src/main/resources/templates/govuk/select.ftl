@@ -30,7 +30,7 @@
       <select class="govuk-select <#if hasError>govuk-select--error</#if>" id="${id}" <#if fieldHint?has_content>aria-describedby="${id}-hint" </#if> name="${spring.status.expression}">
         <#if spring.stringStatusValue?has_content>
         <#else>
-            <option value="" selected disabled>Select One...</option>
+            <option value="" selected disabled></option>
         </#if>
         <#list options?keys as option>
           <#assign isSelected = spring.stringStatusValue == option>
