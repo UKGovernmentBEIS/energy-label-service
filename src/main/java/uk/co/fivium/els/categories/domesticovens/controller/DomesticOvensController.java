@@ -6,16 +6,15 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.fivium.els.categories.domesticovens.model.DomesticOvenCategory;
 import uk.co.fivium.els.categories.domesticovens.model.DomesticOvensForm;
@@ -24,10 +23,11 @@ import uk.co.fivium.els.categories.domesticovens.service.DomesticOvensService;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -36,22 +36,21 @@ public class DomesticOvensController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Domestic ovens";
 
-  private final PdfRenderer pdfRenderer;
   private final DomesticOvensService domesticOvensService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-
+  private final ResponseService responseService;
 
   @Autowired
-  public DomesticOvensController(PdfRenderer pdfRenderer,
-                                 DomesticOvensService domesticOvensService,
+  public DomesticOvensController(DomesticOvensService domesticOvensService,
                                  BreadcrumbService breadcrumbService,
-                                 InternetLabelService internetLabelService) {
+                                 InternetLabelService internetLabelService,
+                                 ResponseService responseService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, DomesticOvenCategory.GET, DomesticOvensController.class);
-    this.pdfRenderer = pdfRenderer;
     this.domesticOvensService = domesticOvensService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/electric-ovens")
@@ -66,8 +65,7 @@ public class DomesticOvensController extends CategoryController {
       return getElectricOvens(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(domesticOvensService.generateHtml(form));
-      return ControllerUtils.serveResource(pdf, "domestic-ovens-label.pdf");
+      return responseService.processPdfResponse(domesticOvensService.generateHtml(form));
     }
   }
 
@@ -78,7 +76,7 @@ public class DomesticOvensController extends CategoryController {
       return getElectricOvens(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, "electric-ovens");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_ELECTRIC));
     }
   }
 
@@ -94,8 +92,7 @@ public class DomesticOvensController extends CategoryController {
       return getGasOvens(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(domesticOvensService.generateHtml(form));
-      return ControllerUtils.serveResource(pdf, "domestic-ovens-label.pdf");
+      return responseService.processPdfResponse(domesticOvensService.generateHtml(form));
     }
   }
 
@@ -106,7 +103,7 @@ public class DomesticOvensController extends CategoryController {
       return getElectricOvens(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, "gas-ovens");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_GAS));
     }
   }
 

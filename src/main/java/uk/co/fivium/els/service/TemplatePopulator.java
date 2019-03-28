@@ -112,12 +112,12 @@ public class TemplatePopulator {
     return template;
   }
 
-  public ProcessedEnergyLabelDocument asProcessedEnergyLabel(ProductMetadata analyticsLabel, AnalyticsForm analyticsForm, SupplierNameForm supplierNameForm) {
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, analyticsForm.getGoogleAnalyticsClientId(), supplierNameForm.getSupplierName(), supplierNameForm.getModelName());
+  public <T extends AnalyticsForm & SupplierNameForm> ProcessedEnergyLabelDocument asProcessedEnergyLabel(ProductMetadata analyticsLabel, T form) {
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), form.getSupplierName(), form.getModelName());
   }
 
-  public ProcessedEnergyLabelDocument asProcessedEnergyLabel(ProductMetadata analyticsLabel, AnalyticsForm analyticsForm) {
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, analyticsForm.getGoogleAnalyticsClientId(), null, null);
+  public ProcessedEnergyLabelDocument asProcessedEnergyLabelNoSupplier(ProductMetadata analyticsLabel, AnalyticsForm form) {
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), null, null);
   }
 
   public ProcessedInternetLabelDocument asProcessedInternetLabel(AnalyticsForm analyticsForm, InternetLabellingForm internetLabellingForm, String ratingClass, ProductMetadata label) {

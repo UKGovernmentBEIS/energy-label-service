@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -21,30 +20,31 @@ import uk.co.fivium.els.categories.dishwashers.model.DishwashersForm;
 import uk.co.fivium.els.categories.dishwashers.service.DishwashersService;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
 @RequestMapping("/categories")
 public class DishwashersController {
 
-  private final PdfRenderer pdfRenderer;
   private final DishwashersService dishwashersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public DishwashersController(PdfRenderer pdfRenderer,
-                               DishwashersService dishwashersService,
+  public DishwashersController(DishwashersService dishwashersService,
                                BreadcrumbService breadcrumbService,
-                               InternetLabelService internetLabelService) {
-    this.pdfRenderer = pdfRenderer;
+                               InternetLabelService internetLabelService,
+                               ResponseService responseService) {
     this.dishwashersService = dishwashersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/dishwashers")
@@ -58,8 +58,7 @@ public class DishwashersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      Resource pdf = pdfRenderer.render(dishwashersService.generateHtml(form, DishwashersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "dishwashers-label.pdf");
+      return responseService.processPdfResponse(dishwashersService.generateHtml(form, DishwashersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -69,7 +68,7 @@ public class DishwashersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORY_CURRENT, "dishwashers");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.DISHWASHERS));
     }
   }
 

@@ -35,7 +35,7 @@ public class LampsService {
         .setMultilineText("model", form.getModelName())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
-        .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form, form);
+        .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form);
   }
 
   public ProcessedEnergyLabelDocument generateHtml(LampsFormNoSupplierModel form, LegislationCategory legislationCategory) {
@@ -51,7 +51,7 @@ public class LampsService {
     return templatePopulator
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
-        .asProcessedEnergyLabel(ProductMetadata.LAMPS_RATING_CONSUMPTION, form);
+        .asProcessedEnergyLabelNoSupplier(ProductMetadata.LAMPS_RATING_CONSUMPTION, form);
   }
 
   public ProcessedEnergyLabelDocument generateHtml(LampsFormNoSupplierModelConsumption form, LegislationCategory legislationCategory) {
@@ -66,7 +66,7 @@ public class LampsService {
 
     return templatePopulator
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-        .asProcessedEnergyLabel(ProductMetadata.LAMPS_RATING, form);
+        .asProcessedEnergyLabelNoSupplier(ProductMetadata.LAMPS_RATING, form);
   }
 
 }
