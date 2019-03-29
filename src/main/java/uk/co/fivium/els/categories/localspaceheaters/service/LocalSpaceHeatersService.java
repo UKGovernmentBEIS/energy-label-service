@@ -1,10 +1,11 @@
 package uk.co.fivium.els.categories.localspaceheaters.service;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.localspaceheaters.model.LocalSpaceHeatersForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
@@ -23,7 +24,7 @@ public class LocalSpaceHeatersService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(LocalSpaceHeatersForm form) {
+  public ProcessedEnergyLabelDocument generateHtml(LocalSpaceHeatersForm form) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/local-space-heaters/local-space-heaters.svg"));
 
@@ -38,6 +39,6 @@ public class LocalSpaceHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("directHeatKw", form.getDirectHeatOutput())
       .setText("indirectHeatKw", form.getIndirectHeatOutput())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.LOCAL_SPACE_HEATERS, form);
   }
 }

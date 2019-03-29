@@ -2,11 +2,12 @@ package uk.co.fivium.els.categories.televisions.service;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.televisions.model.TelevisionsForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
@@ -37,7 +38,7 @@ public class TelevisionsService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(TelevisionsForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(TelevisionsForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
     if (legislationCategory == TelevisionsService.LEGISLATION_CATEGORY_JAN2017) {
@@ -58,6 +59,6 @@ public class TelevisionsService {
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("cm", form.getScreenSizeCm())
       .setText("inch", form.getScreenSizeInch())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.TV, form);
   }
 }

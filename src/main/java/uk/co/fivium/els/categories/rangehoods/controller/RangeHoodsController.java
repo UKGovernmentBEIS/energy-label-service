@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,10 +22,11 @@ import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGrou
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.rangehoods.model.RangeHoodsForm;
 import uk.co.fivium.els.categories.rangehoods.service.RangeHoodsService;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -35,17 +35,20 @@ public class RangeHoodsController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Range Hoods";
 
-  private final PdfRenderer pdfRenderer;
   private final RangeHoodsService rangeHoodsService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public RangeHoodsController(PdfRenderer pdfRenderer, RangeHoodsService rangeHoodsService, BreadcrumbService breadcrumbService, InternetLabelService internetLabelService) {
-    this.pdfRenderer = pdfRenderer;
+  public RangeHoodsController(RangeHoodsService rangeHoodsService,
+                              BreadcrumbService breadcrumbService,
+                              InternetLabelService internetLabelService,
+                              ResponseService responseService) {
     this.rangeHoodsService = rangeHoodsService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/range-hoods")
@@ -56,16 +59,13 @@ public class RangeHoodsController {
   @PostMapping("/range-hoods")
   @ResponseBody
   public Object handleRangeHoodsFormSubmit(@Valid @ModelAttribute("form") RangeHoodsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> {
-      Resource pdf = pdfRenderer.render(rangeHoodsService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "range-hoods-label.pdf");
-    }));
+    return doIfValid(form, bindingResult, (category -> responseService.processPdfResponse(rangeHoodsService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/range-hoods", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelRangeHoodsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") RangeHoodsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "range-hoods")));
+    return doIfValid(form, bindingResult, (category -> responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), category, ProductMetadata.RANGE_HOODS))));
   }
 
   private Object doIfValid(RangeHoodsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function){

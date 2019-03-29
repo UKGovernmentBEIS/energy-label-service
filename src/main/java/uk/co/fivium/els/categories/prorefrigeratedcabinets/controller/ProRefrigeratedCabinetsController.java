@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,10 +24,11 @@ import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelServic
 import uk.co.fivium.els.categories.prorefrigeratedcabinets.model.ClimateClass;
 import uk.co.fivium.els.categories.prorefrigeratedcabinets.model.ProRefrigeratedCabinetsForm;
 import uk.co.fivium.els.categories.prorefrigeratedcabinets.service.ProRefrigeratedCabinetsService;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -38,20 +38,20 @@ public class ProRefrigeratedCabinetsController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Professional refrigerated storage cabinets";
 
-  private final PdfRenderer pdfRenderer;
-  private final ProRefrigeratedCabinetsService professionalRefrigeratedStorageCabinetsService;
+  private final ProRefrigeratedCabinetsService proRefrigeratedCabinets;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public ProRefrigeratedCabinetsController(PdfRenderer pdfRenderer,
-                                           ProRefrigeratedCabinetsService professionalRefrigeratedStorageCabinetsService,
+  public ProRefrigeratedCabinetsController(ProRefrigeratedCabinetsService proRefrigeratedCabinets,
                                            BreadcrumbService breadcrumbService,
-                                           InternetLabelService internetLabelService) {
-    this.pdfRenderer = pdfRenderer;
-    this.professionalRefrigeratedStorageCabinetsService = professionalRefrigeratedStorageCabinetsService;
+                                           InternetLabelService internetLabelService,
+                                           ResponseService responseService) {
+    this.proRefrigeratedCabinets = proRefrigeratedCabinets;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/professional-refrigerated-storage-cabinets")
@@ -62,16 +62,13 @@ public class ProRefrigeratedCabinetsController {
   @PostMapping("/professional-refrigerated-storage-cabinets")
   @ResponseBody
   public Object handleProfessionalRefrigeratedStorageCabinetsFormSubmit(@Valid @ModelAttribute("form") ProRefrigeratedCabinetsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> {
-      Resource pdf = pdfRenderer.render(professionalRefrigeratedStorageCabinetsService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "professional-refrigerated-storage-cabinets-label.pdf");
-    }));
+    return doIfValid(form, bindingResult, (category -> responseService.processPdfResponse(proRefrigeratedCabinets.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/professional-refrigerated-storage-cabinets", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelProfessionalRefrigeratedStorageCabinetsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") ProRefrigeratedCabinetsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "professional-refrigerated-storage-cabinets")));
+    return doIfValid(form, bindingResult, (category -> responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), category, ProductMetadata.PRO_REFRIGERATED_CABINETS))));
   }
 
   private Object doIfValid(ProRefrigeratedCabinetsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {

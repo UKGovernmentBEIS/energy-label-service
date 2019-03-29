@@ -9,14 +9,39 @@ public enum ProductMetadata {
   AC_REVERSIBLE_NON_DUCT("Air conditioners - Reversible ductless air conditioners", "Air conditioners"),
   AC_REVERSIBLE_DUCT("Air conditioners - Reversible ducted air conditioners", "Air conditioners"),
 
+  SPACE_HEATER_BOILER("Space heaters - Boiler space heaters", "Space heaters"),
+  SPACE_HEATER_BOILER_COMBI("Space heaters - Boiler combination heaters", "Space heaters"),
+  SPACE_HEATER_COGEN("Space heaters - Cogeneration space heaters", "Space heaters"),
+  SPACE_HEATER_HEAT_PUMP("Space heaters - Heat pump space heaters", "Space heaters"),
+  SPACE_HEATER_HEAT_PUMP_COMBINATION("Space heaters - Heat pump combination heaters", "Space heaters"),
+  SPACE_HEATER_LOW_TEMP("Space heaters - Low-temperature heat pump space heaters", "Space heaters"),
+  SPACE_HEATER_PACKAGE("Space heaters - Packages of space heater, temperature control and solar device", "Space heaters"),
+  SPACE_HEATER_PACKAGE_COMBINATION("Space heaters - Packages of combination heater, temperature control and solar device", "Space heaters"),
+
   DISHWASHERS("Dishwashers", "Dishwashers"),
+
+  HRA_FRIDGE_FREEZER("Household refrigerating appliances - Fridges and freezers", "Refrigerating appliances"),
+  HRA_WINE_STORAGE("Household refrigerating appliances - Wine storage appliances", "Refrigerating appliances"),
+
+  LAMPS_FULL("Lamps - Label with supplier's name, Heating identification code, rating and energy consumption", "Lamps"),
+  LAMPS_RATING_CONSUMPTION("Lamps - Label with energy rating and weighted energy consumption only", "Lamps"),
+  LAMPS_RATING("Lamps - Label with energy rating only", "Lamps"),
+
+  LOCAL_SPACE_HEATERS("Local space heaters", "Local space heaters"),
 
   OVENS_ELECTRIC("Ovens - Electric ovens", "Ovens"),
   OVENS_GAS("Ovens - Gas ovens", "Ovens"),
 
-  LAMPS_FULL("Lamps - Label with supplier's name, Heating identification code, rating and energy consumption", "Lamps"),
-  LAMPS_RATING_CONSUMPTION("Lamps - Label with energy rating and weighted energy consumption only", "Lamps"),
-  LAMPS_RATING("Lamps - Label with energy rating only", "Lamps");
+  PRO_REFRIGERATED_CABINETS("Professional refrigerated storage cabinets", "Professional refrigerated storage cabinets"),
+
+  RANGE_HOODS("Range hoods", "Range hoods"),
+
+  SOLID_FUEL_BOILER("Solid fuel boilers and packages - Solid fuel boiler", "Solid fuel boiler and packages"),
+  SOLID_FUEL_BOILER_PACKAGE("Solid fuel boilers and packages - Packages of solid fuel boiler, supplementary heaters, temperature controls and solar devices ", "Solid fuel boiler and packages"),
+
+  TV("Televisions", "Televisions");
+
+
 
   private final String analyticsLabel;
   private final String productFileName;

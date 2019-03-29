@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,10 +25,11 @@ import uk.co.fivium.els.categories.solidfuelboilers.model.SolidFuelBoilerPackage
 import uk.co.fivium.els.categories.solidfuelboilers.model.SolidFuelBoilersForm;
 import uk.co.fivium.els.categories.solidfuelboilers.service.SolidFuelBoilersService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -38,21 +38,21 @@ public class SolidFuelBoilersController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Solid fuel boilers and packages";
 
-  private final PdfRenderer pdfRenderer;
   private final SolidFuelBoilersService solidFuelBoilersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public SolidFuelBoilersController(PdfRenderer pdfRenderer,
-                                    SolidFuelBoilersService solidFuelBoilersService,
+  public SolidFuelBoilersController(SolidFuelBoilersService solidFuelBoilersService,
                                     BreadcrumbService breadcrumbService,
-                                    InternetLabelService internetLabelService) {
+                                    InternetLabelService internetLabelService,
+                                    ResponseService responseService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, SolidFuelBoilerCategory.GET, SolidFuelBoilersController.class);
-    this.pdfRenderer = pdfRenderer;
     this.solidFuelBoilersService = solidFuelBoilersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/solid-fuel-boilers")
@@ -63,10 +63,7 @@ public class SolidFuelBoilersController extends CategoryController {
   @PostMapping("/solid-fuel-boilers")
   @ResponseBody
   public Object handleSolidFuelBoilersSubmit(@Valid @ModelAttribute("form") SolidFuelBoilersForm form, BindingResult bindingResult) {
-    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> {
-      Resource pdf = pdfRenderer.render(solidFuelBoilersService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "solid-fuel-boilers-label.pdf");
-    }));
+    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> responseService.processPdfResponse(solidFuelBoilersService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/solid-fuel-boilers", params = "mode=INTERNET")
@@ -99,8 +96,7 @@ public class SolidFuelBoilersController extends CategoryController {
       return getSolidFuelBoilerPackages(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(solidFuelBoilersService.generateHtml(form));
-      return ControllerUtils.serveResource(pdf, "solid-fuel-boilers-label.pdf");
+      return responseService.processPdfResponse(solidFuelBoilersService.generateHtml(form));
     }
   }
 
@@ -111,7 +107,7 @@ public class SolidFuelBoilersController extends CategoryController {
       return getSolidFuelBoilerPackages(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_PACKAGES_CURRENT, "solid-fuel-boiler");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getPackageEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_PACKAGES_CURRENT, ProductMetadata.SOLID_FUEL_BOILER_PACKAGE));
     }
   }
 

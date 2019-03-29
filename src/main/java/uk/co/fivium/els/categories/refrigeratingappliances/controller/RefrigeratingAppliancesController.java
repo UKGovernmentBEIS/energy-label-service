@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -26,10 +25,11 @@ import uk.co.fivium.els.categories.refrigeratingappliances.model.RefrigeratingAp
 import uk.co.fivium.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.service.RefrigeratingAppliancesService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -39,21 +39,21 @@ public class RefrigeratingAppliancesController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Household refrigerating appliances";
 
-  private final PdfRenderer pdfRenderer;
   private final RefrigeratingAppliancesService householdRefrigeratingAppliancesService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public RefrigeratingAppliancesController(PdfRenderer pdfRenderer,
-                                           RefrigeratingAppliancesService householdRefrigeratingAppliancesService,
+  public RefrigeratingAppliancesController(RefrigeratingAppliancesService householdRefrigeratingAppliancesService,
                                            BreadcrumbService breadcrumbService,
-                                           InternetLabelService internetLabelService) {
+                                           InternetLabelService internetLabelService,
+                                           ResponseService responseService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, RefrigeratingAppliancesCategory.GET, RefrigeratingAppliancesController.class);
-    this.pdfRenderer = pdfRenderer;
     this.householdRefrigeratingAppliancesService = householdRefrigeratingAppliancesService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/household-fridges-and-freezers")
@@ -68,8 +68,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getFridgesFreezers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(householdRefrigeratingAppliancesService.generateHtml(form));
-      return ControllerUtils.serveResource(pdf, "household-refrigerating-appliances-label.pdf");
+      return responseService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
     }
   }
 
@@ -80,7 +79,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getFridgesFreezers(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, "household-refrigerating-appliances");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.HRA_FRIDGE_FREEZER));
     }
   }
 
@@ -96,8 +95,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(householdRefrigeratingAppliancesService.generateHtml(form));
-      return ControllerUtils.serveResource(pdf, "wine-storage-appliances-label.pdf");
+      return responseService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
     }
   }
 
@@ -108,7 +106,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, "wine-storage-appliances");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.HRA_WINE_STORAGE));
     }
   }
 

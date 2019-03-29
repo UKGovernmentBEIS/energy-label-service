@@ -1,18 +1,18 @@
 package uk.co.fivium.els.categories.rangehoods.service;
 
 import com.google.common.collect.ImmutableList;
-import org.jsoup.nodes.Document;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.rangehoods.model.RangeHoodsForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.service.TemplateParserService;
 import uk.co.fivium.els.service.TemplatePopulator;
-
-import java.util.List;
 
 @Service
 public class RangeHoodsService {
@@ -40,7 +40,7 @@ public class RangeHoodsService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(RangeHoodsForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(RangeHoodsForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
     if (legislationCategory == RangeHoodsService.LEGISLATION_CATEGORY_JAN2018) {
@@ -58,6 +58,6 @@ public class RangeHoodsService {
       .applyRatingCssClass("fluidDynamicClass", RatingClass.valueOf(form.getFluidClass()))
       .applyRatingCssClass("lightingClass", RatingClass.valueOf(form.getLightingClass()))
       .applyRatingCssClass("greaseFilteringClass", RatingClass.valueOf(form.getGreaseClass()))
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.RANGE_HOODS, form);
   }
 }

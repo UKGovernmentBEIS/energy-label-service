@@ -1,12 +1,13 @@
 package uk.co.fivium.els.categories.refrigeratingappliances.service;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FreezerStarRating;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
 import uk.co.fivium.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
@@ -25,7 +26,7 @@ public class RefrigeratingAppliancesService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(FridgesFreezersForm form) {
+  public ProcessedEnergyLabelDocument generateHtml(FridgesFreezersForm form) {
     TemplatePopulator templatePopulator;
     // This class is the range in which the 'short' label is used, with fewer ratings listed
     RatingClassRange shortRange = RatingClassRange.of(RatingClass.APPP, RatingClass.C);
@@ -61,10 +62,10 @@ public class RefrigeratingAppliancesService {
       .setMultilineText("model", form.getModelName())
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("db", form.getNoiseEmissions())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.HRA_FRIDGE_FREEZER, form);
   }
 
-  public Document generateHtml(WineStorageAppliancesForm form) {
+  public ProcessedEnergyLabelDocument generateHtml(WineStorageAppliancesForm form) {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/wine-storage-appliances.svg"));
 
     return templatePopulator
@@ -74,6 +75,6 @@ public class RefrigeratingAppliancesService {
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("bottleCapacity", form.getBottleCapacity())
       .setText("db", form.getNoiseEmissions())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.HRA_WINE_STORAGE, form);
   }
 }

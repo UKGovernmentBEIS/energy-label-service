@@ -4,10 +4,10 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -22,10 +22,11 @@ import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGrou
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.televisions.model.TelevisionsForm;
 import uk.co.fivium.els.categories.televisions.service.TelevisionsService;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -34,17 +35,20 @@ public class TelevisionController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Televisions";
 
-  private final PdfRenderer pdfRenderer;
   private final TelevisionsService televisionsService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public TelevisionController(PdfRenderer pdfRenderer, TelevisionsService televisionsService, BreadcrumbService breadcrumbService, InternetLabelService internetLabelService) {
-    this.pdfRenderer = pdfRenderer;
+  public TelevisionController(TelevisionsService televisionsService,
+                              BreadcrumbService breadcrumbService,
+                              InternetLabelService internetLabelService,
+                              ResponseService responseService) {
     this.televisionsService = televisionsService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/televisions")
@@ -55,29 +59,24 @@ public class TelevisionController {
   @PostMapping("/televisions")
   @ResponseBody
   public Object handleTelevisionsFormSubmit(@Valid @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (() -> {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
-      Resource pdf = pdfRenderer.render(televisionsService.generateHtml(form, category));
-      return ControllerUtils.serveResource(pdf, "televisions-label.pdf");
-    }));
+    return doIfValid(form, bindingResult, ((category) -> responseService.processPdfResponse(televisionsService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/televisions", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelTelevisionsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (() -> {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "televisions");
-    }));
+    return doIfValid(form, bindingResult, ((category) ->
+        responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), category, ProductMetadata.TV))));
   }
 
-  private Object doIfValid(TelevisionsForm form, BindingResult bindingResult, Supplier<Object> supplier) {
+  private Object doIfValid(TelevisionsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> supplier) {
     ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), TelevisionsService.LEGISLATION_CATEGORIES, bindingResult);
     if (bindingResult.hasErrors()) {
       return getTelevisionsForm(bindingResult.getFieldErrors());
     }
     else {
-      return supplier.get();
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
+      return supplier.apply(category);
     }
   }
 

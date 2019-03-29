@@ -1,19 +1,19 @@
 package uk.co.fivium.els.categories.prorefrigeratedcabinets.service;
 
 import com.google.common.collect.ImmutableList;
-import org.jsoup.nodes.Document;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.prorefrigeratedcabinets.model.ClimateClass;
 import uk.co.fivium.els.categories.prorefrigeratedcabinets.model.ProRefrigeratedCabinetsForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.service.TemplateParserService;
 import uk.co.fivium.els.service.TemplatePopulator;
-
-import java.util.List;
 
 @Service
 public class ProRefrigeratedCabinetsService {
@@ -39,7 +39,7 @@ public class ProRefrigeratedCabinetsService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(ProRefrigeratedCabinetsForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(ProRefrigeratedCabinetsForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
     if (legislationCategory == ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_JUL2016) {
@@ -72,6 +72,6 @@ public class ProRefrigeratedCabinetsService {
       .setMultilineText("model", form.getModelName())
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .applyCssClassToId("climateClass", ClimateClass.valueOf(form.getClimateClass()).getSvgClass())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.PRO_REFRIGERATED_CABINETS, form);
   }
 }
