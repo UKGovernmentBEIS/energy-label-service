@@ -1,10 +1,17 @@
 package uk.co.fivium.els.categories.airconditioners.service;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.airconditioners.model.*;
+import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctedAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctedAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.MultipleClimateGroupForm;
+import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctedAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
@@ -23,7 +30,7 @@ public class AirConditionersService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(CoolingDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(CoolingDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/cooling-only-air-conditioners.svg"));
 
@@ -36,10 +43,10 @@ public class AirConditionersService {
       .setRatingArrow("rating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.AC_COOLING_ONLY_NON_DUCT, form);
   }
 
-  public Document generateHtml(HeatingDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(HeatingDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/heating-only-air-conditioners.svg"));
 
@@ -54,10 +61,10 @@ public class AirConditionersService {
       .setRatingArrow("averageRating", RatingClass.valueOf(form.getAverageHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.AC_HEATING_ONLY_NON_DUCT, form);
   }
 
-  public Document generateHtml(ReversibleDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(ReversibleDuctlessAirConditionersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/non-duct/reversible-air-conditioners.svg"));
 
@@ -76,10 +83,10 @@ public class AirConditionersService {
       .setRatingArrow("averageScopRating", RatingClass.valueOf(form.getAverageHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.AC_REVERSIBLE_NON_DUCT, form);
   }
 
-  public Document generateHtml(CoolingDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(CoolingDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/ducted/cooling-only-single-or-double-duct-air-conditioners.svg"));
 
@@ -91,10 +98,10 @@ public class AirConditionersService {
       .setText("kwhHour", form.getCoolingHourlyEnergyConsumption())
       .setRatingArrow("rating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.AC_COOLING_ONLY_DUCT, form);
   }
 
-  public Document generateHtml(HeatingDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(HeatingDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/ducted/heating-only-single-or-double-duct-air-conditioners.svg"));
 
@@ -106,10 +113,10 @@ public class AirConditionersService {
       .setText("kwhHour", form.getHeatingHourlyEnergyConsumption())
       .setRatingArrow("rating", RatingClass.valueOf(form.getHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.AC_HEATING_ONLY_DUCT, form);
   }
 
-  public Document generateHtml(ReversibleDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(ReversibleDuctedAirConditionersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/air-conditioners/ducted/reversible-single-or-double-duct-air-conditioners.svg"));
 
@@ -125,7 +132,7 @@ public class AirConditionersService {
       .setText("eerKwhHour", form.getCoolingHourlyEnergyConsumption())
       .setRatingArrow("eerRating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.AC_REVERSIBLE_DUCT, form);
   }
 
   private void applyMultipleClimateSection(TemplatePopulator templatePopulator, MultipleClimateGroupForm form, LegislationCategory legislationCategory) {

@@ -10,5 +10,5 @@ applications:
       SHOW_START_PAGE: false
       #TODO update once known
       HOME_PAGE_URL: https://gov.uk
-      ENABLE_GTM: true
-      GTM_TOKEN: changeme
+      ENABLE_GOOGLE_ANALYTICS: true
+      GOOGLE_ANALYTICS_TOKEN: UA-136887405-1

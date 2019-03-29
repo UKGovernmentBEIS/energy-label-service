@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,15 +16,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.fivium.els.categories.airconditioners.model.*;
+import uk.co.fivium.els.categories.airconditioners.model.AirConditionersCategory;
+import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctedAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.CoolingDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctedAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.HeatingDuctlessAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctedAirConditionersForm;
+import uk.co.fivium.els.categories.airconditioners.model.ReversibleDuctlessAirConditionersForm;
 import uk.co.fivium.els.categories.airconditioners.service.AirConditionersService;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.ResponseService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -34,21 +40,21 @@ public class AirConditionersController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Air conditioners";
 
-  private final PdfRenderer pdfRenderer;
   private final AirConditionersService airConditionersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final ResponseService responseService;
 
   @Autowired
-  public AirConditionersController(PdfRenderer pdfRenderer,
-                                   AirConditionersService airConditionersService,
+  public AirConditionersController(AirConditionersService airConditionersService,
                                    BreadcrumbService breadcrumbService,
-                                   InternetLabelService internetLabelService) {
+                                   InternetLabelService internetLabelService,
+                                   ResponseService responseService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, AirConditionersCategory.GET, AirConditionersController.class);
-    this.pdfRenderer = pdfRenderer;
     this.airConditionersService = airConditionersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.responseService = responseService;
   }
 
   @GetMapping("/non-duct/cooling-only-air-conditioners")
@@ -63,8 +69,7 @@ public class AirConditionersController extends CategoryController {
       return getCoolingDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
-      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+      return responseService.processPdfResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
     }
   }
 
@@ -75,7 +80,7 @@ public class AirConditionersController extends CategoryController {
       return getCoolingDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "cooling-only-air-conditioners");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, ProductMetadata.AC_COOLING_ONLY_NON_DUCT));
     }
   }
 
@@ -91,8 +96,7 @@ public class AirConditionersController extends CategoryController {
       return getHeatingDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
-      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+      return responseService.processPdfResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
     }
   }
 
@@ -103,7 +107,7 @@ public class AirConditionersController extends CategoryController {
       return getHeatingDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getAverageHeatingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "heating-only-air-conditioners");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getAverageHeatingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, ProductMetadata.AC_HEATING_ONLY_NON_DUCT));
     }
   }
 
@@ -119,8 +123,7 @@ public class AirConditionersController extends CategoryController {
       return getReversibleDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
-      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+      return responseService.processPdfResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
     }
   }
 
@@ -131,7 +134,7 @@ public class AirConditionersController extends CategoryController {
       return getReversibleDuctlessAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "reversible-air-conditioners");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, ProductMetadata.AC_REVERSIBLE_NON_DUCT));
     }
   }
 
@@ -147,8 +150,7 @@ public class AirConditionersController extends CategoryController {
       return getCoolingDuctedAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
-      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+      return responseService.processPdfResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
     }
   }
 
@@ -159,7 +161,7 @@ public class AirConditionersController extends CategoryController {
       return getCoolingDuctedAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "cooling-only-air-conditioners");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, ProductMetadata.AC_COOLING_ONLY_DUCT));
     }
   }
 
@@ -175,8 +177,7 @@ public class AirConditionersController extends CategoryController {
       return getHeatingDuctedAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
-      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+      return responseService.processPdfResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
     }
   }
 
@@ -187,7 +188,7 @@ public class AirConditionersController extends CategoryController {
       return getHeatingDuctedAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getHeatingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "heating-only-air-conditioners");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getHeatingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, ProductMetadata.AC_HEATING_ONLY_DUCT));
     }
   }
 
@@ -203,8 +204,7 @@ public class AirConditionersController extends CategoryController {
       return getReversibleDuctedAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
-      return ControllerUtils.serveResource(pdf, "air-conditioners-label.pdf");
+      return responseService.processPdfResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_JAN2019));
     }
   }
 
@@ -215,7 +215,7 @@ public class AirConditionersController extends CategoryController {
       return getReversibleDuctedAirConditioners(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, "reversible-air-conditioners");
+      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getCoolingEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_JAN2019, ProductMetadata.AC_REVERSIBLE_DUCT));
     }
   }
 

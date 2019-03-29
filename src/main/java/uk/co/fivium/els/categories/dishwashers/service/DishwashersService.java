@@ -1,10 +1,11 @@
 package uk.co.fivium.els.categories.dishwashers.service;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.dishwashers.model.DishwashersForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
@@ -24,10 +25,9 @@ public class DishwashersService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(DishwashersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtml(DishwashersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/dishwashers/dishwashers.svg"));
-
 
     return templatePopulator
         .setMultilineText("supplier", form.getSupplierName())
@@ -38,7 +38,7 @@ public class DishwashersService {
         .setText("db", form.getNoiseEmissions())
         .applyRatingCssClass("dryingClass", RatingClass.valueOf(form.getDryingEfficiencyRating()))
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-        .getPopulatedDocument();
+        .asProcessedEnergyLabel(ProductMetadata.DISHWASHERS, form);
   }
 
 }
