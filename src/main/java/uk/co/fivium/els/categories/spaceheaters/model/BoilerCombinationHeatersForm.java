@@ -4,6 +4,7 @@ import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 
+@StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class BoilerCombinationHeatersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Declared load profile")

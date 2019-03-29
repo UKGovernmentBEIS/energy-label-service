@@ -13,7 +13,9 @@ import uk.co.fivium.els.categories.waterheaters.model.validation.ConsumptionUnit
 import uk.co.fivium.els.categories.waterheaters.model.validation.ConventionalWaterHeaterFormSequenceProvider;
 import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
+@StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 @GroupSequenceProvider(ConventionalWaterHeaterFormSequenceProvider.class)
 public class ConventionalWaterHeatersForm extends StandardTemplateForm30Char {
 
