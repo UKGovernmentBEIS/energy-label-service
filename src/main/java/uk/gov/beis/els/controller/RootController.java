@@ -14,7 +14,6 @@ public class RootController {
   @Value("${app.show_start_page}")
   private boolean startPageEnabled;
 
-
   @GetMapping("/")
   public ModelAndView renderRootPage() {
     if (startPageEnabled) {

@@ -10,9 +10,6 @@ const sassOptions = {
   includePath: 'src/main/resources/scss'
 };
 
-const sassGlobPattern = 'src/main/resources/scss/*.scss';
-const freemarkerGlobPattern = 'src/main/resources/templates/**/*.ftl';
-
 function compileSass(exitOnError) {
   const plugins = [
     autoprefixer({
@@ -27,7 +24,7 @@ function compileSass(exitOnError) {
     sassTask = sassTask.on('error', sass.logError);
   }
 
-  return gulp.src(sassGlobPattern, {base: "."})
+  return gulp.src('src/main/resources/scss/*.scss', {base: "."})
     .pipe(sourcemaps.init())
     .pipe(sassTask)
     .pipe(postcss(plugins))
@@ -45,26 +42,16 @@ function compileSass(exitOnError) {
     .pipe(gulp.dest('./'));
 }
 
-gulp.task('sass', () => {
+gulp.task('sass', ['copyGovukResources'], () => {
   return compileSass(false);
 });
 
-gulp.task('copyTemplates', () => {
-  return gulp.src(freemarkerGlobPattern, {base: "."})
-  .pipe(rename(path => {
-    //E.g. core\src\main\resources\templates\core\form.ftl -> core\out\production\resources\templates\core\form.ftl
-    path.dirname = path.dirname.replace(/([\/\\])src[\/\\]main[\/\\]/, '$1out$1production$1');
-  }))
-  .pipe(gulp.dest('./'));
-});
-
-gulp.task('watch', callback => {
-  gulp.watch(sassGlobPattern, ['sass']);
-  //copyTemplates is only in 'watch', not 'buildAll', because it's only needed during development for refreshing templates
-  gulp.watch(freemarkerGlobPattern, ['copyTemplates']);
-});
-
-gulp.task('buildAll', () => {
+gulp.task('sassCi', ['copyGovukResources'], () => {
   return compileSass(true);
-//Additional Gulp tasks should be called here
 });
+
+gulp.task('copyGovukResources', () => {
+  return gulp.src(['node_modules/govuk-frontend/**/*']).pipe(gulp.dest('src/main/resources/public/assets/govuk-frontend'))
+});
+
+gulp.task('buildAll', ['sassCi']);
