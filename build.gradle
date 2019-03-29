@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'uk.co.fivium'
+group = 'uk.gov.beis'
 version = 'SNAPSHOT'
 sourceCompatibility = 1.8
 

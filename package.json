@@ -1,14 +1,14 @@
 {
   "name": "energy-label-generator",
   "version": "1.0.0",
-  "description": "This README would normally document whatever steps are necessary to get your application up and running.",
+  "description": "Energy label generator service",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/fiviumuk/energy-label-generator",
+  "license": "MIT",
+  "homepage": "https://github.com/UKGovernmentBEIS/energy-label-service",
   "devDependencies": {
     "autoprefixer": "^9.4.2",
     "gulp": "^3.9.1",
