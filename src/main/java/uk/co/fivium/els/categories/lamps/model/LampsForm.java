@@ -7,7 +7,9 @@ import uk.co.fivium.els.categories.common.StandardTemplateForm20Char;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
+@StaticProductText("The label should be at least 36mm x 76mm when attached to packaging. If it doesn’t fit, you can reduce the height by up to 60 percent. It can be full colour or black and white.")
 public class LampsForm extends StandardTemplateForm20Char {
 
   @FieldPrompt("Energy efficiency class of the application")

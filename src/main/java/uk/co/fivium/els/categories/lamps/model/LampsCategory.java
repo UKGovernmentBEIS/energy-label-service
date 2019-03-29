@@ -51,7 +51,7 @@ public class LampsCategory implements Category {
 
   @Override
   public String getCommonProductGuidanceText() {
-    return "The label should usually be at least 36mm x 76mm when attached to packaging, but you can make it smaller if it doesn't fit. It can be full colour or black and white.";
+    return null;
   }
 
   @Override

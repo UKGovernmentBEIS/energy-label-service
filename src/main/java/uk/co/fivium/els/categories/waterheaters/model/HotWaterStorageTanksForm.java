@@ -17,12 +17,12 @@ public class HotWaterStorageTanksForm extends StandardTemplateForm50Char {
   @DualModeField
   private String efficiencyRating;
 
-  @FieldPrompt("Standing loss in W")
+  @FieldPrompt("Standing loss in watts (W)")
   @Digits(integer = 3, fraction = 0, message = "Enter the standing loss, up to 3 digits long")
   private String standingLoss;
 
-  @FieldPrompt("Hot water storage tank volume, L")
-  @Digits(integer = 3, fraction = 0, message = "Enter the tank volume, up to 3 digits long")
+  @FieldPrompt("Volume of hot water storage tank in litres (l)")
+  @Digits(integer = 3, fraction = 0, message = "Enter the tank's volume, up to 3 digits long")
   private String volume;
 
   public String getEfficiencyRating() {

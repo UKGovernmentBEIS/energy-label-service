@@ -25,12 +25,12 @@ public class WaterSolarPackagesForm extends StandardTemplateForm50Char {
   @DualModeField
   private String packageEfficiencyRating;
 
-  @FieldPrompt("May a solar collector be included in the package of water heater and solar device?")
-  @NotNull(message = "Specify if a solar collector may be included")
+  @FieldPrompt("Can a solar collector be included in this package?")
+  @NotNull(message = "Specify if a solar collector can be included")
   private Boolean solarCollector;
 
-  @FieldPrompt("May a hot water storage tank be included in the package of water heater and solar device?")
-  @NotNull(message = "Specify if a hot water storage tank may be included")
+  @FieldPrompt("Can a hot water storage tank be included in this package?")
+  @NotNull(message = "Specify if a hot water storage tank can be included")
   private Boolean storageTank;
 
   public String getDeclaredLoadProfile() {
