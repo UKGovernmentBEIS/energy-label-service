@@ -23,7 +23,7 @@ public class WineStorageAppliancesForm extends StandardTemplateForm30Char {
   @Digits(integer = 3, fraction = 0, message = "Enter the total capacity of bottles, up to 3 digits long")
   private String bottleCapacity;
 
-  @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re1 pW")
+  @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emissions, up to 2 digits long")
   private String noiseEmissions;
 
