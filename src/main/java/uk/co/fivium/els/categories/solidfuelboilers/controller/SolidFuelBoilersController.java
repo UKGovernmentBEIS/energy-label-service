@@ -29,7 +29,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -41,18 +41,18 @@ public class SolidFuelBoilersController extends CategoryController {
   private final SolidFuelBoilersService solidFuelBoilersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public SolidFuelBoilersController(SolidFuelBoilersService solidFuelBoilersService,
                                     BreadcrumbService breadcrumbService,
                                     InternetLabelService internetLabelService,
-                                    ResponseService responseService) {
+                                    DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, SolidFuelBoilerCategory.GET, SolidFuelBoilersController.class);
     this.solidFuelBoilersService = solidFuelBoilersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/solid-fuel-boilers")
@@ -63,13 +63,13 @@ public class SolidFuelBoilersController extends CategoryController {
   @PostMapping("/solid-fuel-boilers")
   @ResponseBody
   public Object handleSolidFuelBoilersSubmit(@Valid @ModelAttribute("form") SolidFuelBoilersForm form, BindingResult bindingResult) {
-    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> responseService.processPdfResponse(solidFuelBoilersService.generateHtml(form, category))));
+    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> documentRendererService.processPdfResponse(solidFuelBoilersService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/solid-fuel-boilers", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelSolidFuelBoilersSubmit(@Validated(InternetLabellingGroup.class)@ModelAttribute("form") SolidFuelBoilersForm form, BindingResult bindingResult) {
-    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, "solid-fuel-boilers")));
+    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.SOLID_FUEL_BOILER))));
   }
 
   private Object doIfValidSolidFuelBoiler(SolidFuelBoilersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
@@ -96,7 +96,7 @@ public class SolidFuelBoilersController extends CategoryController {
       return getSolidFuelBoilerPackages(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processPdfResponse(solidFuelBoilersService.generateHtml(form));
+      return documentRendererService.processPdfResponse(solidFuelBoilersService.generateHtml(form));
     }
   }
 
@@ -107,7 +107,7 @@ public class SolidFuelBoilersController extends CategoryController {
       return getSolidFuelBoilerPackages(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getPackageEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_PACKAGES_CURRENT, ProductMetadata.SOLID_FUEL_BOILER_PACKAGE));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_PACKAGES_CURRENT, ProductMetadata.SOLID_FUEL_BOILER_PACKAGE));
     }
   }
 

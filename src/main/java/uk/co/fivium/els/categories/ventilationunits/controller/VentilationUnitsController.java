@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,10 +22,11 @@ import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitCategor
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitsForm;
 import uk.co.fivium.els.categories.ventilationunits.service.VentilationUnitsService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -35,21 +35,21 @@ public class VentilationUnitsController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Ventilation units";
 
-  private final PdfRenderer pdfRenderer;
   private final VentilationUnitsService ventilationUnitsService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
-  public VentilationUnitsController(PdfRenderer pdfRenderer,
-                                    VentilationUnitsService ventilationUnitsService,
+  public VentilationUnitsController(VentilationUnitsService ventilationUnitsService,
                                     BreadcrumbService breadcrumbService,
-                                    InternetLabelService internetLabelService) {
+                                    InternetLabelService internetLabelService,
+                                    DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, VentilationUnitCategory.GET, VentilationUnitsController.class);
-    this.pdfRenderer = pdfRenderer;
     this.ventilationUnitsService = ventilationUnitsService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/unidirectional-ventilation-units")
@@ -64,8 +64,7 @@ public class VentilationUnitsController extends CategoryController {
       return getUnidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(ventilationUnitsService.generateHtmlUnidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "ventilation-units-label.pdf");
+      return documentRendererService.processPdfResponse(ventilationUnitsService.generateHtmlUnidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -76,7 +75,7 @@ public class VentilationUnitsController extends CategoryController {
       return getUnidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, "ventilation-units");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENTILATION_UNITS_UNIDIRECTIONAL));
     }
   }
 
@@ -92,8 +91,7 @@ public class VentilationUnitsController extends CategoryController {
       return getBidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(ventilationUnitsService.generateHtmlBidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "ventilation-units-label.pdf");
+      return documentRendererService.processPdfResponse(ventilationUnitsService.generateHtmlBidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -104,7 +102,7 @@ public class VentilationUnitsController extends CategoryController {
       return getBidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, "ventilation-units");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENTILATION_UNITS_BIDIRECTIONAL));
     }
   }
 

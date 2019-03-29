@@ -29,7 +29,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -42,18 +42,18 @@ public class RefrigeratingAppliancesController extends CategoryController {
   private final RefrigeratingAppliancesService householdRefrigeratingAppliancesService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public RefrigeratingAppliancesController(RefrigeratingAppliancesService householdRefrigeratingAppliancesService,
                                            BreadcrumbService breadcrumbService,
                                            InternetLabelService internetLabelService,
-                                           ResponseService responseService) {
+                                           DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, RefrigeratingAppliancesCategory.GET, RefrigeratingAppliancesController.class);
     this.householdRefrigeratingAppliancesService = householdRefrigeratingAppliancesService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/household-fridges-and-freezers")
@@ -68,7 +68,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getFridgesFreezers(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
+      return documentRendererService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
     }
   }
 
@@ -79,7 +79,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getFridgesFreezers(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.HRA_FRIDGE_FREEZER));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.HRA_FRIDGE_FREEZER));
     }
   }
 
@@ -95,7 +95,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
+      return documentRendererService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
     }
   }
 
@@ -106,7 +106,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.HRA_WINE_STORAGE));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.HRA_WINE_STORAGE));
     }
   }
 

@@ -26,7 +26,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -38,17 +38,17 @@ public class TelevisionController {
   private final TelevisionsService televisionsService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public TelevisionController(TelevisionsService televisionsService,
                               BreadcrumbService breadcrumbService,
                               InternetLabelService internetLabelService,
-                              ResponseService responseService) {
+                              DocumentRendererService documentRendererService) {
     this.televisionsService = televisionsService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/televisions")
@@ -59,14 +59,14 @@ public class TelevisionController {
   @PostMapping("/televisions")
   @ResponseBody
   public Object handleTelevisionsFormSubmit(@Valid @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, ((category) -> responseService.processPdfResponse(televisionsService.generateHtml(form, category))));
+    return doIfValid(form, bindingResult, ((category) -> documentRendererService.processPdfResponse(televisionsService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/televisions", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelTelevisionsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
     return doIfValid(form, bindingResult, ((category) ->
-        responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), category, ProductMetadata.TV))));
+        documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.TV))));
   }
 
   private Object doIfValid(TelevisionsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> supplier) {

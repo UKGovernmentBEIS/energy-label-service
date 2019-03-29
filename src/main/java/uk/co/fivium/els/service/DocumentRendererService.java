@@ -17,7 +17,7 @@ import uk.co.fivium.els.renderer.PngRenderer;
 import uk.co.fivium.els.renderer.Renderer;
 
 @Service
-public class ResponseService {
+public class DocumentRendererService {
 
   private final PdfRenderer pdfRenderer;
   private final PngRenderer pngRenderer;
@@ -25,8 +25,8 @@ public class ResponseService {
   private final AnalyticsService analyticsService;
 
   @Autowired
-  public ResponseService(PdfRenderer pdfRenderer, PngRenderer pngRenderer,
-                         JpegRenderer jpegRenderer, AnalyticsService analyticsService) {
+  public DocumentRendererService(PdfRenderer pdfRenderer, PngRenderer pngRenderer,
+                                 JpegRenderer jpegRenderer, AnalyticsService analyticsService) {
     this.pdfRenderer = pdfRenderer;
     this.pngRenderer = pngRenderer;
     this.jpegRenderer = jpegRenderer;

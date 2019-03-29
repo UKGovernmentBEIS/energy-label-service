@@ -1,10 +1,11 @@
 package uk.co.fivium.els.categories.ventilationunits.service;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.ventilationunits.model.VentilationUnitsForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
@@ -23,15 +24,15 @@ public class VentilationUnitsService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtmlUnidirectional(VentilationUnitsForm form, LegislationCategory legislationCategory) {
-    return generateHtml(form, legislationCategory, "labels/ventilation-units/unidirectional-ventilation-unit.svg");
+  public ProcessedEnergyLabelDocument generateHtmlUnidirectional(VentilationUnitsForm form, LegislationCategory legislationCategory) {
+    return generateHtml(form, legislationCategory, "labels/ventilation-units/unidirectional-ventilation-unit.svg", ProductMetadata.VENTILATION_UNITS_UNIDIRECTIONAL);
   }
 
-  public Document generateHtmlBidirectional(VentilationUnitsForm form, LegislationCategory legislationCategory) {
-    return generateHtml(form, legislationCategory, "labels/ventilation-units/bidirectional-ventilation-unit.svg");
+  public ProcessedEnergyLabelDocument generateHtmlBidirectional(VentilationUnitsForm form, LegislationCategory legislationCategory) {
+    return generateHtml(form, legislationCategory, "labels/ventilation-units/bidirectional-ventilation-unit.svg", ProductMetadata.VENTILATION_UNITS_BIDIRECTIONAL);
   }
 
-  private Document generateHtml(VentilationUnitsForm form, LegislationCategory legislationCategory, String templatePath) {
+  private ProcessedEnergyLabelDocument generateHtml(VentilationUnitsForm form, LegislationCategory legislationCategory, String templatePath, ProductMetadata productMetadata) {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
     return templatePopulator
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
@@ -39,6 +40,6 @@ public class VentilationUnitsService {
         .setMultilineText("model", form.getModelName())
         .setText("db", form.getSoundPowerLevel())
         .setText("m3h", form.getMaxFlowRate())
-        .getPopulatedDocument();
+        .asProcessedEnergyLabel(productMetadata, form);
   }
 }

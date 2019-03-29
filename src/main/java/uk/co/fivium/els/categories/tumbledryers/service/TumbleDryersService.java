@@ -1,11 +1,12 @@
 package uk.co.fivium.els.categories.tumbledryers.service;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.tumbledryers.model.CondenserTumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryersForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
@@ -25,25 +26,25 @@ public class TumbleDryersService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtmlGasFired(TumbleDryersForm form, LegislationCategory legislationCategory) {
-    return generateHtml(form, legislationCategory, "labels/tumble-dryers/gas-fired-tumble-dryers.svg");
+  public ProcessedEnergyLabelDocument generateHtmlGasFired(TumbleDryersForm form, LegislationCategory legislationCategory) {
+    return generateHtml(form, legislationCategory, "labels/tumble-dryers/gas-fired-tumble-dryers.svg", ProductMetadata.TUMBLE_DRYERS_GAS_FIRED);
   }
 
-  public Document generateHtmlAirVented(TumbleDryersForm form, LegislationCategory legislationCategory) {
-    return generateHtml(form, legislationCategory, "labels/tumble-dryers/air-vented-tumble-dryers.svg");
+  public ProcessedEnergyLabelDocument generateHtmlAirVented(TumbleDryersForm form, LegislationCategory legislationCategory) {
+    return generateHtml(form, legislationCategory, "labels/tumble-dryers/air-vented-tumble-dryers.svg", ProductMetadata.TUMBLE_DRYERS_AIR_VENTED);
   }
 
-  public Document generateHtmlCondenser(CondenserTumbleDryersForm form, LegislationCategory legislationCategory) {
+  public ProcessedEnergyLabelDocument generateHtmlCondenser(CondenserTumbleDryersForm form, LegislationCategory legislationCategory) {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/condenser-tumble-dryers.svg"));
     return applyCommonPopulation(templatePopulator, form, legislationCategory)
         .applyRatingCssClass("condensationEfficiencyClass", RatingClass.valueOf(form.getCondensationEfficiencyRating()))
-        .getPopulatedDocument();
+        .asProcessedEnergyLabel(ProductMetadata.TUMBLE_DRYERS_CONDENSER, form);
   }
 
-  private Document generateHtml(TumbleDryersForm form, LegislationCategory legislationCategory, String templatePath) {
+  private ProcessedEnergyLabelDocument generateHtml(TumbleDryersForm form, LegislationCategory legislationCategory, String templatePath, ProductMetadata productMetadata) {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
     return applyCommonPopulation(templatePopulator, form, legislationCategory)
-        .getPopulatedDocument();
+        .asProcessedEnergyLabel(productMetadata, form);
   }
 
   private TemplatePopulator applyCommonPopulation(TemplatePopulator templatePopulator, TumbleDryersForm form, LegislationCategory legislationCategory) {

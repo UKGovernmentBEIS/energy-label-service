@@ -24,7 +24,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -34,17 +34,17 @@ public class LocalSpaceHeatersController {
   private final LocalSpaceHeatersService localSpaceHeatersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public LocalSpaceHeatersController(LocalSpaceHeatersService localSpaceHeatersService,
                                      BreadcrumbService breadcrumbService,
                                      InternetLabelService internetLabelService,
-                                     ResponseService responseService) {
+                                     DocumentRendererService documentRendererService) {
     this.localSpaceHeatersService = localSpaceHeatersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/local-space-heaters")
@@ -58,7 +58,7 @@ public class LocalSpaceHeatersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return responseService.processPdfResponse(localSpaceHeatersService.generateHtml(form));
+      return documentRendererService.processPdfResponse(localSpaceHeatersService.generateHtml(form));
     }
   }
 
@@ -68,7 +68,7 @@ public class LocalSpaceHeatersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), LocalSpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LOCAL_SPACE_HEATERS));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LocalSpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LOCAL_SPACE_HEATERS));
     }
   }
 

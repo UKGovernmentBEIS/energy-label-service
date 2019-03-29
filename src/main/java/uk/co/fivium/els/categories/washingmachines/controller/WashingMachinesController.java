@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -21,30 +20,31 @@ import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGrou
 import uk.co.fivium.els.categories.internetlabelling.service.InternetLabelService;
 import uk.co.fivium.els.categories.washingmachines.model.WashingMachinesForm;
 import uk.co.fivium.els.categories.washingmachines.service.WashingMachinesService;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
 @RequestMapping("/categories")
 public class WashingMachinesController {
 
-  private final PdfRenderer pdfRenderer;
   private final WashingMachinesService washingMachinesService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
-  public WashingMachinesController(PdfRenderer pdfRenderer,
-                                   WashingMachinesService washingMachinesService,
+  public WashingMachinesController(WashingMachinesService washingMachinesService,
                                    BreadcrumbService breadcrumbService,
-                                   InternetLabelService internetLabelService) {
-    this.pdfRenderer = pdfRenderer;
+                                   InternetLabelService internetLabelService,
+                                   DocumentRendererService documentRendererService) {
     this.washingMachinesService = washingMachinesService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/washing-machines")
@@ -58,8 +58,7 @@ public class WashingMachinesController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      Resource pdf = pdfRenderer.render(washingMachinesService.generateHtml(form, WashingMachinesService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "washing-machines-label.pdf");
+      return documentRendererService.processPdfResponse(washingMachinesService.generateHtml(form, WashingMachinesService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -69,7 +68,7 @@ public class WashingMachinesController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WashingMachinesService.LEGISLATION_CATEGORY_CURRENT, "washing-machines");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WashingMachinesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WASHING_MACHINES));
     }
   }
 

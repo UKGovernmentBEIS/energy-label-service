@@ -24,7 +24,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -34,17 +34,17 @@ public class DishwashersController {
   private final DishwashersService dishwashersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public DishwashersController(DishwashersService dishwashersService,
                                BreadcrumbService breadcrumbService,
                                InternetLabelService internetLabelService,
-                               ResponseService responseService) {
+                               DocumentRendererService documentRendererService) {
     this.dishwashersService = dishwashersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/dishwashers")
@@ -58,7 +58,7 @@ public class DishwashersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return responseService.processPdfResponse(dishwashersService.generateHtml(form, DishwashersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processPdfResponse(dishwashersService.generateHtml(form, DishwashersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -68,7 +68,7 @@ public class DishwashersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.DISHWASHERS));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.DISHWASHERS));
     }
   }
 

@@ -1,5 +1,6 @@
 package uk.co.fivium.els.model;
 
+// TODO capture association to Form object via annotation.
 public enum ProductMetadata {
 
   AC_COOLING_ONLY_NON_DUCT("Air conditioners - Cooling-only ductless air conditioners", "Air conditioners"),
@@ -39,7 +40,22 @@ public enum ProductMetadata {
   SOLID_FUEL_BOILER("Solid fuel boilers and packages - Solid fuel boiler", "Solid fuel boiler and packages"),
   SOLID_FUEL_BOILER_PACKAGE("Solid fuel boilers and packages - Packages of solid fuel boiler, supplementary heaters, temperature controls and solar devices ", "Solid fuel boiler and packages"),
 
-  TV("Televisions", "Televisions");
+  TUMBLE_DRYERS_AIR_VENTED("Tumble dryers - Air vented tumble dryers", "Air vented tumble dryers"),
+  TUMBLE_DRYERS_CONDENSER("Tumble dryers - Condenser tumble dryers", "Air vented tumble dryers"),
+  TUMBLE_DRYERS_GAS_FIRED("Tumble dryers - Gas-fired tumble dryers", "Air vented tumble dryers"),
+
+  TV("Televisions", "Televisions"),
+
+  VENTILATION_UNITS_UNIDIRECTIONAL("Ventilation units - Unidirectional ventilation units", "Ventilation units"),
+  VENTILATION_UNITS_BIDIRECTIONAL("Ventilation units - Bidirectional ventilation units", "Ventilation units"),
+
+  WASHING_MACHINES("Washing machines", "Washing machines"),
+
+  WATER_HEATERS_CONVENTIONAL("Water heaters - Conventional water heaters", "Water heaters"),
+  WATER_HEATERS_HEAT_PUMP("Water heaters - Heat pump water heaters", "Water heaters"),
+  WATER_HEATERS_SOLAR("Water heaters - Solar water heaters", "Water heaters"),
+  WATER_HEATERS_STORAGE_TANKS("Water heaters - Hot water storage tanks ", "Water heaters"),
+  WATER_HEATERS_PACKAGE("Water heaters - Packages of water heater and solar device ", "Water heaters");
 
 
 

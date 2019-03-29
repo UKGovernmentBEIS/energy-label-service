@@ -26,7 +26,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -38,17 +38,17 @@ public class RangeHoodsController {
   private final RangeHoodsService rangeHoodsService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public RangeHoodsController(RangeHoodsService rangeHoodsService,
                               BreadcrumbService breadcrumbService,
                               InternetLabelService internetLabelService,
-                              ResponseService responseService) {
+                              DocumentRendererService documentRendererService) {
     this.rangeHoodsService = rangeHoodsService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/range-hoods")
@@ -59,13 +59,13 @@ public class RangeHoodsController {
   @PostMapping("/range-hoods")
   @ResponseBody
   public Object handleRangeHoodsFormSubmit(@Valid @ModelAttribute("form") RangeHoodsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> responseService.processPdfResponse(rangeHoodsService.generateHtml(form, category))));
+    return doIfValid(form, bindingResult, (category -> documentRendererService.processPdfResponse(rangeHoodsService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/range-hoods", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelRangeHoodsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") RangeHoodsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), category, ProductMetadata.RANGE_HOODS))));
+    return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.RANGE_HOODS))));
   }
 
   private Object doIfValid(RangeHoodsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function){

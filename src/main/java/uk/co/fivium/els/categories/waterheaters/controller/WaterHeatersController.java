@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -31,9 +30,10 @@ import uk.co.fivium.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.co.fivium.els.categories.waterheaters.service.WaterHeatersService;
 import uk.co.fivium.els.controller.CategoryController;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -43,23 +43,22 @@ public class WaterHeatersController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Water heaters and storage tanks";
 
-  private final PdfRenderer pdfRenderer;
   private final WaterHeatersService waterHeatersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
-  public WaterHeatersController(PdfRenderer pdfRenderer,
-                                WaterHeatersService waterHeatersService,
+  public WaterHeatersController(WaterHeatersService waterHeatersService,
                                 BreadcrumbService breadcrumbService,
-                                InternetLabelService internetLabelService) {
+                                InternetLabelService internetLabelService,
+                                DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, WaterHeaterCategory.GET, WaterHeatersController.class);
-    this.pdfRenderer = pdfRenderer;
     this.waterHeatersService = waterHeatersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.documentRendererService = documentRendererService;
   }
-
 
   @GetMapping("/heat-pump-water-heaters")
   public ModelAndView renderHeatPumpWaterHeaters(@ModelAttribute("form") HeatPumpWaterHeatersForm form) {
@@ -73,8 +72,7 @@ public class WaterHeatersController extends CategoryController {
       return getHeatPumpWaterHeaters(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+      return documentRendererService.processPdfResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -85,7 +83,7 @@ public class WaterHeatersController extends CategoryController {
       return getHeatPumpWaterHeaters(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "heat-pump-water-heaters");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_HEAT_PUMP));
     }
   }
 
@@ -101,8 +99,7 @@ public class WaterHeatersController extends CategoryController {
       return getConventionalWaterHeaters(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+      return documentRendererService.processPdfResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -113,7 +110,7 @@ public class WaterHeatersController extends CategoryController {
       return getConventionalWaterHeaters(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "conventional-water-heaters");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_CONVENTIONAL));
     }
   }
 
@@ -129,8 +126,7 @@ public class WaterHeatersController extends CategoryController {
       return getSolarWaterHeaters(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+      return documentRendererService.processPdfResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -141,7 +137,7 @@ public class WaterHeatersController extends CategoryController {
       return getSolarWaterHeaters(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "solar-water-heaters");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_SOLAR));
     }
   }
 
@@ -157,8 +153,7 @@ public class WaterHeatersController extends CategoryController {
       return getHotWaterStorageTanks(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "hot-water-tanks-label.pdf");
+      return documentRendererService.processPdfResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -169,7 +164,7 @@ public class WaterHeatersController extends CategoryController {
       return getHotWaterStorageTanks(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, "hot-water-storage-tanks");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_STORAGE_TANKS));
     }
   }
 
@@ -185,8 +180,7 @@ public class WaterHeatersController extends CategoryController {
       return getWaterSolarPackages(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
-      return ControllerUtils.serveResource(pdf, "water-heaters-label.pdf");
+      return documentRendererService.processPdfResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
     }
   }
 
@@ -197,7 +191,7 @@ public class WaterHeatersController extends CategoryController {
       return getWaterSolarPackages(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES, "package-water-heaters");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES, ProductMetadata.WATER_HEATERS_PACKAGE));
     }
   }
 

@@ -28,7 +28,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.SelectableLegislationCategory;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -41,17 +41,17 @@ public class ProRefrigeratedCabinetsController {
   private final ProRefrigeratedCabinetsService proRefrigeratedCabinets;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public ProRefrigeratedCabinetsController(ProRefrigeratedCabinetsService proRefrigeratedCabinets,
                                            BreadcrumbService breadcrumbService,
                                            InternetLabelService internetLabelService,
-                                           ResponseService responseService) {
+                                           DocumentRendererService documentRendererService) {
     this.proRefrigeratedCabinets = proRefrigeratedCabinets;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/professional-refrigerated-storage-cabinets")
@@ -62,13 +62,13 @@ public class ProRefrigeratedCabinetsController {
   @PostMapping("/professional-refrigerated-storage-cabinets")
   @ResponseBody
   public Object handleProfessionalRefrigeratedStorageCabinetsFormSubmit(@Valid @ModelAttribute("form") ProRefrigeratedCabinetsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> responseService.processPdfResponse(proRefrigeratedCabinets.generateHtml(form, category))));
+    return doIfValid(form, bindingResult, (category -> documentRendererService.processPdfResponse(proRefrigeratedCabinets.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/professional-refrigerated-storage-cabinets", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelProfessionalRefrigeratedStorageCabinetsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") ProRefrigeratedCabinetsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), category, ProductMetadata.PRO_REFRIGERATED_CABINETS))));
+    return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.PRO_REFRIGERATED_CABINETS))));
   }
 
   private Object doIfValid(ProRefrigeratedCabinetsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {

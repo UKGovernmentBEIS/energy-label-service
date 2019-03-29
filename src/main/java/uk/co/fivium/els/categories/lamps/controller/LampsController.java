@@ -30,7 +30,7 @@ import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
 import uk.co.fivium.els.service.BreadcrumbService;
-import uk.co.fivium.els.service.ResponseService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 import uk.co.fivium.els.util.StreamUtils;
 
@@ -44,16 +44,16 @@ public class LampsController extends CategoryController {
   private final LampsService lampsService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
-  private final ResponseService responseService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
   public LampsController(LampsService lampsService, BreadcrumbService breadcrumbService, InternetLabelService internetLabelService,
-                         ResponseService responseService) {
+                         DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, LampsCategory.GET, LampsController.class);
     this.lampsService = lampsService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
-    this.responseService = responseService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/lamps")
@@ -68,7 +68,7 @@ public class LampsController extends CategoryController {
       return getLamps(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -79,7 +79,7 @@ public class LampsController extends CategoryController {
       return getLamps(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_FULL));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_FULL));
     }
   }
 
@@ -95,7 +95,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -106,7 +106,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_RATING_CONSUMPTION));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_RATING_CONSUMPTION));
     }
   }
 
@@ -122,7 +122,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -133,7 +133,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
-      return responseService.processImageResponse(internetLabelService.generateInternetLabelHtml(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_RATING));
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LAMPS_RATING));
     }
   }
 

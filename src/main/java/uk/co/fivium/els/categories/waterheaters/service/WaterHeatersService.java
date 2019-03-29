@@ -2,12 +2,18 @@ package uk.co.fivium.els.categories.waterheaters.service;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.fivium.els.categories.waterheaters.model.*;
 import uk.co.fivium.els.categories.common.LoadProfile;
+import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
+import uk.co.fivium.els.categories.waterheaters.model.ConventionalWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.EnergyConsumptionUnit;
+import uk.co.fivium.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.HotWaterStorageTanksForm;
+import uk.co.fivium.els.categories.waterheaters.model.SolarWaterHeatersForm;
+import uk.co.fivium.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.co.fivium.els.model.LegislationCategory;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClass;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.service.TemplateParserService;
@@ -31,7 +37,7 @@ public class WaterHeatersService {
     this.templateParserService = templateParserService;
   }
 
-  public Document generateHtml(HeatPumpWaterHeatersForm form, LegislationCategory legislationCategory){
+  public ProcessedEnergyLabelDocument generateHtml(HeatPumpWaterHeatersForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/heat-pump-water-heaters.svg"));
 
     if (StringUtils.isBlank(form.getSoundPowerLevelIndoors())) {
@@ -59,10 +65,10 @@ public class WaterHeatersService {
       .setText("warmerGjAnnum", form.getWarmerGjAnnum())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_HEAT_PUMP, form);
   }
 
-  public Document generateHtml(ConventionalWaterHeatersForm form, LegislationCategory legislationCategory){
+  public ProcessedEnergyLabelDocument generateHtml(ConventionalWaterHeatersForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/conventional-water-heaters.svg"));
 
     if (BooleanUtils.isTrue(form.getOffPeak())) {
@@ -92,10 +98,10 @@ public class WaterHeatersService {
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_CONVENTIONAL, form);
   }
 
-  public Document generateHtml(SolarWaterHeatersForm form, LegislationCategory legislationCategory){
+  public ProcessedEnergyLabelDocument generateHtml(SolarWaterHeatersForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/solar-water-heaters.svg"));
 
     return templatePopulator
@@ -110,10 +116,10 @@ public class WaterHeatersService {
       .setText("warmerGjAnnum", form.getWarmerGjAnnum())
       .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_SOLAR, form);
   }
 
-  public Document generateHtml(HotWaterStorageTanksForm form, LegislationCategory legislationCategory){
+  public ProcessedEnergyLabelDocument generateHtml(HotWaterStorageTanksForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/hot-water-storage-tanks.svg"));
 
     return templatePopulator
@@ -122,10 +128,10 @@ public class WaterHeatersService {
       .setText("watts", form.getStandingLoss())
       .setText("litres", form.getVolume())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_STORAGE_TANKS, form);
   }
 
-  public Document generateHtml(WaterSolarPackagesForm form, LegislationCategory legislationCategory){
+  public ProcessedEnergyLabelDocument generateHtml(WaterSolarPackagesForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/packages-of-water-heater-and-solar-device.svg"));
 
     if (form.getSolarCollector()) {
@@ -143,6 +149,6 @@ public class WaterHeatersService {
       .setRatingArrow("rating", RatingClass.valueOf(form.getPackageEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("waterHeatingRatingLetter", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getLetter())
       .setText("waterHeatingRatingPlusses", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getPlusses())
-      .getPopulatedDocument();
+      .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
   }
 }

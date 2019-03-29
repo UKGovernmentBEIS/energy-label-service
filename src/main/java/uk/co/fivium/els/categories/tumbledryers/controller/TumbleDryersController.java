@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,10 +23,11 @@ import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryerCategory;
 import uk.co.fivium.els.categories.tumbledryers.model.TumbleDryersForm;
 import uk.co.fivium.els.categories.tumbledryers.service.TumbleDryersService;
 import uk.co.fivium.els.controller.CategoryController;
+import uk.co.fivium.els.model.ProductMetadata;
 import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.mvc.ReverseRouter;
-import uk.co.fivium.els.renderer.PdfRenderer;
 import uk.co.fivium.els.service.BreadcrumbService;
+import uk.co.fivium.els.service.DocumentRendererService;
 import uk.co.fivium.els.util.ControllerUtils;
 
 @Controller
@@ -36,21 +36,21 @@ public class TumbleDryersController extends CategoryController {
 
   private static final String BREADCRUMB_STAGE_TEXT = "Tumble dryers";
 
-  private final PdfRenderer pdfRenderer;
   private final TumbleDryersService tumbleDryersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
+  private final DocumentRendererService documentRendererService;
 
   @Autowired
-  public TumbleDryersController(PdfRenderer pdfRenderer,
-                                TumbleDryersService tumbleDryersService,
+  public TumbleDryersController(TumbleDryersService tumbleDryersService,
                                 BreadcrumbService breadcrumbService,
-                                InternetLabelService internetLabelService) {
+                                InternetLabelService internetLabelService,
+                                DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, TumbleDryerCategory.GET, TumbleDryersController.class);
-    this.pdfRenderer = pdfRenderer;
     this.tumbleDryersService = tumbleDryersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
+    this.documentRendererService = documentRendererService;
   }
 
   @GetMapping("/air-vented-tumble-dryers")
@@ -65,8 +65,7 @@ public class TumbleDryersController extends CategoryController {
       return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
+      return documentRendererService.processPdfResponse(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -77,7 +76,7 @@ public class TumbleDryersController extends CategoryController {
       return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, "tumble-dryers");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_AIR_VENTED));
     }
   }
 
@@ -93,8 +92,7 @@ public class TumbleDryersController extends CategoryController {
       return getCondenserTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
+      return documentRendererService.processPdfResponse(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -105,7 +103,7 @@ public class TumbleDryersController extends CategoryController {
       return getCondenserTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, "tumble-dryers");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_CONDENSER));
     }
   }
 
@@ -121,8 +119,7 @@ public class TumbleDryersController extends CategoryController {
       return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      Resource pdf = pdfRenderer.render(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
-      return ControllerUtils.serveResource(pdf, "tumble-dryers-label.pdf");
+      return documentRendererService.processPdfResponse(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -133,7 +130,7 @@ public class TumbleDryersController extends CategoryController {
       return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, "tumble-dryers");
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_GAS_FIRED));
     }
   }
 
