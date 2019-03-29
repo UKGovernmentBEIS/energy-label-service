@@ -7,7 +7,9 @@ import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
+@StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed.")
 public class WaterSolarPackagesForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Declared load profile")
@@ -23,12 +25,12 @@ public class WaterSolarPackagesForm extends StandardTemplateForm50Char {
   @DualModeField
   private String packageEfficiencyRating;
 
-  @FieldPrompt("May a solar collector be included in the package of water heater and solar device?")
-  @NotNull(message = "Specify if a solar collector may be included")
+  @FieldPrompt("Can a solar collector be included in this package?")
+  @NotNull(message = "Specify if a solar collector can be included")
   private Boolean solarCollector;
 
-  @FieldPrompt("May a hot water storage tank be included in the package of water heater and solar device?")
-  @NotNull(message = "Specify if a hot water storage tank may be included")
+  @FieldPrompt("Can a hot water storage tank be included in this package?")
+  @NotNull(message = "Specify if a hot water storage tank can be included")
   private Boolean storageTank;
 
   public String getDeclaredLoadProfile() {

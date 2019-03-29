@@ -17,7 +17,7 @@ public class WashingMachinesForm extends StandardTemplateForm30Char {
   @DualModeField
   private String efficiencyRating;
 
-  @FieldPrompt("Weighted energy consumption (EC) in kWh per 1 000 hours, rounded up to the nearest integer")
+  @FieldPrompt("Weighted energy consumption (EC) in kWh per 1000 hours, rounded up to the nearest integer")
   @Digits(integer = 3, fraction = 0, message = "Enter a weighted energy consumption, up to 3 digits long")
   private String annualEnergyConsumption;
 

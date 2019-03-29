@@ -2,11 +2,13 @@ package uk.co.fivium.els.categories.spaceheaters.model;
 
 import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+@StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class HeatPumpSpaceHeatersForm extends LowTemperatureHeatPumpSpaceHeatersForm {
 
   @FieldPrompt("The seasonal space heating energy efficiency class under average climate conditions for medium temperature")

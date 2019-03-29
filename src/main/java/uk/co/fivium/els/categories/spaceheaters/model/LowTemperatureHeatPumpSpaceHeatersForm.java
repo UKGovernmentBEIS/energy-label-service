@@ -8,7 +8,9 @@ import uk.co.fivium.els.categories.common.StandardTemplateForm50Char;
 import uk.co.fivium.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
+import uk.co.fivium.els.model.meta.StaticProductText;
 
+@StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class LowTemperatureHeatPumpSpaceHeatersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("When was the product first placed on the market?")

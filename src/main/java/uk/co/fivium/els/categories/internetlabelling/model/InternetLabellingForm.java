@@ -8,7 +8,7 @@ import uk.co.fivium.els.model.meta.InternetLabelModeField;
 
 public class InternetLabellingForm extends AnalyticsForm {
 
-  @FieldPrompt("Enter height of the product price (in pixels)")
+  @FieldPrompt(value = "Enter height of the product's price (in pixels)", hintText = "You might need to ask your web or marketing team for this")
   @Digits(integer = 3, fraction = 0, groups = InternetLabellingGroup.class, message = "Enter the height of the product price, up to 3 digits long")
   @InternetLabelModeField
   private String productPriceHeightPx;

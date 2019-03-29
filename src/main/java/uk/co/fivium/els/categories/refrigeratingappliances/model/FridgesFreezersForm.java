@@ -42,7 +42,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @NotBlank(groups = FreezerGroup.class, message = "Select a star rating")
   private String starRating;
 
-  @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re1 pW")
+  @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emissions, up to 2 digits long")
   private String noiseEmissions;
 
