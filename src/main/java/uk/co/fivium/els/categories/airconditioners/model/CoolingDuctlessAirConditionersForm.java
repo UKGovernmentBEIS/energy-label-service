@@ -27,11 +27,11 @@ public class CoolingDuctlessAirConditionersForm extends StandardTemplateForm50Ch
   @Digits(integer = 4, fraction = 0, message = "Enter the annual energy consumption, up to 4 digits long")
   private String coolingAnnualEnergyConsumption;
 
-  @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re1 pW")
+  @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
-  @FieldPrompt("Sound power levels for outdoor units expressed in dB(A) re1 pW")
+  @FieldPrompt("Sound power levels for outdoor units expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the outdoors sound power level, up to 2 digits long")
   private String soundPowerLevelOutdoors;
 

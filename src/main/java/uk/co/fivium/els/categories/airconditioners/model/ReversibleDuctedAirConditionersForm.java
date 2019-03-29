@@ -44,7 +44,7 @@ public class ReversibleDuctedAirConditionersForm extends StandardTemplateForm50C
   @Digits(integer = 2, fraction = 0, message = "Enter the hourly energy consumption, up to 2 digits long")
   private String heatingHourlyEnergyConsumption;
 
-  @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re1 pW, rounded to the nearest integer")
+  @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re 1 pW, rounded to the nearest integer")
   @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
   private String soundPowerLevelIndoors;
 
