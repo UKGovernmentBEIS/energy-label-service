@@ -107,7 +107,7 @@
             </#if>
 
             <#if labelMode?has_content && labelMode=='INTERNET'>
-              <span class="${captionClass}">Internet label</span>
+              <span class="${captionClass}">Online arrow link</span>
             </#if>
             <#--GOVUK heading class names https://design-system.service.gov.uk/styles/typography/-->
             <#if heading>
@@ -118,11 +118,14 @@
                 <div class="govuk-inset-text">
                   <#if labelMode?has_content && labelMode=='INTERNET'>
                     <p>
-                      For a full energy label you can print you can <a class="govuk-link" href="?mode=ENERGY">generate a PDF energy label</a>.
+                      Use this form to download a small image that links to the energy label on a website. You should
+                      use this link if you can’t fit the label next to the product’s price on the screen. If you need
+                      a full label, <a class="govuk-link" href="?mode=ENERGY">create and download an energy label</a>.
                     </p>
                   <#else>
                     <p>
-                      Fill in this form to get an energy label you can print. If the product will be shown on a website, you must also <a class="govuk-link" href="?mode=INTERNET">get an online version of the label</a>.
+                      If you sell the product online you might also need to
+                      <a class="govuk-link" href="?mode=INTERNET">download an arrow image</a> to link to the label.
                     </p>
                   </#if>
                 </div>
