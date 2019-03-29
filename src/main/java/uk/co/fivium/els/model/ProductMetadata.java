@@ -24,7 +24,7 @@ public enum ProductMetadata {
   HRA_FRIDGE_FREEZER("Household refrigerating appliances - Fridges and freezers", "Refrigerating appliances"),
   HRA_WINE_STORAGE("Household refrigerating appliances - Wine storage appliances", "Refrigerating appliances"),
 
-  LAMPS_FULL("Lamps - Label with supplier's name, Heating identification code, rating and energy consumption", "Lamps"),
+  LAMPS_FULL("Lamps - Label with supplier's name, identification code, rating and energy consumption", "Lamps"),
   LAMPS_RATING_CONSUMPTION("Lamps - Label with energy rating and weighted energy consumption only", "Lamps"),
   LAMPS_RATING("Lamps - Label with energy rating only", "Lamps"),
 

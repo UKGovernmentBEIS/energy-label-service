@@ -1,7 +1,10 @@
 package uk.co.fivium.els.service;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.co.fivium.els.categories.common.AnalyticsForm;
 import uk.co.fivium.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.co.fivium.els.categories.common.ProcessedInternetLabelDocument;
@@ -13,6 +16,8 @@ import uk.co.fivium.els.model.RatingClassRange;
 import uk.co.fivium.els.util.TemplateUtils;
 
 public class TemplatePopulator {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(TemplatePopulator.class);
 
   private static final String SVG_RATING_INCREMENT_ATTR_NAME = "data-rating-increment";
   private static final String SVG_MULTILINE_CHARS_PER_ROW_ATTR_NAME = "data-supplier-model-chars-per-row";
@@ -35,16 +40,20 @@ public class TemplatePopulator {
     Element line1 = TemplateUtils.getElementById(template,elementId + "Line1");
     Element line2 = TemplateUtils.getElementById(template,elementId + "Line2");
 
-    // TODO try to split on space first to preserve words
     if (textValue.length() <= charsPerRow) {
       line1.text(""); // clear out row
       line2.text(textValue);
     } else {
-      String line1Text = textValue.substring(0, charsPerRow);
-      String line2Text = textValue.substring(charsPerRow);
+      String wrappedText = WordUtils.wrap(textValue, charsPerRow, "\n", true);
 
-      line1.text(line1Text);
-      line2.text(line2Text);
+      String[] lines = wrappedText.split("\n");
+
+      if (lines.length != 2) {
+        LOGGER.warn("Failed to wrap text '{}' into 2 rows of {} chars", textValue, charsPerRow);
+      }
+      // should never be less than 2. If greater, trunc down to 2
+      line1.text(lines[0]);
+      line2.text(lines[1]);
     }
 
     return this;
