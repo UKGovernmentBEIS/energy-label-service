@@ -9,7 +9,7 @@ import uk.co.fivium.els.model.meta.DualModeField;
 import uk.co.fivium.els.model.meta.FieldPrompt;
 import uk.co.fivium.els.model.meta.StaticProductText;
 
-@StaticProductText("You must display the label so that it’s easy to see and clearly related to the product. It must be at least 110mm x 220mm when printed.")
+@StaticProductText("You must display the label so that it’s easy to see and clearly related to the product. It must be at least 60mm x 120mm when printed.")
 public class RangeHoodsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("When was the product first placed on the market?")
