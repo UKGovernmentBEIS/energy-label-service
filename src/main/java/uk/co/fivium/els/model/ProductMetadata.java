@@ -40,9 +40,9 @@ public enum ProductMetadata {
   SOLID_FUEL_BOILER("Solid fuel boilers and packages - Solid fuel boiler", "Solid fuel boiler and packages"),
   SOLID_FUEL_BOILER_PACKAGE("Solid fuel boilers and packages - Packages of solid fuel boiler, supplementary heaters, temperature controls and solar devices ", "Solid fuel boiler and packages"),
 
-  TUMBLE_DRYERS_AIR_VENTED("Tumble dryers - Air vented tumble dryers", "Air vented tumble dryers"),
-  TUMBLE_DRYERS_CONDENSER("Tumble dryers - Condenser tumble dryers", "Air vented tumble dryers"),
-  TUMBLE_DRYERS_GAS_FIRED("Tumble dryers - Gas-fired tumble dryers", "Air vented tumble dryers"),
+  TUMBLE_DRYERS_AIR_VENTED("Tumble dryers - Air vented tumble dryers", "Tumble dryers"),
+  TUMBLE_DRYERS_CONDENSER("Tumble dryers - Condenser tumble dryers", "Tumble dryers"),
+  TUMBLE_DRYERS_GAS_FIRED("Tumble dryers - Gas-fired tumble dryers", "Tumble dryers"),
 
   TV("Televisions", "Televisions"),
 
