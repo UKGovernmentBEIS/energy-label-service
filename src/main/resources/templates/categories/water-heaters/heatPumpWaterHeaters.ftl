@@ -26,16 +26,20 @@
       </@govukFieldset.fieldset>
     </@govukRadios.radioItem>
     <@govukRadios.radioItem path="form.consumptionUnit" itemMap=energyUnitBoth>
+      <div class="govuk-form-group">
       <@govukFieldset.fieldset legendHeading="Annual electricity consumption in kWh/annum" legendHeadingClass="govuk-fieldset__legend--s" legendSize="h3">
         <@govukTextInput.textInput path="form.colderKwhAnnumBoth"/>
         <@govukTextInput.textInput path="form.averageKwhAnnumBoth"/>
         <@govukTextInput.textInput path="form.warmerKwhAnnumBoth"/>
       </@govukFieldset.fieldset>
+      </div>
+      <div class="govuk-form-group">
       <@govukFieldset.fieldset legendHeading="Annual fuel consumption in GJ/annum" legendHeadingClass="govuk-fieldset__legend--s" legendSize="h3">
         <@govukTextInput.textInput path="form.colderGjAnnumBoth"/>
         <@govukTextInput.textInput path="form.averageGjAnnumBoth"/>
         <@govukTextInput.textInput path="form.warmerGjAnnumBoth"/>
       </@govukFieldset.fieldset>
+      </div>
     </@govukRadios.radioItem>
   </@govukRadios.radioGroup>
 

@@ -269,7 +269,6 @@
     <text id="warmerKwhAnnum" class="cls-50" transform="translate(127.27979 407.88019)">X</text>
     <text class="cls-18" transform="translate(128.60205 424.21808)"><tspan class="cls-19">k</tspan><tspan class="cls-20" x="4.9873" y="0">W</tspan><tspan class="cls-21" x="14.81152" y="0">h</tspan><tspan x="20.58447" y="0">/</tspan></text>
     <text class="cls-18" transform="translate(153.0957 424.21808)"><tspan class="cls-22">ann</tspan><tspan x="16.77051" y="0">u</tspan></text>
-    <!-- TODO 'G' needs to be moved into second group -->
     <text class="cls-18" transform="translate(175.6582 424.21808)"><tspan class="cls-23">m</tspan></text>
   </g>
   <g id="gjGroup">
