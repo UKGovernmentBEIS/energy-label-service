@@ -10,4 +10,4 @@ applications:
       SHOW_START_PAGE: true
       HOME_PAGE_URL: /
       ENABLE_GOOGLE_ANALYTICS: false
-      LOG_PATTERN: %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg %replace(%ex){'[\r\n]+', '\u2028'}%nopex %n
+      LOG_PATTERN: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg %replace(%ex){'[\r\n]+', '\u2028'}%nopex %n"
