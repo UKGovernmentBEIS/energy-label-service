@@ -8,6 +8,5 @@ applications:
     health-check-http-endpoint: /health
     env:
       SHOW_START_PAGE: false
-      #TODO update once known
-      HOME_PAGE_URL: https://gov.uk
+      HOME_PAGE_URL: https://www.gov.uk/guidance/create-an-energy-label
       ENABLE_GOOGLE_ANALYTICS: true
