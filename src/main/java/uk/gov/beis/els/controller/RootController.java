@@ -23,4 +23,14 @@ public class RootController {
     }
   }
 
+  // TODO remove after testing
+  @GetMapping("/throw-error")
+  public Object throwError() {
+    if (true) {
+      throw new RuntimeException("TEST");
+    } else {
+      return null;
+    }
+  }
+
 }
