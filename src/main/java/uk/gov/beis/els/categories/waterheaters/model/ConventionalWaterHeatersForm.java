@@ -29,7 +29,7 @@ public class ConventionalWaterHeatersForm extends StandardTemplateForm30Char {
   private String efficiencyRating;
 
   @FieldPrompt("How do you want to provide annual energy consumption?")
-  @NotBlank(message = "Specify how want to provide annual energy consumption")
+  @NotBlank(message = "Specify how you want to provide annual energy consumption")
   private String consumptionUnit;
 
   @FieldPrompt("Annual electricity consumption in kWh/annum")

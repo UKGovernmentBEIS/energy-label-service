@@ -3,14 +3,16 @@ package uk.gov.beis.els.categories.waterheaters.model;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.groups.Default;
-import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
+import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.waterheaters.model.validation.SolarWaterHeatersFormSequenceProvider;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
-public class SolarWaterHeatersForm extends StandardTemplateForm30Char {
+@GroupSequenceProvider(SolarWaterHeatersFormSequenceProvider.class)
+public class SolarWaterHeatersForm extends ClimateConditionForm {
 
   @FieldPrompt("Declared load profile")
   @NotBlank(message = "Select a declared load profile")
@@ -20,30 +22,6 @@ public class SolarWaterHeatersForm extends StandardTemplateForm30Char {
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   private String efficiencyRating;
-
-  @FieldPrompt("Colder climate conditions")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for colder climate conditions, up to 4 digits long")
-  private String colderKwhAnnum;
-
-  @FieldPrompt("Average climate conditions")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for average climate conditions, up to 4 digits long")
-  private String averageKwhAnnum;
-
-  @FieldPrompt("Warmer climate conditions")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for warmer climate conditions, up to 4 digits long")
-  private String warmerKwhAnnum;
-
-  @FieldPrompt("Colder climate conditions")
-  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for colder climate conditions, up to 2 digits long")
-  private String colderGjAnnum;
-
-  @FieldPrompt("Average climate conditions")
-  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for average climate conditions, up to 2 digits long")
-  private String averageGjAnnum;
-
-  @FieldPrompt("Warmer climate conditions")
-  @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for warmer climate conditions, up to 2 digits long")
-  private String warmerGjAnnum;
 
   @FieldPrompt("Sound power level, indoors dB")
   @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
@@ -64,54 +42,6 @@ public class SolarWaterHeatersForm extends StandardTemplateForm30Char {
 
   public void setEfficiencyRating(String efficiencyRating) {
     this.efficiencyRating = efficiencyRating;
-  }
-
-  public String getColderKwhAnnum() {
-    return colderKwhAnnum;
-  }
-
-  public void setColderKwhAnnum(String colderKwhAnnum) {
-    this.colderKwhAnnum = colderKwhAnnum;
-  }
-
-  public String getAverageKwhAnnum() {
-    return averageKwhAnnum;
-  }
-
-  public void setAverageKwhAnnum(String averageKwhAnnum) {
-    this.averageKwhAnnum = averageKwhAnnum;
-  }
-
-  public String getWarmerKwhAnnum() {
-    return warmerKwhAnnum;
-  }
-
-  public void setWarmerKwhAnnum(String warmerKwhAnnum) {
-    this.warmerKwhAnnum = warmerKwhAnnum;
-  }
-
-  public String getColderGjAnnum() {
-    return colderGjAnnum;
-  }
-
-  public void setColderGjAnnum(String colderGjAnnum) {
-    this.colderGjAnnum = colderGjAnnum;
-  }
-
-  public String getAverageGjAnnum() {
-    return averageGjAnnum;
-  }
-
-  public void setAverageGjAnnum(String averageGjAnnum) {
-    this.averageGjAnnum = averageGjAnnum;
-  }
-
-  public String getWarmerGjAnnum() {
-    return warmerGjAnnum;
-  }
-
-  public void setWarmerGjAnnum(String warmerGjAnnum) {
-    this.warmerGjAnnum = warmerGjAnnum;
   }
 
   public String getSoundPowerLevelIndoors() {

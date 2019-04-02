@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
+import uk.gov.beis.els.categories.waterheaters.model.ClimateConditionForm;
 import uk.gov.beis.els.categories.waterheaters.model.ConventionalWaterHeatersForm;
 import uk.gov.beis.els.categories.waterheaters.model.EnergyConsumptionUnit;
 import uk.gov.beis.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
@@ -53,16 +54,12 @@ public class WaterHeatersService {
      templatePopulator.applyCssClassToId("offPeakMode","hasOffPeakMode");
     }
 
+    populateClimateConditions(form, templatePopulator);
+
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
-      .setText("colderKwhAnnum", form.getColderKwhAnnum())
-      .setText("averageKwhAnnum", form.getAverageKwhAnnum())
-      .setText("warmerKwhAnnum", form.getWarmerKwhAnnum())
-      .setText("colderGjAnnum", form.getColderGjAnnum())
-      .setText("averageGjAnnum", form.getAverageGjAnnum())
-      .setText("warmerGjAnnum", form.getWarmerGjAnnum())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_HEAT_PUMP, form);
@@ -104,16 +101,12 @@ public class WaterHeatersService {
   public ProcessedEnergyLabelDocument generateHtml(SolarWaterHeatersForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/solar-water-heaters.svg"));
 
+    populateClimateConditions(form, templatePopulator);
+
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
-      .setText("colderKwhAnnum", form.getColderKwhAnnum())
-      .setText("averageKwhAnnum", form.getAverageKwhAnnum())
-      .setText("warmerKwhAnnum", form.getWarmerKwhAnnum())
-      .setText("colderGjAnnum", form.getColderGjAnnum())
-      .setText("averageGjAnnum", form.getAverageGjAnnum())
-      .setText("warmerGjAnnum", form.getWarmerGjAnnum())
       .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_SOLAR, form);
@@ -151,4 +144,32 @@ public class WaterHeatersService {
       .setText("waterHeatingRatingPlusses", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getPlusses())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
   }
+
+  private void populateClimateConditions(ClimateConditionForm form, TemplatePopulator templatePopulator) {
+    EnergyConsumptionUnit unit = EnergyConsumptionUnit.valueOf(form.getConsumptionUnit());
+
+    if (unit == EnergyConsumptionUnit.KWH) {
+      templatePopulator
+          .setText("colderKwhAnnum", form.getColderKwhAnnumSingle())
+          .setText("averageKwhAnnum", form.getAverageKwhAnnumSingle())
+          .setText("warmerKwhAnnum", form.getWarmerKwhAnnumSingle())
+          .removeElementById("gjGroup");
+    } else if (unit == EnergyConsumptionUnit.GJ) {
+      templatePopulator
+          .setText("colderGjAnnum", form.getColderGjAnnumSingle())
+          .setText("averageGjAnnum", form.getAverageGjAnnumSingle())
+          .setText("warmerGjAnnum", form.getWarmerGjAnnumSingle())
+          .removeElementById("kwhGroup");
+    } else {
+      templatePopulator
+          .setText("colderKwhAnnum", form.getColderKwhAnnumBoth())
+          .setText("averageKwhAnnum", form.getAverageKwhAnnumBoth())
+          .setText("warmerKwhAnnum", form.getWarmerKwhAnnumBoth())
+          .setText("colderGjAnnum", form.getColderGjAnnumBoth())
+          .setText("averageGjAnnum", form.getAverageGjAnnumBoth())
+          .setText("warmerGjAnnum", form.getWarmerGjAnnumBoth());
+    }
+
+  }
+
 }

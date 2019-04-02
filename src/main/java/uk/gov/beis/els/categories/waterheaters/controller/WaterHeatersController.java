@@ -199,6 +199,7 @@ public class WaterHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/heatPumpWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderHeatPumpWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Heat pump water heaters");
+    addEnergyUnits(modelAndView);
     return modelAndView;
   }
 
@@ -206,11 +207,7 @@ public class WaterHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/conventionalWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderConventionalWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Conventional water heaters");
-
-    modelAndView.addObject("energyUnitKw", Collections.singletonMap(EnergyConsumptionUnit.KWH.name(), EnergyConsumptionUnit.KWH.getDisplayName()));
-    modelAndView.addObject("energyUnitGj", Collections.singletonMap(EnergyConsumptionUnit.GJ.name(), EnergyConsumptionUnit.GJ.getDisplayName()));
-    modelAndView.addObject("energyUnitBoth", Collections.singletonMap(EnergyConsumptionUnit.BOTH.name(), EnergyConsumptionUnit.BOTH.getDisplayName()));
-
+    addEnergyUnits(modelAndView);
     return modelAndView;
   }
 
@@ -218,6 +215,7 @@ public class WaterHeatersController extends CategoryController {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/solarWaterHeaters");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(WaterHeatersController.class).renderSolarWaterHeaters(null)), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Solar water heaters");
+    addEnergyUnits(modelAndView);
     return modelAndView;
   }
 
@@ -247,5 +245,11 @@ public class WaterHeatersController extends CategoryController {
     modelAndView.addObject("submitUrl", submitUrl);
     super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(WaterHeatersController.class).renderCategories(null)));
+  }
+
+  private void addEnergyUnits(ModelAndView modelAndView) {
+    modelAndView.addObject("energyUnitKw", Collections.singletonMap(EnergyConsumptionUnit.KWH.name(), EnergyConsumptionUnit.KWH.getDisplayName()));
+    modelAndView.addObject("energyUnitGj", Collections.singletonMap(EnergyConsumptionUnit.GJ.name(), EnergyConsumptionUnit.GJ.getDisplayName()));
+    modelAndView.addObject("energyUnitBoth", Collections.singletonMap(EnergyConsumptionUnit.BOTH.name(), EnergyConsumptionUnit.BOTH.getDisplayName()));
   }
 }

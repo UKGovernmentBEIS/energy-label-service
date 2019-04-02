@@ -407,22 +407,31 @@
     <polyline class="cls-3" points="26.514 112.593 270.817 112.593 270.817 111.593 26.514 111.593"/>
   </g>
   <text class="cls-25" transform="translate(34.15381 109.38214)"><tspan class="cls-26" xml:space="preserve">                </tspan><tspan x="54.73438" y="0"> </tspan></text>
-  <g class="cls-2">
+
+  <g id="kwhGroup">
     <rect class="cls-27" x="114.496" y="355.29601" width="7.538" height="7.53799"/>
-    <rect class="cls-27" x="202.881" y="355.29601" width="7.53799" height="7.53799"/>
-  </g>
-  <text class="cls-28" transform="translate(128.60205 424.21808)"><tspan class="cls-29">k</tspan><tspan class="cls-30" x="4.9873" y="0">W</tspan><tspan class="cls-31" x="14.81152" y="0">h</tspan><tspan x="20.58447" y="0">/</tspan></text>
-  <text class="cls-28" transform="translate(153.0957 424.21808)"><tspan class="cls-32">ann</tspan><tspan x="16.77051" y="0">u</tspan></text>
-  <text class="cls-28" transform="translate(175.6582 424.21808)"><tspan class="cls-33">m</tspan><tspan x="40.35449" y="0">G</tspan></text>
-  <text class="cls-28" transform="translate(223.14648 424.21808)"><tspan class="cls-34">J</tspan><tspan x="3.25977" y="0">/</tspan></text>
-  <text class="cls-28" transform="translate(230.30176 424.21808)"><tspan class="cls-32">ann</tspan><tspan x="16.77051" y="0">u</tspan></text>
-  <text class="cls-28" transform="translate(252.86523 424.21808)">m</text>
-  <g class="cls-2">
     <rect class="cls-35" x="114.496" y="399.54999" width="7.538" height="7.537"/>
-    <rect class="cls-35" x="202.881" y="399.54999" width="7.53799" height="7.537"/>
     <rect class="cls-36" x="114.496" y="377.31599" width="7.538" height="7.53799"/>
-    <rect class="cls-36" x="202.881" y="377.31599" width="7.53799" height="7.53799"/>
+    <text id="colderKwhAnnum" class="cls-59" transform="translate(127.27979 363.31964)">X</text>
+    <text id="averageKwhAnnum" class="cls-60" transform="translate(127.27979 386.69952)">X</text>
+    <text id="warmerKwhAnnum" class="cls-59" transform="translate(127.27979 407.88019)">X</text>
+    <text class="cls-28" transform="translate(128.60205 424.21808)"><tspan class="cls-29">k</tspan><tspan class="cls-30" x="4.9873" y="0">W</tspan><tspan class="cls-31" x="14.81152" y="0">h</tspan><tspan x="20.58447" y="0">/</tspan></text>
+    <text class="cls-28" transform="translate(153.0957 424.21808)"><tspan class="cls-32">ann</tspan><tspan x="16.77051" y="0">u</tspan></text>
+    <!-- TODO 'G' needs to be moved into second group -->
+    <text class="cls-28" transform="translate(175.6582 424.21808)"><tspan class="cls-33">m</tspan><tspan x="40.35449" y="0">G</tspan></text>
   </g>
+  <g id="gjGroup">
+    <rect class="cls-27" x="202.881" y="355.29601" width="7.53799" height="7.53799"/>
+    <rect class="cls-35" x="202.881" y="399.54999" width="7.53799" height="7.537"/>
+    <rect class="cls-36" x="202.881" y="377.31599" width="7.53799" height="7.53799"/>
+    <text id="colderGjAnnum" class="cls-59" transform="translate(215.66016 363.31964)">X</text>
+    <text id="averageGjAnnum" class="cls-60" transform="translate(215.66016 386.69952)">X</text>
+    <text id="warmerGjAnnum" class="cls-59" transform="translate(215.66016 407.88019)">X</text>
+    <text class="cls-28" transform="translate(223.14648 424.21808)"><tspan class="cls-34">J</tspan><tspan x="3.25977" y="0">/</tspan></text>
+    <text class="cls-28" transform="translate(230.30176 424.21808)"><tspan class="cls-32">ann</tspan><tspan x="16.77051" y="0">u</tspan></text>
+    <text class="cls-28" transform="translate(252.86523 424.21808)">m</text>
+  </g>
+
   <g class="cls-37">
     <rect class="cls-24" x="-423.30701" y="126.61499" width="1062.98999" height="255.118"/>
     <rect class="cls-24" x="-423.30701" y="126.61499" width="1062.98999" height="255.118"/>
@@ -494,12 +503,8 @@
     <text id="ratingPlusses" class="cls-57" transform="translate(235.23047 185.09991)">+</text>
   </g>
   <text id="declaredLoadProfile" class="cls-58" transform="translate(50.50977 144.17023)">X</text>
-  <text id="colderKwhAnnum" class="cls-59" transform="translate(127.27979 363.31964)">X</text>
-  <text id="averageKwhAnnum" class="cls-60" transform="translate(127.27979 386.69952)">X</text>
-  <text id="warmerKwhAnnum" class="cls-59" transform="translate(127.27979 407.88019)">X</text>
-  <text id="colderGjAnnum" class="cls-59" transform="translate(215.66016 363.31964)">X</text>
-  <text id="averageGjAnnum" class="cls-60" transform="translate(215.66016 386.69952)">X</text>
-  <text id="warmerGjAnnum" class="cls-59" transform="translate(215.66016 407.88019)">X</text>
+
+
   <g id="insideDbSection">
     <g class="cls-11">
       <polygon class="cls-12" points="47.243 384.796 47.243 388.733 76.675 388.733 76.675 368.391 61.958 354.982 47.243 368.391 47.243 384.796"/>
