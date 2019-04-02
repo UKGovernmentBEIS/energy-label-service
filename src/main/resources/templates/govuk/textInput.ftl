@@ -17,7 +17,7 @@
   <#if !hiddenField>
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
       <label class="govuk-label" for="${id}">
-        ${fieldPrompt}
+        ${fieldPrompt?no_esc}
       </label>
       <#if fieldHint?has_content>
         <span id="${id}-hint" class="govuk-hint">

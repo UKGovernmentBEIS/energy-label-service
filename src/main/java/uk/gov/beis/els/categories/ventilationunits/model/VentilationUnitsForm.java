@@ -15,7 +15,7 @@ public class VentilationUnitsForm extends StandardTemplateForm30Char {
   @DualModeField
   private String efficiencyRating;
 
-  @FieldPrompt("Sound power level (LWA) in dB rounded to the nearest integer")
+  @FieldPrompt("Sound power level (L<sub>WA</sub>) in dB rounded to the nearest integer")
   @Digits(integer = 2, fraction = 0, message = "Enter the sound power level, up to 2 digits long")
   private String soundPowerLevel;
 

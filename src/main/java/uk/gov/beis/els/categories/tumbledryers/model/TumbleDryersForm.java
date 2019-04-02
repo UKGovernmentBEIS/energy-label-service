@@ -27,7 +27,7 @@ public class TumbleDryersForm extends StandardTemplateForm30Char {
   @Digits(integer = 1, fraction = 1, message = "Enter the capacity, as 1 digit and with an optional decimal place")
   private String ratedCapacity;
 
-  @FieldPrompt("Sound power level (weighted average value — LWA), during the drying phase, for the standard cotton programme at full load, expressed in dB ")
+  @FieldPrompt("Sound power level (weighted average value — L<sub>WA</sub>), during the drying phase, for the standard cotton programme at full load, expressed in dB ")
   @Digits(integer = 2, fraction = 0, message = "Enter the sound power level, up to 2 digits long")
   private String soundPowerLevel;
 

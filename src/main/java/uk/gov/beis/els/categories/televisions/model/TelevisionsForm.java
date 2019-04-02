@@ -35,11 +35,11 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
   private String annualEnergyConsumption;
 
-  @FieldPrompt("Visible screen size in diagonal in centimeters")
-  @Digits(integer = 3, fraction = 0, message = "Enter the screen size in centimeters, up to 3 digits long")
+  @FieldPrompt("Visible diagonal screen size in centimetres")
+  @Digits(integer = 3, fraction = 0, message = "Enter the screen size in centimetres, up to 3 digits long")
   private String screenSizeCm;
 
-  @FieldPrompt("Visible screen size in diagonal in inches")
+  @FieldPrompt("Visible diagonal screen size in inches")
   @Digits(integer = 3, fraction = 0, message = "Enter the screen size in inches, up to 3 digits long")
   private String screenSizeInch;
 
