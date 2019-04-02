@@ -23,7 +23,7 @@ public class HttpHeaderFilter extends OncePerRequestFilter {
     response.addHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' www.google-analytics.com; img-src 'self' www.google-analytics.com; object-src 'none'");
 
     // Force browser XSS filter
-    response.addHeader("X-XSS-Protection", "1; mode=bloc");
+    response.addHeader("X-XSS-Protection", "1; mode=block");
 
     // Force strict MIME checking
     response.addHeader("X-Content-Type-Options", "nosniff");
