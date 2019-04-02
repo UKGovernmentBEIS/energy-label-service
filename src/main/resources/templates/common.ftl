@@ -50,12 +50,7 @@ Includes the wrapping form element, the generate label button and optionally the
     </@form.govukForm>
 
     <#if googleAnalyticsEnabled>
-      <script>
-        ga(function(tracker) {
-          var clientId = tracker.get('clientId');
-          document.getElementById('googleAnalyticsClientId').value = clientId;
-        });
-      </script>
+      <script src="<@spring.url'/assets/scripts/googleAnalyticsSetClient.js'/>"></script>
     </#if>
 
   </@defaultPage>

@@ -44,17 +44,7 @@
 
 <head>
   <#if googleAnalyticsEnabled>
-    <!-- Google Analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', '${googleAnalyticsToken}', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <!-- End Google Analytics -->
+    <script src="<@spring.url'/assets/scripts/googleAnalytics.js'/>"></script>
   </#if>
 
   <meta charset="utf-8" />
@@ -81,9 +71,7 @@
 </head>
 
 <body class="govuk-template__body ">
-  <script>
-    document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-  </script>
+  <script src="<@spring.url'/assets/scripts/jsCheck.js'/>"></script>
 
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
@@ -144,11 +132,6 @@
 
             <#nested>
           </div>
-        <#--<#elseif twoThirdsOneColumn>-->
-          <#--<div class="govuk-grid-column-two-thirds">-->
-            <#--<h1 class="${headingCssClass}">${pageHeading}</h1>-->
-            <#--<#nested>-->
-          <#--</div>-->
         </div>
         <#else>
         <#if heading>
@@ -162,9 +145,7 @@
   <@govukFooter.footer/>
 
   <script src="<@spring.url'/assets/govuk-frontend/all.js'/>"></script>
-  <script>
-    window.GOVUKFrontend.initAll()
-  </script>
+  <script src="<@spring.url'/assets/scripts/frontendInit.js'/>"></script>
 </body>
 
 </html>
