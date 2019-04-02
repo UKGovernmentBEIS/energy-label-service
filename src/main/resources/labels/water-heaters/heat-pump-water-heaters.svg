@@ -417,8 +417,7 @@
     <text id="warmerKwhAnnum" class="cls-59" transform="translate(127.27979 407.88019)">X</text>
     <text class="cls-28" transform="translate(128.60205 424.21808)"><tspan class="cls-29">k</tspan><tspan class="cls-30" x="4.9873" y="0">W</tspan><tspan class="cls-31" x="14.81152" y="0">h</tspan><tspan x="20.58447" y="0">/</tspan></text>
     <text class="cls-28" transform="translate(153.0957 424.21808)"><tspan class="cls-32">ann</tspan><tspan x="16.77051" y="0">u</tspan></text>
-    <!-- TODO 'G' needs to be moved into second group -->
-    <text class="cls-28" transform="translate(175.6582 424.21808)"><tspan class="cls-33">m</tspan><tspan x="40.35449" y="0">G</tspan></text>
+    <text class="cls-28" transform="translate(175.6582 424.21808)"><tspan class="cls-33">m</tspan></text>
   </g>
   <g id="gjGroup">
     <rect class="cls-27" x="202.881" y="355.29601" width="7.53799" height="7.53799"/>
@@ -427,7 +426,7 @@
     <text id="colderGjAnnum" class="cls-59" transform="translate(215.66016 363.31964)">X</text>
     <text id="averageGjAnnum" class="cls-60" transform="translate(215.66016 386.69952)">X</text>
     <text id="warmerGjAnnum" class="cls-59" transform="translate(215.66016 407.88019)">X</text>
-    <text class="cls-28" transform="translate(223.14648 424.21808)"><tspan class="cls-34">J</tspan><tspan x="3.25977" y="0">/</tspan></text>
+    <text class="cls-28" transform="translate(216.14648 424.21808)"><tspan class="cls-34">GJ</tspan><tspan x="10.25977" y="0">/</tspan></text>
     <text class="cls-28" transform="translate(230.30176 424.21808)"><tspan class="cls-32">ann</tspan><tspan x="16.77051" y="0">u</tspan></text>
     <text class="cls-28" transform="translate(252.86523 424.21808)">m</text>
   </g>
