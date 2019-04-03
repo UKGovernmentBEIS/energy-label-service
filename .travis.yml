@@ -52,7 +52,7 @@ deploy:
       user=tech+ci@fivium.co.uk \
       manifest=manifest-prod.yml \
       test=ci/smoke-test.sh \
-      delete=false
+      delete=true
     on:
       repo: UKGovernmentBEIS/energy-label-service
       branch: master
