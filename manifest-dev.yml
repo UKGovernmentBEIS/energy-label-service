@@ -6,6 +6,8 @@ applications:
     path: build/libs/energy-label-service-SNAPSHOT.jar
     health-check-type: http
     health-check-http-endpoint: /health
+    services:
+      - syslog-drain
     env:
       SHOW_START_PAGE: true
       HOME_PAGE_URL: /
