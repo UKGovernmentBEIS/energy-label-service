@@ -56,7 +56,7 @@ public class SpaceHeatersService {
 
   public ProcessedEnergyLabelDocument generateHtml(BoilerSpaceHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
-    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_SEP2015)) {
       templatePath = "labels/space-heaters/boiler-space-heaters-2015.svg";
     }
     else {

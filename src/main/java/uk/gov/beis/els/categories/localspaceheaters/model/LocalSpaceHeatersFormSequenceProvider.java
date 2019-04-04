@@ -12,10 +12,8 @@ public class LocalSpaceHeatersFormSequenceProvider implements DefaultGroupSequen
   public List<Class<?>> getValidationGroups(LocalSpaceHeatersForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
-    if (form != null) {
-      if (BooleanUtils.isTrue(form.getFluidTransfer())) {
-        sequence.add(HeatTransferGroup.class);
-      }
+    if (form != null && BooleanUtils.isTrue(form.getFluidTransfer())) {
+      sequence.add(HeatTransferGroup.class);
     }
 
     sequence.add(LocalSpaceHeatersForm.class);

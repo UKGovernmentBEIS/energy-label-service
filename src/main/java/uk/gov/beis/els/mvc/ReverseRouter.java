@@ -3,8 +3,6 @@ package uk.gov.beis.els.mvc;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.request.RequestAttributes;
@@ -15,8 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class ReverseRouter {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(ReverseRouter.class);
 
   private ReverseRouter() {
   }

@@ -12,10 +12,8 @@ public class GasOvensFormSequenceProvider implements DefaultGroupSequenceProvide
   public List<Class<?>> getValidationGroups(GasOvensForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
-    if (form != null) {
-      if (BooleanUtils.isTrue(form.getIsFanOven())) {
-        sequence.add(FanOvenGroup.class);
-      }
+    if (form != null && BooleanUtils.isTrue(form.getIsFanOven())) {
+      sequence.add(FanOvenGroup.class);
     }
 
     sequence.add(GasOvensForm.class);

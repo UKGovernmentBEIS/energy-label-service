@@ -185,7 +185,7 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
     if(patternAnnotation != null) {
       String pattern = patternAnnotation.regexp();
       // TODO this is the only pattern used currently. To be replaced by a nullable variant of the Digits annotation.
-      if (pattern.equals("[0-9]{0,2}")) {
+      if ("[0-9]{0,2}".equals(pattern)) {
         fieldWidths.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, "2");
       }
     }

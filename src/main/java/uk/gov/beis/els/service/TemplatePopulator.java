@@ -142,7 +142,7 @@ public class TemplatePopulator {
   private double calculateYAxisTransform(RatingClass selectedRating, RatingClassRange ratingClassRange, double ratingIncrementValue) {
     RatingClass maxRating = ratingClassRange.getHighestRating();
 
-    if(selectedRating == maxRating) {
+    if(selectedRating.equals(maxRating)) {
       return 0;
     } else {
       int incrementFactor = selectedRating.ordinal() - maxRating.ordinal();

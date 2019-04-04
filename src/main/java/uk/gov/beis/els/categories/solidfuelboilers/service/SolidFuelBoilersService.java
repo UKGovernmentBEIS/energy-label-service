@@ -46,7 +46,7 @@ public class SolidFuelBoilersService {
 
   public ProcessedEnergyLabelDocument generateHtml(SolidFuelBoilersForm form, LegislationCategory legislationCategory) {
     TemplatePopulator templatePopulator;
-    if (legislationCategory == LEGISLATION_CATEGORY_BOILERS_APR2017) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_BOILERS_APR2017)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/solid-fuel-boilers/solid-fuel-boilers-2017.svg"));
     }
     else {

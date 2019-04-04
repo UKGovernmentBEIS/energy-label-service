@@ -11,10 +11,8 @@ public class DomesticOvensFormSequenceProvider implements DefaultGroupSequencePr
   public List<Class<?>> getValidationGroups(DomesticOvensForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
-    if (form != null) {
-      if (BooleanUtils.isTrue(form.getIsFanOven())) {
-        sequence.add(FanOvenGroup.class);
-      }
+    if (form != null && BooleanUtils.isTrue(form.getIsFanOven())) {
+      sequence.add(FanOvenGroup.class);
     }
 
     sequence.add(DomesticOvensForm.class);
