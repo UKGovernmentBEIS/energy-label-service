@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/UKGovernmentBEIS/energy-label-service.svg?branch=develop)](https://travis-ci.org/UKGovernmentBEIS/energy-label-service)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/44d631203c5a49d79e2fe3ed828d3c6c)](https://www.codacy.com/app/jamesbarnett91/energy-label-service?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=UKGovernmentBEIS/energy-label-service&amp;utm_campaign=Badge_Grade)
 
-Digital service allowing users to generate energy labels for a variety of products.
+Digital service allowing users to create energy labels for a variety of products, such as light bulbs, heaters, televisions and ovens.
 
 ## Running locally
 
@@ -46,9 +46,9 @@ Note that only the production environment has blue/green deployments enabled. Pu
 
 ## Modifying existing products
 The vast majority of product 'config' (e.g. field prompts, hint text, validation rules etc) resides in the form object for the given product. 
-E.g. to change the on screen text for the Dishwashers, edit the [DishwashersForm](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/categories/dishwashers/model/DishwashersForm.java).
+E.g. to change the on screen text for the Dishwashers, edit the [`DishwashersForm`](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/categories/dishwashers/model/DishwashersForm.java).
 
-To change a visual aspect of the generated label, modify the SVG template used to render the PDF. E.g. [dishwashers.svg](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/resources/labels/dishwashers/dishwashers.svg)
+To change a visual aspect of the generated label, modify the SVG template used to render the PDF. E.g. [`dishwashers.svg`](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/resources/labels/dishwashers/dishwashers.svg)
 
 
 ## Adding new products
@@ -58,6 +58,6 @@ Adding a new product requires:
 * A service to populate the SVG template given a form
 * Controller routes
 
-If the product is an entirely new category of products, add an entry to the [ProductCategory](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/model/ProductCategory.java) list.
+If the product is an entirely new category of products, add an entry to the [`ProductCategory`](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/model/ProductCategory.java) list.
 
-If the new product category also contains sub-categories, add a new implementation of the [`Category`](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/categories/common/Category.java) interface, and `extend` the [CategoryController](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/controller/CategoryController.java) in your products controller.
+If the new product category also contains sub-categories, add a new implementation of the [`Category`](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/categories/common/Category.java) interface, and `extend` the [`CategoryController`](https://github.com/UKGovernmentBEIS/energy-label-service/blob/develop/src/main/java/uk/gov/beis/els/controller/CategoryController.java) in your products controller.
