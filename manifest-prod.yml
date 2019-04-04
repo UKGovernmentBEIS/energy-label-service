@@ -9,6 +9,7 @@ applications:
     services:
       - syslog-drain
     routes:
+      - route: energy-label-service-prod.london.cloudapps.digital
       - route: create-energy-label.service.gov.uk
     env:
       SHOW_START_PAGE: false
