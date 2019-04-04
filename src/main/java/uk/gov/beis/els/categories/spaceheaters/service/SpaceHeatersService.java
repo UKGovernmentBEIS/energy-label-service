@@ -76,7 +76,7 @@ public class SpaceHeatersService {
 
   public ProcessedEnergyLabelDocument generateHtml(BoilerCombinationHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
-    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_SEP2015)) {
       templatePath = "labels/space-heaters/boiler-combination-heaters-2015.svg";
     }
     else {
@@ -107,7 +107,7 @@ public class SpaceHeatersService {
 
   public ProcessedEnergyLabelDocument generateHtml(CogenerationSpaceHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
-    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_SEP2015)) {
       templatePath = "labels/space-heaters/cogeneration-space-heaters-2015.svg";
     }
     else {
@@ -131,7 +131,7 @@ public class SpaceHeatersService {
 
   public ProcessedEnergyLabelDocument generateHtml(LowTemperatureHeatPumpSpaceHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
-    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_SEP2015)) {
       templatePath = "labels/space-heaters/low-temperature-heat-pump-space-heaters-2015.svg";
     }
     else {
@@ -142,7 +142,7 @@ public class SpaceHeatersService {
 
   public ProcessedEnergyLabelDocument generateHtml(HeatPumpSpaceHeatersForm form, LegislationCategory legislationCategory) {
     String templatePath;
-    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_SEP2015)) {
       templatePath = "labels/space-heaters/heat-pump-space-heaters-2015.svg";
     }
     else {
@@ -190,7 +190,7 @@ public class SpaceHeatersService {
   public ProcessedEnergyLabelDocument generateHtml(HeatPumpCombinationHeatersForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
-    if (legislationCategory == LEGISLATION_CATEGORY_SEP2015) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_SEP2015)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/space-heaters/heat-pump-combination-heaters-2015.svg"));
     }
     else {

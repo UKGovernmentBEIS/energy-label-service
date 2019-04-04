@@ -9,8 +9,8 @@ Digital service allowing users to generate energy labels for a variety of produc
 The service is built using the [Spring Boot](https://spring.io/projects/spring-boot) framework.
 
 First, ensure you have the following prerequisites installed: 
-  * Java 8 (or higher)
-  * NPM
+* Java 8 (or higher)
+* NPM
 
 Then:
 1.  Clone the project

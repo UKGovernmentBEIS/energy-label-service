@@ -41,7 +41,7 @@ public class TelevisionsService {
   public ProcessedEnergyLabelDocument generateHtml(TelevisionsForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
-    if (legislationCategory == TelevisionsService.LEGISLATION_CATEGORY_JAN2017) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_JAN2017)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/televisions/televisions-2017.svg"));
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/televisions/televisions-2020.svg"));

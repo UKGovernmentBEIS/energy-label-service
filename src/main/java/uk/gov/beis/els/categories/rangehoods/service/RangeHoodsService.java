@@ -43,7 +43,7 @@ public class RangeHoodsService {
   public ProcessedEnergyLabelDocument generateHtml(RangeHoodsForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
-    if (legislationCategory == RangeHoodsService.LEGISLATION_CATEGORY_JAN2018) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_JAN2018)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/range-hoods/range-hoods-2018.svg"));
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/range-hoods/range-hoods-2020.svg"));

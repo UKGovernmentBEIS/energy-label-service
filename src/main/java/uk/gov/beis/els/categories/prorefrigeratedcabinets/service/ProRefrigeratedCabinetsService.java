@@ -42,7 +42,7 @@ public class ProRefrigeratedCabinetsService {
   public ProcessedEnergyLabelDocument generateHtml(ProRefrigeratedCabinetsForm form, LegislationCategory legislationCategory) {
 
     TemplatePopulator templatePopulator;
-    if (legislationCategory == ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_JUL2016) {
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_JUL2016)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/professional-refrigerated-storage-cabinets/professional-refrigerated-storage-cabinets-2016.svg"));
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/professional-refrigerated-storage-cabinets/professional-refrigerated-storage-cabinets-2019.svg"));

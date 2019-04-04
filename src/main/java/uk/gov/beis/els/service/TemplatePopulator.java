@@ -154,7 +154,7 @@ public class TemplatePopulator {
   private int calculateRatingColourIndex(RatingClass selectedRating, RatingClassRange ratingClassRange) {
     RatingClass maxRating = ratingClassRange.getHighestRating();
 
-    if(selectedRating == maxRating) {
+    if(selectedRating.equals(maxRating)) {
       return 0;
     } else {
       int index = selectedRating.ordinal() - maxRating.ordinal();
