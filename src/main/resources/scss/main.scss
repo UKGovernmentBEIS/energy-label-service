@@ -1,7 +1,4 @@
-// changes the default to point to the correct folder inside /out
-// A relative path is used to allow dynamic application contexts set by Tomcat
-// All paths are relative to the main CSS import path - /assets/static/css/main.css as set in layout.ftl
-$govuk-assets-path: "../../govuk-frontend/assets/";
+$govuk-assets-path: "/assets/govuk-frontend/assets/";
 
 // import ALL GOVUK components
 @import '../public/assets/govuk-frontend/all';
