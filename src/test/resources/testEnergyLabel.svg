@@ -1,0 +1,16 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="110mm" height="220mm" viewBox="0 0 311.81 623.62" data-rating-increment="23.9357" data-supplier-model-chars-per-row="5">
+  <title>dishwashers</title>
+  <g id="rating">
+    <polyline id="ratingArrow" class="cls-6" points="208.23 171.95 227.74 152.25 286.7 152.25 286.7 191.62 227.74 191.62 208.23 171.95"/>
+    <text id="ratingLetter" class="cls-39" transform="translate(222.41016 180.45007)">A</text>
+    <text id="ratingPlusses" class="cls-40" transform="translate(241.40039 171.24011)">+++</text>
+  </g>
+  <text id="textField" transform="translate(234.4502 441.99988)" text-anchor="middle">X</text>
+  <text id="existingClass" class="bar" transform="translate(56.02979 557.86023)" text-anchor="middle">X</text>
+  <text transform="translate(191 557.85632)" text-anchor="middle">
+    <tspan class="cls-5">x</tspan><tspan id="placeSettingsCapacity" class="cls-42" transform="translate(183.59961 557.86023)">X</tspan>
+  </text>
+  <text id="db" transform="translate(257.30957 557.86023)" text-anchor="middle">X</text>
+  <text id="multilineTextFieldLine2" transform="translate(25.51182 119.05041)">X</text>
+  <text id="multilineTextFieldLine1" transform="translate(25.51182 102.79204)">X</text>
+</svg>

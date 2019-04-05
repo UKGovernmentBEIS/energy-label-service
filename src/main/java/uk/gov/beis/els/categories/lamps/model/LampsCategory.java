@@ -41,14 +41,6 @@ public class LampsCategory implements Category {
     return "Select the information which should be included on the label";
   }
 
-  // Lamps are a special case where the internet label link should also on the subcategory guidance page since the subcategories are not separate products,
-  // they are variants of the same 'type' of product
-  // TODO decide if this is needed or not
-//  @Override
-//  public String getCategoryPageGuidanceText() {
-//    return "If the product will be shown on a website, you must also <a class=\"govuk-link\" href=\"lamps?mode=INTERNET\">get an online version of the label</a>";
-//  }
-
   @Override
   public String getCommonProductGuidanceText() {
     return null;

@@ -35,12 +35,6 @@ public class TemplateParserService {
 
   }
 
-  /**
-   * // TODO
-   * @param svgDom
-   * @return
-   * @throws IOException
-   */
   private String populateDimensions(Document svgDom) throws IOException {
     String htmlWrapper = IOUtils.toString(new ClassPathResource("labels/html-wrapper.html").getInputStream(), StandardCharsets.UTF_8.name());
     Dimension pageDimensions = parsePageDimension(svgDom);

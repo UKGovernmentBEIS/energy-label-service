@@ -29,7 +29,7 @@ public class TemplatePopulator {
   }
 
   public TemplatePopulator setText(String elementId, String textValue) {
-    TemplateUtils.getElementById(template, elementId).text(textValue); // TODO check this is escaping text
+    TemplateUtils.getElementById(template, elementId).text(textValue);
     return this;
   }
 
@@ -111,10 +111,10 @@ public class TemplatePopulator {
   }
 
   public TemplatePopulator transformInternetLabel(RatingClass selectedRating, RatingClassRange ratingClassRange) {
-   TemplateUtils.getElementById(template, "ratingArrow").addClass("rating" + calculateRatingColourIndex(selectedRating, ratingClassRange));
+    TemplateUtils.getElementById(template, "ratingArrow").addClass("rating" + calculateRatingColourIndex(selectedRating, ratingClassRange));
     setText("ratingLetter", selectedRating.getLetter());
     setText("ratingPlusses", selectedRating.getPlusses());
-   return this;
+    return this;
   }
 
   public Document getPopulatedDocument() {
