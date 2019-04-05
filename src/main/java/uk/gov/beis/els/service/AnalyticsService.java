@@ -67,7 +67,7 @@ public class AnalyticsService {
         ResponseEntity<String> response = restTemplate.postForEntity(GOOGLE_ANALYTICS_ENDPOINT, request, String.class);
 
         if (!response.getStatusCode().is2xxSuccessful()) {
-          LOGGER.error("Non 2xx code returned for google analytics event sent (was {}). Response was still served to user.", response.getStatusCodeValue());
+          LOGGER.error("Non 2xx code returned for google analytics event send (was {}). Response was still served to user.", response.getStatusCodeValue());
         }
 
       } catch (Exception e) {
