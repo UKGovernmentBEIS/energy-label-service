@@ -33,7 +33,7 @@ public class SpaceHeaterPackagesForm extends StandardTemplateForm50Char {
   @NotNull(message = "Specify if this package includes a supplementary space heater")
   private Boolean spaceHeater;
 
-  @FieldPrompt("The seasonal space heating energy efficiency class of the package of combination heater, temperature control and solar device")
+  @FieldPrompt("The seasonal space heating energy efficiency class of the package of space heater, temperature control and solar device")
   @NotBlank(message = "Select an energy efficiency indicator for the complete package", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   private String packageEfficiencyRating;
