@@ -3,6 +3,7 @@ applications:
     memory: 1G
     instances: 1
     buildpack: java_buildpack
+    stack: cflinuxfs3
     path: build/libs/energy-label-service-SNAPSHOT.jar
     health-check-type: http
     health-check-http-endpoint: /health
