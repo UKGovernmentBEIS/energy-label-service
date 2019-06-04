@@ -42,16 +42,16 @@ function compileSass(exitOnError) {
     .pipe(gulp.dest('./'));
 }
 
-gulp.task('sass', ['copyGovukResources'], () => {
-  return compileSass(false);
-});
-
-gulp.task('sassCi', ['copyGovukResources'], () => {
-  return compileSass(true);
-});
-
 gulp.task('copyGovukResources', () => {
   return gulp.src(['node_modules/govuk-frontend/**/*']).pipe(gulp.dest('src/main/resources/public/assets/govuk-frontend'))
 });
 
-gulp.task('buildAll', ['sassCi']);
+gulp.task('sass', gulp.series(['copyGovukResources'], () => {
+  return compileSass(false);
+}));
+
+gulp.task('sassCi', gulp.series(['copyGovukResources'], () => {
+  return compileSass(true);
+}));
+
+gulp.task('buildAll',  gulp.series(['sassCi']));
