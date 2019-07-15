@@ -51,9 +51,17 @@ public class TemplatePopulator {
       if (lines.length != 2) {
         LOGGER.warn("Failed to wrap text '{}' into 2 rows of {} chars", textValue, charsPerRow);
       }
-      // should never be less than 2. If greater, trunc down to 2
-      line1.text(lines[0]);
-      line2.text(lines[1]);
+
+      if (lines.length == 1) {
+        // it's possible textValue was greater than charsPerRow but the wrapped result is still only 1 line
+        // (seems to happen if textValue is 1 char longer than `charsPerRow` and this last char is a space)
+        line1.text(""); // clear out row
+        line2.text(textValue);
+      } else {
+        line1.text(lines[0]);
+        line2.text(lines[1]);
+      }
+
     }
 
     return this;
