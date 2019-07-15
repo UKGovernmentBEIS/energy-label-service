@@ -40,6 +40,8 @@ public class TemplatePopulator {
     Element line1 = TemplateUtils.getElementById(template,elementId + "Line1");
     Element line2 = TemplateUtils.getElementById(template,elementId + "Line2");
 
+    textValue = textValue.trim();
+
     if (textValue.length() <= charsPerRow) {
       line1.text(""); // clear out row
       line2.text(textValue);
@@ -53,8 +55,9 @@ public class TemplatePopulator {
       }
 
       if (lines.length == 1) {
-        // it's possible textValue was greater than charsPerRow but the wrapped result is still only 1 line
-        // (seems to happen if textValue is 1 char longer than `charsPerRow` and this last char is a space)
+        // It's possible textValue was greater than charsPerRow but the wrapped result is still only 1 line.
+        // Seems to happen if textValue is 1 char longer than `charsPerRow` and this last char is a space.
+        // This should be caught by the above .trim() but do a belt and braces check anyway
         line1.text(""); // clear out row
         line2.text(textValue);
       } else {
