@@ -3,6 +3,8 @@ package uk.gov.beis.els.mvc;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.request.RequestAttributes;
@@ -18,16 +20,16 @@ public class ReverseRouter {
   }
 
   public static String route(Object methodCall) {
-    return route(methodCall, Collections.emptyMap(), true);
+    return route(methodCall, Collections.emptyMap(), true, Collections.emptyMap());
   }
 
   public static String route(Object methodCall, Map<String, Object> uriVariables) {
-    return route(methodCall, uriVariables, true);
+    return route(methodCall, uriVariables, true, Collections.emptyMap());
   }
 
   @SuppressWarnings("unchecked")
   public static String route(Object methodCall, Map<String, Object> uriVariables,
-                             boolean expandUriVariablesFromRequest) {
+                             boolean expandUriVariablesFromRequest, Map<String, String> queryParams) {
     //Establish URI variables to substitute - explicitly provided should take precedence
     Map<String, Object> allUriVariables = new HashMap<>();
     if (expandUriVariablesFromRequest) {
@@ -44,22 +46,31 @@ public class ReverseRouter {
 
     allUriVariables.putAll(uriVariables);
 
+    MultiValueMap<String, String> queryParamMultiMap = new LinkedMultiValueMap<>();
+    queryParamMultiMap.setAll(queryParams);
+
     //Use a UriComponentsBuilder which is not scoped to the request to get relative URIs (instead of absolute)
     UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-    return MvcUriComponentsBuilder.fromMethodCall(builder, methodCall).buildAndExpand(allUriVariables).toUriString();
+    return MvcUriComponentsBuilder.fromMethodCall(builder, methodCall)
+        .queryParams(queryParamMultiMap)
+        .buildAndExpand(allUriVariables).toUriString();
   }
 
   public static ModelAndView redirect(Object methodCall) {
     return redirect(methodCall, Collections.emptyMap());
   }
 
+  public static ModelAndView redirectWithQueryParams(Object methodCall, Map<String, String> queryParams) {
+    return redirect(methodCall, Collections.emptyMap(), true, queryParams);
+  }
+
   public static ModelAndView redirect(Object methodCall, Map<String, Object> uriVariables) {
-    return redirect(methodCall, uriVariables, true);
+    return redirect(methodCall, uriVariables, true, Collections.emptyMap());
   }
 
   public static ModelAndView redirect(Object methodCall, Map<String, Object> uriVariables,
-                                      boolean expandUriVariablesFromRequest) {
-    return new ModelAndView("redirect:" + route(methodCall, uriVariables, expandUriVariablesFromRequest));
+                                      boolean expandUriVariablesFromRequest, Map<String, String> queryParams) {
+    return new ModelAndView("redirect:" + route(methodCall, uriVariables, expandUriVariablesFromRequest, queryParams));
   }
 
   /**
