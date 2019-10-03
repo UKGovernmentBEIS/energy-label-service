@@ -58,7 +58,7 @@
   </p>
   <p class="govuk-body">
     This service is fully compliant with the
-    <a href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines version 2.1 AA standard (WCAG 2.1 AA).</a>
+    <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines version 2.1 AA standard (WCAG 2.1 AA).</a>
   </p>
 
   <h2 class="govuk-heading-m">How we tested this service</h2>
