@@ -3,7 +3,7 @@
 <@defaultPage pageHeading="Accessibility statement for Create an energy label" pageTitle="Accessibility statement">
   <p class="govuk-body">
     This statement applies to content published on the ‘Create an energy label’ service web pages only
-    (<a class="govuk-link" href="https://www.gov.uk/guidance/create-an-energy-label">https://www.gov.uk/guidance/create-an-energy-label</a>)
+    (<a class="govuk-link" href="https://create-energy-label.service.gov.uk">create-energy-label.service.gov.uk</a>)
     (the ‘service’).
   </p>
   <p class="govuk-body">
