@@ -83,7 +83,7 @@
       <div class="govuk-phase-banner">
         <p class="govuk-phase-banner__content">
           <strong class="govuk-tag govuk-phase-banner__content__tag ">beta</strong>
-          <span class="govuk-phase-banner__text">This is a new service – you can <a class="govuk-link" href="mailto:energy-label-support@fivium.co.uk">email your feedback</a> to help us improve it.</span>
+          <span class="govuk-phase-banner__text">This is a new service – you can <a class="govuk-link" href="mailto:efficientproducts@beis.gov.uk">email your feedback</a> to help us improve it.</span>
         </p>
       </div>
     </#if>
