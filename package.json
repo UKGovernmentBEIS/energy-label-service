@@ -10,14 +10,14 @@
   "license": "MIT",
   "homepage": "https://github.com/UKGovernmentBEIS/energy-label-service",
   "devDependencies": {
-    "autoprefixer": "^9.4.2",
+    "autoprefixer": "^9.7.3",
     "gulp": "^4.0.2",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.4"
+    "gulp-sourcemaps": "^2.6.5"
   },
   "dependencies": {
-    "govuk-frontend": "^2.9.0"
+    "govuk-frontend": "^3.4.0"
   }
 }

@@ -28,7 +28,7 @@
           </span>
         </#if>
         <#if splitList=false>
-          <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="radios">
+          <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="govuk-radios">
         </#if>
           <#list radioItems?keys as item>
             <#assign isSelected = spring.stringStatusValue == item>
@@ -72,7 +72,7 @@
             ${errorList?join(" ")}
           </span>
         </#if>
-        <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="radios">
+        <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="govuk-radios">
           <div class="govuk-radios__item">
             <input class="govuk-radios__input" id="${id}" name="${fieldName}" type="radio" value="true"<#if displayValue == "true"> checked="checked"</#if> <#if hiddenQuestionsWithYesSelected=true>data-aria-controls="hidden-content-with-yes-selected-${id}"</#if>>
             <label class="govuk-label govuk-radios__label" for="${id}">
@@ -126,7 +126,7 @@
             </#list>
           </span>
         </#if>
-        <div class="govuk-radios <#if hiddenContent>govuk-radios--conditional" data-module="radios"<#else>"</#if>>
+        <div class="govuk-radios <#if hiddenContent>govuk-radios--conditional" data-module="govuk-radios"<#else>"</#if>>
           <#nested/>
           <#if nestingPath?has_content>
             <@spring.bind nestingPath/>

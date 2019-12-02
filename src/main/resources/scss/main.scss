@@ -1,7 +1,7 @@
-$govuk-assets-path: "/assets/govuk-frontend/assets/";
+$govuk-assets-path: "/assets/govuk-frontend/govuk/assets/";
 
 // import ALL GOVUK components
-@import '../public/assets/govuk-frontend/all';
+@import '../public/assets/govuk-frontend/govuk/all';
 
 // GOVUK Patterns
 @import "patterns/task-list";
