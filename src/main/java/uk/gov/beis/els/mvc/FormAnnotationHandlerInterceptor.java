@@ -43,9 +43,8 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
         getStaticProductText(form).ifPresent(t -> modelAndView.addObject("staticProductText", t));
         modelAndView.addObject("fieldWidthMapping", getFieldWidthMapping(form));
         addInternetLabelModelObjects(request, modelAndView);
-
         modelAndView.addObject("hiddenFields", getHiddenFields(form, modelAndView));
-
+        modelAndView.addObject("numericFields", getNumericFields(form));
       }
     }
   }
@@ -189,6 +188,24 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
         fieldWidths.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, "2");
       }
     }
+  }
+
+  private List<String> getNumericFields(Object form) {
+    List<String> numericFields = new ArrayList<>();
+    Class<?> formClass = form.getClass();
+
+    ReflectionUtils.doWithFields(formClass, (field -> {
+      String name = field.getName();
+      Digits digitsAnnotation = field.getAnnotation(Digits.class);
+      Pattern patternAnnotation = field.getAnnotation(Pattern.class);
+
+      // Field input should be marked as numeric if it has Digits or a specific Pattern annotation (see comment in processFieldWidthPatternAnnotations)
+      if (digitsAnnotation != null || (patternAnnotation != null && "[0-9]{0,2}".equals(patternAnnotation.regexp()))) {
+        numericFields.add(FORM_MODEL_ATTRIBUTE_NAME + "." + name);
+      }
+
+    }));
+    return numericFields;
   }
 
 }
