@@ -3,5 +3,5 @@
 <@common.standardProductForm title="Lamps" includeSupplierNameModel=false>
   <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
   <@govukTextInput.textInput path="form.energyConsumption"/>
-  <@govukRadios.radio path="form.templateType" radioItems=templateType />
+  <@govukRadios.radio path="form.templateType" radioItems=templateType legendSize="h2"/>
 </@common.standardProductForm>

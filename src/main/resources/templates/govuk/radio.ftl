@@ -52,7 +52,7 @@
   </#if>
 </#macro>
 
-<#macro radioYesNo path label="" inline=true hiddenQuestionsWithYesSelected=false hiddenQuestionsWithNoSelected=false>
+<#macro radioYesNo path label="" inline=true hiddenQuestionsWithYesSelected=false hiddenQuestionsWithNoSelected=false legendHeadingClass="govuk-fieldset__legend--s" legendSize="h2">
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
@@ -66,7 +66,7 @@
 
   <#if !hiddenField>
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" hintText=fieldHint hintTextId=id mandatory=true>
+      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass=legendHeadingClass legendSize=legendSize hintText=fieldHint hintTextId=id mandatory=true>
         <#if hasError>
           <span id="${id}-error" class="govuk-error-message">
             ${errorList?join(" ")}
@@ -101,7 +101,7 @@
   </#if>
 </#macro>
 
-<#macro radioGroup path nestingPath="" label="" hiddenContent=true>
+<#macro radioGroup path nestingPath="" label="" hiddenContent=true legendSize="h1">
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
@@ -116,7 +116,7 @@
 
   <#if !hiddenField>
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
-      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" hintText=fieldHint hintTextId=id mandatory=true>
+      <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" legendSize=legendSize hintText=fieldHint hintTextId=id mandatory=true>
         <#if hasError>
           <span id="${id}-error" class="govuk-error-message">
             <#list spring.status.errorMessages as errorMessage>

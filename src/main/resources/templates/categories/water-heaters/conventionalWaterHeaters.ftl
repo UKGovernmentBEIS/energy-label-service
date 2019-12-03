@@ -8,7 +8,7 @@
 
     <@govukTextInput.textInput path="form.soundPowerLevelIndoors"/>
 
-    <@govukRadios.radioGroup path="form.consumptionUnit">
+    <@govukRadios.radioGroup path="form.consumptionUnit" legendSize="h2">
       <@govukRadios.radioItem path="form.consumptionUnit" itemMap=energyUnitKw>
         <@govukTextInput.textInput path="form.kwhAnnum" />
       </@govukRadios.radioItem>

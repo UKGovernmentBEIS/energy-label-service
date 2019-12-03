@@ -2,7 +2,7 @@
 
 <@common.standardProductForm title="Heat pump space heaters">
 
-    <@govukRadios.radio path="form.applicableLegislation" radioItems=legislationYears/>
+    <@govukRadios.radio path="form.applicableLegislation" radioItems=legislationYears legendSize="h2"/>
 
     <@govukSelect.select path="form.mediumTempEfficiencyRating" options=efficiencyRating/>
     <@govukSelect.select path="form.lowTempEfficiencyRating" options=efficiencyRating/>
