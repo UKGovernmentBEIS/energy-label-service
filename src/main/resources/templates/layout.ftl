@@ -52,12 +52,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0c0c" />
   <meta name="robots" content="noindex, nofollow" />
-  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<@spring.url'/assets/govuk-frontend/assets/images/favicon.ico'/>" type="image/x-icon" />
-  <link rel="mask-icon" href="<@spring.url'/assets/govuk-frontend/assets/images/govuk-mask-icon.svg'/>" color="#0b0c0c">
-  <link rel="apple-touch-icon" sizes="180x180" href="<@spring.url'/assets/govuk-frontend/assets/images/govuk-apple-touch-icon-180x180.png'/>">
-  <link rel="apple-touch-icon" sizes="167x167" href="<@spring.url'/assets/govuk-frontend/assets/images/govuk-apple-touch-icon-167x167.png'/>">
-  <link rel="apple-touch-icon" sizes="152x152" href="<@spring.url'/assets/govuk-frontend/assets/images/govuk-apple-touch-icon-152x152.png'/>">
-  <link rel="apple-touch-icon" href="<@spring.url'/assets/govuk-frontend/assets/images/govuk-apple-touch-icon.png'/>">
+  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/favicon.ico'/>" type="image/x-icon" />
+  <link rel="mask-icon" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-mask-icon.svg'/>" color="#0b0c0c">
+  <link rel="apple-touch-icon" sizes="180x180" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-180x180.png'/>">
+  <link rel="apple-touch-icon" sizes="167x167" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-167x167.png'/>">
+  <link rel="apple-touch-icon" sizes="152x152" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-152x152.png'/>">
+  <link rel="apple-touch-icon" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon.png'/>">
 
   <!--[if !IE 8]><!-->
   <link rel="stylesheet" href="<@spring.url'/assets/static/css/main.css'/>">
@@ -144,7 +144,7 @@
 
   <@govukFooter.footer/>
 
-  <script src="<@spring.url'/assets/govuk-frontend/all.js'/>"></script>
+  <script src="<@spring.url'/assets/govuk-frontend/govuk/all.js'/>"></script>
   <script src="<@spring.url'/assets/scripts/frontendInit.js'/>"></script>
 </body>
 

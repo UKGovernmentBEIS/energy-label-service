@@ -10,7 +10,7 @@
 
   <@govukTextInput.textInput path="form.soundPowerLevelOutdoors"/>
 
-  <@govukRadios.radioGroup path="form.consumptionUnit">
+  <@govukRadios.radioGroup path="form.consumptionUnit" legendSize="h2">
     <@govukRadios.radioItem path="form.consumptionUnit" itemMap=energyUnitKw>
       <@govukFieldset.fieldset legendHeading="Annual electricity consumption in kWh/annum" legendHeadingClass="govuk-fieldset__legend--s" legendSize="h3">
         <@govukTextInput.textInput path="form.colderKwhAnnumSingle"/>

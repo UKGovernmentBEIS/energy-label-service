@@ -6,7 +6,7 @@ $govuk-button-hover-colour-secondary: darken($govuk-button-colour-secondary, 5%)
 $govuk-button-shadow-colour-secondary: darken($govuk-button-colour-secondary, 15%);
 $govuk-button-text-colour-secondary: govuk-colour("white");
 // tertiary button
-$govuk-button-colour-tertiary: govuk-colour("grey-3");
+$govuk-button-colour-tertiary: govuk-colour("light-grey");
 $govuk-button-hover-colour-tertiary: darken($govuk-button-colour-tertiary, 5%);
 $govuk-button-shadow-colour-tertiary: darken($govuk-button-colour-tertiary, 15%);
 $govuk-button-text-colour-tertiary: govuk-colour("blue");
