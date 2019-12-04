@@ -13,6 +13,7 @@
   <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText())!>
   <#local fieldWidth=fieldWidthMapping[spring.status.path]!>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
+  <#local numericField=(numericFields?seq_contains(spring.status.path))!false>
 
   <#if !hiddenField>
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
@@ -31,7 +32,7 @@
         </#list>
         </span>
       </#if>
-      <input class="govuk-input <#if fieldWidth?has_content>govuk-input--width-${fieldWidth} </#if> <#if hasError>govuk-input--error </#if>" id="${id}" name="${spring.status.expression}" type="text"  <#if fieldHint?has_content>aria-describedby="${id}-hint" </#if> value="${spring.stringStatusValue}">
+      <input class="govuk-input <#if fieldWidth?has_content>govuk-input--width-${fieldWidth} </#if> <#if hasError>govuk-input--error </#if>" id="${id}" name="${spring.status.expression}" type="<#if numericField>number<#else>text</#if>"  <#if fieldHint?has_content>aria-describedby="${id}-hint" </#if> value="${spring.stringStatusValue}">
     </div>
   </#if>
 
