@@ -134,10 +134,15 @@ public class TemplatePopulator {
 
   public <T extends AnalyticsForm & SupplierNameForm> ProcessedEnergyLabelDocument asProcessedEnergyLabel(
       ProductMetadata analyticsLabel, T form) {
+    String title = String.format(analyticsLabel.getProductFileName() + " - %s - %s",
+      form.getSupplierName(), form.getModelName());
+    TemplateUtils.getElementById(template, "html-title").text(title);
+
     return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), form.getSupplierName(), form.getModelName());
   }
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelNoSupplier(ProductMetadata analyticsLabel, AnalyticsForm form) {
+    TemplateUtils.getElementById(template, "html-title").text(analyticsLabel.getProductFileName());
     return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), null, null);
   }
 
