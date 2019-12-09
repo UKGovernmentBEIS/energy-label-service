@@ -67,7 +67,7 @@
   <link rel="stylesheet" href="<@spring.url'/assets/static/css/main-ie8.css'/>">
   <![endif]-->
 
-  <meta property="og:image" content="<@spring.url'/assets/govuk-frontend/assets/images/govuk-opengraph-image.png'/>">
+  <meta property="og:image" content="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-opengraph-image.png'/>">
 </head>
 
 <body class="govuk-template__body ">
