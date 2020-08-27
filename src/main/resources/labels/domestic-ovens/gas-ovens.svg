@@ -236,20 +236,20 @@
   <text class="cls-3" transform="translate(168.64648 365.22888)">kWh/</text>
   <text class="cls-3" transform="translate(191.02637 365.22888)">cy</text>
   <text class="cls-3" transform="translate(199.64648 365.22888)">cle</text>
-  
+
   <rect class="cls-7" x="82.482" y="19.76904" width="137.23598" height="39.37299"/>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
 
   <g class="cls-10">
 
@@ -388,11 +388,10 @@
     <text class="cls-3" transform="translate(180.38574 394.97888)"><tspan class="cls-4">/</tspan><tspan x="3.68262" y="0">c</tspan></text>
     <text class="cls-3" transform="translate(188.2959 394.97888)"><tspan class="cls-5">y</tspan><tspan x="4.40625" y="0">c</tspan></text>
     <text class="cls-3" transform="translate(196.92578 394.97888)">le</text>
-    <text class="cls-3" transform="translate(204.19629 394.97888)">*</text>
     <text class="cls-2" transform="translate(165.41113 410.43982)"> </text>
     <text class="cls-3" transform="translate(168.64648 410.43201)">kWh/</text>
     <text class="cls-3" transform="translate(191.02637 410.43201)">cy</text>
-    <text class="cls-3" transform="translate(199.64648 410.43201)">cle*</text>
+    <text class="cls-3" transform="translate(199.64648 410.43201)">cle</text>
     <g class="cls-43">
       <path class="cls-29" d="M128.8598,407.77911c0,2.315-1.543,4.191-3.446,4.191h-24.121c-1.903,0-3.445-1.876-3.445-4.191v-22.63c0-2.315,1.542-4.191,3.445-4.191h24.121c1.903,0,3.446,1.876,3.446,4.191Z"/>
     </g>
