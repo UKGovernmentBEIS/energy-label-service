@@ -4,10 +4,8 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,7 +21,6 @@ import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService
 import uk.gov.beis.els.categories.televisions.model.TelevisionsForm;
 import uk.gov.beis.els.categories.televisions.service.TelevisionsService;
 import uk.gov.beis.els.model.ProductMetadata;
-import uk.gov.beis.els.model.SelectableLegislationCategory;
 import uk.gov.beis.els.mvc.ReverseRouter;
 import uk.gov.beis.els.service.BreadcrumbService;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -59,31 +56,27 @@ public class TelevisionController {
   @PostMapping("/televisions")
   @ResponseBody
   public Object handleTelevisionsFormSubmit(@Valid @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, ((category) -> documentRendererService.processPdfResponse(televisionsService.generateHtml(form, category))));
+    if (bindingResult.hasErrors()) {
+      return getTelevisionsForm(bindingResult.getFieldErrors());
+    }
+    else {
+      return documentRendererService.processPdfResponse(televisionsService.generateHtml(form, TelevisionsService.LEGISLATION_CATEGORY_CURRENT));
+    }
   }
 
   @PostMapping(value = "/televisions", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelTelevisionsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") TelevisionsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, ((category) ->
-        documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.TV))));
-  }
-
-  private Object doIfValid(TelevisionsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> supplier) {
-    ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), TelevisionsService.LEGISLATION_CATEGORIES, bindingResult);
     if (bindingResult.hasErrors()) {
       return getTelevisionsForm(bindingResult.getFieldErrors());
-    }
-    else {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORIES);
-      return supplier.apply(category);
+    } else {
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TelevisionsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TV));
     }
   }
 
   private ModelAndView getTelevisionsForm(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/televisions/televisions");
-    modelAndView.addObject("legislationYears", ControllerUtils.legislationYearSelection(TelevisionsService.LEGISLATION_CATEGORIES));
-    modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(TelevisionsService.LEGISLATION_CATEGORIES));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(TelevisionsService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(TelevisionController.class).handleTelevisionsFormSubmit(null, ReverseRouter.emptyBindingResult())));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT);

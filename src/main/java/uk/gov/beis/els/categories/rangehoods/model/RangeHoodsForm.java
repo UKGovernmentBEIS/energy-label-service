@@ -12,11 +12,6 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 @StaticProductText("You must display the label so that it’s easy to see and clearly related to the product. It must be at least 60mm x 120mm when printed.")
 public class RangeHoodsForm extends StandardTemplateForm30Char {
 
-  @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
-  @DualModeField
-  private String applicableLegislation;
-
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator" , groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
@@ -41,14 +36,6 @@ public class RangeHoodsForm extends StandardTemplateForm30Char {
   @FieldPrompt("The Noise Value (dB)")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise value, up to 2 digits long")
   private String noiseValue;
-
-  public String getApplicableLegislation() {
-    return applicableLegislation;
-  }
-
-  public void setApplicableLegislation(String applicableLegislation) {
-    this.applicableLegislation = applicableLegislation;
-  }
 
   public String getEfficiencyRating() {
     return efficiencyRating;

@@ -5,10 +5,8 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -25,7 +23,6 @@ import uk.gov.beis.els.categories.prorefrigeratedcabinets.model.ClimateClass;
 import uk.gov.beis.els.categories.prorefrigeratedcabinets.model.ProRefrigeratedCabinetsForm;
 import uk.gov.beis.els.categories.prorefrigeratedcabinets.service.ProRefrigeratedCabinetsService;
 import uk.gov.beis.els.model.ProductMetadata;
-import uk.gov.beis.els.model.SelectableLegislationCategory;
 import uk.gov.beis.els.mvc.ReverseRouter;
 import uk.gov.beis.els.service.BreadcrumbService;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -62,32 +59,28 @@ public class ProRefrigeratedCabinetsController {
   @PostMapping("/professional-refrigerated-storage-cabinets")
   @ResponseBody
   public Object handleProfessionalRefrigeratedStorageCabinetsFormSubmit(@Valid @ModelAttribute("form") ProRefrigeratedCabinetsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> documentRendererService.processPdfResponse(proRefrigeratedCabinets.generateHtml(form, category))));
+    if (bindingResult.hasErrors()) {
+      return getProfessionalRefrigeratedStorageCabinetsForm(bindingResult.getFieldErrors());
+    }
+    else {
+      return documentRendererService.processPdfResponse(proRefrigeratedCabinets.generateHtml(form, ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT));
+    }
   }
 
   @PostMapping(value = "/professional-refrigerated-storage-cabinets", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelProfessionalRefrigeratedStorageCabinetsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") ProRefrigeratedCabinetsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.PRO_REFRIGERATED_CABINETS))));
-  }
-
-  private Object doIfValid(ProRefrigeratedCabinetsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
-    ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), ProRefrigeratedCabinetsService.LEGISLATION_CATEGORIES, bindingResult);
-
     if (bindingResult.hasErrors()) {
       return getProfessionalRefrigeratedStorageCabinetsForm(bindingResult.getFieldErrors());
-    }
-    else {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), ProRefrigeratedCabinetsService.LEGISLATION_CATEGORIES);
-      return function.apply(category);
+    } else {
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.PRO_REFRIGERATED_CABINETS));
     }
   }
 
   private ModelAndView getProfessionalRefrigeratedStorageCabinetsForm(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/professional-refrigerated-storage-cabinets/professionalRefrigeratedStorageCabinets");
-    modelAndView.addObject("legislationYears", ControllerUtils.legislationYearSelection(ProRefrigeratedCabinetsService.LEGISLATION_CATEGORIES));
-    modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(
-        ProRefrigeratedCabinetsService.LEGISLATION_CATEGORIES));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(
+        ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(ProRefrigeratedCabinetsController.class).handleProfessionalRefrigeratedStorageCabinetsFormSubmit(null, ReverseRouter.emptyBindingResult())));
     modelAndView.addObject("climateClass",
       Arrays.stream(ClimateClass.values())

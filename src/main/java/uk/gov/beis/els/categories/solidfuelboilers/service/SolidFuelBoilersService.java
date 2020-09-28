@@ -1,7 +1,5 @@
 package uk.gov.beis.els.categories.solidfuelboilers.service;
 
-import com.google.common.collect.ImmutableList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
@@ -11,27 +9,14 @@ import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
-import uk.gov.beis.els.model.SelectableLegislationCategory;
 import uk.gov.beis.els.service.TemplateParserService;
 import uk.gov.beis.els.service.TemplatePopulator;
 
 @Service
 public class SolidFuelBoilersService {
 
-  public static final SelectableLegislationCategory LEGISLATION_CATEGORY_BOILERS_APR2017 = SelectableLegislationCategory.of(
-    "APR2017",
-    "From 1 April 2017",
-    RatingClassRange.of(RatingClass.APP, RatingClass.G));
-
-  public static final SelectableLegislationCategory LEGISLATION_CATEGORY_BOILERS_SEP2019 = SelectableLegislationCategory.of(
-    "SEP2019",
-    "From 26 September 2019",
+  public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
     RatingClassRange.of(RatingClass.APPP, RatingClass.D));
-
-  public static final List<SelectableLegislationCategory> LEGISLATION_CATEGORIES_BOILERS = new ImmutableList.Builder<SelectableLegislationCategory>()
-    .add(LEGISLATION_CATEGORY_BOILERS_APR2017)
-    .add(LEGISLATION_CATEGORY_BOILERS_SEP2019)
-    .build();
 
   public static final LegislationCategory LEGISLATION_CATEGORY_PACKAGES_CURRENT = LegislationCategory.of(
     RatingClassRange.of(RatingClass.APPP, RatingClass.G)
@@ -45,13 +30,7 @@ public class SolidFuelBoilersService {
   }
 
   public ProcessedEnergyLabelDocument generateHtml(SolidFuelBoilersForm form, LegislationCategory legislationCategory) {
-    TemplatePopulator templatePopulator;
-    if (legislationCategory.equals(LEGISLATION_CATEGORY_BOILERS_APR2017)) {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/solid-fuel-boilers/solid-fuel-boilers-2017.svg"));
-    }
-    else {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/solid-fuel-boilers/solid-fuel-boilers-2019.svg"));
-    }
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/solid-fuel-boilers/solid-fuel-boilers.svg"));
 
     if (form.getCombination()) {
       templatePopulator.applyCssClassToId("combinationBoiler", "isCombinationBoiler");
