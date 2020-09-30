@@ -1,7 +1,6 @@
 <#include '../../layout.ftl'>
 
 <@common.standardProductForm "Range hoods">
-  <@govukRadios.radio path="form.applicableLegislation" radioItems=legislationYears legendSize="h2"/>
   <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
   <@govukTextInput.textInput path="form.annualEnergyConsumption"/>
   <@govukSelect.select path="form.fluidClass" options=secondaryRating/>

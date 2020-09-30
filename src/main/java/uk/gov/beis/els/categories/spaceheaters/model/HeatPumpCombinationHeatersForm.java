@@ -14,11 +14,6 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class HeatPumpCombinationHeatersForm extends StandardTemplateForm50Char {
 
-  @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
-  @DualModeField
-  private String applicableLegislation;
-
   @FieldPrompt("Declared load profile")
   @NotBlank(message = "Select a declared load profile")
   private String declaredLoadProfile;
@@ -56,14 +51,6 @@ public class HeatPumpCombinationHeatersForm extends StandardTemplateForm50Char {
   @FieldPrompt("Can the heater be set to work only during off-peak hours?")
   @NotNull(message = "Specify if off-peak operation is supported")
   private Boolean offPeak;
-
-  public String getApplicableLegislation() {
-    return applicableLegislation;
-  }
-
-  public void setApplicableLegislation(String applicableLegislation) {
-    this.applicableLegislation = applicableLegislation;
-  }
 
   public String getDeclaredLoadProfile() {
     return declaredLoadProfile;

@@ -14,11 +14,6 @@ import javax.validation.groups.Default;
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class CogenerationSpaceHeatersForm extends StandardTemplateForm50Char {
 
-  @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
-  @DualModeField
-  private String applicableLegislation;
-
   @FieldPrompt("The seasonal space heating energy efficiency class")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
@@ -35,14 +30,6 @@ public class CogenerationSpaceHeatersForm extends StandardTemplateForm50Char {
   @FieldPrompt("Is there an additional electricity generation function?")
   @NotNull(message = "Select whether there is an additional electricity generation function")
   private Boolean electricityGeneration;
-
-  public String getApplicableLegislation() {
-    return applicableLegislation;
-  }
-
-  public void setApplicableLegislation(String applicableLegislation) {
-    this.applicableLegislation = applicableLegislation;
-  }
 
   public String getEfficiencyRating() {
     return efficiencyRating;

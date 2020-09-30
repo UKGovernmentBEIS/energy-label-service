@@ -13,11 +13,6 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class SolidFuelBoilersForm extends StandardTemplateForm30Char {
 
-  @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
-  @DualModeField
-  private String applicableLegislation;
-
   @FieldPrompt("Energy efficiency class")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
@@ -34,14 +29,6 @@ public class SolidFuelBoilersForm extends StandardTemplateForm30Char {
   @FieldPrompt("Is this model a cogeneration boiler?")
   @NotNull(message = "Specify if this model is a cogeneration boiler")
   private Boolean cogeneration;
-
-  public String getApplicableLegislation() {
-    return applicableLegislation;
-  }
-
-  public void setApplicableLegislation(String applicableLegislation) {
-    this.applicableLegislation = applicableLegislation;
-  }
 
   public String getEfficiencyRating() {
     return efficiencyRating;

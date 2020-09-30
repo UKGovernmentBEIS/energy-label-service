@@ -4,10 +4,8 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -26,7 +24,6 @@ import uk.gov.beis.els.categories.solidfuelboilers.model.SolidFuelBoilersForm;
 import uk.gov.beis.els.categories.solidfuelboilers.service.SolidFuelBoilersService;
 import uk.gov.beis.els.controller.CategoryController;
 import uk.gov.beis.els.model.ProductMetadata;
-import uk.gov.beis.els.model.SelectableLegislationCategory;
 import uk.gov.beis.els.mvc.ReverseRouter;
 import uk.gov.beis.els.service.BreadcrumbService;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -63,24 +60,21 @@ public class SolidFuelBoilersController extends CategoryController {
   @PostMapping("/solid-fuel-boilers")
   @ResponseBody
   public Object handleSolidFuelBoilersSubmit(@Valid @ModelAttribute("form") SolidFuelBoilersForm form, BindingResult bindingResult) {
-    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> documentRendererService.processPdfResponse(solidFuelBoilersService.generateHtml(form, category))));
+    if (bindingResult.hasErrors()) {
+      return getSolidFuelBoilers(bindingResult.getFieldErrors());
+    }
+    else {
+      return documentRendererService.processPdfResponse(solidFuelBoilersService.generateHtml(form, SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT));
+    }
   }
 
   @PostMapping(value = "/solid-fuel-boilers", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelSolidFuelBoilersSubmit(@Validated(InternetLabellingGroup.class)@ModelAttribute("form") SolidFuelBoilersForm form, BindingResult bindingResult) {
-    return doIfValidSolidFuelBoiler(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.SOLID_FUEL_BOILER))));
-  }
-
-  private Object doIfValidSolidFuelBoiler(SolidFuelBoilersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
-    ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORIES_BOILERS, bindingResult);
-
     if (bindingResult.hasErrors()) {
       return getSolidFuelBoilers(bindingResult.getFieldErrors());
-    }
-    else {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), SolidFuelBoilersService.LEGISLATION_CATEGORIES_BOILERS);
-      return function.apply(category);
+    } else {
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SOLID_FUEL_BOILER));
     }
   }
 
@@ -114,8 +108,7 @@ public class SolidFuelBoilersController extends CategoryController {
   private ModelAndView getSolidFuelBoilers(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/solid-fuel-boilers/solidFuelBoilers");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SolidFuelBoilersController.class).renderSolidFuelBoilers(null)));
-    modelAndView.addObject("legislationYears", ControllerUtils.legislationYearSelection(SolidFuelBoilersService.LEGISLATION_CATEGORIES_BOILERS));
-    modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(SolidFuelBoilersService.LEGISLATION_CATEGORIES_BOILERS));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
     breadcrumbService.pushLastBreadcrumb(modelAndView,"Solid fuel boilers");
     return modelAndView;
   }

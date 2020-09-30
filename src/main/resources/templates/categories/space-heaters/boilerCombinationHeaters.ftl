@@ -4,8 +4,6 @@
 
     <@govukSelect.select path="form.declaredLoadProfile" options=loadProfile/>
 
-    <@govukRadios.radio path="form.applicableLegislation" radioItems=legislationYears legendSize="h2"/>
-
     <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
     <@govukSelect.select path="form.waterHeatingEfficiencyRating" options=secondaryEfficiencyRating/>
 

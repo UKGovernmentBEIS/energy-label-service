@@ -4,10 +4,8 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,7 +21,6 @@ import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService
 import uk.gov.beis.els.categories.rangehoods.model.RangeHoodsForm;
 import uk.gov.beis.els.categories.rangehoods.service.RangeHoodsService;
 import uk.gov.beis.els.model.ProductMetadata;
-import uk.gov.beis.els.model.SelectableLegislationCategory;
 import uk.gov.beis.els.mvc.ReverseRouter;
 import uk.gov.beis.els.service.BreadcrumbService;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -59,31 +56,27 @@ public class RangeHoodsController {
   @PostMapping("/range-hoods")
   @ResponseBody
   public Object handleRangeHoodsFormSubmit(@Valid @ModelAttribute("form") RangeHoodsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> documentRendererService.processPdfResponse(rangeHoodsService.generateHtml(form, category))));
+    if (bindingResult.hasErrors()) {
+      return getRangeHoodsForm(bindingResult.getFieldErrors());
+    }
+    else {
+      return documentRendererService.processPdfResponse(rangeHoodsService.generateHtml(form, RangeHoodsService.LEGISLATION_CATEGORY_CURRENT));
+    }
   }
 
   @PostMapping(value = "/range-hoods", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelRangeHoodsFormSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") RangeHoodsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.RANGE_HOODS))));
-  }
-
-  private Object doIfValid(RangeHoodsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function){
-    ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), RangeHoodsService.LEGISLATION_CATEGORIES, bindingResult);
-
     if (bindingResult.hasErrors()) {
       return getRangeHoodsForm(bindingResult.getFieldErrors());
-    }
-    else {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), RangeHoodsService.LEGISLATION_CATEGORIES);
-      return function.apply(category);
+    } else {
+      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RangeHoodsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.RANGE_HOODS));
     }
   }
 
   private ModelAndView getRangeHoodsForm(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/range-hoods/rangeHoods");
-    modelAndView.addObject("legislationYears", ControllerUtils.legislationYearSelection(RangeHoodsService.LEGISLATION_CATEGORIES));
-    modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(RangeHoodsService.LEGISLATION_CATEGORIES));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(RangeHoodsService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
     modelAndView.addObject("secondaryRating", ControllerUtils.ratingRangeToSelectionMap(RangeHoodsService.SECONDARY_CLASS_RANGE));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(RangeHoodsController.class).handleRangeHoodsFormSubmit(null, ReverseRouter.emptyBindingResult())));
     ControllerUtils.addErrorSummary(modelAndView, errorList);

@@ -19,11 +19,6 @@ public class BoilerCombinationHeatersForm extends StandardTemplateForm50Char {
   @NotBlank(message = "Select a declared load profile")
   private String declaredLoadProfile;
 
-  @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
-  @DualModeField
-  private String applicableLegislation;
-
   @FieldPrompt("The seasonal space heating energy efficiency class")
   @NotBlank(message = "Select a space heating energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
@@ -51,14 +46,6 @@ public class BoilerCombinationHeatersForm extends StandardTemplateForm50Char {
 
   public void setDeclaredLoadProfile(String declaredLoadProfile) {
     this.declaredLoadProfile = declaredLoadProfile;
-  }
-
-  public String getApplicableLegislation() {
-    return applicableLegislation;
-  }
-
-  public void setApplicableLegislation(String applicableLegislation) {
-    this.applicableLegislation = applicableLegislation;
   }
 
   public String getEfficiencyRating() {

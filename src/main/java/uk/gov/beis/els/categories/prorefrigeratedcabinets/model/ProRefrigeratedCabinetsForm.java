@@ -15,11 +15,6 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 @GroupSequenceProvider(ProRefrigeratedCabinetsSequenceProvider.class)
 public class ProRefrigeratedCabinetsForm extends StandardTemplateForm30Char {
 
-  @FieldPrompt("When was the product first placed on the market?")
-  @NotBlank(message = "Specify when your product was first placed on the market", groups = {Default.class, InternetLabellingGroup.class})
-  @DualModeField
-  private String applicableLegislation;
-
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
@@ -48,14 +43,6 @@ public class ProRefrigeratedCabinetsForm extends StandardTemplateForm30Char {
   @FieldPrompt("The climate class")
   @NotNull(message = "Select a climate class")
   private String climateClass;
-
-  public String getApplicableLegislation() {
-    return applicableLegislation;
-  }
-
-  public void setApplicableLegislation(String applicableLegislation) {
-    this.applicableLegislation = applicableLegislation;
-  }
 
   public String getEfficiencyRating() {
     return efficiencyRating;
