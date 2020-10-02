@@ -26,7 +26,7 @@ public class TelevisionsService {
 
   public ProcessedEnergyLabelDocument generateHtml(TelevisionsForm form, LegislationCategory legislationCategory) {
 
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/televisions/televisions.svg"));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/televisions-electronic-displays/televisions.svg"));
 
     if (form.getPowerSwitch()) {
       templatePopulator.applyCssClassToId("powerSwitch", "hasPowerSwitch");
