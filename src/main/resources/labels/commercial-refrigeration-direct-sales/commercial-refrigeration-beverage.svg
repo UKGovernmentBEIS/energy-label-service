@@ -1,26 +1,7 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="96mm" height="192mm" viewBox="0 0 272.12601 544.25201" data-rating-increment="28.3333" data-supplier-model-chars-per-row="20">
   <defs>
     <style>
-      .noiseClassA #noiseClassALetter,
-      .noiseClassB #noiseClassBLetter,
-      .noiseClassC #noiseClassCLetter,
-      .noiseClassD #noiseClassDLetter {
-        font-size: 16px;
-        font-weight: 700;
-        font-family: Verdana-Bold, Verdana;
-      }
-
-      #freezerSection,
-      #fridgeSection {
-        visibility: hidden;
-      }
-
-      #freezerSection.hasFreezerSection,
-      #fridgeSection.hasFridgeSection {
-        visibility: visible;
-      }
-
-      .cls-1, .cls-21, .cls-22, .cls-7 {
+      .cls-1, .cls-23, .cls-30, .cls-7 {
         fill: none;
       }
 
@@ -33,7 +14,7 @@
         font-family: Calibri-Bold, Calibri;
       }
 
-      .cls-16, .cls-19, .cls-2, .cls-25, .cls-27, .cls-28, .cls-30 {
+      .cls-16, .cls-18, .cls-2, .cls-21, .cls-24, .cls-25, .cls-27 {
         font-weight: 700;
       }
 
@@ -45,11 +26,11 @@
         font-size: 7.63636px;
       }
 
-      .cls-18, .cls-19, .cls-20, .cls-23, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-30, .cls-4 {
+      .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-24, .cls-25, .cls-26, .cls-27, .cls-4 {
         fill: #1d1d1b;
       }
 
-      .cls-18, .cls-20, .cls-23, .cls-26, .cls-29, .cls-4 {
+      .cls-19, .cls-20, .cls-22, .cls-26, .cls-4 {
         font-family: Verdana;
       }
 
@@ -61,7 +42,7 @@
         fill: #da2e33;
       }
 
-      .cls-21, .cls-22, .cls-7 {
+      .cls-23, .cls-30, .cls-7 {
         stroke: #1d1d1b;
       }
 
@@ -109,53 +90,53 @@
         fill: #164194;
       }
 
-      .cls-18 {
-        font-size: 6px;
+      .cls-18, .cls-19 {
+        font-size: 9px;
       }
 
-      .cls-19 {
-        font-size: 16px;
-      }
-
-      .cls-19, .cls-25, .cls-27, .cls-28, .cls-30 {
+      .cls-18, .cls-21, .cls-24, .cls-25, .cls-27 {
         font-family: Verdana-Bold, Verdana;
       }
 
-      .cls-20, .cls-25 {
-        font-size: 12px;
+      .cls-20 {
+        font-size: 6px;
       }
 
       .cls-21 {
+        font-size: 16px;
+      }
+
+      .cls-22, .cls-27 {
+        font-size: 12px;
+      }
+
+      .cls-23 {
         stroke-linecap: round;
       }
 
-      .cls-21, .cls-22 {
+      .cls-23, .cls-30 {
         stroke-linejoin: round;
         stroke-width: 1.2px;
       }
 
-      .cls-23 {
-        font-size: 10px;
-      }
-
       .cls-24 {
-        letter-spacing: 0.05898em;
-      }
-
-      .cls-26, .cls-30 {
-        font-size: 9px;
-      }
-
-      .cls-27 {
         font-size: 28px;
       }
 
-      .cls-28 {
+      .cls-25 {
         font-size: 26px;
       }
 
-      .cls-29 {
+      .cls-26 {
         font-size: 18px;
+      }
+
+      .cls-28 {
+        letter-spacing: 0.15999em;
+      }
+
+      .cls-29 {
+        letter-spacing: -0.14176em;
       }
     </style>
     <clipPath id="clip-path">
@@ -163,17 +144,15 @@
     </clipPath>
   </defs>
   <g id="rating">
-    <polygon id="ratingArrow" points="219.514 82.462 198.351 100.176 219.514 116.478 263.547 116.478 263.547 82.462 219.514 82.462"/>
-    <text id="ratingLetter" class="cls-2" transform="translate(231.84473 108.99838) scale(1 1.012)">A</text>
+    <polygon id="ratingArrow" points="219.514 82.004 198.351 99.718 219.514 116.02 263.547 116.02 263.547 82.004 219.514 82.004"/>
+    <text id="ratingLetter" class="cls-2" transform="translate(231.84473 108.54037) scale(1 1.012)">A</text>
   </g>
   <g id="qrCode">
     <rect class="cls-3" x="223.82323" y="8.50403" width="39.68504" height="39.68504"/>
     <text class="cls-4" transform="translate(227.70317 30.48639)">QR code</text>
   </g>
-  <g id="ukFlag">
-    <path class="cls-5" d="M15.6609,48.18863h15.993v-10.662Zm52.371-4.775v-8.453H55.3459Zm0-21.681v-8.453l-12.686,8.453Zm-23.15,26.456h15.993l-15.993-10.662ZM31.6539,8.5036H15.6609l15.993,10.662Zm-23.15,4.776v8.453h12.686Zm52.371-4.776H44.8819v10.662Zm-39.685,26.457-12.686,8.453v-8.453Z"/>
-    <path class="cls-6" d="M44.8815,20.75305v.979h3.307L68.0315,8.504h-4.775ZM31.6535,35.94v-.979h-3.307L8.5035,48.189h4.776Zm36.378,9.048L52.9775,34.961h-4.775l19.829,13.215ZM8.5035,11.705l15.054,10.027h4.776L8.5035,8.517Zm59.528,20.61H42.2365V48.189h-7.937V32.315H8.5035V24.37805h25.796V8.504h7.937v15.874h25.795Z"/>
-  </g>
+  <path class="cls-5" d="M15.6609,48.18863h15.993v-10.662Zm52.371-4.775v-8.453H55.3459Zm0-21.681v-8.453l-12.686,8.453Zm-23.15,26.456h15.993l-15.993-10.662ZM31.6539,8.5036H15.6609l15.993,10.662Zm-23.15,4.776v8.453h12.686Zm52.371-4.776H44.8819v10.662Zm-39.685,26.457-12.686,8.453v-8.453Z"/>
+  <path class="cls-6" d="M44.8815,20.75305v.979h3.307L68.0315,8.504h-4.775ZM31.6535,35.94v-.979h-3.307L8.5035,48.189h4.776Zm36.378,9.048L52.9775,34.961h-4.775l19.829,13.215ZM8.5035,11.705l15.054,10.027h4.776L8.5035,8.517Zm59.528,20.61H42.2365V48.189h-7.937V32.315H8.5035V24.37805h25.796V8.504h7.937v15.874h25.795Z"/>
   <line class="cls-7" x1="8.504" y1="76.51752" x2="263.547" y2="76.51752"/>
   <polygon class="cls-8" points="132.05 257.868 8.504 257.868 8.504 281.962 132.05 281.962 144.567 269.915 132.05 257.868"/>
   <polygon class="cls-9" points="120.729 229.521 8.504 229.521 8.504 253.615 120.729 253.615 133.228 241.568 120.729 229.521"/>
@@ -201,47 +180,35 @@
   <polygon class="cls-17" points="202.728 14.059 209.186 14.059 206.622 22.221 213.649 21.069 203.583 43.059 206.622 27.118 199.879 27.407 202.728 14.059"/>
   <line class="cls-7" x1="8.504" y1="295.05321" x2="263.547" y2="295.05321"/>
   <line class="cls-7" x1="8.504" y1="351.57112" x2="263.547" y2="351.57112"/>
-  <text class="cls-18" transform="translate(259.0332 502.50778) rotate(90)">2019/2016</text>
-  <g id="freezerSection">
-    <text transform="translate(72 439.37018)" text-anchor="middle">
-      <tspan id="freezerLitres" class="cls-19">X</tspan>
-      <tspan class="cls-20">L</tspan>
-    </text>
-    <line class="cls-21" x1="70.8803" y1="380.46091" x2="70.8803" y2="418.94591"/>
-    <polyline class="cls-21" points="65.305 383.324 70.789 389.034 76.456 383.134"/>
-    <polyline class="cls-21" points="76.456 415.644 70.972 409.934 65.305 415.834"/>
-    <line class="cls-21" x1="55.049" y1="390.19792" x2="87.077" y2="409.42793"/>
-    <polyline class="cls-21" points="54.631 396.653 62.1 394.559 60.032 386.487"/>
-    <polyline class="cls-21" points="87.13 402.754 79.661 404.848 81.729 412.92"/>
-    <line class="cls-21" x1="55.049" y1="409.30411" x2="87.077" y2="390.07411"/>
-    <polyline class="cls-21" points="60.19 412.92 62.192 405.107 54.473 402.944"/>
-    <polyline class="cls-21" points="81.571 386.677 79.569 394.49 87.288 396.653"/>
-  </g>
-  <g id="fridgeSection">
-    <text transform="translate(200 439.37018)" text-anchor="middle">
-      <tspan id="fridgeLitres" class="cls-19">X</tspan>
-      <tspan class="cls-20" >L</tspan>
-    </text>
-    <polygon class="cls-22" points="192.402 385.492 190.276 390.966 190.276 418.928 209.41 418.928 209.41 390.801 207.284 385.492 192.402 385.492"/>
-    <rect class="cls-22" x="192.67599" y="380.44202" width="14.32401" height="4.98599"/>
-    <line class="cls-22" x1="192.685" y1="391.11722" x2="206.99998" y2="391.11722"/>
-  </g>
-  <text class="cls-23 cls-24" id="noiseClass" transform="translate(136.063005 518.76862)" text-anchor="middle">
-    <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
-    <tspan id="noiseClassALetter">A</tspan><tspan id="noiseClassBLetter">B</tspan><tspan id="noiseClassCLetter">C</tspan><tspan id="noiseClassDLetter">D</tspan>
+  <text id="supplier" class="cls-18" transform="translate(8.50391 72.04694)">X</text>
+  <text id="model" class="cls-19" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
+  <text class="cls-20" transform="translate(259.0332 502.50778) rotate(90)">2019/2018</text>
+  <text transform="translate(73 439.37018)" text-anchor="middle">
+    <tspan id="capacity" class="cls-21">X</tspan>
+    <tspan class="cls-22">L</tspan>
   </text>
-  <g class="cls-15">
-    <path class="cls-21" d="M150.36729,491.74662a25.5866,25.5866,0,0,0-.712-21.289m13.845,26.466a38.871,38.871,0,0,0-1.093-32.468m-5.375,29.665a31.6945,31.6945,0,0,0-.887-26.432m-13.836-7.876v44.154l-17.301-10.581h-19.54v-22.758h19.54Z"/>
+  <g id="fridgeIcon">
+    <polygon class="cls-23" points="63.954 385.492 61.828 390.966 61.828 418.928 80.962 418.928 80.962 390.801 78.836 385.492 63.954 385.492"/>
+    <rect class="cls-23" x="64.229" y="380.44202" width="14.324" height="4.98599"/>
+    <line class="cls-23" x1="64.2378" y1="391.11722" x2="78.5528" y2="391.11722"/>
   </g>
-  <text transform="translate(123.5 486.26276)" text-anchor="middle">
-    <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
-    <tspan id="db" class="cls-25">X</tspan><tspan class="cls-26">dB</tspan>
-  </text>
   <text transform="translate(136.063005 334.5235)" text-anchor="middle">
-    <tspan id="kwhAnnum" class="cls-27">X</tspan>
-    <tspan class="cls-29" xml:space="preserve"> kWh/annum</tspan>
+    <tspan id="kwhAnnum" class="cls-24">X</tspan>
+    <tspan class="cls-26" xml:space="preserve"> kWh/annum</tspan>
+  </text>
+  <polyline class="cls-23" points="107.361 483.632 107.361 518.253 164.024 518.253 164.024 483.632"/>
+  <polyline class="cls-23" points="167.131 479.48 136.063 460.063 104.868 479.48"/>
+  <text transform="translate(136.063005 503.04694)" text-anchor="middle">
+    <tspan id="maxAmbientTemp" class="cls-27 cls-28">≤</tspan><tspan class="cls-27">X</tspan><tspan class="cls-22">°C</tspan>
   </text>
 
-  <text id="supplier" class="cls-30" transform="translate(8.50391 72.04694)">X</text>
-  <text id="model" class="cls-26" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
+  <text transform="translate(192.61426 404.26373)">
+    <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
+    <tspan id="compartmentTemp" class="cls-27">X</tspan><tspan class="cls-22">°C</tspan>
+  </text>
+  <g class="cls-15">
+    <path class="cls-30" d="M183.01939,400.89682v-15.46a4.90909,4.90909,0,1,0-9.817,0v15.46a9.73429,9.73429,0,0,0-4.65,8.331,9.55967,9.55967,0,1,0,19.117,0A9.7343,9.7343,0,0,0,183.01939,400.89682Z"/>
+    <ellipse class="cls-30" cx="178.11109" cy="409.04251" rx="4.868" ry="4.828"/>
+  </g>
+  <path class="cls-30" d="M183.2524,395.20952h-2.635m2.635-4.275h-2.635m2.635-4.275h-2.635m-2.11,17.161v-18.41"/>
 </svg>
