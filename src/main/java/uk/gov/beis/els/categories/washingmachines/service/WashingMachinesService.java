@@ -27,7 +27,7 @@ public class WashingMachinesService {
 
   public ProcessedEnergyLabelDocument generateHtml(WashingMachinesForm form, LegislationCategory legislationCategory) {
 
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/washing-machines/washing-machines.svg"));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/washing-machines/washing-machines-2010.svg"));
 
 
     return templatePopulator

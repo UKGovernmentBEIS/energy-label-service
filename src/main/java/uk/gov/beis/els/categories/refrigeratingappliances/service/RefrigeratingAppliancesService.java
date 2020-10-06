@@ -32,9 +32,9 @@ public class RefrigeratingAppliancesService {
     RatingClassRange shortRange = RatingClassRange.of(RatingClass.APPP, RatingClass.C);
     // If the rating provided in the form is within the range specified above
     if (shortRange.getApplicableRatings().contains(RatingClass.valueOf(form.getEfficiencyRating()))) {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-a+++-to-d.svg"));
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-a+++-to-d-2010.svg"));
     } else {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-d-to-g.svg"));
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-d-to-g-2010.svg"));
     }
 
     if (form.getRatedCompartment()) {
@@ -66,7 +66,7 @@ public class RefrigeratingAppliancesService {
   }
 
   public ProcessedEnergyLabelDocument generateHtml(WineStorageAppliancesForm form) {
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/wine-storage-appliances.svg"));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/wine-storage-appliances-2010.svg"));
 
     return templatePopulator
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())

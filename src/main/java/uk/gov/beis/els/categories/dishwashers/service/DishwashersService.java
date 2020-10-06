@@ -27,7 +27,7 @@ public class DishwashersService {
 
   public ProcessedEnergyLabelDocument generateHtml(DishwashersForm form, LegislationCategory legislationCategory) {
 
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/dishwashers/dishwashers.svg"));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/dishwashers/dishwashers-2010.svg"));
 
     return templatePopulator
         .setMultilineText("supplier", form.getSupplierName())
