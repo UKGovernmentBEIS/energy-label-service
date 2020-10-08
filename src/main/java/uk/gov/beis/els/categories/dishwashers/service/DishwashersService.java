@@ -48,6 +48,7 @@ public class DishwashersService {
       templatePopulator
           .setMultilineText("supplier", form.getSupplierName())
           .setMultilineText("model", form.getModelName())
+          .setText("placeSettingsCapacity", form.getStandardCapacity())
           .setText("kwhAnnum", form.getAnnualEnergyConsumption())
           .setText("lAnnum", form.getAnnualWaterConsumption())
           .applyRatingCssClass("dryingClass", RatingClass.valueOf(form.getDryingEfficiencyRating()));
@@ -57,6 +58,7 @@ public class DishwashersService {
           // TODO QR code
           .setText("supplier", form.getSupplierName())
           .setText("model", form.getModelName())
+          .setText("placeSettingsCapacity", form.getEcoCapacity())
           .setText("kwh100cycles", form.getEnergyConsumptionPer100Cycles())
           .setText("lCycle", form.getWaterConsumptionPerCycle())
           .setHoursMinutes("duration", form.getProgrammeDurationHours(), form.getProgrammeDurationMinutes())
@@ -64,7 +66,6 @@ public class DishwashersService {
     }
 
     return templatePopulator
-        .setText("placeSettingsCapacity", form.getCapacity())
         .setText("db", form.getNoiseEmissions())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()),
             legislationCategory.getPrimaryRatingRange())

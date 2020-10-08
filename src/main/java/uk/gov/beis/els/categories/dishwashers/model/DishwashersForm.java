@@ -15,24 +15,24 @@ import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
-@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed.")
+@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in dishwasher it doesn't have to be attached to the product, but it must still be easy to see. Original-style labels must be at least 110mm x 220mm when printed. New-style 'rescaled' labels must be at least 96mm x 192mm when printed.")
 @GroupSequenceProvider(DishwashersFormSequenceProvider.class)
 public class DishwashersForm extends StandardTemplateForm30Char {
 
-  @FieldPrompt("What style of label do you need to generate?")
-  @NotBlank(message = "Specify the style of label you need to generate", groups = {Default.class, InternetLabellingGroup.class})
+  @FieldPrompt("What style of label do you need to create?")
+  @NotBlank(message = "Specify the style of label you need to create", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   private String applicableLegislation;
-
-  @FieldPrompt("Rated capacity (number of standard place settings) for the standard cleaning cycle")
-  @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long")
-  private String capacity;
 
   @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emission, up to 2 digits long")
   private String noiseEmissions;
 
   // Pre march 2021 fields
+  @FieldPrompt("Rated capacity (number of standard place settings) for the standard cleaning cycle")
+  @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long", groups = PreMarch2021Field.class)
+  private String standardCapacity;
+
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")
   @Digits(integer = 3, fraction = 0, message = "Enter an annual energy consumption, up to 3 digits long", groups = PreMarch2021Field.class)
   private String annualEnergyConsumption;
@@ -47,8 +47,12 @@ public class DishwashersForm extends StandardTemplateForm30Char {
 
   // Post march 2021 fields
   @FieldPrompt("Link to the EPREL or other website which provides further energy efficiency information about this product")
-  @Pattern(regexp = "^(https|http)://([a-zA-Z0-9]+)\\.[a-zA-Z0-9]+", message = "Enter a Link to the EPREL or other website. Links must start with http:// or https:// and contain at least one dot (.) character", groups = PostMarch2021Field.class)
+  @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+", message = "Enter a link to the EPREL or other website. Links must start with http:// or https:// and contain at least one dot (.) character", groups = PostMarch2021Field.class)
   private String qrCodeUrl;
+
+  @FieldPrompt("Rated capacity (number of standard place settings) for the eco programme")
+  @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long", groups = PostMarch2021Field.class)
+  private String ecoCapacity;
 
   @FieldPrompt("Eco programme energy consumption (EPEC) in kWh per 100 cycles")
   @Digits(integer = 3, fraction = 0, message = "Enter an eco programme energy consumption, up to 3 digits long", groups = PostMarch2021Field.class)
@@ -115,6 +119,14 @@ public class DishwashersForm extends StandardTemplateForm30Char {
     this.qrCodeUrl = qrCodeUrl;
   }
 
+  public String getEcoCapacity() {
+    return ecoCapacity;
+  }
+
+  public void setEcoCapacity(String ecoCapacity) {
+    this.ecoCapacity = ecoCapacity;
+  }
+
   public String getEnergyConsumptionPer100Cycles() {
     return energyConsumptionPer100Cycles;
   }
@@ -163,12 +175,12 @@ public class DishwashersForm extends StandardTemplateForm30Char {
     this.efficiencyRating = efficiencyRating;
   }
 
-  public String getCapacity() {
-    return capacity;
+  public String getStandardCapacity() {
+    return standardCapacity;
   }
 
-  public void setCapacity(String capacity) {
-    this.capacity = capacity;
+  public void setStandardCapacity(String standardCapacity) {
+    this.standardCapacity = standardCapacity;
   }
 
   public String getNoiseEmissions() {

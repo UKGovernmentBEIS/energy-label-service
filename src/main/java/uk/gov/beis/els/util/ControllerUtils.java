@@ -67,7 +67,7 @@ public class ControllerUtils {
     if (!StringUtils.isBlank(legislationId) && !StringUtils.isBlank(efficiencyRating)) {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(legislationId, legislationCategory);
       if (!LegislationCategory.isPrimaryRatingClassValid(efficiencyRating, category)) {
-        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
+        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the style of label selected");
       }
     }
   }
