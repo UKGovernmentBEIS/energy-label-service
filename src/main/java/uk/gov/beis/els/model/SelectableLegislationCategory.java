@@ -22,6 +22,14 @@ public class SelectableLegislationCategory extends LegislationCategory {
     return new SelectableLegislationCategory(id, displayName, primaryRatingRange, secondaryRatingRange);
   }
 
+  public static SelectableLegislationCategory preMarch2021(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
+    return new SelectableLegislationCategory("PRE_MAR2021", "An original-style label for display before 1 March 2021", primaryRatingRange, secondaryRatingRange);
+  }
+
+  public static SelectableLegislationCategory postMarch2021(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
+    return new SelectableLegislationCategory("POST_MAR2021", "A new-style 'rescaled' label for display after 1 March 2021", primaryRatingRange, secondaryRatingRange);
+  }
+
   public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
     super(primaryRatingRange, secondaryRatingRange);
     this.id = id;

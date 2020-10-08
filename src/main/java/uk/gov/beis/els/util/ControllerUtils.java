@@ -58,7 +58,7 @@ public class ControllerUtils {
       .collect(StreamUtils.toLinkedMergingHashMap(Enum::name, RatingClass::getDisplayValue));
   }
 
-  public static Map<String, String> legislationYearSelection(List<SelectableLegislationCategory> legislationCategories) {
+  public static Map<String, String> legislationCategorySelection(List<SelectableLegislationCategory> legislationCategories) {
     return legislationCategories.stream()
         .collect(StreamUtils.toLinkedHashMap(SelectableLegislationCategory::getId, SelectableLegislationCategory::getDisplayName));
   }

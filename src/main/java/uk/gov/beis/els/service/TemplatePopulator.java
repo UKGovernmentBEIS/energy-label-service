@@ -89,6 +89,12 @@ public class TemplatePopulator {
     return this;
   }
 
+  public TemplatePopulator setHoursMinutes(String elementId, String hours, String minutes) {
+    int mins = Integer.parseInt(minutes);
+    TemplateUtils.getElementById(template, elementId).text(String.format("%s:%02d", hours, mins));
+    return this;
+  }
+
   public TemplatePopulator applyRatingCssClass(String elementId, RatingClass ratingClass) {
     TemplateUtils.getElementById(template, elementId).addClass(elementId + ratingClass.name());
 
