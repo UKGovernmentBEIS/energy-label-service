@@ -26,7 +26,7 @@ public class VendingMachinesForm extends StandardTemplateForm20Char {
   @Digits(integer = 4, fraction = 0, message = "Enter the total volume of chilled compartments, up to 4 digits long")
   private String fridgeCapacity;
 
-  @FieldPrompt("The maximum measured product temperature, expressed in degrees Celcius, of the compartment(s) with chilled operating temperatures")
+  @FieldPrompt("The maximum measured product temperature, expressed in degrees Celsius, of the compartment(s) with chilled operating temperatures")
   @Digits(integer = 2, fraction = 0, message = "Enter the maximum measured product temperature in the chilled compartments, up to 2 digits long")
   private String fridgeMaxTemp;
 
@@ -34,7 +34,7 @@ public class VendingMachinesForm extends StandardTemplateForm20Char {
   @NotNull(message = "Select whether this model has frozen compartments")
   private Boolean frozenCompartment;
 
-  @FieldPrompt("The maximum measured product temperature, expressed in degrees Celcius, of the compartment(s) with frozen operating temperatures")
+  @FieldPrompt("The maximum measured product temperature, expressed in degrees Celsius, of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter the maximum measured product temperature in the frozen compartments, up to 2 digits long")
   private String freezerMaxTemp;
 

@@ -30,11 +30,11 @@ public class DisplayCabinetsForm extends StandardTemplateForm20Char {
   @Digits(groups = FridgeGroup.class, integer = 4, fraction = 2, message = "Enter the total volume of chilled compartments, up to 4 digits long with up to 2 decimal places")
   private String fridgeCapacity;
 
-  @FieldPrompt("The highest temperature, expressed in degrees Celcius, of the warmest M-package of the compartment(s) with chilled operating temperatures")
+  @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with chilled operating temperatures")
   @Digits(groups = FridgeGroup.class, integer = 2, fraction = 0, message = "Enter the highest temperature of the warmest M-package in the chilled compartments, up to 2 digits long")
   private String fridgeMaxTemp;
 
-  @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celcius of the compartment(s) with chilled operating temperatures")
+  @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with chilled operating temperatures")
   @Digits(groups = FridgeGroup.class, integer = 2, fraction = 0, message = "Enter lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages in the chilled compartments, up to 2 digits long")
   private String fridgeMinTemp;
 
@@ -46,11 +46,11 @@ public class DisplayCabinetsForm extends StandardTemplateForm20Char {
   @Digits(groups = FreezerGroup.class, integer = 4, fraction = 2, message = "Enter the total volume of chilled compartments, up to 4 digits long with up to 2 decimal places")
   private String freezerCapacity;
 
-  @FieldPrompt("The highest temperature, expressed in degrees Celcius, of the warmest M-package of the compartment(s) with frozen operating temperatures")
+  @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter the highest temperature of the warmest M-package in the frozen compartments, up to 2 digits long")
   private String freezerMaxTemp;
 
-  @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celcius of the compartment(s) with frozen operating temperatures")
+  @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages in the frozen compartments, up to 2 digits long")
   private String freezerMinTemp;
 

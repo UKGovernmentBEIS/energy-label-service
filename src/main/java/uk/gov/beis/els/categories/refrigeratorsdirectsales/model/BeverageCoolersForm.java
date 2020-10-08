@@ -23,11 +23,11 @@ public class BeverageCoolersForm extends StandardTemplateForm20Char {
   @Digits(integer = 4, fraction = 0, message = "Enter the total volume of chilled compartments, up to 4 digits long")
   private String capacity;
 
-  @FieldPrompt("The highest average compartment temperature, expressed in degrees Celcius, of all compartments functioning at chilled operating temperature")
+  @FieldPrompt("The highest average compartment temperature, expressed in degrees Celsius, of all compartments functioning at chilled operating temperature")
   @Digits(integer = 2, fraction = 0, message = "Enter the highest average compartment temperature, up to 2 digits long")
   private String compartmentTemp;
 
-  @FieldPrompt("The maximum ambient temperature expressed in degrees Celcius")
+  @FieldPrompt("The maximum ambient temperature expressed in degrees Celsius")
   @Digits(integer = 2, fraction = 0, message = "Enter the maximum ambient temperature, up to 2 digits long")
   private String maxAmbientTemp;
 
