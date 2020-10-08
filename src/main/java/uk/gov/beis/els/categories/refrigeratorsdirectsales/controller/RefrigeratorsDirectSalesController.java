@@ -125,7 +125,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping(value = "/vending machines", params = "mode=INTERNET")
   @ResponseBody
-  public Object handleInternetLabelVendingMachinesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") BeverageCoolersForm form, BindingResult bindingResult) {
+  public Object handleInternetLabelVendingMachinesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") VendingMachinesForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getVendingMachines(bindingResult.getFieldErrors());
     } else {
