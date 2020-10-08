@@ -27,7 +27,7 @@ public class DisplayCabinetsForm extends StandardTemplateForm20Char {
   private Boolean chilledCompartment;
 
   @FieldPrompt("The sum of the display areas, expressed in square metres, of all compartments functioning at chilled operating temperature")
-  @Digits(groups = FridgeGroup.class, integer = 4, fraction = 2, message = "Enter the total volume of chilled compartments, up to 4 digits long with up to 2 decimal places")
+  @Digits(groups = FridgeGroup.class, integer = 4, fraction = 2, message = "Enter the total display area of chilled compartments, up to 4 digits long with up to 2 decimal places")
   private String fridgeCapacity;
 
   @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with chilled operating temperatures")
@@ -43,7 +43,7 @@ public class DisplayCabinetsForm extends StandardTemplateForm20Char {
   private Boolean frozenCompartment;
 
   @FieldPrompt("The sum of the display areas, expressed in square metres, of all display areas functioning at frozen operating temperature")
-  @Digits(groups = FreezerGroup.class, integer = 4, fraction = 2, message = "Enter the total volume of chilled compartments, up to 4 digits long with up to 2 decimal places")
+  @Digits(groups = FreezerGroup.class, integer = 4, fraction = 2, message = "Enter the total display area of frozen compartments, up to 4 digits long with up to 2 decimal places")
   private String freezerCapacity;
 
   @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with frozen operating temperatures")
