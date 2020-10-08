@@ -12,10 +12,8 @@ public class VendingMachinesFormSequenceProvider implements DefaultGroupSequence
   public List<Class<?>> getValidationGroups(VendingMachinesForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
-    if (form != null) {
-      if (BooleanUtils.isTrue(form.getFrozenCompartment())) {
-        sequence.add(FreezerGroup.class);
-      }
+    if (form != null && BooleanUtils.isTrue(form.getFrozenCompartment())) {
+      sequence.add(FreezerGroup.class);
     }
 
     sequence.add(VendingMachinesForm.class);
