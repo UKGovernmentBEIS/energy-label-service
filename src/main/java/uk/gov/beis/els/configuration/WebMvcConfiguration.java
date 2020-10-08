@@ -40,6 +40,16 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
       LOGGER.info("Calibri-bold loaded {}", calibriBoldLoaded);
 
+      boolean verdanaLoaded = GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(
+              Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource("fonts/verdana.ttf").getInputStream()));
+
+      LOGGER.info("Verdana loaded {}", verdanaLoaded);
+
+      boolean verdanaBoldLoaded = GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(
+              Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource("fonts/verdana-bold.ttf").getInputStream()));
+
+      LOGGER.info("Verdana-bold loaded {}", verdanaBoldLoaded);
+
       LOGGER.info("Available system fonts are:");
       Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()).forEach(f ->
           LOGGER.info("Font: {}", f)

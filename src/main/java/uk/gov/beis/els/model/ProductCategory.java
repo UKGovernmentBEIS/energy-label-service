@@ -14,6 +14,7 @@ import uk.gov.beis.els.categories.localspaceheaters.controller.LocalSpaceHeaters
 import uk.gov.beis.els.categories.prorefrigeratedcabinets.controller.ProRefrigeratedCabinetsController;
 import uk.gov.beis.els.categories.rangehoods.controller.RangeHoodsController;
 import uk.gov.beis.els.categories.refrigeratingappliances.controller.RefrigeratingAppliancesController;
+import uk.gov.beis.els.categories.refrigeratorsdirectsales.controller.RefrigeratorsDirectSalesController;
 import uk.gov.beis.els.categories.solidfuelboilers.controller.SolidFuelBoilersController;
 import uk.gov.beis.els.categories.spaceheaters.controller.SpaceHeatersController;
 import uk.gov.beis.els.categories.televisions.controller.TelevisionController;
@@ -60,6 +61,10 @@ public class ProductCategory implements Category {
           "REFRIGERATED_STORAGE_CABINETS",
           "Refrigerated storage cabinets for professional use",
           ReverseRouter.route(on(ProRefrigeratedCabinetsController.class).renderProfessionalRefrigeratedStorageCabinetsForm(null))))
+      .add(new CategoryItem(
+          "REFRIGERATORS_DIRECT_SALES",
+          "Refrigerators with a direct sales function",
+          ReverseRouter.route(on(RefrigeratorsDirectSalesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "SOLID_FUEL_BOILERS",
           "Solid fuel boilers",

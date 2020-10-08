@@ -6,7 +6,7 @@
     outline: none;
     border: none;
     padding-left: 0;
-    
+
     &:disabled {
       background: #fff;
       color: govuk-colour("black");
@@ -14,3 +14,10 @@
   }
 }
 
+.govuk-input--width-7 {
+  max-width: 14.4ex;
+}
+
+.govuk-input--width-6 {
+  max-width: 12.6ex;
+}
