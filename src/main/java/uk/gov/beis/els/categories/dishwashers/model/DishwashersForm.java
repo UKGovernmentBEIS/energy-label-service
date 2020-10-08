@@ -75,8 +75,6 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   @DualModeField
   private String efficiencyRating;
 
-  public DishwashersForm() { }
-
   public String getApplicableLegislation() {
     return applicableLegislation;
   }
