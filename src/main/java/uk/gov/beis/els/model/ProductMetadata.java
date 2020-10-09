@@ -35,6 +35,11 @@ public enum ProductMetadata {
 
   PRO_REFRIGERATED_CABINETS("Professional refrigerated storage cabinets", "Professional refrigerated storage cabinets"),
 
+  ICE_CREAM_FREEZERS("Direct sales refrigerators - Ice cream freezers", "Refrigerators with direct sales function"),
+  BEVERAGE_COOLERS("Direct sales refrigerators - Beverage coolers", "Refrigerators with direct sales function"),
+  VENDING_MACHINES("Direct sales refrigerators - Vending machines", "Refrigerators with direct sales function"),
+  DISPLAY_CABINETS("Direct sales refrigerators - Supermarket refrigerator/freezer cabinets or gelato-scooping cabinets", "Refrigerators with direct sales function"),
+
   RANGE_HOODS("Range hoods", "Range hoods"),
 
   SOLID_FUEL_BOILER("Solid fuel boilers and packages - Solid fuel boiler", "Solid fuel boiler and packages"),

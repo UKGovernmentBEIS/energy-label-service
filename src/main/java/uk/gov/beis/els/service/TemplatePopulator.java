@@ -89,9 +89,17 @@ public class TemplatePopulator {
     return this;
   }
 
+  public TemplatePopulator setElementTranslate(String elementId, double x, double y) {
+    Element svgElement = TemplateUtils.getElementById(template, elementId);
+    svgElement.attr("transform", String.format("translate(%s,%s)", x, y));
+
+    return this;
+  }
+
   public TemplatePopulator setHoursMinutes(String elementId, String hours, String minutes) {
     int mins = Integer.parseInt(minutes);
     TemplateUtils.getElementById(template, elementId).text(String.format("%s:%02d", hours, mins));
+    
     return this;
   }
 

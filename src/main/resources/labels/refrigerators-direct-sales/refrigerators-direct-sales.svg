@@ -2,6 +2,20 @@
   <defs>
     <style>
 
+      #fridgeSection,
+      #freezerSection,
+      #freezerCapacitySection {
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      #fridgeSection.hasFridgeSection,
+      #freezerSection.hasFreezerSection,
+      #freezerCapacitySection.hasFreezerCapacitySection {
+        visibility: visible;
+        opacity: 1;
+      }
+
       .fridgeCapacityUnit {
         display: none;
       }
@@ -195,7 +209,7 @@
       <tspan id="fridgeMaxTemp" class="cls-25" >X</tspan><tspan class="cls-22">°C</tspan>
     </text>
 
-    <text transform="translate(181.27539 424.08893)">
+    <text transform="translate(181.27539 424.08893)" id="fridgeMinTempSection">
       <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
       <tspan id="fridgeMinTemp" class="cls-25" >X</tspan><tspan class="cls-22">°C</tspan>
     </text>
@@ -205,7 +219,7 @@
     <path class="cls-24" d="M171.91379,395.20042h-2.635m2.635-4.275h-2.635m2.635-4.275h-2.635m-2.11,17.161v-18.41"/>
   </g>
   <g id="freezerSection">
-    <text transform="translate(73 518.76862)" text-anchor="middle">
+    <text transform="translate(73 518.76862)" text-anchor="middle" id="freezerCapacitySection">
       <tspan id="freezerCapacity" class="cls-21">X</tspan>
       <tspan class="cls-22">m²</tspan>
     </text>
@@ -223,7 +237,7 @@
       <tspan id="freezerMaxTemp" class="cls-25" >X</tspan><tspan class="cls-22">°C</tspan>
     </text>
 
-    <text transform="translate(181.27539 503.43268)">
+    <text transform="translate(181.27539 503.43268)" id="freezerMinTempSection">
       <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
       <tspan id="freezerMinTemp" class="cls-25" >X</tspan><tspan class="cls-22">°C</tspan>
     </text>

@@ -6,7 +6,7 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
 /**
- * Standard form elements for Lamp templates which only allow 20 chars for supplier name/model fields
+ * Standard form elements for templates which only allow 20 chars for supplier name/model fields
  */
 public class StandardTemplateForm20Char extends InternetLabellingForm implements SupplierNameForm {
 
