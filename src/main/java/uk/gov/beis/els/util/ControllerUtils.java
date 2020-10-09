@@ -58,7 +58,7 @@ public class ControllerUtils {
       .collect(StreamUtils.toLinkedMergingHashMap(Enum::name, RatingClass::getDisplayValue));
   }
 
-  public static Map<String, String> legislationYearSelection(List<SelectableLegislationCategory> legislationCategories) {
+  public static Map<String, String> legislationCategorySelection(List<SelectableLegislationCategory> legislationCategories) {
     return legislationCategories.stream()
         .collect(StreamUtils.toLinkedHashMap(SelectableLegislationCategory::getId, SelectableLegislationCategory::getDisplayName));
   }
@@ -67,7 +67,7 @@ public class ControllerUtils {
     if (!StringUtils.isBlank(legislationId) && !StringUtils.isBlank(efficiencyRating)) {
       SelectableLegislationCategory category = SelectableLegislationCategory.getById(legislationId, legislationCategory);
       if (!LegislationCategory.isPrimaryRatingClassValid(efficiencyRating, category)) {
-        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the period your product is on the market");
+        bindingResult.rejectValue("efficiencyRating", "efficiencyRating.invalid", "This rating is not valid for the style of label selected");
       }
     }
   }

@@ -13,6 +13,18 @@
   <@govukButton.button buttonText="Download internet label" buttonClass="govuk-button"/>
 </#macro>
 
+<#macro preMarch2021RadioItem legislationCategories>
+  <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"PRE_MAR2021": legislationCategories["PRE_MAR2021"]}>
+    <#nested>
+  </@govukRadios.radioItem>
+</#macro>
+
+<#macro postMarch2021RadioItem legislationCategories>
+    <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"POST_MAR2021": legislationCategories["POST_MAR2021"]}>
+        <#nested>
+    </@govukRadios.radioItem>
+</#macro>
+
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
 <#macro standardProductForm title includeSupplierNameModel=true>

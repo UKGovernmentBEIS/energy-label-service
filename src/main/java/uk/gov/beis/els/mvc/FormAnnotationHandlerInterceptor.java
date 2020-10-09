@@ -13,6 +13,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -142,6 +143,7 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
       processFieldWidthDigitsAnnotations(field, fieldWidths);
       processFieldWidthLengthAnnotations(field, fieldWidths);
       processFieldWidthPatternAnnotations(field, fieldWidths);
+      processFieldWidthRangeAnnotations(field, fieldWidths);
     }));
 
     return fieldWidths;
@@ -160,6 +162,11 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
         fieldWidth = integers + 1 + decimals; // +1 for decimal place
       } else {
         fieldWidth = integers;
+      }
+
+      if (fieldWidth == 1) {
+        // govuk-input--width-2 is the smallest possible value
+        fieldWidth = 2;
       }
       fieldWidths.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, String.valueOf(fieldWidth));
     }
@@ -183,10 +190,19 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
     Pattern patternAnnotation = field.getAnnotation(Pattern.class);
     if(patternAnnotation != null) {
       String pattern = patternAnnotation.regexp();
-      // TODO this is the only pattern used currently. To be replaced by a nullable variant of the Digits annotation.
+      // TODO this is the only pattern used currently that implies a width. To be replaced by a nullable variant of the Digits annotation.
       if ("[0-9]{0,2}".equals(pattern)) {
         fieldWidths.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, "2");
       }
+    }
+  }
+
+  private void processFieldWidthRangeAnnotations(Field field, Map<String, String> fieldWidths) {
+    String name = field.getName();
+    Range patternAnnotation = field.getAnnotation(Range.class);
+    if(patternAnnotation != null) {
+      int maxChars = String.valueOf(patternAnnotation.max()).length();
+      fieldWidths.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, String.valueOf(maxChars));
     }
   }
 
@@ -197,10 +213,11 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
     ReflectionUtils.doWithFields(formClass, (field -> {
       String name = field.getName();
       Digits digitsAnnotation = field.getAnnotation(Digits.class);
+      Range rangeAnnotation = field.getAnnotation(Range.class);
       Pattern patternAnnotation = field.getAnnotation(Pattern.class);
 
-      // Field input should be marked as numeric if it has Digits or a specific Pattern annotation (see comment in processFieldWidthPatternAnnotations)
-      if (digitsAnnotation != null || (patternAnnotation != null && "[0-9]{0,2}".equals(patternAnnotation.regexp()))) {
+      // Field input should be marked as numeric if it has Digits, Range or a specific Pattern annotation (see comment in processFieldWidthPatternAnnotations)
+      if (digitsAnnotation != null || rangeAnnotation != null || (patternAnnotation != null && "[0-9]{0,2}".equals(patternAnnotation.regexp()))) {
         numericFields.add(FORM_MODEL_ATTRIBUTE_NAME + "." + name);
       }
 

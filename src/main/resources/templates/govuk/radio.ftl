@@ -126,7 +126,8 @@
             </#list>
           </span>
         </#if>
-        <div class="govuk-radios <#if hiddenContent>govuk-radios--conditional" data-module="govuk-radios"<#else>"</#if>>
+        <#-- hide nested content in internet label mode -->
+        <div class="govuk-radios <#if hiddenContent && labelMode != 'INTERNET'>govuk-radios--conditional" data-module="govuk-radios"<#else>"</#if>>
           <#nested/>
           <#if nestingPath?has_content>
             <@spring.bind nestingPath/>
