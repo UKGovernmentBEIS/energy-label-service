@@ -71,10 +71,10 @@ public class DishwashersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-        SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), DishwashersService.LEGISLATION_CATEGORIES);
-        return function.apply(category);
-      }
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), DishwashersService.LEGISLATION_CATEGORIES);
+      return function.apply(category);
     }
+  }
 
   private ModelAndView getModelAndView() {
     return getModelAndView(Collections.emptyList());

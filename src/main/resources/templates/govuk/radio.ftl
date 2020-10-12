@@ -101,7 +101,7 @@
   </#if>
 </#macro>
 
-<#macro radioGroup path nestingPath="" label="" hiddenContent=true legendSize="h1">
+<#macro radioGroup path nestingPath="" label="" hiddenContent=true legendSize="h1" showNestedForInternetLabels=false>
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
@@ -127,7 +127,7 @@
           </span>
         </#if>
         <#-- hide nested content in internet label mode -->
-        <div class="govuk-radios <#if hiddenContent && labelMode != 'INTERNET'>govuk-radios--conditional" data-module="govuk-radios"<#else>"</#if>>
+        <div class="govuk-radios <#if hiddenContent && (showNestedForInternetLabels || labelMode != 'INTERNET')>govuk-radios--conditional" data-module="govuk-radios"<#else>"</#if>>
           <#nested/>
           <#if nestingPath?has_content>
             <@spring.bind nestingPath/>

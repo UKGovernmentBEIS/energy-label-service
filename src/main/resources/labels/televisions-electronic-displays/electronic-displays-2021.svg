@@ -2,11 +2,11 @@
   <defs>
     <style>
       #hdrSection {
-        visibility: hidden;
+        display: none;
       }
 
       #hdrSection.hasHdrSection {
-        visibility: visible;
+        display: block;
       }
 
       .hdrRatingA #hdrRatingALetter,
