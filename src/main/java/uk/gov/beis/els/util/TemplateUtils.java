@@ -3,6 +3,7 @@ package uk.gov.beis.els.util;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class TemplateUtils {
 
@@ -28,6 +29,14 @@ public class TemplateUtils {
     } else {
       throw new RuntimeException(String.format("No element with id '%s' found in document", elementId));
     }
+  }
+
+  public static Element getElementByTag(Element parent, String tagName) {
+    Elements elements = parent.getElementsByTag(tagName);
+    if (elements.size() > 1) {
+      throw new RuntimeException(String.format("Found %s '%s' tags in element. Expected 1.", elements.size(), tagName));
+    }
+    return elements.get(0);
   }
 
 }

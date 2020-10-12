@@ -55,7 +55,7 @@ public class DishwashersService {
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/dishwashers/dishwashers-2021.svg"));
       templatePopulator
-          // TODO QR code
+          .setQrCode(form.getQrCodeUrl())
           .setText("supplier", form.getSupplierName())
           .setText("model", form.getModelName())
           .setText("placeSettingsCapacity", form.getEcoCapacity())
