@@ -75,7 +75,7 @@ public class ProductCategory implements Category {
           ReverseRouter.route(on(SpaceHeatersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "TELEVISIONS",
-          "Televisions",
+          "Televisions and electronic displays",
           ReverseRouter.route(on(TelevisionController.class).renderTelevisionsForm(null))))
       .add(new CategoryItem(
           "TUMBLE_DRYERS",
