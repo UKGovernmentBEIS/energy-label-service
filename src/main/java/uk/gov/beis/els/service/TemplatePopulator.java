@@ -1,8 +1,11 @@
 package uk.gov.beis.els.service;
 
+import io.nayuki.qrcodegen.QrCode;
 import org.apache.commons.lang3.text.WordUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.ParseSettings;
+import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.gov.beis.els.categories.common.AnalyticsForm;
@@ -92,6 +95,32 @@ public class TemplatePopulator {
   public TemplatePopulator setHoursMinutes(String elementId, String hours, String minutes) {
     int mins = Integer.parseInt(minutes);
     TemplateUtils.getElementById(template, elementId).text(String.format("%s:%02d", hours, mins));
+    return this;
+  }
+
+  public TemplatePopulator setQrCode(String url) {
+    Element qrCode = generateQrCode(url);
+    Element qrCodeTemplateDom = TemplateUtils.getElementById(template, "qrCode");
+    Element qrCodePlaceholder = TemplateUtils.getElementByTag(qrCodeTemplateDom, "rect");
+
+    // Read position infromation off the placeholder
+    String width = qrCodePlaceholder.attr("width");
+    String height = qrCodePlaceholder.attr("height");
+    String xPos = qrCodePlaceholder.attr("x");
+    String yPos = qrCodePlaceholder.attr("y");
+
+    // Adjust the generated QR code and template to match the required position/scale
+    qrCode
+        .attr("width", width)
+        .attr("height", height);
+
+    qrCodeTemplateDom
+        .attr("transform", String.format("translate(%s,%s)", xPos, yPos));
+
+    qrCodeTemplateDom
+        .empty() // Remove placeholder rectangle and text
+        .appendChild(qrCode);
+
     return this;
   }
 
@@ -187,6 +216,17 @@ public class TemplatePopulator {
       return index;
     }
 
+  }
+
+  private Element generateQrCode(String url) {
+    Parser parser = Parser.htmlParser();
+    parser.settings(ParseSettings.preserveCase);
+
+    QrCode qrCode = QrCode.encodeText(url, QrCode.Ecc.LOW);
+
+    Document svgDocument = parser.parseInput(qrCode.toSvgString(0), "");
+
+    return TemplateUtils.getElementByTag(svgDocument, "svg");
   }
 
 }

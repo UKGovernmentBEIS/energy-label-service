@@ -2,7 +2,6 @@ package uk.gov.beis.els.categories.dishwashers.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.group.GroupSequenceProvider;
@@ -46,10 +45,6 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   private String dryingEfficiencyRating;
 
   // Post march 2021 fields
-  @FieldPrompt("Link to the EPREL or other website which provides further energy efficiency information about this product")
-  @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+", message = "Enter a link to the EPREL or other website. Links must start with http:// or https:// and contain at least one dot (.) character", groups = PostMarch2021Field.class)
-  private String qrCodeUrl;
-
   @FieldPrompt("Rated capacity (number of standard place settings) for the eco programme")
   @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long", groups = PostMarch2021Field.class)
   private String ecoCapacity;
@@ -109,14 +104,6 @@ public class DishwashersForm extends StandardTemplateForm30Char {
 
   public void setDryingEfficiencyRating(String dryingEfficiencyRating) {
     this.dryingEfficiencyRating = dryingEfficiencyRating;
-  }
-
-  public String getQrCodeUrl() {
-    return qrCodeUrl;
-  }
-
-  public void setQrCodeUrl(String qrCodeUrl) {
-    this.qrCodeUrl = qrCodeUrl;
   }
 
   public String getEcoCapacity() {
