@@ -23,7 +23,6 @@ public class DishwashersService {
   );
 
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_POST_MARCH_2021 = SelectableLegislationCategory.postMarch2021(
-      RatingClassRange.of(RatingClass.A, RatingClass.G),
       RatingClassRange.of(RatingClass.A, RatingClass.D)  // Noise emission class
   );
 
@@ -55,7 +54,7 @@ public class DishwashersService {
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/dishwashers/dishwashers-2021.svg"));
       templatePopulator
-          .setQrCode(form.getQrCodeUrl())
+          .setQrCode(form)
           .setText("supplier", form.getSupplierName())
           .setText("model", form.getModelName())
           .setText("placeSettingsCapacity", form.getEcoCapacity())

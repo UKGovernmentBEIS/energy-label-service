@@ -33,10 +33,11 @@ public class TemplateUtils {
 
   public static Element getElementByTag(Element parent, String tagName) {
     Elements elements = parent.getElementsByTag(tagName);
-    if (elements.size() > 1) {
+    if (elements.size() == 1) {
+      return elements.get(0);
+    } else {
       throw new RuntimeException(String.format("Found %s '%s' tags in element. Expected 1.", elements.size(), tagName));
     }
-    return elements.get(0);
   }
 
 }

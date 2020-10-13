@@ -9,6 +9,7 @@ import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.gov.beis.els.categories.common.AnalyticsForm;
+import uk.gov.beis.els.categories.common.BaseForm;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.common.SupplierNameForm;
@@ -102,12 +103,12 @@ public class TemplatePopulator {
   public TemplatePopulator setHoursMinutes(String elementId, String hours, String minutes) {
     int mins = Integer.parseInt(minutes);
     TemplateUtils.getElementById(template, elementId).text(String.format("%s:%02d", hours, mins));
-    
+
     return this;
   }
 
-  public TemplatePopulator setQrCode(String url) {
-    Element qrCode = generateQrCode(url);
+  public TemplatePopulator setQrCode(BaseForm form) {
+    Element qrCode = generateQrCode(form.getQrCodeUrl());
     Element qrCodeTemplateDom = TemplateUtils.getElementById(template, "qrCode");
     Element qrCodePlaceholder = TemplateUtils.getElementByTag(qrCodeTemplateDom, "rect");
 
