@@ -25,7 +25,7 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   private String applicableLegislation;
 
   @FieldPrompt("Visible diagonal screen size in centimetres")
-  @Digits(integer = 3, fraction = 0, message = "Enter the screen size in centimetres, up to 3 digits long")
+  @Digits(integer = 4, fraction = 0, message = "Enter the screen size in centimetres, up to 4 digits long")
   private String screenSizeCm;
 
   @FieldPrompt("Visible diagonal screen size in inches")
@@ -73,11 +73,11 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   private String energyConsumptionHdr1000h;
 
   @FieldPrompt("Horizontal resolution in pixels")
-  @Digits(integer = 4, fraction = 0, message = "Enter the horizontal resolution in pixels, up to 4 digits long", groups = PostMarch2021Field.class)
+  @Digits(integer = 5, fraction = 0, message = "Enter the horizontal resolution in pixels, up to 5 digits long", groups = PostMarch2021Field.class)
   private String horizontalPixels;
 
   @FieldPrompt("Vertical resolution in pixels")
-  @Digits(integer = 4, fraction = 0, message = "Enter the vertical resolution in pixels, up to 4 digits long", groups = PostMarch2021Field.class)
+  @Digits(integer = 5, fraction = 0, message = "Enter the vertical resolution in pixels, up to 5 digits long", groups = PostMarch2021Field.class)
   private String verticalPixels;
 
   public String getApplicableLegislation() {
