@@ -105,7 +105,13 @@
             </#if>
 
             <#if labelMode?has_content && labelMode=='INTERNET'>
-              <span class="${captionClass}">Online arrow link</span>
+              <span class="${captionClass}">
+              <#if showRescaledInternetLabelGuidance>
+                  Arrow image
+                <#else>
+                  Online arrow link
+              </#if>
+              </span>
             </#if>
             <#--GOVUK heading class names https://design-system.service.gov.uk/styles/typography/-->
             <#if heading>
@@ -115,10 +121,33 @@
               <#if showInsetText>
                 <div class="govuk-inset-text">
                   <#if labelMode?has_content && labelMode=='INTERNET'>
+                    <#if showRescaledInternetLabelGuidance>
+                      <p>
+                        Use this form to download an arrow image of this product’s energy efficiency class. This image should be used:
+                      </p>
+                      <ul>
+                        <li>on the internet, to link to the full label if you can’t fit the label next to the product's price on screen</li>
+                        <li>
+                          in visual advertisements, promotional material and paper-based distance selling materials,
+                          if the product's energy label is a new-style 'rescaled' label
+                        </li>
+                      </ul>
+                      <p>
+                        If you need a full label,
+                        <a class="govuk-link" href="?mode=ENERGY">create and download an energy label</a>.
+                      </p>
+                    <#else>
+                      <p>
+                        Use this form to download a small image that links to the energy label on a website. You should
+                        use this link if you can’t fit the label next to the product’s price on the screen. If you need
+                        a full label, <a class="govuk-link" href="?mode=ENERGY">create and download an energy label</a>.
+                      </p>
+                    </#if>
+                  <#elseif showRescaledInternetLabelGuidance>
                     <p>
-                      Use this form to download a small image that links to the energy label on a website. You should
-                      use this link if you can’t fit the label next to the product’s price on the screen. If you need
-                      a full label, <a class="govuk-link" href="?mode=ENERGY">create and download an energy label</a>.
+                      You can also <a class="govuk-link" href="?mode=INTERNET">download an arrow image</a> showing this
+                      product’s energy efficiency class. You might need to show this image in advertisements,
+                      promotional material, or on the internet.
                     </p>
                   <#else>
                     <p>

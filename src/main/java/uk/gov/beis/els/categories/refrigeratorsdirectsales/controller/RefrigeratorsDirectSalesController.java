@@ -123,7 +123,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     }
   }
 
-  @PostMapping(value = "/vending machines", params = "mode=INTERNET")
+  @PostMapping(value = "/vending-machines", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelVendingMachinesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") VendingMachinesForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
@@ -192,6 +192,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
+    modelAndView.addObject("showRescaledInternetLabelGuidance", true);
     super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
             RefrigeratorsDirectSalesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));

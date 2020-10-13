@@ -101,7 +101,7 @@
   </#if>
 </#macro>
 
-<#macro radioGroup path nestingPath="" label="" hiddenContent=true legendSize="h1" showNestedForInternetLabels=false>
+<#macro radioGroup path nestingPath="" label="" hiddenContent=true legendSize="h1" showNestedForInternetLabels=true>
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>

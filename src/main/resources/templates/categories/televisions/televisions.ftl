@@ -2,7 +2,7 @@
 
 <@common.standardProductForm "Televisions and electronic displays">
 
-  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2" showNestedForInternetLabels=true>
+  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2">
     <@common.preMarch2021RadioItem legislationCategories>
       <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
       <@govukRadios.radioYesNo path="form.powerSwitch"/>

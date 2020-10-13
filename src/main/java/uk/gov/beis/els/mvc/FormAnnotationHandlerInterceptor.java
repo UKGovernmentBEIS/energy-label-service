@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelFormat;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.model.LabelMode;
@@ -70,6 +71,14 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
             .collect(StreamUtils.toLinkedHashMap(Enum::name, InternetLabelOrientation::getDisplayName))
     );
 
+    modelAndView.addObject("internetLabelColourOptions",
+        Arrays.stream(InternetLabelColour.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, InternetLabelColour::getDisplayName))
+    );
+
+    if(!modelAndView.getModel().containsKey("showRescaledInternetLabelGuidance")) {
+      modelAndView.addObject("showRescaledInternetLabelGuidance", false);
+    }
   }
 
   private List<String> getHiddenFields(Object form, ModelAndView modelAndView) {

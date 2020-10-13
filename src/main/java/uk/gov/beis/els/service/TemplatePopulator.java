@@ -168,7 +168,9 @@ public class TemplatePopulator {
   public TemplatePopulator transformInternetLabel(RatingClass selectedRating, RatingClassRange ratingClassRange) {
     TemplateUtils.getElementById(template, "ratingArrow").addClass("rating" + calculateRatingColourIndex(selectedRating, ratingClassRange));
     setText("ratingLetter", selectedRating.getLetter());
-    setText("ratingPlusses", selectedRating.getPlusses());
+    if(!selectedRating.getPlusses().isEmpty()) {
+      setText("ratingPlusses", selectedRating.getPlusses());
+    }
     return this;
   }
 

@@ -89,6 +89,7 @@ public class DishwashersController {
     // Noise rating only for post march 20201
     modelAndView.addObject("noiseEmissionsRating", ControllerUtils.ratingRangeToSelectionMap(DishwashersService.LEGISLATION_CATEGORY_POST_MARCH_2021.getSecondaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(DishwashersController.class).renderDishwashers(null)));
+    modelAndView.addObject("showRescaledInternetLabelGuidance", true);
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Dishwashers");
 

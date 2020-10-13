@@ -15,12 +15,14 @@
       <@govukTextInput.textInput path="form.ecoCapacity"/>
       <@govukTextInput.textInput path="form.energyConsumptionPer100Cycles"/>
       <@govukTextInput.textInput path="form.waterConsumptionPerCycle"/>
-      <div class="govuk-form-group">
-        <@govukFieldset.fieldset legendHeading="Eco programme duration" legendHeadingClass="govuk-fieldset__legend--s" legendSize="h3">
-          <@govukTextInput.textInput path="form.programmeDurationHours"/>
-          <@govukTextInput.textInput path="form.programmeDurationMinutes"/>
-        </@govukFieldset.fieldset>
-      </div>
+      <#if !labelMode?has_content || (labelMode?has_content && labelMode=='LABEL')>
+        <div class="govuk-form-group">
+          <@govukFieldset.fieldset legendHeading="Eco programme duration" legendHeadingClass="govuk-fieldset__legend--s" legendSize="h3">
+            <@govukTextInput.textInput path="form.programmeDurationHours"/>
+            <@govukTextInput.textInput path="form.programmeDurationMinutes"/>
+          </@govukFieldset.fieldset>
+        </div>
+      </#if>
     </@common.postMarch2021RadioItem>
   </@govukRadios.radioGroup>
 
