@@ -15,7 +15,7 @@
       <@govukTextInput.textInput path="form.ecoCapacity"/>
       <@govukTextInput.textInput path="form.energyConsumptionPer100Cycles"/>
       <@govukTextInput.textInput path="form.waterConsumptionPerCycle"/>
-      <#if !labelMode?has_content || (labelMode?has_content && labelMode=='LABEL')>
+      <#if labelMode=='ENERGY'>
         <div class="govuk-form-group">
           <@govukFieldset.fieldset legendHeading="Eco programme duration" legendHeadingClass="govuk-fieldset__legend--s" legendSize="h3">
             <@govukTextInput.textInput path="form.programmeDurationHours"/>
