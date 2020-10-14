@@ -55,6 +55,7 @@ public enum ProductMetadata {
   VENTILATION_UNITS_BIDIRECTIONAL("Ventilation units - Bidirectional ventilation units", "Ventilation units"),
 
   WASHING_MACHINES("Washing machines", "Washing machines"),
+  WASHING_MACHINES_WASHER_DRYER("Washer-dryer", "Washer-dryer"),
 
   WATER_HEATERS_CONVENTIONAL("Water heaters - Conventional water heaters", "Water heaters"),
   WATER_HEATERS_HEAT_PUMP("Water heaters - Heat pump water heaters", "Water heaters"),

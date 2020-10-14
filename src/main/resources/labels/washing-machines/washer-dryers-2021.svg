@@ -276,11 +276,9 @@
   <g class="cls-12">
     <path class="cls-16" d="M189.70448,506.63272a18.42726,18.42726,0,0,0-.548-15.823m10.654,19.67a27.991,27.991,0,0,0-.841-24.13m-4.136,22.047a22.82855,22.82855,0,0,0-.683-19.645m-10.647-5.853v32.816l-13.314-7.864h-15.036v-16.914h15.036Z"/>
   </g>
-  <text id="db" class="cls-20" transform="translate(161.60645 502.62408)">X</text>
-  <text class="cls-26" transform="translate(168.00488 502.62408)">dB</text>
   <text transform="translate(169.2 502.5)" text-anchor="middle">
     <!-- Do not pretty-print these spans - they need to be all on one line to avoid whitespace between them when rendering -->
-    <tspan id="db" class="cls-20">1</tspan><tspan class="cls-26">dB</tspan>
+    <tspan id="db" class="cls-20">43</tspan><tspan class="cls-26">dB</tspan>
   </text>
   <text transform="translate(70 317.17877)" text-anchor="middle">
     <tspan id="completeCycleKwh100cycles" class="cls-24">X</tspan><tspan class="cls-23">kWh</tspan>
