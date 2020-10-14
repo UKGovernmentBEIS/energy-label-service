@@ -40,6 +40,10 @@ public class ControllerUtils {
     );
   }
 
+  public static void addShowRescaledInternetLabelGuidance(ModelAndView modelAndView) {
+    modelAndView.addObject("showRescaledInternetLabelGuidance", true);
+  }
+
   public static Map<String, String> ratingRangeToSelectionMap(RatingClassRange ratingClassRange) {
     return ratingClassRange.getApplicableRatings().stream()
         .collect(StreamUtils.toLinkedHashMap(Enum::name, RatingClass::getDisplayValue));

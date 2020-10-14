@@ -84,7 +84,7 @@ public class WashingMachinesController {
     modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     modelAndView.addObject("spinDryingEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(spinEfficiencyRange));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null)));
-    modelAndView.addObject("showRescaledInternetLabelGuidance", true);
+    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Washing machines");
 

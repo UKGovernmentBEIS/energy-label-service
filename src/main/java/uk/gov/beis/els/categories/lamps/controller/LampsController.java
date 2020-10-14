@@ -169,7 +169,7 @@ public class LampsController extends CategoryController {
             .collect(StreamUtils.toLinkedHashMap(Enum::name, TemplateType::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
-    modelAndView.addObject("showRescaledInternetLabelGuidance", true);
+    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
     super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
         LampsController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
