@@ -17,11 +17,11 @@ public class LegislationCategory {
   }
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange) {
-    return new LegislationCategory(primaryRatingRange, null);
+    return new LegislationCategory(primaryRatingRange, null, InternetLabelTemplate.ORIGINAL);
   }
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
-    return new LegislationCategory( primaryRatingRange, secondaryRatingRange);
+    return new LegislationCategory( primaryRatingRange, secondaryRatingRange, InternetLabelTemplate.ORIGINAL);
   }
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
@@ -30,12 +30,6 @@ public class LegislationCategory {
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
     return new LegislationCategory( primaryRatingRange, secondaryRatingRange, internetLabelTemplate);
-  }
-
-  public LegislationCategory(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
-    this.primaryRatingRange = primaryRatingRange;
-    this.secondaryRatingRange = secondaryRatingRange;
-    this.internetLabelTemplate = InternetLabelTemplate.ORIGINAL;
   }
 
   public LegislationCategory(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, InternetLabelTemplate internetLabelTemplate) {

@@ -1,7 +1,5 @@
 package uk.gov.beis.els.model;
 
-import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
-
 import java.util.List;
 
 public class SelectableLegislationCategory extends LegislationCategory {
@@ -41,7 +39,7 @@ public class SelectableLegislationCategory extends LegislationCategory {
   }
 
   public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
-    super(primaryRatingRange, secondaryRatingRange);
+    super(primaryRatingRange, secondaryRatingRange, InternetLabelTemplate.ORIGINAL);
     this.id = id;
     this.displayName = displayName;
   }
