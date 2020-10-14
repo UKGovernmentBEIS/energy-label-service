@@ -150,12 +150,12 @@
   <#list itemMap as itemKey, itemValue>
     <#assign isSelected = spring.stringStatusValue == itemKey>
     <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="${id}-${itemKey}" name="${fieldName}" type="radio" value="${itemKey}" <#if isSelected>checked="checked"</#if> <#if nested?has_content>data-aria-controls="${id}-${itemKey}-hidden"</#if>>
+      <input class="govuk-radios__input" id="${id}-${itemKey}" name="${fieldName}" type="radio" value="${itemKey}" <#if isSelected>checked="checked"</#if> <#if nested?markup_string?trim?has_content>data-aria-controls="${id}-${itemKey}-hidden"</#if>>
       <label class="govuk-label govuk-radios__label" for="${id}-${itemKey}">
         ${itemValue}
         </label>
     </div>
-    <#if nested?has_content>
+    <#if nested?markup_string?trim?has_content>
       <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="${id}-${itemKey}-hidden">
         ${nested}
       </div>
