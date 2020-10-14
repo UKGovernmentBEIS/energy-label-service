@@ -16,7 +16,6 @@ public class InternetLabellingForm extends AnalyticsForm {
   private String productPriceHeightPx;
 
   @FieldPrompt(value = "Should the arrow be in colour or black and white?", hintText = "Use a colour arrow if you can. You can use a black and white arrow if your material is being printed in black and white. You shouldn't use black and white arrows on the internet.")
-  //@NotBlank(message = "Select whether the arrow should be in colour or black and white")
   @InternetLabelModeField
   private String labelColour;
 

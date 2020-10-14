@@ -68,6 +68,7 @@ public class DishwashersController {
 
   private Object doIfValid(DishwashersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
     ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORIES, bindingResult);
+    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), DishwashersService.LEGISLATION_CATEGORY_POST_MARCH_2021, bindingResult);
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {

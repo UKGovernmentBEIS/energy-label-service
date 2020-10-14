@@ -72,6 +72,7 @@ public class TelevisionController {
     } else if(TelevisionsService.LEGISLATION_CATEGORY_POST_MARCH_2021.getId().equals(form.getApplicableLegislation())) {
       ValidationUtils.rejectIfEmpty(bindingResult, "efficiencyRatingSdr", "efficiencyRatingSdr.invalid", "Select an energy efficiency class for SDR content");
     }
+    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), TelevisionsService.LEGISLATION_CATEGORY_POST_MARCH_2021, bindingResult);
 
     return doIfValid(form, bindingResult, (category -> {
       String ratingClass;

@@ -33,13 +33,13 @@
         fill: #fff;
       }
 
-      .rating0 { fill: #009640; }
-      .rating1 { fill: #52ae32; }
-      .rating2 { fill: #c8d400; }
-      .rating3 { fill: #ffed00; }
-      .rating4 { fill: #fbba00; }
-      .rating5 { fill: #ec6608; }
-      .rating6 { fill: #e30613; }
+      #ratingArrow.rating0 { fill: #009640; }
+      #ratingArrow.rating1 { fill: #52ae32; }
+      #ratingArrow.rating2 { fill: #c8d400; }
+      #ratingArrow.rating3 { fill: #ffed00; }
+      #ratingArrow.rating4 { fill: #fbba00; }
+      #ratingArrow.rating5 { fill: #ec6608; }
+      #ratingArrow.rating6 { fill: #e30613; }
     </style>
   </defs>
   <g>

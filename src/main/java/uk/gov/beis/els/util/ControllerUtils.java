@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.RatingClass;
@@ -72,4 +73,9 @@ public class ControllerUtils {
     }
   }
 
+  public static void validateInternetLabelColour(String selectedLegislationId, SelectableLegislationCategory postMarch2021LegislationCategory, BindingResult bindingResult) {
+    if(postMarch2021LegislationCategory == null || postMarch2021LegislationCategory.getId().equals(selectedLegislationId)) {
+      ValidationUtils.rejectIfEmpty(bindingResult, "labelColour", "labelColour.invalid", "Select whether the arrow should be in colour or black and white");
+    }
+  }
 }
