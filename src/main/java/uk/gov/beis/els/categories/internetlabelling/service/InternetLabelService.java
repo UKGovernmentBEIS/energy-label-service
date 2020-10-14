@@ -9,6 +9,7 @@ import org.jsoup.parser.Parser;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
+import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.gov.beis.els.model.LegislationCategory;
@@ -24,12 +25,14 @@ public class InternetLabelService {
     parser.settings(ParseSettings.preserveCase);
 
     InternetLabelOrientation orientation = InternetLabelOrientation.valueOf(form.getLabelOrientation());
-    String templatePath;
-    if (orientation == InternetLabelOrientation.LEFT) {
-      templatePath = "internet-labelling-left.svg";
+    InternetLabelColour colour;
+    if(legislationCategory.getInternetLabelTemplate().getHasBWOption()) {
+      colour = InternetLabelColour.valueOf(form.getLabelColour());
     } else {
-      templatePath = "internet-labelling-right.svg";
+      colour = InternetLabelColour.COLOUR;
     }
+
+    String templatePath = legislationCategory.getInternetLabelTemplate().getTemplatePathForOrientationAndColour(orientation, colour);
 
     Document svgDom;
 

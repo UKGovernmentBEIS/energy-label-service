@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.internetlabelling.model.RescaledInternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.model.BeverageCoolersForm;
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.model.DisplayCabinetsForm;
@@ -73,7 +74,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping(value = "/ice-cream-freezers", params = "mode=INTERNET")
   @ResponseBody
-  public Object handleInternetLabelIceCreamFreezersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") IceCreamFreezersForm form, BindingResult bindingResult) {
+  public Object handleInternetLabelIceCreamFreezersSubmit(@Validated({InternetLabellingGroup.class, RescaledInternetLabellingGroup.class}) @ModelAttribute("form") IceCreamFreezersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getIceCreamFreezers(bindingResult.getFieldErrors());
     } else {
@@ -99,7 +100,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping(value = "/beverage-coolers", params = "mode=INTERNET")
   @ResponseBody
-  public Object handleInternetLabelBeverageCoolersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") BeverageCoolersForm form, BindingResult bindingResult) {
+  public Object handleInternetLabelBeverageCoolersSubmit(@Validated({InternetLabellingGroup.class, RescaledInternetLabellingGroup.class}) @ModelAttribute("form") BeverageCoolersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getBeverageCoolers(bindingResult.getFieldErrors());
     } else {
@@ -123,9 +124,9 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     }
   }
 
-  @PostMapping(value = "/vending machines", params = "mode=INTERNET")
+  @PostMapping(value = "/vending-machines", params = "mode=INTERNET")
   @ResponseBody
-  public Object handleInternetLabelVendingMachinesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") VendingMachinesForm form, BindingResult bindingResult) {
+  public Object handleInternetLabelVendingMachinesSubmit(@Validated({InternetLabellingGroup.class, RescaledInternetLabellingGroup.class}) @ModelAttribute("form") VendingMachinesForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getVendingMachines(bindingResult.getFieldErrors());
     } else {
@@ -151,7 +152,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping(value = "/display-cabinets", params = "mode=INTERNET")
   @ResponseBody
-  public Object handleInternetLabelDisplayCabinetsSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") DisplayCabinetsForm form, BindingResult bindingResult) {
+  public Object handleInternetLabelDisplayCabinetsSubmit(@Validated({InternetLabellingGroup.class, RescaledInternetLabellingGroup.class}) @ModelAttribute("form") DisplayCabinetsForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getDisplayCabinets(bindingResult.getFieldErrors());
     } else {
@@ -192,6 +193,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
+    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
     super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
             RefrigeratorsDirectSalesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));

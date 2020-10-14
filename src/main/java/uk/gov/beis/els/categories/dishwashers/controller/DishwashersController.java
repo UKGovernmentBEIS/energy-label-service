@@ -68,6 +68,7 @@ public class DishwashersController {
 
   private Object doIfValid(DishwashersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
     ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORIES, bindingResult);
+    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), DishwashersService.LEGISLATION_CATEGORY_POST_MARCH_2021, bindingResult);
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
@@ -89,6 +90,7 @@ public class DishwashersController {
     // Noise rating only for post march 20201
     modelAndView.addObject("noiseEmissionsRating", ControllerUtils.ratingRangeToSelectionMap(DishwashersService.LEGISLATION_CATEGORY_POST_MARCH_2021.getSecondaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(DishwashersController.class).renderDishwashers(null)));
+    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Dishwashers");
 

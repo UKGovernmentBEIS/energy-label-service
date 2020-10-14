@@ -19,7 +19,7 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 public class DishwashersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("What style of label do you need to create?")
-  @NotBlank(message = "Specify the style of label you need to create", groups = {Default.class, InternetLabellingGroup.class})
+  @NotBlank(message = "Select the style of label you need to create", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   private String applicableLegislation;
 

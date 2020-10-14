@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.RatingClass;
@@ -37,6 +38,10 @@ public class ControllerUtils {
     modelAndView.addObject("errorList", errorList.stream()
         .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage))
     );
+  }
+
+  public static void addShowRescaledInternetLabelGuidance(ModelAndView modelAndView) {
+    modelAndView.addObject("showRescaledInternetLabelGuidance", true);
   }
 
   public static Map<String, String> ratingRangeToSelectionMap(RatingClassRange ratingClassRange) {
@@ -72,4 +77,9 @@ public class ControllerUtils {
     }
   }
 
+  public static void validateInternetLabelColour(String selectedLegislationId, SelectableLegislationCategory rescaledLegislationCategory, BindingResult bindingResult) {
+    if(rescaledLegislationCategory.getId().equals(selectedLegislationId)) {
+      ValidationUtils.rejectIfEmpty(bindingResult, "labelColour", "labelColour.invalid", "Select whether the arrow should be in colour or black and white");
+    }
+  }
 }

@@ -30,7 +30,7 @@
   <g id="rating">
     <polygon id="ratingArrow" class="cls-1" points="391 0 391 158 79 158 0 79 79 0 391 0"/>
     <text class="cls-2" transform="translate(352 124.55518)" text-anchor="end">
-      <tspan id="ratingLetter">A</tspan><tspan id="ratingPlusses" class="cls-3" dy="-59">+++</tspan>
+      <tspan id="ratingLetter">A</tspan><tspan id="ratingPlusses" class="cls-3" dy="-59"></tspan>
     </text>
   </g>
 </svg>

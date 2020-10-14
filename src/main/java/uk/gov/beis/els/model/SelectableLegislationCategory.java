@@ -31,15 +31,21 @@ public class SelectableLegislationCategory extends LegislationCategory {
   }
 
   public static SelectableLegislationCategory postMarch2021() {
-    return new SelectableLegislationCategory("POST_MAR2021", "A new-style 'rescaled' label for display after 1 March 2021", RatingClassRange.of(RatingClass.A, RatingClass.G), null);
+    return new SelectableLegislationCategory("POST_MAR2021", "A new-style 'rescaled' label for display after 1 March 2021", RatingClassRange.of(RatingClass.A, RatingClass.G), null, InternetLabelTemplate.RESCALED);
   }
 
   public static SelectableLegislationCategory postMarch2021(RatingClassRange secondaryRatingRange) {
-    return new SelectableLegislationCategory("POST_MAR2021", "A new-style 'rescaled' label for display after 1 March 2021", RatingClassRange.of(RatingClass.A, RatingClass.G), secondaryRatingRange);
+    return new SelectableLegislationCategory("POST_MAR2021", "A new-style 'rescaled' label for display after 1 March 2021", RatingClassRange.of(RatingClass.A, RatingClass.G), secondaryRatingRange, InternetLabelTemplate.RESCALED);
   }
 
   public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
-    super(primaryRatingRange, secondaryRatingRange);
+    super(primaryRatingRange, secondaryRatingRange, InternetLabelTemplate.ORIGINAL);
+    this.id = id;
+    this.displayName = displayName;
+  }
+
+  public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
+    super(primaryRatingRange, secondaryRatingRange, internetLabelTemplate);
     this.id = id;
     this.displayName = displayName;
   }
