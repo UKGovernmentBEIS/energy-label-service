@@ -1,7 +1,5 @@
 package uk.gov.beis.els.model;
 
-import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
-
 public class LegislationCategory {
 
   private final RatingClassRange primaryRatingRange;

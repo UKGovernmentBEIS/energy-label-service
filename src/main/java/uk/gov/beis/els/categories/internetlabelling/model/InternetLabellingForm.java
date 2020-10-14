@@ -4,7 +4,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
 import uk.gov.beis.els.categories.common.AnalyticsForm;
-import uk.gov.beis.els.categories.common.PostMarch2021Field;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.InternetLabelModeField;
 
@@ -16,6 +15,7 @@ public class InternetLabellingForm extends AnalyticsForm {
   private String productPriceHeightPx;
 
   @FieldPrompt(value = "Should the arrow be in colour or black and white?", hintText = "Use a colour arrow if you can. You can use a black and white arrow if your material is being printed in black and white. You shouldn't use black and white arrows on the internet.")
+  @NotBlank(groups = RescaledInternetLabellingGroup.class, message = "Select whether the arrow should be in colour or black and white")
   @InternetLabelModeField
   private String labelColour;
 

@@ -73,8 +73,8 @@ public class ControllerUtils {
     }
   }
 
-  public static void validateInternetLabelColour(String selectedLegislationId, SelectableLegislationCategory postMarch2021LegislationCategory, BindingResult bindingResult) {
-    if(postMarch2021LegislationCategory == null || postMarch2021LegislationCategory.getId().equals(selectedLegislationId)) {
+  public static void validateInternetLabelColour(String selectedLegislationId, SelectableLegislationCategory rescaledLegislationCategory, BindingResult bindingResult) {
+    if(rescaledLegislationCategory.getId().equals(selectedLegislationId)) {
       ValidationUtils.rejectIfEmpty(bindingResult, "labelColour", "labelColour.invalid", "Select whether the arrow should be in colour or black and white");
     }
   }
