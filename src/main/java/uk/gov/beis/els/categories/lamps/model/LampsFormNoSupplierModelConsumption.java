@@ -16,9 +16,9 @@ public class LampsFormNoSupplierModelConsumption extends InternetLabellingForm {
   @DualModeField
   private String efficiencyRating;
 
-  @FieldPrompt("What type of label should be generated?")
-  @NotBlank(message = "Select what type of label should be generated")
-  private String templateType;
+  @FieldPrompt("Should the label be in colour or black and white?")
+  @NotBlank(message = "Select whether the label be in colour or black and white")
+  private String templateColour;
 
   public String getEfficiencyRating() {
     return efficiencyRating;
@@ -28,11 +28,11 @@ public class LampsFormNoSupplierModelConsumption extends InternetLabellingForm {
     this.efficiencyRating = efficiencyRating;
   }
 
-  public String getTemplateType() {
-    return templateType;
+  public String getTemplateColour() {
+    return templateColour;
   }
 
-  public void setTemplateType(String templateType) {
-    this.templateType = templateType;
+  public void setTemplateColour(String templateColour) {
+    this.templateColour = templateColour;
   }
 }

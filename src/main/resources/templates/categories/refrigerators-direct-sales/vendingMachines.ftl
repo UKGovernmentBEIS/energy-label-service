@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm title="Refrigerated vending machines" includePostMarch2021InternetLabellingFields=true>
+<@common.standardProductForm title="Refrigerated vending machines" includeRescaledInternetLabellingFields=true>
   <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
   <@govukTextInput.textInput path="form.annualEnergyConsumption"/>
   <@govukTextInput.textInput path="form.fridgeCapacity"/>

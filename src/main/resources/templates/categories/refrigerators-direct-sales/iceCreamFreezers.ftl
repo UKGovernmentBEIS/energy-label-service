@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm title="Ice cream freezers" includePostMarch2021InternetLabellingFields=true>
+<@common.standardProductForm title="Ice cream freezers" includeRescaledInternetLabellingFields=true>
   <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
   <@govukTextInput.textInput path="form.annualEnergyConsumption"/>
   <@govukTextInput.textInput path="form.capacity"/>

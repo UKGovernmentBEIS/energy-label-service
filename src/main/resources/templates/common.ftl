@@ -22,15 +22,28 @@
 <#macro postMarch2021RadioItem legislationCategories>
     <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"POST_MAR2021": legislationCategories["POST_MAR2021"]}>
         <#nested>
-        <@common.postMarch2021InternetLabellingFields/>
+        <@common.rescaledInternetLabellingFields/>
+    </@govukRadios.radioItem>
+</#macro>
+
+<#macro preSeptember2021RadioItem legislationCategories>
+    <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"PRE_SEPT2021": legislationCategories["PRE_SEPT2021"]}>
+        <#nested>
+    </@govukRadios.radioItem>
+</#macro>
+
+<#macro postSeptember2021RadioItem legislationCategories>
+    <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"POST_SEPT2021": legislationCategories["POST_SEPT2021"]}>
+        <#nested>
+        <@common.rescaledInternetLabellingFields/>
     </@govukRadios.radioItem>
 </#macro>
 
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
-<#macro standardProductForm title includeSupplierNameModel=true includePostMarch2021InternetLabellingFields=false>
+<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true>
 
-  <@defaultPage pageHeading=title showInsetText=true>
+  <@defaultPage pageHeading=title showInsetText=showInsetText>
     <@form.govukForm submitUrl + modeQueryParam!"">
 
       <#if includeSupplierNameModel>
@@ -56,8 +69,8 @@ Includes the wrapping form element, the generate label button and optionally the
             </p>
           </#if>
         </@govukDetails.details>
-        <#if includePostMarch2021InternetLabellingFields>
-          <@common.postMarch2021InternetLabellingFields/>
+        <#if includeRescaledInternetLabellingFields>
+          <@common.rescaledInternetLabellingFields/>
         </#if>
         <@govukRadios.radio path="form.labelOrientation" radioItems=internetLabelOrientationOptions/>
         <@govukRadios.radio path="form.labelFormat" radioItems=internetLabelFormatOptions/>
@@ -87,6 +100,6 @@ Includes the wrapping form element, the generate label button and optionally the
   </@defaultPage>
 </#macro>
 
-<#macro postMarch2021InternetLabellingFields>
+<#macro rescaledInternetLabellingFields>
   <@govukRadios.radio path="form.labelColour" radioItems=internetLabelColourOptions/>
 </#macro>

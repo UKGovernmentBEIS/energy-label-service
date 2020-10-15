@@ -13,7 +13,7 @@ public class BaseForm extends InternetLabellingForm {
       hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the EPREL or other website. Links must start with http:// or https:// and contain at least one dot (.) character",
-      groups = PostMarch2021Field.class)
+      groups = {PostMarch2021Field.class, PostSeptember2021Field.class})
   private String qrCodeUrl;
 
   public String getQrCodeUrl() {
