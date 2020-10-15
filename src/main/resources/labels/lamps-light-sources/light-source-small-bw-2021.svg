@@ -170,7 +170,7 @@
   <text class="cls-18" transform="translate(11.21631 110.68233)"> </text>
   <text class="cls-18" transform="translate(13.45166 110.68233)"> </text>
   <text class="cls-16" transform="translate(2.68506 116.4294)">kW<tspan class="cls-19" x="7.90283" y="0">h</tspan><tspan x="11.86182" y="0">/1000h</tspan></text>
-  <text id="kwh1000h" class="cls-20" transform="translate(2.68506 110.68233)">X</text>
+  <text id="kwh" class="cls-20" transform="translate(2.68506 110.68233)">X</text>
   <g id="qrCode">
     <rect class="cls-21" x="2.63945" y="121.88983" width="28.34646" height="28.34646"/>
     <text class="cls-22" transform="translate(5.41053 137.59117)">QR code</text>

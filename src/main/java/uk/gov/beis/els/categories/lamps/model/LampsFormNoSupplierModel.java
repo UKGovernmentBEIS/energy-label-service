@@ -21,9 +21,9 @@ public class LampsFormNoSupplierModel extends InternetLabellingForm {
   @Digits(integer = 3, fraction = 0, message = "Enter an energy consumption, up to 3 digits long")
   private String energyConsumption;
 
-  @FieldPrompt("What type of label should be generated?")
-  @NotBlank(message = "Select what type of label should be generated")
-  private String templateType;
+  @FieldPrompt("Should the label be in colour or black and white?")
+  @NotBlank(message = "Select whether the label be in colour or black and white")
+  private String templateColour;
 
   public String getEfficiencyRating() {
     return efficiencyRating;
@@ -41,11 +41,11 @@ public class LampsFormNoSupplierModel extends InternetLabellingForm {
     this.energyConsumption = energyConsumption;
   }
 
-  public String getTemplateType() {
-    return templateType;
+  public String getTemplateColour() {
+    return templateColour;
   }
 
-  public void setTemplateType(String templateType) {
-    this.templateType = templateType;
+  public void setTemplateColour(String templateColour) {
+    this.templateColour = templateColour;
   }
 }
