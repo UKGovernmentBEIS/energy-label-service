@@ -74,10 +74,6 @@ public class WasherDryerForm extends StandardTemplateForm20Char {
   @Digits(integer = 2, fraction = 0, message = "Enter the airborne acoustic noise emission, up to 2 digits")
   private String noiseEmissionValue;
 
-  public WasherDryerForm() {
-  }
-
-
   public String getCompleteCycleEfficiencyRating() {
     return completeCycleEfficiencyRating;
   }
