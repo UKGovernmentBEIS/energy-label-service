@@ -52,7 +52,7 @@ Includes the wrapping form element, the generate label button and optionally the
 
       <#nested/>
 
-      <#if labelMode?has_content && labelMode == 'INTERNET'>
+      <#if labelMode == 'INTERNET'>
         <@govukTextInput.textInput path="form.productPriceHeightPx"/>
         <@govukDetails.details summaryTitle="Why do I need to enter the height of the product's price?">
           <p>

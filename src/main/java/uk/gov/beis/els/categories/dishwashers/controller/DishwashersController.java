@@ -63,12 +63,12 @@ public class DishwashersController {
   @PostMapping(value = "/dishwashers", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelDishwashersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") DishwashersForm form, BindingResult bindingResult) {
+    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), DishwashersService.LEGISLATION_CATEGORY_POST_MARCH_2021, bindingResult);
     return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.DISHWASHERS))));
   }
 
   private Object doIfValid(DishwashersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
     ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORIES, bindingResult);
-    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), DishwashersService.LEGISLATION_CATEGORY_POST_MARCH_2021, bindingResult);
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {

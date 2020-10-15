@@ -87,8 +87,8 @@ public class ProductCategory implements Category {
           ReverseRouter.route(on(VentilationUnitsController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "WASHING_MACHINES",
-          "Washing machines",
-          ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null))))
+          "Washing machines and washer-dryers",
+          ReverseRouter.route(on(WashingMachinesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "WATER_HEATERS",
           "Water heaters",
