@@ -75,8 +75,8 @@ public class LampsController extends CategoryController {
   @PostMapping(value = "/lamps", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelLampsSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LampsForm form, BindingResult bindingResult) {
+    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021, bindingResult);
     return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.LAMPS_FULL))));
-
   }
 
   private Object doIfValid(LampsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
