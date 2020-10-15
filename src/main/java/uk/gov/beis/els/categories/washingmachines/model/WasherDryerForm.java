@@ -10,7 +10,7 @@ import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
-@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 96mm x 192mm when printed.")
+@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in washer-dryer it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed.")
 public class WasherDryerForm extends StandardTemplateForm20Char {
 
   @FieldPrompt("Energy efficiency class for the complete cycle")
