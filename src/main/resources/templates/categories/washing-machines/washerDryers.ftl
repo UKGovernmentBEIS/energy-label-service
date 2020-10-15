@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm title="Washer-dryers" includePostMarch2021InternetLabellingFields=true>
+<@common.standardProductForm title="Washer-dryers" includeRescaledInternetLabellingFields=true>
   <@govukTextInput.textInput path="form.qrCodeUrl"/>
   <@govukSelect.select path="form.spinDryingEfficiencyRating" options=spinDryingEfficiencyRating/>
   <@govukSelect.select path="form.noiseEmissionClass" options=noiseClass/>
