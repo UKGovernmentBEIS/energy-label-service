@@ -4,9 +4,11 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import javax.validation.Valid;
 import javax.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -27,7 +29,7 @@ import uk.gov.beis.els.categories.washingmachines.model.WashingMachinesForm;
 import uk.gov.beis.els.categories.washingmachines.service.WashingMachinesService;
 import uk.gov.beis.els.controller.CategoryController;
 import uk.gov.beis.els.model.ProductMetadata;
-import uk.gov.beis.els.model.RatingClassRange;
+import uk.gov.beis.els.model.SelectableLegislationCategory;
 import uk.gov.beis.els.mvc.ReverseRouter;
 import uk.gov.beis.els.service.BreadcrumbService;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -37,7 +39,7 @@ import uk.gov.beis.els.util.ControllerUtils;
 @RequestMapping("/categories/washing-machines/")
 public class WashingMachinesController extends CategoryController {
 
-  private static final String BREADCRUMB_STAGE_TEXT = "Washing machines";
+  private static final String BREADCRUMB_STAGE_TEXT = "Washing machines and washer-dryers";
 
   private final WashingMachinesService washingMachinesService;
   private final BreadcrumbService breadcrumbService;
@@ -64,21 +66,14 @@ public class WashingMachinesController extends CategoryController {
   @PostMapping("/washing-machines")
   @ResponseBody
   public Object handleWashingMachinesSubmit(@Valid @ModelAttribute("form") WashingMachinesForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getWashingMachinesModelAndView(bindingResult.getFieldErrors());
-    } else {
-      return documentRendererService.processPdfResponse(washingMachinesService.generateHtml(form, WashingMachinesService.LEGISLATION_CATEGORY_CURRENT));
-    }
+    return doIfValidWashingMachineForm(form, bindingResult, (category -> documentRendererService.processPdfResponse(washingMachinesService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/washing-machines", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelWashingMachinesSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") WashingMachinesForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getWashingMachinesModelAndView(bindingResult.getFieldErrors());
-    } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WashingMachinesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WASHING_MACHINES));
-    }
+    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), WashingMachinesService.LEGISLATION_CATEGORY_POST_MARCH_2021, bindingResult);
+    return doIfValidWashingMachineForm(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.WASHING_MACHINES))));
   }
 
   @GetMapping("/washer-dryer")
@@ -106,6 +101,16 @@ public class WashingMachinesController extends CategoryController {
     }
   }
 
+  private Object doIfValidWashingMachineForm(WashingMachinesForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
+    ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), WashingMachinesService.LEGISLATION_CATEGORIES, bindingResult);
+    if (bindingResult.hasErrors()) {
+      return getWashingMachinesModelAndView(bindingResult.getFieldErrors());
+    } else {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), WashingMachinesService.LEGISLATION_CATEGORIES);
+      return function.apply(category);
+    }
+  }
+
   private ModelAndView getWasherDryerModelAndView() {
     return getWasherDryerModelAndView(Collections.emptyList());
   }
@@ -113,11 +118,9 @@ public class WashingMachinesController extends CategoryController {
   private ModelAndView getWasherDryerModelAndView(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/washing-machines/washerDryers");
     modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(WashingMachinesService.LEGISLATION_CATEGORY_POST_MARCH_2021.getPrimaryRatingRange()));
-    modelAndView.addObject("noiseClass", ControllerUtils.ratingRangeToSelectionMap(WashingMachinesService.LEGISLATION_CATEGORY_POST_MARCH_2021.getSecondaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(WashingMachinesController.class).handleWasherDryerSubmit(null, ReverseRouter.emptyBindingResult())));
-    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
-    ControllerUtils.addErrorSummary(modelAndView, errorList);
-    breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Washer-dryers");
+    addCommonModelAttributes(modelAndView, errorList);
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Washer-dryers");
     return modelAndView;
   }
 
@@ -126,20 +129,22 @@ public class WashingMachinesController extends CategoryController {
   }
 
   private ModelAndView getWashingMachinesModelAndView(List<FieldError> errorList) {
-    RatingClassRange efficiencyRatingRange = WashingMachinesService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange();
-    RatingClassRange spinEfficiencyRange = WashingMachinesService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange();
-
     ModelAndView modelAndView = new ModelAndView("categories/washing-machines/washingMachines");
-    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(efficiencyRatingRange));
-    modelAndView.addObject("spinDryingEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(spinEfficiencyRange));
+    modelAndView.addObject("legislationCategories", ControllerUtils.legislationCategorySelection(WashingMachinesService.LEGISLATION_CATEGORIES));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(WashingMachinesService.LEGISLATION_CATEGORIES));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(WashingMachinesController.class).renderWashingMachines(null)));
-    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
-    ControllerUtils.addErrorSummary(modelAndView, errorList);
-    breadcrumbService.addLastBreadcrumbToModel(modelAndView, "Washing machines");
-
+    addCommonModelAttributes(modelAndView, errorList);
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Washing machines");
     return modelAndView;
   }
 
-
+  private void addCommonModelAttributes(ModelAndView modelAndView, List<FieldError> errorList) {
+    modelAndView.addObject("noiseClass", ControllerUtils.ratingRangeToSelectionMap(WashingMachinesService.NOISE_EMISSIONS_CLASS_RANGE));
+    modelAndView.addObject("spinDryingEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(WashingMachinesService.SPIN_DRYING_CLASS_RANGE));
+    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
+    ControllerUtils.addErrorSummary(modelAndView, errorList);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
+        WashingMachinesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
+  }
 
 }

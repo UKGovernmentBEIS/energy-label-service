@@ -28,7 +28,7 @@
       </@govukFieldset.fieldset>
     </div>
   </#if>
-  <@govukSelect.select path="form.spinDryingEfficiencyRating" options=efficiencyRating/>
+  <@govukSelect.select path="form.spinDryingEfficiencyRating" options=spinDryingEfficiencyRating/>
   <@govukSelect.select path="form.noiseEmissionClass" options=noiseClass/>
   <@govukTextInput.textInput path="form.noiseEmissionValue"/>
 
