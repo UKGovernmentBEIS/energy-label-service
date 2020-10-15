@@ -4,7 +4,7 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.Collections;
 import java.util.List;
-import javax.validation.Valid;
+import javax.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.gov.beis.els.categories.common.PostMarch2021Field;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.model.RescaledInternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
@@ -63,7 +64,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping("/ice-cream-freezers")
   @ResponseBody
-  public Object handleIceCreamFreezersSubmit(@Valid @ModelAttribute("form") IceCreamFreezersForm form, BindingResult bindingResult) {
+  public Object handleIceCreamFreezersSubmit(@Validated({Default.class, PostMarch2021Field.class}) @ModelAttribute("form") IceCreamFreezersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getIceCreamFreezers(bindingResult.getFieldErrors());
     }
@@ -89,7 +90,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping("/beverage-coolers")
   @ResponseBody
-  public Object handleBeverageCoolersSubmit(@Valid @ModelAttribute("form") BeverageCoolersForm form, BindingResult bindingResult) {
+  public Object handleBeverageCoolersSubmit(@Validated({Default.class, PostMarch2021Field.class}) @ModelAttribute("form") BeverageCoolersForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getBeverageCoolers(bindingResult.getFieldErrors());
     }
@@ -115,7 +116,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping("/vending-machines")
   @ResponseBody
-  public Object handleVendingMachinesSubmit(@Valid @ModelAttribute("form") VendingMachinesForm form, BindingResult bindingResult) {
+  public Object handleVendingMachinesSubmit(@Validated({Default.class, PostMarch2021Field.class}) @ModelAttribute("form") VendingMachinesForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getVendingMachines(bindingResult.getFieldErrors());
     }
@@ -141,7 +142,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
 
   @PostMapping("/display-cabinets")
   @ResponseBody
-  public Object handleDisplayCabinetsSubmit(@Valid @ModelAttribute("form") DisplayCabinetsForm form, BindingResult bindingResult) {
+  public Object handleDisplayCabinetsSubmit(@Validated({Default.class, PostMarch2021Field.class}) @ModelAttribute("form") DisplayCabinetsForm form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getDisplayCabinets(bindingResult.getFieldErrors());
     }

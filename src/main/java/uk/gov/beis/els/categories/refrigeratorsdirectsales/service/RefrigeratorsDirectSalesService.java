@@ -35,14 +35,15 @@ public class RefrigeratorsDirectSalesService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/ice-cream-freezers.svg"));
 
     return templatePopulator
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .setText("supplier", form.getSupplierName())
-      .setText("model", form.getModelName())
-      .setText("kwhAnnum", form.getAnnualEnergyConsumption())
-      .setText("capacity", form.getCapacity())
-      .setText("compartmentTemp", form.getCompartmentTemp())
-      .setText("maxAmbientTemp", form.getMaxAmbientTemp())
-      .asProcessedEnergyLabel(ProductMetadata.ICE_CREAM_FREEZERS, form);
+        .setQrCode(form)
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("supplier", form.getSupplierName())
+        .setText("model", form.getModelName())
+        .setText("kwhAnnum", form.getAnnualEnergyConsumption())
+        .setText("capacity", form.getCapacity())
+        .setText("compartmentTemp", form.getCompartmentTemp())
+        .setText("maxAmbientTemp", form.getMaxAmbientTemp())
+        .asProcessedEnergyLabel(ProductMetadata.ICE_CREAM_FREEZERS, form);
   }
 
   public ProcessedEnergyLabelDocument generateHtml(BeverageCoolersForm form, LegislationCategory legislationCategory) {
@@ -50,14 +51,15 @@ public class RefrigeratorsDirectSalesService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/ice-cream-freezers.svg"));
 
     return templatePopulator
-            .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-            .setText("supplier", form.getSupplierName())
-            .setText("model", form.getModelName())
-            .setText("kwhAnnum", form.getAnnualEnergyConsumption())
-            .setText("capacity", form.getCapacity())
-            .setText("compartmentTemp", form.getCompartmentTemp())
-            .setText("maxAmbientTemp", form.getMaxAmbientTemp())
-            .asProcessedEnergyLabel(ProductMetadata.BEVERAGE_COOLERS, form);
+        .setQrCode(form)
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("supplier", form.getSupplierName())
+        .setText("model", form.getModelName())
+        .setText("kwhAnnum", form.getAnnualEnergyConsumption())
+        .setText("capacity", form.getCapacity())
+        .setText("compartmentTemp", form.getCompartmentTemp())
+        .setText("maxAmbientTemp", form.getMaxAmbientTemp())
+        .asProcessedEnergyLabel(ProductMetadata.BEVERAGE_COOLERS, form);
   }
 
   public ProcessedEnergyLabelDocument generateHtml(VendingMachinesForm form, LegislationCategory legislationCategory) {
@@ -71,18 +73,19 @@ public class RefrigeratorsDirectSalesService {
     }
 
     return templatePopulator
-            .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-            .setText("supplier", form.getSupplierName())
-            .setText("model", form.getModelName())
-            .setText("kwhAnnum", form.getAnnualEnergyConsumption())
-            .applyCssClassToId("fridgeSection", "hasFridgeSection")
-            .setText("fridgeCapacity", form.getFridgeCapacity())
-            .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsL")
-            .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
-            .removeElementById("fridgeMinTempSection")
-            .setText("freezerMaxTemp", form.getFreezerMaxTemp())
-            .removeElementById("freezerMinTempSection")
-            .asProcessedEnergyLabel(ProductMetadata.VENDING_MACHINES, form);
+        .setQrCode(form)
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("supplier", form.getSupplierName())
+        .setText("model", form.getModelName())
+        .setText("kwhAnnum", form.getAnnualEnergyConsumption())
+        .applyCssClassToId("fridgeSection", "hasFridgeSection")
+        .setText("fridgeCapacity", form.getFridgeCapacity())
+        .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsL")
+        .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
+        .removeElementById("fridgeMinTempSection")
+        .setText("freezerMaxTemp", form.getFreezerMaxTemp())
+        .removeElementById("freezerMinTempSection")
+        .asProcessedEnergyLabel(ProductMetadata.VENDING_MACHINES, form);
   }
 
   public ProcessedEnergyLabelDocument generateHtml(DisplayCabinetsForm form, LegislationCategory legislationCategory) {
@@ -107,17 +110,18 @@ public class RefrigeratorsDirectSalesService {
     }
 
     return templatePopulator
-            .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-            .setText("supplier", form.getSupplierName())
-            .setText("model", form.getModelName())
-            .setText("kwhAnnum", form.getAnnualEnergyConsumption())
-            .setText("fridgeCapacity", form.getFridgeCapacity())
-            .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsm2")
-            .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
-            .setText("fridgeMinTemp", form.getFridgeMinTemp())
-            .setText("freezerCapacity", form.getFreezerCapacity())
-            .setText("freezerMaxTemp", form.getFreezerMaxTemp())
-            .setText("freezerMinTemp", form.getFreezerMinTemp())
-            .asProcessedEnergyLabel(ProductMetadata.DISPLAY_CABINETS, form);
+        .setQrCode(form)
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("supplier", form.getSupplierName())
+        .setText("model", form.getModelName())
+        .setText("kwhAnnum", form.getAnnualEnergyConsumption())
+        .setText("fridgeCapacity", form.getFridgeCapacity())
+        .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsm2")
+        .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
+        .setText("fridgeMinTemp", form.getFridgeMinTemp())
+        .setText("freezerCapacity", form.getFreezerCapacity())
+        .setText("freezerMaxTemp", form.getFreezerMaxTemp())
+        .setText("freezerMinTemp", form.getFreezerMinTemp())
+        .asProcessedEnergyLabel(ProductMetadata.DISPLAY_CABINETS, form);
   }
 }
