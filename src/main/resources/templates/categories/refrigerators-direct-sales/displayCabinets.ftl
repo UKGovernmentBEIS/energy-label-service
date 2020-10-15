@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm title="Supermarket refrigerator/freezer cabinets or gelato-scooping cabinets" includePostMarch2021InternetLabellingFields=true>
+<@common.standardProductForm title="Supermarket refrigerator/freezer cabinets or gelato-scooping cabinets" includeRescaledInternetLabellingFields=true>
   <@govukTextInput.textInput path="form.qrCodeUrl"/>
   <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
   <@govukTextInput.textInput path="form.annualEnergyConsumption"/>

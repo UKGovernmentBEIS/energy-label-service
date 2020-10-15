@@ -14,6 +14,9 @@ import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.common.SupplierNameForm;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
+import uk.gov.beis.els.categories.lamps.model.LampsFormPackagingArrow;
+import uk.gov.beis.els.categories.lamps.model.LightSourceArrowOrientation;
+import uk.gov.beis.els.categories.lamps.model.TemplateColour;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -174,6 +177,12 @@ public class TemplatePopulator {
     return this;
   }
 
+  public TemplatePopulator transformPackagingArrow(RatingClass selectedRating, RatingClassRange ratingClassRange) {
+    TemplateUtils.getElementById(template, "ratingArrow").addClass("rating" + calculateRatingColourIndex(selectedRating, ratingClassRange));
+    TemplateUtils.getElementById(template, "ratingLetter").addClass("rating" + calculateRatingColourIndex(selectedRating, ratingClassRange));
+    return this;
+  }
+
   public Document getPopulatedDocument() {
     return template;
   }
@@ -184,12 +193,21 @@ public class TemplatePopulator {
       form.getSupplierName(), form.getModelName());
     TemplateUtils.getElementById(template, "html-title").text(title);
 
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), form.getSupplierName(), form.getModelName());
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId());
   }
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelNoSupplier(ProductMetadata analyticsLabel, AnalyticsForm form) {
     TemplateUtils.getElementById(template, "html-title").text(analyticsLabel.getProductFileName());
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), null, null);
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId());
+  }
+
+  public ProcessedEnergyLabelDocument asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata analyticsLabel, LampsFormPackagingArrow form) {
+    String title = String.format(analyticsLabel.getProductFileName() + " - %s - %s - %s",
+        RatingClass.valueOf(form.getEfficiencyRating()).getDisplayValue(),
+        LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
+        TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
+    TemplateUtils.getElementById(template, "html-title").text(title);
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId());
   }
 
   public ProcessedInternetLabelDocument asProcessedInternetLabel(AnalyticsForm analyticsForm, InternetLabellingForm internetLabellingForm, String ratingClass, ProductMetadata label) {

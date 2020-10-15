@@ -1,6 +1,5 @@
 package uk.gov.beis.els.service;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -66,13 +65,7 @@ public class DocumentRendererService {
   }
 
   private String generatePdfFilename(ProcessedEnergyLabelDocument processedDocument) {
-    String filename;
-    if (StringUtils.isBlank(processedDocument.getSupplierName()) || StringUtils.isBlank(processedDocument.getModelName())) {
-       filename = processedDocument.getProductMetadata().getProductFileName() + ".pdf";
-    } else {
-      filename = String.format(processedDocument.getProductMetadata().getProductFileName() + " - %s - %s.pdf",
-          processedDocument.getSupplierName(), processedDocument.getModelName());
-    }
+    String filename = processedDocument.getDocument().title()+".pdf";
     return sanitiseFilename(filename);
   }
 

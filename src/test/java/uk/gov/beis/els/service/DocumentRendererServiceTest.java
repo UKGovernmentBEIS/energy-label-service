@@ -36,7 +36,7 @@ public class DocumentRendererServiceTest {
   @Test
   public void testProcessPdfResponse() {
     ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<div></div>"), ProductMetadata.DISHWASHERS, "x", "name", "model");
+        Jsoup.parse("<title>Dishwashers - name - model</title>"), ProductMetadata.DISHWASHERS, "x");
 
     ResponseEntity responseEntity = documentRendererService.processPdfResponse(doc);
 
@@ -49,7 +49,7 @@ public class DocumentRendererServiceTest {
   @Test
   public void testProcessPdfResponse_SanitiseFilename() {
     ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<div></div>"), ProductMetadata.DISHWASHERS, "x", "b/a\\d?f%i*l:e|n\"a<m>e", "model");
+        Jsoup.parse("<title>Dishwashers - b/a\\d?f%i*l:e|n\"a&lt;m&gt;e - model</title>"), ProductMetadata.DISHWASHERS, "x");
 
     ResponseEntity responseEntity = documentRendererService.processPdfResponse(doc);
 
