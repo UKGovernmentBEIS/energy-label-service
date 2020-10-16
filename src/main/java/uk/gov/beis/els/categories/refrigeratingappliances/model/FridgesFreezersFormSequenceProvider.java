@@ -6,7 +6,7 @@ import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RefrigeratingAppliancesFormSequenceProvider implements DefaultGroupSequenceProvider<FridgesFreezersForm> {
+public class FridgesFreezersFormSequenceProvider implements DefaultGroupSequenceProvider<FridgesFreezersForm> {
 
   @Override
   public List<Class<?>> getValidationGroups(FridgesFreezersForm form) {

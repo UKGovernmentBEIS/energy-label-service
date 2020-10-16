@@ -10,7 +10,7 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-@GroupSequenceProvider(RefrigeratingAppliancesFormSequenceProvider.class)
+@GroupSequenceProvider(FridgesFreezersFormSequenceProvider.class)
 public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class")
