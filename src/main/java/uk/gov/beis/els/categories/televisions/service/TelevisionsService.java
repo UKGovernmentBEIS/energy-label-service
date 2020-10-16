@@ -51,8 +51,6 @@ public class TelevisionsService {
 
       templatePopulator
           .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-          .setMultilineText("supplier", form.getSupplierName())
-          .setMultilineText("model", form.getModelName())
           .setText("watt", form.getPowerConsumption())
           .setText("kwhAnnum", form.getAnnualEnergyConsumption());
     } else {
@@ -60,8 +58,6 @@ public class TelevisionsService {
           templateParserService.parseTemplate("labels/televisions-electronic-displays/electronic-displays-2021.svg"));
 
       templatePopulator
-          .setText("supplier", form.getSupplierName())
-          .setText("model", form.getModelName())
           .setQrCode(form)
           .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRatingSdr()),
               legislationCategory.getPrimaryRatingRange())
@@ -78,6 +74,8 @@ public class TelevisionsService {
     }
 
     return templatePopulator
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setText("cm", form.getScreenSizeCm())
         .setText("inch", form.getScreenSizeInch())
         .asProcessedEnergyLabel(ProductMetadata.TV, form);

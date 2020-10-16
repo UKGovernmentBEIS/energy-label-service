@@ -4,14 +4,14 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.groups.Default;
 import org.hibernate.validator.constraints.Range;
-import uk.gov.beis.els.categories.common.StandardTemplateForm20Char;
+import uk.gov.beis.els.categories.common.StandardTemplateForm40Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
 @StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in washer-dryer it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed.")
-public class WasherDryerForm extends StandardTemplateForm20Char {
+public class WasherDryerForm extends StandardTemplateForm40Char {
 
   @FieldPrompt("Energy efficiency class for the complete cycle")
   @NotBlank(message = "Select an energy efficiency class for the complete cycle", groups = {Default.class, InternetLabellingGroup.class})

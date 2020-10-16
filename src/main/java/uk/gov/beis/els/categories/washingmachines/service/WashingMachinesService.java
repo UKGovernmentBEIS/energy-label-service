@@ -46,8 +46,6 @@ public class WashingMachinesService {
     if (legislationCategory.equals(LEGISLATION_CATEGORY_PRE_MARCH_2021)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/washing-machines/washing-machines-2010.svg"));
       templatePopulator
-          .setMultilineText("supplier", form.getSupplierName())
-          .setMultilineText("model", form.getModelName())
           .setText("kwhAnnum", form.getAnnualEnergyConsumption())
           .setText("lAnnum", form.getAnnualWaterConsumption())
           .setText("kg", form.getCapacity())
@@ -57,8 +55,6 @@ public class WashingMachinesService {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/washing-machines/washing-machines-2021.svg"));
       templatePopulator
           .setQrCode(form)
-          .setText("supplier", form.getSupplierName())
-          .setText("model", form.getModelName())
           .setText("kwh100cycles", form.getEnergyConsumptionPer100Cycles())
           .setText("kg", form.getEcoRatedCapacity())
           .setHoursMinutes("duration", form.getProgrammeDurationHours(), form.getProgrammeDurationMinutes())
@@ -68,6 +64,8 @@ public class WashingMachinesService {
     }
 
     return templatePopulator
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .applyRatingCssClass("spinClass", RatingClass.valueOf(form.getSpinDryingEfficiencyRating()))
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .asProcessedEnergyLabel(ProductMetadata.WASHING_MACHINES, form);
@@ -79,8 +77,8 @@ public class WashingMachinesService {
 
     return templatePopulator
         .setQrCode(form)
-        .setText("supplier", form.getSupplierName())
-        .setText("model", form.getModelName())
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setRatingArrow("completeCycleRating", RatingClass.valueOf(form.getCompleteCycleEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setRatingArrow("washCycleRating", RatingClass.valueOf(form.getWashingCycleEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("completeCycleKwh100cycles", form.getCompleteCycleEnergyConsumption())

@@ -253,8 +253,10 @@
   </g>
   <polygon class="cls-19" points="151.837 446.197 154.553 441.589 149.121 441.589 151.837 446.197"/>
   <path class="cls-15" d="M139.4187,447.05352l-3.862-5.477m0,0v-11.41"/>
-  <text id="supplier" class="cls-20" transform="translate(8.59717 72.28326)">X</text>
-  <text id="model" class="cls-21" transform="translate(263.8 72.28326)" text-anchor="end">X</text>
+  <text id="supplierLine1" class="cls-20" transform="translate(8.59717 62.28326)">X</text>
+  <text id="supplierLine2" class="cls-20" transform="translate(8.59717 72.28326)">X</text>
+  <text id="modelLine1" class="cls-21" transform="translate(263.8 62.28326)" text-anchor="end">X</text>
+  <text id="modelLine2" class="cls-21" transform="translate(263.8 72.28326)" text-anchor="end">X</text>
   <text transform="translate(105 362.73737)" text-anchor="end">
     <tspan id="completeCycleKg" class="cls-22">X</tspan><tspan class="cls-23">kg</tspan>
   </text>

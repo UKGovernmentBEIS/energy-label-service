@@ -37,8 +37,8 @@ public class RefrigeratorsDirectSalesService {
     return templatePopulator
         .setQrCode(form)
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-        .setText("supplier", form.getSupplierName())
-        .setText("model", form.getModelName())
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
         .setText("capacity", form.getCapacity())
         .setText("compartmentTemp", form.getCompartmentTemp())
@@ -53,8 +53,8 @@ public class RefrigeratorsDirectSalesService {
     return templatePopulator
         .setQrCode(form)
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-        .setText("supplier", form.getSupplierName())
-        .setText("model", form.getModelName())
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
         .setText("capacity", form.getCapacity())
         .setText("compartmentTemp", form.getCompartmentTemp())
@@ -75,8 +75,8 @@ public class RefrigeratorsDirectSalesService {
     return templatePopulator
         .setQrCode(form)
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-        .setText("supplier", form.getSupplierName())
-        .setText("model", form.getModelName())
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
         .applyCssClassToId("fridgeSection", "hasFridgeSection")
         .setText("fridgeCapacity", form.getFridgeCapacity())
@@ -112,8 +112,8 @@ public class RefrigeratorsDirectSalesService {
     return templatePopulator
         .setQrCode(form)
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-        .setText("supplier", form.getSupplierName())
-        .setText("model", form.getModelName())
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
         .setText("fridgeCapacity", form.getFridgeCapacity())
         .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsm2")

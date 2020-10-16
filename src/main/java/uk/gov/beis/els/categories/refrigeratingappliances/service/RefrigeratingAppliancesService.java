@@ -69,10 +69,6 @@ public class RefrigeratingAppliancesService {
         templatePopulator
             .setText("fridgeLitres", "-");
       }
-
-      templatePopulator
-          .setMultilineText("supplier", form.getSupplierName())
-          .setMultilineText("model", form.getModelName());
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-2021.svg"));
 
@@ -90,12 +86,12 @@ public class RefrigeratingAppliancesService {
 
       templatePopulator
           .setQrCode(form)
-          .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()))
-          .setText("supplier", form.getSupplierName())
-          .setText("model", form.getModelName());;
+          .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()));
     }
 
     return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("db", form.getNoiseEmissions())
@@ -107,19 +103,17 @@ public class RefrigeratingAppliancesService {
 
     if (legislationCategory.equals(LEGISLATION_CATEGORY_PRE_MARCH_2021)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(
-          "labels/household-refrigerating-appliances/wine-storage-appliances-2010.svg"))
-          .setMultilineText("supplier", form.getSupplierName())
-          .setMultilineText("model", form.getModelName());
+          "labels/household-refrigerating-appliances/wine-storage-appliances-2010.svg"));
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(
           "labels/household-refrigerating-appliances/wine-storage-appliances-2021.svg"))
           .setQrCode(form)
-          .setText("supplier", form.getSupplierName())
-          .setText("model", form.getModelName())
           .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()));
     }
 
     return templatePopulator
+      .setMultilineText("supplier", form.getSupplierName())
+      .setMultilineText("model", form.getModelName())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("bottleCapacity", form.getBottleCapacity())

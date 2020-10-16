@@ -45,8 +45,6 @@ public class DishwashersService {
     if (legislationCategory.equals(LEGISLATION_CATEGORY_PRE_MARCH_2021)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/dishwashers/dishwashers-2010.svg"));
       templatePopulator
-          .setMultilineText("supplier", form.getSupplierName())
-          .setMultilineText("model", form.getModelName())
           .setText("placeSettingsCapacity", form.getStandardCapacity())
           .setText("kwhAnnum", form.getAnnualEnergyConsumption())
           .setText("lAnnum", form.getAnnualWaterConsumption())
@@ -55,8 +53,6 @@ public class DishwashersService {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/dishwashers/dishwashers-2021.svg"));
       templatePopulator
           .setQrCode(form)
-          .setText("supplier", form.getSupplierName())
-          .setText("model", form.getModelName())
           .setText("placeSettingsCapacity", form.getEcoCapacity())
           .setText("kwh100cycles", form.getEnergyConsumptionPer100Cycles())
           .setText("lCycle", form.getWaterConsumptionPerCycle())
@@ -65,6 +61,8 @@ public class DishwashersService {
     }
 
     return templatePopulator
+        .setMultilineText("supplier", form.getSupplierName())
+        .setMultilineText("model", form.getModelName())
         .setText("db", form.getNoiseEmissions())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()),
             legislationCategory.getPrimaryRatingRange())

@@ -258,7 +258,8 @@
   <g class="cls-12">
     <path class="cls-24" d="M204.0455,303.76581a19.85036,19.85036,0,0,1,19.792,18.854h2.792l-4.136,7.165-4.137-7.165h2.692a17.0213,17.0213,0,1,0-4.809,12.909l1.994,1.951a19.84257,19.84257,0,1,1-14.188-33.714"/>
   </g>
-  <text id="supplier" class="cls-32" transform="translate(8.50391 72.04694)">X</text>
+  <text id="supplierLine1" class="cls-32" transform="translate(8.50391 62.04694)">X</text>
+  <text id="supplierLine2" class="cls-32" transform="translate(8.50391 72.04694)">X</text>
   <g id="rating">
     <polygon id="ratingArrow" points="219.514 82.205 198.351 99.919 219.514 116.221 263.547 116.221 263.547 82.205 219.514 82.205"/>
     <text id="ratingLetter" class="cls-17" transform="translate(231.84473 108.74097) scale(1 1.012)">A</text>
@@ -267,5 +268,6 @@
     <rect class="cls-33" x="223.82323" y="8.50403" width="39.68504" height="39.68504"/>
     <text class="cls-34" transform="translate(227.70317 30.48639)">QR code</text>
   </g>
-  <text id="model" class="cls-30" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
+  <text id="modelLine1" class="cls-30" transform="translate(263.8 61.98981)" text-anchor="end">X</text>
+  <text id="modelLine2" class="cls-30" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
 </svg>
