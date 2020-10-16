@@ -1,18 +1,17 @@
 package uk.gov.beis.els.categories.refrigeratorsdirectsales.model;
 
-import org.hibernate.validator.group.GroupSequenceProvider;
-import uk.gov.beis.els.categories.common.StandardTemplateForm20Char;
-import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
-import uk.gov.beis.els.model.meta.DualModeField;
-import uk.gov.beis.els.model.meta.FieldPrompt;
-
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
+import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.gov.beis.els.categories.common.StandardTemplateForm40Char;
+import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.model.meta.DualModeField;
+import uk.gov.beis.els.model.meta.FieldPrompt;
 
 @GroupSequenceProvider(DisplayCabinetsFormSequenceProvider.class)
-public class DisplayCabinetsForm extends StandardTemplateForm20Char {
+public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField

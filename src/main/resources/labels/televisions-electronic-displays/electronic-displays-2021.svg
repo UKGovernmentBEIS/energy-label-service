@@ -238,8 +238,10 @@
     <polygon id="ratingArrow" points="219.514 82.63 198.351 100.344 219.514 116.646 263.547 116.646 263.547 82.63 219.514 82.63"/>
     <text id="ratingLetter" class="cls-29" transform="translate(231.84473 109.16608) scale(1 1.012)">A</text>
   </g>
-  <text id="supplier" class="cls-30" transform="translate(8.59717 72.93561)">X</text>
-  <text id="model" class="cls-19" transform="translate(264.55605 72.93561)" text-anchor="end">X</text>
+  <text id="supplierLine1" class="cls-30" transform="translate(8.59717 62.93561)">X</text>
+  <text id="supplierLine2" class="cls-30" transform="translate(8.59717 72.93561)">X</text>
+  <text id="modelLine1" class="cls-19" transform="translate(263.8 62.93561)" text-anchor="end">X</text>
+  <text id="modelLine2" class="cls-19" transform="translate(263.8 72.93561)" text-anchor="end">X</text>
   <g id="qrCode">
     <rect class="cls-31" x="216.85005" y="8.50397" width="46.77165" height="46.77165"/>
     <text class="cls-19" transform="translate(221.42295 34.41108)">QR code</text>

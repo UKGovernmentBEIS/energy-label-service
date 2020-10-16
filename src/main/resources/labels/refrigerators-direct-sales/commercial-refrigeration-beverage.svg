@@ -180,8 +180,11 @@
   <polygon class="cls-17" points="202.728 14.059 209.186 14.059 206.622 22.221 213.649 21.069 203.583 43.059 206.622 27.118 199.879 27.407 202.728 14.059"/>
   <line class="cls-7" x1="8.504" y1="295.05321" x2="263.547" y2="295.05321"/>
   <line class="cls-7" x1="8.504" y1="351.57112" x2="263.547" y2="351.57112"/>
-  <text id="supplier" class="cls-18" transform="translate(8.50391 72.04694)">X</text>
-  <text id="model" class="cls-19" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
+  <text id="supplierLine1" class="cls-18" transform="translate(8.50391 62.04694)">X</text>
+  <text id="supplierLine2" class="cls-18" transform="translate(8.50391 72.04694)">X</text>
+  <text id="modelLine1" class="cls-19" transform="translate(263.8 61.98981)" text-anchor="end">X</text>
+  <text id="modelLine2" class="cls-19" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
+
   <text class="cls-20" transform="translate(259.0332 502.50778) rotate(90)">2019/2018</text>
   <text transform="translate(73 439.37018)" text-anchor="middle">
     <tspan id="capacity" class="cls-21">X</tspan>

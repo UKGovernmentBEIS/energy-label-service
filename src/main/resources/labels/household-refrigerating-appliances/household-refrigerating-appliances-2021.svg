@@ -242,6 +242,8 @@
     <tspan class="cls-29" xml:space="preserve"> kWh/annum</tspan>
   </text>
 
-  <text id="supplier" class="cls-30" transform="translate(8.50391 72.04694)">X</text>
-  <text id="model" class="cls-26" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
+  <text id="supplierLine1" class="cls-30" transform="translate(8.50391 62.04694)">X</text>
+  <text id="supplierLine2" class="cls-30" transform="translate(8.50391 72.04694)">X</text>
+  <text id="modelLine1" class="cls-26" transform="translate(263.8 61.98981)" text-anchor="end">X</text>
+  <text id="modelLine2" class="cls-26" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
 </svg>

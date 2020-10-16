@@ -1,15 +1,14 @@
 package uk.gov.beis.els.categories.refrigeratorsdirectsales.model;
 
-import uk.gov.beis.els.categories.common.StandardTemplateForm20Char;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
+import uk.gov.beis.els.categories.common.StandardTemplateForm40Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.groups.Default;
-
-public class IceCreamFreezersForm extends StandardTemplateForm20Char {
+public class IceCreamFreezersForm extends StandardTemplateForm40Char {
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
