@@ -66,23 +66,14 @@ public class RefrigeratingAppliancesController extends CategoryController {
   @PostMapping("/household-fridges-and-freezers")
   @ResponseBody
   public Object handleFridgesFreezersSubmit(@Valid @ModelAttribute("form") FridgesFreezersForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getFridgesFreezers(bindingResult.getFieldErrors());
-    }
-    else {
-      return documentRendererService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
-    }
+    return doIfValidFridgesFreezersForm(form, bindingResult, (category -> documentRendererService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/household-fridges-and-freezers", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelFridgesFreezersSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") FridgesFreezersForm form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getFridgesFreezers(bindingResult.getFieldErrors());
-    }
-    else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_PRE_MARCH_2021, ProductMetadata.HRA_FRIDGE_FREEZER));
-    }
+    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_POST_MARCH_2021, bindingResult);
+    return doIfValidFridgesFreezersForm(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.HRA_FRIDGE_FREEZER))));
   }
 
   @GetMapping("/wine-storage-appliances")
@@ -113,6 +104,16 @@ public class RefrigeratingAppliancesController extends CategoryController {
     }
   }
 
+  private Object doIfValidFridgesFreezersForm(FridgesFreezersForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
+    ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORIES, bindingResult);
+    if (bindingResult.hasErrors()) {
+      return getFridgesFreezers(bindingResult.getFieldErrors());
+    } else {
+      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), RefrigeratingAppliancesService.LEGISLATION_CATEGORIES);
+      return function.apply(category);
+    }
+  }
+
   private ModelAndView getFridgesFreezers(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/household-refrigerating-appliances/fridgesFreezers");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(RefrigeratingAppliancesController.class).renderFridgesFreezers(null)));
@@ -127,8 +128,6 @@ public class RefrigeratingAppliancesController extends CategoryController {
   private ModelAndView getWineStorageAppliances(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/household-refrigerating-appliances/wineStorageAppliances");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(RefrigeratingAppliancesController.class).renderWineStorageAppliances(null)));
-    // Noise rating only for post march 20201
-    modelAndView.addObject("noiseEmissionsRating", ControllerUtils.ratingRangeToSelectionMap(RefrigeratingAppliancesService.LEGISLATION_CATEGORY_POST_MARCH_2021.getSecondaryRatingRange()));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Wine storage appliances");
     return modelAndView;
   }
@@ -136,6 +135,8 @@ public class RefrigeratingAppliancesController extends CategoryController {
   private void addCommonObjects(ModelAndView modelAndView, List<FieldError> errorList,  String submitUrl) {
     modelAndView.addObject("legislationCategories", ControllerUtils.legislationCategorySelection(RefrigeratingAppliancesService.LEGISLATION_CATEGORIES));
     modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(RefrigeratingAppliancesService.LEGISLATION_CATEGORIES));
+    // Noise rating only for post march 2021
+    modelAndView.addObject("noiseEmissionsRating", ControllerUtils.ratingRangeToSelectionMap(RefrigeratingAppliancesService.LEGISLATION_CATEGORY_POST_MARCH_2021.getSecondaryRatingRange()));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
     ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);

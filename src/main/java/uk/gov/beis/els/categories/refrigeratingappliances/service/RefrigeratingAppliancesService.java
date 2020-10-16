@@ -39,40 +39,64 @@ public class RefrigeratingAppliancesService {
     this.templateParserService = templateParserService;
   }
 
-  public ProcessedEnergyLabelDocument generateHtml(FridgesFreezersForm form) {
+  public ProcessedEnergyLabelDocument generateHtml(FridgesFreezersForm form, LegislationCategory legislationCategory) {
     TemplatePopulator templatePopulator;
-    // This class is the range in which the 'short' label is used, with fewer ratings listed
-    RatingClassRange shortRange = RatingClassRange.of(RatingClass.APPP, RatingClass.C);
-    // If the rating provided in the form is within the range specified above
-    if (shortRange.getApplicableRatings().contains(RatingClass.valueOf(form.getEfficiencyRating()))) {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-a+++-to-d-2010.svg"));
+    if (legislationCategory.equals(LEGISLATION_CATEGORY_PRE_MARCH_2021)) {
+      // This class is the range in which the 'short' label is used, with fewer ratings listed
+      RatingClassRange shortRange = RatingClassRange.of(RatingClass.APPP, RatingClass.C);
+      // If the rating provided in the form is within the range specified above
+      if (shortRange.getApplicableRatings().contains(RatingClass.valueOf(form.getEfficiencyRating()))) {
+        templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-a+++-to-d-2010.svg"));
+      } else {
+        templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-d-to-g-2010.svg"));
+      }
+
+      if (form.getRatedCompartmentPreMarch2021()) {
+        templatePopulator
+            .setText("freezerLitres", form.getRatedVolumePreMarch2021())
+            .applyCssClassToId("starRating", FreezerStarRating.valueOf(form.getStarRatingPreMarch2021()).getTemplateStarRatingClassName());
+      }
+      else {
+        templatePopulator
+            .setText("freezerLitres", "-");
+      }
+
+      if (form.getNonRatedCompartmentPreMarch2021()) {
+        templatePopulator
+            .setText("fridgeLitres", form.getNonRatedVolumePreMarch2021());
+      }
+      else {
+        templatePopulator
+            .setText("fridgeLitres", "-");
+      }
+
+      templatePopulator
+          .setMultilineText("supplier", form.getSupplierName())
+          .setMultilineText("model", form.getModelName());
     } else {
-      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-d-to-g-2010.svg"));
-    }
+      templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/household-refrigerating-appliances/household-refrigerating-appliances-2021.svg"));
 
-    if (form.getRatedCompartment()) {
-      templatePopulator
-        .setText("freezerLitres", form.getRatedVolume())
-        .applyCssClassToId("starRating", FreezerStarRating.valueOf(form.getStarRating()).getTemplateStarRatingClassName());
-    }
-    else {
-      templatePopulator
-        .setText("freezerLitres", "-");
-    }
+      if (form.getRatedCompartmentPostMarch2021()) {
+        templatePopulator
+            .setText("freezerLitres", form.getRatedVolumePostMarch2021())
+            .applyCssClassToId("freezerSection", "hasFreezerSection");
+      }
 
-    if (form.getNonRatedCompartment()) {
+      if (form.getNonRatedCompartmentPostMarch2021()) {
+        templatePopulator
+            .setText("fridgeLitres", form.getNonRatedVolumePostMarch2021())
+            .applyCssClassToId("fridgeSection", "hasFridgeSection");
+      }
+
       templatePopulator
-        .setText("fridgeLitres", form.getNonRatedVolume());
-    }
-    else {
-      templatePopulator
-        .setText("fridgeLitres", "-");
+          .setQrCode(form)
+          .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()))
+          .setText("supplier", form.getSupplierName())
+          .setText("model", form.getModelName());;
     }
 
     return templatePopulator
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), LEGISLATION_CATEGORY_POST_MARCH_2021.getPrimaryRatingRange())
-      .setMultilineText("supplier", form.getSupplierName())
-      .setMultilineText("model", form.getModelName())
+      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("db", form.getNoiseEmissions())
       .asProcessedEnergyLabel(ProductMetadata.HRA_FRIDGE_FREEZER, form);
