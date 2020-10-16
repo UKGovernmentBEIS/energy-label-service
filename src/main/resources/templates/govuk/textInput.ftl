@@ -32,7 +32,7 @@
         </#list>
         </span>
       </#if>
-      <input class="govuk-input <#if fieldWidth?has_content>govuk-input--width-${fieldWidth} </#if> <#if hasError>govuk-input--error </#if>" id="${id}" name="${spring.status.expression}" type="<#if numericField>number<#else>text</#if>"  <#if fieldHint?has_content>aria-describedby="${id}-hint" </#if> value="${spring.stringStatusValue}">
+      <input class="govuk-input <#if fieldWidth?has_content>govuk-input--width-${fieldWidth} </#if> <#if hasError>govuk-input--error </#if>" id="${id}" name="${spring.status.expression}" type="text" <#if numericField>inputmode="numeric" pattern="[0-9]*" </#if> <#if fieldHint?has_content>aria-describedby="${id}-hint" </#if> value="${spring.stringStatusValue}">
     </div>
   </#if>
 

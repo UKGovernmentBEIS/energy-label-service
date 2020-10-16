@@ -226,7 +226,8 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
       Pattern patternAnnotation = field.getAnnotation(Pattern.class);
 
       // Field input should be marked as numeric if it has Digits, Range or a specific Pattern annotation (see comment in processFieldWidthPatternAnnotations)
-      if (digitsAnnotation != null || rangeAnnotation != null || (patternAnnotation != null && "[0-9]{0,2}".equals(patternAnnotation.regexp()))) {
+      // Do not mark decimal fields as numeric as some devices to bring up a keypad without a key for the decimal separator.
+      if ((digitsAnnotation != null && digitsAnnotation.fraction() == 0) || rangeAnnotation != null || (patternAnnotation != null && "[0-9]{0,2}".equals(patternAnnotation.regexp()))) {
         numericFields.add(FORM_MODEL_ATTRIBUTE_NAME + "." + name);
       }
 
