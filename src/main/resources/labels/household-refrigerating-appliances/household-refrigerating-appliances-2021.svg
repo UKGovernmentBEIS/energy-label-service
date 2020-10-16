@@ -12,12 +12,12 @@
 
       #freezerSection,
       #fridgeSection {
-        visibility: hidden;
+        display: none;
       }
 
       #freezerSection.hasFreezerSection,
       #fridgeSection.hasFridgeSection {
-        visibility: visible;
+        display: block;
       }
 
       .cls-1, .cls-21, .cls-22, .cls-7 {

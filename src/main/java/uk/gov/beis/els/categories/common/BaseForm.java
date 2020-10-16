@@ -9,10 +9,10 @@ import uk.gov.beis.els.model.meta.FieldPrompt;
  */
 public class BaseForm extends InternetLabellingForm {
 
-  @FieldPrompt(value = "Link to the EPREL or other website which provides further energy efficiency information about this product",
+  @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
       hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
-      message = "Enter a link to the EPREL or other website. Links must start with http:// or https:// and contain at least one dot (.) character",
+      message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character",
       groups = {PostMarch2021Field.class, PostSeptember2021Field.class})
   private String qrCodeUrl;
 
