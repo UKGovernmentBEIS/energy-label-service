@@ -38,7 +38,7 @@ public class RefrigeratingAppliancesCategory implements Category {
 
   @Override
   public String getCommonProductGuidanceText() {
-    return "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 110mm x 220mm when printed.";
+    return "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. Original-style labels must be at least 110mm x 220mm when printed. New-style 'rescaled' labels must be at least 96mm x 192mm when printed.";
   }
 
   @Override
