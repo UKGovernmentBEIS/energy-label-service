@@ -104,7 +104,7 @@
               <@govukErrorSummary.errorSummary errorItems=errorList/>
             </#if>
 
-            <#if labelMode=='INTERNET'>
+            <#if labelMode?has_content && labelMode=='INTERNET'>
               <span class="${captionClass}">
               <#if showRescaledInternetLabelGuidance>
                   Arrow image
@@ -120,7 +120,7 @@
 
               <#if showInsetText>
                 <div class="govuk-inset-text">
-                  <#if labelMode=='INTERNET'>
+                  <#if labelMode?has_content && labelMode=='INTERNET'>
                     <#if showRescaledInternetLabelGuidance>
                       <p>
                         Use this form to download an arrow image of this product’s energy efficiency class. This image should be used:

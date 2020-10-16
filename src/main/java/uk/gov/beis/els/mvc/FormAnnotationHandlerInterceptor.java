@@ -39,12 +39,12 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
                          Object handler,
                          ModelAndView modelAndView) {
     if (modelAndView != null) {
-      addInternetLabelModelObjects(request, modelAndView);
       Object form = modelAndView.getModelMap().get(FORM_MODEL_ATTRIBUTE_NAME);
       if (form != null) {
         modelAndView.addObject("fieldPromptMapping",  getFieldPromptMapping(form));
         getStaticProductText(form).ifPresent(t -> modelAndView.addObject("staticProductText", t));
         modelAndView.addObject("fieldWidthMapping", getFieldWidthMapping(form));
+        addInternetLabelModelObjects(request, modelAndView);
         modelAndView.addObject("hiddenFields", getHiddenFields(form, modelAndView));
         modelAndView.addObject("numericFields", getNumericFields(form));
       }
