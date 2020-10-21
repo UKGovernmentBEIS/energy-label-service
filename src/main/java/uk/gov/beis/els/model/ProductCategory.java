@@ -43,7 +43,7 @@ public class ProductCategory implements Category {
           ReverseRouter.route(on(RefrigeratingAppliancesController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "LAMPS",
-          "Lamps and light sources",
+          "Lamps",
           ReverseRouter.route(on(LampsController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
       .add(new CategoryItem(
           "LOCAL_SPACE_HEATERS",
