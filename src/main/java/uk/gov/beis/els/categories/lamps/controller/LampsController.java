@@ -25,8 +25,6 @@ import uk.gov.beis.els.categories.lamps.model.LampsCategory;
 import uk.gov.beis.els.categories.lamps.model.LampsForm;
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModel;
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModelConsumption;
-import uk.gov.beis.els.categories.lamps.model.LampsFormPackagingArrow;
-import uk.gov.beis.els.categories.lamps.model.LightSourceArrowOrientation;
 import uk.gov.beis.els.categories.lamps.model.TemplateColour;
 import uk.gov.beis.els.categories.lamps.model.TemplateSize;
 import uk.gov.beis.els.categories.lamps.service.LampsService;
@@ -44,7 +42,7 @@ import uk.gov.beis.els.util.StreamUtils;
 @RequestMapping("/categories/lamps")
 public class LampsController extends CategoryController {
 
-  private static final String BREADCRUMB_STAGE_TEXT = "Lamps and light sources";
+  private static final String BREADCRUMB_STAGE_TEXT = "Lamps";
 
   private final LampsService lampsService;
   private final BreadcrumbService breadcrumbService;
@@ -75,17 +73,14 @@ public class LampsController extends CategoryController {
   @PostMapping(value = "/lamps", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelLampsSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LampsForm form, BindingResult bindingResult) {
-    ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021, bindingResult);
     return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.LAMPS_FULL))));
   }
 
   private Object doIfValid(LampsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
-    ControllerUtils.validateRatingClassIfPopulated(form.getApplicableLegislation(), form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORIES, bindingResult);
     if (bindingResult.hasErrors()) {
       return getLamps(bindingResult.getFieldErrors());
     } else {
-      SelectableLegislationCategory category = SelectableLegislationCategory.getById(form.getApplicableLegislation(), LampsService.LEGISLATION_CATEGORIES);
-      return function.apply(category);
+      return function.apply(LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021);
     }
   }
 
@@ -143,32 +138,14 @@ public class LampsController extends CategoryController {
     }
   }
 
-  @GetMapping("/lamps-packaging-arrow")
-  public ModelAndView renderLampsPackagingArrow(@ModelAttribute("form") LampsFormPackagingArrow form) {
-    return getLampsPackagingArrow(Collections.emptyList());
-  }
-
-  @PostMapping("/lamps-packaging-arrow")
-  @ResponseBody
-  public Object handleLampsPackagingArrowSubmit(@Valid @ModelAttribute("form") LampsFormPackagingArrow form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      return getLampsPackagingArrow(bindingResult.getFieldErrors());
-    }
-    else {
-      return documentRendererService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021));
-    }
-  }
-
   private ModelAndView getLamps(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/lamps/lamps");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).handleLampsSubmit(null, ReverseRouter.emptyBindingResult())));
-    modelAndView.addObject("efficiencyRating", ControllerUtils.combinedLegislationCategoryRangesToSelectionMap(LampsService.LEGISLATION_CATEGORIES));
-    modelAndView.addObject("legislationCategories", ControllerUtils.legislationCategorySelection(LampsService.LEGISLATION_CATEGORIES));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021.getPrimaryRatingRange()));
     modelAndView.addObject("templateSize",
         Arrays.stream(TemplateSize.values())
             .collect(StreamUtils.toLinkedHashMap(Enum::name, TemplateSize::getDisplayName))
     );
-    ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with supplier's name, model identification code, rating and energy consumption");
     return modelAndView;
   }
@@ -186,18 +163,6 @@ public class LampsController extends CategoryController {
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).renderLampsExNameModelConsumption(null)));
     modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021.getPrimaryRatingRange()));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Label with energy rating only");
-    return modelAndView;
-  }
-
-  private ModelAndView getLampsPackagingArrow(List<FieldError> errorList) {
-    ModelAndView modelAndView = new ModelAndView("categories/lamps/lampsPackagingArrow");
-    addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(LampsController.class).renderLampsPackagingArrow(null)));
-    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021.getPrimaryRatingRange()));
-    modelAndView.addObject("labelOrientationOptions",
-        Arrays.stream(LightSourceArrowOrientation.values())
-            .collect(StreamUtils.toLinkedHashMap(Enum::name, LightSourceArrowOrientation::getDisplayName))
-    );
-    breadcrumbService.pushLastBreadcrumb(modelAndView, "Arrow for packaging");
     return modelAndView;
   }
 
