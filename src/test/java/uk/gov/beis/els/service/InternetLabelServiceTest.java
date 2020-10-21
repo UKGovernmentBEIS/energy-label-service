@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
+import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelFormat;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
@@ -26,6 +27,7 @@ public class InternetLabelServiceTest {
     internetLabellingForm.setLabelOrientation(InternetLabelOrientation.LEFT.name());
     internetLabellingForm.setProductPriceHeightPx("500");
     internetLabellingForm.setGoogleAnalyticsClientId("123");
+    internetLabellingForm.setLabelColour(InternetLabelColour.COLOUR.name());
   }
 
   @Test

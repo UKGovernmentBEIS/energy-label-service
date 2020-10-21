@@ -13,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
-import uk.gov.beis.els.model.GoogleAnalyticsEventAction;
 import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.renderer.JpegRenderer;
@@ -36,53 +35,53 @@ public class DocumentRendererServiceTest {
   @Test
   public void testProcessPdfResponse() {
     ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<title>Dishwashers - name - model</title>"), ProductMetadata.DISHWASHERS, "x");
+        Jsoup.parse("<title>Dishwashers - name - model</title>"), ProductMetadata.DISHWASHERS, "x", "name - model");
 
     ResponseEntity responseEntity = documentRendererService.processPdfResponse(doc);
 
     assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers - name - model.pdf");
 
     verify(analyticsService, times(1))
-        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL, "name - model", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
   }
 
   @Test
   public void testProcessPdfResponse_SanitiseFilename() {
     ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<title>Dishwashers - b/a\\d?f%i*l:e|n\"a&lt;m&gt;e - model</title>"), ProductMetadata.DISHWASHERS, "x");
+        Jsoup.parse("<title>Dishwashers - b/a\\d?f%i*l:e|n\"a&lt;m&gt;e - model</title>"), ProductMetadata.DISHWASHERS, "x", "b/a\\d?f%i*l:e|n\"a<m>e - model");
 
     ResponseEntity responseEntity = documentRendererService.processPdfResponse(doc);
 
     assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers - b_a_d_f_i_l_e_n_a_m_e - model.pdf");
 
     verify(analyticsService, times(1))
-        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL, "b/a\\d?f%i*l:e|n\"a<m>e - model", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
   }
 
   @Test
   public void testProcessImageResponse_Png() {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
-        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "PNG");
+        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "PNG", "y");
 
     ResponseEntity responseEntity = documentRendererService.processImageResponse(doc);
 
     assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers internet arrow A+.png");
 
     verify(analyticsService, times(1))
-        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.INTERNET_LABEL, "y", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
   }
 
   @Test
   public void testProcessImageResponse_Jpeg() {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
-        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "JPEG");
+        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "JPEG", "y");
 
     ResponseEntity responseEntity = documentRendererService.processImageResponse(doc);
 
     assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers internet arrow A+.jpg");
 
     verify(analyticsService, times(1))
-        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.INTERNET_LABEL, GoogleAnalyticsEventAction.DOWNLOAD, ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.INTERNET_LABEL, "y", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
   }
 
 }

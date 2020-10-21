@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import uk.gov.beis.els.model.GoogleAnalyticsEventAction;
 import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 
 @Service
@@ -32,7 +31,7 @@ public class AnalyticsService {
     this.connectionTimeoutMs = connectionTimeoutMs;
   }
 
-  public void sendGoogleAnalyticsEvent(String jsClientId, GoogleAnalyticsEventCategory eventCategory, GoogleAnalyticsEventAction action, String eventLabel) {
+  public void sendGoogleAnalyticsEvent(String jsClientId, GoogleAnalyticsEventCategory eventCategory, String action, String eventLabel) {
     if (analyticsEnabled) {
       try {
         // We might not get a client ID if the user has JavaScript disabled or blocks the Google Analytics JS.
@@ -60,7 +59,7 @@ public class AnalyticsService {
         map.add("cid", clientId);
         map.add("t", "event");
         map.add("ec", eventCategory.getDisplayValue());
-        map.add("ea", action.getDisplayValue());
+        map.add("ea", action);
         map.add("el", eventLabel);
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
