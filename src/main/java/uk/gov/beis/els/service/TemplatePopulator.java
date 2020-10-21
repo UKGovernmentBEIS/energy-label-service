@@ -13,6 +13,8 @@ import uk.gov.beis.els.categories.common.BaseForm;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.common.SupplierNameForm;
+import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
+import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.gov.beis.els.categories.lamps.model.LampsFormPackagingArrow;
 import uk.gov.beis.els.categories.lamps.model.LightSourceArrowOrientation;
@@ -189,29 +191,35 @@ public class TemplatePopulator {
 
   public <T extends AnalyticsForm & SupplierNameForm> ProcessedEnergyLabelDocument asProcessedEnergyLabel(
       ProductMetadata analyticsLabel, T form) {
-    String title = String.format(analyticsLabel.getProductFileName() + " - %s - %s",
-      form.getSupplierName(), form.getModelName());
+    String analyticsAction = String.format("%s - %s", form.getSupplierName(), form.getModelName());
+    String title = String.format(analyticsLabel.getProductFileName() + " - %s", analyticsAction);
     TemplateUtils.getElementById(template, "html-title").text(title);
 
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId());
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction);
   }
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelNoSupplier(ProductMetadata analyticsLabel, AnalyticsForm form) {
     TemplateUtils.getElementById(template, "html-title").text(analyticsLabel.getProductFileName());
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId());
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), "No supplier or model");
   }
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata analyticsLabel, LampsFormPackagingArrow form) {
-    String title = String.format(analyticsLabel.getProductFileName() + " - %s - %s - %s",
+    String analyticsAction = String.format("%s - %s - %s",
         RatingClass.valueOf(form.getEfficiencyRating()).getDisplayValue(),
         LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
         TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
+
+    String title = String.format(analyticsLabel.getProductFileName() + " - %s", analyticsAction);
     TemplateUtils.getElementById(template, "html-title").text(title);
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId());
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction);
   }
 
   public ProcessedInternetLabelDocument asProcessedInternetLabel(AnalyticsForm analyticsForm, InternetLabellingForm internetLabellingForm, String ratingClass, ProductMetadata label) {
-    return new ProcessedInternetLabelDocument(template, ratingClass, label, analyticsForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat());
+    String analyticsAction = String.format("%s - %s - %s",
+        ratingClass,
+        InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName(),
+        InternetLabelColour.valueOf(internetLabellingForm.getLabelColour()).getDisplayName());
+    return new ProcessedInternetLabelDocument(template, ratingClass, label, analyticsForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat(), analyticsAction);
   }
 
   private double getRatingIncrementValue(String ratingIncrementAttrName) {

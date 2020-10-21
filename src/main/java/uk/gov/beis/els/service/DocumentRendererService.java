@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelFormat;
-import uk.gov.beis.els.model.GoogleAnalyticsEventAction;
 import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.renderer.JpegRenderer;
 import uk.gov.beis.els.renderer.PdfRenderer;
@@ -39,7 +38,7 @@ public class DocumentRendererService {
 
     analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
         GoogleAnalyticsEventCategory.ENERGY_LABEL,
-        GoogleAnalyticsEventAction.DOWNLOAD,
+        processedDocument.getAnalyticsEventAction(),
         processedDocument.getProductMetadata().getAnalyticsLabel());
 
     return serveResource(pdf, generatePdfFilename(processedDocument));
@@ -57,7 +56,7 @@ public class DocumentRendererService {
 
     analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
         GoogleAnalyticsEventCategory.INTERNET_LABEL,
-        GoogleAnalyticsEventAction.DOWNLOAD,
+        processedDocument.getAnalyticsEventAction(),
         processedDocument.getProductMetadata().getAnalyticsLabel());
 
 

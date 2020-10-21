@@ -12,15 +12,17 @@ public class ProcessedInternetLabelDocument {
   private final ProductMetadata productMetadata;
   private final String clientAnalyticsToken;
   private final InternetLabelFormat internetLabelFormat;
+  private final String AnalyticsEventAction;
 
   public ProcessedInternetLabelDocument(Document document, String ratingClass,
                                         ProductMetadata productMetadata, String clientAnalyticsToken,
-                                        String internetLabelFormat) {
+                                        String internetLabelFormat, String AnalyticsEventAction) {
     this.document = document;
     this.ratingClass = RatingClass.valueOf(ratingClass);
     this.productMetadata = productMetadata;
     this.clientAnalyticsToken = clientAnalyticsToken;
     this.internetLabelFormat = InternetLabelFormat.valueOf(internetLabelFormat);
+    this.AnalyticsEventAction = AnalyticsEventAction;
   }
 
   public Document getDocument() {
@@ -41,5 +43,9 @@ public class ProcessedInternetLabelDocument {
 
   public InternetLabelFormat getInternetLabelFormat() {
     return internetLabelFormat;
+  }
+
+  public String getAnalyticsEventAction() {
+    return AnalyticsEventAction;
   }
 }
