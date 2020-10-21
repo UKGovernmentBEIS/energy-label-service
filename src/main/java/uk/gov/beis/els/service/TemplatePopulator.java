@@ -192,7 +192,7 @@ public class TemplatePopulator {
   public <T extends AnalyticsForm & SupplierNameForm> ProcessedEnergyLabelDocument asProcessedEnergyLabel(
       ProductMetadata analyticsLabel, T form) {
     String analyticsAction = String.format("%s - %s", form.getSupplierName(), form.getModelName());
-    String title = String.format(analyticsLabel.getProductFileName() + " - %s", analyticsAction);
+    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), analyticsAction);
     TemplateUtils.getElementById(template, "html-title").text(title);
 
     return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction);
@@ -209,16 +209,25 @@ public class TemplatePopulator {
         LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
         TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
 
-    String title = String.format(analyticsLabel.getProductFileName() + " - %s", analyticsAction);
+    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), analyticsAction);
     TemplateUtils.getElementById(template, "html-title").text(title);
     return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction);
   }
 
   public ProcessedInternetLabelDocument asProcessedInternetLabel(AnalyticsForm analyticsForm, InternetLabellingForm internetLabellingForm, String ratingClass, ProductMetadata label) {
-    String analyticsAction = String.format("%s - %s - %s",
-        ratingClass,
-        InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName(),
-        InternetLabelColour.valueOf(internetLabellingForm.getLabelColour()).getDisplayName());
+    String analyticsAction;
+
+    if(internetLabellingForm.getLabelColour() == null) {
+      analyticsAction = String.format("%s - %s",
+          RatingClass.valueOf(ratingClass).getDisplayValue(),
+          InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName());
+    } else {
+      analyticsAction = String.format("%s - %s - %s",
+          RatingClass.valueOf(ratingClass).getDisplayValue(),
+          InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName(),
+          InternetLabelColour.valueOf(internetLabellingForm.getLabelColour()).getDisplayName());
+    }
+
     return new ProcessedInternetLabelDocument(template, ratingClass, label, analyticsForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat(), analyticsAction);
   }
 
