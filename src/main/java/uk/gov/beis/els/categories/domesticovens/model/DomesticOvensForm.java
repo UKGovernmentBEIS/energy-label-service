@@ -19,7 +19,7 @@ public class DomesticOvensForm extends StandardTemplateForm40Char {
   private String efficiencyRating;
 
   @FieldPrompt("Usable volume of the cavity in litres (L)")
-  @Digits(integer = 2, fraction = 0, message = "Enter the volume, up to 2 digits long")
+  @Digits(integer = 3, fraction = 0, message = "Enter the volume, up to 3 digits long")
   private String volume;
 
   @FieldPrompt("Energy consumption of the conventional heating function per cycle, in kWh/cycle")
