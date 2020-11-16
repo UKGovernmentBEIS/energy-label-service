@@ -76,12 +76,20 @@ public class RefrigeratingAppliancesService {
         templatePopulator
             .setText("freezerLitres", form.getRatedVolumePostMarch2021())
             .applyCssClassToId("freezerSection", "hasFreezerSection");
+
+        if(!form.getNonRatedCompartmentPostMarch2021()) {
+          templatePopulator.setElementTranslate("freezerSection", 65.3, 0);
+        }
       }
 
       if (form.getNonRatedCompartmentPostMarch2021()) {
         templatePopulator
             .setText("fridgeLitres", form.getNonRatedVolumePostMarch2021())
             .applyCssClassToId("fridgeSection", "hasFridgeSection");
+
+        if(!form.getRatedCompartmentPostMarch2021()) {
+          templatePopulator.setElementTranslate("fridgeSection", -63.5, 0);
+        }
       }
 
       templatePopulator
