@@ -23,7 +23,7 @@ public class ReversibleDuctlessAirConditionersForm extends MultipleClimateGroupF
   private String coolingModeDesignLoad;
 
   @FieldPrompt("Cooling mode: seasonal energy efficiency ratio (SEER value) ")
-  @Digits(integer = 1, fraction = 1, message = "Enter the design load in cooling mode, 1 digit with an optional decimal place")
+  @Digits(integer = 2, fraction = 1, message = "Enter the design load in cooling mode, up to 2 digits with an optional decimal place")
   private String coolingModeSeer;
 
   @FieldPrompt("Annual energy consumption in kWh per year, for cooling")

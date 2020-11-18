@@ -2,13 +2,17 @@ package uk.gov.beis.els.categories.rangehoods.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
+import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.rangehoods.RangeHoodsFormSequenceProvider;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
+@GroupSequenceProvider(RangeHoodsFormSequenceProvider.class)
 @StaticProductText("You must display the label so that it’s easy to see and clearly related to the product. It must be at least 60mm x 120mm when printed.")
 public class RangeHoodsForm extends StandardTemplateForm30Char {
 
@@ -25,8 +29,12 @@ public class RangeHoodsForm extends StandardTemplateForm30Char {
   @NotBlank(message = "Select a fluid dynamic efficiency class")
   private String fluidClass;
 
+  @FieldPrompt(value = "Does this model have a lighting system?")
+  @NotNull(message = "Specify if the model has a lighting system")
+  private Boolean lightingSystem;
+
   @FieldPrompt("The Lighting Efficiency class")
-  @NotBlank(message = "Select a lighting efficiency class")
+  @NotBlank(message = "Select a lighting efficiency class", groups = {LightingSystemGroup.class})
   private String lightingClass;
 
   @FieldPrompt("The Grease Filtering Efficiency class")
@@ -83,5 +91,13 @@ public class RangeHoodsForm extends StandardTemplateForm30Char {
 
   public void setNoiseValue(String noiseValue) {
     this.noiseValue = noiseValue;
+  }
+
+  public Boolean getLightingSystem() {
+    return lightingSystem;
+  }
+
+  public void setLightingSystem(Boolean lightingSystem) {
+    this.lightingSystem = lightingSystem;
   }
 }

@@ -30,6 +30,10 @@ public class RangeHoodsService {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/range-hoods/range-hoods.svg"));
 
+    if (form.getLightingSystem()) {
+      templatePopulator.applyRatingCssClass("lightingClass", RatingClass.valueOf(form.getLightingClass()));
+    }
+
     return templatePopulator
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setMultilineText("supplier", form.getSupplierName())
@@ -37,7 +41,6 @@ public class RangeHoodsService {
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
       .setText("db", form.getNoiseValue())
       .applyRatingCssClass("fluidDynamicClass", RatingClass.valueOf(form.getFluidClass()))
-      .applyRatingCssClass("lightingClass", RatingClass.valueOf(form.getLightingClass()))
       .applyRatingCssClass("greaseFilteringClass", RatingClass.valueOf(form.getGreaseClass()))
       .asProcessedEnergyLabel(ProductMetadata.RANGE_HOODS, form);
   }
