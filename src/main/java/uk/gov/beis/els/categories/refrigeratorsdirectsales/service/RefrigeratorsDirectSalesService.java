@@ -48,7 +48,7 @@ public class RefrigeratorsDirectSalesService {
 
   public ProcessedEnergyLabelDocument generateHtml(BeverageCoolersForm form, LegislationCategory legislationCategory) {
 
-    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/ice-cream-freezers.svg"));
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/commercial-refrigeration-beverage.svg"));
 
     return templatePopulator
         .setQrCode(form)

@@ -202,7 +202,7 @@
   <polyline class="cls-23" points="107.361 483.632 107.361 518.253 164.024 518.253 164.024 483.632"/>
   <polyline class="cls-23" points="167.131 479.48 136.063 460.063 104.868 479.48"/>
   <text transform="translate(136.063005 503.04694)" text-anchor="middle">
-    <tspan id="maxAmbientTemp" class="cls-27 cls-28">≤</tspan><tspan class="cls-27">X</tspan><tspan class="cls-22">°C</tspan>
+    <tspan class="cls-27 cls-28">≤</tspan><tspan class="cls-27" id="maxAmbientTemp">X</tspan><tspan class="cls-22">°C</tspan>
   </text>
 
   <text transform="translate(192.61426 404.26373)">
