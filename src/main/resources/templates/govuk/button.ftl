@@ -4,7 +4,7 @@
   <#if buttonElement="link">
     <a href="${buttonUrl}" class="govuk-button ${buttonClass}">${buttonText}</a>
     <#else>
-    <button type="submit" class="govuk-button<#if disabled>govuk-button--disabled</#if> ${buttonClass}" <#if disabled>disabled="disabled" aria-disabled="true"</#if> value="${buttonText}" name="${buttonText}">
+    <button type="submit" class="govuk-button<#if disabled>govuk-button--disabled</#if> ${buttonClass}" <#if disabled>disabled="disabled" aria-disabled="true"</#if> value="${buttonText}" name="${buttonText}" data-prevent-double-click="true" data-module="govuk-button">
       ${buttonText}
     </button>
   </#if>
