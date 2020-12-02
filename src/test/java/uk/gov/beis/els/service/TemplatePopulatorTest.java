@@ -23,7 +23,7 @@ public class TemplatePopulatorTest {
   @Test
   public void testSetText() {
     Document doc = templatePopulator.setText("textField", "foo").getPopulatedDocument();
-    assertThat(doc.getElementById("textField").text()).isEqualTo("foo");
+    assertThat(doc.getElementById("textField").text()).isEqualTo("bar");
   }
 
   @Test
