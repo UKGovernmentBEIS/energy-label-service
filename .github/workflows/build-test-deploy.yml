@@ -43,9 +43,9 @@ jobs:
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
-          run: |
-            cf api api.london.cloud.service.gov.uk
-            cf auth
-            cf target -o beis-energy-label-service -s energy-label-service-dev
-            cf push -f manifest-dev.yml
-            cf logout
+        run: |
+          cf api api.london.cloud.service.gov.uk
+          cf auth
+          cf target -o beis-energy-label-service -s energy-label-service-dev
+          cf push -f manifest-dev.yml
+          cf logout
