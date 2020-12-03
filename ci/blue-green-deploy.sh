@@ -90,11 +90,6 @@ if [ ! -z $ERROR ]; then
   exit 1
 fi
 
-echo "Installing cf CLI"
-wget "https://cli.run.pivotal.io/stable?release=linux64-binary" -qO cf.tgz && tar -zxvf cf.tgz && rm cf.tgz
-export PATH="$PATH:."
-cf --version
-
 echo "Installing cf blue-green deploy plugin"
 cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
 cf install-plugin blue-green-deploy -r CF-Community -f

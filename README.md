@@ -1,5 +1,5 @@
 # Energy Label Service
-[![Build Status](https://travis-ci.org/UKGovernmentBEIS/energy-label-service.svg?branch=develop)](https://travis-ci.org/UKGovernmentBEIS/energy-label-service)
+[![Build Status](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg)](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/44d631203c5a49d79e2fe3ed828d3c6c)](https://www.codacy.com/app/jamesbarnett91/energy-label-service?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=UKGovernmentBEIS/energy-label-service&amp;utm_campaign=Badge_Grade)
 
 Digital service allowing users to create energy labels for a variety of products, such as light bulbs, heaters, televisions and ovens.
@@ -31,7 +31,7 @@ Then:
     
 ## Deployment
 
-Any code committed to the `develop`, `qa`, or `master` branch (via PR, merge or direct commit) will automatically trigger a Travis CI build and deploy to the `dev`, `qa` and `prod` environments respectively.
+Any code committed to the `develop`, `qa`, or `master` branch (via PR merge or direct commit) will automatically trigger a GitHub Actions workflow to build and deploy to the `dev`, `qa` and `prod` environments respectively.
 
 Changes should first be made on `develop`, merged to `qa` and then finally `master` once completed and QA'd. Merges should be done using the `--ff-only` option in order to avoid merge commits which will de-sync the branches.
 
