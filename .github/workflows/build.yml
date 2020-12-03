@@ -1,4 +1,4 @@
-name: Build, test, and deploy
+name: Build
 
 on: [push, pull_request]
 
@@ -39,7 +39,7 @@ jobs:
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
       - name: Deploy dev
-        #if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
@@ -51,7 +51,7 @@ jobs:
           cf logout
 
       - name: Deploy QA
-        #if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
@@ -61,3 +61,20 @@ jobs:
           cf target -o beis-energy-label-service -s energy-label-service-qa
           cf push -f manifest-qa.yml
           cf logout
+
+      - name: Deploy prod
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        env:
+          API: api.london.cloud.service.gov.uk
+          APP: energy-label-service-prod
+          ORG: beis-energy-label-service
+          SPACE: energy-label-service-prod
+          MANIFEST: manifest-prod.yml
+          SMOKE_TEST: ci/smoke-test.sh
+          DELETE_OLD_APPS: true
+          USER: ${{ secrets.CF_USERNAME }}
+          CF_PASS: ${{ secrets.CF_PASSWORD }}
+        run: |
+          chmod +x ci/blue-green-deploy.sh
+          chmod +x ci/smoke-test.sh
+          ci/blue-green-deploy.sh
