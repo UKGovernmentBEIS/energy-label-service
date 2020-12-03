@@ -1,0 +1,51 @@
+name: Build, test, and deploy
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10'
+
+      - name: Build frontend
+        run: |
+          npm install
+          npx gulp buildAll
+
+      - name: Build backend and test
+        run: |
+          chmod +x gradlew
+          ./gradlew test bootJar
+
+      - name: Install cf client
+        env:
+          CF_CLI_VERSION: v6
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/bin
+          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=${CF_CLI_VERSION}" | tar -zx -C $GITHUB_WORKSPACE/bin
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+
+      - name: Deploy dev
+        #if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+        env:
+          CF_USERNAME: ${{ secrets.CF_USERNAME }}
+          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+          run: |
+            cf api api.london.cloud.service.gov.uk
+            cf auth
+            cf target -o beis-energy-label-service -s energy-label-service-dev
+            cf push -f manifest-dev.yml
+            cf logout
