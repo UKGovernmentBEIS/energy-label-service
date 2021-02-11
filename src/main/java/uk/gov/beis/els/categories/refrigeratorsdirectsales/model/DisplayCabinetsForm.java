@@ -18,7 +18,7 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   private String efficiencyRating;
 
   @FieldPrompt("The annual electricity consumption in kWh in terms of final energy consumption per year")
-  @Digits(integer = 4, fraction = 0, message = "Enter the annual energy consumption, up to 4 digits long")
+  @Digits(integer = 5, fraction = 0, message = "Enter the annual energy consumption, up to 5 digits long")
   private String annualEnergyConsumption;
 
   @FieldPrompt("Does this model have any display areas functioning at chilled operating temperature?")

@@ -24,8 +24,8 @@ public class ReversibleDuctedAirConditionersForm extends StandardTemplateForm50C
   @Digits(integer = 1, fraction = 1, message = "Enter the EER rated value, 1 digit with an optional decimal place")
   private String eerRated;
 
-  @FieldPrompt("Hourly energy consumption in kWh per 60 minutes")
-  @Digits(integer = 2, fraction = 0, message = "Enter the hourly energy consumption, up to 2 digits long")
+  @FieldPrompt("Hourly energy consumption for cooling in kWh per 60 minutes, rounded up to the nearest integer")
+  @Digits(integer = 2, fraction = 0, message = "Enter the hourly energy consumption for cooling, up to 2 digits long")
   private String coolingHourlyEnergyConsumption;
 
   @FieldPrompt("Energy efficiency class for heating")
@@ -40,8 +40,8 @@ public class ReversibleDuctedAirConditionersForm extends StandardTemplateForm50C
   @Digits(integer = 1, fraction = 1, message = "Enter the COPrated value, 1 digit with an optional decimal place")
   private String copRated;
 
-  @FieldPrompt("Hourly energy consumption in kWh per 60 minutes")
-  @Digits(integer = 2, fraction = 0, message = "Enter the hourly energy consumption, up to 2 digits long")
+  @FieldPrompt("Hourly energy consumption for heating in kWh per 60 minutes, rounded up to the nearest integer")
+  @Digits(integer = 2, fraction = 0, message = "Enter the hourly energy consumption for heating, up to 2 digits long")
   private String heatingHourlyEnergyConsumption;
 
   @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re 1 pW, rounded to the nearest integer")

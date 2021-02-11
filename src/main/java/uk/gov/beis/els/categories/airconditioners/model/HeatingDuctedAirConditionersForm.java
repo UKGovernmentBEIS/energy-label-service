@@ -24,7 +24,7 @@ public class HeatingDuctedAirConditionersForm extends StandardTemplateForm50Char
   @Digits(integer = 1, fraction = 1, message = "Enter the COPrated value, 1 digit with an optional decimal place")
   private String copRated;
 
-  @FieldPrompt("Hourly energy consumption in kWh per 60 minutes")
+  @FieldPrompt("Hourly energy consumption in kWh per 60 minutes, rounded up to the nearest integer")
   @Digits(integer = 2, fraction = 0, message = "Enter the hourly energy consumption, up to 2 digits long")
   private String heatingHourlyEnergyConsumption;
 
