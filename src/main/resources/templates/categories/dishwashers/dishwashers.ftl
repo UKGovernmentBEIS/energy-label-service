@@ -1,16 +1,7 @@
 <#include '../../layout.ftl'>
 
 <@common.standardProductForm "Dishwashers">
-
-  <#assign radioGroupClass>
-    <#if labelMode=='ENERGY'>
-      govuk-!-margin-bottom-0
-    <#else>
-      govuk-!-margin-bottom-2
-    </#if>
-  </#assign>
-
-  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2" formGroupClass=radioGroupClass>
+  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2" isAboveDetailsComponent=true lastItemHasHiddenContent=(labelMode=='ENERGY')>
     <@common.postMarch2021RadioItem legislationCategories>
         <@govukTextInput.textInput path="form.qrCodeUrl"/>
         <@govukSelect.select path="form.noiseEmissionsClass" options=noiseEmissionsRating/>

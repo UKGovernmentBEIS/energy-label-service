@@ -101,7 +101,7 @@
   </#if>
 </#macro>
 
-<#macro radioGroup path nestingPath="" label="" hiddenContent=true legendSize="h1" showNestedForInternetLabels=true formGroupClass="">
+<#macro radioGroup path nestingPath="" label="" hiddenContent=true legendSize="h1" showNestedForInternetLabels=true isAboveDetailsComponent=false lastItemHasHiddenContent=false>
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
@@ -114,8 +114,16 @@
   <#local displayValue=spring.status.displayValue>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
 
+  <#assign marginClass>
+    <#if isAboveDetailsComponent && lastItemHasHiddenContent>
+      govuk-!-margin-bottom-0
+    <#elseif isAboveDetailsComponent>
+      govuk-!-margin-bottom-2
+    </#if>
+  </#assign>
+
   <#if !hiddenField>
-    <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if> <#if formGroupClass?has_content>${formGroupClass}</#if>">
+    <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if> <#if marginClass?has_content>${marginClass}</#if>">
       <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" legendSize=legendSize hintText=fieldHint hintTextId=id mandatory=true>
         <#if hasError>
           <span id="${id}-error" class="govuk-error-message">

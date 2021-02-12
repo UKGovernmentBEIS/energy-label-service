@@ -1,7 +1,7 @@
 <#include '../../layout.ftl'>
 
 <@common.standardProductForm "Wine storage appliances">
-  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2" formGroupClass="govuk-!-margin-bottom-2">
+  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2" isAboveDetailsComponent=true>
     <@common.postMarch2021RadioItem legislationCategories>
         <@govukTextInput.textInput path="form.qrCodeUrl"/>
         <@govukSelect.select path="form.noiseEmissionsClass" options=noiseEmissionsRating/>

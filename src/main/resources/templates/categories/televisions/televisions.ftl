@@ -1,8 +1,7 @@
 <#include '../../layout.ftl'>
 
 <@common.standardProductForm "Televisions and electronic displays">
-
-  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2" formGroupClass="govuk-!-margin-bottom-0">
+  <@govukRadios.radioGroup path="form.applicableLegislation" legendSize="h2" isAboveDetailsComponent=true lastItemHasHiddenContent=true>
     <@common.postMarch2021RadioItem legislationCategories>
         <@govukTextInput.textInput path="form.qrCodeUrl"/>
         <@govukSelect.select path="form.efficiencyRatingSdr" options=efficiencyRatingSdr/>
