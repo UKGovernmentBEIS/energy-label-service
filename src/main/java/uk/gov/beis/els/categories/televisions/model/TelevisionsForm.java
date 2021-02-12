@@ -19,8 +19,8 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 @GroupSequenceProvider(TelevisionsFormSequenceProvider.class)
 public class TelevisionsForm extends StandardTemplateForm30Char {
 
-  @FieldPrompt("What style of label do you need to create?")
-  @NotBlank(message = "Select the style of label you need to create", groups = {Default.class, InternetLabellingGroup.class})
+  @FieldPrompt("What kind of label do you need to create?")
+  @NotBlank(message = "Select the kind of label you need to create", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   private String applicableLegislation;
 
@@ -57,7 +57,7 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   private String efficiencyRatingSdr;
 
   @FieldPrompt("On-mode energy consumption in kWh per 1000 hours, when playing SDR content")
-  @Digits(integer = 3, fraction = 0, message = "Enter the energy consumption when playing SDR content, up to 3 digits long", groups = PostMarch2021Field.class)
+  @Digits(integer = 4, fraction = 0, message = "Enter the energy consumption when playing SDR content, up to 4 digits long", groups = PostMarch2021Field.class)
   private String energyConsumptionSdr1000h;
 
   @FieldPrompt("Can this product display HDR content?")
@@ -69,7 +69,7 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   private String efficiencyRatingHdr;
 
   @FieldPrompt("On-mode energy consumption in kWh per 1000 hours, when playing HDR content")
-  @Digits(integer = 3, fraction = 0, message = "Enter the energy consumption when playing HDR content, up to 3 digits long", groups = HdrGroup.class)
+  @Digits(integer = 4, fraction = 0, message = "Enter the energy consumption when playing HDR content, up to 4 digits long", groups = HdrGroup.class)
   private String energyConsumptionHdr1000h;
 
   @FieldPrompt("Horizontal resolution in pixels")

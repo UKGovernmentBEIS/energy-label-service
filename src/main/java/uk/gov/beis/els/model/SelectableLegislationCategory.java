@@ -23,19 +23,19 @@ public class SelectableLegislationCategory extends LegislationCategory {
   }
 
   public static SelectableLegislationCategory preMarch2021(RatingClassRange primaryRatingRange) {
-    return new SelectableLegislationCategory("PRE_MAR2021", "An original-style label for display before 1 March 2021", primaryRatingRange, null);
+    return new SelectableLegislationCategory("PRE_MAR2021", "An old-style energy label", primaryRatingRange, null);
   }
 
   public static SelectableLegislationCategory preMarch2021(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
-    return new SelectableLegislationCategory("PRE_MAR2021", "An original-style label for display before 1 March 2021", primaryRatingRange, secondaryRatingRange);
+    return new SelectableLegislationCategory("PRE_MAR2021", "An old-style energy label", primaryRatingRange, secondaryRatingRange);
   }
 
   public static SelectableLegislationCategory postMarch2021() {
-    return new SelectableLegislationCategory("POST_MAR2021", "A new-style 'rescaled' label for display after 1 March 2021", RatingClassRange.of(RatingClass.A, RatingClass.G), null, InternetLabelTemplate.RESCALED);
+    return new SelectableLegislationCategory("POST_MAR2021", "A new-style rescaled energy label", RatingClassRange.of(RatingClass.A, RatingClass.G), null, InternetLabelTemplate.RESCALED);
   }
 
   public static SelectableLegislationCategory postMarch2021(RatingClassRange secondaryRatingRange) {
-    return new SelectableLegislationCategory("POST_MAR2021", "A new-style 'rescaled' label for display after 1 March 2021", RatingClassRange.of(RatingClass.A, RatingClass.G), secondaryRatingRange, InternetLabelTemplate.RESCALED);
+    return new SelectableLegislationCategory("POST_MAR2021", "A new-style rescaled energy label", RatingClassRange.of(RatingClass.A, RatingClass.G), secondaryRatingRange, InternetLabelTemplate.RESCALED);
   }
 
   public static SelectableLegislationCategory preSeptember2021(RatingClassRange primaryRatingRange) {

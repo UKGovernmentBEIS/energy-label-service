@@ -103,3 +103,22 @@ Includes the wrapping form element, the generate label button and optionally the
 <#macro rescaledInternetLabellingFields>
   <@govukRadios.radio path="form.labelColour" radioItems=internetLabelColourOptions/>
 </#macro>
+
+<#macro labelTypeGuidanceMarch2021>
+  <@govukDetails.details summaryTitle="What kind of label should I choose?" detailsClass="govuk-!-margin-bottom-5">
+    <p>
+      If the product was first placed on the market on or after 1 November 2020, or hasn't been placed on the
+      market yet, you must use the new rescaled energy label.
+    </p>
+    <p>
+      The product's energy efficiency class on the rescaled label will be lower than its class on the old label, and
+      other values might also be calculated differently. Before you create a rescaled label, you need to make sure
+      the values you're entering are based on the criteria for the rescaled label. You shouldn't copy values directly
+      from the old label.
+    </p>
+    <p>
+      Products placed on the market before 1 November 2020 can continue to use the old style label until
+      30 November 2021.
+    </p>
+  </@govukDetails.details>
+</#macro>
