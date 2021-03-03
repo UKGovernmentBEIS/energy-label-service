@@ -6,9 +6,18 @@
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <div class="govuk-footer__meta-custom">
           <h2 class="govuk-visually-hidden">Support links</h2>
-          <a class="govuk-footer__link" href="/accessibility-statement">
-            Accessibility statement
-          </a>
+          <ul class="govuk-footer__inline-list">
+            <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="/cookies">
+                Cookies
+              </a>
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="/accessibility-statement">
+                Accessibility statement
+              </a>
+            </li>
+          </ul>
           <p>
             For any help or assistance with this service, please email <a class="govuk-footer__link" href="mailto:efficientproducts@beis.gov.uk">efficientproducts@beis.gov.uk</a>
           </p>

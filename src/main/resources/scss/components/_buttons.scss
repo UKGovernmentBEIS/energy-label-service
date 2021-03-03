@@ -1,0 +1,102 @@
+// Button styling
+
+// secondary button - needs both base class and modifier e.g. class="govuk-button govuk-button--secondary"
+$govuk-button-colour-secondary: govuk-colour("blue");
+$govuk-button-hover-colour-secondary: darken($govuk-button-colour-secondary, 5%);
+$govuk-button-shadow-colour-secondary: darken($govuk-button-colour-secondary, 15%);
+$govuk-button-text-colour-secondary: govuk-colour("white");
+// tertiary button
+$govuk-button-colour-tertiary: govuk-colour("light-grey");
+$govuk-button-hover-colour-tertiary: darken($govuk-button-colour-tertiary, 5%);
+$govuk-button-shadow-colour-tertiary: darken($govuk-button-colour-tertiary, 15%);
+$govuk-button-text-colour-tertiary: govuk-colour("blue");
+
+$button-shadow-size: $govuk-border-width-form-element;
+
+// styling to make buttons look like links
+@mixin link-button {
+  color: $govuk-link-colour;
+  background-color: transparent;
+  box-shadow: none;
+  cursor: pointer;
+
+  @include govuk-link-common;
+  @include govuk-link-style-default;
+  @include govuk-link-print-friendly;
+
+  &:hover,
+  &:visited {
+    background-color: transparent;
+  }
+}
+
+// mixin to define alternate button colours
+@mixin button-alternate($colour, $bg-colour, $bg-hover-colour, $shadow-colour) {
+  background-color: $bg-colour;
+  box-shadow: 0 $button-shadow-size 0 $shadow-colour;
+
+  @include govuk-if-ie8 {
+    border-bottom: $button-shadow-size solid $shadow-colour;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $bg-hover-colour;
+  }
+
+  // Set text colour depending on background colour
+  @if lightness($bg-colour) < 50% {
+    color: govuk-colour("white");
+
+    &:link,
+    &:link:focus,
+    &:hover,
+    &:focus,
+    &:visited {
+      color: govuk-colour("white");
+    }
+  } @else if($bg-colour == $govuk-button-colour-tertiary) {
+      color: $govuk-button-text-colour-tertiary;
+
+      &:link,
+      &:link:focus,
+      &:hover,
+      &:focus,
+      &:visited {
+        color: $govuk-button-text-colour-tertiary;
+      }
+  } @else {
+      color: $govuk-text-colour;
+
+      &:link,
+      &:link:focus,
+      &:hover,
+      &:focus,
+      &:visited {
+        color: $govuk-text-colour;
+      }
+    }
+}
+
+// 0 padding to make link-buttons align the same as <a> tags
+.govuk-button--link {
+  @include link-button;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// to be used for actions next to your primary action, e.g. Save and exit
+.govuk-button--link-exit {
+  @include link-button;
+}
+// blue secondary button
+.govuk-button--secondary {
+  @include button-alternate($govuk-button-text-colour-secondary, $govuk-button-colour-secondary, $govuk-button-hover-colour-secondary, $govuk-button-shadow-colour-secondary);
+}
+// grey tertiary button
+.govuk-button--tertiary {
+  @include button-alternate($govuk-button-text-colour-tertiary, $govuk-button-colour-tertiary, $govuk-button-hover-colour-tertiary, $govuk-button-shadow-colour-tertiary);
+}
