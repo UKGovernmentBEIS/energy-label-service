@@ -2,6 +2,7 @@
 <#--IRS-->
 <#import 'form.ftl' as form>
 <#--GOVUK-->
+<#import 'govuk/cookieBanner.ftl' as govukCookieBanner>
 <#import 'govuk/header.ftl' as govukHeader>
 <#import 'govuk/footer.ftl' as govukFooter>
 <#import 'govuk/breadcrumbs.ftl' as govukBreadcrumbs>
@@ -23,6 +24,8 @@
   <#return springUrl>
 </#function>
 
+<#macro blankMacro></#macro>
+
 <#macro defaultPage
   pageHeading=""
   caption=""
@@ -34,6 +37,8 @@
   pageTitle=""
   showInsetText=false
   showBreadcrumbs=true
+  pageScripts=blankMacro
+  notificationBanner=blankMacro
   >
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
@@ -43,9 +48,6 @@
 <html lang="en" class="govuk-template ">
 
 <head>
-  <#if googleAnalyticsEnabled>
-    <script src="<@spring.url'/assets/scripts/googleAnalytics.js'/>"></script>
-  </#if>
 
   <meta charset="utf-8" />
   <title><#if errorList?has_content>Error: </#if><#if pageTitle?has_content>${pageTitle} - <#elseif pageHeading?has_content>${pageHeading} - </#if>Create an energy label - GOV.UK</title>
@@ -72,6 +74,8 @@
 
 <body class="govuk-template__body ">
   <script src="<@spring.url'/assets/scripts/jsCheck.js'/>"></script>
+
+  <@govukCookieBanner.cookieBanner/>
 
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
@@ -100,6 +104,7 @@
       <#if twoThirdsColumn>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">
+            <@notificationBanner/>
             <#if errorList?has_content>
               <@govukErrorSummary.errorSummary errorItems=errorList/>
             </#if>
@@ -175,6 +180,13 @@
 
   <script src="<@spring.url'/assets/govuk-frontend/govuk/all.js'/>"></script>
   <script src="<@spring.url'/assets/scripts/frontendInit.js'/>"></script>
+  <#if googleAnalyticsEnabled>
+    <script src="<@spring.url'/assets/scripts/googleAnalytics/analyticsEnabled.js'/>"></script>
+  <#else>
+    <script src="<@spring.url'/assets/scripts/googleAnalytics/analyticsDisabled.js'/>"></script>
+  </#if>
+  <script src="<@spring.url'/assets/scripts/cookieControl.js'/>"></script>
+  <@pageScripts/>
 </body>
 
 </html>

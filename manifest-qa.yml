@@ -13,5 +13,6 @@ applications:
       SHOW_START_PAGE: true
       HOME_PAGE_URL: /
       ENABLE_GOOGLE_ANALYTICS: false
+      VALID_REFERER_DOMAIN: https://energy-label-service-qa.london.cloudapps.digital/
       # https://github.com/cloudfoundry/loggregator-release/blob/develop/docs/java-multi-line-work-around.md
       LOG_PATTERN: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg %replace(%ex){'[\r\n]+', 'CF_NEWLINE_PLACEHOLDER'}%nopex %n"

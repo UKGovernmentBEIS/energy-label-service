@@ -93,10 +93,6 @@ Includes the wrapping form element, the generate label button and optionally the
     <input type="hidden" id="googleAnalyticsClientId" name="googleAnalyticsClientId" value="">
     </@form.govukForm>
 
-    <#if googleAnalyticsEnabled>
-      <script src="<@spring.url'/assets/scripts/googleAnalyticsSetClient.js'/>"></script>
-    </#if>
-
   </@defaultPage>
 </#macro>
 
