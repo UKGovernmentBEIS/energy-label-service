@@ -16,5 +16,6 @@ applications:
       SHOW_START_PAGE: false
       HOME_PAGE_URL: https://www.gov.uk/guidance/create-an-energy-label
       ENABLE_GOOGLE_ANALYTICS: true
+      VALID_REFERER_DOMAIN: https://create-energy-label.service.gov.uk/
       # https://github.com/cloudfoundry/loggregator-release/blob/develop/docs/java-multi-line-work-around.md
       LOG_PATTERN: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg %replace(%ex){'[\r\n]+', 'CF_NEWLINE_PLACEHOLDER'}%nopex %n"
