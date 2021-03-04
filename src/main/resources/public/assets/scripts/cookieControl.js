@@ -1,11 +1,11 @@
 (function() {
   var elsCookieControl = {
     prefsCookieName: 'els-cookies-allowed',
-    nonEssentialCookieNames: [
-      '_gat_govuk_shared',
-      '_ga',
-      '_gat',
-      '_gid'
+    nonEssentialCookies: [
+      { name: '_gat_govuk_shared', path: '/'},
+      { name: '_ga', path: '/'},
+      { name: '_gat', path: '/'},
+      { name: '_gid', path: '/'}
     ],
     cookieScripts: [
       // Google Analytics
@@ -62,8 +62,8 @@
       }
       return null;
     },
-    eraseCookie: function (name) {
-      document.cookie = name+'=; Max-Age=-99999999;';
+    eraseCookie: function (name, path) {
+      document.cookie = name+'=;path='+path+';Max-Age=-99999999;';
     },
     getBanner: function() {
       return document.getElementById('els-cookie-banner');
@@ -116,8 +116,9 @@
       elsCookieControl.deleteNonEssentialCookies();
     },
     deleteNonEssentialCookies: function () {
-      for(var i = 0; i < elsCookieControl.nonEssentialCookieNames.length; i++) {
-        elsCookieControl.eraseCookie(elsCookieControl.nonEssentialCookieNames[i]);
+      for(var i = 0; i < elsCookieControl.nonEssentialCookies.length; i++) {
+        var cookie = elsCookieControl.nonEssentialCookies[i];
+        elsCookieControl.eraseCookie(cookie.name, cookie.path);
       }
     },
     cookiesAllowed: function() {
