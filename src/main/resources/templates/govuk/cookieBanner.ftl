@@ -30,7 +30,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
           <div class="govuk-cookie-banner__content">
-            <p>You’ve accepted analytics cookies. You can <a href="/cookies">change your cookie settings</a> at any time.</p>
+            <p>You’ve accepted analytics cookies. You can <a href="/cookies" class="govuk-link">change your cookie settings</a> at any time.</p>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
           <div class="govuk-cookie-banner__content">
-            <p>You’ve rejected analytics cookies. You can <a href="/cookies">change your cookie settings</a> at any time.</p>
+            <p>You’ve rejected analytics cookies. You can <a href="/cookies" class="govuk-link">change your cookie settings</a> at any time.</p>
           </div>
         </div>
       </div>
