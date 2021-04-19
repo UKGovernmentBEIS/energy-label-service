@@ -41,9 +41,9 @@
 
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
-<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true>
+<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="">
 
-  <@defaultPage pageHeading=title showInsetText=showInsetText>
+  <@defaultPage pageHeading=title showInsetText=showInsetText beforeStandardInsetText=beforeStandardInsetText>
     <@form.govukForm submitUrl + modeQueryParam!"">
 
       <#if includeSupplierNameModel>
