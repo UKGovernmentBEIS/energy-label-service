@@ -15,7 +15,7 @@ import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
-@StaticProductText("<p>You must display the label so that it’s easy to see and clearly related to the product.</p> <p>Original-style labels must be at least 60mm x 120mm when printed.</p><p>New-style 'rescaled' labels must usually be at least 96mm x 192mm when printed. If the diagonal size of the visible screen area is less than 127cm (50 inches) you can scale down the the label, but it must still be at least 57.6mm x 115.2mm. If you scale down the label you must test that the QR code can still be read when printed, for example by using a smartphone camera.</p>")
+@StaticProductText("<p>You must display the label so that it’s easy to see and clearly related to the product.</p> <p>Old-style labels must be at least 60mm x 120mm when printed.</p><p>New-style rescaled labels must usually be at least 96mm x 192mm when printed. If the diagonal size of the visible screen area is less than 127cm (50 inches) you can scale down the the label, but it must still be at least 57.6mm x 115.2mm. If you scale down the label you must test that the QR code can still be read when printed, for example by using a smartphone camera.</p>")
 @GroupSequenceProvider(TelevisionsFormSequenceProvider.class)
 public class TelevisionsForm extends StandardTemplateForm30Char {
 

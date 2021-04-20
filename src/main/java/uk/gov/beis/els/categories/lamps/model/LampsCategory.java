@@ -17,19 +17,19 @@ public class LampsCategory implements Category {
   private static List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
     .add(new CategoryItem(
         "LAMPS",
-        "An original-style or new-style 'rescaled' label including the energy rating, weighted energy consumption, supplier's name and model identification code",
+        "An old-style or new-style rescaled label including the energy rating, weighted energy consumption, supplier's name and model identification code",
         ReverseRouter.route(on(LampsController.class).renderLamps(null))))
     .add(new CategoryItem(
         "LAMPS_EX_NAME_MODEL",
-        "An original-style label including the energy rating and weighted energy consumption only",
+        "An old-style label including the energy rating and weighted energy consumption only",
         ReverseRouter.route(on(LampsController.class).renderLampsExNameModel(null))))
     .add(new CategoryItem(
         "LAMPS_EX_NAME_MODEL_CONSUMPTION",
-        "An original-style label including the energy rating only",
+        "An old-style label including the energy rating only",
         ReverseRouter.route(on(LampsController.class).renderLampsExNameModelConsumption(null))))
     .add(new CategoryItem(
         "LAMPS_PACKAGING_ARROW",
-        "An arrow containing the energy rating for the front of the packaging, for products which use a new-style 'rescaled' label",
+        "An arrow containing the energy rating for the front of the packaging, for products which use a new-style rescaled label",
         ReverseRouter.route(on(LampsController.class).renderLampsPackagingArrow(null))))
     .build();
 

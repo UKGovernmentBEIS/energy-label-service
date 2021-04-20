@@ -12,7 +12,7 @@ import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
-@StaticProductText("<p>Original-style labels must usually be at least 36mm x 75mm when attached to packaging. You can scale down the label if no side of the packaging is large enough to contain the label, or if the label would cover more than 50% of the surface area of the largest side. You must only scale down the label enough to meet these conditions, and the label must never be less than 14.4mm x 30mm.</p><p>New-style 'rescaled' labels must be at least 36mm x 72mm, or 20mm x 54mm for the small version of the label.</p>")
+@StaticProductText("<p>Old-style labels must usually be at least 36mm x 75mm when attached to packaging. You can scale down the label if no side of the packaging is large enough to contain the label, or if the label would cover more than 50% of the surface area of the largest side. You must only scale down the label enough to meet these conditions, and the label must never be less than 14.4mm x 30mm.</p><p>New-style rescaled labels must be at least 36mm x 72mm, or 20mm x 54mm for the small version of the label.</p>")
 @GroupSequenceProvider(LampsFormSequenceProvider.class)
 public class LampsForm extends StandardTemplateForm20Char {
 
@@ -36,7 +36,7 @@ public class LampsForm extends StandardTemplateForm20Char {
   private String templateSize;
 
   @FieldPrompt(value = "Should the label be in colour or black and white?", hintText = "You must only use a black and white label if all other information on the packaging, including graphics, is printed in black and white")
-  @NotBlank(message = "Select whether the label be in colour or black and white", groups = {PostSeptember2021Field.class})
+  @NotBlank(message = "Select whether the label should be in colour or black and white", groups = {PostSeptember2021Field.class})
   private String templateColour;
 
   public String getEfficiencyRating() {
