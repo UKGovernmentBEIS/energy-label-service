@@ -17,7 +17,7 @@ public class LampsFormNoSupplierModelConsumption extends InternetLabellingForm {
   private String efficiencyRating;
 
   @FieldPrompt("Should the label be in colour or black and white?")
-  @NotBlank(message = "Select whether the label be in colour or black and white")
+  @NotBlank(message = "Select whether the label should be in colour or black and white")
   private String templateColour;
 
   public String getEfficiencyRating() {

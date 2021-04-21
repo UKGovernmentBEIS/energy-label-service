@@ -30,8 +30,8 @@ public class LampsService {
   public static final SelectableLegislationCategory LEGISLATION_CATEGORY_POST_SEPTEMBER_2021 = SelectableLegislationCategory.postSeptember2021();
 
   public static final List<SelectableLegislationCategory> LEGISLATION_CATEGORIES = new ImmutableList.Builder<SelectableLegislationCategory>()
-          .add(LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021)
           .add(LEGISLATION_CATEGORY_POST_SEPTEMBER_2021)
+          .add(LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021)
           .build();
 
   private final TemplateParserService templateParserService;

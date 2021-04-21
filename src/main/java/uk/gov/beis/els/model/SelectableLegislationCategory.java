@@ -39,11 +39,11 @@ public class SelectableLegislationCategory extends LegislationCategory {
   }
 
   public static SelectableLegislationCategory preSeptember2021(RatingClassRange primaryRatingRange) {
-    return new SelectableLegislationCategory("PRE_SEPT2021", "An original-style label for display before 1 September 2021", primaryRatingRange, null);
+    return new SelectableLegislationCategory("PRE_SEPT2021", "An old-style energy label", primaryRatingRange, null);
   }
 
   public static SelectableLegislationCategory postSeptember2021() {
-    return new SelectableLegislationCategory("POST_SEPT2021", "A new-style 'rescaled' label for display after 1 September 2021", RatingClassRange.of(RatingClass.A, RatingClass.G), null, InternetLabelTemplate.RESCALED);
+    return new SelectableLegislationCategory("POST_SEPT2021", "A new-style rescaled energy label", RatingClassRange.of(RatingClass.A, RatingClass.G), null, InternetLabelTemplate.RESCALED);
   }
 
   public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {

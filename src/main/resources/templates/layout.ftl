@@ -39,6 +39,7 @@
   showBreadcrumbs=true
   pageScripts=blankMacro
   notificationBanner=blankMacro
+  beforeStandardInsetText=""
   >
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
@@ -125,6 +126,11 @@
 
               <#if showInsetText>
                 <div class="govuk-inset-text">
+                  <#if beforeStandardInsetText?has_content>
+                    <p>
+                      ${beforeStandardInsetText}
+                    </p>
+                  </#if>
                   <#if labelMode?has_content && labelMode=='INTERNET'>
                     <#if showRescaledInternetLabelGuidance>
                       <p>
