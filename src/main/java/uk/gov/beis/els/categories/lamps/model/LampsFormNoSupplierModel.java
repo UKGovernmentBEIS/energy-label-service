@@ -18,7 +18,7 @@ public class LampsFormNoSupplierModel extends InternetLabellingForm {
   private String efficiencyRating;
 
   @FieldPrompt("Weighted energy consumption (EC) in kWh per 1000 hours, rounded up to the nearest integer")
-  @Digits(integer = 3, fraction = 0, message = "Enter an energy consumption, up to 3 digits long")
+  @Digits(integer = 4, fraction = 0, message = "Enter an energy consumption, up to 4 digits long")
   private String energyConsumption;
 
   @FieldPrompt("Should the label be in colour or black and white?")
