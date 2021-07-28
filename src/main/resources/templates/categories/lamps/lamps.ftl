@@ -13,7 +13,7 @@
   <@govukDetails.details summaryTitle="What kind of label should I choose?" detailsClass="govuk-!-margin-bottom-5">
     <p>
       The government will implement a rescaled energy label for lighting products in Great Britain from
-      September 2021. You can begin preparing for this now.
+      1 October 2021. You can begin preparing for this now.
     </p>
     <p>
       The product's energy efficiency class on the rescaled label will be lower than its class on the old label, and
