@@ -134,7 +134,7 @@
   <text class="cls-12" transform="translate(4.20947 192.63794)">kWh/1000h</text>
   <line class="cls-13" x1="4.2915" y1="49.78099" x2="97.75249" y2="49.78099"/>
   <line class="cls-13" x1="4.2915" y1="164.51469" x2="97.75249" y2="164.51469"/>
-  <text class="cls-14" transform="translate(93.92871 170.94408) rotate(90)">2019/2015</text>
+  <text class="cls-14" transform="translate(93.92871 170.07295) rotate(90)" textLength="29.76378" lengthAdjust="spacingAndGlyphs">2021 No. 1095</text>
   <text id="kwh" class="cls-15" transform="translate(4.2915 184.38013)">X</text>
   <g id="qrCode">
     <rect class="cls-16" x="61.1803" y="170.07295" width="29.76378" height="29.76378"/>
