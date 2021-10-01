@@ -22,6 +22,7 @@ import uk.gov.beis.els.categories.lamps.model.TemplateColour;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
+import uk.gov.beis.els.util.FontUtils;
 import uk.gov.beis.els.util.TemplateUtils;
 
 public class TemplatePopulator {
@@ -30,6 +31,8 @@ public class TemplatePopulator {
 
   private static final String SVG_RATING_INCREMENT_ATTR_NAME = "data-rating-increment";
   private static final String SVG_MULTILINE_CHARS_PER_ROW_ATTR_NAME = "data-supplier-model-chars-per-row";
+  private static final String TEXT_FONT_SIZE_ATTR_NAME = "data-font-size-px";
+  private static final String TEXT_FONT_FACE_NAME = "data-font-face";
 
   private Document template;
 
@@ -40,6 +43,26 @@ public class TemplatePopulator {
   public TemplatePopulator setText(String elementId, String textValue) {
     TemplateUtils.getElementById(template, elementId).text(textValue);
     return this;
+  }
+
+  public TemplatePopulator setCondensingText(String elementId, String textValue) {
+    // If an element has the textLength attribute, the text will always be stretched or shrunk to fit that width.
+    // We only want it to shrink (condense), so we estimate if the rendered text will be wider than allowed by
+    // textLength. If it will, we want it to shrink so we leave the attribute on. If it'll be narrower, we remove the
+    // attribute because we don't want the text to expand.
+    Element textElement = TemplateUtils.getElementById(template, elementId);
+
+    Float textLengthAttr = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, "textLength"));
+    Float fontSizeAttr = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, TEXT_FONT_SIZE_ATTR_NAME));
+    String fontFaceAttr = TemplateUtils.getAttributeByName(textElement, TEXT_FONT_FACE_NAME);
+
+    Float estimatedTextWidth = FontUtils.estimatedTextWidth(textValue, fontSizeAttr, FontUtils.FontProperties.fromFontFaceName(fontFaceAttr));
+
+    if(estimatedTextWidth < textLengthAttr) {
+      textElement.removeAttr("textLength");
+    }
+
+    return setText(elementId, textValue);
   }
 
   public TemplatePopulator setMultilineText(String elementId, String textValue) {

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.PostSeptember2021Field;
-import uk.gov.beis.els.categories.common.StandardTemplateForm20Char;
+import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.lamps.model.validation.LampsFormSequenceProvider;
 import uk.gov.beis.els.model.meta.DualModeField;
@@ -14,7 +14,7 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 
 @StaticProductText("<p>Old-style labels must usually be at least 36mm x 75mm when attached to packaging. You can scale down the label if no side of the packaging is large enough to contain the label, or if the label would cover more than 50% of the surface area of the largest side. You must only scale down the label enough to meet these conditions, and the label must never be less than 14.4mm x 30mm.</p><p>New-style rescaled labels must be at least 36mm x 72mm, or 20mm x 54mm for the small version of the label.</p>")
 @GroupSequenceProvider(LampsFormSequenceProvider.class)
-public class LampsForm extends StandardTemplateForm20Char {
+public class LampsForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("What kind of label do you need to create?")
   @NotBlank(message = "Select the kind of label you need to create", groups = {Default.class, InternetLabellingGroup.class})

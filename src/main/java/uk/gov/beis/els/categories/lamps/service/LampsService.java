@@ -69,8 +69,8 @@ public class LampsService {
 
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
 
-      templatePopulator.setText("supplier", form.getSupplierName())
-          .setText("model", form.getModelName())
+      templatePopulator.setCondensingText("supplier", form.getSupplierName())
+          .setCondensingText("model", form.getModelName())
           .setQrCode(form);
     }
 
