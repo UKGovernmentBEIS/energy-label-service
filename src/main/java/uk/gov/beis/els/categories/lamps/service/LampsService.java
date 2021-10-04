@@ -46,8 +46,8 @@ public class LampsService {
 
     if(legislationCategory.equals(LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021)) {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps-light-sources/lamps.svg"));
-      templatePopulator.setMultilineText("supplier", form.getSupplierName())
-          .setMultilineText("model", form.getModelName());
+      templatePopulator.setCondensingMultilineText("supplier", form.getSupplierName())
+          .setCondensingMultilineText("model", form.getModelName());
     } else {
       String templatePath;
       TemplateColour templateColour = TemplateColour.valueOf(form.getTemplateColour());

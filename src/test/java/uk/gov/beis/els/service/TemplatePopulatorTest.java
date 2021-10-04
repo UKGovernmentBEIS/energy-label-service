@@ -62,6 +62,35 @@ public class TemplatePopulatorTest {
   }
 
   @Test
+  public void testSetCondensedMultilineText_SplitText() {
+    Document doc = templatePopulator.setCondensingMultilineText("multilineCondensedTextField", "12345678").getPopulatedDocument();
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine1").text()).isEqualTo("12345");
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine2").text()).isEqualTo("678");
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine1").attr("textLength")).isBlank();
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine2").attr("textLength")).isBlank();
+  }
+
+  @Test
+  public void testSetCondensedMultilineText_SingleLine() {
+    Document doc = templatePopulator.setCondensingMultilineText("multilineCondensedTextField", "123").getPopulatedDocument();
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine1").text()).isBlank();
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine2").text()).isEqualTo("123");
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine2").attr("textLength")).isBlank();
+  }
+
+  @Test
+  public void testSetCondensedMultilineText_WordWrapCondensed() {
+    Document doc = templatePopulator.setCondensingMultilineText("multilineCondensedTextField", "foo bar baz").getPopulatedDocument();
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine1").text()).isEqualTo("foo");
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine2").text()).isEqualTo("bar baz");
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine1").attr("textLength")).isNotBlank();
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine2").attr("textLength")).isNotBlank();
+    assertThat(doc.getElementById("multilineCondensedTextFieldLine1").attr("textLength")).isLessThan(
+        doc.getElementById("multilineCondensedTextFieldLine2").attr("textLength")
+    );
+  }
+
+  @Test
   public void testApplyCssClassToId() {
     Document doc = templatePopulator.applyCssClassToId("textField", "foo").getPopulatedDocument();
     assertThat(doc.getElementById("textField").hasClass("foo")).isTrue();

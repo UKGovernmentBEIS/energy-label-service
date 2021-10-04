@@ -151,20 +151,20 @@
   <text class="cls-14" transform="translate(41.74463 200.78165)"> </text>
   <text class="cls-15" transform="translate(44.23145 200.78165)">kWh/1000h</text>
   <line class="cls-16" x1="8.4921" y1="55.88081" x2="93.5551" y2="55.88081"/>
-  
+
   <rect class="cls-18" x="34.124" y="8.14301" width="59.419" height="16.575"/>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -173,10 +173,10 @@
     <text id="ratingLetter" class="cls-23" transform="translate(70.16016 78.35001)">A</text>
     <text id="ratingPlusses" class="cls-24" transform="translate(80.86035 71.5502)">++</text>
   </g>
-  <text id="supplierLine1" class="cls-25" transform="translate(8.5 43.43985)">X</text>
-  <text id="supplierLine2" class="cls-25" transform="translate(8.5 52.43985)">X</text>
-  <text id="modelLine1" class="cls-25" transform="translate(52.44043 43.43985)">X</text>
-  <text id="modelLine2" class="cls-25" transform="translate(52.44043 52.43985)">X</text>
+  <text id="supplierLine1" class="cls-25" transform="translate(8.5 43.43985)" textLength="41" lengthAdjust="spacingAndGlyphs" data-font-size-px="8" data-font-face="Calibri Regular">X</text>
+  <text id="supplierLine2" class="cls-25" transform="translate(8.5 52.43985)" textLength="41" lengthAdjust="spacingAndGlyphs" >X</text>
+  <text id="modelLine1" class="cls-25" transform="translate(52.44043 43.43985)" textLength="41" lengthAdjust="spacingAndGlyphs" data-font-size-px="8" data-font-face="Calibri Regular">X</text>
+  <text id="modelLine2" class="cls-25" transform="translate(52.44043 52.43985)" textLength="41" lengthAdjust="spacingAndGlyphs">X</text>
   <text id="kwh" class="cls-26" transform="translate(41.5 200.77969)" text-anchor="end">X</text>
 <g id="union-flag" transform="translate(8.487, 8.14301) scale(0.5525)">
 	<path id="blue" fill="#004289" d="M9.59,20L0,26.39V20H9.59z M39.59,0H27.5v8.06L39.59,0z M0,3.61V10h9.59L0,3.61z M17.5,0H5.41
