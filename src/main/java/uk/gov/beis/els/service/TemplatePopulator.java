@@ -123,7 +123,7 @@ public class TemplatePopulator {
       String [] lines = wrappedText.split("\n");
 
       float line1EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[0], fontSize, fontFace);
-      float line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[0], fontSize, fontFace);
+      float line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[1], fontSize, fontFace);
 
       if(line1EstimatedWidth > maxTextWidth || line2EstimatedWidth > maxTextWidth || lines.length > 2) {
         // At least one line is too wide, or we have more than 2 lines, so split the text as evenly as possible
