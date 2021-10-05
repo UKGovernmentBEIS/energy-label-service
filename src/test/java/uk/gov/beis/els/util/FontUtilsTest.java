@@ -31,4 +31,18 @@ public class FontUtilsTest {
     assertThat(width).isCloseTo(24.48f, offset);
   }
 
+  @Test
+  public void testCalculateEstimatedTextWidth_undefinedChars() {
+    String text = "test\uffff";
+    float width = FontUtils.INSTANCE.calculateEstimatedTextWidth(text, 10f, "Calibri Regular");
+    assertThat(width).isCloseTo(24.48f, offset);
+  }
+
+  @Test
+  public void testCalculateEstimatedTextWidth_rtlChars() {
+    String text = "اختبار";
+    float width = FontUtils.INSTANCE.calculateEstimatedTextWidth(text, 10f, "Calibri Regular");
+    assertThat(width).isCloseTo(53.37f, offset);
+  }
+
 }
