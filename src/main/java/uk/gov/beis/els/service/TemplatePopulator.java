@@ -122,6 +122,13 @@ public class TemplatePopulator {
 
       String [] lines = wrappedText.split("\n");
 
+      if(lines.length == 1) {
+        // It's possible textValue was greater than charsPerRow but the wrapped result is still only 1 line.
+        // Seems to happen if textValue is 1 char longer than `charsPerRow` and this last char is a space.
+        // This should be caught by the above .trim() but do a belt and braces check anyway
+        lines = new String[]{"", lines[0]};
+      }
+
       float line1EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[0], fontSize, fontFace);
       float line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[1], fontSize, fontFace);
 
@@ -141,8 +148,15 @@ public class TemplatePopulator {
         line1EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(line1Text, fontSize, fontFace);
         line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(line2Text, fontSize, fontFace);
 
-        // Change the textLength of the shorter line so that the characters are condensed by the same amount on both lines
-        if(line1EstimatedWidth > line2EstimatedWidth) {
+        if(line1EstimatedWidth <= maxTextWidth && line2EstimatedWidth <= maxTextWidth) {
+          // We may have ended up forcing the text onto two lines because the chars per row wrapping put it on three lines
+          // but the lines might still be less than the max width, so don't condense the text. This can happen if
+          // the text contains lots of narrow characters.
+          line1.removeAttr("textLength");
+          line2.removeAttr("textLength");
+        }
+        else if(line1EstimatedWidth > line2EstimatedWidth) {
+          // Change the textLength of the shorter line so that the characters are condensed by the same amount on both lines
           float lengthRatio = line2EstimatedWidth / line1EstimatedWidth;
           line2.attr("textLength", String.valueOf(maxTextWidth * lengthRatio));
         } else {
@@ -154,16 +168,8 @@ public class TemplatePopulator {
         line2.text(line2Text);
       } else {
         // The text wrapped successfully using the chars per row value
-        if (lines.length == 1) {
-          // It's possible textValue was greater than charsPerRow but the wrapped result is still only 1 line.
-          // Seems to happen if textValue is 1 char longer than `charsPerRow` and this last char is a space.
-          // This should be caught by the above .trim() but do a belt and braces check anyway
-          line1.text(""); // clear out row
-          line2.text(textValue);
-        } else {
-          line1.text(lines[0]);
-          line2.text(lines[1]);
-        }
+        line1.text(lines[0]);
+        line2.text(lines[1]);
         line1.removeAttr("textLength");
         line2.removeAttr("textLength");
       }
