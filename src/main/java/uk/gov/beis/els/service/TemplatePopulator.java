@@ -8,11 +8,7 @@ import org.jsoup.parser.ParseSettings;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.gov.beis.els.categories.common.AnalyticsForm;
-import uk.gov.beis.els.categories.common.BaseForm;
-import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
-import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
-import uk.gov.beis.els.categories.common.SupplierNameForm;
+import uk.gov.beis.els.categories.common.*;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
@@ -23,7 +19,6 @@ import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
 import uk.gov.beis.els.util.FontUtils;
-import uk.gov.beis.els.util.FontUtils.FontProperties;
 import uk.gov.beis.els.util.TemplateUtils;
 
 public class TemplatePopulator {
@@ -53,11 +48,11 @@ public class TemplatePopulator {
     // attribute because we don't want the text to expand.
     Element textElement = TemplateUtils.getElementById(template, elementId);
 
-    Float maxTextWidth = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, "textLength"));
-    Float fontSize = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, TEXT_FONT_SIZE_ATTR_NAME));
+    float maxTextWidth = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, "textLength"));
+    float fontSize = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, TEXT_FONT_SIZE_ATTR_NAME));
     String fontFace = TemplateUtils.getAttributeByName(textElement, TEXT_FONT_FACE_NAME);
 
-    Float estimatedTextWidth = FontUtils.estimatedTextWidth(textValue, fontSize, FontUtils.FontProperties.fromFontFaceName(fontFace));
+    float estimatedTextWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(textValue, fontSize, fontFace);
 
     if(estimatedTextWidth < maxTextWidth) {
       textElement.removeAttr("textLength");
@@ -110,12 +105,11 @@ public class TemplatePopulator {
     textValue = textValue.trim();
 
     int charsPerRow = Integer.parseInt(TemplateUtils.getAttributeByName(TemplateUtils.getSvgElement(template), SVG_MULTILINE_CHARS_PER_ROW_ATTR_NAME));
-    Float maxTextWidth = Float.parseFloat(TemplateUtils.getAttributeByName(line1, "textLength"));
-    Float fontSize = Float.parseFloat(TemplateUtils.getAttributeByName(line1, TEXT_FONT_SIZE_ATTR_NAME));
+    float maxTextWidth = Float.parseFloat(TemplateUtils.getAttributeByName(line1, "textLength"));
+    float fontSize = Float.parseFloat(TemplateUtils.getAttributeByName(line1, TEXT_FONT_SIZE_ATTR_NAME));
     String fontFace = TemplateUtils.getAttributeByName(line1, TEXT_FONT_FACE_NAME);
-    FontProperties fontProperties = FontUtils.FontProperties.fromFontFaceName(fontFace);
 
-    Float estimatedTextWidth = FontUtils.estimatedTextWidth(textValue, fontSize, fontProperties);
+    float estimatedTextWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(textValue, fontSize, fontFace);
 
     if(estimatedTextWidth < maxTextWidth) {
       // Text fits on one line without condensing
@@ -128,8 +122,8 @@ public class TemplatePopulator {
 
       String [] lines = wrappedText.split("\n");
 
-      Float line1EstimatedWidth = FontUtils.estimatedTextWidth(lines[0], fontSize, fontProperties);
-      Float line2EstimatedWidth = FontUtils.estimatedTextWidth(lines[1], fontSize, fontProperties);
+      float line1EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[0], fontSize, fontFace);
+      float line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[0], fontSize, fontFace);
 
       if(line1EstimatedWidth > maxTextWidth || line2EstimatedWidth > maxTextWidth || lines.length > 2) {
         // At least one line is too wide, or we have more than 2 lines, so split the text as evenly as possible
@@ -144,15 +138,15 @@ public class TemplatePopulator {
         String line2Text = textValue.substring(line1Text.length());
 
         // Recalculate the estimated widths
-        line1EstimatedWidth = FontUtils.estimatedTextWidth(line1Text, fontSize, fontProperties);
-        line2EstimatedWidth = FontUtils.estimatedTextWidth(line2Text, fontSize, fontProperties);
+        line1EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(line1Text, fontSize, fontFace);
+        line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(line2Text, fontSize, fontFace);
 
         // Change the textLength of the shorter line so that the characters are condensed by the same amount on both lines
         if(line1EstimatedWidth > line2EstimatedWidth) {
-          Float lengthRatio = line2EstimatedWidth / line1EstimatedWidth;
+          float lengthRatio = line2EstimatedWidth / line1EstimatedWidth;
           line2.attr("textLength", String.valueOf(maxTextWidth * lengthRatio));
         } else {
-          Float lengthRatio = line1EstimatedWidth / line2EstimatedWidth;
+          float lengthRatio = line1EstimatedWidth / line2EstimatedWidth;
           line1.attr("textLength", String.valueOf(maxTextWidth * lengthRatio));
         }
 
