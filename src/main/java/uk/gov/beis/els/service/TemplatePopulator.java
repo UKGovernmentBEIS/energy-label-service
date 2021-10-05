@@ -8,11 +8,7 @@ import org.jsoup.parser.ParseSettings;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.gov.beis.els.categories.common.AnalyticsForm;
-import uk.gov.beis.els.categories.common.BaseForm;
-import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
-import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
-import uk.gov.beis.els.categories.common.SupplierNameForm;
+import uk.gov.beis.els.categories.common.*;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
@@ -22,6 +18,7 @@ import uk.gov.beis.els.categories.lamps.model.TemplateColour;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
+import uk.gov.beis.els.util.FontUtils;
 import uk.gov.beis.els.util.TemplateUtils;
 
 public class TemplatePopulator {
@@ -30,6 +27,8 @@ public class TemplatePopulator {
 
   private static final String SVG_RATING_INCREMENT_ATTR_NAME = "data-rating-increment";
   private static final String SVG_MULTILINE_CHARS_PER_ROW_ATTR_NAME = "data-supplier-model-chars-per-row";
+  private static final String TEXT_FONT_SIZE_ATTR_NAME = "data-font-size-px";
+  private static final String TEXT_FONT_FACE_NAME = "data-font-face";
 
   private Document template;
 
@@ -40,6 +39,26 @@ public class TemplatePopulator {
   public TemplatePopulator setText(String elementId, String textValue) {
     TemplateUtils.getElementById(template, elementId).text(textValue);
     return this;
+  }
+
+  public TemplatePopulator setCondensingText(String elementId, String textValue) {
+    // If an element has the textLength attribute, the text will always be stretched or shrunk to fit that width.
+    // We only want it to shrink (condense), so we estimate if the rendered text will be wider than allowed by
+    // textLength. If it will, we want it to shrink so we leave the attribute on. If it'll be narrower, we remove the
+    // attribute because we don't want the text to expand.
+    Element textElement = TemplateUtils.getElementById(template, elementId);
+
+    float maxTextWidth = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, "textLength"));
+    float fontSize = Float.parseFloat(TemplateUtils.getAttributeByName(textElement, TEXT_FONT_SIZE_ATTR_NAME));
+    String fontFace = TemplateUtils.getAttributeByName(textElement, TEXT_FONT_FACE_NAME);
+
+    float estimatedTextWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(textValue, fontSize, fontFace);
+
+    if(estimatedTextWidth < maxTextWidth) {
+      textElement.removeAttr("textLength");
+    }
+
+    return setText(elementId, textValue);
   }
 
   public TemplatePopulator setMultilineText(String elementId, String textValue) {
@@ -78,6 +97,87 @@ public class TemplatePopulator {
 
     return this;
   }
+
+  public TemplatePopulator setCondensingMultilineText(String elementId, String textValue) {
+    Element line1 = TemplateUtils.getElementById(template,elementId + "Line1");
+    Element line2 = TemplateUtils.getElementById(template,elementId + "Line2");
+
+    textValue = textValue.trim();
+
+    int charsPerRow = Integer.parseInt(TemplateUtils.getAttributeByName(TemplateUtils.getSvgElement(template), SVG_MULTILINE_CHARS_PER_ROW_ATTR_NAME));
+    float maxTextWidth = Float.parseFloat(TemplateUtils.getAttributeByName(line1, "textLength"));
+    float fontSize = Float.parseFloat(TemplateUtils.getAttributeByName(line1, TEXT_FONT_SIZE_ATTR_NAME));
+    String fontFace = TemplateUtils.getAttributeByName(line1, TEXT_FONT_FACE_NAME);
+
+    float estimatedTextWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(textValue, fontSize, fontFace);
+
+    if(estimatedTextWidth < maxTextWidth) {
+      // Text fits on one line without condensing
+      line1.text(""); // clear out row
+      line2.text(textValue);
+      line2.removeAttr("textLength");
+    } else {
+      // Try wrapping using the chars per row specified on the template
+      String wrappedText = WordUtils.wrap(textValue, charsPerRow, "\n", true);
+
+      String [] lines = wrappedText.split("\n");
+
+      if(lines.length == 1) {
+        // It's possible textValue was greater than charsPerRow but the wrapped result is still only 1 line.
+        // Seems to happen if textValue is 1 char longer than `charsPerRow` and this last char is a space.
+        // This should be caught by the above .trim() but do a belt and braces check anyway
+        lines = new String[]{"", lines[0]};
+      }
+
+      float line1EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[0], fontSize, fontFace);
+      float line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(lines[1], fontSize, fontFace);
+
+      if(line1EstimatedWidth > maxTextWidth || line2EstimatedWidth > maxTextWidth || lines.length > 2) {
+        // At least one line is too wide, or we have more than 2 lines, so split the text as evenly as possible
+        // across two lines then apply condensing so it fits
+
+        // Wrap text onto lines of about equal length
+        String evenlyWrappedText = WordUtils.wrap(textValue, textValue.length()/2, "\n", true);
+        lines = evenlyWrappedText.split("\n");
+
+        // It might have wrapped onto more than 2 lines, so just make line 2 everything that didn't fit on line 1
+        String line1Text = lines[0];
+        String line2Text = textValue.substring(line1Text.length());
+
+        // Recalculate the estimated widths
+        line1EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(line1Text, fontSize, fontFace);
+        line2EstimatedWidth = FontUtils.INSTANCE.calculateEstimatedTextWidth(line2Text, fontSize, fontFace);
+
+        if(line1EstimatedWidth <= maxTextWidth && line2EstimatedWidth <= maxTextWidth) {
+          // We may have ended up forcing the text onto two lines because the chars per row wrapping put it on three lines
+          // but the lines might still be less than the max width, so don't condense the text. This can happen if
+          // the text contains lots of narrow characters.
+          line1.removeAttr("textLength");
+          line2.removeAttr("textLength");
+        }
+        else if(line1EstimatedWidth > line2EstimatedWidth) {
+          // Change the textLength of the shorter line so that the characters are condensed by the same amount on both lines
+          float lengthRatio = line2EstimatedWidth / line1EstimatedWidth;
+          line2.attr("textLength", String.valueOf(maxTextWidth * lengthRatio));
+        } else {
+          float lengthRatio = line1EstimatedWidth / line2EstimatedWidth;
+          line1.attr("textLength", String.valueOf(maxTextWidth * lengthRatio));
+        }
+
+        line1.text(line1Text);
+        line2.text(line2Text);
+      } else {
+        // The text wrapped successfully using the chars per row value
+        line1.text(lines[0]);
+        line2.text(lines[1]);
+        line1.removeAttr("textLength");
+        line2.removeAttr("textLength");
+      }
+    }
+
+    return this;
+  }
+
 
   public TemplatePopulator setRatingArrow(String parentElementId, RatingClass rating, RatingClassRange ratingClassRange) {
     return setRatingArrow(parentElementId, rating, ratingClassRange, SVG_RATING_INCREMENT_ATTR_NAME);

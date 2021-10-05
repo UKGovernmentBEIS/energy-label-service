@@ -150,7 +150,7 @@
   <text class="cls-12" transform="translate(4.20947 192.63794)">kWh/1000h</text>
   <line class="cls-13" x1="4.2915" y1="49.78099" x2="97.75249" y2="49.78099"/>
   <line class="cls-13" x1="4.2915" y1="164.51469" x2="97.75249" y2="164.51469"/>
-  <text class="cls-14" transform="translate(93.92871 170.94408) rotate(90)">2019/2015</text>
+  <text class="cls-14" transform="translate(93.92871 170.07295) rotate(90)" textLength="29.76378" lengthAdjust="spacingAndGlyphs">2021 No. 1095</text>
   <text id="kwh" class="cls-15" transform="translate(4.2915 184.38013)">X</text>
   <g id="qrCode">
     <rect class="cls-16" x="61.1803" y="170.07295" width="29.76378" height="29.76378"/>
@@ -160,8 +160,8 @@
     <path class="cls-18" d="M7.2765,21.4342h6.854v-4.569Zm22.445-2.046v-3.623h-5.437Zm0-9.292v-3.623l-5.437,3.623Zm-9.921,11.338h6.854l-6.854-4.569Zm-5.67-17.008H7.2765l6.854,4.57Zm-9.921,2.047v3.623h5.437Zm22.445-2.047h-6.854v4.57ZM9.6465,15.7652l-5.437,3.623v-3.623Z"/>
     <path class="cls-19" d="M19.8005,9.67641v.42h1.417l8.504-5.67h-2.047Zm-5.67,6.508v-.419h-1.417l-8.504,5.669h2.047Zm15.591,3.878-6.452-4.297h-2.046l8.498,5.663ZM4.2095,5.7984l6.452,4.298h2.046l-8.498-5.664Zm25.512,8.833H18.6665v6.803h-3.402v-6.803H4.2095v-3.402h11.055v-6.803h3.402v6.803h11.055Z"/>
   </g>
-  <text id="supplier" class="cls-20" transform="translate(4.20947 33.71899)">X</text>
-  <text id="model" class="cls-12" transform="translate(4.20947 45.43481)">X</text>
+  <text id="supplier" class="cls-20" transform="translate(4.20947 33.71899)" textLength="93.46099" lengthAdjust="spacingAndGlyphs" data-font-size-px="8" data-font-face="Verdana Bold">X</text>
+  <text id="model" class="cls-12" transform="translate(4.20947 45.43481)" textLength="93.46099" lengthAdjust="spacingAndGlyphs" data-font-size-px="8" data-font-face="Verdana Regular">X</text>
   <g id="rating">
     <polygon id="ratingArrow" points="75.773 51.571 65.209 60.413 75.773 68.55 97.752 68.55 97.752 51.571 75.773 51.571"/>
     <text id="ratingLetter" class="cls-21" transform="translate(81.92805 64.81665) scale(1 1.012)">A</text>

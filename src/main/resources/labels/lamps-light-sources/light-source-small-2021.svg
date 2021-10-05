@@ -149,7 +149,7 @@
   <text class="cls-12" transform="translate(5.27441 74.75069) scale(1 1.00529)">E</text>
   <text class="cls-14" transform="translate(5.27832 84.37373) scale(1 1.00529)">F</text>
   <text class="cls-15" transform="translate(4.86523 94.01241) scale(1 1.00528)">G</text>
-  <text class="cls-16" transform="translate(50.03418 122.00326) rotate(90)">2019/2015</text>
+  <text class="cls-16" transform="translate(50.03418 122.00326) rotate(90)" textLength="28.34646" lengthAdjust="spacingAndGlyphs">2021 No. 1095</text>
   <line class="cls-17" x1="2.8347" y1="26.9293" x2="53.8587" y2="26.9293"/>
   <line class="cls-17" x1="2.8347" y1="99.2127" x2="53.8587" y2="99.2127"/>
   <text class="cls-18" transform="translate(11.21631 110.68233)"> </text>
@@ -164,8 +164,8 @@
     <polygon id="ratingArrow" class="cls-23" points="43.965 28.368 39.235 34.273 43.965 39.707 53.602 39.707 53.602 28.368 43.965 28.368"/>
     <text id="ratingLetter" class="cls-24" transform="translate(45.18945 37.52559) scale(1 1.012)">A</text>
   </g>
-  <text id="supplier" class="cls-25" transform="translate(28.34645 18.42549)" text-anchor="middle">X</text>
-  <text id="model" class="cls-16" transform="translate(28.34645 24.09444)" text-anchor="middle">X</text>
+  <text id="supplier" class="cls-25" transform="translate(28.34645 18.42549)" text-anchor="middle" textLength="51.024" lengthAdjust="spacingAndGlyphs" data-font-size-px="5" data-font-face="Verdana Bold">X</text>
+  <text id="model" class="cls-16" transform="translate(28.34645 24.09444)" text-anchor="middle" textLength="51.024" lengthAdjust="spacingAndGlyphs" data-font-size-px="5" data-font-face="Verdana Regular">X</text>
   <g id="ukFlag">
     <path class="cls-26" d="M4.3681,11.33911h3.427v-2.285Zm11.222-1.024V8.5041h-2.718Zm0-4.646v-1.811l-2.718,1.811Zm-4.96,5.67h3.427l-3.427-2.285Zm-2.835-8.504H4.3681l3.427,2.284Zm-4.96,1.023v1.811h2.718Zm11.222-1.023h-3.427v2.284Zm-8.504,5.669-2.718,1.811V8.5041Z"/>
     <path class="cls-27" d="M10.6296,5.46011v.209h.709l4.252-2.834h-1.023Zm-2.834,3.254v-.21h-.709l-4.252,2.835h1.023Zm7.795,1.939-3.226-2.149h-1.023l4.249,2.832Zm-12.756-7.132,3.226,2.148h1.023l-4.249-2.832Zm12.756,4.416h-5.528v3.402h-1.7V7.9371H2.8346v-1.701h5.528v-3.401h1.7v3.401h5.528Z"/>

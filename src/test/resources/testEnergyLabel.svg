@@ -13,4 +13,6 @@
   <text id="db" transform="translate(257.30957 557.86023)" text-anchor="middle">X</text>
   <text id="multilineTextFieldLine2" transform="translate(25.51182 119.05041)">X</text>
   <text id="multilineTextFieldLine1" transform="translate(25.51182 102.79204)">X</text>
+  <text id="multilineCondensedTextFieldLine2" transform="translate(25.51182 143.05041)" font-size="16" font-family="Calibri" textLength="50" lengthAdjust="spacingAndGlyphs">X</text>
+  <text id="multilineCondensedTextFieldLine1" transform="translate(25.51182 130.79204)" font-size="16" font-family="Calibri" data-font-size-px="16" data-font-face="Calibri Regular" textLength="50" lengthAdjust="spacingAndGlyphs">X</text>
 </svg>
