@@ -188,7 +188,8 @@
   <text id="supplierLine1" class="cls-15" transform="translate(8.50391 62.04694)">X</text>
   <text id="supplierLine2" class="cls-15" transform="translate(8.50391 72.04694)">X</text>
   <text id="modelLine1" class="cls-16" transform="translate(263.8 61.98981)" text-anchor="end">X</text>
-  <text id="modelLine2" class="cls-16" transform="translate(263.8 71.98981)" text-anchor="end">X</text>  <text class="cls-17" transform="translate(259.0332 502.50778) rotate(90)">2019/2018</text>
+  <text id="modelLine2" class="cls-16" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
+  <text class="cls-17" transform="translate(259.0332 535) rotate(90)" text-anchor="end">2021/745</text>
   <text transform="translate(136.063005 334.5235)" text-anchor="middle">
     <tspan id="kwhAnnum" class="cls-18">X</tspan>
     <tspan class="cls-20" xml:space="preserve"> kWh/annum</tspan>

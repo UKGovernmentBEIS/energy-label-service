@@ -185,7 +185,8 @@
   <text id="modelLine1" class="cls-19" transform="translate(263.8 61.98981)" text-anchor="end">X</text>
   <text id="modelLine2" class="cls-19" transform="translate(263.8 71.98981)" text-anchor="end">X</text>
 
-  <text class="cls-20" transform="translate(259.0332 502.50778) rotate(90)">2019/2018</text>
+
+  <text class="cls-20" transform="translate(259.0332 535) rotate(90)" text-anchor="end">2021/745</text>
   <text transform="translate(73 439.37018)" text-anchor="middle">
     <tspan id="capacity" class="cls-21">X</tspan>
     <tspan class="cls-22">L</tspan>
