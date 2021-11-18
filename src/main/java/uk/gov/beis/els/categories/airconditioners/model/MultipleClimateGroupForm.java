@@ -1,14 +1,15 @@
 package uk.gov.beis.els.categories.airconditioners.model;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
 
-  @FieldPrompt("Is data available for warmer climate conditons?")
+  @FieldPrompt("Is data available for warmer climate conditions?")
   @NotNull(message = "Select whether data is available for warmer climate conditions")
   private Boolean warmerConditions;
 
@@ -28,7 +29,7 @@ public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
   @Digits(groups = WarmerClimateGroup.class, integer = 4, fraction = 0,message = "Enter the annual energy consumption for warmer climate conditions, up to 4 digits")
   private String warmerAnnualEnergyConsumption;
 
-  @FieldPrompt("Is data available for colder climate conditons?")
+  @FieldPrompt("Is data available for colder climate conditions?")
   @NotNull(message = "Select whether data is available for colder climate conditions")
   private Boolean colderConditions;
 
