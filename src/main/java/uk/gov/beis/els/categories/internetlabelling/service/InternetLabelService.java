@@ -8,6 +8,7 @@ import org.jsoup.parser.ParseSettings;
 import org.jsoup.parser.Parser;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.api.common.BaseInternetLabelApiForm;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
@@ -19,6 +20,14 @@ import uk.gov.beis.els.service.TemplatePopulator;
 
 @Service
 public class InternetLabelService {
+
+  public ProcessedInternetLabelDocument generateInternetLabel(BaseInternetLabelApiForm apiForm, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
+    InternetLabellingForm standardForm = new InternetLabellingForm();
+    standardForm.setLabelFormat(apiForm.getLabelFormat().name());
+    standardForm.setLabelOrientation(apiForm.getLabelOrientation().name());
+    standardForm.setProductPriceHeightPx(String.valueOf(apiForm.getProductPriceHeightPx()));
+    return generateInternetLabel(standardForm, ratingClass, legislationCategory, analyticsLabel);
+  }
 
   public ProcessedInternetLabelDocument generateInternetLabel(InternetLabellingForm form, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
     Parser parser = Parser.htmlParser();

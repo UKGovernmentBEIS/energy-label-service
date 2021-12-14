@@ -2,7 +2,9 @@ package uk.gov.beis.els.model;
 
 public enum GoogleAnalyticsEventCategory {
   ENERGY_LABEL("Energy label"),
-  INTERNET_LABEL("Internet arrow");
+  ENERGY_LABEL_API("Energy label - API"),
+  INTERNET_LABEL("Internet arrow"),
+  INTERNET_LABEL_API("Internet arrow - API");
 
   private final String displayValue;
 
