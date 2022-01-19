@@ -41,19 +41,12 @@ public class CustomApiModelPlugin implements ModelPropertyBuilderPlugin {
     element.ifPresent(e -> {
       processFieldPrompts(e, context);
       processLegislationCategoryValues(e, context);
-      processDigits(e, context);
     });
   }
 
-  private void processDigits(AnnotatedElement element, ModelPropertyContext context) {
-    Digits digits = element.getAnnotation(Digits.class);
-    if(digits != null) {
-      context.getSpecificationBuilder().stringFacet(f-> f.pattern("^[0-9]+(\\.[0-9]{1,2})?$"));
-    }
-  }
-
   /**
-   * Sets the description field based on the FieldPrompt if it has not been overridden by a description defined by the ApiModelProperty annotation.
+   * Sets the description field based on the FieldPrompt and optional Digits annotations, if it has not been overridden
+   * by a description defined by the ApiModelProperty annotation.
    * @param element the annotated element
    * @param context the context
    */
@@ -63,8 +56,30 @@ public class CustomApiModelPlugin implements ModelPropertyBuilderPlugin {
       ApiModelProperty modelProperty = element.getAnnotation(ApiModelProperty.class);
       if(modelProperty == null || modelProperty.value().isEmpty()) {
         // Only set description if it has not been overridden by an ApiModelProperty description
-        context.getSpecificationBuilder().description(fieldPrompt.value());
+        context.getSpecificationBuilder()
+            .description(fieldPrompt.value() + stringifyDigitsConstraint(element.getAnnotation(Digits.class)));
       }
+    }
+  }
+
+  /**
+   * Returns a string representation of the Digits annotation. The OpenAPI spec does not allow for the number of digits/decimal places
+   * to be specified explicitly as a constraint, so we just include it in the field description.
+   * @param digits the Digits annotation param. If null an empty string is returned.
+   * @return The digits constraint expressed as a string.
+   */
+  private String stringifyDigitsConstraint(Digits digits) {
+    if (digits == null) {
+      return "";
+    }
+    int ints = digits.integer();
+    int fractions = digits.fraction();
+    if (ints > 0 && fractions > 0) {
+      return String.format(". This may be up to %d digit(s) long with an optional %d decimal places.", ints, fractions);
+    } else if (ints > 0) {
+      return String.format(". This may be up to %d digit(s) long.", ints);
+    } else {
+      return "";
     }
   }
 
