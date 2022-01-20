@@ -1,7 +1,7 @@
 package uk.gov.beis.els.api.categories.domesticovens;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
 @RequestMapping("${api.v1.base_path}/domestic-ovens")
-@Api(tags = "Domestic ovens")
+@Tag(name = "Domestic ovens")
 public class DomesticOvensApiController {
 
   private final DomesticOvensService domesticOvensService;
@@ -31,16 +31,16 @@ public class DomesticOvensApiController {
     this.documentRendererService = documentRendererService;
   }
 
-  @ApiOperation(
-    value = "Create an energy label for an electric oven",
-    notes = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+  @Operation(
+    summary = "Create an energy label for an electric oven",
+    description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
   )
   @PostMapping("/electric-ovens/energy-label")
   public Object electricOvens(@RequestBody @Valid DomesticOvensForm form) {
     return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
   }
 
-  @ApiOperation(value = "Create an internet label for an electric oven")
+  @Operation(summary = "Create an internet label for an electric oven")
   @PostMapping("/electric-ovens/internet-label")
   public Object electricOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -48,16 +48,16 @@ public class DomesticOvensApiController {
     );
   }
 
-  @ApiOperation(
-    value = "Create an energy label for a gas oven",
-    notes = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+  @Operation(
+    summary = "Create an energy label for a gas oven",
+    description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
   )
   @PostMapping("/gas-ovens/energy-label")
   public Object gasOvens(@RequestBody @Valid GasOvensForm form) {
     return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
   }
 
-  @ApiOperation(value = "Create an internet label for an gas oven")
+  @Operation(summary = "Create an internet label for an gas oven")
   @PostMapping("/gas-ovens/internet-label")
   public Object gasOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

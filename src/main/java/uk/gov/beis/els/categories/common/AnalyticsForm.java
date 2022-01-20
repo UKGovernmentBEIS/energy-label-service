@@ -1,10 +1,10 @@
 package uk.gov.beis.els.categories.common;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class AnalyticsForm {
 
-  @ApiModelProperty(hidden = true)
+  @Schema(hidden = true)
   private String googleAnalyticsClientId;
 
   public String getGoogleAnalyticsClientId() {

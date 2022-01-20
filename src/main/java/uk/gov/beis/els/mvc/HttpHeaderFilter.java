@@ -31,4 +31,10 @@ public class HttpHeaderFilter extends OncePerRequestFilter {
     filterChain.doFilter(request, response);
   }
 
+  @Override
+  protected boolean shouldNotFilter(HttpServletRequest request) {
+    // Do not add CSP etc. to Swagger UI
+    return "/swagger-ui.html".equals(request.getRequestURI());
+  }
+
 }

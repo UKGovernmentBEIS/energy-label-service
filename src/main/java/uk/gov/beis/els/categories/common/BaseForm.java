@@ -1,6 +1,6 @@
 package uk.gov.beis.els.categories.common;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Pattern;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.gov.beis.els.model.meta.FieldPrompt;
@@ -15,7 +15,7 @@ public class BaseForm extends InternetLabellingForm {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character",
       groups = {PostMarch2021Field.class, PostSeptember2021Field.class})
-  @ApiModelProperty(hidden = true)
+  @Schema(hidden = true)
   private String qrCodeUrl;
 
   public String getQrCodeUrl() {

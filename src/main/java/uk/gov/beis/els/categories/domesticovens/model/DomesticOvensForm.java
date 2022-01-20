@@ -1,7 +1,6 @@
 package uk.gov.beis.els.categories.domesticovens.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,7 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-@ApiModel(value = "Electric oven energy label")
+@Schema(name = "Electric oven energy label")
 @GroupSequenceProvider(DomesticOvensFormSequenceProvider.class)
 public class DomesticOvensForm extends StandardTemplateForm40Char {
 
@@ -26,13 +25,13 @@ public class DomesticOvensForm extends StandardTemplateForm40Char {
 
   @FieldPrompt("Usable volume of the cavity in litres (L)")
   @Digits(integer = 3, fraction = 0, message = "Enter the volume, up to 3 digits long")
-  @ApiModelProperty(dataType = "java.lang.Integer")
+  @Schema(type = "integer")
   @NotNull
   private String volume;
 
   @FieldPrompt("Energy consumption of the conventional heating function per cycle, in kWh/cycle")
   @Digits(integer = 1, fraction = 2, message = "Enter the energy consumption of the conventional heating function per cycle as 1 digit with up to 2 decimal places")
-  @ApiModelProperty(dataType = "java.lang.Float")
+  @Schema(type = "number")
   @NotNull
   private String conventionalKwhConsumption;
 
@@ -42,7 +41,7 @@ public class DomesticOvensForm extends StandardTemplateForm40Char {
 
   @FieldPrompt("Energy consumption of the fan-forced heating function per cycle, in kWh/cycle")
   @Digits(groups = FanOvenGroup.class, integer = 1, fraction = 2, message = "Enter the energy consumption of the fan-forced heating function per cycle as 1 digit with up to 2 decimal places")
-  @ApiModelProperty(dataType = "java.lang.Float")
+  @Schema(type = "number")
   @NotNull(groups = FanOvenGroup.class)
   private String convectionKwhConsumption;
 
