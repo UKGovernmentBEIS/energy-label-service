@@ -3,6 +3,7 @@ package uk.gov.beis.els;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Before;
@@ -30,6 +31,7 @@ public class ControllerSmokeTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(ControllerSmokeTest.class);
 
   private MockMvc mockMvc;
+  private List<String> ignoredEndpoints;
 
   @Autowired
   public RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -42,13 +44,18 @@ public class ControllerSmokeTest {
     mockMvc = MockMvcBuilders
         .webAppContextSetup(context)
         .build();
+
+    ignoredEndpoints = new ArrayList<>();
+    ignoredEndpoints.add("/swagger-ui.html");
   }
 
   @Test
   public void testAllGets() throws Exception {
+
     List<String> getRoutes = requestMappingHandlerMapping.getHandlerMethods().keySet().stream()
         .filter(r -> r.getMethodsCondition().getMethods().contains(RequestMethod.GET))
         .map(r -> (String) r.getPatternsCondition().getPatterns().toArray()[0])
+        .filter(path -> !ignoredEndpoints.contains(path))
         .collect(Collectors.toList());
 
     for (String route : getRoutes) {
