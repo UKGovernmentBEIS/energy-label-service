@@ -2,6 +2,7 @@ package uk.gov.beis.els.categories.lamps.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.PostSeptember2021Field;
@@ -30,6 +31,7 @@ public class LampsForm extends StandardTemplateForm50Char {
   @Digits(integer = 4, fraction = 0, message = "Enter an energy consumption, up to 4 digits long")
   private String energyConsumption;
 
+
   // Post September 2021 fields
   @FieldPrompt(value = "What size of label do you need to create?", hintText = "You must only use the small label on packaging less than 36mm wide")
   @NotBlank(message = "Select the size of label you need to create", groups = {PostSeptember2021Field.class})
@@ -38,6 +40,14 @@ public class LampsForm extends StandardTemplateForm50Char {
   @FieldPrompt(value = "Should the label be in colour or black and white?", hintText = "You must only use a black and white label if all other information on the packaging, including graphics, is printed in black and white")
   @NotBlank(message = "Select whether the label should be in colour or black and white", groups = {PostSeptember2021Field.class})
   private String templateColour;
+
+  @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
+      hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
+  @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
+      message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character",
+      groups = {PostSeptember2021Field.class}
+  )
+  private String qrCodeUrl;
 
   public String getEfficiencyRating() {
     return efficiencyRating;
@@ -77,5 +87,13 @@ public class LampsForm extends StandardTemplateForm50Char {
 
   public void setTemplateColour(String templateColour) {
     this.templateColour = templateColour;
+  }
+
+  public String getQrCodeUrl() {
+    return qrCodeUrl;
+  }
+
+  public void setQrCodeUrl(String qrCodeUrl) {
+    this.qrCodeUrl = qrCodeUrl;
   }
 }

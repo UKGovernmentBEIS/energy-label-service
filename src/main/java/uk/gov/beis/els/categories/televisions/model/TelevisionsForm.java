@@ -3,13 +3,14 @@ package uk.gov.beis.els.categories.televisions.model;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.PostMarch2021Field;
 import uk.gov.beis.els.categories.common.PreMarch2021Field;
 import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
-import uk.gov.beis.els.categories.televisions.model.validation.HdrGroup;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.televisions.model.validation.HdrGroup;
 import uk.gov.beis.els.categories.televisions.model.validation.TelevisionsFormSequenceProvider;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
@@ -79,6 +80,14 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   @FieldPrompt("Vertical resolution in pixels")
   @Digits(integer = 5, fraction = 0, message = "Enter the vertical resolution in pixels, up to 5 digits long", groups = PostMarch2021Field.class)
   private String verticalPixels;
+
+  @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
+      hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
+  @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
+      message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character",
+      groups = PostMarch2021Field.class
+  )
+  private String qrCodeUrl;
 
   public String getApplicableLegislation() {
     return applicableLegislation;
@@ -190,5 +199,13 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
 
   public void setVerticalPixels(String verticalPixels) {
     this.verticalPixels = verticalPixels;
+  }
+
+  public String getQrCodeUrl() {
+    return qrCodeUrl;
+  }
+
+  public void setQrCodeUrl(String qrCodeUrl) {
+    this.qrCodeUrl = qrCodeUrl;
   }
 }

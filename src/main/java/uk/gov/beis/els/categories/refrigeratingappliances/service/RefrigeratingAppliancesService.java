@@ -93,7 +93,7 @@ public class RefrigeratingAppliancesService {
       }
 
       templatePopulator
-          .setQrCode(form)
+          .setQrCode(form.getQrCodeUrl())
           .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()));
     }
 
@@ -115,7 +115,7 @@ public class RefrigeratingAppliancesService {
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(
           "labels/household-refrigerating-appliances/wine-storage-appliances-2021.svg"))
-          .setQrCode(form)
+          .setQrCode(form.getQrCodeUrl())
           .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()));
     }
 
