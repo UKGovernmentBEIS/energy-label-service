@@ -14,8 +14,8 @@
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
-  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].value())!label>
-  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText())!>
+  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].promptText)!label>
+  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText)!>
   <#local fieldName=spring.status.expression>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
 
@@ -58,8 +58,8 @@
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
-  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].value())!label>
-  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText())!>
+  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].promptText)!label>
+  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText)!>
   <#local fieldName=spring.status.expression>
   <#local displayValue=spring.status.displayValue>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
@@ -108,8 +108,8 @@
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local errorList=spring.status.errorMessages>
   <#local fieldName=spring.status.expression>
-  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].value())!label>
-  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText())!>
+  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].promptText)!label>
+  <#local fieldHint=(fieldPromptMapping[spring.status.path].hintText)!>
   <#local fieldName=spring.status.expression>
   <#local displayValue=spring.status.displayValue>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
