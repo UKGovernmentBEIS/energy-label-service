@@ -9,8 +9,8 @@
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
   <#local hasError=(spring.status.errorMessages?size > 0)>
   <#local mandatory=((validation[spring.status.path].mandatory)!false)>
-  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].value())!label>
-  <#local fieldHint=fieldHintOverride?has_content?then(fieldHintOverride, (fieldPromptMapping[spring.status.path].hintText())!)>
+  <#local fieldPrompt=(fieldPromptMapping[spring.status.path].promptText)!label>
+  <#local fieldHint=fieldHintOverride?has_content?then(fieldHintOverride, (fieldPromptMapping[spring.status.path].hintText)!)>
   <#local fieldWidth=fieldWidthMapping[spring.status.path]!>
   <#local hiddenField=hiddenFields?seq_contains(spring.status.path)!false>
   <#local numericField=(numericFields?seq_contains(spring.status.path))!false>
