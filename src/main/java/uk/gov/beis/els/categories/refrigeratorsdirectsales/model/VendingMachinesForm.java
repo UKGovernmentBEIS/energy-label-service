@@ -3,6 +3,7 @@ package uk.gov.beis.els.categories.refrigeratorsdirectsales.model;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.StandardTemplateForm40Char;
@@ -36,6 +37,12 @@ public class VendingMachinesForm extends StandardTemplateForm40Char {
   @FieldPrompt("The maximum measured product temperature, expressed in degrees Celsius, of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter the maximum measured product temperature in the frozen compartments, up to 2 digits long")
   private String freezerMaxTemp;
+
+  @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
+      hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
+  @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
+      message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
+  private String qrCodeUrl;
 
   public String getEfficiencyRating() {
     return efficiencyRating;
@@ -83,5 +90,13 @@ public class VendingMachinesForm extends StandardTemplateForm40Char {
 
   public void setFreezerMaxTemp(String freezerMaxTemp) {
     this.freezerMaxTemp = freezerMaxTemp;
+  }
+
+  public String getQrCodeUrl() {
+    return qrCodeUrl;
+  }
+
+  public void setQrCodeUrl(String qrCodeUrl) {
+    this.qrCodeUrl = qrCodeUrl;
   }
 }

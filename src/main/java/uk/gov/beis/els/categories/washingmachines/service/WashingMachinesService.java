@@ -54,7 +54,7 @@ public class WashingMachinesService {
     } else {
       templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/washing-machines/washing-machines-2021.svg"));
       templatePopulator
-          .setQrCode(form)
+          .setQrCode(form.getQrCodeUrl())
           .setText("kwh100cycles", form.getEnergyConsumptionPer100Cycles())
           .setText("kg", form.getEcoRatedCapacity())
           .setHoursMinutes("duration", form.getProgrammeDurationHours(), form.getProgrammeDurationMinutes())
@@ -76,7 +76,7 @@ public class WashingMachinesService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/washing-machines/washer-dryers-2021.svg"));
 
     return templatePopulator
-        .setQrCode(form)
+        .setQrCode(form.getQrCodeUrl())
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
         .setRatingArrow("completeCycleRating", RatingClass.valueOf(form.getCompleteCycleEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
