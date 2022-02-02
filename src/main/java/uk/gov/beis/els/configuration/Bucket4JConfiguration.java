@@ -11,6 +11,7 @@ public class Bucket4JConfiguration {
 
   @Bean
   public Bucket getBucket() {
+    // Limits the API requests to 20 requests in a single minute
     Bandwidth limit = Bandwidth.simple(20, Duration.ofMinutes(1));
     return Bucket.builder()
         .addLimit(limit)
