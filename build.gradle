@@ -28,6 +28,7 @@ dependencies {
   implementation 'org.jsoup:jsoup:1.11.3'
   implementation 'com.google.guava:guava:27.1-jre'
   implementation 'io.nayuki:qrcodegen:1.6.0'
+  implementation group: 'com.giffing.bucket4j.spring.boot.starter', name: 'bucket4j-spring-boot-starter', version: '0.5.2'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
