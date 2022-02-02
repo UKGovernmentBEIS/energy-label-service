@@ -37,8 +37,8 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         .filter(annotation::isInstance)
         .map(annotation::cast)
         .findFirst();
-  } 
-  
+  }
+
   /**
    * Sets the description field based on the FieldPrompt and optional Digits annotations, if it has not been overridden
    * by a description defined by the Schema annotation.
@@ -87,8 +87,17 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
       .ifPresent(apiValueAnnotation -> {
         try {
           Field field = apiValueAnnotation.serviceClass().getField(apiValueAnnotation.legislationCategoryFieldName());
-          LegislationCategory legislationCategory = (LegislationCategory) field.get(null); // Null as we're accessing a static field
-          RatingClassRange range = legislationCategory.getPrimaryRatingRange();
+          RatingClassRange range;
+
+          if (field.get(null).getClass().equals(LegislationCategory.class)) {
+            LegislationCategory legislationCategory = (LegislationCategory) field.get(
+                null); // Null as we're accessing a static field
+            range = legislationCategory.getPrimaryRatingRange();
+          } else if (field.get(null).getClass().equals(RatingClassRange.class)) {
+            range = (RatingClassRange) field.get(null);
+          } else {
+            throw new RuntimeException("cannot unwrap field");
+          }
 
           List<String> allowedValues = range.getApplicableRatings().stream()
               .map(RatingClass::name) // TODO may be nicer to accept the display value i.e 'A++' rather than 'APP'
