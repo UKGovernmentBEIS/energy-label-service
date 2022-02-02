@@ -5,11 +5,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
+import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
+@GroupSequenceProvider(FridgesFreezersFormSequenceProvider.class)
 public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class")
@@ -30,7 +32,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   private Boolean nonRatedCompartment;
 
   @FieldPrompt("Total volume of chill and unfrozen compartments in litres (l)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the total volume of chill and unfrozen compartments in litres up to 3 digits long")
+  @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of chill and unfrozen compartments in litres up to 3 digits long")
   private String nonRatedVolume;
 
   @FieldPrompt(value = "Does the model have any frozen compartments?", hintText = "A frozen compartment has a target temperature of 0 degrees Celsius or below")
@@ -38,7 +40,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   private Boolean ratedCompartment;
 
   @FieldPrompt("Total volume of frozen compartments in litres (l)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the total volume of frozen compartments in litres, up to 3 digits long")
+  @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of frozen compartments in litres, up to 3 digits long")
   private String ratedVolume;
 
   @FieldPrompt("Airborne acoustic noise emission class")
