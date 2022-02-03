@@ -21,6 +21,14 @@ public class Bucket4JRequestService {
     this.request = request;
   }
 
+
+  /**
+   * Checks the X-Forwarded-For header sent after load balancing and returns the last IP address in the list
+   * This will be the origin IP address of the request.
+   * This is used as the unique identifier for the rate-limiting of API requests so that a single origin IP can't make too many requests at one time.
+   * The rate-limiting amount and time frame are controlled in the application.properties file.
+   * @return the last IP address found in the X-Forwarded-For request header
+   */
   public String getRequestIpAddress() {
     String ipAddresses = request.getHeader("X-Forwarded-For");
     if (ipAddresses != null) {
