@@ -6,9 +6,11 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import uk.gov.beis.els.mvc.FormAnnotationHandlerInterceptor;
@@ -58,6 +60,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     } catch (Exception e) {
       LOGGER.error("Failed to load fonts during app start", e);
     }
+  }
+
+  @Bean
+  public RequestContextListener requestContextListener() {
+    return new RequestContextListener();
   }
 
 }
