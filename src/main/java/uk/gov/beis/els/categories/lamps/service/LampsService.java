@@ -71,7 +71,7 @@ public class LampsService {
 
       templatePopulator.setCondensingText("supplier", form.getSupplierName())
           .setCondensingText("model", form.getModelName())
-          .setQrCode(form);
+          .setQrCode(form.getQrCodeUrl());
     }
 
     return templatePopulator

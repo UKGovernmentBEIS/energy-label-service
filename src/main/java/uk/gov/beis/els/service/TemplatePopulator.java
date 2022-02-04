@@ -212,8 +212,8 @@ public class TemplatePopulator {
     return this;
   }
 
-  public TemplatePopulator setQrCode(BaseForm form) {
-    Element qrCode = generateQrCode(form.getQrCodeUrl());
+  public TemplatePopulator setQrCode(String qrCodeUrl) {
+    Element qrCode = generateQrCode(qrCodeUrl);
     Element qrCodeTemplateDom = TemplateUtils.getElementById(template, "qrCode");
     Element qrCodePlaceholder = TemplateUtils.getElementByTag(qrCodeTemplateDom, "rect");
 

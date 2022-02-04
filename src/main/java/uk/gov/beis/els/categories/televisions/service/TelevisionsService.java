@@ -58,7 +58,7 @@ public class TelevisionsService {
           templateParserService.parseTemplate("labels/televisions-electronic-displays/electronic-displays-2021.svg"));
 
       templatePopulator
-          .setQrCode(form)
+          .setQrCode(form.getQrCodeUrl())
           .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRatingSdr()),
               legislationCategory.getPrimaryRatingRange())
           .setText("kwh1000hSdr", form.getEnergyConsumptionSdr1000h())
