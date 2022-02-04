@@ -7,11 +7,11 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.model.BeverageCoolers
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.model.DisplayCabinetsForm;
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.model.IceCreamFreezersForm;
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.model.VendingMachinesForm;
+import uk.gov.beis.els.model.InternetLabelTemplate;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
-import uk.gov.beis.els.model.InternetLabelTemplate;
 import uk.gov.beis.els.service.TemplateParserService;
 import uk.gov.beis.els.service.TemplatePopulator;
 
@@ -68,6 +68,7 @@ public class RefrigeratorsDirectSalesService {
 
     if (form.getFrozenCompartment()) {
       templatePopulator.applyCssClassToId("freezerSection", "hasFreezerSection");
+      templatePopulator.setText("freezerMaxTemp", form.getFreezerMaxTemp());
     } else {
       templatePopulator.setElementTranslate("fridgeSection", 0, 35);
     }
@@ -83,7 +84,6 @@ public class RefrigeratorsDirectSalesService {
         .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsL")
         .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
         .removeElementById("fridgeMinTempSection")
-        .setText("freezerMaxTemp", form.getFreezerMaxTemp())
         .removeElementById("freezerMinTempSection")
         .asProcessedEnergyLabel(ProductMetadata.VENDING_MACHINES, form);
   }
