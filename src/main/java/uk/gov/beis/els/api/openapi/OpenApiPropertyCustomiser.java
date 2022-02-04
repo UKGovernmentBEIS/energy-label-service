@@ -84,31 +84,28 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
    */
   private void processLegislationCategoryValues(List<Annotation> annotations, Schema schema) {
     getAnnotation(annotations, ApiValuesFromLegislationCategory.class)
-      .ifPresent(apiValueAnnotation -> {
-        try {
-          Field field = apiValueAnnotation.serviceClass().getField(apiValueAnnotation.legislationCategoryFieldName());
-          RatingClassRange range;
+        .ifPresent(apiValueAnnotation -> {
+          try {
+            Field field = apiValueAnnotation.serviceClass().getField(apiValueAnnotation.legislationCategoryFieldName());
+            LegislationCategory legislationCategory = (LegislationCategory) field.get(null); // Null as we're accessing a static field
+            RatingClassRange range;
 
-          if (field.get(null).getClass().equals(LegislationCategory.class)) {
-            LegislationCategory legislationCategory = (LegislationCategory) field.get(
-                null); // Null as we're accessing a static field
-            range = legislationCategory.getPrimaryRatingRange();
-          } else if (field.get(null).getClass().equals(RatingClassRange.class)) {
-            range = (RatingClassRange) field.get(null);
-          } else {
-            throw new RuntimeException("cannot unwrap field");
+            if (apiValueAnnotation.useSecondaryRange()) {
+              range = legislationCategory.getSecondaryRatingRange();
+            } else {
+              range = legislationCategory.getPrimaryRatingRange();
+            }
+
+            List<String> allowedValues = range.getApplicableRatings().stream()
+                .map(RatingClass::name) // TODO may be nicer to accept the display value i.e 'A++' rather than 'APP'
+                .collect(Collectors.toList());
+
+            schema.setEnum(allowedValues);
+
+          } catch (Exception e) {
+            throw new RuntimeException("Error processing ApiValuesFromLegislationCategory annotations", e);
           }
-
-          List<String> allowedValues = range.getApplicableRatings().stream()
-              .map(RatingClass::name) // TODO may be nicer to accept the display value i.e 'A++' rather than 'APP'
-              .collect(Collectors.toList());
-
-          schema.setEnum(allowedValues);
-
-        } catch (Exception e) {
-          throw new RuntimeException("Error processing ApiValuesFromLegislationCategory annotations", e);
-        }
-    });
+        });
   }
 
 }

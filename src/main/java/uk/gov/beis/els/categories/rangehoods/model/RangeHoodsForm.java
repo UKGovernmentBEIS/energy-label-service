@@ -36,7 +36,7 @@ public class RangeHoodsForm extends StandardTemplateForm30Char {
   @NotBlank(message = "Select a fluid dynamic efficiency class")
   @ApiValuesFromLegislationCategory(
       serviceClass = RangeHoodsService.class,
-      legislationCategoryFieldName = "SECONDARY_CLASS_RANGE"
+      useSecondaryRange = true
   )
   private String fluidClass;
 
@@ -48,7 +48,7 @@ public class RangeHoodsForm extends StandardTemplateForm30Char {
   @NotBlank(message = "Select a lighting efficiency class", groups = {LightingSystemGroup.class})
   @ApiValuesFromLegislationCategory(
       serviceClass = RangeHoodsService.class,
-      legislationCategoryFieldName = "SECONDARY_CLASS_RANGE"
+      useSecondaryRange = true
   )
   private String lightingClass;
 
@@ -56,7 +56,7 @@ public class RangeHoodsForm extends StandardTemplateForm30Char {
   @NotBlank(message = "Select a grease filtering efficiency class")
   @ApiValuesFromLegislationCategory(
       serviceClass = RangeHoodsService.class,
-      legislationCategoryFieldName = "SECONDARY_CLASS_RANGE"
+      useSecondaryRange = true
   )
   private String greaseClass;
 
