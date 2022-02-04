@@ -35,7 +35,7 @@ public class RefrigeratorsDirectSalesService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/ice-cream-freezers.svg"));
 
     return templatePopulator
-        .setQrCode(form)
+        .setQrCode(form.getQrCodeUrl())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
@@ -51,7 +51,7 @@ public class RefrigeratorsDirectSalesService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/commercial-refrigeration-beverage.svg"));
 
     return templatePopulator
-        .setQrCode(form)
+        .setQrCode(form.getQrCodeUrl())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
@@ -73,7 +73,7 @@ public class RefrigeratorsDirectSalesService {
     }
 
     return templatePopulator
-        .setQrCode(form)
+        .setQrCode(form.getQrCodeUrl())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
@@ -110,7 +110,7 @@ public class RefrigeratorsDirectSalesService {
     }
 
     return templatePopulator
-        .setQrCode(form)
+        .setQrCode(form.getQrCodeUrl())
         .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
