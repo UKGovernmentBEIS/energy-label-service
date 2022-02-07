@@ -54,6 +54,7 @@ public class VendingMachinesForm extends StandardTemplateForm40Char {
       hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
+  @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   @NotNull
   private String qrCodeUrl;
 
