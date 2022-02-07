@@ -37,8 +37,8 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         .filter(annotation::isInstance)
         .map(annotation::cast)
         .findFirst();
-  } 
-  
+  }
+
   /**
    * Sets the description field based on the FieldPrompt and optional Digits annotations, if it has not been overridden
    * by a description defined by the Schema annotation.
@@ -84,22 +84,28 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
    */
   private void processLegislationCategoryValues(List<Annotation> annotations, Schema schema) {
     getAnnotation(annotations, ApiValuesFromLegislationCategory.class)
-      .ifPresent(apiValueAnnotation -> {
-        try {
-          Field field = apiValueAnnotation.serviceClass().getField(apiValueAnnotation.legislationCategoryFieldName());
-          LegislationCategory legislationCategory = (LegislationCategory) field.get(null); // Null as we're accessing a static field
-          RatingClassRange range = legislationCategory.getPrimaryRatingRange();
+        .ifPresent(apiValueAnnotation -> {
+          try {
+            Field field = apiValueAnnotation.serviceClass().getField(apiValueAnnotation.legislationCategoryFieldName());
+            LegislationCategory legislationCategory = (LegislationCategory) field.get(null); // Null as we're accessing a static field
+            RatingClassRange range;
 
-          List<String> allowedValues = range.getApplicableRatings().stream()
-              .map(RatingClass::name) // TODO may be nicer to accept the display value i.e 'A++' rather than 'APP'
-              .collect(Collectors.toList());
+            if (apiValueAnnotation.useSecondaryRange()) {
+              range = legislationCategory.getSecondaryRatingRange();
+            } else {
+              range = legislationCategory.getPrimaryRatingRange();
+            }
 
-          schema.setEnum(allowedValues);
+            List<String> allowedValues = range.getApplicableRatings().stream()
+                .map(RatingClass::name) // TODO may be nicer to accept the display value i.e 'A++' rather than 'APP'
+                .collect(Collectors.toList());
 
-        } catch (Exception e) {
-          throw new RuntimeException("Error processing ApiValuesFromLegislationCategory annotations", e);
-        }
-    });
+            schema.setEnum(allowedValues);
+
+          } catch (Exception e) {
+            throw new RuntimeException("Error processing ApiValuesFromLegislationCategory annotations", e);
+          }
+        });
   }
 
 }

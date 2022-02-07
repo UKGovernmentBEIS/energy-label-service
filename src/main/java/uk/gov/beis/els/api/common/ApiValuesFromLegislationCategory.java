@@ -24,4 +24,9 @@ public @interface ApiValuesFromLegislationCategory {
    * @return The name of the LegislationCategory field
    */
   String legislationCategoryFieldName() default "LEGISLATION_CATEGORY_CURRENT";
+
+  /**
+   * @return whether to use the second range of a LegislationCategory for efficiency ratings
+   */
+  boolean useSecondaryRange() default false;
 }
