@@ -5,7 +5,6 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.gov.beis.els.categories.common.PostMarch2021Field;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.model.RescaledInternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
@@ -93,7 +91,7 @@ public class WashingMachinesController extends CategoryController {
   @PostMapping("/washer-dryer")
   @ResponseBody
   public Object handleWasherDryerSubmit(
-      @Validated({Default.class, PostMarch2021Field.class}) @ModelAttribute("form") WasherDryerForm form,
+      @Valid @ModelAttribute("form") WasherDryerForm form,
       BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getWasherDryerModelAndView(bindingResult.getFieldErrors());
