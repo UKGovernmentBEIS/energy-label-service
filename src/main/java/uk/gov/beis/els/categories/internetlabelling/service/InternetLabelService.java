@@ -9,6 +9,7 @@ import org.jsoup.parser.Parser;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.api.common.BaseInternetLabelApiForm;
+import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
@@ -25,6 +26,23 @@ public class InternetLabelService {
     InternetLabellingForm standardForm = new InternetLabellingForm();
     standardForm.setLabelFormat(apiForm.getLabelFormat().name());
     standardForm.setLabelOrientation(apiForm.getLabelOrientation().name());
+    standardForm.setProductPriceHeightPx(String.valueOf(apiForm.getProductPriceHeightPx()));
+    return generateInternetLabel(standardForm, ratingClass, legislationCategory, analyticsLabel);
+  }
+
+  public ProcessedInternetLabelDocument generateInternetLabel(RescaledInternetLabelApiForm apiForm, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
+    InternetLabellingForm standardForm = new InternetLabellingForm();
+    standardForm.setLabelFormat(apiForm.getLabelFormat().name());
+    standardForm.setLabelOrientation(apiForm.getLabelOrientation().name());
+
+    InternetLabelColour colour;
+    if(legislationCategory.getInternetLabelTemplate().getHasBWOption()) {
+      colour = apiForm.getLabelColour();
+    } else {
+      colour = InternetLabelColour.COLOUR;
+    }
+    standardForm.setLabelColour(colour.name());
+
     standardForm.setProductPriceHeightPx(String.valueOf(apiForm.getProductPriceHeightPx()));
     return generateInternetLabel(standardForm, ratingClass, legislationCategory, analyticsLabel);
   }
