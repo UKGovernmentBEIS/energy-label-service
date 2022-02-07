@@ -15,7 +15,7 @@ import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
-@RequestMapping("${api.v1.base_path}/range-hoods")
+@RequestMapping("${api.v1.base_path}")
 @Tag(name = "Range hoods")
 public class RangeHoodsApiController {
 
