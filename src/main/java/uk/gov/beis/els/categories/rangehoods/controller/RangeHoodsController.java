@@ -77,7 +77,7 @@ public class RangeHoodsController {
   private ModelAndView getRangeHoodsForm(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/range-hoods/rangeHoods");
     modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(RangeHoodsService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
-    modelAndView.addObject("secondaryRating", ControllerUtils.ratingRangeToSelectionMap(RangeHoodsService.SECONDARY_CLASS_RANGE));
+    modelAndView.addObject("secondaryRating", ControllerUtils.ratingRangeToSelectionMap(RangeHoodsService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(RangeHoodsController.class).handleRangeHoodsFormSubmit(null, ReverseRouter.emptyBindingResult())));
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     breadcrumbService.addLastBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT);
