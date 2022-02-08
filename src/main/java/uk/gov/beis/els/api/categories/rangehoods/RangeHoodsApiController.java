@@ -15,7 +15,7 @@ import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
-@RequestMapping("${api.v1.base_path}")
+@RequestMapping("${api.v1.base_path}/range-hoods")
 @Tag(name = "Range hoods")
 public class RangeHoodsApiController {
 
@@ -33,17 +33,17 @@ public class RangeHoodsApiController {
   }
 
   @Operation(
-      summary = "Create energy label for range hood",
+      summary = "Create energy label for a range hood",
       description = "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 60mm x 120mm when printed."
   )
-  @PostMapping("/range-hoods/energy-label")
+  @PostMapping("/energy-label")
   public Object rangeHoods(@RequestBody @Valid RangeHoodsForm form) {
     return documentRendererService.processPdfApiResponse(
         rangeHoodsService.generateHtml(form, RangeHoodsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Create an internet label for a range hood")
-  @PostMapping("/range-hoods/internet-label")
+  @PostMapping("/internet-label")
   public Object rangeHoodsInternetLabel(@RequestBody @Valid RangeHoodsInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
