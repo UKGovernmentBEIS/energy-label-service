@@ -20,7 +20,7 @@ import uk.gov.beis.els.service.TemplatePopulator;
 @Service
 public class AirConditionersService {
 
-  public static final LegislationCategory LEGISLATION_CATEGORY_JAN2019 = LegislationCategory.of(
+  public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
       RatingClassRange.of(RatingClass.APPP, RatingClass.D));
 
   private final TemplateParserService templateParserService;

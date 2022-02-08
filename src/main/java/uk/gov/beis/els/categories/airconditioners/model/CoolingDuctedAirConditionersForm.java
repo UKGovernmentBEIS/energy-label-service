@@ -1,35 +1,42 @@
 package uk.gov.beis.els.categories.airconditioners.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
+import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
+import uk.gov.beis.els.categories.airconditioners.service.AirConditionersService;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
-
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.groups.Default;
 
 public class CoolingDuctedAirConditionersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Energy efficiency class for cooling")
   @NotBlank(message = "Select an energy efficiency indicator for cooling", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @ApiValuesFromLegislationCategory(serviceClass = AirConditionersService.class)
   private String coolingEfficiencyRating;
 
   @FieldPrompt("Rated capacity for cooling in kW")
   @Digits(integer = 2, fraction = 1, message = "Enter the rated capacity for cooling, up to 2 digits with an optional decimal place")
+  @Schema(type = "number")
   private String coolingKw;
 
   @FieldPrompt("EER rated value")
   @Digits(integer = 1, fraction = 1, message = "Enter the EER rated value, 1 digit with an optional decimal place")
+  @Schema(type = "number")
   private String eerRated;
 
   @FieldPrompt("Hourly energy consumption in kWh per 60 minutes, rounded up to the nearest integer")
   @Digits(integer = 2, fraction = 0, message = "Enter the hourly energy consumption, up to 2 digits long")
+  @Schema(type = "integer")
   private String coolingHourlyEnergyConsumption;
 
   @FieldPrompt("Sound power levels for indoor units expressed in dB(A) re 1 pW, rounded to the nearest integer")
   @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
+  @Schema(type = "integer")
   private String soundPowerLevelIndoors;
 
   public String getCoolingEfficiencyRating() {
