@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.beis.els.categories.dishwashers.service.DishwashersService;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.televisions.model.TelevisionsForm;
 import uk.gov.beis.els.categories.televisions.service.TelevisionsService;
@@ -48,7 +47,7 @@ public class TelevisionsApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
-            DishwashersService.LEGISLATION_CATEGORY_CURRENT,
+            TelevisionsService.LEGISLATION_CATEGORY_CURRENT,
             ProductMetadata.TV
         ));
   }
