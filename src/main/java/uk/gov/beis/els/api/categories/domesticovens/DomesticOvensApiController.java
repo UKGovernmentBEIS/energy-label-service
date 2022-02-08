@@ -40,7 +40,7 @@ public class DomesticOvensApiController {
     return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an internet label for an electric oven")
+  @Operation(summary = "Create an arrow image for an electric oven")
   @PostMapping("/electric-ovens/internet-label")
   public Object electricOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -57,7 +57,7 @@ public class DomesticOvensApiController {
     return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an internet label for an gas oven")
+  @Operation(summary = "Create an arrow image for a gas oven")
   @PostMapping("/gas-ovens/internet-label")
   public Object gasOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
