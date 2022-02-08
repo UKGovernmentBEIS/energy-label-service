@@ -1,30 +1,39 @@
 package uk.gov.beis.els.categories.refrigeratingappliances.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.refrigeratingappliances.service.RefrigeratingAppliancesService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
+@Schema(name = "Household fridges and freezers energy label")
 @GroupSequenceProvider(FridgesFreezersFormSequenceProvider.class)
 public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Energy efficiency class")
   @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @ApiValuesFromLegislationCategory(serviceClass = RefrigeratingAppliancesService.class)
   private String efficiencyRating;
 
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
+  @Schema(type = "integer")
+  @NotBlank
   private String annualEnergyConsumption;
 
   @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emissions, up to 2 digits long")
+  @Schema(type = "integer")
+  @NotBlank
   private String noiseEmissions;
 
   @FieldPrompt(value = "Does the model have any chill or unfrozen compartments?", hintText = "A chill compartment has a target temperature of 2 degrees Celsius and storage conditions between minus 3 degrees Celsius and 3 degrees Celsius. An unfrozen compartment has a target temperature of 4 degrees Celsius or above.")
@@ -33,6 +42,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Total volume of chill and unfrozen compartments in litres (l)")
   @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of chill and unfrozen compartments in litres up to 3 digits long")
+  @Schema(type = "integer")
   private String nonRatedVolume;
 
   @FieldPrompt(value = "Does the model have any frozen compartments?", hintText = "A frozen compartment has a target temperature of 0 degrees Celsius or below")
@@ -41,10 +51,15 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Total volume of frozen compartments in litres (l)")
   @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of frozen compartments in litres, up to 3 digits long")
+  @Schema(type = "integer")
   private String ratedVolume;
 
   @FieldPrompt("Airborne acoustic noise emission class")
   @NotBlank(message = "Select an airborne acoustic noise emission class")
+  @ApiValuesFromLegislationCategory(
+      serviceClass = RefrigeratingAppliancesService.class,
+      useSecondaryRange = true
+  )
   private String noiseEmissionsClass;
 
   @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
@@ -52,6 +67,8 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character"
   )
+  @NotBlank
+  @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   private String qrCodeUrl;
 
   public String getEfficiencyRating() {
