@@ -9,7 +9,7 @@ import uk.gov.beis.els.categories.refrigeratingappliances.service.RefrigeratingA
 @Schema(name = "Wine storage appliances internet label")
 public class WineStorageAppliancesInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
-  @Schema(description = "Energy efficiency class indicator")
+  @Schema(description = "Energy efficiency class")
   @NotBlank
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratingAppliancesService.class)
   private String efficiencyRating;
