@@ -42,8 +42,8 @@ public class RangeHoodsApiController {
         rangeHoodsService.generateHtml(form, RangeHoodsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an internet label for a range hood")
-  @PostMapping("/internet-label")
+  @Operation(summary = "Create an arrow image for a range hood")
+  @PostMapping("/arrow-image")
   public Object rangeHoodsInternetLabel(@RequestBody @Valid RangeHoodsInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
