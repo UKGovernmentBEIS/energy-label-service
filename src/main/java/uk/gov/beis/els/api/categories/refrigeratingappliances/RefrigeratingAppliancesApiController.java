@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.refrigeratingappliances.model.FridgesFreezersForm;
+import uk.gov.beis.els.categories.refrigeratingappliances.model.WineStorageAppliancesForm;
 import uk.gov.beis.els.categories.refrigeratingappliances.service.RefrigeratingAppliancesService;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -49,6 +50,26 @@ public class RefrigeratingAppliancesApiController {
             form.getEfficiencyRating(),
             RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT,
             ProductMetadata.HRA_FRIDGE_FREEZER
+        ));
+  }
+
+  @Operation(
+      summary = "Create an energy label for wine storage appliances",
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed."
+  )
+  @PostMapping("/wine-storage-appliances/energy-label")
+  public Object wineStorageAppliances(@RequestBody @Valid WineStorageAppliancesForm form) {
+    return documentRendererService.processPdfApiResponse(refrigeratingAppliancesService.generateHtml(form));
+  }
+
+  @Operation(summary = "Create an internet label for wine storage appliances")
+  @PostMapping("/wine-storage-appliances/internet-label")
+  public Object wineStorageAppliancesInternetLabel(@RequestBody @Valid WineStorageAppliancesInternetLabelApiForm form) {
+    return documentRendererService.processImageApiResponse(
+        internetLabelService.generateInternetLabel(form,
+            form.getEfficiencyRating(),
+            RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT,
+            ProductMetadata.HRA_WINE_STORAGE
         ));
   }
 }
