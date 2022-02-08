@@ -9,7 +9,7 @@ import uk.gov.beis.els.categories.dishwashers.service.DishwashersService;
 @Schema(name = "Dishwasher internet label")
 public class DishwashersInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
-  @Schema(description = "The energy efficiency class of the cavity")
+  @Schema(description = "Energy efficiency class indicator")
   @NotBlank
   @ApiValuesFromLegislationCategory(serviceClass = DishwashersService.class)
   private String efficiencyRating;

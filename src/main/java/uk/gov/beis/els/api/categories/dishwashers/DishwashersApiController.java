@@ -41,7 +41,7 @@ public class DishwashersApiController {
     return documentRendererService.processPdfApiResponse(dishwashersService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an energy label for dishwashers")
+  @Operation(summary = "Create an internet label for dishwashers")
   @PostMapping("/internet-label")
   public Object dishwashersInternetLabel(@RequestBody @Valid DishwashersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
