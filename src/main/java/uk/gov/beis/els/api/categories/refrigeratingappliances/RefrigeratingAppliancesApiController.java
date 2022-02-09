@@ -62,8 +62,8 @@ public class RefrigeratingAppliancesApiController {
     return documentRendererService.processPdfApiResponse(refrigeratingAppliancesService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an internet label for wine storage appliances")
-  @PostMapping("/wine-storage-appliances/internet-label")
+  @Operation(summary = "Create an arrow image for wine storage appliances")
+  @PostMapping("/wine-storage-appliances/arrow-image")
   public Object wineStorageAppliancesInternetLabel(@RequestBody @Valid WineStorageAppliancesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,

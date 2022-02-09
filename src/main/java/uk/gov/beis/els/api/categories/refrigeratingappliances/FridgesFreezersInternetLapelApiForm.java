@@ -6,7 +6,7 @@ import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.refrigeratingappliances.service.RefrigeratingAppliancesService;
 
-@Schema(name = "Household fridges and freezers internet label")
+@Schema(name = "Household fridges and freezers arrow image")
 public class FridgesFreezersInternetLapelApiForm extends RescaledInternetLabelApiForm {
 
   @Schema(description = "Energy efficiency class indicator")
