@@ -1,7 +1,7 @@
 package uk.gov.beis.els.api.categories.localspaceheaters;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.BaseInternetLabelApiForm;
 import uk.gov.beis.els.categories.localspaceheaters.service.LocalSpaceHeatersService;
@@ -10,7 +10,7 @@ import uk.gov.beis.els.categories.localspaceheaters.service.LocalSpaceHeatersSer
 public class LocalSpaceHeatersInternetLabelApiForm extends BaseInternetLabelApiForm {
 
   @Schema(description = "The energy efficiency class of the model")
-  @NotBlank
+  @NotNull
   @ApiValuesFromLegislationCategory(serviceClass = LocalSpaceHeatersService.class)
   private String efficiencyRating;
 

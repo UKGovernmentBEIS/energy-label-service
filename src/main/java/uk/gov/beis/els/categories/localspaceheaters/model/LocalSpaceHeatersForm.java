@@ -28,7 +28,7 @@ public class LocalSpaceHeatersForm extends StandardTemplateForm50Char {
   @FieldPrompt("The direct heat output in kW")
   @Digits(integer = 2, fraction = 1, message = "Enter the direct heat output, up to 2 digits long with an optional decimal place")
   @Schema(type = "number")
-  @NotBlank
+  @NotNull
   private String directHeatOutput;
 
   @FieldPrompt("Is this model a local space heater with transfer to a fluid?")
