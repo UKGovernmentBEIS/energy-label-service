@@ -17,6 +17,7 @@ public class BeverageCoolersForm extends StandardTemplateForm40Char {
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @Schema(description = "Energy efficiency class for beverage coolers")
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratorsDirectSalesService.class)
   private String efficiencyRating;
 

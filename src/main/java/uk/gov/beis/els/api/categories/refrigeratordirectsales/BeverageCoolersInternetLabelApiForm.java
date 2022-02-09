@@ -9,7 +9,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.Refrigerators
 @Schema(name = "Beverage coolers arrow image")
 public class BeverageCoolersInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
-  @Schema(description = "Energy efficiency class indicator")
+  @Schema(description = "Energy efficiency class for beverage coolers")
   @NotBlank
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratorsDirectSalesService.class)
   private String efficiencyRating;

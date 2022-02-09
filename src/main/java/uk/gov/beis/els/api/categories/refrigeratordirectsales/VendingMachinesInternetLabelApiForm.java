@@ -9,7 +9,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.Refrigerators
 @Schema(name = "Refrigerated vending machines arrow image")
 public class VendingMachinesInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
-  @Schema(description = "Energy efficiency class indicator")
+  @Schema(description = "Energy efficiency class for refrigerated vending machines")
   @NotBlank
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratorsDirectSalesService.class)
   private String efficiencyRating;

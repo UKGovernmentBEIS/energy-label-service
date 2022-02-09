@@ -9,7 +9,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.Refrigerators
 @Schema(name = "Supermarket refrigerator, freezer cabinets or gelato-scooping cabinets arrow image")
 public class DisplayCabinetsInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
-  @Schema(description = "Energy efficiency class indicator")
+  @Schema(description = "Energy efficiency class for supermarket refrigerators, freezer cabinets or gelato-scooping cabinets")
   @NotBlank
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratorsDirectSalesService.class)
   private String efficiencyRating;

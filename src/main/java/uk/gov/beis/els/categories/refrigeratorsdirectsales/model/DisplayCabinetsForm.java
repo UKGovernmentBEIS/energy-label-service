@@ -20,6 +20,7 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @Schema(description = "Energy efficiency class for supermarket refrigerators, freezer cabinets or gelato-scooping cabinets")
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratorsDirectSalesService.class)
   private String efficiencyRating;
 
