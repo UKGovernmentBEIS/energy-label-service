@@ -27,13 +27,13 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String annualEnergyConsumption;
 
   @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emissions, up to 2 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String noiseEmissions;
 
   @FieldPrompt(value = "Does the model have any chill or unfrozen compartments?", hintText = "A chill compartment has a target temperature of 2 degrees Celsius and storage conditions between minus 3 degrees Celsius and 3 degrees Celsius. An unfrozen compartment has a target temperature of 4 degrees Celsius or above.")
@@ -67,7 +67,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character"
   )
-  @NotBlank
+  @NotNull
   @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   private String qrCodeUrl;
 
