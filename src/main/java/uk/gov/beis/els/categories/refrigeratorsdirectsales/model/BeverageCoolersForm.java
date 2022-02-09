@@ -12,7 +12,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.Refrigerators
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-@Schema(name = "Beverage coolers")
+@Schema(name = "Beverage coolers energy label")
 public class BeverageCoolersForm extends StandardTemplateForm40Char {
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})

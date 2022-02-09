@@ -14,7 +14,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.Refrigerators
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-@Schema(name = "Supermarket refrigerator, freezer cabinets or gelato-scooping cabinets")
+@Schema(name = "Supermarket refrigerator, freezer cabinets or gelato-scooping cabinets energy label")
 @GroupSequenceProvider(DisplayCabinetsFormSequenceProvider.class)
 public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   @FieldPrompt("Energy efficiency class indicator")

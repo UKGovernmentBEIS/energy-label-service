@@ -14,7 +14,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.Refrigerators
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-@Schema(name = "Refrigerated vending machines")
+@Schema(name = "Refrigerated vending machines energy label")
 @GroupSequenceProvider(VendingMachinesFormSequenceProvider.class)
 public class VendingMachinesForm extends StandardTemplateForm40Char {
   @FieldPrompt("Energy efficiency class indicator")
