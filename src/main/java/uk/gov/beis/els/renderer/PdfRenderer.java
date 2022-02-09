@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,6 +37,11 @@ public class PdfRenderer implements Renderer {
     } catch (Exception e) {
       throw new RuntimeException("Error rendering template to PDF", e);
     }
+  }
+
+  @Override
+  public MediaType getTargetContentType() {
+    return MediaType.APPLICATION_PDF;
   }
 
 }

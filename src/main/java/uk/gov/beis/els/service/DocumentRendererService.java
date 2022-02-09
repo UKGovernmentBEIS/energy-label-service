@@ -33,7 +33,6 @@ public class DocumentRendererService {
   }
 
   public ResponseEntity processPdfResponse(ProcessedEnergyLabelDocument processedDocument) {
-
     Resource pdf = pdfRenderer.render(processedDocument.getDocument());
 
     analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
@@ -42,17 +41,34 @@ public class DocumentRendererService {
         processedDocument.getProductMetadata().getAnalyticsLabel());
 
     return serveResource(pdf, generatePdfFilename(processedDocument));
+  }
+  public ResponseEntity processPdfApiResponse(ProcessedEnergyLabelDocument processedDocument) {
+    Resource pdf = pdfRenderer.render(processedDocument.getDocument());
 
+    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
+        GoogleAnalyticsEventCategory.ENERGY_LABEL_API,
+        processedDocument.getAnalyticsEventAction(),
+        processedDocument.getProductMetadata().getAnalyticsLabel());
+
+    return serveWithContentType(pdf, pdfRenderer.getTargetContentType());
+  }
+
+  public ResponseEntity processImageApiResponse(ProcessedInternetLabelDocument processedDocument) {
+
+    Renderer renderer = getImageRenderer(processedDocument);
+
+    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
+        GoogleAnalyticsEventCategory.INTERNET_LABEL_API,
+        processedDocument.getAnalyticsEventAction(),
+        processedDocument.getProductMetadata().getAnalyticsLabel());
+
+
+    return serveWithContentType(renderer.render(processedDocument.getDocument()), renderer.getTargetContentType());
   }
 
   public ResponseEntity processImageResponse(ProcessedInternetLabelDocument processedDocument) {
 
-    Renderer renderer;
-    if (processedDocument.getInternetLabelFormat() == InternetLabelFormat.PNG) {
-      renderer = pngRenderer;
-    } else {
-      renderer = jpegRenderer;
-    }
+    Renderer renderer = getImageRenderer(processedDocument);
 
     analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
         GoogleAnalyticsEventCategory.INTERNET_LABEL,
@@ -61,6 +77,14 @@ public class DocumentRendererService {
 
 
     return serveResource(renderer.render(processedDocument.getDocument()), generateImageFilename(processedDocument));
+  }
+
+  private Renderer getImageRenderer(ProcessedInternetLabelDocument processedDocument) {
+    if (processedDocument.getInternetLabelFormat() == InternetLabelFormat.PNG) {
+      return pngRenderer;
+    } else {
+      return jpegRenderer;
+    }
   }
 
   private String generatePdfFilename(ProcessedEnergyLabelDocument processedDocument) {
@@ -95,6 +119,17 @@ public class DocumentRendererService {
           .body(resource);
     } catch (Exception e) {
       throw new RuntimeException(String.format("Error serving file '%s'", fileName), e);
+    }
+  }
+
+  private ResponseEntity serveWithContentType(Resource resource, MediaType contentType) {
+    try {
+      return ResponseEntity.ok()
+          .contentType(contentType)
+          .contentLength(resource.contentLength())
+          .body(resource);
+    } catch (Exception e) {
+      throw new RuntimeException("Error serving PDF API response", e);
     }
   }
 
