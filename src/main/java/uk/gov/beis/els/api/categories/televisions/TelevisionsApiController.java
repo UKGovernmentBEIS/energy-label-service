@@ -41,8 +41,8 @@ public class TelevisionsApiController {
     return documentRendererService.processPdfApiResponse(televisionsService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an internet label for televisions")
-  @PostMapping("/internet-label")
+  @Operation(summary = "Create an arrow image for televisions")
+  @PostMapping("/arrow-image")
   public Object televisionsInternetLabel(@RequestBody @Valid TelevisionsInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,

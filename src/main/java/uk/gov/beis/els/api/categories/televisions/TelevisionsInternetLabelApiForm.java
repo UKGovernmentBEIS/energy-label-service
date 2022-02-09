@@ -6,7 +6,7 @@ import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.televisions.service.TelevisionsService;
 
-@Schema(name = "Televisions and electronic displays internet label")
+@Schema(name = "Televisions and electronic displays arrow image")
 public class TelevisionsInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
   @Schema(description = "Energy efficiency class for SDR content")
