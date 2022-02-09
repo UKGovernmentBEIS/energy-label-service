@@ -22,13 +22,13 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Visible diagonal screen size in centimetres")
   @Digits(integer = 4, fraction = 0, message = "Enter the screen size in centimetres, up to 4 digits long")
-  @NotBlank
+  @NotNull
   @Schema(type = "integer")
   private String screenSizeCm;
 
   @FieldPrompt("Visible diagonal screen size in inches")
   @Digits(integer = 3, fraction = 0, message = "Enter the screen size in inches, up to 3 digits long")
-  @NotBlank
+  @NotNull
   @Schema(type = "integer")
   private String screenSizeInch;
 
@@ -40,7 +40,7 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("On-mode energy consumption in kWh per 1000 hours, when playing SDR content")
   @Digits(integer = 4, fraction = 0, message = "Enter the energy consumption when playing SDR content, up to 4 digits long")
-  @NotBlank
+  @NotNull
   @Schema(type = "integer")
   private String energyConsumptionSdr1000h;
 
@@ -63,13 +63,13 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Horizontal resolution in pixels")
   @Digits(integer = 5, fraction = 0, message = "Enter the horizontal resolution in pixels, up to 5 digits long")
-  @NotBlank
+  @NotNull
   @Schema(type = "integer")
   private String horizontalPixels;
 
   @FieldPrompt("Vertical resolution in pixels")
   @Digits(integer = 5, fraction = 0, message = "Enter the vertical resolution in pixels, up to 5 digits long")
-  @NotBlank
+  @NotNull
   @Schema(type = "integer")
   private String verticalPixels;
 
@@ -78,7 +78,7 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character"
   )
-  @NotBlank
+  @NotNull
   @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   private String qrCodeUrl;
 

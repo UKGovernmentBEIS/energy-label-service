@@ -1,7 +1,7 @@
 package uk.gov.beis.els.api.categories.televisions;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.televisions.service.TelevisionsService;
@@ -10,7 +10,7 @@ import uk.gov.beis.els.categories.televisions.service.TelevisionsService;
 public class TelevisionsInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
   @Schema(description = "Energy efficiency class for SDR content")
-  @NotBlank
+  @NotNull
   @ApiValuesFromLegislationCategory(serviceClass = TelevisionsService.class)
   private String efficiencyRating;
 
