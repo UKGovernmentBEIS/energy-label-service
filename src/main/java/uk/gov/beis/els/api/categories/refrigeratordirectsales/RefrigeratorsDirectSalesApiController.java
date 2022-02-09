@@ -29,7 +29,8 @@ public class RefrigeratorsDirectSalesApiController {
   @Autowired
   public RefrigeratorsDirectSalesApiController(
       RefrigeratorsDirectSalesService refrigeratorsDirectSalesService,
-      InternetLabelService internetLabelService, DocumentRendererService documentRendererService) {
+      InternetLabelService internetLabelService,
+      DocumentRendererService documentRendererService) {
     this.refrigeratorsDirectSalesService = refrigeratorsDirectSalesService;
     this.internetLabelService = internetLabelService;
     this.documentRendererService = documentRendererService;
