@@ -41,8 +41,8 @@ public class LocalSpaceHeatersApiController {
     return documentRendererService.processPdfApiResponse(localSpaceHeatersService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an internet label for local space heaters")
-  @PostMapping("/internet-label")
+  @Operation(summary = "Create an arrow image for local space heaters")
+  @PostMapping("/arrow-image")
   public Object localSpaceHeatersInternetLabel(@RequestBody @Valid LocalSpaceHeatersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,

@@ -6,7 +6,7 @@ import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.BaseInternetLabelApiForm;
 import uk.gov.beis.els.categories.localspaceheaters.service.LocalSpaceHeatersService;
 
-@Schema(name = "Local space heaters internet label")
+@Schema(name = "Local space heaters arrow image")
 public class LocalSpaceHeatersInternetLabelApiForm extends BaseInternetLabelApiForm {
 
   @Schema(description = "The energy efficiency class of the model")
