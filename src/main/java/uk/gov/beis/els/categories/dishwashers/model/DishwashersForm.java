@@ -3,6 +3,7 @@ package uk.gov.beis.els.categories.dishwashers.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import org.hibernate.validator.constraints.Range;
@@ -21,25 +22,25 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emission, up to 2 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String noiseEmissions;
 
   @FieldPrompt("Rated capacity (number of standard place settings) for the eco programme")
   @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String ecoCapacity;
 
   @FieldPrompt("Eco programme energy consumption (EPEC) in kWh per 100 cycles")
   @Digits(integer = 3, fraction = 0, message = "Enter an eco programme energy consumption, up to 3 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String energyConsumptionPer100Cycles;
 
   @FieldPrompt("Eco programme water consumption (EPWC) in litres per cycle")
   @Digits(integer = 2, fraction = 1, message = "Enter an eco programme water consumption, up to 2 digits with an optional decimal place")
   @Schema(type = "number")
-  @NotBlank
+  @NotNull
   private String waterConsumptionPerCycle;
 
   @FieldPrompt("Hours")
@@ -48,7 +49,7 @@ public class DishwashersForm extends StandardTemplateForm30Char {
       type = "integer",
       description = "Enter a number of hours for the eco programme duration, up to 1 digit. If the eco programme duration is under 1 hour, enter 0"
   )
-  @NotBlank
+  @NotNull
   private String programmeDurationHours;
 
   @FieldPrompt("Minutes")
@@ -57,7 +58,7 @@ public class DishwashersForm extends StandardTemplateForm30Char {
       type = "integer",
       description = "Enter a number of minutes for the eco programme duration, between 0 and 59"
   )
-  @NotBlank
+  @NotNull
   private String programmeDurationMinutes;
 
   @FieldPrompt("Airborne acoustic noise emission class")
@@ -78,7 +79,7 @@ public class DishwashersForm extends StandardTemplateForm30Char {
       hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
-  @NotBlank
+  @NotNull
   @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   private String qrCodeUrl;
 

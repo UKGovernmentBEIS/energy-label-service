@@ -1,7 +1,7 @@
 package uk.gov.beis.els.api.categories.dishwashers;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.dishwashers.service.DishwashersService;
@@ -10,7 +10,7 @@ import uk.gov.beis.els.categories.dishwashers.service.DishwashersService;
 public class DishwashersInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
   @Schema(description = "Energy efficiency class indicator")
-  @NotBlank
+  @NotNull
   @ApiValuesFromLegislationCategory(serviceClass = DishwashersService.class)
   private String efficiencyRating;
 
