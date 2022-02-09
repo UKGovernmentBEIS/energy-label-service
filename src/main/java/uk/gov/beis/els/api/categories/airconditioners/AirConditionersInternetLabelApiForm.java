@@ -1,7 +1,7 @@
 package uk.gov.beis.els.api.categories.airconditioners;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.BaseInternetLabelApiForm;
 import uk.gov.beis.els.categories.airconditioners.service.AirConditionersService;
@@ -10,7 +10,7 @@ import uk.gov.beis.els.categories.airconditioners.service.AirConditionersService
 public class AirConditionersInternetLabelApiForm extends BaseInternetLabelApiForm {
 
   @Schema(description = "The energy efficiency class indicator")
-  @NotBlank
+  @NotNull
   @ApiValuesFromLegislationCategory(serviceClass = AirConditionersService.class)
   private String efficiencyRating;
 

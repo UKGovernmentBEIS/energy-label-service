@@ -21,16 +21,19 @@ public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
   private String warmerHeatingEfficiencyRating;
 
   @FieldPrompt("Design load for heating in warmer climate conditions in kW")
+  @NotNull(groups = WarmerClimateGroup.class)
   @Digits(groups = WarmerClimateGroup.class, integer = 2, fraction = 1, message = "Enter the design load for warmer climate conditions, up to 2 digits with an optional decimal place")
   @Schema(type = "number")
   private String warmerHeatingDesignLoad;
 
   @FieldPrompt("Seasonal coefficient of performance in warmer climate conditions (SCOP value)")
+  @NotNull(groups = WarmerClimateGroup.class)
   @Digits(groups = WarmerClimateGroup.class, integer = 1, fraction = 1, message = "Enter the SCOP value for warmer climate conditions, 1 digit with an optional decimal place")
   @Schema(type = "number")
   private String warmerScop;
 
   @FieldPrompt("Annual energy consumption in kWh per year in warmer climate conditions")
+  @NotNull(groups = WarmerClimateGroup.class)
   @Digits(groups = WarmerClimateGroup.class, integer = 4, fraction = 0,message = "Enter the annual energy consumption for warmer climate conditions, up to 4 digits")
   @Schema(type = "integer")
   private String warmerAnnualEnergyConsumption;
@@ -45,16 +48,19 @@ public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
   private String colderHeatingEfficiencyRating;
 
   @FieldPrompt("Design load for heating in colder climate conditions in kW")
+  @NotNull(groups = ColderClimateGroup.class)
   @Digits(groups = ColderClimateGroup.class, integer = 2, fraction = 1, message = "Enter the design load for colder climate conditions, up to 2 digits with an optional decimal place")
   @Schema(type = "number")
   private String colderHeatingDesignLoad;
 
   @FieldPrompt("Seasonal coefficient of performance in colder climate conditions (SCOP value)")
+  @NotNull(groups = ColderClimateGroup.class)
   @Digits(groups = ColderClimateGroup.class, integer = 1, fraction = 1, message = "Enter the SCOP value for colder climate conditions, 1 digit with an optional decimal place")
   @Schema(type = "number")
   private String colderScop;
 
   @FieldPrompt("Annual energy consumption in kWh per year in colder climate conditions")
+  @NotNull(groups = ColderClimateGroup.class)
   @Digits(groups = ColderClimateGroup.class, integer = 4, fraction = 0,message = "Enter the annual energy consumption for colder climate conditions, up to 4 digits")
   @Schema(type = "integer")
   private String colderAnnualEnergyConsumption;
