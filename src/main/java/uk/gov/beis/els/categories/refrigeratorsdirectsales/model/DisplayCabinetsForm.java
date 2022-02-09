@@ -27,6 +27,7 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   @FieldPrompt("The annual electricity consumption in kWh in terms of final energy consumption per year")
   @Digits(integer = 5, fraction = 0, message = "Enter the annual energy consumption, up to 5 digits long")
   @Schema(type = "integer")
+  @NotNull
   private String annualEnergyConsumption;
 
   @FieldPrompt("Does this model have any display areas functioning at chilled operating temperature?")
@@ -72,7 +73,7 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
-  @NotBlank
+  @NotNull
   private String qrCodeUrl;
 
   public String getEfficiencyRating() {

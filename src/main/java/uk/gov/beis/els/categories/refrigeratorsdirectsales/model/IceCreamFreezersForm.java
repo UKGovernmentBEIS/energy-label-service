@@ -3,6 +3,7 @@ package uk.gov.beis.els.categories.refrigeratorsdirectsales.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
@@ -24,21 +25,25 @@ public class IceCreamFreezersForm extends StandardTemplateForm40Char {
   @FieldPrompt("The annual electricity consumption in kWh in terms of final energy consumption per year")
   @Digits(integer = 4, fraction = 0, message = "Enter the annual energy consumption, up to 4 digits long")
   @Schema(type = "integer")
+  @NotNull
   private String annualEnergyConsumption;
 
   @FieldPrompt("The sum of the net volumes, expressed in litres, of all compartments functioning at frozen operating temperature")
   @Digits(integer = 4, fraction = 0, message = "Enter the total volume of frozen compartments, up to 4 digits long")
   @Schema(type = "integer")
+  @NotNull
   private String capacity;
 
   @FieldPrompt("The highest average compartment temperature, expressed in degrees Celsius, of all compartments functioning at frozen operating temperature")
   @Digits(integer = 2, fraction = 0, message = "Enter the highest average compartment temperature, up to 2 digits long")
   @Schema(type = "integer")
+  @NotNull
   private String compartmentTemp;
 
   @FieldPrompt("The maximum ambient temperature expressed in degrees Celsius")
   @Digits(integer = 2, fraction = 0, message = "Enter the maximum ambient temperature, up to 2 digits long")
   @Schema(type = "integer")
+  @NotNull
   private String maxAmbientTemp;
 
   @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
@@ -46,7 +51,7 @@ public class IceCreamFreezersForm extends StandardTemplateForm40Char {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
-  @NotBlank
+  @NotNull
   private String qrCodeUrl;
 
   public String getEfficiencyRating() {

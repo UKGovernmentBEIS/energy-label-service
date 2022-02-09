@@ -1,7 +1,7 @@
 package uk.gov.beis.els.api.categories.refrigeratordirectsales;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.RefrigeratorsDirectSalesService;
@@ -10,7 +10,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.Refrigerators
 public class IceCreamFreezersInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
   @Schema(description = "Energy efficiency class for ice cream freezers")
-  @NotBlank
+  @NotNull
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratorsDirectSalesService.class)
   private String efficiencyRating;
 
