@@ -2,21 +2,14 @@ package uk.gov.beis.els.categories.refrigeratingappliances.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
-import org.hibernate.validator.group.GroupSequenceProvider;
-import uk.gov.beis.els.categories.common.PostMarch2021Field;
 import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-@GroupSequenceProvider(WineStorageAppliancesFormSequenceProvider.class)
 public class WineStorageAppliancesForm extends StandardTemplateForm30Char {
-
-  @FieldPrompt("What kind of label do you need to create?")
-  @NotBlank(message = "Select the kind of label you need to create", groups = {Default.class, InternetLabellingGroup.class})
-  @DualModeField
-  private String applicableLegislation;
 
   @FieldPrompt("Energy efficiency class")
   @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
@@ -35,18 +28,16 @@ public class WineStorageAppliancesForm extends StandardTemplateForm30Char {
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emissions, up to 2 digits long")
   private String noiseEmissions;
 
-  // Post march 2021 fields
   @FieldPrompt("Airborne acoustic noise emission class")
-  @NotBlank(message = "Select an airborne acoustic noise emission class", groups = PostMarch2021Field.class)
+  @NotBlank(message = "Select an airborne acoustic noise emission class")
   private String noiseEmissionsClass;
 
-  public String getApplicableLegislation() {
-    return applicableLegislation;
-  }
-
-  public void setApplicableLegislation(String applicableLegislation) {
-    this.applicableLegislation = applicableLegislation;
-  }
+  @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
+      hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
+  @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
+      message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character"
+  )
+  private String qrCodeUrl;
 
   public String getEfficiencyRating() {
     return efficiencyRating;
@@ -86,5 +77,13 @@ public class WineStorageAppliancesForm extends StandardTemplateForm30Char {
 
   public void setNoiseEmissionsClass(String noiseEmissionsClass) {
     this.noiseEmissionsClass = noiseEmissionsClass;
+  }
+
+  public String getQrCodeUrl() {
+    return qrCodeUrl;
+  }
+
+  public void setQrCodeUrl(String qrCodeUrl) {
+    this.qrCodeUrl = qrCodeUrl;
   }
 }

@@ -1,17 +1,17 @@
-package uk.gov.beis.els.api.categories.domesticovens;
+package uk.gov.beis.els.api.categories.rangehoods;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.BaseInternetLabelApiForm;
-import uk.gov.beis.els.categories.domesticovens.service.DomesticOvensService;
+import uk.gov.beis.els.categories.rangehoods.service.RangeHoodsService;
 
-@Schema(name = "Domestic oven arrow image")
-public class DomesticOvenInternetLabelApiForm extends BaseInternetLabelApiForm {
+@Schema(name = "Range hood internet label")
+public class RangeHoodsInternetLabelApiForm extends BaseInternetLabelApiForm {
 
-  @Schema(description = "The energy efficiency class of the cavity")
+  @Schema(description = "Energy efficiency class indicator")
   @NotBlank
-  @ApiValuesFromLegislationCategory(serviceClass = DomesticOvensService.class)
+  @ApiValuesFromLegislationCategory(serviceClass = RangeHoodsService.class)
   private String efficiencyRating;
 
   public String getEfficiencyRating() {
