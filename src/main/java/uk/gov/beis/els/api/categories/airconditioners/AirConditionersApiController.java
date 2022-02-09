@@ -39,7 +39,7 @@ public class AirConditionersApiController {
 
   @Operation(
       summary = "Create an energy label for a cooling-only ductless air conditioner",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/non-duct/cooling-only-air-conditioners/energy-label")
   public Object coolingOnlyDuctlessAirConditioners(@RequestBody @Valid CoolingDuctlessAirConditionersForm form) {
@@ -56,7 +56,7 @@ public class AirConditionersApiController {
 
   @Operation(
       summary = "Create an energy label for a heating-only ductless air conditioner",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/non-duct/heating-only-air-conditioners/energy-label")
   public Object heatingOnlyDuctlessAirConditioners(@RequestBody @Valid HeatingDuctlessAirConditionersForm form) {
@@ -73,7 +73,7 @@ public class AirConditionersApiController {
 
   @Operation(
       summary = "Create an energy label for a reversible ductless air conditioner",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. The label must be at least 120mm x 210mm when printed "
   )
   @PostMapping("/non-duct/reversible-air-conditioners/energy-label")
   public Object reversibleDuctlessAirConditioners(@RequestBody @Valid ReversibleDuctlessAirConditionersForm form) {
@@ -90,7 +90,7 @@ public class AirConditionersApiController {
 
   @Operation(
       summary = "Create an energy label for a cooling-only single or double duct air conditioner",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/single-or-double-duct/cooling-only-air-conditioners/energy-label")
   public Object coolingOnlyDuctedAirConditioners(@RequestBody @Valid CoolingDuctedAirConditionersForm form) {
@@ -107,7 +107,7 @@ public class AirConditionersApiController {
 
   @Operation(
       summary = "Create an energy label for a heating-only single or double duct air conditioner",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/single-or-double-duct/heating-only-air-conditioners/energy-label")
   public Object heatingOnlyDuctedAirConditioners(@RequestBody @Valid HeatingDuctedAirConditionersForm form) {
@@ -124,7 +124,7 @@ public class AirConditionersApiController {
 
   @Operation(
       summary = "Create an energy label for a reversible single or double duct air conditioner",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/single-or-double-duct/reversible-air-conditioners/energy-label")
   public Object reversibleDuctedAirConditioners(@RequestBody @Valid ReversibleDuctedAirConditionersForm form) {

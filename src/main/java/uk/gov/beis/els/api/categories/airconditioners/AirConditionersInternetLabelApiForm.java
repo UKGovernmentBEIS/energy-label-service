@@ -9,7 +9,7 @@ import uk.gov.beis.els.categories.airconditioners.service.AirConditionersService
 @Schema(name = "Air conditioner arrow image")
 public class AirConditionersInternetLabelApiForm extends BaseInternetLabelApiForm {
 
-  @Schema(description = "The energy efficiency class for cooling")
+  @Schema(description = "The energy efficiency class indicator")
   @NotBlank
   @ApiValuesFromLegislationCategory(serviceClass = AirConditionersService.class)
   private String efficiencyRating;
