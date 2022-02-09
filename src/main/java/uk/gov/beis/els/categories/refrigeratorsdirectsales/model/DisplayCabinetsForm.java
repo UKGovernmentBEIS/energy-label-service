@@ -42,11 +42,13 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with chilled operating temperatures")
   @Digits(groups = FridgeGroup.class, integer = 2, fraction = 0, message = "Enter the highest temperature of the warmest M-package in the chilled compartments, up to 2 digits long")
   @Schema(type = "integer")
+  @NotNull(groups = FridgeGroup.class)
   private String fridgeMaxTemp;
 
   @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with chilled operating temperatures")
   @Digits(groups = FridgeGroup.class, integer = 2, fraction = 0, message = "Enter lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages in the chilled compartments, up to 2 digits long")
   @Schema(type = "integer")
+  @NotNull(groups = FridgeGroup.class)
   private String fridgeMinTemp;
 
   @FieldPrompt("Does this model have any display areas functioning at frozen operating temperature?")
@@ -56,16 +58,19 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
   @FieldPrompt("The sum of the display areas, expressed in square metres, of all display areas functioning at frozen operating temperature")
   @Digits(groups = FreezerGroup.class, integer = 4, fraction = 2, message = "Enter the total display area of frozen compartments, up to 4 digits long with up to 2 decimal places")
   @Schema(type = "number")
+  @NotNull(groups = FreezerGroup.class)
   private String freezerCapacity;
 
   @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter the highest temperature of the warmest M-package in the frozen compartments, up to 2 digits long")
   @Schema(type = "integer")
+  @NotNull(groups = FreezerGroup.class)
   private String freezerMaxTemp;
 
   @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages in the frozen compartments, up to 2 digits long")
   @Schema(type = "integer")
+  @NotNull(groups = FreezerGroup.class)
   private String freezerMinTemp;
 
   @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",

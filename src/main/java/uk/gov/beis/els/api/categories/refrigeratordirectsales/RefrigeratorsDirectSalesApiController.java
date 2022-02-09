@@ -59,7 +59,7 @@ public class RefrigeratorsDirectSalesApiController {
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/ice-cream-freezers/energy-label")
-  public Object  iceCreamFreezers(@RequestBody @Valid IceCreamFreezersForm form) {
+  public Object iceCreamFreezers(@RequestBody @Valid IceCreamFreezersForm form) {
     return documentRendererService.processPdfApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
@@ -77,7 +77,7 @@ public class RefrigeratorsDirectSalesApiController {
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/beverage-coolers/energy-label")
-  public Object  beverageCoolers(@RequestBody @Valid BeverageCoolersForm form) {
+  public Object beverageCoolers(@RequestBody @Valid BeverageCoolersForm form) {
     return documentRendererService.processPdfApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
@@ -95,7 +95,7 @@ public class RefrigeratorsDirectSalesApiController {
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/display-cabinets/energy-label")
-  public Object  displayCabinets(@RequestBody @Valid DisplayCabinetsForm form) {
+  public Object displayCabinets(@RequestBody @Valid DisplayCabinetsForm form) {
     return documentRendererService.processPdfApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
