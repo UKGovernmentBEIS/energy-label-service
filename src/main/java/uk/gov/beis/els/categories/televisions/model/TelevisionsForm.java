@@ -59,6 +59,7 @@ public class TelevisionsForm extends StandardTemplateForm30Char {
   @FieldPrompt("On-mode energy consumption in kWh per 1000 hours, when playing HDR content")
   @Digits(integer = 4, fraction = 0, message = "Enter the energy consumption when playing HDR content, up to 4 digits long", groups = HdrGroup.class)
   @Schema(type = "integer")
+  @NotNull(groups = HdrGroup.class)
   private String energyConsumptionHdr1000h;
 
   @FieldPrompt("Horizontal resolution in pixels")
