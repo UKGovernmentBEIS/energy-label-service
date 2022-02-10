@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
@@ -53,7 +54,7 @@ public class ProRefrigeratedCabinetsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("The climate class")
   @NotNull(message = "Select a climate class")
-  @Schema(type = "integer")
+  @ApiValuesFromEnum(ClimateClass.class)
   private String climateClass;
 
   public String getEfficiencyRating() {
