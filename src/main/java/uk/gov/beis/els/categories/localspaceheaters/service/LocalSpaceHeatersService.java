@@ -30,7 +30,8 @@ public class LocalSpaceHeatersService {
 
 
     if (form.getFluidTransfer()) {
-      templatePopulator.applyCssClassToId("indirectHeatSection", "hasIndirectHeatSection");
+      templatePopulator.applyCssClassToId("indirectHeatSection", "hasIndirectHeatSection")
+          .setText("indirectHeatKw", form.getIndirectHeatOutput());
     }
 
     return templatePopulator
@@ -38,7 +39,6 @@ public class LocalSpaceHeatersService {
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("directHeatKw", form.getDirectHeatOutput())
-      .setText("indirectHeatKw", form.getIndirectHeatOutput())
       .asProcessedEnergyLabel(ProductMetadata.LOCAL_SPACE_HEATERS, form);
   }
 }

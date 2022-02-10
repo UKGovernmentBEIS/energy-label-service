@@ -68,6 +68,7 @@ public class RefrigeratorsDirectSalesService {
 
     if (form.getFrozenCompartment()) {
       templatePopulator.applyCssClassToId("freezerSection", "hasFreezerSection");
+      templatePopulator.setText("freezerMaxTemp", form.getFreezerMaxTemp());
     } else {
       templatePopulator.setElementTranslate("fridgeSection", 0, 35);
     }
@@ -83,7 +84,6 @@ public class RefrigeratorsDirectSalesService {
         .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsL")
         .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
         .removeElementById("fridgeMinTempSection")
-        .setText("freezerMaxTemp", form.getFreezerMaxTemp())
         .removeElementById("freezerMinTempSection")
         .asProcessedEnergyLabel(ProductMetadata.VENDING_MACHINES, form);
   }
@@ -93,7 +93,11 @@ public class RefrigeratorsDirectSalesService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/refrigerators-direct-sales.svg"));
 
     if (form.getChilledCompartment()) {
-      templatePopulator.applyCssClassToId("fridgeSection", "hasFridgeSection");
+      templatePopulator.applyCssClassToId("fridgeSection", "hasFridgeSection")
+          .setText("fridgeCapacity", form.getFridgeCapacity())
+          .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsm2")
+          .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
+          .setText("fridgeMinTemp", form.getFridgeMinTemp());
 
       if(!form.getFrozenCompartment()) {
         templatePopulator.setElementTranslate("fridgeSection", 0, 35);
@@ -102,7 +106,10 @@ public class RefrigeratorsDirectSalesService {
 
     if (form.getFrozenCompartment()) {
       templatePopulator.applyCssClassToId("freezerSection", "hasFreezerSection");
-      templatePopulator.applyCssClassToId("freezerCapacitySection", "hasFreezerCapacitySection");
+      templatePopulator.applyCssClassToId("freezerCapacitySection", "hasFreezerCapacitySection")
+          .setText("freezerCapacity", form.getFreezerCapacity())
+          .setText("freezerMaxTemp", form.getFreezerMaxTemp())
+          .setText("freezerMinTemp", form.getFreezerMinTemp());
 
       if(!form.getChilledCompartment()) {
         templatePopulator.setElementTranslate("freezerSection", 0, -44.5);
@@ -115,13 +122,6 @@ public class RefrigeratorsDirectSalesService {
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
-        .setText("fridgeCapacity", form.getFridgeCapacity())
-        .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsm2")
-        .setText("fridgeMaxTemp", form.getFridgeMaxTemp())
-        .setText("fridgeMinTemp", form.getFridgeMinTemp())
-        .setText("freezerCapacity", form.getFreezerCapacity())
-        .setText("freezerMaxTemp", form.getFreezerMaxTemp())
-        .setText("freezerMinTemp", form.getFreezerMinTemp())
         .asProcessedEnergyLabel(ProductMetadata.DISPLAY_CABINETS, form);
   }
 }
