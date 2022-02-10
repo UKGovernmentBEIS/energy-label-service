@@ -42,8 +42,8 @@ public class RefrigeratingAppliancesApiController {
     return documentRendererService.processPdfApiResponse(refrigeratingAppliancesService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an internet label for household fridges and freezers")
-  @PostMapping("/household-fridges-and-freezers/internet-label")
+  @Operation(summary = "Create an arrow image for household fridges and freezers")
+  @PostMapping("/household-fridges-and-freezers/arrow-image")
   public Object fridgesFreezersInternetLabel(@RequestBody @Valid RefrigeratingAppliancesInternetLapelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,
