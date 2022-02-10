@@ -6,10 +6,10 @@ import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.RefrigeratorsDirectSalesService;
 
-@Schema(name = "Supermarket refrigerator, freezer cabinets or gelato-scooping cabinets arrow image")
-public class DisplayCabinetsInternetLabelApiForm extends RescaledInternetLabelApiForm {
+@Schema(name = "Refrigerators with a direct sales function arrow image")
+public class RefrigeratorsDirectSalesInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
-  @Schema(description = "Energy efficiency class for supermarket refrigerators, freezer cabinets or gelato-scooping cabinets")
+  @Schema(description = "Energy efficiency class for refrigerators with a direct sales function")
   @NotNull
   @ApiValuesFromLegislationCategory(serviceClass = RefrigeratorsDirectSalesService.class)
   private String efficiencyRating;

@@ -48,7 +48,7 @@ public class RefrigeratorsDirectSalesApiController {
 
   @Operation(summary = "Create an arrow image for refrigerated vending machines")
   @PostMapping("/vending-machines/arrow-image")
-  public Object vendingMachinesInternetLabel(@RequestBody @Valid VendingMachinesInternetLabelApiForm form) {
+  public Object vendingMachinesInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.VENDING_MACHINES));
@@ -66,7 +66,7 @@ public class RefrigeratorsDirectSalesApiController {
 
   @Operation(summary = "Create an arrow image for ice cream freezers")
   @PostMapping("/ice-cream-freezers/arrow-image")
-  public Object iceCreamFreezersInternetLabel(@RequestBody @Valid IceCreamFreezersInternetLabelApiForm form) {
+  public Object iceCreamFreezersInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.ICE_CREAM_FREEZERS));
@@ -84,7 +84,7 @@ public class RefrigeratorsDirectSalesApiController {
 
   @Operation(summary = "Create an arrow image for beverage coolers")
   @PostMapping("/beverage-coolers/arrow-image")
-  public Object beverageCoolersInternetLabel(@RequestBody @Valid BeverageCoolersInternetLabelApiForm form) {
+  public Object beverageCoolersInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.BEVERAGE_COOLERS));
@@ -102,7 +102,7 @@ public class RefrigeratorsDirectSalesApiController {
 
   @Operation(summary = "Create an arrow image for supermarket refrigerator, freezer cabinets or gelato-scooping cabinets")
   @PostMapping("/display-cabinets/arrow-image")
-  public Object displayCabinetsInternetLabel(@RequestBody @Valid DisplayCabinetsInternetLabelApiForm form) {
+  public Object displayCabinetsInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.DISPLAY_CABINETS));
