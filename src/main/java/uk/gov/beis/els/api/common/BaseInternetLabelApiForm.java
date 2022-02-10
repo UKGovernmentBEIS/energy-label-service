@@ -10,6 +10,7 @@ public class BaseInternetLabelApiForm {
 
   @FieldPrompt(value = "Enter height of the product's price (in pixels)")
   @Digits(integer = 3, fraction = 0, message = "Enter the height of the product price, up to 3 digits long")
+  @NotNull
   private int productPriceHeightPx;
 
   @FieldPrompt("Arrow direction")
