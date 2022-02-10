@@ -1,5 +1,6 @@
 package uk.gov.beis.els.service;
 
+import com.google.common.base.Strings;
 import java.time.Duration;
 import java.util.UUID;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class AnalyticsService {
         // In that case, we generate a random client ID so we can track this event, but it won't be linked to the rest of
         // the user's actions in the service
         String clientId = jsClientId;
-        if (clientId.isEmpty()) {
+        if (Strings.isNullOrEmpty(clientId)) {
           clientId = UUID.randomUUID().toString();
         }
 

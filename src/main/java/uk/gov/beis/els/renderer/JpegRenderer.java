@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.util.TemplateUtils;
 
@@ -40,4 +41,10 @@ public class JpegRenderer implements Renderer {
       throw new RuntimeException("Error generating JPEG from SVG", e);
     }
   }
+
+  @Override
+  public MediaType getTargetContentType() {
+    return MediaType.IMAGE_JPEG;
+  }
+
 }

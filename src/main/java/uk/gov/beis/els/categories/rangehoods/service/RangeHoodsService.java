@@ -15,9 +15,8 @@ import uk.gov.beis.els.service.TemplatePopulator;
 public class RangeHoodsService {
 
   public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
-      RatingClassRange.of(RatingClass.APPP, RatingClass.D));
-
-  public static final RatingClassRange SECONDARY_CLASS_RANGE = RatingClassRange.of(RatingClass.A, RatingClass.G);
+      RatingClassRange.of(RatingClass.APPP, RatingClass.D),
+      RatingClassRange.of(RatingClass.A, RatingClass.G));
 
   private final TemplateParserService templateParserService;
 
