@@ -38,6 +38,7 @@ public class LocalSpaceHeatersForm extends StandardTemplateForm50Char {
   @FieldPrompt("The indirect heat output in kW")
   @Digits(groups = HeatTransferGroup.class, integer = 2, fraction = 1, message = "Enter the indirect heat output, up to 2 digits long with an optional decimal place")
   @Schema(type = "number")
+  @NotNull(groups = HeatTransferGroup.class)
   private String indirectHeatOutput;
 
   public String getEfficiencyRating() {
