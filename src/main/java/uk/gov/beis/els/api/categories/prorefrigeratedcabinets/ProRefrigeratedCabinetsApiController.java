@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
-import uk.gov.beis.els.categories.localspaceheaters.service.LocalSpaceHeatersService;
 import uk.gov.beis.els.categories.prorefrigeratedcabinets.model.ProRefrigeratedCabinetsForm;
 import uk.gov.beis.els.categories.prorefrigeratedcabinets.service.ProRefrigeratedCabinetsService;
 import uk.gov.beis.els.model.ProductMetadata;
@@ -50,7 +49,7 @@ public class ProRefrigeratedCabinetsApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
-            LocalSpaceHeatersService.LEGISLATION_CATEGORY_CURRENT,
+            ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT,
             ProductMetadata.PRO_REFRIGERATED_CABINETS
         ));
   }
