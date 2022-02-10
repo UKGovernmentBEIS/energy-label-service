@@ -43,6 +43,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @FieldPrompt("Total volume of chill and unfrozen compartments in litres (l)")
   @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of chill and unfrozen compartments in litres up to 3 digits long")
   @Schema(type = "integer")
+  @NotNull(groups = FridgeGroup.class)
   private String nonRatedVolume;
 
   @FieldPrompt(value = "Does the model have any frozen compartments?", hintText = "A frozen compartment has a target temperature of 0 degrees Celsius or below")
@@ -52,6 +53,7 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
   @FieldPrompt("Total volume of frozen compartments in litres (l)")
   @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of frozen compartments in litres, up to 3 digits long")
   @Schema(type = "integer")
+  @NotNull(groups = FreezerGroup.class)
   private String ratedVolume;
 
   @FieldPrompt("Airborne acoustic noise emission class")

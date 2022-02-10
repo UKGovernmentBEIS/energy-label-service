@@ -44,7 +44,7 @@ public class RefrigeratingAppliancesApiController {
 
   @Operation(summary = "Create an internet label for household fridges and freezers")
   @PostMapping("/household-fridges-and-freezers/internet-label")
-  public Object fridgesFreezersInternetLabel(@RequestBody @Valid FridgesFreezersInternetLapelApiForm form) {
+  public Object fridgesFreezersInternetLabel(@RequestBody @Valid RefrigeratingAppliancesInternetLapelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
@@ -64,7 +64,7 @@ public class RefrigeratingAppliancesApiController {
 
   @Operation(summary = "Create an arrow image for wine storage appliances")
   @PostMapping("/wine-storage-appliances/arrow-image")
-  public Object wineStorageAppliancesInternetLabel(@RequestBody @Valid WineStorageAppliancesInternetLabelApiForm form) {
+  public Object wineStorageAppliancesInternetLabel(@RequestBody @Valid RefrigeratingAppliancesInternetLapelApiForm form) {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),

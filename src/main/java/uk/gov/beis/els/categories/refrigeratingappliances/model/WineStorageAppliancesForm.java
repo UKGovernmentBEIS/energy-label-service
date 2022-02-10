@@ -3,6 +3,7 @@ package uk.gov.beis.els.categories.refrigeratingappliances.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
@@ -24,19 +25,19 @@ public class WineStorageAppliancesForm extends StandardTemplateForm30Char {
   @FieldPrompt("Annual energy consumption (AEC) in kWh per year")
   @Digits(integer = 3, fraction = 0, message = "Enter the annual energy consumption, up to 3 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String annualEnergyConsumption;
 
   @FieldPrompt("Rated capacity in number of standard wine bottles")
   @Digits(integer = 3, fraction = 0, message = "Enter the total capacity of bottles, up to 3 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String bottleCapacity;
 
   @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emissions, up to 2 digits long")
   @Schema(type = "integer")
-  @NotBlank
+  @NotNull
   private String noiseEmissions;
 
   @FieldPrompt("Airborne acoustic noise emission class")
@@ -52,7 +53,7 @@ public class WineStorageAppliancesForm extends StandardTemplateForm30Char {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character"
   )
-  @NotBlank
+  @NotNull
   @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   private String qrCodeUrl;
 
