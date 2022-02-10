@@ -11,9 +11,9 @@ import uk.gov.beis.els.model.meta.FieldPrompt;
 public class BaseInternetLabelApiForm {
 
   @FieldPrompt(value = "Enter height of the product's price (in pixels)")
-  @NotNull
   @Digits(integer = 3, fraction = 0, message = "Enter the height of the product price, up to 3 digits long")
   @Min(value = 1, message = "Height of product's price must be greater than zero")
+  @NotNull
   @Schema(type = "integer")
   private int productPriceHeightPx;
 
