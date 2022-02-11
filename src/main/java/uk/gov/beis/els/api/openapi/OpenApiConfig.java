@@ -13,8 +13,9 @@ public class OpenApiConfig {
     return new OpenAPI()
       .info(
         new Info()
-          .title("Create an energy label")
-          .description("Create a label for an energy-related product (ErP) that you make or sell to UK customers, for example white goods, boilers and other household appliances.")
+            .title("Create an energy label")
+            .description("Create a label for an energy-related product (ErP) that you make or sell to UK customers, for example white goods, boilers and other household appliances.")
+            .version("v1")
       );
   }
 
