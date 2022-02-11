@@ -11,7 +11,7 @@ public class CondenserTumbleDryersForm extends TumbleDryersForm {
 
   @FieldPrompt("Condensation efficiency class indicator")
   @NotBlank(message = "Select a condensation efficiency class")
-  @ApiValuesFromLegislationCategory(serviceClass = TumbleDryersService.class)
+  @ApiValuesFromLegislationCategory(serviceClass = TumbleDryersService.class, useSecondaryRange = true)
   private String condensationEfficiencyRating;
 
   public String getCondensationEfficiencyRating() {
