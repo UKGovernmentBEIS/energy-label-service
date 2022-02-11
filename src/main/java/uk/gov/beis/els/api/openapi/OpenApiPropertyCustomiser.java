@@ -12,6 +12,7 @@ import javax.validation.constraints.Digits;
 import org.springdoc.core.customizers.PropertyCustomizer;
 import org.springframework.stereotype.Component;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
+import uk.gov.beis.els.api.common.ApiValuesFromRatingClassRange;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -27,6 +28,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
 
     processFieldPrompts(annotations, schema);
     processLegislationCategoryValues(annotations, schema);
+    processRatingClassRangeValues(annotations, schema);
 
     return schema;
   }
@@ -108,4 +110,27 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         });
   }
 
+  /**
+   * Sets the allowedValues list from a RatingClassRange field accessed via reflection.
+   * @param annotations the annotations on the element
+   * @param schema the OpenAPI schema
+   */
+  private void processRatingClassRangeValues(List<Annotation> annotations, Schema schema) {
+    getAnnotation(annotations, ApiValuesFromRatingClassRange.class)
+        .ifPresent(apiValueAnnotation -> {
+          try {
+            Field field = apiValueAnnotation.serviceClass().getField(apiValueAnnotation.ratingClassRangeFieldName());
+            RatingClassRange range = (RatingClassRange) field.get(null); // Null as we're accessing a static field
+
+            List<String> allowedValues = range.getApplicableRatings().stream()
+                .map(RatingClass::name) // TODO ELG-38 accept the display value i.e 'A++' rather than 'APP'
+                .collect(Collectors.toList());
+
+            schema.setEnum(allowedValues);
+
+          } catch (Exception e) {
+            throw new RuntimeException("Error processing RatingClassRange annotations", e);
+          }
+        });
+  }
 }
