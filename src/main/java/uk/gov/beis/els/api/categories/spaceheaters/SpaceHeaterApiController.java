@@ -14,6 +14,7 @@ import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersFor
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -141,5 +142,23 @@ public class SpaceHeaterApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP_COMBINATION));
+  }
+
+  @Operation(
+      summary = "Packages of space heater, temperature control and solar device energy label",
+      description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed."
+  )
+  @PostMapping("/package-space-heater/energy-label")
+  public Object packageSpaceHeater(@RequestBody @Valid SpaceHeaterPackagesForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(form));
+  }
+
+  @Operation(summary = "Packages of space heater, temperature control and solar device arrow image")
+  @PostMapping("/package-space-heater/arrow-image")
+  public Object packageSpaceHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
+    return documentRendererService.processImageApiResponse(
+        internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
+            SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_PACKAGE));
   }
 }
