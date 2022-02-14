@@ -37,7 +37,7 @@ public class Bucket4JRequestService {
         return ipAddressesSplit.get(0);
       } else if (ipAddressesSplit.size() > 1) {
         String lastIpAddress = Iterables.getLast(ipAddressesSplit);
-        LOGGER.warn("Request for " + request.getRequestURI() + " found with multiple IP addresses: " + ipAddresses + ". Origin IP determined to be " + lastIpAddress);
+        LOGGER.warn("Request for {} found with multiple IP addresses: {}. Origin IP determined to be {}", request.getRequestURI(), ipAddresses, lastIpAddress);
         return lastIpAddress;
       } else {
         throw new RuntimeException("Request for " + request.getRequestURI() + " found with no IP addresses in the X-Forwarded-For header");
