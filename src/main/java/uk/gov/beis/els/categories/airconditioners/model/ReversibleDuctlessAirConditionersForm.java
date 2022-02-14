@@ -42,7 +42,6 @@ public class ReversibleDuctlessAirConditionersForm extends MultipleClimateGroupF
   private String coolingAnnualEnergyConsumption;
 
   @FieldPrompt("Energy efficiency class for Average heating season")
-  @NotNull
   @NotBlank(message = "Select an energy efficiency indicator for average climate conditions")
   @ApiValuesFromLegislationCategory(serviceClass = AirConditionersService.class)
   private String averageHeatingEfficiencyRating;
