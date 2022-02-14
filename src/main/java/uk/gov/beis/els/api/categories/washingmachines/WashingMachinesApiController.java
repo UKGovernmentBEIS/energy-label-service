@@ -55,7 +55,7 @@ public class WashingMachinesApiController {
 
   @Operation(
       summary = "Create an energy label for washer-dryers",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in washing machine it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in washer-dryer it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/washer-dryer/energy-label")
   public Object washerDryer(@RequestBody @Valid WasherDryerForm form) {
