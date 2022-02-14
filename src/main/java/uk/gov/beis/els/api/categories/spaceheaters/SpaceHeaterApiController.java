@@ -11,6 +11,7 @@ import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
@@ -160,5 +161,23 @@ public class SpaceHeaterApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_PACKAGE));
+  }
+
+  @Operation(
+      summary = "Packages of combination heater, temperature control and solar device energy label",
+      description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed."
+  )
+  @PostMapping("/package-combination-heater/energy-label")
+  public Object combinationPackageSpaceHeater(@RequestBody @Valid CombinationHeaterPackagesForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(form));
+  }
+
+  @Operation(summary = "Packages of combination heater, temperature control and solar device arrow image")
+  @PostMapping("/package-combination-heater/arrow-image")
+  public Object combinationPackageSpaceHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
+    return documentRendererService.processImageApiResponse(
+        internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
+            SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION));
   }
 }
