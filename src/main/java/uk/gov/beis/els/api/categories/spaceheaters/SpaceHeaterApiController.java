@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -65,5 +66,23 @@ public class SpaceHeaterApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_BOILER_COMBI));
+  }
+
+  @Operation(
+      summary = "Cogeneration space heaters energy label",
+      description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
+  )
+  @PostMapping("/cogeneration-space-heaters/energy-label")
+  public Object cogenerationSpaceHeaters(@RequestBody @Valid CogenerationSpaceHeatersForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+  }
+
+  @Operation(summary = "Cogeneration space heaters arrow image")
+  @PostMapping("/cogeneration-space-heaters/arrow-image")
+  public Object cogenerationSpaceHeatersInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
+    return documentRendererService.processImageApiResponse(
+        internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
+            SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_COGEN));
   }
 }
