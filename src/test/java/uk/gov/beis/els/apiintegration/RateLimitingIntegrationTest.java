@@ -38,6 +38,7 @@ public class RateLimitingIntegrationTest {
         .build();
   }
 
+  //TODO fix integration test: raised ELG-39 for this
   @Test
   public void withSingleIpAddress() throws Exception {
 
