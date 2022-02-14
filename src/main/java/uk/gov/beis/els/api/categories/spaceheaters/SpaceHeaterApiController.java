@@ -11,6 +11,7 @@ import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -84,5 +85,23 @@ public class SpaceHeaterApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_COGEN));
+  }
+
+  @Operation(
+      summary = "Low-temperature heat pump space heaters energy label",
+      description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
+  )
+  @PostMapping("/low-temperature-heat-pump-space-heaters/energy-label")
+  public Object lowTempertatureHeatPumpSpaceHeater(@RequestBody @Valid LowTemperatureHeatPumpSpaceHeatersForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+  }
+
+  @Operation(summary = "Low-temperature heat pump space heaters arrow image")
+  @PostMapping("/low-temperature-heat-pump-space-heaters/arrow-image")
+  public Object lowTempertatureHeatPumpSpaceHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
+    return documentRendererService.processImageApiResponse(
+        internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
+            SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_LOW_TEMP));
   }
 }
