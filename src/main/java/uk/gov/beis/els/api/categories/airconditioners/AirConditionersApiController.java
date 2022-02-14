@@ -23,6 +23,7 @@ import uk.gov.beis.els.service.DocumentRendererService;
 @RequestMapping("${api.v1.base_path}/air-conditioners")
 @Tag(name = "Air conditioners")
 public class AirConditionersApiController {
+
   private final AirConditionersService airConditionersService;
   private final InternetLabelService internetLabelService;
   private final DocumentRendererService documentRendererService;
