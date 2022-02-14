@@ -11,6 +11,7 @@ import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
@@ -122,5 +123,23 @@ public class SpaceHeaterApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP));
+  }
+
+  @Operation(
+      summary = "Heat pump combination heaters energy label",
+      description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
+  )
+  @PostMapping("/heat-pump-combination-heaters/energy-label")
+  public Object heatPumpCombinationHeater(@RequestBody @Valid HeatPumpCombinationHeatersForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+  }
+
+  @Operation(summary = "Heat pump combination heaters arrow image")
+  @PostMapping("/heat-pump-combination-heaters/arrow-image")
+  public Object heatPumpCombinationHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
+    return documentRendererService.processImageApiResponse(
+        internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
+            SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP_COMBINATION));
   }
 }
