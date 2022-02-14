@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.Digits;
 import org.springdoc.core.customizers.PropertyCustomizer;
 import org.springframework.stereotype.Component;
+import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.RatingClass;
@@ -27,6 +28,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
 
     processFieldPrompts(annotations, schema);
     processLegislationCategoryValues(annotations, schema);
+    processEnumValues(annotations, schema);
 
     return schema;
   }
@@ -97,13 +99,32 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
             }
 
             List<String> allowedValues = range.getApplicableRatings().stream()
-                .map(RatingClass::name) // TODO may be nicer to accept the display value i.e 'A++' rather than 'APP'
+                .map(RatingClass::name) // TODO ELG-38 accept the display value i.e 'A++' rather than 'APP'
                 .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);
 
           } catch (Exception e) {
             throw new RuntimeException("Error processing ApiValuesFromLegislationCategory annotations", e);
+          }
+        });
+  }
+
+  private void processEnumValues(List<Annotation> annotations, Schema schema) {
+    getAnnotation(annotations, ApiValuesFromEnum.class)
+        .ifPresent(apiValueAnnotation -> {
+          try {
+            Class<?> enumClass = apiValueAnnotation.value();
+            List<Enum<?>> enumValues = (List<Enum<?>>) Arrays.asList(enumClass.getEnumConstants());
+
+            List<String> allowedValues = enumValues.stream()
+                .map(Enum::name) // TODO ELG-38 accept the display value
+                .collect(Collectors.toList());
+
+            schema.setEnum(allowedValues);
+
+          } catch (Exception e) {
+            throw new RuntimeException("Error processing ApiValuesFromEnum annotations", e);
           }
         });
   }
