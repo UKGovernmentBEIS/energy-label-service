@@ -26,7 +26,8 @@ public class ProRefrigeratedCabinetsApiController {
   @Autowired
   public ProRefrigeratedCabinetsApiController(
       ProRefrigeratedCabinetsService proRefrigeratedCabinetsService,
-      InternetLabelService internetLabelService, DocumentRendererService documentRendererService) {
+      InternetLabelService internetLabelService,
+      DocumentRendererService documentRendererService) {
     this.proRefrigeratedCabinetsService = proRefrigeratedCabinetsService;
     this.internetLabelService = internetLabelService;
     this.documentRendererService = documentRendererService;
