@@ -27,7 +27,8 @@ public class WashingMachinesApiController {
   @Autowired
   public WashingMachinesApiController(
       WashingMachinesService washingMachinesService,
-      InternetLabelService internetLabelService, DocumentRendererService documentRendererService) {
+      InternetLabelService internetLabelService,
+      DocumentRendererService documentRendererService) {
     this.washingMachinesService = washingMachinesService;
     this.internetLabelService = internetLabelService;
     this.documentRendererService = documentRendererService;
