@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.validation.constraints.Digits;
+import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.customizers.PropertyCustomizer;
 import org.springframework.stereotype.Component;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
@@ -72,13 +73,28 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     }
     int ints = digits.get().integer();
     int fractions = digits.get().fraction();
-    if (ints > 0 && fractions > 0) {
-      return String.format(". This may be up to %d digit(s) long with an optional %d decimal places.", ints, fractions);
+
+    String intsString;
+    String fractionsString;
+    if (ints > 1) {
+      intsString = String.format(". This may be up to %d digits long", ints);
     } else if (ints > 0) {
-      return String.format(". This may be up to %d digit(s) long.", ints);
+      intsString = ". This may be up to 1 digit long";
     } else {
-      return "";
+      intsString = "";
     }
+
+    if (fractions > 1) {
+      fractionsString = String.format(" with an optional %d decimal places.", fractions);
+    } else if (fractions > 0) {
+      fractionsString = " with an optional decimal place.";
+    } else if (!StringUtils.isBlank(intsString)){
+      fractionsString = ".";
+    } else {
+      fractionsString = "";
+    }
+
+    return intsString + fractionsString;
   }
 
   /**
