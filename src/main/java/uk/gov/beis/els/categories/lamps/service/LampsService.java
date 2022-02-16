@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.api.categories.lamps.LampsPostSeptember2021ApiForm;
 import uk.gov.beis.els.api.categories.lamps.LampsPreSeptember2021ApiForm;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.lamps.model.LampsForm;
@@ -148,6 +149,36 @@ public class LampsService {
         .setCondensingMultilineText("supplier", form.getSupplierName())
         .setCondensingMultilineText("model", form.getModelName()).setRatingArrow("rating",
             RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("kwh", form.getEnergyConsumption())
+        .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form);
+  }
+
+  public ProcessedEnergyLabelDocument generateHtml(LampsPostSeptember2021ApiForm form,
+                                                   LegislationCategory legislationCategory) {
+    String templatePath;
+    TemplateColour templateColour = TemplateColour.valueOf(form.getTemplateColour());
+    TemplateSize templateSize = TemplateSize.valueOf(form.getTemplateSize());
+
+    if (templateSize == TemplateSize.STANDARD) {
+      if (templateColour == TemplateColour.COLOUR) {
+        templatePath = "labels/lamps-light-sources/light-source-2021.svg";
+      } else {
+        templatePath = "labels/lamps-light-sources/light-source-bw-2021.svg";
+      }
+    } else {
+      if (templateColour == TemplateColour.COLOUR) {
+        templatePath = "labels/lamps-light-sources/light-source-small-2021.svg";
+      } else {
+        templatePath = "labels/lamps-light-sources/light-source-small-bw-2021.svg";
+      }
+    }
+
+    return new TemplatePopulator(templateParserService.parseTemplate(templatePath))
+        .setCondensingText("supplier", form.getSupplierName())
+        .setCondensingText("model", form.getModelName())
+        .setQrCode(form.getQrCodeUrl())
+        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()),
+            legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
         .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form);
   }

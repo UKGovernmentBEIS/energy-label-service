@@ -63,4 +63,14 @@ public class LampsApiController {
     return documentRendererService.processPdfApiResponse(
         lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
   }
+
+  @Operation(
+      summary = "Create a new style energy label for lamps with all fields",
+      description = "New-style rescaled labels must be at least 36mm x 72mm, or 20mm x 54mm for the small version of the label."
+  )
+  @PostMapping("/all-fields/new-style/energy-label")
+  public Object lampsAllFields(@RequestBody @Valid LampsPostSeptember2021ApiForm form) {
+    return documentRendererService.processPdfApiResponse(
+        lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021));
+  }
 }
