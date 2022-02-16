@@ -12,6 +12,7 @@ import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModel;
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModelConsumption;
 import uk.gov.beis.els.categories.lamps.service.LampsService;
+import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
@@ -72,5 +73,14 @@ public class LampsApiController {
   public Object lampsAllFields(@RequestBody @Valid LampsPostSeptember2021ApiForm form) {
     return documentRendererService.processPdfApiResponse(
         lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021));
+  }
+
+  @Operation(summary = "Lamps and light sources arrow image")
+  @PostMapping("/arrow-image")
+  public Object lampsInternetLabel(@RequestBody @Valid LampsArrowImageApiForm form) {
+    return documentRendererService.processImageApiResponse(
+        internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
+            LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021, ProductMetadata.LAMPS_FULL)
+    );
   }
 }
