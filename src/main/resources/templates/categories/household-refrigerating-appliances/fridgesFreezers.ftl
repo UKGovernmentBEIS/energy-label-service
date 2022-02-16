@@ -3,11 +3,11 @@
 <@common.standardProductForm "Household fridges and freezers">
   <@govukTextInput.textInput path="form.qrCodeUrl"/>
 
-  <@govukRadios.radioYesNo path="form.nonRatedCompartment" inline=false hiddenQuestionsWithYesSelected=true>
+  <@govukRadios.radioYesNo path="form.nonRatedCompartment" hiddenQuestionsWithYesSelected=true>
     <@govukTextInput.textInput path="form.nonRatedVolume"/>
   </@govukRadios.radioYesNo>
 
-  <@govukRadios.radioYesNo path="form.ratedCompartment" inline=false hiddenQuestionsWithYesSelected=true>
+  <@govukRadios.radioYesNo path="form.ratedCompartment" hiddenQuestionsWithYesSelected=true>
       <@govukTextInput.textInput path="form.ratedVolume"/>
   </@govukRadios.radioYesNo>
 

@@ -10,7 +10,7 @@
   <@govukTextInput.textInput path="form.annualEnergyConsumption"/>
   <@govukTextInput.textInput path="form.fridgeCapacity"/>
   <@govukTextInput.textInput path="form.fridgeMaxTemp"/>
-  <@govukRadios.radioYesNo path="form.frozenCompartment" inline=false hiddenQuestionsWithYesSelected=true>
+  <@govukRadios.radioYesNo path="form.frozenCompartment" hiddenQuestionsWithYesSelected=true>
     <@govukTextInput.textInput path="form.freezerMaxTemp"/>
   </@govukRadios.radioYesNo>
 </@common.standardProductForm>

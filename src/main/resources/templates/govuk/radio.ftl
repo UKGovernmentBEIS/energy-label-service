@@ -8,7 +8,7 @@
 <#--If using a split radio group then you need to wrap the radio group in a conditional class and data-module div in the form template so that the show/hide content works across radio items-->
 <#--Setting splitList to true against each radio item in a split group will ignore the above mentioned div in the macro.-->
 <#--If splitList is false the radio group is considered to not have hidden content and the radio grouping will work as standard.-->
-<#macro radio path radioItems label="" inline=true hiddenContentId="" splitList=false legendHeadingClass="govuk-fieldset__legend--s" legendSize="h1" guidanceText="">
+<#macro radio path radioItems label="" inline=false hiddenContentId="" splitList=false legendHeadingClass="govuk-fieldset__legend--s" legendSize="h1" guidanceText="">
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
@@ -23,9 +23,9 @@
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
       <@radioFieldset.fieldset legendHeading=fieldPrompt legendSize=legendSize legendHeadingClass=legendHeadingClass hintText=fieldHint hintTextId=id productGuidanceText=guidanceText mandatory=mandatory>
         <#if hasError>
-          <span id="${id}-error" class="govuk-error-message">
+          <p id="${id}-error" class="govuk-error-message">
             ${errorList?join(" ")}
-          </span>
+          </p>
         </#if>
         <#if splitList=false>
           <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="govuk-radios">
@@ -52,7 +52,7 @@
   </#if>
 </#macro>
 
-<#macro radioYesNo path label="" inline=true hiddenQuestionsWithYesSelected=false hiddenQuestionsWithNoSelected=false legendHeadingClass="govuk-fieldset__legend--s" legendSize="h2">
+<#macro radioYesNo path label="" inline=false hiddenQuestionsWithYesSelected=false hiddenQuestionsWithNoSelected=false legendHeadingClass="govuk-fieldset__legend--s" legendSize="h2">
   <@spring.bind path/>
 
   <#local id=spring.status.expression?replace('[','')?replace(']','')>
@@ -68,11 +68,11 @@
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if>">
       <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass=legendHeadingClass legendSize=legendSize hintText=fieldHint hintTextId=id mandatory=true>
         <#if hasError>
-          <span id="${id}-error" class="govuk-error-message">
+          <p id="${id}-error" class="govuk-error-message">
             ${errorList?join(" ")}
-          </span>
+          </p>
         </#if>
-        <div class="govuk-radios govuk-radios--conditional <#if inline>govuk-radios--inline</#if>" data-module="govuk-radios">
+        <div class="govuk-radios govuk-radios--conditional <#if inline && !(hiddenQuestionsWithYesSelected || hiddenQuestionsWithNoSelected)>govuk-radios--inline</#if>" data-module="govuk-radios">
           <div class="govuk-radios__item">
             <input class="govuk-radios__input" id="${id}" name="${fieldName}" type="radio" value="true"<#if displayValue == "true"> checked="checked"</#if> <#if hiddenQuestionsWithYesSelected=true>data-aria-controls="hidden-content-with-yes-selected-${id}"</#if>>
             <label class="govuk-label govuk-radios__label" for="${id}">
@@ -126,13 +126,13 @@
     <div class="govuk-form-group <#if hasError>govuk-form-group--error</#if> <#if marginClass?has_content>${marginClass}</#if>">
       <@radioFieldset.fieldset legendHeading=fieldPrompt legendHeadingClass="govuk-fieldset__legend--s" legendSize=legendSize hintText=fieldHint hintTextId=id mandatory=true>
         <#if hasError>
-          <span id="${id}-error" class="govuk-error-message">
+          <p id="${id}-error" class="govuk-error-message">
             <#list spring.status.errorMessages as errorMessage>
               <#if errorMessage?has_content>
                 ${errorMessage}<br/>
               </#if>
             </#list>
-          </span>
+          </p>
         </#if>
         <#-- hide nested content in internet label mode -->
         <div class="govuk-radios <#if hiddenContent && (showNestedForInternetLabels || labelMode != 'INTERNET')>govuk-radios--conditional" data-module="govuk-radios"<#else>"</#if>>

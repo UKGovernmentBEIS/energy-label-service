@@ -18,14 +18,14 @@
         ${fieldPrompt}
       </label>
       <#if fieldHint?has_content>
-        <span id="${id}-hint" class="govuk-hint">
+        <div id="${id}-hint" class="govuk-hint">
           ${fieldHint}
-        </span>
+        </div>
       </#if>
       <#if hasError>
-        <span id="${id}-error" class="govuk-error-message">
+        <p id="${id}-error" class="govuk-error-message">
           ${spring.status.errorMessages?join(" ")}
-        </span>
+        </p>
       </#if>
       <select class="govuk-select <#if hasError>govuk-select--error</#if>" id="${id}" <#if fieldHint?has_content>aria-describedby="${id}-hint" </#if> name="${spring.status.expression}">
         <#if spring.stringStatusValue?has_content>

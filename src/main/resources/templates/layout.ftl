@@ -78,7 +78,7 @@
 
   <@govukCookieBanner.cookieBanner/>
 
-  <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+  <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
 
   <@govukHeader.header currentUserView/>
 

@@ -1,5 +1,5 @@
 <#macro cookieBanner>
-  <div class="govuk-cookie-banner" role="region" aria-label="Cookies on the 'Create an energy label' service" id="els-cookie-banner" hidden>
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the 'Create an energy label' service" id="els-cookie-banner" hidden>
 
     <div class="govuk-cookie-banner__message govuk-width-container" id="els-cookie-banner__options">
 
@@ -8,8 +8,8 @@
           <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the 'Create an energy label' service</h2>
 
           <div class="govuk-cookie-banner__content">
-            <p>We use some essential cookies to make this service work.</p>
-            <p>We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
+            <p class="govuk-body">We use some essential cookies to make this service work.</p>
+            <p class="govuk-body">We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
           <div class="govuk-cookie-banner__content">
-            <p>You’ve accepted analytics cookies. You can <a href="/cookies" class="govuk-link">change your cookie settings</a> at any time.</p>
+            <p class="govuk-body">You’ve accepted analytics cookies. You can <a href="/cookies" class="govuk-link">change your cookie settings</a> at any time.</p>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
           <div class="govuk-cookie-banner__content">
-            <p>You’ve rejected analytics cookies. You can <a href="/cookies" class="govuk-link">change your cookie settings</a> at any time.</p>
+            <p class="govuk-body">You’ve rejected analytics cookies. You can <a href="/cookies" class="govuk-link">change your cookie settings</a> at any time.</p>
           </div>
         </div>
       </div>
