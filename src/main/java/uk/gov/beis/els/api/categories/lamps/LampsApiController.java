@@ -47,7 +47,19 @@ public class LampsApiController {
       description = "The label should be at least 36mm x 68mm when attached to packaging. If it doesn’t fit, you can reduce the height by up to 60 percent. It can be full colour or black and white."
   )
   @PostMapping("/energy-rating-and-consumption-only/energy-label")
-  public Object LampsExNameModel(@RequestBody @Valid LampsFormNoSupplierModel form) {
+  public Object lampsExNameModel(@RequestBody @Valid LampsFormNoSupplierModel form) {
+    return documentRendererService.processPdfApiResponse(
+        lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
+  }
+
+  @Operation(
+      summary = "Create an old style energy label for lamps with all fields",
+      description = "If the product was first placed on the market on or after 1 October 2021, or hasn't been placed on the market yet, you must use the new rescaled energy label." +
+          "\nProducts placed on the market before 1 October 2021 can continue to use the old style label until 31 March 2023." +
+          "\nOld-style labels must usually be at least 36mm x 75mm when attached to packaging. You can scale down the label if no side of the packaging is large enough to contain the label, or if the label would cover more than 50% of the surface area of the largest side. You must only scale down the label enough to meet these conditions, and the label must never be less than 14.4mm x 30mm."
+  )
+  @PostMapping("/all-fields/old-style/energy-label")
+  public Object lampsAllFieldsOldStyle(@RequestBody @Valid LampsPreSeptember2021ApiForm form) {
     return documentRendererService.processPdfApiResponse(
         lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
   }

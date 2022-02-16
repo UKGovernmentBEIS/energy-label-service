@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.api.categories.lamps.LampsPreSeptember2021ApiForm;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.lamps.model.LampsForm;
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModel;
@@ -141,4 +142,13 @@ public class LampsService {
         .asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata.LAMPS_PACKAGING_ARROW, form);
   }
 
+  public ProcessedEnergyLabelDocument generateHtml(LampsPreSeptember2021ApiForm form,
+                                                   LegislationCategory legislationCategory) {
+    return new TemplatePopulator(templateParserService.parseTemplate("labels/lamps-light-sources/lamps.svg"))
+        .setCondensingMultilineText("supplier", form.getSupplierName())
+        .setCondensingMultilineText("model", form.getModelName()).setRatingArrow("rating",
+            RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setText("kwh", form.getEnergyConsumption())
+        .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form);
+  }
 }
