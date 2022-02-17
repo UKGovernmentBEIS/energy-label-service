@@ -75,12 +75,10 @@ public class InternetLabelService {
     double height = Double.parseDouble(form.getProductPriceHeightPx());
     double scaleFactor = height/100;
 
-    RatingClass resolvedRatingClass = RatingClass.getEnum(ratingClass);
-
     return templatePopulator
         .scaleSvg(scaleFactor)
-        .transformInternetLabel(resolvedRatingClass, legislationCategory.getPrimaryRatingRange())
-        .asProcessedInternetLabel(form, form, resolvedRatingClass.name(), analyticsLabel);
+        .transformInternetLabel(RatingClass.getEnum(ratingClass), legislationCategory.getPrimaryRatingRange())
+        .asProcessedInternetLabel(form, form, ratingClass, analyticsLabel);
   }
 
 }

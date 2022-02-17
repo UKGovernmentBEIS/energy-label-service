@@ -48,16 +48,12 @@ public enum RatingClass {
     ENUM_MAP = Collections.unmodifiableMap(map);
   }
 
-  private static RatingClass get(String name) {
-    return ENUM_MAP.get(name.toLowerCase());
-  }
-
   public static RatingClass getEnum(String ratingClass) {
     RatingClass result;
     try {
       result = RatingClass.valueOf(ratingClass);
     } catch (IllegalArgumentException e) {
-      result = RatingClass.get(ratingClass);
+      result = ENUM_MAP.get(ratingClass.toLowerCase());
     }
 
     if (result == null) {
