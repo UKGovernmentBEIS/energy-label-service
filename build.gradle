@@ -29,6 +29,13 @@ dependencies {
   implementation 'com.google.guava:guava:27.1-jre'
   implementation 'io.nayuki:qrcodegen:1.6.0'
 
+  //Bucket4j dependencies
+  implementation 'com.giffing.bucket4j.spring.boot.starter:bucket4j-spring-boot-starter:0.5.2'
+  implementation 'org.springframework.boot:spring-boot-starter-cache'
+  implementation 'javax.cache:cache-api'
+  implementation 'com.github.ben-manes.caffeine:caffeine:2.8.2'
+  implementation 'com.github.ben-manes.caffeine:jcache'
+
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
