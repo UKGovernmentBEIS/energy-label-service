@@ -308,7 +308,7 @@ public class TemplatePopulator {
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata analyticsLabel, LampsFormPackagingArrow form) {
     String analyticsAction = String.format("%s - %s - %s",
-        RatingClass.valueOf(form.getEfficiencyRating()).getDisplayValue(),
+        RatingClass.getEnum(form.getEfficiencyRating()).getDisplayValue(),
         LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
         TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
 
@@ -322,11 +322,11 @@ public class TemplatePopulator {
 
     if(internetLabellingForm.getLabelColour() == null) {
       analyticsAction = String.format("%s - %s",
-          RatingClass.valueOf(ratingClass).getDisplayValue(),
+          RatingClass.getEnum(ratingClass).getDisplayValue(),
           InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName());
     } else {
       analyticsAction = String.format("%s - %s - %s",
-          RatingClass.valueOf(ratingClass).getDisplayValue(),
+          RatingClass.getEnum(ratingClass).getDisplayValue(),
           InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName(),
           InternetLabelColour.valueOf(internetLabellingForm.getLabelColour()).getDisplayName());
     }

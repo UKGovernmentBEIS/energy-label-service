@@ -75,7 +75,7 @@ public class LampsService {
     }
 
     return templatePopulator
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
         .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form);
   }
@@ -93,7 +93,7 @@ public class LampsService {
     }
 
     return templatePopulator
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
         .asProcessedEnergyLabelNoSupplier(ProductMetadata.LAMPS_RATING_CONSUMPTION, form);
   }
@@ -111,7 +111,7 @@ public class LampsService {
     }
 
     return templatePopulator
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .asProcessedEnergyLabelNoSupplier(ProductMetadata.LAMPS_RATING, form);
   }
 
@@ -137,7 +137,7 @@ public class LampsService {
     templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps-light-sources/packaging-arrow/"+templatePath));
 
     return templatePopulator
-        .transformPackagingArrow(RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .transformPackagingArrow(RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata.LAMPS_PACKAGING_ARROW, form);
   }
 

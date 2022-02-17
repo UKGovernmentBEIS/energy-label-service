@@ -61,7 +61,7 @@ public class WaterHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_HEAT_PUMP, form);
   }
 
@@ -94,7 +94,7 @@ public class WaterHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_CONVENTIONAL, form);
   }
 
@@ -108,7 +108,7 @@ public class WaterHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_SOLAR, form);
   }
 
@@ -120,7 +120,7 @@ public class WaterHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("watts", form.getStandingLoss())
       .setText("litres", form.getVolume())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_STORAGE_TANKS, form);
   }
 
@@ -139,9 +139,9 @@ public class WaterHeatersService {
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getPackageEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
-      .setText("waterHeatingRatingLetter", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getLetter())
-      .setText("waterHeatingRatingPlusses", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getPlusses())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getPackageEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setText("waterHeatingRatingLetter", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getLetter())
+      .setText("waterHeatingRatingPlusses", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getPlusses())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
   }
 
