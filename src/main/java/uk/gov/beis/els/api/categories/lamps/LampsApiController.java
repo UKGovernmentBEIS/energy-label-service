@@ -85,7 +85,10 @@ public class LampsApiController {
     );
   }
 
-  @Operation(summary = "Energy rating arrow for light source packaging")
+  @Operation(
+      summary = "Energy rating arrow for light source packaging",
+      description = "This arrow must only be used on products which include a new-style rescaled energy label. The arrow must be shown on the front of the packaging if the energy label isn't on the front. It must be clearly visible and legible. You don't need to include this arrow on the packaging if the energy label is on the front."
+  )
   @PostMapping("/new-style/packaging-arrow")
   public Object packagingArrow(@RequestBody @Valid LampsFormPackagingArrow form) {
     return documentRendererService.processPdfApiResponse(
