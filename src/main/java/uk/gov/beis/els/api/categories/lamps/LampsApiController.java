@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModel;
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModelConsumption;
+import uk.gov.beis.els.categories.lamps.model.LampsFormPackagingArrow;
 import uk.gov.beis.els.categories.lamps.service.LampsService;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
@@ -82,5 +83,12 @@ public class LampsApiController {
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021, ProductMetadata.LAMPS_FULL)
     );
+  }
+
+  @Operation(summary = "Energy rating arrow for light source packaging")
+  @PostMapping("/new-style/packaging-arrow")
+  public Object packagingArrow(@RequestBody @Valid LampsFormPackagingArrow form) {
+    return documentRendererService.processPdfApiResponse(
+        lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021));
   }
 }
