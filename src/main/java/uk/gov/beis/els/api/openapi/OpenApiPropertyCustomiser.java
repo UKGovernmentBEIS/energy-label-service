@@ -101,7 +101,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
             }
 
             List<String> allowedValues = range.getApplicableRatings().stream()
-                .map(RatingClass::name) // TODO ELG-38 accept the display value i.e 'A++' rather than 'APP'
+                .map(RatingClass::getDisplayValue)
                 .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);
@@ -125,7 +125,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
             RatingClassRange range = (RatingClassRange) field.get(null); // Null as we're accessing a static field
 
             List<String> allowedValues = range.getApplicableRatings().stream()
-                .map(RatingClass::name) // TODO ELG-38 accept the display value i.e 'A++' rather than 'APP'
+                .map(RatingClass::getDisplayValue)
                 .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);

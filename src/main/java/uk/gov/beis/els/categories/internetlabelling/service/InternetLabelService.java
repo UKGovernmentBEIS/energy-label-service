@@ -75,10 +75,26 @@ public class InternetLabelService {
     double height = Double.parseDouble(form.getProductPriceHeightPx());
     double scaleFactor = height/100;
 
+    RatingClass resolvedRatingClass = resolveRatingClass(ratingClass);
+
     return templatePopulator
         .scaleSvg(scaleFactor)
-        .transformInternetLabel(RatingClass.valueOf(ratingClass), legislationCategory.getPrimaryRatingRange())
-        .asProcessedInternetLabel(form, form, ratingClass, analyticsLabel);
+        .transformInternetLabel(resolvedRatingClass, legislationCategory.getPrimaryRatingRange())
+        .asProcessedInternetLabel(form, form, resolvedRatingClass.name(), analyticsLabel);
   }
 
+  private RatingClass resolveRatingClass(String ratingClass) {
+    RatingClass result;
+    try {
+      result = RatingClass.valueOf(ratingClass);
+    } catch (IllegalArgumentException e) {
+      result = RatingClass.get(ratingClass);
+    }
+
+    if (result == null) {
+      throw new IllegalArgumentException(String.format("No RatingClass for string: %s", ratingClass));
+    }
+
+    return result;
+  }
 }

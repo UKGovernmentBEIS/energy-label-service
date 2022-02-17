@@ -1,5 +1,9 @@
 package uk.gov.beis.els.model;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public enum RatingClass {
   APPPP("A++++", "A", "++++"),
   APPP("A+++", "A", "+++"),
@@ -13,6 +17,7 @@ public enum RatingClass {
   F("F", "F", ""),
   G("G", "G", "");
 
+  private static final Map<String, RatingClass> ENUM_MAP;
   private final String displayValue;
   private final String letter;
   private final String plusses;
@@ -35,4 +40,15 @@ public enum RatingClass {
     return plusses;
   }
 
+  static {
+    Map<String, RatingClass> map = new HashMap<String, RatingClass>();
+    for (RatingClass instance : RatingClass.values()) {
+      map.put(instance.getDisplayValue().toLowerCase(), instance);
+    }
+    ENUM_MAP = Collections.unmodifiableMap(map);
+  }
+
+  public static RatingClass get(String name) {
+    return ENUM_MAP.get(name.toLowerCase());
+  }
 }
