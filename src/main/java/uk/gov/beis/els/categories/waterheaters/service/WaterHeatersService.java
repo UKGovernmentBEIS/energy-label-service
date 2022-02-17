@@ -164,8 +164,6 @@ public class WaterHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_SOLAR, form);
   }
 
-
-
   public SolarWaterHeatersForm toSolarWaterHeatersForm(SolarWaterHeatersApiForm solarWaterHeatersApiForm) {
     SolarWaterHeatersForm form = new SolarWaterHeatersForm();
     form.setSupplierName(solarWaterHeatersApiForm.getSupplierName());
