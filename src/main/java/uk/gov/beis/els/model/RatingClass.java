@@ -49,17 +49,10 @@ public enum RatingClass {
   }
 
   public static RatingClass getEnum(String ratingClass) {
-    RatingClass result;
-    try {
-      result = RatingClass.valueOf(ratingClass);
-    } catch (IllegalArgumentException e) {
-      result = ENUM_MAP.get(ratingClass.toLowerCase());
-    }
-
+    RatingClass result = ENUM_MAP.get(ratingClass.toLowerCase());
     if (result == null) {
-      throw new IllegalArgumentException(String.format("No RatingClass for string: %s", ratingClass));
+      result = RatingClass.valueOf(ratingClass);
     }
-
     return result;
   }
 
