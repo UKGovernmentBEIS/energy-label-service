@@ -21,7 +21,7 @@ public class ProcessedInternetLabelDocument {
     this.ratingClass = RatingClass.getEnum(ratingClass);
     this.productMetadata = productMetadata;
     this.clientAnalyticsToken = clientAnalyticsToken;
-    this.internetLabelFormat = InternetLabelFormat.valueOf(internetLabelFormat);
+    this.internetLabelFormat = InternetLabelFormat.getEnum(internetLabelFormat);
     this.AnalyticsEventAction = AnalyticsEventAction;
   }
 
