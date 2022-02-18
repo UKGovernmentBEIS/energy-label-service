@@ -59,7 +59,7 @@ public class WaterHeatersService {
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_HEAT_PUMP, form);
@@ -92,7 +92,7 @@ public class WaterHeatersService {
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_CONVENTIONAL, form);
@@ -106,7 +106,7 @@ public class WaterHeatersService {
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_SOLAR, form);
@@ -138,7 +138,7 @@ public class WaterHeatersService {
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
       .setRatingArrow("rating", RatingClass.getEnum(form.getPackageEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("waterHeatingRatingLetter", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getLetter())
       .setText("waterHeatingRatingPlusses", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getPlusses())

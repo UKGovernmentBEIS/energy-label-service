@@ -69,7 +69,7 @@ public class SpaceHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("kw", form.getHeatOutput())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
       .setRatingArrow("spaceHeatingRating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange(), "data-rating-increment-space-heating")
       .setRatingArrow("waterHeatingRating", RatingClass.getEnum(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_BOILER_COMBI, form);
@@ -159,7 +159,7 @@ public class SpaceHeatersService {
       .setRatingArrow("waterHeatingRating", RatingClass.getEnum(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("colderKw", form.getColderHeatOutput())
       .setText("averageKw", form.getAverageHeatOutput())
       .setText("warmerKw", form.getWarmerHeatOutput())
@@ -217,8 +217,8 @@ public class SpaceHeatersService {
       .setText("heaterSpaceHeatingRatingPlusses", RatingClass.getEnum(form.getSpaceHeaterEfficiencyRating()).getPlusses())
       .setText("heaterWaterHeatingRatingLetter", RatingClass.getEnum(form.getWaterHeaterEfficiencyRating()).getLetter())
       .setText("heaterWaterHeatingRatingPlusses", RatingClass.getEnum(form.getWaterHeaterEfficiencyRating()).getPlusses())
-      .setText("heaterDeclaredLoadProfile", LoadProfile.valueOf(form.getHeaterDeclaredLoadProfile()).getDisplayName())
-      .setText("packageDeclaredLoadProfile", LoadProfile.valueOf(form.getPackageDeclaredLoadProfile()).getDisplayName())
+      .setText("heaterDeclaredLoadProfile", LoadProfile.getEnum(form.getHeaterDeclaredLoadProfile()).getDisplayName())
+      .setText("packageDeclaredLoadProfile", LoadProfile.getEnum(form.getPackageDeclaredLoadProfile()).getDisplayName())
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION, form);
   }
 
