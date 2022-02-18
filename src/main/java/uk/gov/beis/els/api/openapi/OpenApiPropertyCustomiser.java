@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.ApiValuesFromRatingClassRange;
+import uk.gov.beis.els.model.Displayable;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -141,10 +142,10 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         .ifPresent(apiValueAnnotation -> {
           try {
             Class<?> enumClass = apiValueAnnotation.value();
-            List<Enum<?>> enumValues = (List<Enum<?>>) Arrays.asList(enumClass.getEnumConstants());
+            List<Displayable> enumValues = (List<Displayable>) Arrays.asList(enumClass.getEnumConstants());
 
             List<String> allowedValues = enumValues.stream()
-                .map(Enum::name) // TODO ELG-38 accept the display value
+                .map(Displayable::getDisplayName)
                 .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);

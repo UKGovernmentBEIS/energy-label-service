@@ -52,7 +52,7 @@ public class ProRefrigeratedCabinetsService {
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("kwhAnnum", form.getAnnualEnergyConsumption())
-      .applyCssClassToId("climateClass", ClimateClass.valueOf(form.getClimateClass()).getSvgClass())
+      .applyCssClassToId("climateClass", ClimateClass.getEnum(form.getClimateClass()).getSvgClass())
       .asProcessedEnergyLabel(ProductMetadata.PRO_REFRIGERATED_CABINETS, form);
   }
 }
