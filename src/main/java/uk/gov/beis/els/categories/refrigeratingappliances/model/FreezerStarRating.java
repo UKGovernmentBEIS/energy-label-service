@@ -6,16 +6,16 @@ public enum FreezerStarRating {
   THREE_STAR("Three star", "starRating3"),
   FOUR_STAR("Four star", "starRating4");
 
-  private final String displayValue;
+  private final String displayName;
   private final String templateStarRatingClassName;
 
-  FreezerStarRating(String displayValue, String templateStarRatingClassName) {
-    this.displayValue = displayValue;
+  FreezerStarRating(String displayName, String templateStarRatingClassName) {
+    this.displayName = displayName;
     this.templateStarRatingClassName = templateStarRatingClassName;
   }
 
-  public String getDisplayValue() {
-    return displayValue;
+  public String getDisplayName() {
+    return displayName;
   }
 
   public String getTemplateStarRatingClassName() {
