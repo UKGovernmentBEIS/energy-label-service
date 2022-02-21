@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
@@ -30,9 +29,9 @@ public class HeatPumpWaterHeatersApiForm extends ClimateConditionApiForm {
   @ApiValuesFromLegislationCategory(serviceClass = WaterHeatersService.class)
   private String efficiencyRating;
 
-  // TODO Create Digits variant which allows optional. Auto set (optional) in prompt
   @FieldPrompt("Sound power level, indoors dB (optional)")
-  @Pattern(regexp = "[0-9]{0,2}", message = "Enter the indoors sound power level, up to 2 digits long")
+  @Digits(integer = 2, fraction = 0, message = "Enter the indoors sound power level, up to 2 digits long")
+  @Schema(type = "integer")
   private String soundPowerLevelIndoors;
 
   @FieldPrompt("Sound power level, outdoors dB")
