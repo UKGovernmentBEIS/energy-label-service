@@ -21,5 +21,4 @@ public enum FreezerStarRating {
   public String getTemplateStarRatingClassName() {
     return templateStarRatingClassName;
   }
-
 }
