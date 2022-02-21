@@ -125,7 +125,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
     );
     modelAndView.addObject("starRating",
         Arrays.stream(FreezerStarRating.values())
-            .collect(StreamUtils.toLinkedHashMap(Enum::name, FreezerStarRating::getDisplayName))
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, FreezerStarRating::getDisplayValue))
     );
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Household fridges and freezers");
     return modelAndView;
