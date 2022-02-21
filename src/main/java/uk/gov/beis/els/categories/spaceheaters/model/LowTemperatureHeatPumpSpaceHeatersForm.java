@@ -10,14 +10,12 @@ import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
-import uk.gov.beis.els.categories.spaceheaters.LowTemperatureHeatPumpSpaceHeatersFormSequenceProvider;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
 @Schema(name = "Low-temperature heat pump space heaters energy label")
-@GroupSequenceProvider(LowTemperatureHeatPumpSpaceHeatersFormSequenceProvider.class)
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class LowTemperatureHeatPumpSpaceHeatersForm extends StandardTemplateForm50Char {
 
@@ -61,7 +59,6 @@ public class LowTemperatureHeatPumpSpaceHeatersForm extends StandardTemplateForm
       type = "integer",
       description = "Sound power level, indoors dB (optional), up to 2 digits long"
   )
-  @NotNull(groups = SoundPowerLevelIndoorsGroup.class)
   private String soundPowerLevelIndoors;
 
   @FieldPrompt("Sound power level, outdoors dB")

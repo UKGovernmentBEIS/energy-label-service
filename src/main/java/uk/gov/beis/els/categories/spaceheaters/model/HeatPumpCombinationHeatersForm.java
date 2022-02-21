@@ -12,14 +12,12 @@ import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
-import uk.gov.beis.els.categories.spaceheaters.HeatPumpCombinationHeatersFormSequenceProvider;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
 @Schema(name = "Heat pump combination heaters energy label")
-@GroupSequenceProvider(HeatPumpCombinationHeatersFormSequenceProvider.class)
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed.")
 public class HeatPumpCombinationHeatersForm extends StandardTemplateForm50Char {
 
@@ -76,7 +74,6 @@ public class HeatPumpCombinationHeatersForm extends StandardTemplateForm50Char {
       type = "integer",
       description = "Sound power level, indoors dB (optional), up to 2 digits long"
   )
-  @NotNull(groups = SoundPowerLevelIndoorsGroup.class)
   private String soundPowerLevelIndoors;
 
   @FieldPrompt("Sound power level, outdoors dB")
