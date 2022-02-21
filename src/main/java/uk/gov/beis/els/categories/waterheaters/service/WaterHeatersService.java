@@ -104,7 +104,7 @@ public class WaterHeatersService {
       templatePopulator.applyCssClassToId("offPeakMode","hasOffPeakMode");
     }
 
-    EnergyConsumptionUnit energyConsumptionUnit = EnergyConsumptionUnit.valueOf(form.getConsumptionUnit());
+    EnergyConsumptionUnit energyConsumptionUnit = EnergyConsumptionUnit.getEnum(form.getConsumptionUnit());
 
     if (energyConsumptionUnit == EnergyConsumptionUnit.KWH) {
       templatePopulator
@@ -225,7 +225,7 @@ public class WaterHeatersService {
   }
 
   private void populateClimateConditions(ClimateConditionForm form, TemplatePopulator templatePopulator) {
-    EnergyConsumptionUnit unit = EnergyConsumptionUnit.valueOf(form.getConsumptionUnit());
+    EnergyConsumptionUnit unit = EnergyConsumptionUnit.getEnum(form.getConsumptionUnit());
 
     if (unit == EnergyConsumptionUnit.KWH) {
       templatePopulator
