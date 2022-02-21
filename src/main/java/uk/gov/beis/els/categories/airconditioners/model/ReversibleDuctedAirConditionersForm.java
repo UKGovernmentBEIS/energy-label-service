@@ -39,7 +39,6 @@ public class ReversibleDuctedAirConditionersForm extends StandardTemplateForm50C
   private String coolingHourlyEnergyConsumption;
 
   @FieldPrompt("Energy efficiency class for heating")
-  @NotNull
   @NotBlank(message = "Select an energy efficiency indicator for heating")
   @ApiValuesFromLegislationCategory(serviceClass = AirConditionersService.class)
   private String heatingEfficiencyRating;
