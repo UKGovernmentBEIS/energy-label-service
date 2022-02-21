@@ -18,7 +18,6 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientati
 import uk.gov.beis.els.model.RatingClass;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class ApiValuesFromLegislationCategoryValidatorTest {
 
   private Validator validator;

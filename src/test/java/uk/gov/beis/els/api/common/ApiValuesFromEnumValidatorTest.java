@@ -18,7 +18,6 @@ import uk.gov.beis.els.categories.prorefrigeratedcabinets.model.ProRefrigeratedC
 import uk.gov.beis.els.model.RatingClass;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class ApiValuesFromEnumValidatorTest {
 
   private Validator validator;

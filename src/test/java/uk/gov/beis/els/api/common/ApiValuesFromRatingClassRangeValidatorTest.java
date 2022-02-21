@@ -16,7 +16,6 @@ import uk.gov.beis.els.categories.washingmachines.model.WashingMachinesForm;
 import uk.gov.beis.els.model.RatingClass;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class ApiValuesFromRatingClassRangeValidatorTest {
 
   private Validator validator;
