@@ -3,9 +3,10 @@ package uk.gov.beis.els;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,8 +46,10 @@ public class ControllerSmokeTest {
         .webAppContextSetup(context)
         .build();
 
-    ignoredEndpoints = new ArrayList<>();
-    ignoredEndpoints.add("/swagger-ui.html");
+    ignoredEndpoints = Arrays.asList(
+        "/swagger-ui.html",
+        "/api-documentation");
+
   }
 
   @Test
@@ -55,7 +58,7 @@ public class ControllerSmokeTest {
     List<String> getRoutes = requestMappingHandlerMapping.getHandlerMethods().keySet().stream()
         .filter(r -> r.getMethodsCondition().getMethods().contains(RequestMethod.GET))
         .map(r -> (String) r.getDirectPaths().toArray()[0])
-        .filter(path -> !ignoredEndpoints.contains(path))
+        .filter(path -> !StringUtils.startsWithAny(path, ignoredEndpoints.toArray(new CharSequence[0])))
         .collect(Collectors.toList());
 
     for (String route : getRoutes) {
