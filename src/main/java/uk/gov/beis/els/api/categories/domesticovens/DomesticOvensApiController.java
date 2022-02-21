@@ -32,7 +32,7 @@ public class DomesticOvensApiController {
   }
 
   @Operation(
-    summary = "Create an energy label for an electric oven",
+    summary = "Electric ovens: energy label",
     description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
   )
   @PostMapping("/electric-ovens/energy-label")
@@ -40,7 +40,7 @@ public class DomesticOvensApiController {
     return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for an electric oven")
+  @Operation(summary = "Electric ovens: arrow image")
   @PostMapping("/electric-ovens/arrow-image")
   public Object electricOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -49,7 +49,7 @@ public class DomesticOvensApiController {
   }
 
   @Operation(
-    summary = "Create an energy label for a gas oven",
+    summary = "Gas ovens: energy label",
     description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 85mm x 170mm when printed."
   )
   @PostMapping("/gas-ovens/energy-label")
@@ -57,7 +57,7 @@ public class DomesticOvensApiController {
     return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for a gas oven")
+  @Operation(summary = "Gas ovens: arrow image")
   @PostMapping("/gas-ovens/arrow-image")
   public Object gasOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

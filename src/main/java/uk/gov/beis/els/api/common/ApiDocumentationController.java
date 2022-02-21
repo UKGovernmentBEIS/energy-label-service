@@ -10,9 +10,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,7 +24,7 @@ import uk.gov.beis.els.mvc.ReverseRouter;
 public class ApiDocumentationController {
 
   @GetMapping(path = "/api-documentation")
-  public ModelAndView getApiDocumentation(HttpServletRequest request) {
+  public ModelAndView getApiDocumentation(@Value("${app.home_page_url}") String serviceHomePageUrl, HttpServletRequest request) {
     OpenAPI openAPIResponse = getOpenApiResponse(request);
 
     ModelAndView modelAndView = new ModelAndView("/apidocumentation/apiDocumentationStartPage");
@@ -32,11 +33,13 @@ public class ApiDocumentationController {
         .sorted(Comparator.comparing(TagLink::getName))
         .collect(Collectors.toList());
     modelAndView.addObject("tagLinks", tagLinks);
+    modelAndView.addObject("currentUrl", request.getRequestURI());
+    modelAndView.addObject("serviceHomePageUrl", serviceHomePageUrl);
     return modelAndView;
   }
 
-  @GetMapping("/api-documentation/api")
-  public ModelAndView getApiDocumentationForTag(@RequestParam("tag") String tag, HttpServletRequest request) {
+  @GetMapping("/api-documentation/endpoint/{tag}")
+  public ModelAndView getApiDocumentationForTag(@PathVariable("tag") String tag, HttpServletRequest request) {
     ModelAndView modelAndView = new ModelAndView("/apidocumentation/apiDocumentationForTag");
     modelAndView.addObject("tagName", tag);
     OpenAPI openAPI = getOpenApiResponse(request);
@@ -46,6 +49,12 @@ public class ApiDocumentationController {
         .sorted(Comparator.comparing(Operation::getSummary))
         .collect(Collectors.toList());
     modelAndView.addObject("operationList", operationList);
+    List<TagLink> tagLinks = openAPI.getTags().stream()
+        .map(this::getTagLink)
+        .sorted(Comparator.comparing(TagLink::getName))
+        .collect(Collectors.toList());
+    modelAndView.addObject("tagLinks", tagLinks);
+    modelAndView.addObject("currentUrl", request.getRequestURI());
     return modelAndView;
   }
 
