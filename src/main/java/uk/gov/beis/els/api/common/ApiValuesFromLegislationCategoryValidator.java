@@ -17,7 +17,7 @@ public class ApiValuesFromLegislationCategoryValidator implements ConstraintVali
     LegislationCategory legislationCategory;
     try {
       Field field = constraintAnnotation.serviceClass().getField(constraintAnnotation.legislationCategoryFieldName());
-      legislationCategory = (LegislationCategory) field.get(null); // Null as we're accessing a static field
+      legislationCategory = (LegislationCategory) field.get(null);
     } catch (NoSuchFieldException | IllegalAccessException e) {
       throw new RuntimeException("Cannot get LegislationCategory", e);
     }
