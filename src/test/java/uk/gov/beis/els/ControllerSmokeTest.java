@@ -57,7 +57,7 @@ public class ControllerSmokeTest {
 
     List<String> getRoutes = requestMappingHandlerMapping.getHandlerMethods().keySet().stream()
         .filter(r -> r.getMethodsCondition().getMethods().contains(RequestMethod.GET))
-        .map(r -> (String) r.getDirectPaths().toArray()[0])
+        .map(r -> (String) r.getPatternValues().toArray()[0])
         .filter(path -> !StringUtils.startsWithAny(path, ignoredEndpoints.toArray(new CharSequence[0])))
         .collect(Collectors.toList());
 
