@@ -4,6 +4,9 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.api.categories.waterheaters.ConventionalWaterHeaterApiForm;
+import uk.gov.beis.els.api.categories.waterheaters.HeatPumpWaterHeatersApiForm;
+import uk.gov.beis.els.api.categories.waterheaters.SolarWaterHeatersApiForm;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.waterheaters.model.ClimateConditionForm;
@@ -65,6 +68,35 @@ public class WaterHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_HEAT_PUMP, form);
   }
 
+  public HeatPumpWaterHeatersForm toHeatPumpWaterHeatersForm(HeatPumpWaterHeatersApiForm heatPumpWaterHeatersApiForm) {
+    HeatPumpWaterHeatersForm form = new HeatPumpWaterHeatersForm();
+    form.setSupplierName(heatPumpWaterHeatersApiForm.getSupplierName());
+    form.setModelName(heatPumpWaterHeatersApiForm.getModelName());
+    form.setDeclaredLoadProfile(heatPumpWaterHeatersApiForm.getDeclaredLoadProfile());
+    form.setEfficiencyRating(heatPumpWaterHeatersApiForm.getEfficiencyRating());
+    form.setSoundPowerLevelIndoors(heatPumpWaterHeatersApiForm.getSoundPowerLevelIndoors());
+    form.setSoundPowerLevelOutdoors(heatPumpWaterHeatersApiForm.getSoundPowerLevelOutdoors());
+    form.setConsumptionUnit(heatPumpWaterHeatersApiForm.getConsumptionUnit());
+    if (heatPumpWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.KWH.name())) {
+      form.setColderKwhAnnumSingle(heatPumpWaterHeatersApiForm.getColderKwhAnnum());
+      form.setAverageKwhAnnumSingle(heatPumpWaterHeatersApiForm.getAverageKwhAnnum());
+      form.setWarmerKwhAnnumSingle(heatPumpWaterHeatersApiForm.getWarmerKwhAnnum());
+    } else if (heatPumpWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.GJ.name())) {
+      form.setColderGjAnnumSingle(heatPumpWaterHeatersApiForm.getColderGjAnnum());
+      form.setAverageGjAnnumSingle(heatPumpWaterHeatersApiForm.getAverageGjAnnum());
+      form.setWarmerGjAnnumSingle(heatPumpWaterHeatersApiForm.getWarmerGjAnnum());
+    } else if (heatPumpWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.BOTH.name())) {
+      form.setColderKwhAnnumBoth(heatPumpWaterHeatersApiForm.getColderKwhAnnum());
+      form.setAverageKwhAnnumBoth(heatPumpWaterHeatersApiForm.getAverageKwhAnnum());
+      form.setWarmerKwhAnnumBoth(heatPumpWaterHeatersApiForm.getWarmerKwhAnnum());
+      form.setColderGjAnnumBoth(heatPumpWaterHeatersApiForm.getColderGjAnnum());
+      form.setAverageGjAnnumBoth(heatPumpWaterHeatersApiForm.getAverageGjAnnum());
+      form.setWarmerGjAnnumBoth(heatPumpWaterHeatersApiForm.getWarmerGjAnnum());
+    }
+    form.setCanRunOffPeakOnly(heatPumpWaterHeatersApiForm.getCanRunOffPeakOnly());
+    return form;
+  }
+
   public ProcessedEnergyLabelDocument generateHtml(ConventionalWaterHeatersForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/conventional-water-heaters.svg"));
 
@@ -98,6 +130,26 @@ public class WaterHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_CONVENTIONAL, form);
   }
 
+  public ConventionalWaterHeatersForm toConventionWaterHeatersForm(ConventionalWaterHeaterApiForm conventionalWaterHeaterApiForm) {
+    ConventionalWaterHeatersForm form = new ConventionalWaterHeatersForm();
+    form.setSupplierName(conventionalWaterHeaterApiForm.getSupplierName());
+    form.setModelName(conventionalWaterHeaterApiForm.getModelName());
+    form.setDeclaredLoadProfile(conventionalWaterHeaterApiForm.getDeclaredLoadProfile());
+    form.setEfficiencyRating(conventionalWaterHeaterApiForm.getEfficiencyRating());
+    form.setConsumptionUnit(conventionalWaterHeaterApiForm.getConsumptionUnit());
+    if (conventionalWaterHeaterApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.KWH.name())) {
+      form.setKwhAnnum(conventionalWaterHeaterApiForm.getKwhAnnum());
+    } else if (conventionalWaterHeaterApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.GJ.name())) {
+      form.setGjAnnum(conventionalWaterHeaterApiForm.getGjAnnum());
+    } else if (conventionalWaterHeaterApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.BOTH.name())) {
+      form.setBothKwhAnnum(conventionalWaterHeaterApiForm.getKwhAnnum());
+      form.setBothGjAnnum(conventionalWaterHeaterApiForm.getGjAnnum());
+    }
+    form.setSoundPowerLevelIndoors(conventionalWaterHeaterApiForm.getSoundPowerLevelIndoors());
+    form.setOffPeak(conventionalWaterHeaterApiForm.getOffPeak());
+    return form;
+  }
+
   public ProcessedEnergyLabelDocument generateHtml(SolarWaterHeatersForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/solar-water-heaters.svg"));
 
@@ -110,6 +162,33 @@ public class WaterHeatersService {
       .setText("db", form.getSoundPowerLevelIndoors())
       .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_SOLAR, form);
+  }
+
+  public SolarWaterHeatersForm toSolarWaterHeatersForm(SolarWaterHeatersApiForm solarWaterHeatersApiForm) {
+    SolarWaterHeatersForm form = new SolarWaterHeatersForm();
+    form.setSupplierName(solarWaterHeatersApiForm.getSupplierName());
+    form.setModelName(solarWaterHeatersApiForm.getModelName());
+    form.setDeclaredLoadProfile(solarWaterHeatersApiForm.getDeclaredLoadProfile());
+    form.setEfficiencyRating(solarWaterHeatersApiForm.getEfficiencyRating());
+    form.setSoundPowerLevelIndoors(solarWaterHeatersApiForm.getSoundPowerLevelIndoors());
+    form.setConsumptionUnit(solarWaterHeatersApiForm.getConsumptionUnit());
+    if (solarWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.KWH.name())) {
+      form.setColderKwhAnnumSingle(solarWaterHeatersApiForm.getColderKwhAnnum());
+      form.setAverageKwhAnnumSingle(solarWaterHeatersApiForm.getAverageKwhAnnum());
+      form.setWarmerKwhAnnumSingle(solarWaterHeatersApiForm.getWarmerKwhAnnum());
+    } else if (solarWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.GJ.name())) {
+      form.setColderGjAnnumSingle(solarWaterHeatersApiForm.getColderGjAnnum());
+      form.setAverageGjAnnumSingle(solarWaterHeatersApiForm.getAverageGjAnnum());
+      form.setWarmerGjAnnumSingle(solarWaterHeatersApiForm.getWarmerGjAnnum());
+    } else if (solarWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.BOTH.name())) {
+      form.setColderKwhAnnumBoth(solarWaterHeatersApiForm.getColderKwhAnnum());
+      form.setAverageKwhAnnumBoth(solarWaterHeatersApiForm.getAverageKwhAnnum());
+      form.setWarmerKwhAnnumBoth(solarWaterHeatersApiForm.getWarmerKwhAnnum());
+      form.setColderGjAnnumBoth(solarWaterHeatersApiForm.getColderGjAnnum());
+      form.setAverageGjAnnumBoth(solarWaterHeatersApiForm.getAverageGjAnnum());
+      form.setWarmerGjAnnumBoth(solarWaterHeatersApiForm.getWarmerGjAnnum());
+    }
+    return form;
   }
 
   public ProcessedEnergyLabelDocument generateHtml(HotWaterStorageTanksForm form, LegislationCategory legislationCategory){
