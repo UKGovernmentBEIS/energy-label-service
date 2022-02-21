@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.validation.constraints.Digits;
-import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.customizers.PropertyCustomizer;
 import org.springframework.stereotype.Component;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
@@ -74,27 +73,26 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     int ints = digits.get().integer();
     int fractions = digits.get().fraction();
 
-    String intsString;
-    String fractionsString;
-    if (ints > 1) {
-      intsString = String.format(". This may be up to %d digits long", ints);
-    } else if (ints > 0) {
-      intsString = ". This may be up to 1 digit long";
+    if (ints > 0 && fractions > 0) {
+      return String.format(". This may be up to %d %s long with an optional %d decimal %s.",
+          ints,
+          pluralise(ints, "digit"),
+          fractions,
+          pluralise(fractions, "place")
+      );
+    } else if (ints > 0){
+      return String.format(". This may be up to %d %s long.", ints, pluralise(ints, "digit"));
     } else {
-      intsString = "";
+      return "";
     }
+  }
 
-    if (fractions > 1) {
-      fractionsString = String.format(" with an optional %d decimal places.", fractions);
-    } else if (fractions > 0) {
-      fractionsString = " with an optional decimal place.";
-    } else if (!StringUtils.isBlank(intsString)){
-      fractionsString = ".";
+  private String pluralise(int count, String item) {
+    if (count == 1) {
+      return item;
     } else {
-      fractionsString = "";
+      return item + "s";
     }
-
-    return intsString + fractionsString;
   }
 
   /**
