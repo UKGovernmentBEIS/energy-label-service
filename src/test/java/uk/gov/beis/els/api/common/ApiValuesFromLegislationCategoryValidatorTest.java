@@ -73,6 +73,17 @@ public class ApiValuesFromLegislationCategoryValidatorTest {
     assertEquals(1, errors.size());
   }
 
+  @Test
+  public void invalidRatingClass_invalidString_assertError() {
+    String invalidRatingClass = "FR-001";
+    AirConditionersInternetLabelApiForm form = getForm();
+    form.setEfficiencyRating(invalidRatingClass);
+
+    Set<ConstraintViolation<AirConditionersInternetLabelApiForm>> errors = validator.validate(form);
+
+    assertEquals(1, errors.size());
+  }
+
   private AirConditionersInternetLabelApiForm getForm() {
     AirConditionersInternetLabelApiForm form = new AirConditionersInternetLabelApiForm();
     form.setEfficiencyRating(RatingClass.D.getDisplayValue());
