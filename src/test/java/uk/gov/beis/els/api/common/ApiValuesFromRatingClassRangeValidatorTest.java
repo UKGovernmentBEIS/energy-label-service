@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
 import uk.gov.beis.els.categories.washingmachines.model.WashingMachinesForm;
 import uk.gov.beis.els.model.RatingClass;
 
