@@ -35,7 +35,7 @@ public class WashingMachinesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for washing machines",
+      summary = "Washing machines: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in washing machine it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/washing-machines/energy-label")
@@ -43,7 +43,7 @@ public class WashingMachinesApiController {
     return documentRendererService.processPdfApiResponse(washingMachinesService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for washing machines")
+  @Operation(summary = "Washing machines: arrow image")
   @PostMapping("/washing-machines/arrow-image")
   public Object washingMachinesInternetLabel(@RequestBody @Valid WashingMachinesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -55,7 +55,7 @@ public class WashingMachinesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for washer-dryers",
+      summary = "Washer-dryers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in washer-dryer it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/washer-dryer/energy-label")
@@ -63,7 +63,7 @@ public class WashingMachinesApiController {
     return documentRendererService.processPdfApiResponse(washingMachinesService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for washer-dryers")
+  @Operation(summary = "Washer-dryers: arrow image")
   @PostMapping("/washer-dryer/arrow-image")
   public Object washerDryerInternetLabel(@RequestBody @Valid WashingMachinesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

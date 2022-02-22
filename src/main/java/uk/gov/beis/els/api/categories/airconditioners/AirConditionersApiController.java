@@ -39,7 +39,7 @@ public class AirConditionersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a cooling-only ductless air conditioner",
+      summary = "Cooling-only ductless air conditioners: energy label",
       description = "The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/non-duct/cooling-only-air-conditioners/energy-label")
@@ -47,7 +47,7 @@ public class AirConditionersApiController {
     return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a cooling-only ductless air conditioner")
+  @Operation(summary = "Cooling-only ductless air conditioners: arrow image")
   @PostMapping("/non-duct/cooling-only-air-conditioners/arrow-image")
   public Object coolingOnlyDuctlessInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -56,7 +56,7 @@ public class AirConditionersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a heating-only ductless air conditioner",
+      summary = "Heating-only ductless air conditioners: energy label",
       description = "The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/non-duct/heating-only-air-conditioners/energy-label")
@@ -64,7 +64,7 @@ public class AirConditionersApiController {
     return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a heating-only ductless air conditioner")
+  @Operation(summary = "Heating-only ductless air conditioners: arrow image")
   @PostMapping("/non-duct/heating-only-air-conditioners/arrow-image")
   public Object heatingOnlyDuctlessInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -73,7 +73,7 @@ public class AirConditionersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a reversible ductless air conditioner",
+      summary = "Reversible ductless air conditioners: energy label",
       description = "The label must be at least 120mm x 210mm when printed "
   )
   @PostMapping("/non-duct/reversible-air-conditioners/energy-label")
@@ -81,7 +81,7 @@ public class AirConditionersApiController {
     return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a reversible ductless air conditioner")
+  @Operation(summary = "Reversible ductless air conditioners: arrow image")
   @PostMapping("/non-duct/reversible-air-conditioners/arrow-image")
   public Object reversibleDuctlessInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -90,7 +90,7 @@ public class AirConditionersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a cooling-only single or double duct air conditioner",
+      summary = "Cooling-only single or double duct air conditioners: energy label",
       description = "The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/single-or-double-duct/cooling-only-air-conditioners/energy-label")
@@ -98,7 +98,7 @@ public class AirConditionersApiController {
     return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a cooling-only single or double duct air conditioner")
+  @Operation(summary = "Cooling-only single or double duct air conditioners: arrow image")
   @PostMapping("/single-or-double-duct/cooling-only-air-conditioners/arrow-image")
   public Object coolingOnlyDuctedInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -107,7 +107,7 @@ public class AirConditionersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a heating-only single or double duct air conditioner",
+      summary = "Heating-only single or double duct air conditioners: energy label",
       description = "The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/single-or-double-duct/heating-only-air-conditioners/energy-label")
@@ -115,7 +115,7 @@ public class AirConditionersApiController {
     return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a heating-only single or double duct air conditioner")
+  @Operation(summary = "Heating-only single or double duct air conditioners: arrow image")
   @PostMapping("/single-or-double-duct/heating-only-air-conditioners/arrow-image")
   public Object heatingOnlyDuctedInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -124,7 +124,7 @@ public class AirConditionersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a reversible single or double duct air conditioner",
+      summary = "Reversible single or double duct air conditioners: energy label",
       description = "The label must be at least 100mm x 200mm when printed."
   )
   @PostMapping("/single-or-double-duct/reversible-air-conditioners/energy-label")
@@ -132,7 +132,7 @@ public class AirConditionersApiController {
     return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a reversible single or double duct air conditioner")
+  @Operation(summary = "Reversible single or double duct air conditioners: arrow image")
   @PostMapping("/single-or-double-duct/reversible-air-conditioners/arrow-image")
   public Object reversibleDuctedInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

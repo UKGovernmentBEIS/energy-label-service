@@ -33,7 +33,7 @@ public class LocalSpaceHeatersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for local space heaters",
+      summary = "Local space heaters: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 105mm x 200mm when printed."
   )
   @PostMapping("/energy-label")
@@ -41,7 +41,7 @@ public class LocalSpaceHeatersApiController {
     return documentRendererService.processPdfApiResponse(localSpaceHeatersService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for local space heaters")
+  @Operation(summary = "Local space heaters: arrow image")
   @PostMapping("/arrow-image")
   public Object localSpaceHeatersInternetLabel(@RequestBody @Valid LocalSpaceHeatersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

@@ -1,0 +1,17 @@
+.els-code {
+  font-family: monospace;
+  font-size: 1em;
+  color: #d13118; // Taken from GOV.UK Design System stylesheet; not present in the govuk colour palette
+  background: govuk-colour("light-grey");
+
+  &--inline {
+    padding: 0 govuk-spacing(1);
+  }
+
+  &--block {
+    display: block;
+    white-space: pre;
+    padding: govuk-spacing(3);
+    overflow-x: scroll;
+  }
+}

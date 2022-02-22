@@ -35,7 +35,7 @@ public class TumbleDryerApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for an air vented tumble dryer",
+      summary = "Air vented tumble dryers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed."
   )
   @PostMapping("/air-vented-tumble-dryers/energy-label")
@@ -43,7 +43,7 @@ public class TumbleDryerApiController {
     return documentRendererService.processPdfApiResponse(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for an air vented tumble dryer")
+  @Operation(summary = "Air vented tumble dryers: arrow image")
   @PostMapping("/air-vented-tumble-dryers/arrow-image")
   public Object airVentedTumbleDryerInternetLabel(@Valid @RequestBody TumbleDryerInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -52,7 +52,7 @@ public class TumbleDryerApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a gas fired tumble dryer",
+      summary = "Gas fired tumble dryers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed."
   )
   @PostMapping("/gas-fired-tumble-dryers/energy-label")
@@ -60,7 +60,7 @@ public class TumbleDryerApiController {
     return documentRendererService.processPdfApiResponse(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a gas fired tumble dryer")
+  @Operation(summary = "Gas fired tumble dryers: arrow image")
   @PostMapping("/gas-fired-tumble-dryers/arrow-image")
   public Object gasFiredTumbleDryerInternetLabel(@Valid @RequestBody TumbleDryerInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -69,7 +69,7 @@ public class TumbleDryerApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a condenser tumble dryer",
+      summary = "Condenser tumble dryers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed."
   )
   @PostMapping("/condenser-tumble-dryers/energy-label")
@@ -77,7 +77,7 @@ public class TumbleDryerApiController {
     return documentRendererService.processPdfApiResponse(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a condenser tumble dryer")
+  @Operation(summary = "Condenser tumble dryers: arrow image")
   @PostMapping("/condenser-tumble-dryers/arrow-image")
   public Object condenserTumbleDryerInternetLabel(@Valid @RequestBody TumbleDryerInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
