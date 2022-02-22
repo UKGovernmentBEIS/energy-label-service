@@ -34,7 +34,7 @@ public class RefrigeratingAppliancesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for household fridges and freezers",
+      summary = "Household fridges and freezers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/household-fridges-and-freezers/energy-label")
@@ -42,7 +42,7 @@ public class RefrigeratingAppliancesApiController {
     return documentRendererService.processPdfApiResponse(refrigeratingAppliancesService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for household fridges and freezers")
+  @Operation(summary = "Household fridges and freezers: arrow image")
   @PostMapping("/household-fridges-and-freezers/arrow-image")
   public Object fridgesFreezersInternetLabel(@RequestBody @Valid RefrigeratingAppliancesInternetLapelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -54,7 +54,7 @@ public class RefrigeratingAppliancesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for wine storage appliances",
+      summary = "Wine storage appliances: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/wine-storage-appliances/energy-label")
@@ -62,7 +62,7 @@ public class RefrigeratingAppliancesApiController {
     return documentRendererService.processPdfApiResponse(refrigeratingAppliancesService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for wine storage appliances")
+  @Operation(summary = "Wine storage appliances: arrow image")
   @PostMapping("/wine-storage-appliances/arrow-image")
   public Object wineStorageAppliancesInternetLabel(@RequestBody @Valid RefrigeratingAppliancesInternetLapelApiForm form) {
     return documentRendererService.processImageApiResponse(

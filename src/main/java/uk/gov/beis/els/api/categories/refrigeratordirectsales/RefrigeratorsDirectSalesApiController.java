@@ -37,7 +37,7 @@ public class RefrigeratorsDirectSalesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for refrigerated vending machines",
+      summary = "Refrigerated vending machines: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/vending-machines/energy-label")
@@ -46,7 +46,7 @@ public class RefrigeratorsDirectSalesApiController {
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for refrigerated vending machines")
+  @Operation(summary = "Refrigerated vending machines: arrow image")
   @PostMapping("/vending-machines/arrow-image")
   public Object vendingMachinesInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
@@ -55,7 +55,7 @@ public class RefrigeratorsDirectSalesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for ice cream freezers",
+      summary = "Ice cream freezers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/ice-cream-freezers/energy-label")
@@ -64,7 +64,7 @@ public class RefrigeratorsDirectSalesApiController {
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for ice cream freezers")
+  @Operation(summary = "Ice cream freezers: arrow image")
   @PostMapping("/ice-cream-freezers/arrow-image")
   public Object iceCreamFreezersInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
@@ -73,7 +73,7 @@ public class RefrigeratorsDirectSalesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for beverage coolers",
+      summary = "Beverage coolers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/beverage-coolers/energy-label")
@@ -82,7 +82,7 @@ public class RefrigeratorsDirectSalesApiController {
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for beverage coolers")
+  @Operation(summary = "Beverage coolers: arrow image")
   @PostMapping("/beverage-coolers/arrow-image")
   public Object beverageCoolersInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
@@ -91,7 +91,7 @@ public class RefrigeratorsDirectSalesApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for supermarket refrigerator, freezer cabinets or gelato-scooping cabinets",
+      summary = "Supermarket refrigerator or freezer cabinets or gelato-scooping cabinets: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in appliance it doesn't have to be attached to the product, but it must still be easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/display-cabinets/energy-label")
@@ -100,7 +100,7 @@ public class RefrigeratorsDirectSalesApiController {
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for supermarket refrigerator, freezer cabinets or gelato-scooping cabinets")
+  @Operation(summary = "Supermarket refrigerator or freezer cabinets or gelato-scooping cabinets: arrow image")
   @PostMapping("/display-cabinets/arrow-image")
   public Object displayCabinetsInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,

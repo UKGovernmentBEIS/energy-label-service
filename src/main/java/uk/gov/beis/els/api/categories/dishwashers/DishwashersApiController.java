@@ -33,7 +33,7 @@ public class DishwashersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for dishwashers",
+      summary = "Dishwashers: energy label",
       description = "You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in dishwasher it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/energy-label")
@@ -41,7 +41,7 @@ public class DishwashersApiController {
     return documentRendererService.processPdfApiResponse(dishwashersService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for dishwashers")
+  @Operation(summary = "Dishwashers: arrow image")
   @PostMapping("/arrow-image")
   public Object dishwashersInternetLabel(@RequestBody @Valid DishwashersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
