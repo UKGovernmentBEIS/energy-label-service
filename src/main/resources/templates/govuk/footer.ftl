@@ -8,6 +8,11 @@
           <h2 class="govuk-visually-hidden">Support links</h2>
           <ul class="govuk-footer__inline-list">
             <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="/api-documentation">
+                Energy label API
+              </a>
+            </li>
+            <li class="govuk-footer__inline-list-item">
               <a class="govuk-footer__link" href="/cookies">
                 Cookies
               </a>

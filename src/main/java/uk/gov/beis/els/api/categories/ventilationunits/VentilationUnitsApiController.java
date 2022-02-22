@@ -34,7 +34,7 @@ public class VentilationUnitsApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a unidirectional ventilation unit",
+      summary = "Unidirectional ventilation units: energy label",
       description = "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 75mm x 150mm when printed."
   )
   @PostMapping("/unidirectional-ventilation-units/energy-label")
@@ -42,7 +42,7 @@ public class VentilationUnitsApiController {
     return documentRendererService.processPdfApiResponse(ventilationUnitsService.generateHtmlUnidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a unidirectional ventilation unit")
+  @Operation(summary = "Unidirectional ventilation units: arrow image")
   @PostMapping("/unidirectional-ventilation-units/arrow-image")
   public Object unidirectionalVentilationUnitInternetLabel(@Valid @RequestBody VentilationUnitsInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -51,7 +51,7 @@ public class VentilationUnitsApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a bidirectional ventilation unit",
+      summary = "Bidirectional ventilation units: energy label",
       description = "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 75mm x 150mm when printed. "
   )
   @PostMapping("/bidirectional-ventilation-units/energy-label")
@@ -59,7 +59,7 @@ public class VentilationUnitsApiController {
     return documentRendererService.processPdfApiResponse(ventilationUnitsService.generateHtmlBidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a bidirectional ventilation unit")
+  @Operation(summary = "Bidirectional ventilation units: arrow image")
   @PostMapping("/bidirectional-ventilation-units/arrow-image")
   public Object bidirectionalVentilationUnitInternetLabel(@Valid @RequestBody VentilationUnitsInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

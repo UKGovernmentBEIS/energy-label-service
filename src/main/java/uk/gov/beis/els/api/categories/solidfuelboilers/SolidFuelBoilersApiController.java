@@ -35,7 +35,7 @@ public class SolidFuelBoilersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a solid fuel boiler",
+      summary = "Solid fuel boilers: energy label",
       description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
   )
   @PostMapping("/solid-fuel-boilers/energy-label")
@@ -43,7 +43,7 @@ public class SolidFuelBoilersApiController {
     return documentRendererService.processPdfApiResponse(solidFuelBoilersService.generateHtml(form, SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a solid fuel boiler")
+  @Operation(summary = "Solid fuel boilers: arrow image")
   @PostMapping("/solid-fuel-boilers/arrow-image")
   public Object solidFuelBoilersInternetLabel(@Valid @RequestBody SolidFuelBoilersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -52,7 +52,7 @@ public class SolidFuelBoilersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices",
+      summary = "Package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices: energy label",
       description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed."
   )
   @PostMapping("/package-solid-fuel-boiler/energy-label")
@@ -62,7 +62,7 @@ public class SolidFuelBoilersApiController {
 
 
 
-  @Operation(summary = "Create an arrow image for a  a package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices")
+  @Operation(summary = "Package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices: arrow image")
   @PostMapping("/package-solid-fuel-boiler/arrow-image")
   public Object solidFuelBoilerPackagesInternetLabel(@Valid @RequestBody SolidFuelBoilersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

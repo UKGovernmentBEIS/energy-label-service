@@ -34,7 +34,7 @@ public class ProRefrigeratedCabinetsApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for professional refrigerated storage cabinets",
+      summary = "Professional refrigerated storage cabinets: energy label",
       description = "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 110mm x 220mm when printed."
   )
   @PostMapping("/energy-label")
@@ -43,7 +43,7 @@ public class ProRefrigeratedCabinetsApiController {
         proRefrigeratedCabinetsService.generateHtml(form, ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for professional refrigerated storage cabinets")
+  @Operation(summary = "Professional refrigerated storage cabinets: arrow image")
   @PostMapping("/arrow-image")
   public Object proRefrigeratedCabinetsInternetLabel(
       @RequestBody @Valid ProRefrigeratedCabinetsInternetLabelApiForm form) {

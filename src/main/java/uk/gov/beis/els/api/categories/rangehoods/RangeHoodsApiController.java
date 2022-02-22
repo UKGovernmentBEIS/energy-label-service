@@ -33,7 +33,7 @@ public class RangeHoodsApiController {
   }
 
   @Operation(
-      summary = "Create energy label for a range hood",
+      summary = "Range hoods: energy label",
       description = "You must display the label so that it’s easy to see and clearly related to the product. It must be at least 60mm x 120mm when printed."
   )
   @PostMapping("/energy-label")
@@ -42,7 +42,7 @@ public class RangeHoodsApiController {
         rangeHoodsService.generateHtml(form, RangeHoodsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a range hood")
+  @Operation(summary = "Range hoods: arrow image")
   @PostMapping("/arrow-image")
   public Object rangeHoodsInternetLabel(@RequestBody @Valid RangeHoodsInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
