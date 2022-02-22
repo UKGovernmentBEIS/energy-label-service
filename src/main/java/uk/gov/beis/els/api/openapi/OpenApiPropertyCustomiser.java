@@ -72,12 +72,26 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     }
     int ints = digits.get().integer();
     int fractions = digits.get().fraction();
+
     if (ints > 0 && fractions > 0) {
-      return String.format(". This may be up to %d digit(s) long with an optional %d decimal places.", ints, fractions);
-    } else if (ints > 0) {
-      return String.format(". This may be up to %d digit(s) long.", ints);
+      return String.format(". This may be up to %d %s long with an optional %d decimal %s.",
+          ints,
+          pluralise(ints, "digit"),
+          fractions,
+          pluralise(fractions, "place")
+      );
+    } else if (ints > 0){
+      return String.format(". This may be up to %d %s long.", ints, pluralise(ints, "digit"));
     } else {
       return "";
+    }
+  }
+
+  private String pluralise(int count, String item) {
+    if (count == 1) {
+      return item;
+    } else {
+      return item + "s";
     }
   }
 
