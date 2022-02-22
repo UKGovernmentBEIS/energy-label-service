@@ -78,7 +78,7 @@ public class RateLimitingIntegrationTest {
   }
 
   @Test
-  public void requestLimitTest() throws Exception {
+  public void requestLimitTest() {
     String url = "/api/v1/domestic-ovens/gas-ovens/energy-label";
     String xForwardedForHeader = "1.1.1.1";
     IntStream.rangeClosed(1, 3)
