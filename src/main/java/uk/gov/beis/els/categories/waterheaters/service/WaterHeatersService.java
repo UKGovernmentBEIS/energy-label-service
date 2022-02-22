@@ -77,15 +77,15 @@ public class WaterHeatersService {
     form.setSoundPowerLevelIndoors(heatPumpWaterHeatersApiForm.getSoundPowerLevelIndoors());
     form.setSoundPowerLevelOutdoors(heatPumpWaterHeatersApiForm.getSoundPowerLevelOutdoors());
     form.setConsumptionUnit(heatPumpWaterHeatersApiForm.getConsumptionUnit());
-    if (heatPumpWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.KWH.name())) {
+    if (EnergyConsumptionUnit.getEnum(heatPumpWaterHeatersApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.KWH)) {
       form.setColderKwhAnnumSingle(heatPumpWaterHeatersApiForm.getColderKwhAnnum());
       form.setAverageKwhAnnumSingle(heatPumpWaterHeatersApiForm.getAverageKwhAnnum());
       form.setWarmerKwhAnnumSingle(heatPumpWaterHeatersApiForm.getWarmerKwhAnnum());
-    } else if (heatPumpWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.GJ.name())) {
+    } else if (EnergyConsumptionUnit.getEnum(heatPumpWaterHeatersApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.GJ)) {
       form.setColderGjAnnumSingle(heatPumpWaterHeatersApiForm.getColderGjAnnum());
       form.setAverageGjAnnumSingle(heatPumpWaterHeatersApiForm.getAverageGjAnnum());
       form.setWarmerGjAnnumSingle(heatPumpWaterHeatersApiForm.getWarmerGjAnnum());
-    } else if (heatPumpWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.BOTH.name())) {
+    } else if (EnergyConsumptionUnit.getEnum(heatPumpWaterHeatersApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.BOTH)) {
       form.setColderKwhAnnumBoth(heatPumpWaterHeatersApiForm.getColderKwhAnnum());
       form.setAverageKwhAnnumBoth(heatPumpWaterHeatersApiForm.getAverageKwhAnnum());
       form.setWarmerKwhAnnumBoth(heatPumpWaterHeatersApiForm.getWarmerKwhAnnum());
@@ -137,11 +137,11 @@ public class WaterHeatersService {
     form.setDeclaredLoadProfile(conventionalWaterHeaterApiForm.getDeclaredLoadProfile());
     form.setEfficiencyRating(conventionalWaterHeaterApiForm.getEfficiencyRating());
     form.setConsumptionUnit(conventionalWaterHeaterApiForm.getConsumptionUnit());
-    if (conventionalWaterHeaterApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.KWH.name())) {
+    if (EnergyConsumptionUnit.getEnum(conventionalWaterHeaterApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.KWH)) {
       form.setKwhAnnum(conventionalWaterHeaterApiForm.getKwhAnnum());
-    } else if (conventionalWaterHeaterApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.GJ.name())) {
+    } else if (EnergyConsumptionUnit.getEnum(conventionalWaterHeaterApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.GJ)) {
       form.setGjAnnum(conventionalWaterHeaterApiForm.getGjAnnum());
-    } else if (conventionalWaterHeaterApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.BOTH.name())) {
+    } else if (EnergyConsumptionUnit.getEnum(conventionalWaterHeaterApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.BOTH)) {
       form.setBothKwhAnnum(conventionalWaterHeaterApiForm.getKwhAnnum());
       form.setBothGjAnnum(conventionalWaterHeaterApiForm.getGjAnnum());
     }
@@ -172,15 +172,15 @@ public class WaterHeatersService {
     form.setEfficiencyRating(solarWaterHeatersApiForm.getEfficiencyRating());
     form.setSoundPowerLevelIndoors(solarWaterHeatersApiForm.getSoundPowerLevelIndoors());
     form.setConsumptionUnit(solarWaterHeatersApiForm.getConsumptionUnit());
-    if (solarWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.KWH.name())) {
+    if (EnergyConsumptionUnit.getEnum(solarWaterHeatersApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.KWH)) {
       form.setColderKwhAnnumSingle(solarWaterHeatersApiForm.getColderKwhAnnum());
       form.setAverageKwhAnnumSingle(solarWaterHeatersApiForm.getAverageKwhAnnum());
       form.setWarmerKwhAnnumSingle(solarWaterHeatersApiForm.getWarmerKwhAnnum());
-    } else if (solarWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.GJ.name())) {
+    } else if (EnergyConsumptionUnit.getEnum(solarWaterHeatersApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.GJ)) {
       form.setColderGjAnnumSingle(solarWaterHeatersApiForm.getColderGjAnnum());
       form.setAverageGjAnnumSingle(solarWaterHeatersApiForm.getAverageGjAnnum());
       form.setWarmerGjAnnumSingle(solarWaterHeatersApiForm.getWarmerGjAnnum());
-    } else if (solarWaterHeatersApiForm.getConsumptionUnit().equals(EnergyConsumptionUnit.BOTH.name())) {
+    } else if (EnergyConsumptionUnit.getEnum(solarWaterHeatersApiForm.getConsumptionUnit()).equals(EnergyConsumptionUnit.BOTH)) {
       form.setColderKwhAnnumBoth(solarWaterHeatersApiForm.getColderKwhAnnum());
       form.setAverageKwhAnnumBoth(solarWaterHeatersApiForm.getAverageKwhAnnum());
       form.setWarmerKwhAnnumBoth(solarWaterHeatersApiForm.getWarmerKwhAnnum());
