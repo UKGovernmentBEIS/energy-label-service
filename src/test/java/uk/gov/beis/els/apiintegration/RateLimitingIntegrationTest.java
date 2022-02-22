@@ -1,14 +1,19 @@
 package uk.gov.beis.els.apiintegration;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Collections;
+import java.util.stream.IntStream;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -35,8 +40,89 @@ public class RateLimitingIntegrationTest {
 
   @Test
   public void withSingleIpAddress() throws Exception {
+    mockMvc.perform(post("/api/v1/domestic-ovens/gas-ovens/energy-label")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(getApiContent())
+            .accept(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", "1.1.1.1"))
+        .andExpect(status().isOk())
+        .andExpect(header().longValue("X-Rate-Limit-Remaining", 2));
+  }
 
-    String apiContent = "{\n" +
+  @Test
+  public void withMultipleIpAddress() throws Exception {
+    mockMvc.perform(post("/api/v1/domestic-ovens/gas-ovens/energy-label")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(getApiContent())
+            .accept(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", "1.1.1.1, 2.2.2.2"))
+        .andExpect(status().isOk())
+        .andExpect(header().longValue("X-Rate-Limit-Remaining", 2));
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void withEmptyXForwardedForHeader() throws Exception {
+    mockMvc.perform(post("/api/v1/domestic-ovens/gas-ovens/energy-label")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(getApiContent())
+            .accept(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", ""));
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void withNoXForwardedForHeader() throws Exception {
+    mockMvc.perform(post("/api/v1/domestic-ovens/gas-ovens/energy-label")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(getApiContent())
+        .accept(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  public void requestLimitTest() throws Exception {
+    String url = "/api/v1/domestic-ovens/gas-ovens/energy-label";
+    String xForwardedForHeader = "1.1.1.1";
+    IntStream.rangeClosed(1, 3)
+        .boxed()
+        .sorted(Collections.reverseOrder())
+        .forEach(counter -> {
+          successfulWebRequest(url, xForwardedForHeader, counter - 1);
+        });
+
+    blockedWebRequestDueToRateLimit(url, xForwardedForHeader);
+  }
+
+  private void successfulWebRequest(String url, String xForwardedForHeader, Integer remainingTries) {
+    try {
+      mockMvc.perform(post(url)
+              .contentType(MediaType.APPLICATION_JSON)
+              .content(getApiContent())
+              .accept(MediaType.APPLICATION_JSON)
+              .header("X-Forwarded-For", xForwardedForHeader))
+          .andExpect(status().isOk())
+          .andExpect(header().longValue("X-Rate-Limit-Remaining", remainingTries));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void blockedWebRequestDueToRateLimit(String url, String xForwardedForHeader) {
+    try {
+      mockMvc.perform(post(url)
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(getApiContent())
+          .accept(MediaType.APPLICATION_JSON)
+          .header("X-Forwarded-For", xForwardedForHeader))
+          .andExpect(status().is(HttpStatus.TOO_MANY_REQUESTS.value()))
+          .andExpect(header().exists("X-Rate-Limit-Retry-After-Seconds"))
+          .andExpect(content().string(containsString("{ \"status\" : 429, \"error\": \"Too many requests\", \"message\" : \"You have exhausted your API request quota\" }")));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  private String getApiContent() {
+    return "{\n" +
         "  \"supplierName\": \"string\",\n" +
         "  \"modelName\": \"string\",\n" +
         "  \"efficiencyRating\": \"APPP\",\n" +
@@ -47,14 +133,6 @@ public class RateLimitingIntegrationTest {
         "  \"conventionalMjConsumption\": 0,\n" +
         "  \"convectionMjConsumption\": 0\n" +
         "}";
-
-    mockMvc.perform(post("/api/v1/domestic-ovens/gas-ovens/energy-label")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(apiContent)
-            .accept(MediaType.APPLICATION_JSON)
-            .header("X-Forwarded-For", "1.1.1.1"))
-        .andExpect(status().isOk())
-        .andExpect(header().longValue("X-Rate-Limit-Remaining", 2));
   }
 
 }
