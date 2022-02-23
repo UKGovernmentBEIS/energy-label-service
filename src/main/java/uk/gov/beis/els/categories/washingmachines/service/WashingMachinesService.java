@@ -42,11 +42,11 @@ public class WashingMachinesService {
         .setHoursMinutes("duration", form.getProgrammeDurationHours(), form.getProgrammeDurationMinutes())
         .setText("lCycle", form.getWaterConsumptionPerCycle())
         .setText("db", form.getNoiseEmissionValue())
-        .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionClass()))
+        .applyRatingCssClass("noiseClass", RatingClass.getEnum(form.getNoiseEmissionClass()))
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
-        .applyRatingCssClass("spinClass", RatingClass.valueOf(form.getSpinDryingEfficiencyRating()))
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()),
+        .applyRatingCssClass("spinClass", RatingClass.getEnum(form.getSpinDryingEfficiencyRating()))
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()),
             LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
         .asProcessedEnergyLabel(ProductMetadata.WASHING_MACHINES, form);
   }
@@ -58,9 +58,9 @@ public class WashingMachinesService {
         .setQrCode(form.getQrCodeUrl())
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
-        .setRatingArrow("completeCycleRating", RatingClass.valueOf(form.getCompleteCycleEfficiencyRating()),
+        .setRatingArrow("completeCycleRating", RatingClass.getEnum(form.getCompleteCycleEfficiencyRating()),
             LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
-        .setRatingArrow("washCycleRating", RatingClass.valueOf(form.getWashingCycleEfficiencyRating()),
+        .setRatingArrow("washCycleRating", RatingClass.getEnum(form.getWashingCycleEfficiencyRating()),
             LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
         .setText("completeCycleKwh100cycles", form.getCompleteCycleEnergyConsumption())
         .setText("washCycleKwh100cycles", form.getWashingCycleEnergyConsumption())
@@ -72,9 +72,9 @@ public class WashingMachinesService {
             form.getCompleteCycleDurationMinutes())
         .setHoursMinutes("washCycleDuration", form.getWashingCycleDurationHours(),
             form.getWashingCycleDurationMinutes())
-        .applyRatingCssClass("spinClass", RatingClass.valueOf(form.getSpinDryingEfficiencyRating()))
+        .applyRatingCssClass("spinClass", RatingClass.getEnum(form.getSpinDryingEfficiencyRating()))
         .setText("db", form.getNoiseEmissionValue())
-        .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionClass()))
+        .applyRatingCssClass("noiseClass", RatingClass.getEnum(form.getNoiseEmissionClass()))
         .asProcessedEnergyLabel(ProductMetadata.WASHING_MACHINES_WASHER_DRYER, form);
   }
 

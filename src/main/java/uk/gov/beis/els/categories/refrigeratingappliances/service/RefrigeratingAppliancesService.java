@@ -55,10 +55,10 @@ public class RefrigeratingAppliancesService {
 
     return templatePopulator
         .setQrCode(form.getQrCodeUrl())
-        .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()))
+        .applyRatingCssClass("noiseClass", RatingClass.getEnum(form.getNoiseEmissionsClass()))
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()),
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()),
             LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
         .setText("db", form.getNoiseEmissions())
@@ -69,10 +69,10 @@ public class RefrigeratingAppliancesService {
     return new TemplatePopulator(templateParserService.parseTemplate(
         "labels/household-refrigerating-appliances/wine-storage-appliances-2021.svg"))
         .setQrCode(form.getQrCodeUrl())
-        .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()))
+        .applyRatingCssClass("noiseClass", RatingClass.getEnum(form.getNoiseEmissionsClass()))
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()),
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()),
             LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
         .setText("kwhAnnum", form.getAnnualEnergyConsumption())
         .setText("bottleCapacity", form.getBottleCapacity())

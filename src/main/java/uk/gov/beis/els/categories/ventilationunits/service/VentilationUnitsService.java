@@ -35,7 +35,7 @@ public class VentilationUnitsService {
   private ProcessedEnergyLabelDocument generateHtml(VentilationUnitsForm form, LegislationCategory legislationCategory, String templatePath, ProductMetadata productMetadata) {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(templatePath));
     return templatePopulator
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
         .setText("db", form.getSoundPowerLevel())

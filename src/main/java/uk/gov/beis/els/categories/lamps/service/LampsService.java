@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.api.categories.lamps.LampsPostSeptember2021ApiForm;
+import uk.gov.beis.els.api.categories.lamps.LampsPreSeptember2021ApiForm;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.lamps.model.LampsForm;
 import uk.gov.beis.els.categories.lamps.model.LampsFormNoSupplierModel;
@@ -75,7 +77,7 @@ public class LampsService {
     }
 
     return templatePopulator
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
         .asProcessedEnergyLabel(ProductMetadata.LAMPS_FULL, form);
   }
@@ -93,7 +95,7 @@ public class LampsService {
     }
 
     return templatePopulator
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwh", form.getEnergyConsumption())
         .asProcessedEnergyLabelNoSupplier(ProductMetadata.LAMPS_RATING_CONSUMPTION, form);
   }
@@ -111,7 +113,7 @@ public class LampsService {
     }
 
     return templatePopulator
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .asProcessedEnergyLabelNoSupplier(ProductMetadata.LAMPS_RATING, form);
   }
 
@@ -137,8 +139,30 @@ public class LampsService {
     templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/lamps-light-sources/packaging-arrow/"+templatePath));
 
     return templatePopulator
-        .transformPackagingArrow(RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .transformPackagingArrow(RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata.LAMPS_PACKAGING_ARROW, form);
   }
 
+  public LampsForm toStandardLampsForm(LampsPreSeptember2021ApiForm form){
+    LampsForm lampsForm = new LampsForm();
+    lampsForm.setApplicableLegislation(LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021.getId());
+    lampsForm.setEfficiencyRating(form.getEfficiencyRating());
+    lampsForm.setEnergyConsumption(form.getEnergyConsumption());
+    lampsForm.setSupplierName(form.getSupplierName());
+    lampsForm.setModelName(form.getModelName());
+    return lampsForm;
+  }
+
+  public LampsForm toStandardLampsForm(LampsPostSeptember2021ApiForm form) {
+    LampsForm lampsForm = new LampsForm();
+    lampsForm.setApplicableLegislation(LEGISLATION_CATEGORY_POST_SEPTEMBER_2021.getId());
+    lampsForm.setEfficiencyRating(form.getEfficiencyRating());
+    lampsForm.setEnergyConsumption(form.getEnergyConsumption());
+    lampsForm.setTemplateSize(form.getTemplateSize());
+    lampsForm.setTemplateColour(form.getTemplateColour());
+    lampsForm.setQrCodeUrl(form.getQrCodeUrl());
+    lampsForm.setSupplierName(form.getSupplierName());
+    lampsForm.setModelName(form.getModelName());
+    return lampsForm;
+  }
 }
