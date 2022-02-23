@@ -7,12 +7,12 @@ public class LegislationCategory {
   private final InternetLabelTemplate internetLabelTemplate;
 
   public static Boolean isPrimaryRatingClassValid(String ratingClass, LegislationCategory legislationCategory) {
-    RatingClass rating = RatingClass.valueOf(ratingClass);
+    RatingClass rating = RatingClass.getEnum(ratingClass);
     return legislationCategory.getPrimaryRatingRange().getApplicableRatings().contains(rating);
   }
 
   public static Boolean isSecondaryRatingClassValid(String ratingClass, LegislationCategory legislationCategory) {
-    RatingClass rating = RatingClass.valueOf(ratingClass);
+    RatingClass rating = RatingClass.getEnum(ratingClass);
     return legislationCategory.getSecondaryRatingRange().getApplicableRatings().contains(rating);
   }
 

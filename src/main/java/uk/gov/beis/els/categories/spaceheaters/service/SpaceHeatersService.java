@@ -47,7 +47,7 @@ public class SpaceHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("kw", form.getHeatOutput())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_BOILER, form);
   }
 
@@ -68,9 +68,9 @@ public class SpaceHeatersService {
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("kw", form.getHeatOutput())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
-      .setRatingArrow("spaceHeatingRating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange(), "data-rating-increment-space-heating")
-      .setRatingArrow("waterHeatingRating", RatingClass.valueOf(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
+      .setRatingArrow("spaceHeatingRating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange(), "data-rating-increment-space-heating")
+      .setRatingArrow("waterHeatingRating", RatingClass.getEnum(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_BOILER_COMBI, form);
   }
 
@@ -86,7 +86,7 @@ public class SpaceHeatersService {
       .setMultilineText("model", form.getModelName())
       .setText("kw", form.getHeatOutput())
       .setText("db", form.getSoundPowerLevelIndoors())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_COGEN, form);
   }
 
@@ -112,7 +112,7 @@ public class SpaceHeatersService {
     }
 
     if (StringUtils.isNotBlank(mediumTempEfficiencyRating)) {
-      templatePopulator.setRatingArrow("mediumTemperatureRating", RatingClass.valueOf(mediumTempEfficiencyRating), legislationCategory.getPrimaryRatingRange());
+      templatePopulator.setRatingArrow("mediumTemperatureRating", RatingClass.getEnum(mediumTempEfficiencyRating), legislationCategory.getPrimaryRatingRange());
     }
     if (StringUtils.isNotBlank(mediumTempColderHeatOutput)) {
       templatePopulator.setText("mediumTemperatureColderKw", mediumTempColderHeatOutput);
@@ -126,7 +126,7 @@ public class SpaceHeatersService {
 
 
     return templatePopulator
-      .setRatingArrow("lowTemperatureRating", RatingClass.valueOf(form.getLowTempEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("lowTemperatureRating", RatingClass.getEnum(form.getLowTempEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("lowTemperatureColderKw", form.getLowTempColderHeatOutput())
@@ -154,11 +154,11 @@ public class SpaceHeatersService {
     }
 
     return templatePopulator
-      .setRatingArrow("spaceHeatingRating", RatingClass.valueOf(form.getSpaceHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange(), "data-rating-increment-space-heating")
-      .setRatingArrow("waterHeatingRating", RatingClass.valueOf(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
+      .setRatingArrow("spaceHeatingRating", RatingClass.getEnum(form.getSpaceHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange(), "data-rating-increment-space-heating")
+      .setRatingArrow("waterHeatingRating", RatingClass.getEnum(form.getWaterHeatingEfficiencyRating()), legislationCategory.getSecondaryRatingRange(), "data-rating-increment-water-heating")
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setText("declaredLoadProfile", LoadProfile.valueOf(form.getDeclaredLoadProfile()).getDisplayName())
+      .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
       .setText("colderKw", form.getColderHeatOutput())
       .setText("averageKw", form.getAverageHeatOutput())
       .setText("warmerKw", form.getWarmerHeatOutput())
@@ -185,9 +185,9 @@ public class SpaceHeatersService {
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getPackageEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
-      .setText("boilerRatingLetter", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getLetter())
-      .setText("boilerRatingPlusses", RatingClass.valueOf(form.getHeaterEfficiencyRating()).getPlusses())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getPackageEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
+      .setText("boilerRatingLetter", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getLetter())
+      .setText("boilerRatingPlusses", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getPlusses())
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE, form);
   }
 
@@ -210,14 +210,14 @@ public class SpaceHeatersService {
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setRatingArrow("packageSpaceHeatingRating", RatingClass.valueOf(form.getPackageSpaceHeatingEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
-      .setRatingArrow("packageWaterHeatingRating", RatingClass.valueOf(form.getPackageWaterHeatingEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
-      .setText("heaterSpaceHeatingRatingLetter", RatingClass.valueOf(form.getSpaceHeaterEfficiencyRating()).getLetter())
-      .setText("heaterSpaceHeatingRatingPlusses", RatingClass.valueOf(form.getSpaceHeaterEfficiencyRating()).getPlusses())
-      .setText("heaterWaterHeatingRatingLetter", RatingClass.valueOf(form.getWaterHeaterEfficiencyRating()).getLetter())
-      .setText("heaterWaterHeatingRatingPlusses", RatingClass.valueOf(form.getWaterHeaterEfficiencyRating()).getPlusses())
-      .setText("heaterDeclaredLoadProfile", LoadProfile.valueOf(form.getHeaterDeclaredLoadProfile()).getDisplayName())
-      .setText("packageDeclaredLoadProfile", LoadProfile.valueOf(form.getPackageDeclaredLoadProfile()).getDisplayName())
+      .setRatingArrow("packageSpaceHeatingRating", RatingClass.getEnum(form.getPackageSpaceHeatingEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
+      .setRatingArrow("packageWaterHeatingRating", RatingClass.getEnum(form.getPackageWaterHeatingEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange())
+      .setText("heaterSpaceHeatingRatingLetter", RatingClass.getEnum(form.getSpaceHeaterEfficiencyRating()).getLetter())
+      .setText("heaterSpaceHeatingRatingPlusses", RatingClass.getEnum(form.getSpaceHeaterEfficiencyRating()).getPlusses())
+      .setText("heaterWaterHeatingRatingLetter", RatingClass.getEnum(form.getWaterHeaterEfficiencyRating()).getLetter())
+      .setText("heaterWaterHeatingRatingPlusses", RatingClass.getEnum(form.getWaterHeaterEfficiencyRating()).getPlusses())
+      .setText("heaterDeclaredLoadProfile", LoadProfile.getEnum(form.getHeaterDeclaredLoadProfile()).getDisplayName())
+      .setText("packageDeclaredLoadProfile", LoadProfile.getEnum(form.getPackageDeclaredLoadProfile()).getDisplayName())
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION, form);
   }
 

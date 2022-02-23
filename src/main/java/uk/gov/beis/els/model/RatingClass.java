@@ -1,5 +1,7 @@
 package uk.gov.beis.els.model;
 
+import java.util.Arrays;
+
 public enum RatingClass {
   APPPP("A++++", "A", "++++"),
   APPP("A+++", "A", "+++"),
@@ -33,6 +35,13 @@ public enum RatingClass {
 
   public String getPlusses() {
     return plusses;
+  }
+
+  public static RatingClass getEnum(String ratingClass) {
+    return Arrays.stream(RatingClass.values())
+        .filter(e -> e.getDisplayValue().equals(ratingClass) || e.name().equals(ratingClass))
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException(String.format("Can't resolve RatingClass from string %s", ratingClass)));
   }
 
 }
