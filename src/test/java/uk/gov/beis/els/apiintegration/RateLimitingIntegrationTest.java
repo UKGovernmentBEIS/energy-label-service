@@ -39,25 +39,15 @@ public class RateLimitingIntegrationTest {
   protected Bucket4JRequestService bucket4JRequestService;
 
   @Test
-  public void withSingleIpAddress() throws Exception {
-    mockMvc.perform(post("/api/v1/domestic-ovens/gas-ovens/energy-label")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(getApiContent())
-            .accept(MediaType.APPLICATION_JSON)
-            .header("X-Forwarded-For", "1.1.1.1"))
-        .andExpect(status().isOk())
-        .andExpect(header().longValue("X-Rate-Limit-Remaining", 2));
+  public void withSingleIpAddress() {
+    successfulWebRequest("/api/v1/domestic-ovens/gas-ovens/energy-label", "1.1.1.1", 2);
   }
 
   @Test
-  public void withMultipleIpAddress() throws Exception {
-    mockMvc.perform(post("/api/v1/domestic-ovens/gas-ovens/energy-label")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(getApiContent())
-            .accept(MediaType.APPLICATION_JSON)
-            .header("X-Forwarded-For", "1.1.1.1, 2.2.2.2"))
-        .andExpect(status().isOk())
-        .andExpect(header().longValue("X-Rate-Limit-Remaining", 2));
+  public void withMultipleIpAddress() {
+    String url = "/api/v1/domestic-ovens/gas-ovens/energy-label";
+    successfulWebRequest(url, "1.1.1.1, 2.2.2.2", 2);
+    successfulWebRequest(url, "3.3.3.3, 2.2.2.2", 1);
   }
 
   @Test(expected = RuntimeException.class)
