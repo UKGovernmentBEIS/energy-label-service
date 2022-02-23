@@ -145,6 +145,7 @@ public class LampsService {
 
   public LampsForm toStandardLampsForm(LampsPreSeptember2021ApiForm form){
     LampsForm lampsForm = new LampsForm();
+    lampsForm.setApplicableLegislation(LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021.getId());
     lampsForm.setEfficiencyRating(form.getEfficiencyRating());
     lampsForm.setEnergyConsumption(form.getEnergyConsumption());
     lampsForm.setSupplierName(form.getSupplierName());
@@ -154,6 +155,7 @@ public class LampsService {
 
   public LampsForm toStandardLampsForm(LampsPostSeptember2021ApiForm form) {
     LampsForm lampsForm = new LampsForm();
+    lampsForm.setApplicableLegislation(LEGISLATION_CATEGORY_POST_SEPTEMBER_2021.getId());
     lampsForm.setEfficiencyRating(form.getEfficiencyRating());
     lampsForm.setEnergyConsumption(form.getEnergyConsumption());
     lampsForm.setTemplateSize(form.getTemplateSize());
