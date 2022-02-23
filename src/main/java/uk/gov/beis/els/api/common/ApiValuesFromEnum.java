@@ -19,5 +19,6 @@ public @interface ApiValuesFromEnum {
   String message() default "{uk.gov.beis.els.api.common.ApiValuesFromEnum.message}";
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
+
   Class<?> value();
 }

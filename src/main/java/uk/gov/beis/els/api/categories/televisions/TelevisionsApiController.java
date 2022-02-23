@@ -33,7 +33,7 @@ public class TelevisionsApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for televisions",
+      summary = "Televisions and electronic displays: energy label",
       description = "You must display the label so that it’s easy to see and clearly related to the product. Labels must usually be at least 96mm x 192mm when printed. If the diagonal size of the visible screen area is less than 127cm (50 inches) you can scale down the the label, but it must still be at least 57.6mm x 115.2mm. If you scale down the label you must test that the QR code can still be read when printed, for example by using a smartphone camera."
   )
   @PostMapping("/energy-label")
@@ -41,7 +41,7 @@ public class TelevisionsApiController {
     return documentRendererService.processPdfApiResponse(televisionsService.generateHtml(form));
   }
 
-  @Operation(summary = "Create an arrow image for televisions")
+  @Operation(summary = "Televisions and electronic displays: arrow image")
   @PostMapping("/arrow-image")
   public Object televisionsInternetLabel(@RequestBody @Valid TelevisionsInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

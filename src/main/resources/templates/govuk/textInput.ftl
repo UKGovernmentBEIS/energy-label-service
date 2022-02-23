@@ -21,16 +21,16 @@
         ${fieldPrompt?no_esc}
       </label>
       <#if fieldHint?has_content>
-        <span id="${id}-hint" class="govuk-hint">
+        <div id="${id}-hint" class="govuk-hint">
           ${fieldHint}
-        </span>
+        </div>
       </#if>
       <#if hasError>
-        <span id="${id}-error" class="govuk-error-message">
+        <p id="${id}-error" class="govuk-error-message">
         <#list spring.status.errorMessages as errorMessage>
           ${errorMessage}<br/>
         </#list>
-        </span>
+        </p>
       </#if>
       <input class="govuk-input <#if fieldWidth?has_content>govuk-input--width-${fieldWidth} </#if> <#if hasError>govuk-input--error </#if>" id="${id}" name="${spring.status.expression}" type="text" <#if numericField>inputmode="numeric" pattern="[0-9]*" </#if> <#if fieldHint?has_content>aria-describedby="${id}-hint" </#if> value="${spring.stringStatusValue}">
     </div>
