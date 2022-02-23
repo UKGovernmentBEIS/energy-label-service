@@ -1,8 +1,6 @@
 package uk.gov.beis.els.categories.prorefrigeratedcabinets.model;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 import uk.gov.beis.els.model.Displayable;
 
 public enum ClimateClass implements Displayable {
@@ -10,7 +8,6 @@ public enum ClimateClass implements Displayable {
   FOUR("4", "climateClass4"),
   FIVE("5", "climateClass5");
 
-  private static final Map<String, ClimateClass> ENUM_MAP;
   private final String displayName;
   private final String svgClass;
 
@@ -28,19 +25,10 @@ public enum ClimateClass implements Displayable {
     return svgClass;
   }
 
-  static {
-    Map<String, ClimateClass> map = new HashMap<String, ClimateClass>();
-    for (ClimateClass instance : ClimateClass.values()) {
-      map.put(instance.getDisplayName().toLowerCase(), instance);
-    }
-    ENUM_MAP = Collections.unmodifiableMap(map);
-  }
-
   public static ClimateClass getEnum(String climateClass) {
-    ClimateClass result = ENUM_MAP.get(climateClass.toLowerCase());
-    if (result == null) {
-      result = ClimateClass.valueOf(climateClass);
-    }
-    return result;
+    return Arrays.stream(ClimateClass.values())
+        .filter(e -> e.getDisplayName().equals(climateClass) || e.name().equals(climateClass))
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException(String.format("Can't resolve ClimateClass from string %s", climateClass)));
   }
 }
