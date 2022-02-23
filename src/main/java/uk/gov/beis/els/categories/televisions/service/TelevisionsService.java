@@ -34,7 +34,7 @@ public class TelevisionsService {
     TemplatePopulator templatePopulator = new TemplatePopulator(
         templateParserService.parseTemplate("labels/televisions-electronic-displays/electronic-displays-2021.svg"))
         .setQrCode(form.getQrCodeUrl())
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRatingSdr()),
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRatingSdr()),
             LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
         .setText("kwh1000hSdr", form.getEnergyConsumptionSdr1000h())
         .setText("pxHorizontal", form.getHorizontalPixels())
@@ -47,7 +47,7 @@ public class TelevisionsService {
     if (BooleanUtils.isTrue(form.getIsHdr())) {
       templatePopulator
           .applyCssClassToId("hdrSection", "hasHdrSection")
-          .applyRatingCssClass("hdrRating", RatingClass.valueOf(form.getEfficiencyRatingHdr()))
+          .applyRatingCssClass("hdrRating", RatingClass.getEnum(form.getEfficiencyRatingHdr()))
           .setText("kwh1000hHdr", form.getEnergyConsumptionHdr1000h());
     }
 

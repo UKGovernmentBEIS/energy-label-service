@@ -44,7 +44,7 @@ public class SolidFuelBoilersService {
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("kw", form.getRatedHeatOutput())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.SOLID_FUEL_BOILER, form);
   }
 
@@ -67,9 +67,9 @@ public class SolidFuelBoilersService {
     return templatePopulator
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getPackageEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES_CURRENT.getPrimaryRatingRange())
-      .setText("boilerRatingLetter", RatingClass.valueOf(form.getBoilerEfficiencyRating()).getLetter())
-      .setText("boilerRatingPlusses", RatingClass.valueOf(form.getBoilerEfficiencyRating()).getPlusses())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getPackageEfficiencyRating()), LEGISLATION_CATEGORY_PACKAGES_CURRENT.getPrimaryRatingRange())
+      .setText("boilerRatingLetter", RatingClass.getEnum(form.getBoilerEfficiencyRating()).getLetter())
+      .setText("boilerRatingPlusses", RatingClass.getEnum(form.getBoilerEfficiencyRating()).getPlusses())
       .asProcessedEnergyLabel(ProductMetadata.SOLID_FUEL_BOILER_PACKAGE, form);
   }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.ApiValuesFromRatingClassRange;
+import uk.gov.beis.els.model.Displayable;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -115,7 +116,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
             }
 
             List<String> allowedValues = range.getApplicableRatings().stream()
-                .map(RatingClass::name) // TODO ELG-38 accept the display value i.e 'A++' rather than 'APP'
+                .map(RatingClass::getDisplayValue)
                 .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);
@@ -139,7 +140,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
             RatingClassRange range = (RatingClassRange) field.get(null); // Null as we're accessing a static field
 
             List<String> allowedValues = range.getApplicableRatings().stream()
-                .map(RatingClass::name) // TODO ELG-38 accept the display value i.e 'A++' rather than 'APP'
+                .map(RatingClass::getDisplayValue)
                 .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);
@@ -158,8 +159,14 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
             List<Enum<?>> enumValues = (List<Enum<?>>) Arrays.asList(enumClass.getEnumConstants());
 
             List<String> allowedValues = enumValues.stream()
-                .map(Enum::name) // TODO ELG-38 accept the display value
-                .collect(Collectors.toList());
+                    .map(anEnum -> {
+                      if (anEnum instanceof Displayable) {
+                        return ((Displayable) anEnum).getDisplayName();
+                      } else {
+                        return anEnum.name();
+                      }
+                    })
+                    .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);
 

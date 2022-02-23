@@ -37,7 +37,7 @@ public class TumbleDryersService {
   public ProcessedEnergyLabelDocument generateHtmlCondenser(CondenserTumbleDryersForm form, LegislationCategory legislationCategory) {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/condenser-tumble-dryers.svg"));
     return applyCommonPopulation(templatePopulator, form, legislationCategory)
-        .applyRatingCssClass("condensationEfficiencyClass", RatingClass.valueOf(form.getCondensationEfficiencyRating()))
+        .applyRatingCssClass("condensationEfficiencyClass", RatingClass.getEnum(form.getCondensationEfficiencyRating()))
         .asProcessedEnergyLabel(ProductMetadata.TUMBLE_DRYERS_CONDENSER, form);
   }
 
@@ -51,7 +51,7 @@ public class TumbleDryersService {
     return templatePopulator
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
         .setText("kwhAnnum", form.getEnergyConsumption())
         .setText("minCycle", form.getCycleTime())
         .setText("kg", form.getRatedCapacity())

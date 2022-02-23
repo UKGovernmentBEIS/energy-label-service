@@ -35,11 +35,11 @@ public class DishwashersService {
         .setText("kwh100cycles", form.getEnergyConsumptionPer100Cycles())
         .setText("lCycle", form.getWaterConsumptionPerCycle())
         .setHoursMinutes("duration", form.getProgrammeDurationHours(), form.getProgrammeDurationMinutes())
-        .applyRatingCssClass("noiseClass", RatingClass.valueOf(form.getNoiseEmissionsClass()))
+        .applyRatingCssClass("noiseClass", RatingClass.getEnum(form.getNoiseEmissionsClass()))
         .setMultilineText("supplier", form.getSupplierName())
         .setMultilineText("model", form.getModelName())
         .setText("db", form.getNoiseEmissions())
-        .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()),
+        .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()),
             LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
         .asProcessedEnergyLabel(ProductMetadata.DISHWASHERS, form);
   }
