@@ -53,7 +53,7 @@
         sandbox environment for testing. You can use the live API URL for development, testing and production.
       </p>
       <p class="govuk-body">
-        You can import <a href="#" class="govuk-link">the energy label API OpenAPI 3 document</a> into API testing tools
+        You can import <a href="${apiSpecUrl}" class="govuk-link">the energy label API OpenAPI 3 document</a> into API testing tools
         like Postman to test all of our API endpoints.
       </p>
 
