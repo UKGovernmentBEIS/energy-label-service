@@ -6,8 +6,8 @@ import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.lamps.service.LampsService;
 
-@Schema(name = "Lamps and light sources arrow image")
-public class LampsArrowImageApiForm extends RescaledInternetLabelApiForm {
+@Schema(name = "Lamps and light sources new style arrow image")
+public class LampsNewStyleInternetLabelApiForm extends RescaledInternetLabelApiForm {
 
   @NotBlank(message = "Select an energy efficiency class")
   @Schema(description = "Energy efficiency class of the application")
