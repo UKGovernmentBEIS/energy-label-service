@@ -142,11 +142,17 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         .ifPresent(apiValueAnnotation -> {
           try {
             Class<?> enumClass = apiValueAnnotation.value();
-            List<Displayable> enumValues = (List<Displayable>) Arrays.asList(enumClass.getEnumConstants());
+            List<Enum<?>> enumValues = (List<Enum<?>>) Arrays.asList(enumClass.getEnumConstants());
 
             List<String> allowedValues = enumValues.stream()
-                .map(Displayable::getDisplayName)
-                .collect(Collectors.toList());
+                    .map(anEnum -> {
+                      if (anEnum instanceof Displayable) {
+                        return ((Displayable) anEnum).getDisplayName();
+                      } else {
+                        return anEnum.name();
+                      }
+                    })
+                    .collect(Collectors.toList());
 
             schema.setEnum(allowedValues);
 

@@ -1,28 +1,37 @@
 package uk.gov.beis.els.categories.waterheaters.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
+import uk.gov.beis.els.api.common.ApiValuesFromEnum;
+import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
+import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
+@Schema(name = "Package of a water heater and solar device energy label")
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed.")
 public class WaterSolarPackagesForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Declared load profile")
   @NotBlank(message = "Select a declared load profile")
+  @ApiValuesFromEnum(value = LoadProfile.class)
   private String declaredLoadProfile;
 
   @FieldPrompt("Water heating energy efficiency class of the water heater")
   @NotBlank(message = "Select an energy efficiency indicator for the water heater")
+  @ApiValuesFromLegislationCategory(serviceClass = WaterHeatersService.class, legislationCategoryFieldName = "LEGISLATION_CATEGORY_SOLAR_PACKAGES", useSecondaryRange = true)
   private String heaterEfficiencyRating;
 
   @FieldPrompt("Water heating energy efficiency class of the package of water heater and solar device")
   @NotBlank(message = "Select an energy efficiency indicator for the package of water heater and solar device", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @ApiValuesFromLegislationCategory(serviceClass = WaterHeatersService.class, legislationCategoryFieldName = "LEGISLATION_CATEGORY_SOLAR_PACKAGES")
   private String packageEfficiencyRating;
 
   @FieldPrompt("Can a solar collector be included in this package?")

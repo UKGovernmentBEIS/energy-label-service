@@ -1,28 +1,42 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
+import uk.gov.beis.els.api.common.ApiValuesFromEnum;
+import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
+import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
-
+@Schema(name = "Packages of combination heater, temperature control and solar device energy label")
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed.")
 public class CombinationHeaterPackagesForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("The seasonal space heating energy efficiency class of the space heater")
   @NotBlank(message = "Select the space heating energy efficiency class of the space heater")
+  @ApiValuesFromLegislationCategory(
+      serviceClass = SpaceHeatersService.class,
+      legislationCategoryFieldName = "LEGISLATION_CATEGORY_PACKAGES"
+  )
   private String spaceHeaterEfficiencyRating;
 
   @FieldPrompt("Water heating energy efficiency")
   @NotBlank(message = "Select the water heating energy efficiency")
+  @ApiValuesFromLegislationCategory(
+      serviceClass = SpaceHeatersService.class,
+      legislationCategoryFieldName = "LEGISLATION_CATEGORY_PACKAGES"
+  )
   private String waterHeaterEfficiencyRating;
 
   @FieldPrompt("Declared load profile of the space heater")
   @NotBlank(message = "Select a declared load profile")
+  @ApiValuesFromEnum(LoadProfile.class)
   private String heaterDeclaredLoadProfile;
 
   @FieldPrompt("Does this package include a solar collector?")
@@ -44,14 +58,23 @@ public class CombinationHeaterPackagesForm extends StandardTemplateForm50Char {
   @FieldPrompt("The seasonal space heating energy efficiency class of the package of combination heater, temperature control and solar device")
   @NotBlank(message = "Select a space heating energy efficiency indicator for the complete package", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @ApiValuesFromLegislationCategory(
+      serviceClass = SpaceHeatersService.class,
+      legislationCategoryFieldName = "LEGISLATION_CATEGORY_PACKAGES"
+  )
   private String packageSpaceHeatingEfficiencyRating;
 
   @FieldPrompt("The water heating energy efficiency class of the package of combination heater, temperature control and solar device")
   @NotBlank(message = "Select a water heating energy efficiency indicator for the complete package")
+  @ApiValuesFromLegislationCategory(
+      serviceClass = SpaceHeatersService.class,
+      legislationCategoryFieldName = "LEGISLATION_CATEGORY_PACKAGES"
+  )
   private String packageWaterHeatingEfficiencyRating;
 
   @FieldPrompt("Declared load profile of the package")
   @NotBlank(message = "Select a declared load profile")
+  @ApiValuesFromEnum(LoadProfile.class)
   private String packageDeclaredLoadProfile;
 
   public String getSpaceHeaterEfficiencyRating() {
