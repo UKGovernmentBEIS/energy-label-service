@@ -44,10 +44,18 @@ public class RateLimitingIntegrationTest {
   }
 
   @Test
-  public void withMultipleIpAddress() {
+  public void withMultipleIpAddresses() {
     String url = "/api/v1/domestic-ovens/gas-ovens/energy-label";
     successfulWebRequest(url, "1.1.1.1, 2.2.2.2", 2);
     successfulWebRequest(url, "3.3.3.3, 2.2.2.2", 1);
+  }
+
+  @Test
+  public void withDifferentIpAddresses() {
+    String url = "/api/v1/domestic-ovens/gas-ovens/energy-label";
+    successfulWebRequest(url, "1.1.1.1, 2.2.2.2", 2);
+    successfulWebRequest(url, "2.2.2.2", 1);
+    successfulWebRequest(url, "3.3.3.3", 2);
   }
 
   @Test(expected = RuntimeException.class)
