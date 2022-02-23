@@ -100,6 +100,7 @@ public class RateLimitingIntegrationTest {
           .andExpect(header().longValue("X-Rate-Limit-Remaining", remainingTries));
     } catch (Exception e) {
       e.printStackTrace();
+      throw new RuntimeException(e);
     }
   }
 
@@ -115,6 +116,7 @@ public class RateLimitingIntegrationTest {
           .andExpect(content().string(containsString("{ \"status\" : 429, \"error\": \"Too many requests\", \"message\" : \"You have exhausted your API request quota\" }")));
     } catch (Exception e) {
       e.printStackTrace();
+      throw new RuntimeException(e);
     }
 
   }
