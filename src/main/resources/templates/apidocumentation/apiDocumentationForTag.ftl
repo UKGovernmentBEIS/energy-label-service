@@ -72,106 +72,30 @@
                     </tr>
                     </thead>
                     <tbody class="govuk-table__body">
-                    <#list operationWithSchema.getSchema().getProperties() as propertyName, schema>
-                      <tr class="govuk-table__row">
-                        <td class="govuk-table__cell">
-                          <code class="els-code els-code--inline">${propertyName}</code>
-                        </td>
-                        <td class="govuk-table__cell">
-                          ${schema.getDescription()}
-                          <#if schema.getEnum()?has_content>
-                            <br/>
-                            Must be one of:<br/>
-                            <#list schema.getEnum() as enum>
-                              <code class="els-code els-code--inline">${enum}</code><br/>
-                            </#list>
-                          </#if>
-                        </td>
-                        <td class="govuk-table__cell">
-                          ${schema.getType()?cap_first}
-                        </td>
-                      </tr>
-                    </#list>
-
-<#--                    <tr class="govuk-table__row">-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        <code class="els-code els-code--inline">modelName</code>-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Supplier's model identification code-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        String-->
-<#--                      </td>-->
-<#--                    </tr>-->
-<#--                    <tr class="govuk-table__row">-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        <code class="els-code els-code--inline">efficiencyRating</code>-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        The energy efficiency class of the cavity. Must be one of-->
-<#--                        <code class="els-code els-code--inline">A+++</code>,-->
-<#--                        <code class="els-code els-code--inline">A++</code>,-->
-<#--                        <code class="els-code els-code--inline">A+</code>,-->
-<#--                        <code class="els-code els-code--inline">A</code>,-->
-<#--                        <code class="els-code els-code--inline">B</code>,-->
-<#--                        <code class="els-code els-code--inline">C</code>,-->
-<#--                        <code class="els-code els-code--inline">D</code>-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        String-->
-<#--                      </td>-->
-<#--                    </tr>-->
-<#--                    <tr class="govuk-table__row">-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        <code class="els-code els-code--inline">volume</code>-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Usable volume of the cavity in litres (L). This may be up to 3 digit(s) long.-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Integer-->
-<#--                      </td>-->
-<#--                    </tr>-->
-<#--                    <tr class="govuk-table__row">-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        <code class="els-code els-code--inline">conventionalKwhConsumption</code>-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Energy consumption of the conventional heating function per cycle, in kWh/cycle. This may be up to 1 digit(s) long with an optional 2 decimal places.-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Number-->
-<#--                      </td>-->
-<#--                    </tr>-->
-<#--                    <tr class="govuk-table__row">-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        <code class="els-code els-code--inline">isFanOven</code>-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Is this a fan-forced oven?-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Boolean-->
-<#--                      </td>-->
-<#--                    </tr>-->
-<#--                    <tr class="govuk-table__row">-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        <code class="els-code els-code--inline">convectionKwhConsumption</code>-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Energy consumption of the fan-forced heating function per cycle, in kWh/cycle. This may be up to 1 digit(s) long with an optional 2 decimal places.-->
-<#--                      </td>-->
-<#--                      <td class="govuk-table__cell">-->
-<#--                        Number-->
-<#--                      </td>-->
-<#--                    </tr>-->
+                      <#list operationWithSchema.getSchema().getProperties() as propertyName, schema>
+                        <tr class="govuk-table__row">
+                          <td class="govuk-table__cell">
+                            <code class="els-code els-code--inline">${propertyName}</code>
+                          </td>
+                          <td class="govuk-table__cell">
+                            ${schema.getDescription()}
+                            <#if schema.getEnum()?has_content>
+                              <br/>
+                              Must be one of:<br/>
+                              <#list schema.getEnum() as enum>
+                                <code class="els-code els-code--inline">${enum}</code><br/>
+                              </#list>
+                            </#if>
+                          </td>
+                          <td class="govuk-table__cell">
+                            ${schema.getType()?cap_first}
+                          </td>
+                        </tr>
+                      </#list>
                     </tbody>
                   </table>
-
                 </@govukAccordion.accordionSection>
             </#list>
-
       </@govukAccordion.accordion>
     </div>
   </div>
