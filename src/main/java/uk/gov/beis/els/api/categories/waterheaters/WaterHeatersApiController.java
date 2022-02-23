@@ -35,7 +35,7 @@ public class WaterHeatersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a conventional water heater",
+      summary = "Conventional water heater: energy label",
       description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
   )
   @PostMapping("/conventional-water-heaters/energy-label")
@@ -44,7 +44,7 @@ public class WaterHeatersApiController {
         waterHeatersService.toConventionWaterHeatersForm(form), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a conventional water heater")
+  @Operation(summary = "Conventional water heater: arrow image")
   @PostMapping("/conventional-water-heaters/arrow-image")
   public Object conventionalWaterHeaterInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -53,7 +53,7 @@ public class WaterHeatersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a heat pump water heater",
+      summary = "Heat pump water heater: energy label",
       description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
   )
   @PostMapping("/heat-pump-water-heaters/energy-label")
@@ -62,7 +62,7 @@ public class WaterHeatersApiController {
         waterHeatersService.toHeatPumpWaterHeatersForm(form), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a heat pump water heater")
+  @Operation(summary = "Heat pump water heater: arrow image")
   @PostMapping("/heat-pump-water-heaters/arrow-image")
   public Object heatPumpWaterInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -71,7 +71,7 @@ public class WaterHeatersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a solar water heater",
+      summary = "Solar water heater: energy label",
       description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
   )
   @PostMapping("/solar-water-heaters/energy-label")
@@ -80,7 +80,7 @@ public class WaterHeatersApiController {
         waterHeatersService.toSolarWaterHeatersForm(form), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a solar water heater")
+  @Operation(summary = "Solar water heater: arrow image")
   @PostMapping("/solar-water-heaters/arrow-image")
   public Object solarWaterHeaterInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -89,7 +89,7 @@ public class WaterHeatersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a hot water storage tank",
+      summary = "Hot water storage tank: energy label",
       description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 105mm x 200mm when printed."
   )
   @PostMapping("/hot-water-storage-tanks/energy-label")
@@ -97,7 +97,7 @@ public class WaterHeatersApiController {
     return documentRendererService.processPdfApiResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
-  @Operation(summary = "Create an arrow image for a hot water storage tank")
+  @Operation(summary = "Hot water storage tank: arrow image")
   @PostMapping("/hot-water-storage-tanks/arrow-image")
   public Object hotWaterStorageTankInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -106,7 +106,7 @@ public class WaterHeatersApiController {
   }
 
   @Operation(
-      summary = "Create an energy label for a package of a water heater and solar device",
+      summary = "Package of a water heater and solar device: energy label",
       description = "You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed."
   )
   @PostMapping("/packages-of-water-heater-and-solar-device/energy-label")
@@ -114,7 +114,7 @@ public class WaterHeatersApiController {
     return documentRendererService.processPdfApiResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
   }
 
-  @Operation(summary = "Create an arrow image for a package of a water heater and solar device")
+  @Operation(summary = "Package of a water heater and solar device: arrow image")
   @PostMapping("/packages-of-water-heater-and-solar-device/arrow-image")
   public Object waterHeaterSolarDevicePackageInternetLabel(@Valid @RequestBody WaterSolarPackageInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(

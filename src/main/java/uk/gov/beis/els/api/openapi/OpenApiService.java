@@ -6,14 +6,16 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.Paths;
+import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.tags.Tag;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import uk.gov.beis.els.api.common.ApiDocumentationController;
+import uk.gov.beis.els.api.model.OperationWithSchema;
 import uk.gov.beis.els.api.model.TagLink;
 import uk.gov.beis.els.mvc.ReverseRouter;
+import uk.gov.beis.els.util.StreamUtils;
 
 @Service
 public class OpenApiService {
@@ -48,10 +52,6 @@ public class OpenApiService {
     LOGGER.info("OpenAPI spec parsed");
   }
 
-  public OpenAPI getOpenAPISpec() {
-    return openAPISpec;
-  }
-
   public String getApiSpecUrl(HttpServletRequest request) {
     return getBaseUrl(request) + "/v3/api-docs/";
   }
@@ -67,7 +67,8 @@ public class OpenApiService {
    * @param tag The tag for the current API documentation page, e.g. Air Conditioners
    * @return a map of the operation path and the individual operations for the given tag
    */
-  public Map<String, Operation> getOperationWithPathForTag(String tag) {
+  @SuppressWarnings("rawtypes")
+  public Map<String, OperationWithSchema> getOperationWithPathForTag(String tag) {
     // Get the operation list for the tag
     List<Operation> operationList = openAPISpec.getPaths().values().stream()
         .map(PathItem::getPost)
@@ -75,30 +76,40 @@ public class OpenApiService {
         .sorted(Comparator.comparing(Operation::getSummary))
         .collect(Collectors.toList());
 
+    // Get the schema associated with each operation
+    List<OperationWithSchema> operationWithSchemaList = new ArrayList<>();
+
+    for (Operation operation : operationList) {
+      String schemaRef = operation.getRequestBody().getContent().get("application/json").getSchema().get$ref();
+      Schema schema = openAPISpec.getComponents().getSchemas().get(StringUtils.remove(schemaRef, "#/components/schemas/"));
+      operationWithSchemaList.add(new OperationWithSchema(operation, schema));
+    }
+
     // Go back up the openapi spec chain and get the path for each operation in the list
     // There should only be one path per operationId
-    // Add that path and operation to the map we want to return
-    Map<String, Operation> operationWithPathMap = new HashMap<>();
-    for (Operation operation : operationList) {
-      String operationId = operation.getOperationId();
+    // Add that path and operation (with schema) to the map we want to return
+    Map<String, OperationWithSchema> operationWithPathMap = new HashMap<>();
+
+    for (OperationWithSchema operationWithSchema : operationWithSchemaList) {
+      String operationId = operationWithSchema.getOperation().getOperationId();
+
       Paths paths = openAPISpec.getPaths().entrySet().stream()
           .filter(p -> p.getValue().getPost().getOperationId().equals(operationId))
           .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x, y) -> y, Paths::new));
+
       String path = paths.entrySet().iterator().next().getKey();
-      operationWithPathMap.put(path, operation);
+
+      operationWithPathMap.put(path, operationWithSchema);
     }
 
     // Order the map by the operation summary and return it
     return operationWithPathMap.entrySet().stream()
-        .sorted(Comparator.comparing(o -> o.getValue().getSummary()))
-        .collect(Collectors.toMap(Map.Entry::getKey,
-            Map.Entry::getValue,
-            (x, y) -> y,
-            LinkedHashMap::new));
+        .sorted(Comparator.comparing(o -> o.getValue().getOperation().getSummary()))
+        .collect(StreamUtils.toLinkedHashMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
   public List<TagLink> getTagLinks() {
-    return getOpenAPISpec().getTags().stream()
+    return openAPISpec.getTags().stream()
         .map(this::getTagLink)
         .sorted(Comparator.comparing(TagLink::getName))
         .collect(Collectors.toList());
