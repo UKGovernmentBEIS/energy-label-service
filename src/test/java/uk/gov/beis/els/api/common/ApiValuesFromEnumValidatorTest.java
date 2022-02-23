@@ -1,6 +1,6 @@
 package uk.gov.beis.els.api.common;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -34,7 +34,7 @@ public class ApiValuesFromEnumValidatorTest {
 
     Set<ConstraintViolation<ProRefrigeratedCabinetsForm>> errors = validator.validate(form);
 
-    assertEquals(0, errors.size());
+    assertThat(errors).isEmpty();
   }
 
   @Test
@@ -45,18 +45,20 @@ public class ApiValuesFromEnumValidatorTest {
 
     Set<ConstraintViolation<ProRefrigeratedCabinetsForm>> errors = validator.validate(form);
 
-    assertEquals(0, errors.size());
+    assertThat(errors).isEmpty();
   }
 
   @Test
   public void invalidValue_assertError() {
-    String validEnum = "FR-002";
+    String invalidEnum = "FR-002";
     ProRefrigeratedCabinetsForm form = getForm();
-    form.setClimateClass(validEnum);
+    form.setClimateClass(invalidEnum);
 
     Set<ConstraintViolation<ProRefrigeratedCabinetsForm>> errors = validator.validate(form);
 
-    assertEquals(1, errors.size());
+    assertThat(errors)
+        .extracting(ConstraintViolation::getMessageTemplate)
+        .containsExactly("{uk.gov.beis.els.api.common.ApiValuesFromEnum.message}");
   }
 
   private ProRefrigeratedCabinetsForm getForm() {

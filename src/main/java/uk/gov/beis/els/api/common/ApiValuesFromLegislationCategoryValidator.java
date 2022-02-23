@@ -37,7 +37,7 @@ public class ApiValuesFromLegislationCategoryValidator implements ConstraintVali
 
     try {
       return range.getApplicableRatings().contains(RatingClass.getEnum(value));
-    } catch (IllegalArgumentException e) {
+    } catch (RuntimeException e) {
       return false;
     }
   }

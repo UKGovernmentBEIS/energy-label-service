@@ -1,6 +1,6 @@
 package uk.gov.beis.els.api.common;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -27,56 +27,62 @@ public class ApiValuesFromRatingClassRangeValidatorTest {
 
   @Test
   public void validSpinDryingEfficiencyRating_displayValue_assertNoErrors() {
-    String validRatingClass = RatingClass.B.getDisplayValue();
+    String validEfficiencyRating = RatingClass.B.getDisplayValue();
     WashingMachinesForm form = getForm();
-    form.setEfficiencyRating(validRatingClass);
+    form.setSpinDryingEfficiencyRating(validEfficiencyRating);
 
     Set<ConstraintViolation<WashingMachinesForm>> errors = validator.validate(form);
 
-    assertEquals(0, errors.size());
+    assertThat(errors).isEmpty();
   }
 
   @Test
   public void invalidSpinDryingEfficiencyRating_displayValue_assertError() {
-    String validRatingClass = RatingClass.APPP.getDisplayValue();
+    String invalidEfficiencyRating = RatingClass.APPP.getDisplayValue();
     WashingMachinesForm form = getForm();
-    form.setEfficiencyRating(validRatingClass);
+    form.setSpinDryingEfficiencyRating(invalidEfficiencyRating);
 
     Set<ConstraintViolation<WashingMachinesForm>> errors = validator.validate(form);
 
-    assertEquals(1, errors.size());
+    assertThat(errors)
+        .extracting(ConstraintViolation::getMessageTemplate)
+        .containsExactly("{uk.gov.beis.els.api.common.ApiValuesFromRatingClassRange.message}");
   }
 
   @Test
   public void validSpinDryingEfficiencyRating_enumName_assertNoErrors() {
-    String validRatingClass = RatingClass.B.name();
+    String validEfficiencyRating = RatingClass.B.name();
     WashingMachinesForm form = getForm();
-    form.setEfficiencyRating(validRatingClass);
+    form.setSpinDryingEfficiencyRating(validEfficiencyRating);
 
     Set<ConstraintViolation<WashingMachinesForm>> errors = validator.validate(form);
 
-    assertEquals(0, errors.size());
+    assertThat(errors).isEmpty();
   }
 
   @Test
   public void invalidSpinDryingEfficiencyRating_enumName_assertError() {
-    String validRatingClass = RatingClass.APPP.name();
+    String invalidEfficiencyRating = RatingClass.APPP.name();
     WashingMachinesForm form = getForm();
-    form.setEfficiencyRating(validRatingClass);
+    form.setSpinDryingEfficiencyRating(invalidEfficiencyRating);
 
     Set<ConstraintViolation<WashingMachinesForm>> errors = validator.validate(form);
 
-    assertEquals(1, errors.size());
+    assertThat(errors)
+        .extracting(ConstraintViolation::getMessageTemplate)
+        .containsExactly("{uk.gov.beis.els.api.common.ApiValuesFromRatingClassRange.message}");
   }
   @Test
   public void invalidSpinDryingEfficiencyRating_invalidString_assertError() {
-    String validRatingClass = "FR";
+    String invalidEfficiencyRating = "FR";
     WashingMachinesForm form = getForm();
-    form.setEfficiencyRating(validRatingClass);
+    form.setSpinDryingEfficiencyRating(invalidEfficiencyRating);
 
     Set<ConstraintViolation<WashingMachinesForm>> errors = validator.validate(form);
 
-    assertEquals(1, errors.size());
+    assertThat(errors)
+        .extracting(ConstraintViolation::getMessageTemplate)
+        .containsExactly("{uk.gov.beis.els.api.common.ApiValuesFromRatingClassRange.message}");
   }
 
 

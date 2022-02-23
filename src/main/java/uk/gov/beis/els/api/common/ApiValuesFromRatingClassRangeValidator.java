@@ -29,7 +29,7 @@ public class ApiValuesFromRatingClassRangeValidator implements ConstraintValidat
 
     try {
       return range.getApplicableRatings().contains(RatingClass.getEnum(value));
-    } catch (IllegalArgumentException e) {
+    } catch (RuntimeException e) {
       return false;
     }
   }

@@ -31,7 +31,7 @@ public class ApiValuesFromEnumValidator implements ConstraintValidator<ApiValues
       resolvedEnum = (Displayable) method.invoke(null, value);
     } catch (IllegalAccessException e) {
       throw new RuntimeException("Cannot invoke getEnum()", e);
-    } catch (InvocationTargetException e) { //We ignore the IllegalArgumentException from getEnum() as that gets wrapped in an InvocationTargetException
+    } catch (InvocationTargetException e) { //We ignore the RuntimeException from getEnum() as that gets wrapped in an InvocationTargetException
       return false;
     }
 

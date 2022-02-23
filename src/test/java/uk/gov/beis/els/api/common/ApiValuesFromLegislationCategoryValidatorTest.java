@@ -1,6 +1,6 @@
 package uk.gov.beis.els.api.common;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -35,7 +35,7 @@ public class ApiValuesFromLegislationCategoryValidatorTest {
 
     Set<ConstraintViolation<AirConditionersInternetLabelApiForm>> errors = validator.validate(form);
 
-    assertEquals(0, errors.size());
+    assertThat(errors).isEmpty();
   }
 
   @Test
@@ -46,7 +46,9 @@ public class ApiValuesFromLegislationCategoryValidatorTest {
 
     Set<ConstraintViolation<AirConditionersInternetLabelApiForm>> errors = validator.validate(form);
 
-    assertEquals(1, errors.size());
+    assertThat(errors)
+        .extracting(ConstraintViolation::getMessageTemplate)
+        .containsExactly("{uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory.message}");
   }
 
   @Test
@@ -57,7 +59,7 @@ public class ApiValuesFromLegislationCategoryValidatorTest {
 
     Set<ConstraintViolation<AirConditionersInternetLabelApiForm>> errors = validator.validate(form);
 
-    assertEquals(0, errors.size());
+    assertThat(errors).isEmpty();
   }
 
   @Test
@@ -68,7 +70,9 @@ public class ApiValuesFromLegislationCategoryValidatorTest {
 
     Set<ConstraintViolation<AirConditionersInternetLabelApiForm>> errors = validator.validate(form);
 
-    assertEquals(1, errors.size());
+    assertThat(errors)
+        .extracting(ConstraintViolation::getMessageTemplate)
+        .containsExactly("{uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory.message}");
   }
 
   @Test
@@ -79,12 +83,14 @@ public class ApiValuesFromLegislationCategoryValidatorTest {
 
     Set<ConstraintViolation<AirConditionersInternetLabelApiForm>> errors = validator.validate(form);
 
-    assertEquals(1, errors.size());
+    assertThat(errors)
+        .extracting(ConstraintViolation::getMessageTemplate)
+        .containsExactly("{uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory.message}");
   }
 
   private AirConditionersInternetLabelApiForm getForm() {
     AirConditionersInternetLabelApiForm form = new AirConditionersInternetLabelApiForm();
-    form.setEfficiencyRating(RatingClass.D.getDisplayValue());
+    form.setEfficiencyRating(RatingClass.D.name());
     form.setProductPriceHeightPx(10);
     form.setLabelFormat(InternetLabelFormat.JPEG);
     form.setLabelOrientation(InternetLabelOrientation.RIGHT);
