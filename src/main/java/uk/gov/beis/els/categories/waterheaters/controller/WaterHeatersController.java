@@ -214,7 +214,7 @@ public class WaterHeatersController extends CategoryController {
   @GetMapping("/packages-of-water-heater-and-solar-device/calculator")
   public ModelAndView renderWaterSolarPackagesCalculator(
       @ModelAttribute("form") WaterHeaterPackageCalculatorForm form) {
-    return getWaterSolarPackagesCalculator();
+    return getWaterSolarPackagesCalculator(Collections.emptyList());
   }
 
   @GetMapping("/packages-of-water-heater-and-solar-device")
@@ -295,7 +295,9 @@ public class WaterHeatersController extends CategoryController {
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
     modelAndView.addObject("secondaryEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES.getSecondaryRatingRange()));
-    breadcrumbService.pushLastBreadcrumb(modelAndView, "Packages of water heater and solar device");
+    breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
+        ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label");
     return modelAndView;
   }
 
@@ -334,14 +336,24 @@ public class WaterHeatersController extends CategoryController {
             on(WaterHeatersController.class).handleWaterSolarPackagesSortQuestionSubmit(null,
                 ReverseRouter.emptyBindingResult())));
     ControllerUtils.addErrorSummary(modelAndView, errors);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT,
+        ReverseRouter.route(on(WaterHeatersController.class).renderCategories(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Packages of water heater and solar device");
     return modelAndView;
   }
 
-  private ModelAndView getWaterSolarPackagesCalculator() {
-    return new ModelAndView("categories/water-heaters/waterHeaterPackagesCalculator")
+  private ModelAndView getWaterSolarPackagesCalculator(List<FieldError> errors) {
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterHeaterPackagesCalculator")
         .addObject("loadProfile", Arrays.stream(
-            LoadProfile.values())
+                LoadProfile.values())
             .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
         );
+    addCommonObjects(modelAndView, errors,
+        ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesCalculator(null)),
+        WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
+    breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
+        ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Calculator");
+    return modelAndView;
   }
 }
