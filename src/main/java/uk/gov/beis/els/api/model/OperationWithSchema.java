@@ -10,12 +10,15 @@ public class OperationWithSchema {
 
   private Schema schema;
 
+  private String example;
+
   public OperationWithSchema() {
   }
 
-  public OperationWithSchema(Operation operation, Schema schema) {
+  public OperationWithSchema(Operation operation, Schema schema, String example) {
     this.operation = operation;
     this.schema = schema;
+    this.example = example;
   }
 
   public Operation getOperation() {
@@ -32,5 +35,13 @@ public class OperationWithSchema {
 
   public void setSchema(Schema schema) {
     this.schema = schema;
+  }
+
+  public String getExample() {
+    return example;
+  }
+
+  public void setExample(String example) {
+    this.example = example;
   }
 }

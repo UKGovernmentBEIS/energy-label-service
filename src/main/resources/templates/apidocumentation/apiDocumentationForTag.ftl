@@ -94,6 +94,12 @@
                       </#list>
                     </tbody>
                   </table>
+
+                  <h3 class="govuk-heading-m">Example request body</h3>
+
+                  <p class="govuk-body">
+                    <code class="els-code els-code--block">${operationWithSchema.getExample()}</code>
+                  </p>
                 </@govukAccordion.accordionSection>
             </#list>
       </@govukAccordion.accordion>
