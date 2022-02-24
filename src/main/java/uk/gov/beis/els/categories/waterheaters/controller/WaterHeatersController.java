@@ -212,9 +212,19 @@ public class WaterHeatersController extends CategoryController {
   }
 
   @GetMapping("/packages-of-water-heater-and-solar-device/calculator")
-  public ModelAndView renderWaterSolarPackagesCalculator(
-      @ModelAttribute("form") WaterHeaterPackageCalculatorForm form) {
+  public ModelAndView renderWaterSolarPackagesCalculator(@ModelAttribute("form") WaterHeaterPackageCalculatorForm form) {
     return getWaterSolarPackagesCalculator(Collections.emptyList());
+  }
+
+  @PostMapping("/packages-of-water-heater-and-solar-device/calculator")
+  @ResponseBody
+  public Object handleWaterSolarPackagesCalculatorSubmit(@Valid @ModelAttribute("form") WaterHeaterPackageCalculatorForm form,
+                                                         BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getWaterSolarPackagesCalculator(bindingResult.getFieldErrors());
+    } else {
+      return true; //TODO
+    }
   }
 
   @GetMapping("/packages-of-water-heater-and-solar-device")
