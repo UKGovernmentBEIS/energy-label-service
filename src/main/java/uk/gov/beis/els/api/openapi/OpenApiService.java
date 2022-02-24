@@ -30,7 +30,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import uk.gov.beis.els.api.common.ApiDocumentationController;
 import uk.gov.beis.els.api.model.OperationWithSchema;
-import uk.gov.beis.els.api.model.SchemaExampleProperty;
+import uk.gov.beis.els.api.model.SchemaPropertyExample;
 import uk.gov.beis.els.api.model.TagLink;
 import uk.gov.beis.els.mvc.ReverseRouter;
 import uk.gov.beis.els.util.StreamUtils;
@@ -98,14 +98,14 @@ public class OpenApiService {
         ObjectNode objectNode = objectMapper.createObjectNode();
         Map<String, Schema<?>> properties = schema.getProperties();
 
-        List<SchemaExampleProperty> schemaExampleProperties = properties.entrySet().stream()
-            .map(p -> new SchemaExampleProperty(
+        List<SchemaPropertyExample> schemaPropertyExamples = properties.entrySet().stream()
+            .map(p -> new SchemaPropertyExample(
                 p.getKey(),
                 p.getValue().getExample() != null ? p.getValue().getExample().toString() : "")
             ).collect(Collectors.toList());
 
-        for (SchemaExampleProperty schemaExampleProperty : schemaExampleProperties) {
-          objectNode.put(schemaExampleProperty.getPropertyName(), schemaExampleProperty.getExampleInput());
+        for (SchemaPropertyExample schemaPropertyExample : schemaPropertyExamples) {
+          objectNode.put(schemaPropertyExample.getPropertyName(), schemaPropertyExample.getExampleInput());
         }
 
         example = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(objectNode);

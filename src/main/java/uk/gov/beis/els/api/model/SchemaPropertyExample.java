@@ -1,14 +1,14 @@
 package uk.gov.beis.els.api.model;
 
-public class SchemaExampleProperty {
+public class SchemaPropertyExample {
 
   private String propertyName;
   private String exampleInput;
 
-  public SchemaExampleProperty() {
+  public SchemaPropertyExample() {
   }
 
-  public SchemaExampleProperty(String propertyName, String exampleInput) {
+  public SchemaPropertyExample(String propertyName, String exampleInput) {
     this.propertyName = propertyName;
     this.exampleInput = exampleInput;
   }
