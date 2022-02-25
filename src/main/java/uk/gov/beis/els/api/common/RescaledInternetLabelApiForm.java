@@ -6,7 +6,7 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 
 public class RescaledInternetLabelApiForm extends BaseInternetLabelApiForm {
 
-  @Schema(description = "The colour of the arrow image. Use a colour arrow if you can. You can use a black and white arrow if your material is being printed in black and white. You shouldn't use black and white arrows on the internet.")
+  @Schema(description = "The colour of the arrow image. Use a colour arrow if you can. You can use a black and white arrow if your material is being printed in black and white. You shouldn't use black and white arrows on the internet.", example = "COLOUR")
   @NotNull
   private InternetLabelColour labelColour;
 

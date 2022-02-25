@@ -14,15 +14,17 @@ public class BaseInternetLabelApiForm {
   @Digits(integer = 3, fraction = 0, message = "Enter the height of the product price, up to 3 digits long")
   @Min(value = 1, message = "Height of product's price must be greater than zero")
   @NotNull
-  @Schema(type = "integer")
+  @Schema(type = "integer", example = "300")
   private int productPriceHeightPx;
 
   @FieldPrompt("Arrow direction")
   @NotNull
+  @Schema(example = "LEFT")
   private InternetLabelOrientation labelOrientation;
 
   @FieldPrompt("Image format")
   @NotNull
+  @Schema(example = "PNG")
   private InternetLabelFormat labelFormat;
 
   public int getProductPriceHeightPx() {
