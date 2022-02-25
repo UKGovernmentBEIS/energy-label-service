@@ -20,15 +20,30 @@ jobs:
         with:
           node-version: '10'
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
       - name: Build frontend
         run: |
           npm install
           npx gulp buildAll
 
-      - name: Build backend and test
+#      - name: Build backend and test
+#        run: |
+#          chmod +x gradlew
+#          ./gradlew test bootJar
+
+      - name: Detached run test app
         run: |
           chmod +x gradlew
-          ./gradlew test bootJar
+          ./gradlew bootRun &
+
+      - name: Run OpenAPI tests
+        run: |
+          pip install schemathesis
+          schemathesis run --hypothesis-phases=explicit http://localhost:8080/v3/api-docs
 
       - name: Install cf client
         env:

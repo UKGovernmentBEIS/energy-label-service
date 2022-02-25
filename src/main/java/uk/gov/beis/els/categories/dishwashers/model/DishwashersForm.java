@@ -21,25 +21,25 @@ public class DishwashersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("Airborne acoustical noise emissions expressed in dB(A) re 1 pW")
   @Digits(integer = 2, fraction = 0, message = "Enter the noise emission, up to 2 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", example = "12")
   @NotNull
   private String noiseEmissions;
 
   @FieldPrompt("Rated capacity (number of standard place settings) for the eco programme")
   @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", example = "8")
   @NotNull
   private String ecoCapacity;
 
   @FieldPrompt("Eco programme energy consumption (EPEC) in kWh per 100 cycles")
   @Digits(integer = 3, fraction = 0, message = "Enter an eco programme energy consumption, up to 3 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", example = "640")
   @NotNull
   private String energyConsumptionPer100Cycles;
 
   @FieldPrompt("Eco programme water consumption (EPWC) in litres per cycle")
   @Digits(integer = 2, fraction = 1, message = "Enter an eco programme water consumption, up to 2 digits with an optional decimal place")
-  @Schema(type = "number")
+  @Schema(type = "number", example = "17.6")
   @NotNull
   private String waterConsumptionPerCycle;
 
@@ -47,7 +47,8 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   @Digits(integer = 1, fraction = 0, message = "Enter a number of hours for the eco programme duration, up to 1 digit. If the eco programme duration is under 1 hour, enter 0")
   @Schema(
       type = "integer",
-      description = "Enter a number of hours for the eco programme duration, up to 1 digit. If the eco programme duration is under 1 hour, enter 0"
+      description = "Enter a number of hours for the eco programme duration, up to 1 digit. If the eco programme duration is under 1 hour, enter 0",
+      example = "1"
   )
   @NotNull
   private String programmeDurationHours;
@@ -56,7 +57,8 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   @Range(min = 0, max = 59, message = "Enter a number of minutes for the eco programme duration, between 0 and 59")
   @Schema(
       type = "integer",
-      description = "Enter a number of minutes for the eco programme duration, between 0 and 59"
+      description = "Enter a number of minutes for the eco programme duration, between 0 and 59",
+      example = "21"
   )
   @NotNull
   private String programmeDurationMinutes;
@@ -67,12 +69,14 @@ public class DishwashersForm extends StandardTemplateForm30Char {
       serviceClass = DishwashersService.class,
       useSecondaryRange = true
   )
+  @Schema(example = "A")
   private String noiseEmissionsClass;
 
   @FieldPrompt("Energy efficiency class indicator")
   @NotBlank(message = "Select an energy efficiency indicator", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   @ApiValuesFromLegislationCategory(serviceClass = DishwashersService.class)
+  @Schema(example = "B")
   private String efficiencyRating;
 
   @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
@@ -80,7 +84,7 @@ public class DishwashersForm extends StandardTemplateForm30Char {
   @Pattern(regexp = "^(https|http)://([a-zA-Z0-9\\-]+)\\.[a-zA-Z0-9]+.*",
       message = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
   @NotNull
-  @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character")
+  @Schema(description = "Enter a link to the product information sheet. Links must start with http:// or https:// and contain at least one dot (.) character", example = "https://example.com")
   private String qrCodeUrl;
 
   public String getEcoCapacity() {
