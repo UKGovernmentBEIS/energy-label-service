@@ -15,7 +15,7 @@ import uk.gov.beis.els.categories.waterheaters.model.EnergyConsumptionUnit;
 import uk.gov.beis.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.gov.beis.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.gov.beis.els.categories.waterheaters.model.SolarWaterHeatersForm;
-import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterPackageCalculatorForm;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCalculatorForm;
 import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
@@ -207,15 +207,18 @@ public class WaterHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_STORAGE_TANKS, form);
   }
 
-  public WaterSolarPackagesForm toWaterSolarPackagesForm(WaterHeaterPackageCalculatorForm waterHeaterPackageCalculatorForm) {
+  public WaterSolarPackagesForm toWaterSolarPackagesForm(
+      WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm) {
     WaterSolarPackagesForm form = new WaterSolarPackagesForm();
-    form.setDeclaredLoadProfile(waterHeaterPackageCalculatorForm.getDeclaredLoadProfile());
-    form.setHeaterEfficiencyRating(waterSolarPackagesCalculatorService.getWaterHeatingEfficiencyClass(waterHeaterPackageCalculatorForm).name());
-    form.setPackageEfficiencyRating(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(waterHeaterPackageCalculatorForm).name());
-    form.setSolarCollector(waterHeaterPackageCalculatorForm.getSolarCollector());
-    form.setStorageTank(waterHeaterPackageCalculatorForm.getStorageTank());
-    form.setSupplierName(waterHeaterPackageCalculatorForm.getSupplierName());
-    form.setModelName(waterHeaterPackageCalculatorForm.getModelName());
+    form.setDeclaredLoadProfile(waterSolarPackagesCalculatorForm.getDeclaredLoadProfile());
+    form.setHeaterEfficiencyRating(waterSolarPackagesCalculatorService.getWaterHeatingEfficiencyClass(
+        waterSolarPackagesCalculatorForm).name());
+    form.setPackageEfficiencyRating(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(
+        waterSolarPackagesCalculatorForm).name());
+    form.setSolarCollector(waterSolarPackagesCalculatorForm.getSolarCollector());
+    form.setStorageTank(waterSolarPackagesCalculatorForm.getStorageTank());
+    form.setSupplierName(waterSolarPackagesCalculatorForm.getSupplierName());
+    form.setModelName(waterSolarPackagesCalculatorForm.getModelName());
     return form;
   }
 

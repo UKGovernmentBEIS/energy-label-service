@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-public class WaterHeaterPackageCalculatorForm extends StandardTemplateForm50Char {
+public class WaterSolarPackagesCalculatorForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Water heating efficiency (%)")
   @Digits(integer = 3, fraction = 0, message = "Enter the water heating efficiency (%), up to 3 digits long")

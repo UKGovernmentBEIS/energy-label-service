@@ -9,9 +9,9 @@ import uk.gov.beis.els.categories.common.CategoryItem;
 import uk.gov.beis.els.categories.waterheaters.controller.WaterHeatersController;
 import uk.gov.beis.els.mvc.ReverseRouter;
 
-public class WaterHeaterPackageCategory implements Category {
+public class WaterSolarPackagesCategory implements Category {
 
-  public static final Category GET = new WaterHeaterPackageCategory();
+  public static final Category GET = new WaterSolarPackagesCategory();
 
   private static final List<CategoryItem> subCategories = new ImmutableList.Builder<CategoryItem>()
       .add(new CategoryItem(

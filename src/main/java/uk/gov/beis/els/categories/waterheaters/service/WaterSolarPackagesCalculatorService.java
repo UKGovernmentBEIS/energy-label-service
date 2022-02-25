@@ -5,14 +5,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.LoadProfile;
-import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterPackageCalculatorForm;
-import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCalculatorForm;
 import uk.gov.beis.els.model.RatingClass;
 
 @Service
 public class WaterSolarPackagesCalculatorService {
 
-  // This mapping of load profile to number is used in a couple of the calculations below.
   // Qref values are taken from Table 3 in https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32013R0812
   // Rating classes are from Annex II table 1
   private static final Map<LoadProfile, Map<Integer, RatingClass>> LOAD_PROFILE_VALUES;
@@ -139,7 +137,7 @@ public class WaterSolarPackagesCalculatorService {
     LOAD_PROFILE_QREF_VALUES = Collections.unmodifiableMap(qrefMap);
   }
 
-  public RatingClass getWaterHeatingEfficiencyClass(WaterHeaterPackageCalculatorForm form) {
+  public RatingClass getWaterHeatingEfficiencyClass(WaterSolarPackagesCalculatorForm form) {
     LoadProfile declaredLoadProfile = LoadProfile.getEnum(form.getDeclaredLoadProfile());
     Integer key = LOAD_PROFILE_VALUES.get(declaredLoadProfile).keySet()
         .stream()
@@ -150,7 +148,7 @@ public class WaterSolarPackagesCalculatorService {
     return LOAD_PROFILE_VALUES.get(declaredLoadProfile).get(key);
   }
 
-  public RatingClass getPackageWaterHeatingEfficiencyClass(WaterHeaterPackageCalculatorForm form) {
+  public RatingClass getPackageWaterHeatingEfficiencyClass(WaterSolarPackagesCalculatorForm form) {
     LoadProfile loadProfile = LoadProfile.getEnum(form.getDeclaredLoadProfile());
     Integer key = LOAD_PROFILE_VALUES.get(loadProfile).keySet()
         .stream()
@@ -161,15 +159,15 @@ public class WaterSolarPackagesCalculatorService {
     return LOAD_PROFILE_VALUES.get(loadProfile).get(key);
   }
 
-  public float getPackageWaterHeatingEfficiencyDecimal(WaterHeaterPackageCalculatorForm form) {
+  public float getPackageWaterHeatingEfficiencyDecimal(WaterSolarPackagesCalculatorForm form) {
     return getWaterHeatingEfficiencyDecimal(form) + getSolarContributionDecimal(form);
   }
 
-  public float getWaterHeatingEfficiencyDecimal(WaterHeaterPackageCalculatorForm form) {
+  public float getWaterHeatingEfficiencyDecimal(WaterSolarPackagesCalculatorForm form) {
     return Float.parseFloat(form.getWaterHeatingEfficiencyPercentage()) / 100F;
   }
 
-  public float getSolarContributionDecimal(WaterHeaterPackageCalculatorForm form) {
+  public float getSolarContributionDecimal(WaterSolarPackagesCalculatorForm form) {
     return (1.1F * getWaterHeatingEfficiencyDecimal(form) - 0.1F) *
         ((220F * LOAD_PROFILE_QREF_VALUES.get(LoadProfile.getEnum(form.getDeclaredLoadProfile()))) /
             Float.parseFloat(form.getAnnualNonSolarHeatContribution())) -
@@ -177,22 +175,22 @@ public class WaterSolarPackagesCalculatorService {
 
   }
 
-  public float getAuxElectricityConsumptionProportionDecimal(WaterHeaterPackageCalculatorForm form) {
+  public float getAuxElectricityConsumptionProportionDecimal(WaterSolarPackagesCalculatorForm form) {
     return (Float.parseFloat(form.getAuxElectricityConsumption()) * 2.5F) / 220F /
         LOAD_PROFILE_QREF_VALUES.get(LoadProfile.getEnum(form.getDeclaredLoadProfile()));
   }
 
-  public float getNonSolarScalingFactor(WaterHeaterPackageCalculatorForm form) {
+  public float getNonSolarScalingFactor(WaterSolarPackagesCalculatorForm form) {
     return ((220F * LOAD_PROFILE_QREF_VALUES.get(LoadProfile.getEnum(form.getDeclaredLoadProfile()))) /
         Float.parseFloat(form.getAnnualNonSolarHeatContribution()));
   }
 
-  public float getPackageWaterHeatingEfficiencyColderDecimal(WaterHeaterPackageCalculatorForm form) {
+  public float getPackageWaterHeatingEfficiencyColderDecimal(WaterSolarPackagesCalculatorForm form) {
     return getPackageWaterHeatingEfficiencyDecimal(form) -
         0.2F * getSolarContributionDecimal(form);
   }
 
-  public float getPackageWaterHeatingEfficiencyWarmerDecimal(WaterHeaterPackageCalculatorForm form) {
+  public float getPackageWaterHeatingEfficiencyWarmerDecimal(WaterSolarPackagesCalculatorForm form) {
     return getPackageWaterHeatingEfficiencyDecimal(form) +
         0.4F * getSolarContributionDecimal(form);
   }

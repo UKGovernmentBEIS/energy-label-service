@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import uk.gov.beis.els.categories.common.LoadProfile;
-import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterPackageCalculatorForm;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCalculatorForm;
 import uk.gov.beis.els.model.RatingClass;
 
 public class WaterSolarPackagesCalculatorServiceTest {
@@ -20,7 +20,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_MLoadWaterHeatingLowerLimit_assertAppp() {
     RatingClass expectedRatingClass = RatingClass.APPP;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.M.name());
     form.setWaterHeatingEfficiencyPercentage("163");
 
@@ -32,7 +32,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_MLoadWaterHeatingUpperLimit_assertApp() {
     RatingClass expectedRatingClass = RatingClass.APP;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.M.name());
     form.setWaterHeatingEfficiencyPercentage("162");
 
@@ -44,7 +44,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_MLoadWaterHeatingLowerLimit_assertApp() {
     RatingClass expectedRatingClass = RatingClass.APP;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.M.name());
     form.setWaterHeatingEfficiencyPercentage("130");
 
@@ -56,7 +56,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_MLoadWaterHeatingUpperLimit_assertF() {
     RatingClass expectedRatingClass = RatingClass.F;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.M.name());
     form.setWaterHeatingEfficiencyPercentage("29");
 
@@ -68,7 +68,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_MLoadWaterHeatingLowerLimit_assertF() {
     RatingClass expectedRatingClass = RatingClass.F;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.M.name());
     form.setWaterHeatingEfficiencyPercentage("27");
 
@@ -80,7 +80,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_LLoadWaterHeatingLowerLimit_assertAPPP() {
     RatingClass expectedRatingClass = RatingClass.APPP;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.L.name());
     form.setWaterHeatingEfficiencyPercentage("188");
 
@@ -92,7 +92,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_LLoadWaterHeatingUpperLimit_assertB() {
     RatingClass expectedRatingClass = RatingClass.B;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.L.name());
     form.setWaterHeatingEfficiencyPercentage("74");
 
@@ -104,7 +104,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_LLoadWaterHeatingLowerLimit_assertF() {
     RatingClass expectedRatingClass = RatingClass.F;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.L.name());
     form.setWaterHeatingEfficiencyPercentage("27");
 
@@ -116,7 +116,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XLLoadWaterHeatingUpperLimit_assertG() {
     RatingClass expectedRatingClass = RatingClass.G;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XL.name());
     form.setWaterHeatingEfficiencyPercentage("26");
 
@@ -128,7 +128,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XLLoadWaterHeatingLowerLimit_assertC() {
     RatingClass expectedRatingClass = RatingClass.C;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XL.name());
     form.setWaterHeatingEfficiencyPercentage("38");
 
@@ -140,7 +140,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XLLoadWaterHeatingUpperLimit_assertC() {
     RatingClass expectedRatingClass = RatingClass.C;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XL.name());
     form.setWaterHeatingEfficiencyPercentage("54");
 
@@ -152,7 +152,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XLLoadWaterHeatingLowerLimit_assertB() {
     RatingClass expectedRatingClass = RatingClass.B;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XL.name());
     form.setWaterHeatingEfficiencyPercentage("55");
 
@@ -164,7 +164,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XXLLoadWaterHeatingLowerLimit_assertB() {
     RatingClass expectedRatingClass = RatingClass.B;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XXL.name());
     form.setWaterHeatingEfficiencyPercentage("60");
 
@@ -176,7 +176,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XXLLoadWaterHeatingUpperLimit_assertB() {
     RatingClass expectedRatingClass = RatingClass.B;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XXL.name());
     form.setWaterHeatingEfficiencyPercentage("84");
 
@@ -188,7 +188,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XXLLoadWaterHeatingLowerLimit_assertAPP() {
     RatingClass expectedRatingClass = RatingClass.APP;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XXL.name());
     form.setWaterHeatingEfficiencyPercentage("170");
 
@@ -200,7 +200,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
   @Test
   public void getWaterHeatingEfficiencyClass_XXLLoadWaterHeatingUpperLimit_assertD() {
     RatingClass expectedRatingClass = RatingClass.D;
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setDeclaredLoadProfile(LoadProfile.XXL.name());
     form.setWaterHeatingEfficiencyPercentage("36");
 
@@ -211,7 +211,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
 
   @Test
   public void getAllValues_formWithValues_AssertRightValues_A() {
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setWaterHeatingEfficiencyPercentage("96");
     form.setDeclaredLoadProfile(LoadProfile.M.name());
     form.setStorageTank(false);
@@ -231,7 +231,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
 
   @Test
   public void getAllValues_formWithValues_AssertRightValues_B() {
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setWaterHeatingEfficiencyPercentage("24");
     form.setDeclaredLoadProfile(LoadProfile.XL.name());
     form.setStorageTank(true);
@@ -251,7 +251,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
 
   @Test
   public void getAllValues_formWithValues_AssertRightValues_C() {
-    WaterHeaterPackageCalculatorForm form = getPackageForm();
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
     form.setWaterHeatingEfficiencyPercentage("35");
     form.setDeclaredLoadProfile(LoadProfile.L.name());
     form.setStorageTank(true);
@@ -269,8 +269,8 @@ public class WaterSolarPackagesCalculatorServiceTest {
     assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyWarmerDecimal(form)).isEqualTo(1.3726614F);
   }
 
-  private WaterHeaterPackageCalculatorForm getPackageForm() {
-    WaterHeaterPackageCalculatorForm form = new WaterHeaterPackageCalculatorForm();
+  private WaterSolarPackagesCalculatorForm getPackageForm() {
+    WaterSolarPackagesCalculatorForm form = new WaterSolarPackagesCalculatorForm();
     form.setSupplierName("FR Energy Corp");
     form.setModelName("FR-5000");
     form.setWaterHeatingEfficiencyPercentage("120");

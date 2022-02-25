@@ -31,8 +31,8 @@ import uk.gov.beis.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.gov.beis.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.gov.beis.els.categories.waterheaters.model.SolarWaterHeatersForm;
 import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterCategory;
-import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterPackageCalculatorForm;
-import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterPackageCategory;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCalculatorForm;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCategory;
 import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.controller.CategoryController;
@@ -54,7 +54,7 @@ public class WaterHeatersController extends CategoryController {
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
   private final DocumentRendererService documentRendererService;
-  private final Category waterHeaterPackageCategory = WaterHeaterPackageCategory.GET;
+  private final Category waterHeaterPackageCategory = WaterSolarPackagesCategory.GET;
 
   @Autowired
   public WaterHeatersController(WaterHeatersService waterHeatersService,
@@ -212,13 +212,13 @@ public class WaterHeatersController extends CategoryController {
   }
 
   @GetMapping("/packages-of-water-heater-and-solar-device/calculator")
-  public ModelAndView renderWaterSolarPackagesCalculator(@ModelAttribute("form") WaterHeaterPackageCalculatorForm form) {
+  public ModelAndView renderWaterSolarPackagesCalculator(@ModelAttribute("form") WaterSolarPackagesCalculatorForm form) {
     return getWaterSolarPackagesCalculator(Collections.emptyList());
   }
 
   @PostMapping("/packages-of-water-heater-and-solar-device/calculator")
   @ResponseBody
-  public Object handleWaterSolarPackagesCalculatorSubmit(@Valid @ModelAttribute("form") WaterHeaterPackageCalculatorForm form,
+  public Object handleWaterSolarPackagesCalculatorSubmit(@Valid @ModelAttribute("form") WaterSolarPackagesCalculatorForm form,
                                                          BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getWaterSolarPackagesCalculator(bindingResult.getFieldErrors());
@@ -356,7 +356,7 @@ public class WaterHeatersController extends CategoryController {
   }
 
   private ModelAndView getWaterSolarPackagesCalculator(List<FieldError> errors) {
-    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterHeaterPackagesCalculator")
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterSolarPackagesCalculator")
         .addObject("loadProfile", Arrays.stream(
                 LoadProfile.values())
             .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
