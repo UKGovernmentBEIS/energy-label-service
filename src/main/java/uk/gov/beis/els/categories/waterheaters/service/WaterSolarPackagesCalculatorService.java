@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.LoadProfile;
+import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterPackageCalculatorForm;
 import uk.gov.beis.els.model.RatingClass;
 
 @Service
@@ -92,41 +93,50 @@ public class WaterSolarPackagesCalculatorService {
     return LOAD_PROFILE_VALUES.get(declaredLoadProfile).get(key);
   }
 
-  public RatingClass getPackageWaterHeatingEfficiencyClass(LoadProfile loadProfile,
-                                                           int waterHeatingEfficiencyPercentage,
-                                                           int annualNonSolarHeatContribution,
-                                                           int auxElectricityConsumption) {
+  public RatingClass getPackageWaterHeatingEfficiencyClass(WaterHeaterPackageCalculatorForm form) {
+    LoadProfile loadProfile = LoadProfile.getEnum(form.getDeclaredLoadProfile());
     Integer key = LOAD_PROFILE_VALUES.get(loadProfile).keySet()
         .stream()
-        .filter(integer -> getPackageWaterHeatingEfficiencyDecimal(waterHeatingEfficiencyPercentage, loadProfile,
-            annualNonSolarHeatContribution, auxElectricityConsumption) * 100 >= integer)
+        .filter(integer -> getPackageWaterHeatingEfficiencyDecimal(form) * 100 >= integer)
         .findFirst()
         .orElseThrow(() -> new RuntimeException("Cannot get package water heating efficiency class"));
 
     return LOAD_PROFILE_VALUES.get(loadProfile).get(key);
   }
 
-  public float getPackageWaterHeatingEfficiencyDecimal(int waterHeatingEfficiencyPercentage, LoadProfile loadProfile,
-                                                       int annualNonSolarHeatContribution,
-                                                       int auxElectricityConsumption) {
-    return getWaterHeatingEfficiencyDecimal(waterHeatingEfficiencyPercentage) + getSolarContributionDecimal(loadProfile,
-        waterHeatingEfficiencyPercentage, annualNonSolarHeatContribution, auxElectricityConsumption);
+  public float getPackageWaterHeatingEfficiencyDecimal(WaterHeaterPackageCalculatorForm form) {
+    return getWaterHeatingEfficiencyDecimal(form) + getSolarContributionDecimal(form);
   }
 
-  public float getWaterHeatingEfficiencyDecimal(int waterHeatingEfficiencyPercentage) {
-    return waterHeatingEfficiencyPercentage / 100F;
+  public float getWaterHeatingEfficiencyDecimal(WaterHeaterPackageCalculatorForm form) {
+    return Float.parseFloat(form.getWaterHeatingEfficiencyPercentage()) / 100F;
   }
 
-  public float getSolarContributionDecimal(LoadProfile loadProfile, int waterHeatingEfficiencyPercentage,
-                                           int annualNonSolarHeatContribution, int auxElectricityConsumption) {
-    return (1.1F * getWaterHeatingEfficiencyDecimal(waterHeatingEfficiencyPercentage) - 0.1F) *
-        ((220F * LOAD_PROFILE_QREF_VALUES.get(loadProfile)) / annualNonSolarHeatContribution) -
-        getAuxElectricityConsumptionProportionDecimal(auxElectricityConsumption,
-            loadProfile) - getWaterHeatingEfficiencyDecimal(waterHeatingEfficiencyPercentage);
+  public float getSolarContributionDecimal(WaterHeaterPackageCalculatorForm form) {
+    return (1.1F * getWaterHeatingEfficiencyDecimal(form) - 0.1F) *
+        ((220F * LOAD_PROFILE_QREF_VALUES.get(LoadProfile.getEnum(form.getDeclaredLoadProfile()))) /
+            Float.parseFloat(form.getAnnualNonSolarHeatContribution())) -
+        getAuxElectricityConsumptionProportionDecimal(form) - getWaterHeatingEfficiencyDecimal(form);
 
   }
 
-  public float getAuxElectricityConsumptionProportionDecimal(int auxElectricityConsumption, LoadProfile loadProfile) {
-    return (auxElectricityConsumption * 2.5F) / 220F / LOAD_PROFILE_QREF_VALUES.get(loadProfile);
+  public float getAuxElectricityConsumptionProportionDecimal(WaterHeaterPackageCalculatorForm form) {
+    return (Float.parseFloat(form.getAuxElectricityConsumption()) * 2.5F) / 220F /
+        LOAD_PROFILE_QREF_VALUES.get(LoadProfile.getEnum(form.getDeclaredLoadProfile()));
+  }
+
+  public float getNonSolarScalingFactor(LoadProfile loadProfile, int annualNonSolarHeatContribution) {
+    return ((220F * LOAD_PROFILE_QREF_VALUES.get(loadProfile)) /
+        annualNonSolarHeatContribution);
+  }
+
+  public float getPackageWaterHeatingEfficiencyColderDecimal(WaterHeaterPackageCalculatorForm form) {
+    return getPackageWaterHeatingEfficiencyDecimal(form) -
+        0.2F * getSolarContributionDecimal(form);
+  }
+
+  public float getPackageWaterHeatingEfficiencyWarmerDecimal(WaterHeaterPackageCalculatorForm form) {
+    return getPackageWaterHeatingEfficiencyDecimal(form) +
+        0.4F * getSolarContributionDecimal(form);
   }
 }
