@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.waterheaters.model.WaterHeaterPackageCalculatorForm;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.model.RatingClass;
 
 @Service
@@ -36,7 +37,7 @@ public class WaterSolarPackagesCalculatorService {
     xxxsRatingClasses.put(26, RatingClass.D);
     xxxsRatingClasses.put(22, RatingClass.E);
     xxxsRatingClasses.put(19, RatingClass.F);
-    xxxsRatingClasses.put(0,  RatingClass.G);
+    xxxsRatingClasses.put(0, RatingClass.G);
 
     xxsRatingClasses.put(62, RatingClass.APPP);
     xxsRatingClasses.put(53, RatingClass.APP);
@@ -47,7 +48,7 @@ public class WaterSolarPackagesCalculatorService {
     xxsRatingClasses.put(26, RatingClass.D);
     xxsRatingClasses.put(23, RatingClass.E);
     xxsRatingClasses.put(20, RatingClass.F);
-    xxsRatingClasses.put(0,  RatingClass.G);
+    xxsRatingClasses.put(0, RatingClass.G);
 
     xsRatingClasses.put(69, RatingClass.APPP);
     xsRatingClasses.put(61, RatingClass.APP);
@@ -58,7 +59,7 @@ public class WaterSolarPackagesCalculatorService {
     xsRatingClasses.put(29, RatingClass.D);
     xsRatingClasses.put(26, RatingClass.E);
     xsRatingClasses.put(23, RatingClass.F);
-    xsRatingClasses.put(0,  RatingClass.G);
+    xsRatingClasses.put(0, RatingClass.G);
 
     sRatingClasses.put(90, RatingClass.APPP);
     sRatingClasses.put(72, RatingClass.APP);
@@ -69,7 +70,7 @@ public class WaterSolarPackagesCalculatorService {
     sRatingClasses.put(29, RatingClass.D);
     sRatingClasses.put(26, RatingClass.E);
     sRatingClasses.put(23, RatingClass.F);
-    sRatingClasses.put(0,  RatingClass.G);
+    sRatingClasses.put(0, RatingClass.G);
 
     mRatingClasses.put(163, RatingClass.APPP);
     mRatingClasses.put(130, RatingClass.APP);
@@ -181,9 +182,9 @@ public class WaterSolarPackagesCalculatorService {
         LOAD_PROFILE_QREF_VALUES.get(LoadProfile.getEnum(form.getDeclaredLoadProfile()));
   }
 
-  public float getNonSolarScalingFactor(LoadProfile loadProfile, int annualNonSolarHeatContribution) {
-    return ((220F * LOAD_PROFILE_QREF_VALUES.get(loadProfile)) /
-        annualNonSolarHeatContribution);
+  public float getNonSolarScalingFactor(WaterHeaterPackageCalculatorForm form) {
+    return ((220F * LOAD_PROFILE_QREF_VALUES.get(LoadProfile.getEnum(form.getDeclaredLoadProfile()))) /
+        Float.parseFloat(form.getAnnualNonSolarHeatContribution()));
   }
 
   public float getPackageWaterHeatingEfficiencyColderDecimal(WaterHeaterPackageCalculatorForm form) {
