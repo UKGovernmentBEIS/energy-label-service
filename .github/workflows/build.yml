@@ -40,9 +40,11 @@ jobs:
           chmod +x gradlew
           ./gradlew bootRun &
 
-      # TODO poll health-check endpoint until ready
+      # Wait up to 30s for the app to start
       - name: Wait for test app start
-        run: sleep 30s
+        run:  |
+          export START_TIME=$(date +%s)
+          until curl http://localhost:8080/health > /dev/null || test "$(($(date +%s) - $START_TIME))" -gt 30; do sleep 5 | echo "Waiting..."; done
         shell: bash
 
       - name: Run OpenAPI tests
