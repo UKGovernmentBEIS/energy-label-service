@@ -223,7 +223,10 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWaterSolarPackagesCalculator(bindingResult.getFieldErrors());
     } else {
-      return true; //TODO
+      return documentRendererService.processPdfResponse(
+          waterHeatersService.generateHtml(waterHeatersService.toWaterSolarPackagesForm(form),
+              WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES)
+      );
     }
   }
 
