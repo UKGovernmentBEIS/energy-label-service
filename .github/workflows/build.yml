@@ -40,6 +40,11 @@ jobs:
           chmod +x gradlew
           ./gradlew bootRun &
 
+      # TODO poll health-check endpoint until ready
+      - name: Wait for test app start
+        run: sleep 30s
+        shell: bash
+
       - name: Run OpenAPI tests
         run: |
           pip install schemathesis
