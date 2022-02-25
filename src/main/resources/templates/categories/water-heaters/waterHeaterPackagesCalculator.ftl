@@ -1,7 +1,7 @@
 <#include '../../layout.ftl'>
 
 <@common.standardProductForm
-    title="Packages of water heater and solar device energy calculator"
+    title="Packages of water heater and solar device energy label calculator"
     showInsetText=false
 >
     <@govukTextInput.textInput path="form.waterHeatingEfficiencyPercentage"/>
