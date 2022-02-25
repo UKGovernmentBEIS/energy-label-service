@@ -3,9 +3,10 @@ package uk.gov.beis.els.categories.waterheaters.model;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-public class WaterHeaterPackageCalculatorForm {
+public class WaterHeaterPackageCalculatorForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Water heating efficiency (%)")
   @Digits(integer = 3, fraction = 0, message = "Enter the water heating efficiency (%), up to 3 digits long")
@@ -21,7 +22,7 @@ public class WaterHeaterPackageCalculatorForm {
 
   @FieldPrompt("Can a solar collector be included in this package?")
   @NotNull(message = "Specify if a solar collector can be included")
-  private Boolean solarCollector;
+  private Boolean solarCollector = true;
 
   //TODO check integer=3
   @FieldPrompt("Annual non-solar heat contribution (kWh)")
