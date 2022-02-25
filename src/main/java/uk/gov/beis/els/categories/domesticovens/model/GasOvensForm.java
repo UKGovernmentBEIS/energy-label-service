@@ -13,13 +13,13 @@ public class GasOvensForm extends DomesticOvensForm {
   @FieldPrompt("Energy consumption of the conventional heating function per cycle, in MJ/cycle")
   @Digits(integer = 1, fraction = 2, message = "Enter the energy consumption of the conventional heating function per cycle as 1 digit with up to 2 decimal places")
   @NotNull
-  @Schema(type = "number")
+  @Schema(type = "number", example = "4.23")
   private String conventionalMjConsumption;
 
   @FieldPrompt("Energy consumption of the fan-forced heating function per cycle, in MJ/cycle")
   @Digits(groups = FanOvenGroup.class, integer = 1, fraction = 2, message = "Enter the energy consumption of the fan-forced heating function per cycle as 1 digit with up to 2 decimal places")
   @NotNull(groups = FanOvenGroup.class)
-  @Schema(type = "number")
+  @Schema(type = "number", example = "4.94")
   private String convectionMjConsumption;
 
   public String getConventionalMjConsumption() {

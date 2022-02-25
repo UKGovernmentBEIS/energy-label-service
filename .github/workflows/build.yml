@@ -50,7 +50,7 @@ jobs:
       - name: Run OpenAPI tests
         run: |
           pip install schemathesis
-          schemathesis run --hypothesis-phases=explicit http://localhost:8080/v3/api-docs
+          schemathesis run --tag 'Dishwashers' --tag 'Domestic ovens' --hypothesis-phases=explicit http://localhost:8080/v3/api-docs
 
       - name: Install cf client
         env:

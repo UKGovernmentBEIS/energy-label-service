@@ -21,27 +21,29 @@ public class DomesticOvensForm extends StandardTemplateForm40Char {
   @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
   @ApiValuesFromLegislationCategory(serviceClass = DomesticOvensService.class)
+  @Schema(example = "A")
   private String efficiencyRating;
 
   @FieldPrompt("Usable volume of the cavity in litres (L)")
   @Digits(integer = 3, fraction = 0, message = "Enter the volume, up to 3 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", example = "85")
   @NotNull
   private String volume;
 
   @FieldPrompt("Energy consumption of the conventional heating function per cycle, in kWh/cycle")
   @Digits(integer = 1, fraction = 2, message = "Enter the energy consumption of the conventional heating function per cycle as 1 digit with up to 2 decimal places")
-  @Schema(type = "number")
+  @Schema(type = "number" , example = "2.5")
   @NotNull
   private String conventionalKwhConsumption;
 
   @FieldPrompt("Is this a fan-forced oven?")
   @NotNull(message = "Specify if this is a fan-forced oven")
+  @Schema(type = "number" , example = "true")
   private Boolean isFanOven;
 
   @FieldPrompt("Energy consumption of the fan-forced heating function per cycle, in kWh/cycle")
   @Digits(groups = FanOvenGroup.class, integer = 1, fraction = 2, message = "Enter the energy consumption of the fan-forced heating function per cycle as 1 digit with up to 2 decimal places")
-  @Schema(type = "number")
+  @Schema(type = "number", example = "2.8")
   @NotNull(groups = FanOvenGroup.class)
   private String convectionKwhConsumption;
 

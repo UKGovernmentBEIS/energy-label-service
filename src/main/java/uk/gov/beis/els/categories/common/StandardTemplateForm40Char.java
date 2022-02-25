@@ -1,5 +1,6 @@
 package uk.gov.beis.els.categories.common;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
@@ -13,11 +14,13 @@ public class StandardTemplateForm40Char extends InternetLabellingForm implements
   @FieldPrompt("Supplier's name or trade mark")
   @NotBlank(message = "Enter a supplier name or trade mark")
   @Length(max = 40, message = "Supplier name or trade mark must be 40 characters or less")
+  @Schema(example = "Acme Inc")
   private String supplierName;
 
   @FieldPrompt("Supplier's model identification code")
   @NotBlank(message = "Enter a supplier model identification code")
   @Length(max = 40, message = "Supplier model identification code must be 40 characters or less")
+  @Schema(example = "Test123")
   private String modelName;
 
   public String getSupplierName() {
