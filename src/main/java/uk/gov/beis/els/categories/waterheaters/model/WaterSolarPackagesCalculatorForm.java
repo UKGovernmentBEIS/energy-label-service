@@ -24,14 +24,12 @@ public class WaterSolarPackagesCalculatorForm extends StandardTemplateForm50Char
   @NotNull(message = "Specify if a solar collector can be included")
   private Boolean solarCollector = true;
 
-  //TODO check integer=3
   @FieldPrompt("Annual non-solar heat contribution (kWh)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the annual non-solar heat contribution (kWh), up to 3 digits long")
+  @Digits(integer = 4, fraction = 0, message = "Enter the annual non-solar heat contribution (kWh), up to 4 digits long")
   private String annualNonSolarHeatContribution;
 
-  //TODO check integer=3
   @FieldPrompt("Auxiliary electricity consumption (kWh)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the auxiliary electricity consumption (kWh), up to 3 digits long")
+  @Digits(integer = 4, fraction = 0, message = "Enter the auxiliary electricity consumption (kWh), up to 4 digits long")
   private String auxElectricityConsumption;
 
   public String getWaterHeatingEfficiencyPercentage() {

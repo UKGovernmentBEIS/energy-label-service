@@ -143,7 +143,7 @@ public class WaterSolarPackagesCalculatorService {
         .stream()
         .filter(integer -> Integer.parseInt(form.getWaterHeatingEfficiencyPercentage()) >= integer)
         .findFirst()
-        .orElseThrow(() -> new RuntimeException("Cannot get water heating efficiency class"));
+        .orElse(0);
 
     return LOAD_PROFILE_VALUES.get(declaredLoadProfile).get(key);
   }
@@ -154,7 +154,7 @@ public class WaterSolarPackagesCalculatorService {
         .stream()
         .filter(integer -> getPackageWaterHeatingEfficiencyDecimal(form) * 100 >= integer)
         .findFirst()
-        .orElseThrow(() -> new RuntimeException("Cannot get package water heating efficiency class"));
+        .orElse(0);
 
     return LOAD_PROFILE_VALUES.get(loadProfile).get(key);
   }
