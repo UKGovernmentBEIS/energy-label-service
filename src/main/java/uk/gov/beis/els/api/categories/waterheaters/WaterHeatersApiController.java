@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.waterheaters.model.HotWaterStorageTanksForm;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCalculatorForm;
 import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.model.ProductMetadata;
@@ -120,5 +121,13 @@ public class WaterHeatersApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES, ProductMetadata.WATER_HEATERS_PACKAGE)
     );
+  }
+
+  @Operation(summary = "Packages of water heater and solar device: energy label calculator")
+  @PostMapping("/packages-of-water-heater-and-solar-device/calculate/energy-label")
+  public Object waterHeaterSolarDevicePackageCalculator(@RequestBody @Valid WaterSolarPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        waterHeatersService.generateHtml(waterHeatersService.toWaterSolarPackagesForm(form),
+            WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
   }
 }
