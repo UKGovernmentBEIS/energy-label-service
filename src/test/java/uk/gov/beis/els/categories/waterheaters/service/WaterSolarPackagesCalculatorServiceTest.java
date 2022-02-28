@@ -209,6 +209,7 @@ public class WaterSolarPackagesCalculatorServiceTest {
     assertThat(returnedRatingClass).isEqualTo(expectedRatingClass);
   }
 
+  //Test's expected values come from the values https://tool.label-pack-a-plus.eu/packagelabel/waterheater/calculate would return
   @Test
   public void getAllValues_formWithValues_AssertRightValues_A() {
     WaterSolarPackagesCalculatorForm form = getPackageForm();
@@ -267,6 +268,26 @@ public class WaterSolarPackagesCalculatorServiceTest {
     assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyDecimal(form)).isEqualTo(1.0804724F);
     assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyColderDecimal(form)).isEqualTo(0.9343779F);
     assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyWarmerDecimal(form)).isEqualTo(1.3726614F);
+  }
+
+  @Test
+  public void getAllValues_formWithValues_AssertRightValues_D() {
+    WaterSolarPackagesCalculatorForm form = getPackageForm();
+    form.setWaterHeatingEfficiencyPercentage("200");
+    form.setDeclaredLoadProfile(LoadProfile.XXL.name());
+    form.setStorageTank(true);
+    form.setAnnualNonSolarHeatContribution("5000");
+    form.setAuxElectricityConsumption("5000");
+
+    assertThat(waterSolarPackagesCalculatorService.getWaterHeatingEfficiencyClass(form)).isEqualTo(RatingClass.APP);
+    assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(form)).isEqualTo(RatingClass.G);
+    assertThat(waterSolarPackagesCalculatorService.getWaterHeatingEfficiencyDecimal(form)).isEqualTo(2.0F);
+    assertThat(waterSolarPackagesCalculatorService.getNonSolarScalingFactor(form)).isEqualTo(1.0793201F);
+    assertThat(waterSolarPackagesCalculatorService.getAuxElectricityConsumptionProportionDecimal(form)).isEqualTo(2.316273F);
+    assertThat(waterSolarPackagesCalculatorService.getSolarContributionDecimal(form)).isEqualTo(-2.0497007F);
+    assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyDecimal(form)).isEqualTo(-0.049700737F);
+    assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyColderDecimal(form)).isEqualTo(0.36023942F);
+    assertThat(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyWarmerDecimal(form)).isEqualTo(-0.86958104F);
   }
 
   private WaterSolarPackagesCalculatorForm getPackageForm() {
