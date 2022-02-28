@@ -32,7 +32,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     processLegislationCategoryValues(annotations, schema);
     processRatingClassRangeValues(annotations, schema);
     processEnumValues(annotations, schema);
-    processExamples(annotations, schema);
+    processExamples(schema);
 
     return schema;
   }
@@ -177,35 +177,24 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         });
   }
 
-  private void processExamples(List<Annotation> annotations, Schema schema) {
-    getAnnotation(annotations, io.swagger.v3.oas.annotations.media.Schema.class)
-        .ifPresent(schema1 -> {
-          String type = schema1.type();
-          // process integer and number types
-          if (type != null) {
-            if (type.equals("integer")) {
-              if (schema.getDescription().contains("pixels")) {
-                schema.setExample(
-                    "100"); // set pixels to something the user can actually see (i.e. bigger than 1 pixel)
-              } else {
-                schema.setExample("1");
-              }
-            } else if (type.equals("number")) {
-              schema.setExample("1.1");
-            }
-          }
-        });
-
-    // process strings
-    if (schema.getDescription().contains("http://")) {
+  private void processExamples(Schema schema) {
+    if (schema.getType().equals("integer")) { // process integers
+      if (schema.getDescription().contains("pixels")) {
+        schema.setExample("100"); // set pixels to something the user can actually see (i.e. bigger than 1 pixel)
+      } else {
+        schema.setExample("1");
+      }
+    } else if (schema.getType().equals("number")) { // process numbers (i.e. those that allow decimal places
+      schema.setExample("1.1");
+    } else if (schema.getDescription().contains("http://")) {
       schema.setExample("http://www.example-energy.co.uk"); // default example for QR code website fields
     } else if (schema.getType().equals("string")) {
-      schema.setExample("string"); // all others
+      schema.setExample("string"); // process all other strings
     }
 
-    // process enum objects
+    // process enum objects (these have type "string" so this will overwrite the default string value above)
     if (schema.getEnum() != null) {
-      schema.setExample(schema.getEnum().get(0));
+      schema.setExample(schema.getEnum().get(0)); // set the example to the first enum value in the list
     }
   }
 }
