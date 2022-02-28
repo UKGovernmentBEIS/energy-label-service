@@ -215,7 +215,7 @@ public class WaterHeatersService {
         waterSolarPackagesCalculatorForm).name());
     form.setPackageEfficiencyRating(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(
         waterSolarPackagesCalculatorForm).name());
-    form.setSolarCollector(waterSolarPackagesCalculatorForm.getSolarCollector());
+    form.setSolarCollector(true);
     form.setStorageTank(waterSolarPackagesCalculatorForm.getStorageTank());
     form.setSupplierName(waterSolarPackagesCalculatorForm.getSupplierName());
     form.setModelName(waterSolarPackagesCalculatorForm.getModelName());

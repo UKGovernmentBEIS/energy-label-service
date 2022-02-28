@@ -12,7 +12,7 @@ import uk.gov.beis.els.model.meta.FieldPrompt;
 @Schema(name = "Package of a water heater and solar device energy label calculator")
 public class WaterSolarPackagesCalculatorForm extends StandardTemplateForm50Char {
 
-  @FieldPrompt("Water heating efficiency (%)")
+  @FieldPrompt("Water heating energy efficiency of water heater (%)")
   @Digits(integer = 3, fraction = 0, message = "Enter the water heating efficiency (%), up to 3 digits long")
   @Schema(type = "integer")
   @NotNull
@@ -23,14 +23,9 @@ public class WaterSolarPackagesCalculatorForm extends StandardTemplateForm50Char
   @ApiValuesFromEnum(LoadProfile.class)
   private String declaredLoadProfile;
 
-  @FieldPrompt("Can a hot water storage tank be included in this package?")
-  @NotNull(message = "Specify if a hot water storage tank can be included")
+  @FieldPrompt("Is a hot water storage tank included in this package?")
+  @NotNull(message = "Specify if a hot water storage tank is included")
   private Boolean storageTank;
-
-  @FieldPrompt("Can a solar collector be included in this package?")
-  @NotNull(message = "Specify if a solar collector can be included")
-  @Schema(hidden = true)
-  private Boolean solarCollector = true;
 
   @FieldPrompt("Annual non-solar heat contribution (kWh)")
   @Digits(integer = 4, fraction = 0, message = "Enter the annual non-solar heat contribution (kWh), up to 4 digits long")
@@ -66,14 +61,6 @@ public class WaterSolarPackagesCalculatorForm extends StandardTemplateForm50Char
 
   public void setStorageTank(Boolean storageTank) {
     this.storageTank = storageTank;
-  }
-
-  public Boolean getSolarCollector() {
-    return solarCollector;
-  }
-
-  public void setSolarCollector(Boolean solarCollector) {
-    this.solarCollector = solarCollector;
   }
 
   public String getAnnualNonSolarHeatContribution() {
