@@ -78,7 +78,7 @@ public class OpenApiService {
           String tag = operation.getTags().stream().findFirst().orElseThrow(() -> new RuntimeException(String.format("No tag found for operation: %s", operation.getSummary())));
           String schemaRef = operation.getRequestBody().getContent().get("application/json").getSchema().get$ref();
           Schema schema = openAPISpec.getComponents().getSchemas().get(StringUtils.remove(schemaRef, "#/components/schemas/"));
-          String example = getExampleJsonBody(schema);
+          String example = getExampleJsonBody(schema, schemaRef);
 
           return new OperationWithSchema(operation, tag, schema, example);
         }));
@@ -95,7 +95,7 @@ public class OpenApiService {
   }
 
   @SuppressWarnings("rawtypes")
-  private String getExampleJsonBody(Schema schema) {
+  private String getExampleJsonBody(Schema schema, String schemaRef) {
     String example = "";
     try {
       ObjectMapper objectMapper = new ObjectMapper();
@@ -114,7 +114,7 @@ public class OpenApiService {
 
       example = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(objectNode);
     } catch (JsonProcessingException e) {
-      LOGGER.warn("Could not create API request body example for {}. {}", schema.getName(), e.getMessage());
+      LOGGER.warn("Could not create API request body example for schema ref: {}. {}", schemaRef, e.getMessage());
     }
 
     return example;
