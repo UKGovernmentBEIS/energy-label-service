@@ -35,7 +35,7 @@
       </h2>
       <p class="govuk-body">
         Requests to the energy label API are rate limited to ${rateLimitCapacity} requests every ${rateLimitTimeValue} ${rateLimitTimeUnit} per IP address.
-        Each request will include a <code class="els-code els-code--inline">X-Rate-Limit-Remaining</code> header which will tell you how many more requests you can make within that ${rateLimitTimeValue} ${rateLimitTimeUnit} timeframe.
+        Each response will include an <code class="els-code els-code--inline">X-Rate-Limit-Remaining</code> header which will tell you how many more requests you can make within that ${rateLimitTimeValue} ${rateLimitTimeUnit} timeframe.
       </p>
       <p class="govuk-body">
         You should store the labels you generate in your application, rather than making repeated requests
@@ -44,7 +44,7 @@
       <p class="govuk-body">
         If you exceed the rate limit, you'll receive a response with the <code class="els-code els-code--inline">429 Too Many Requests</code>
         HTTP status code. You can retry your request in ${rateLimitTimeValue} ${rateLimitTimeUnit}.
-        The request will include a <code class="els-code els-code--inline">X-Rate-Limit-Retry-After-Seconds</code> header which will tell you how many seconds you have left until you can make another successful request.
+        The response will include an <code class="els-code els-code--inline">X-Rate-Limit-Retry-After-Seconds</code> header which will tell you how many seconds you have left until you can make another successful request.
       </p>
 
       <h2 class="govuk-heading-m" id="testing">
