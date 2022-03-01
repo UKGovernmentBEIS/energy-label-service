@@ -17,58 +17,10 @@ public class WaterSolarPackagesCalculatorService {
   private static final Map<LoadProfile, Float> LOAD_PROFILE_QREF_VALUES;
 
   static {
-    Map<Integer, RatingClass> xxxsRatingClasses = new LinkedHashMap<>();
-    Map<Integer, RatingClass> xxsRatingClasses = new LinkedHashMap<>();
-    Map<Integer, RatingClass> xsRatingClasses = new LinkedHashMap<>();
-    Map<Integer, RatingClass> sRatingClasses = new LinkedHashMap<>();
     Map<Integer, RatingClass> mRatingClasses = new LinkedHashMap<>();
     Map<Integer, RatingClass> lRatingClasses = new LinkedHashMap<>();
     Map<Integer, RatingClass> xlRatingClasses = new LinkedHashMap<>();
     Map<Integer, RatingClass> xxlRatingClasses = new LinkedHashMap<>();
-
-    xxxsRatingClasses.put(62, RatingClass.APPP);
-    xxxsRatingClasses.put(53, RatingClass.APP);
-    xxxsRatingClasses.put(44, RatingClass.AP);
-    xxxsRatingClasses.put(35, RatingClass.A);
-    xxxsRatingClasses.put(32, RatingClass.B);
-    xxxsRatingClasses.put(29, RatingClass.C);
-    xxxsRatingClasses.put(26, RatingClass.D);
-    xxxsRatingClasses.put(22, RatingClass.E);
-    xxxsRatingClasses.put(19, RatingClass.F);
-    xxxsRatingClasses.put(0, RatingClass.G);
-
-    xxsRatingClasses.put(62, RatingClass.APPP);
-    xxsRatingClasses.put(53, RatingClass.APP);
-    xxsRatingClasses.put(44, RatingClass.AP);
-    xxsRatingClasses.put(35, RatingClass.A);
-    xxsRatingClasses.put(32, RatingClass.B);
-    xxsRatingClasses.put(29, RatingClass.C);
-    xxsRatingClasses.put(26, RatingClass.D);
-    xxsRatingClasses.put(23, RatingClass.E);
-    xxsRatingClasses.put(20, RatingClass.F);
-    xxsRatingClasses.put(0, RatingClass.G);
-
-    xsRatingClasses.put(69, RatingClass.APPP);
-    xsRatingClasses.put(61, RatingClass.APP);
-    xsRatingClasses.put(53, RatingClass.AP);
-    xsRatingClasses.put(38, RatingClass.A);
-    xsRatingClasses.put(35, RatingClass.B);
-    xsRatingClasses.put(32, RatingClass.C);
-    xsRatingClasses.put(29, RatingClass.D);
-    xsRatingClasses.put(26, RatingClass.E);
-    xsRatingClasses.put(23, RatingClass.F);
-    xsRatingClasses.put(0, RatingClass.G);
-
-    sRatingClasses.put(90, RatingClass.APPP);
-    sRatingClasses.put(72, RatingClass.APP);
-    sRatingClasses.put(55, RatingClass.AP);
-    sRatingClasses.put(38, RatingClass.A);
-    sRatingClasses.put(35, RatingClass.B);
-    sRatingClasses.put(32, RatingClass.C);
-    sRatingClasses.put(29, RatingClass.D);
-    sRatingClasses.put(26, RatingClass.E);
-    sRatingClasses.put(23, RatingClass.F);
-    sRatingClasses.put(0, RatingClass.G);
 
     mRatingClasses.put(163, RatingClass.APPP);
     mRatingClasses.put(130, RatingClass.APP);
@@ -115,10 +67,6 @@ public class WaterSolarPackagesCalculatorService {
     xxlRatingClasses.put(0, RatingClass.G);
 
     Map<LoadProfile, Map<Integer, RatingClass>> aMap = new LinkedHashMap<>();
-    aMap.put(LoadProfile.XXXS, Collections.unmodifiableMap(xxxsRatingClasses));
-    aMap.put(LoadProfile.XXS, Collections.unmodifiableMap(xxsRatingClasses));
-    aMap.put(LoadProfile.XS, Collections.unmodifiableMap(xsRatingClasses));
-    aMap.put(LoadProfile.S, Collections.unmodifiableMap(sRatingClasses));
     aMap.put(LoadProfile.M, Collections.unmodifiableMap(mRatingClasses));
     aMap.put(LoadProfile.L, Collections.unmodifiableMap(lRatingClasses));
     aMap.put(LoadProfile.XL, Collections.unmodifiableMap(xlRatingClasses));
@@ -126,10 +74,6 @@ public class WaterSolarPackagesCalculatorService {
     LOAD_PROFILE_VALUES = Collections.unmodifiableMap(aMap);
 
     Map<LoadProfile, Float> qrefMap = new LinkedHashMap<>();
-    qrefMap.put(LoadProfile.XXXS, 0.345F);
-    qrefMap.put(LoadProfile.XXS, 2.1F);
-    qrefMap.put(LoadProfile.XS, 2.1F);
-    qrefMap.put(LoadProfile.S, 2.1F);
     qrefMap.put(LoadProfile.M, 5.845F);
     qrefMap.put(LoadProfile.L, 11.655F);
     qrefMap.put(LoadProfile.XL, 19.07F);
