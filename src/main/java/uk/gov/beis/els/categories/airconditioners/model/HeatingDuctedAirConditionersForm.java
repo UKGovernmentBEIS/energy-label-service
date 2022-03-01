@@ -12,6 +12,7 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
+@Schema(name = "Heating-only single or double duct air conditioner energy label")
 public class HeatingDuctedAirConditionersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Energy efficiency class for heating")

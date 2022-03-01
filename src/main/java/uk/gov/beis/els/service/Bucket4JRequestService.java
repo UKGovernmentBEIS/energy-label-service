@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.configuration.RateLimitConfiguration;
 
 @Service
 public class Bucket4JRequestService {
@@ -16,10 +18,13 @@ public class Bucket4JRequestService {
   private static final Logger LOGGER = LoggerFactory.getLogger(Bucket4JRequestService.class);
 
   private final HttpServletRequest request;
+  private final RateLimitConfiguration rateLimitConfiguration;
 
   @Autowired
-  public Bucket4JRequestService(HttpServletRequest request) {
+  public Bucket4JRequestService(HttpServletRequest request,
+                                RateLimitConfiguration rateLimitConfiguration) {
     this.request = request;
+    this.rateLimitConfiguration = rateLimitConfiguration;
   }
 
 
@@ -49,5 +54,21 @@ public class Bucket4JRequestService {
     else {
       throw new RuntimeException("Request for " + request.getRequestURI() + " found with no IP addresses in the X-Forwarded-For header");
     }
+  }
+
+  public String getRateLimitCapacity() {
+    return rateLimitConfiguration.getCapacity();
+  }
+
+  public String getRateLimitTimeValue() {
+    return rateLimitConfiguration.getTimeValue();
+  }
+
+  public String getRateLimitTimeUnit() {
+    String timeValue = getRateLimitTimeValue();
+    String timeUnit = rateLimitConfiguration.getTimeUnit();
+    return Integer.parseInt(timeValue) > 1
+        ? timeUnit
+        : StringUtils.remove(timeUnit, "s");
   }
 }

@@ -80,7 +80,7 @@ public class LampsApiController {
     );
   }
 
-  @Operation(summary = "Lamps and light sources: New style arrow image")
+  @Operation(summary = "Lamps and light sources: new style arrow image")
   @PostMapping("/new-style/arrow-image")
   public Object lampsNewStyleInternetLabel(@RequestBody @Valid LampsNewStyleInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -89,7 +89,7 @@ public class LampsApiController {
     );
   }
 
-  @Operation(summary = "Lamps and light sources: Old style arrow image")
+  @Operation(summary = "Lamps and light sources: old style arrow image")
   @PostMapping("/old-style/arrow-image")
   public Object lampsOldStyleInternetLabel(@RequestBody @Valid LampsOldStyleInternetLabelApiForm form) {
     return documentRendererService.processImageApiResponse(
@@ -99,7 +99,7 @@ public class LampsApiController {
   }
 
   @Operation(
-      summary = "light source packaging: Energy rating arrow",
+      summary = "Light source packaging: energy rating arrow",
       description = "This arrow must only be used on products which include a new-style rescaled energy label. The arrow must be shown on the front of the packaging if the energy label isn't on the front. It must be clearly visible and legible. You don't need to include this arrow on the packaging if the energy label is on the front."
   )
   @PostMapping("/new-style/packaging-arrow")
