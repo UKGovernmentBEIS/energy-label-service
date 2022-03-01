@@ -10,30 +10,6 @@
     <div class="govuk-grid-column-three-quarters">
       <span class="govuk-caption-xl">API endpoints</span>
       <h1 class="govuk-heading-xl">${tagName}</h1>
-      <p class="govuk-body">
-        These endpoints return data in PDF format for energy labels, PNG or JPEG for arrow images and JSON for errors.
-      </p>
-      <p class="govuk-body">
-        You can import <a href="${apiSpecUrl}" class="govuk-link">the energy label API OpenAPI 3 document</a> into API testing tools
-        like Postman to test all of our API endpoints.
-      </p>
-      <p class="govuk-body">
-        The values you send will be validated. If there are any validation errors, the response body will be a JSON object
-        containing a <code class="els-code els-code--inline">validationErrors</code> array. For example:
-      </p>
-      <p class="govuk-body">
-        <code class="els-code els-code--block">{
-    "timestamp": "2022-02-18T15:28:11.877Z",
-    "status": 400,
-    "error": "Bad request",
-    "message": "There were validation errors",
-    "validationErrors": [
-      "Field 'modelName' has error: Enter a supplier model identification code",
-      "Field 'supplierName' has error: Enter a supplier name or trade mark"
-    ],
-    "path": "/api/v1/path/to/endpoint"
-  }</code>
-      </p>
 
       <h2 class="govuk-heading-l">Endpoints</h2>
 
