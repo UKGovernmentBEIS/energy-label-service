@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import uk.gov.beis.els.api.common.ApiValuesFromEnum;
+import uk.gov.beis.els.api.common.ApiValuesFromLoadProfileList;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.model.meta.FieldPrompt;
@@ -20,7 +20,7 @@ public class WaterSolarPackagesCalculatorForm extends StandardTemplateForm50Char
 
   @FieldPrompt("Declared load profile")
   @NotBlank(message = "Select a declared load profile")
-  @ApiValuesFromEnum(LoadProfile.class)
+  @ApiValuesFromLoadProfileList(values = {LoadProfile.M, LoadProfile.L, LoadProfile.XL, LoadProfile.XXL})
   private String declaredLoadProfile;
 
   @FieldPrompt("Is a hot water storage tank included in this package?")

@@ -13,7 +13,9 @@ import org.springdoc.core.customizers.PropertyCustomizer;
 import org.springframework.stereotype.Component;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
+import uk.gov.beis.els.api.common.ApiValuesFromLoadProfileList;
 import uk.gov.beis.els.api.common.ApiValuesFromRatingClassRange;
+import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.model.Displayable;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.RatingClass;
@@ -32,6 +34,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     processLegislationCategoryValues(annotations, schema);
     processRatingClassRangeValues(annotations, schema);
     processEnumValues(annotations, schema);
+    processLoadProfileList(annotations, schema);
 
     return schema;
   }
@@ -172,6 +175,21 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
 
           } catch (Exception e) {
             throw new RuntimeException("Error processing ApiValuesFromEnum annotations", e);
+          }
+        });
+  }
+
+  private void processLoadProfileList(List<Annotation> annotations, Schema schema) {
+    getAnnotation(annotations, ApiValuesFromLoadProfileList.class)
+        .ifPresent(apiValueAnnotation -> {
+          try {
+            List<String> allowedValues = Arrays.stream(apiValueAnnotation.values())
+                .map(LoadProfile::getDisplayName)
+                .collect(Collectors.toList());
+
+            schema.setEnum(allowedValues);
+          } catch (Exception e) {
+            throw new RuntimeException("Error processing ApiValuesFromLoadProfileList annotations", e);
           }
         });
   }
