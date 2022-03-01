@@ -302,12 +302,16 @@ public class WaterHeatersController extends CategoryController {
 
   private ModelAndView getWaterSolarPackages(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterSolarPackages");
+    List<LoadProfile> packagesLoadProfiles = Arrays.asList(LoadProfile.M, LoadProfile.L, LoadProfile.XL,
+        LoadProfile.XXL);
 
     addCommonObjects(modelAndView, errorList,
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackages(null)),
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
     modelAndView.addObject("secondaryEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES.getSecondaryRatingRange()));
+    modelAndView.getModel().put("loadProfile", packagesLoadProfiles.stream()
+        .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
     breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Label");
