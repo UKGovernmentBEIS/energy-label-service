@@ -32,7 +32,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     processLegislationCategoryValues(annotations, schema);
     processRatingClassRangeValues(annotations, schema);
     processEnumValues(annotations, schema);
-    processExamples(schema);
+    processExamples(schema, type);
 
     return schema;
   }
@@ -177,16 +177,17 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         });
   }
 
-  private void processExamples(Schema schema) {
+  private void processExamples(Schema schema, AnnotatedType type) {
+    String propertyName = type.getPropertyName();
     if (schema.getType().equals("integer")) { // process integers
-      if (schema.getDescription().contains("pixels")) {
+      if (propertyName.equals("productPriceHeightPx")) {
         schema.setExample("100"); // set pixels to something the user can actually see (i.e. bigger than 1 pixel)
       } else {
         schema.setExample("1");
       }
     } else if (schema.getType().equals("number")) { // process numbers (i.e. those that allow decimal places
       schema.setExample("1.1");
-    } else if (schema.getDescription().contains("http://")) {
+    } else if (propertyName.equals("qrCodeUrl")) {
       schema.setExample("http://www.example-energy.co.uk"); // default example for QR code website fields
     } else if (schema.getType().equals("string")) {
       schema.setExample("string"); // process all other strings

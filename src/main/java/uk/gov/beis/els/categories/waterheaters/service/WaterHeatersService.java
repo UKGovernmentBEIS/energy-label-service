@@ -15,6 +15,7 @@ import uk.gov.beis.els.categories.waterheaters.model.EnergyConsumptionUnit;
 import uk.gov.beis.els.categories.waterheaters.model.HeatPumpWaterHeatersForm;
 import uk.gov.beis.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.gov.beis.els.categories.waterheaters.model.SolarWaterHeatersForm;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCalculatorForm;
 import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
@@ -35,10 +36,13 @@ public class WaterHeatersService {
   );
 
   private final TemplateParserService templateParserService;
+  private final WaterSolarPackagesCalculatorService waterSolarPackagesCalculatorService;
 
   @Autowired
-  public WaterHeatersService(TemplateParserService templateParserService) {
+  public WaterHeatersService(TemplateParserService templateParserService,
+                             WaterSolarPackagesCalculatorService waterSolarPackagesCalculatorService) {
     this.templateParserService = templateParserService;
+    this.waterSolarPackagesCalculatorService = waterSolarPackagesCalculatorService;
   }
 
   public ProcessedEnergyLabelDocument generateHtml(HeatPumpWaterHeatersForm form, LegislationCategory legislationCategory){
@@ -201,6 +205,21 @@ public class WaterHeatersService {
       .setText("litres", form.getVolume())
       .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_STORAGE_TANKS, form);
+  }
+
+  public WaterSolarPackagesForm toWaterSolarPackagesForm(
+      WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm) {
+    WaterSolarPackagesForm form = new WaterSolarPackagesForm();
+    form.setDeclaredLoadProfile(waterSolarPackagesCalculatorForm.getDeclaredLoadProfile());
+    form.setHeaterEfficiencyRating(waterSolarPackagesCalculatorService.getWaterHeatingEfficiencyClass(
+        waterSolarPackagesCalculatorForm).name());
+    form.setPackageEfficiencyRating(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(
+        waterSolarPackagesCalculatorForm).name());
+    form.setSolarCollector(true);
+    form.setStorageTank(waterSolarPackagesCalculatorForm.getStorageTank());
+    form.setSupplierName(waterSolarPackagesCalculatorForm.getSupplierName());
+    form.setModelName(waterSolarPackagesCalculatorForm.getModelName());
+    return form;
   }
 
   public ProcessedEnergyLabelDocument generateHtml(WaterSolarPackagesForm form, LegislationCategory legislationCategory){

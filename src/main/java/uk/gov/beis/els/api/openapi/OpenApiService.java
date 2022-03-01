@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import uk.gov.beis.els.api.common.ApiDocumentationController;
+import uk.gov.beis.els.api.common.TagNotFoundException;
 import uk.gov.beis.els.api.model.OperationWithSchema;
 import uk.gov.beis.els.api.model.SchemaPropertyExample;
 import uk.gov.beis.els.api.model.TagLink;
@@ -89,9 +90,15 @@ public class OpenApiService {
    * @return a map of the operation path and the individual operations for the given tag
    */
   public Map<String, OperationWithSchema> getOperationWithPathForTag(String tag) {
-    return operationMap.entrySet()
+    Map<String, OperationWithSchema> operationWithSchemaMap = operationMap.entrySet()
         .stream().filter(e -> e.getValue().getTag().equals(tag))
         .collect(StreamUtils.toLinkedHashMap(Map.Entry::getKey, Map.Entry::getValue));
+
+    if (operationWithSchemaMap.isEmpty()) {
+      throw new TagNotFoundException(String.format("Tag not found with name: %s", tag));
+    } else {
+      return operationWithSchemaMap;
+    }
   }
 
   @SuppressWarnings("rawtypes")
