@@ -15,6 +15,7 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 
 @StaticProductText("The label must be at least 120mm x 210mm when printed")
 @GroupSequenceProvider(ReversibleDuctlessAirConditionersFormSequenceProvider.class)
+@Schema(name = "Reversible ductless air conditioner energy label")
 public class ReversibleDuctlessAirConditionersForm extends MultipleClimateGroupForm {
 
   @FieldPrompt("Energy efficiency class for cooling")

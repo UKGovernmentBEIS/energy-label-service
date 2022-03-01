@@ -360,11 +360,7 @@ public class WaterHeatersController extends CategoryController {
   }
 
   private ModelAndView getWaterSolarPackagesCalculator(List<FieldError> errors) {
-    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterSolarPackagesCalculator")
-        .addObject("loadProfile", Arrays.stream(
-                LoadProfile.values())
-            .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
-        );
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterSolarPackagesCalculator");
     addCommonObjects(modelAndView, errors,
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesCalculator(null)),
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
