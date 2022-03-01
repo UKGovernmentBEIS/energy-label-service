@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
-import uk.gov.beis.els.model.Displayable;
 
 public class ApiValuesFromEnumValidator implements ConstraintValidator<ApiValuesFromEnum, String> {
 
@@ -16,7 +15,12 @@ public class ApiValuesFromEnumValidator implements ConstraintValidator<ApiValues
     try {
       method = constraintAnnotation.value().getMethod("getEnum", String.class);
     } catch (NoSuchMethodException e) {
-      throw new RuntimeException(String.format("Cannot access getEnum method in %s", constraintAnnotation.value()), e);
+      try {
+        // Fall back to using Enum::ValueOf
+        method = constraintAnnotation.value().getMethod("valueOf", String.class);
+      } catch (NoSuchMethodException ex) {
+        throw new RuntimeException(String.format("Cannot access getEnum or valueOf methods for %s", constraintAnnotation.value()), e);
+      }
     }
   }
 
@@ -26,12 +30,12 @@ public class ApiValuesFromEnumValidator implements ConstraintValidator<ApiValues
       return true; //avoid getting duplicate validation errors as this will get picked up by the existing @NotBlank annotation
     }
 
-    Displayable resolvedEnum;
+    Object resolvedEnum;
     try {
-      resolvedEnum = (Displayable) method.invoke(null, value);
+      resolvedEnum = method.invoke(null, value);
     } catch (IllegalAccessException e) {
-      throw new RuntimeException("Cannot invoke getEnum()", e);
-    } catch (InvocationTargetException e) { //We ignore the RuntimeException from getEnum() as that gets wrapped in an InvocationTargetException
+      throw new RuntimeException(String.format("Cannot invoke method %s from validator", method.toString()), e);
+    } catch (InvocationTargetException e) { // Errors thrown by invoked method should fail validation
       return false;
     }
 
