@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: '10'
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
       - name: Build frontend
         run: |
           npm install
@@ -29,6 +34,22 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew test bootJar
+
+      - name: Detached run test app
+        run: |
+          ./gradlew bootRun &
+
+      # Wait up to 30s for the app to start
+      - name: Wait for test app start
+        run:  |
+          export START_TIME=$(date +%s)
+          until curl http://localhost:8080/health > /dev/null || test "$(($(date +%s) - $START_TIME))" -gt 30; do sleep 5 | echo "Waiting..."; done
+        shell: bash
+
+      - name: Run OpenAPI tests
+        run: |
+          pip install schemathesis
+          schemathesis run --hypothesis-phases=explicit http://localhost:8080/v3/api-docs
 
       - name: Install cf client
         env:
