@@ -6,17 +6,17 @@ import io.swagger.v3.oas.models.media.Schema;
 @SuppressWarnings("rawtypes")
 public class OperationWithSchema {
 
-  private Operation operation;
+  private final Operation operation;
 
-  private Schema schema;
+  private final String tag;
 
-  private String example;
+  private final Schema schema;
 
-  public OperationWithSchema() {
-  }
+  private final String example;
 
-  public OperationWithSchema(Operation operation, Schema schema, String example) {
+  public OperationWithSchema(Operation operation, String tag, Schema schema, String example) {
     this.operation = operation;
+    this.tag = tag;
     this.schema = schema;
     this.example = example;
   }
@@ -25,23 +25,15 @@ public class OperationWithSchema {
     return operation;
   }
 
-  public void setOperation(Operation operation) {
-    this.operation = operation;
+  public String getTag() {
+    return tag;
   }
 
   public Schema getSchema() {
     return schema;
   }
 
-  public void setSchema(Schema schema) {
-    this.schema = schema;
-  }
-
   public String getExample() {
     return example;
-  }
-
-  public void setExample(String example) {
-    this.example = example;
   }
 }

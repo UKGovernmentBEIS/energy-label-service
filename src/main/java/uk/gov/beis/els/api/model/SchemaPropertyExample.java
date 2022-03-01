@@ -2,11 +2,8 @@ package uk.gov.beis.els.api.model;
 
 public class SchemaPropertyExample {
 
-  private String propertyName;
-  private String exampleInput;
-
-  public SchemaPropertyExample() {
-  }
+  private final String propertyName;
+  private final String exampleInput;
 
   public SchemaPropertyExample(String propertyName, String exampleInput) {
     this.propertyName = propertyName;
@@ -17,15 +14,7 @@ public class SchemaPropertyExample {
     return propertyName;
   }
 
-  public void setPropertyName(String propertyName) {
-    this.propertyName = propertyName;
-  }
-
   public String getExampleInput() {
     return exampleInput;
-  }
-
-  public void setExampleInput(String exampleInput) {
-    this.exampleInput = exampleInput;
   }
 }
