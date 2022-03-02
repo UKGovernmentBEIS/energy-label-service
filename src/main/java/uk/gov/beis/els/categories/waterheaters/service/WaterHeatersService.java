@@ -38,6 +38,8 @@ public class WaterHeatersService {
   private final TemplateParserService templateParserService;
   private final WaterSolarPackagesCalculatorService waterSolarPackagesCalculatorService;
 
+  public static final LoadProfile[] WATER_SOLAR_PACKAGES_LOAD_PROFILES = {LoadProfile.M, LoadProfile.L, LoadProfile.XL, LoadProfile.XXL};
+
   @Autowired
   public WaterHeatersService(TemplateParserService templateParserService,
                              WaterSolarPackagesCalculatorService waterSolarPackagesCalculatorService) {

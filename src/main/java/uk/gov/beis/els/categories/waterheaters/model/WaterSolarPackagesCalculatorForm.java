@@ -5,8 +5,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.api.common.ApiValuesFromLoadProfileList;
-import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
+import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
 @Schema(name = "Package of a water heater and solar device energy label calculator")
@@ -20,7 +20,10 @@ public class WaterSolarPackagesCalculatorForm extends StandardTemplateForm50Char
 
   @FieldPrompt("Declared load profile")
   @NotBlank(message = "Select a declared load profile")
-  @ApiValuesFromLoadProfileList(values = {LoadProfile.M, LoadProfile.L, LoadProfile.XL, LoadProfile.XXL})
+  @ApiValuesFromLoadProfileList(
+      serviceClass = WaterHeatersService.class,
+      loadProfilesFieldName = "WATER_SOLAR_PACKAGES_LOAD_PROFILES"
+  )
   private String declaredLoadProfile;
 
   @FieldPrompt("Is a hot water storage tank included in this package?")
