@@ -42,7 +42,7 @@
         No authentication is required for any endpoints.
       </div>
 
-      <#global tagNameSanitised=tagName?replace(" ", "-")>
+      <#assign tagNameSanitised=tagName?replace(" ", "-")>
       <@govukAccordion.accordion accordionId="elg-api-operations-${tagNameSanitised}">
           <#list operationListWithPath as path, operationWithSchema>
                 <@govukAccordion.accordionSection sectionHeading="${operationWithSchema.getOperation().getSummary()}" sectionHeadingSize="h3">
