@@ -80,8 +80,14 @@
   "error": "Bad request",
   "message": "There were validation errors",
   "validationErrors": [
-    "Field 'modelName' has error: Enter a supplier model identification code",
-    "Field 'supplierName' has error: Enter a supplier name or trade mark"
+    {
+      "propertyName": "modelName",
+      "errorMessage": "Enter a supplier model identification code"
+    },
+    {
+      "propertyName": "supplierName",
+      "errorMessage": "Enter a supplier name or trade mark"
+    }
   ],
   "path": "/api/v1/path/to/endpoint"
 }</code>
