@@ -1,5 +1,8 @@
 package uk.gov.beis.els.api.common;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,8 +53,14 @@ public class ApiDocumentationController {
   private void getCommonModelAndViewAttributes(ModelAndView modelAndView, HttpServletRequest request) {
     modelAndView
         .addObject("tagLinks", openApiService.getTagLinks())
-        .addObject("currentUrl", request.getRequestURI())
         .addObject("apiSpecUrl", openApiService.getApiSpecUrl(request));
+
+    // decode current URL to replace %20 with actual spaces to match the link action URL (for sub nav styling)
+    try {
+      modelAndView.addObject("currentUrl", URLDecoder.decode(request.getRequestURI(), StandardCharsets.UTF_8.name()));
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException(String.format("Invalid URL found for request: %s", request.getRequestURI()));
+    }
   }
 
 

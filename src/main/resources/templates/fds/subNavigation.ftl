@@ -24,8 +24,7 @@
 </#macro>
 
 <#macro subNavigationSectionItem linkAction linkName currentItemHref>
-  <#local linkActionSanitised=linkAction?replace(" ", "%20")>
-  <#if currentItemHref?starts_with(linkActionSanitised)>
+  <#if currentItemHref?starts_with(linkAction)>
     <#local currentClass="fds-subnav__section-item--current">
     <#local currentAriaAttr='aria-current="true"'>
   <#else>
@@ -35,7 +34,7 @@
 
   <li class="fds-subnav__section-item ${currentClass}" ${currentAriaAttr}>
     <a class="fds-subnav__link govuk-link govuk-link--no-visited-state" href="${linkAction}">${linkName}</a>
-    <#if currentItemHref?starts_with(linkActionSanitised) && currentItemHref!="/">
+    <#if currentItemHref?starts_with(linkAction) && currentItemHref!="/">
       <#nested>
     </#if>
   </li>
