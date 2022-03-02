@@ -184,7 +184,10 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     getAnnotation(annotations, ApiValuesFromLoadProfileList.class)
         .ifPresent(apiValueAnnotation -> {
           try {
-            List<String> allowedValues = Arrays.stream(apiValueAnnotation.values())
+            Field field = apiValueAnnotation.serviceClass().getField(apiValueAnnotation.loadProfilesFieldName());
+            List<LoadProfile> loadProfiles = (List<LoadProfile>) field.get(null);
+            List<String> allowedValues = loadProfiles
+                .stream()
                 .map(LoadProfile::getDisplayName)
                 .collect(Collectors.toList());
 
