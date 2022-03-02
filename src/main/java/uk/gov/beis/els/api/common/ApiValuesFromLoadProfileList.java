@@ -19,7 +19,6 @@ public @interface ApiValuesFromLoadProfileList {
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 
-//  LoadProfile[] values();
   Class<?> serviceClass();
 
   String loadProfilesFieldName();
