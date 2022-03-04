@@ -31,7 +31,7 @@ public class WaterSolarPackagesCategory implements Category {
 
   @Override
   public String getNoSelectionErrorMessage() {
-    return "Select if you know the values to calculate or if need help of the calculator";
+    return "Specify if you need help calculating the energy rating.";
   }
 
   @Override
