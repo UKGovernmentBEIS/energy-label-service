@@ -119,7 +119,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSupplementaryBoilerContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (form.isHasSupplementaryBoiler()) {
+    if (!form.isHasSupplementaryBoiler()) {
       return 0;
     }
 
@@ -156,7 +156,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSolarContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (form.isHasSolarCollector()) {
+    if (!form.isHasSolarCollector()) {
       return 0;
     }
 

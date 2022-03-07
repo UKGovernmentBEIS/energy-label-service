@@ -6,15 +6,12 @@ public class BoilerPackagesCalculatorForm extends SpaceHeaterPackagesCalculatorF
 
   private final PreferentialHeaterTypes preferentialHeaterType = PreferentialHeaterTypes.BOILER;
 
-    //if preferential heater type == boiler
   @FieldPrompt("Supplementary heat pump installed?")
   private boolean hasSupplementaryHeatPump;
 
-    //if preferential heater type == boiler && hasSupplementaryHeatPump == true
   @FieldPrompt("Rated heat output (Prated) of the supplementary heat pump (in kW")
   private String supplementaryHeatPumpHeatOutput;
 
-  //if preferential heater type == boiler && hasSupplementaryHeatPump == true
   @FieldPrompt("Seasonal space heating energy efficiency of supplementary heat pump (in %)")
   private String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage;
 
