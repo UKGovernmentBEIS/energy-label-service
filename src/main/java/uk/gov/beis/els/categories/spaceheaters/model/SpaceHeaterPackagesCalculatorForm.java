@@ -51,6 +51,9 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @FieldPrompt("Tank label class")
   private TankLabelClass storageTankRating;
 
+  @FieldPrompt("Does this package include a supplementary space heater?")
+  private boolean spaceHeater;
+
   public abstract PreferentialHeaterTypes getPreferentialHeaterType();
 
   public String getPreferentialHeaterHeatOutput() {
@@ -182,5 +185,13 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
 
   public void setStorageTankRating(TankLabelClass storageTankRating) {
     this.storageTankRating = storageTankRating;
+  }
+
+  public boolean isSpaceHeater() {
+    return spaceHeater;
+  }
+
+  public void setSpaceHeater(boolean spaceHeater) {
+    this.spaceHeater = spaceHeater;
   }
 }

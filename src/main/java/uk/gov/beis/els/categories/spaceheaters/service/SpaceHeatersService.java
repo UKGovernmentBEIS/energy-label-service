@@ -12,6 +12,7 @@ import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesFo
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
@@ -32,10 +33,13 @@ public class SpaceHeatersService {
   );
 
   private final TemplateParserService templateParserService;
+  private final SpaceHeaterPackagesCalculatorService spaceHeaterPackagesCalculatorService;
 
   @Autowired
-  public SpaceHeatersService(TemplateParserService templateParserService) {
+  public SpaceHeatersService(TemplateParserService templateParserService,
+                             SpaceHeaterPackagesCalculatorService spaceHeaterPackagesCalculatorService) {
     this.templateParserService = templateParserService;
+    this.spaceHeaterPackagesCalculatorService = spaceHeaterPackagesCalculatorService;
   }
 
   public ProcessedEnergyLabelDocument generateHtml(BoilerSpaceHeatersForm form, LegislationCategory legislationCategory) {
@@ -221,4 +225,18 @@ public class SpaceHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION, form);
   }
 
+  public SpaceHeaterPackagesForm toSpaceHeaterPackagesForm(
+      SpaceHeaterPackagesCalculatorForm calculatorForm) {
+    SpaceHeaterPackagesForm form = new SpaceHeaterPackagesForm();
+    form.setHeaterEfficiencyRating(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(calculatorForm).name());
+    form.setSolarCollector(calculatorForm.isHasSolarCollector());
+    form.setHotWaterStorageTank(calculatorForm.isHasStorageTank());
+    form.setTemperatureControl(calculatorForm.isHasTemperatureControl());
+    form.setSpaceHeater(calculatorForm.isSpaceHeater());
+    form.setPackageEfficiencyRating(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(calculatorForm).name());
+    form.setSupplierName(calculatorForm.getSupplierName());
+    form.setModelName(calculatorForm.getModelName());
+
+    return form;
+  }
 }

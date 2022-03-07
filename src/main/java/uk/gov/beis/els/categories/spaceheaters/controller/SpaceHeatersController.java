@@ -35,6 +35,7 @@ import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersF
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.PreferentialHeaterTypes;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterCategory;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCategory;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
@@ -293,17 +294,55 @@ public class SpaceHeatersController extends CategoryController {
 
   @GetMapping("/packages-of-water-heater-and-solar-device/boiler/calculator")
   public ModelAndView renderSpaceHeaterPackagesBoilerCalculator(@ModelAttribute("form") BoilerPackagesCalculatorForm form) {
-    return getSpaceHeatersPackagesCalculator(Collections.emptyList());
+    return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.BOILER);
+  }
+
+  @PostMapping("/packages-of-water-heater-and-solar-device/boiler/calculator")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesBoilerCalculatorSubmit(@Valid @ModelAttribute("form") BoilerPackagesCalculatorForm form,
+                                                                BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toSpaceHeaterPackagesForm(form))
+      );
+    }
   }
 
   @GetMapping("/packages-of-water-heater-and-solar-device/heat-pump/calculator")
   public ModelAndView renderSpaceHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpPackagesCalculatorForm form) {
-    return getSpaceHeatersPackagesCalculator(Collections.emptyList());
+    return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
+  }
+
+  @PostMapping("/packages-of-water-heater-and-solar-device/heat-pump/calculator")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesHeatPumpCalculatorSubmit(@Valid @ModelAttribute("form") HeatPumpPackagesCalculatorForm form,
+                                                                  BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+    }
   }
 
   @GetMapping("/packages-of-water-heater-and-solar-device/cogeneration-heater/calculator")
   public ModelAndView renderSpaceHeaterPackagesCogenerationCalculator(@ModelAttribute("form") CogenerationPackagesCalculatorForm form) {
-    return getSpaceHeatersPackagesCalculator(Collections.emptyList());
+    return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.COGENERATION_HEATER);
+  }
+
+  @PostMapping("/packages-of-water-heater-and-solar-device/cogeneration-heater/calculator")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesCogenerationCalculatorSubmit(@Valid @ModelAttribute("form") CogenerationPackagesCalculatorForm form,
+                                                                      BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(),
+          PreferentialHeaterTypes.COGENERATION_HEATER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+    }
   }
 
   @GetMapping("/package-combination-heater")
@@ -445,10 +484,29 @@ public class SpaceHeatersController extends CategoryController {
     return modelAndView;
   }
 
-  private ModelAndView getSpaceHeatersPackagesCalculator(List<FieldError> errors) {
-    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesCalculator");
-    addCommonObjects(modelAndView, errors,
-        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesBoilerCalculator(null)));
+  private ModelAndView getSpaceHeatersPackagesCalculator(List<FieldError> errors, PreferentialHeaterTypes preferentialHeaterType) {
+    ModelAndView modelAndView;
+
+    switch (preferentialHeaterType) {
+      case BOILER:
+        modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesBoilerCalculator");
+        addCommonObjects(modelAndView, errors,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesBoilerCalculator(null)));
+        break;
+      case HEAT_PUMP:
+        modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesHeatPumpCalculator");
+        addCommonObjects(modelAndView, errors,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesHeatPumpCalculator(null)));
+        break;
+      case COGENERATION_HEATER:
+        modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesCogenerationCalculator");
+        addCommonObjects(modelAndView, errors,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesCogenerationCalculator(null)));
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + preferentialHeaterType);
+    }
+
     modelAndView.addObject("temperatureControlClass",
         Arrays.stream(TemperatureControlClass.values())
             .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name)));
