@@ -308,6 +308,8 @@ public class WaterHeatersController extends CategoryController {
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
     modelAndView.addObject("secondaryEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES.getSecondaryRatingRange()));
+    modelAndView.addObject("loadProfile", WaterHeatersService.WATER_SOLAR_PACKAGES_LOAD_PROFILES.stream()
+        .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
     breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Label");
@@ -356,14 +358,12 @@ public class WaterHeatersController extends CategoryController {
   }
 
   private ModelAndView getWaterSolarPackagesCalculator(List<FieldError> errors) {
-    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterSolarPackagesCalculator")
-        .addObject("loadProfile", Arrays.stream(
-                LoadProfile.values())
-            .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
-        );
+    ModelAndView modelAndView = new ModelAndView("categories/water-heaters/waterSolarPackagesCalculator");
     addCommonObjects(modelAndView, errors,
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesCalculator(null)),
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
+    modelAndView.addObject("loadProfile", WaterHeatersService.WATER_SOLAR_PACKAGES_LOAD_PROFILES.stream()
+        .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
     breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Calculator");

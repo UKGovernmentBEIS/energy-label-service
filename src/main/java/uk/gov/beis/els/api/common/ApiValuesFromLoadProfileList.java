@@ -8,16 +8,19 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * Set which values can be used in an API call from an enum
+ * Set which LoadProfile values can be used in an API call from a subset list of LoadProfile
  */
-@Constraint(validatedBy = ApiValuesFromEnumValidator.class)
+@Constraint(validatedBy = ApiValuesFromLoadProfileListValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiValuesFromEnum {
+public @interface ApiValuesFromLoadProfileList {
 
-  String message() default "{uk.gov.beis.els.api.common.ApiValuesFromEnum.message}";
+  String message() default "{uk.gov.beis.els.api.common.ApiValuesFromLoadProfileList.message}";
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 
-  Class<?> value();
+  Class<?> serviceClass();
+
+  String loadProfilesFieldName();
 }
+
