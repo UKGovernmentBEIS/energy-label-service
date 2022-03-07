@@ -3,40 +3,13 @@ package uk.gov.beis.els.categories.spaceheaters.model;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-public class SpaceHeaterPackagesCalculatorForm extends StandardTemplateForm50Char {
+public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplateForm50Char {
 
-  //TODO check if I'll need this
-  private PreferentialHeaterTypes preferentialHeaterType;
-
-  @FieldPrompt("Rated heat output (Prated) of the preferential heater type (in kW)") //TODO dynamically set this in the template
+  @FieldPrompt("Rated heat output (Prated) of the preferential heater type (in kW)")
   private String preferentialHeaterHeatOutput;
 
-  @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater type (in %") //TODO do this dynamically
+  @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater type (in %")
   private String preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
-
-  //if preferential heater type == heatPump
-  @FieldPrompt("Seasonal space heating energy efficiency of heat pump in colder climate (in %)")
-  private String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage;
-
-  //if preferential heater type == heatPump
-  @FieldPrompt("Seasonal space heating energy efficiency of heat pump in warmer climate (in %)")
-  private String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage;
-
-  //if preferential heater type == heatPump
-  @FieldPrompt("Is this a low temperature heat pump?")
-  private boolean isLowTemperatureHeatPump;
-
-  //if preferential heater type == boiler
-  @FieldPrompt("Supplementary heat pump installed?")
-  private boolean hasSupplementaryHeatPump;
-
-  //if preferential heater type == boiler && hasSupplementaryHeatPump == true
-  @FieldPrompt("Rated heat output (Prated) of the supplementary heat pump (in kW")
-  private String supplementaryHeatPumpHeatOutput;
-
-  //if preferential heater type == boiler && hasSupplementaryHeatPump == true
-  @FieldPrompt("Seasonal space heating energy efficiency of supplementary heat pump (in %)")
-  private String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage;
 
   @FieldPrompt("Temperature control installed?")
   private boolean hasTemperatureControl;
@@ -78,14 +51,7 @@ public class SpaceHeaterPackagesCalculatorForm extends StandardTemplateForm50Cha
   @FieldPrompt("Tank label class")
   private TankLabelClass storageTankRating;
 
-  public PreferentialHeaterTypes getPreferentialHeaterType() {
-    return preferentialHeaterType;
-  }
-
-  public void setPreferentialHeaterType(
-      PreferentialHeaterTypes preferentialHeaterType) {
-    this.preferentialHeaterType = preferentialHeaterType;
-  }
+  public abstract PreferentialHeaterTypes getPreferentialHeaterType();
 
   public String getPreferentialHeaterHeatOutput() {
     return preferentialHeaterHeatOutput;
@@ -104,56 +70,29 @@ public class SpaceHeaterPackagesCalculatorForm extends StandardTemplateForm50Cha
     this.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage = preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
   }
 
-  public String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage() {
-    return preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage;
-  }
+  public abstract String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage();
 
-  public void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage(
-      String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage) {
-    this.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage = preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage;
-  }
+  public abstract void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage(String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage);
 
-  public String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage() {
-    return preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage;
-  }
+  public abstract String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage();
 
-  public void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage(
-      String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage) {
-    this.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage = preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage;
-  }
+  public abstract void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage(String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage);
 
-  public boolean isLowTemperatureHeatPump() {
-    return isLowTemperatureHeatPump;
-  }
+  public abstract boolean isLowTemperatureHeatPump();
 
-  public void setLowTemperatureHeatPump(boolean lowTemperatureHeatPump) {
-    isLowTemperatureHeatPump = lowTemperatureHeatPump;
-  }
+  public abstract void setLowTemperatureHeatPump(boolean isLowTemperatureHeatPump);
 
-  public boolean isHasSupplementaryHeatPump() {
-    return hasSupplementaryHeatPump;
-  }
+  public abstract boolean isHasSupplementaryHeatPump();
 
-  public void setHasSupplementaryHeatPump(boolean hasSupplementaryHeatPump) {
-    this.hasSupplementaryHeatPump = hasSupplementaryHeatPump;
-  }
+  public abstract void setHasSupplementaryHeatPump(boolean hasSupplementaryHeatPump);
 
-  public String getSupplementaryHeatPumpHeatOutput() {
-    return supplementaryHeatPumpHeatOutput;
-  }
+  public abstract String getSupplementaryHeatPumpHeatOutput();
 
-  public void setSupplementaryHeatPumpHeatOutput(String supplementaryHeatPumpHeatOutput) {
-    this.supplementaryHeatPumpHeatOutput = supplementaryHeatPumpHeatOutput;
-  }
+  public abstract void setSupplementaryHeatPumpHeatOutput(String supplementaryHeatPumpHeatOutput);
 
-  public String getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage() {
-    return supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage;
-  }
+  public abstract String getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage();
 
-  public void setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage(
-      String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage) {
-    this.supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage = supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage;
-  }
+  public abstract void setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage(String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage);
 
   public boolean isHasTemperatureControl() {
     return hasTemperatureControl;

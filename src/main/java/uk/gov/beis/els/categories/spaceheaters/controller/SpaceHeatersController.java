@@ -26,6 +26,7 @@ import uk.gov.beis.els.categories.common.StandardCategoryForm;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
@@ -33,12 +34,11 @@ import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersF
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterCategory;
-import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCategory;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
+import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
+import uk.gov.beis.els.categories.spaceheaters.model.TemperatureControlClass;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
-import uk.gov.beis.els.categories.waterheaters.controller.WaterHeatersController;
-import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.controller.CategoryController;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -269,7 +269,7 @@ public class SpaceHeatersController extends CategoryController {
   }
 
   @GetMapping("/packages-of-water-heater-and-solar-device/calculator")
-  public ModelAndView renderSpaceHeaterPackagesCalculator(@ModelAttribute("form") SpaceHeaterPackagesCalculatorForm form) {
+  public ModelAndView renderSpaceHeaterPackagesCalculator(@ModelAttribute("form") BoilerPackagesCalculatorForm form) {
     return getSpaceHeatersPackagesCalculator(Collections.emptyList());
   }
 
@@ -345,7 +345,9 @@ public class SpaceHeatersController extends CategoryController {
   private ModelAndView getSpaceHeaterPackages(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackages");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackages(null)));
-    breadcrumbService.pushLastBreadcrumb(modelAndView, "Package space heaters");
+    breadcrumbService.pushBreadcrumb(modelAndView, "Package space heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label");
     return modelAndView;
   }
 
@@ -387,19 +389,22 @@ public class SpaceHeatersController extends CategoryController {
     ControllerUtils.addErrorSummary(modelAndView, errors);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT,
         ReverseRouter.route(on(SpaceHeatersController.class).renderCategories(null)));
-    breadcrumbService.pushLastBreadcrumb(modelAndView, "Packages of space heater, temperature control and solar device");
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Package space heaters");
     return modelAndView;
   }
 
   private ModelAndView getSpaceHeatersPackagesCalculator(List<FieldError> errors) {
     ModelAndView modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesCalculator");
     addCommonObjects(modelAndView, errors,
-        ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesCalculator(null)),
-        WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
-    modelAndView.getModel().put("loadProfile", packagesLoadProfiles.stream()
-        .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
-    breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
-        ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesCalculator(null)));
+    modelAndView.addObject("temperatureControlClass",
+        Arrays.stream(TemperatureControlClass.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name)));
+    modelAndView.addObject("storageTankRating",
+        Arrays.stream(TankLabelClass.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, TankLabelClass::getDisplayName)));
+    breadcrumbService.pushBreadcrumb(modelAndView, "Package space heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesSortQuestion(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Calculator");
     return modelAndView;
   }
