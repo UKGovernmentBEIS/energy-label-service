@@ -1,6 +1,6 @@
 package uk.gov.beis.els.api.common;
 
-import java.util.Arrays;
+import java.lang.reflect.Field;
 import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,7 +13,12 @@ public class ApiValuesFromLoadProfileListValidator implements ConstraintValidato
 
   @Override
   public void initialize(ApiValuesFromLoadProfileList constraintAnnotation) {
-    validLoadProfiles = Arrays.asList(constraintAnnotation.values());
+    try {
+      Field field = constraintAnnotation.serviceClass().getField(constraintAnnotation.loadProfilesFieldName());
+      validLoadProfiles = (List<LoadProfile>) field.get(null);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new RuntimeException("Cannot find load profiles field", e);
+    }
   }
 
   @Override

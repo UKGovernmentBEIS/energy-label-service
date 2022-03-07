@@ -14,10 +14,10 @@ public class ApiErrorResponse {
   public final int status;
   public final String error;
   public final String message;
-  public final List<String> validationErrors;
+  public final List<ApiFieldError> validationErrors;
   public final String path;
 
-  public ApiErrorResponse(Instant timestamp, int status, String error, String message, List<String> validationErrors, String path) {
+  public ApiErrorResponse(Instant timestamp, int status, String error, String message, List<ApiFieldError> validationErrors, String path) {
     this.timestamp = timestamp;
     this.status = status;
     this.error = error;

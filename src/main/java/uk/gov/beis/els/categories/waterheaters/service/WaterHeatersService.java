@@ -1,5 +1,7 @@
 package uk.gov.beis.els.categories.waterheaters.service;
 
+import java.util.Arrays;
+import java.util.List;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class WaterHeatersService {
 
   private final TemplateParserService templateParserService;
   private final WaterSolarPackagesCalculatorService waterSolarPackagesCalculatorService;
+
+  public static final List<LoadProfile> WATER_SOLAR_PACKAGES_LOAD_PROFILES = Arrays.asList(LoadProfile.M, LoadProfile.L,
+      LoadProfile.XL, LoadProfile.XXL);
 
   @Autowired
   public WaterHeatersService(TemplateParserService templateParserService,

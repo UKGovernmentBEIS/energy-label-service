@@ -6,7 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import uk.gov.beis.els.categories.common.LoadProfile;
 
 /**
  * Set which LoadProfile values can be used in an API call from a subset list of LoadProfile
@@ -20,5 +19,8 @@ public @interface ApiValuesFromLoadProfileList {
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 
-  LoadProfile[] values();
+  Class<?> serviceClass();
+
+  String loadProfilesFieldName();
 }
+

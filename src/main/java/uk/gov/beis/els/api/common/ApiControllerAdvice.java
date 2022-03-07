@@ -17,9 +17,9 @@ public class ApiControllerAdvice {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseBody
   public ResponseEntity<ApiErrorResponse> handleApiValidationException(MethodArgumentNotValidException ex, HttpServletRequest request) {
-    List<String> validationErrors = ex.getBindingResult().getFieldErrors()
+    List<ApiFieldError> apiFieldErrorList = ex.getBindingResult().getFieldErrors()
         .stream()
-        .map(e -> String.format("Field '%s' has error: %s", e.getField(), e.getDefaultMessage()))
+        .map(e -> new ApiFieldError(e.getField(), e.getDefaultMessage()))
         .collect(Collectors.toList());
 
     ApiErrorResponse response = new ApiErrorResponse(
@@ -27,7 +27,7 @@ public class ApiControllerAdvice {
         HttpStatus.BAD_REQUEST.value(),
         "Bad request",
         "There were validation errors",
-        validationErrors,
+        apiFieldErrorList,
         request.getRequestURI()
     );
 

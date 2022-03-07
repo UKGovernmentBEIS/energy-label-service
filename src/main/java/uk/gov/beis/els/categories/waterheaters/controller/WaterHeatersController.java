@@ -55,8 +55,6 @@ public class WaterHeatersController extends CategoryController {
   private final InternetLabelService internetLabelService;
   private final DocumentRendererService documentRendererService;
   private final Category waterHeaterPackageCategory = WaterSolarPackagesCategory.GET;
-  private final List<LoadProfile> packagesLoadProfiles = Arrays.asList(LoadProfile.M, LoadProfile.L, LoadProfile.XL,
-      LoadProfile.XXL);
 
   @Autowired
   public WaterHeatersController(WaterHeatersService waterHeatersService,
@@ -310,7 +308,7 @@ public class WaterHeatersController extends CategoryController {
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
     modelAndView.addObject("secondaryEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES.getSecondaryRatingRange()));
-    modelAndView.getModel().put("loadProfile", packagesLoadProfiles.stream()
+    modelAndView.addObject("loadProfile", WaterHeatersService.WATER_SOLAR_PACKAGES_LOAD_PROFILES.stream()
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
     breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
@@ -364,7 +362,7 @@ public class WaterHeatersController extends CategoryController {
     addCommonObjects(modelAndView, errors,
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesCalculator(null)),
         WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES);
-    modelAndView.getModel().put("loadProfile", packagesLoadProfiles.stream()
+    modelAndView.addObject("loadProfile", WaterHeatersService.WATER_SOLAR_PACKAGES_LOAD_PROFILES.stream()
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
     breadcrumbService.pushBreadcrumb(modelAndView, "Packages of water heater and solar device",
         ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null)));
