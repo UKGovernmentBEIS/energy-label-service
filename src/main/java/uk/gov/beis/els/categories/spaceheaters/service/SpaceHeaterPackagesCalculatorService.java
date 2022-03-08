@@ -257,13 +257,13 @@ public class SpaceHeaterPackagesCalculatorService {
         getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerDecimal(form));
   }
 
-  public float packageSpaceHeatingEfficiencyColderDecimal(SpaceHeaterPackagesCalculatorForm form) {
+  public float getPackageSpaceHeatingEfficiencyColderDecimal(SpaceHeaterPackagesCalculatorForm form) {
     return getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) -
         getPreferentialHeatPumpColderDifferenceDecimal(form);
   }
 
   public float getPackageSpaceHeatingEfficiencyWarmerDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) -
+    return getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) +
         getPreferentialHeatPumpWarmerDifferenceDecimal(form);
   }
 
