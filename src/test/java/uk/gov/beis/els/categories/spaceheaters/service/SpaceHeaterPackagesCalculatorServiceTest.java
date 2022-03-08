@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
-import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
 import uk.gov.beis.els.categories.spaceheaters.model.TemperatureControlClass;
 import uk.gov.beis.els.model.RatingClass;
@@ -88,33 +87,5 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.4934595F);
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)).isEqualTo(0.089999974F);
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)).isEqualTo(0.9499999F);
-  }
-
-  private BoilerPackagesCalculatorForm getBoilerForm() {
-    BoilerPackagesCalculatorForm form = new BoilerPackagesCalculatorForm();
-    form.setHasSupplementaryHeatPump(true);
-    form.setSupplementaryHeatPumpHeatOutput("42");
-    form.setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage("42");
-
-    return form;
-  }
-
-  private void populateBaseForm(SpaceHeaterPackagesCalculatorForm form) {
-    form.setSupplierName("FR Industries");
-    form.setModelName("FR-042");
-    form.setPreferentialHeaterHeatOutput("42");
-    form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("42");
-    form.setHasTemperatureControl(true);
-    form.setTemperatureControlClass(TemperatureControlClass.I);
-    form.setHasSupplementaryBoiler(true);
-    form.setSupplementaryBoilerHeatOutput("42");
-    form.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("42");
-    form.setHasSolarCollector(true);
-    form.setSolarCollectorSize("42");
-    form.setSolarCollectorEfficiencyPercentage("42");
-    form.setHasStorageTank(true);
-    form.setStorageTankVolume("42");
-    form.setStorageTankRating(TankLabelClass.A);
-    form.setSpaceHeater(true);
   }
 }
