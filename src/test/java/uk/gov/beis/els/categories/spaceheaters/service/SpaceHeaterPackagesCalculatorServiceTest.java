@@ -88,4 +88,31 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)).isEqualTo(0.089999974F);
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)).isEqualTo(0.9499999F);
   }
+
+  @Test
+  public void heatPumpPackage_givenValuesNoOptionals_assertValues() {
+    HeatPumpPackagesCalculatorForm form = new HeatPumpPackagesCalculatorForm();
+    form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage("75");
+    form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage("95");
+    form.setLowTemperatureHeatPump(true);
+    form.setSupplierName("FR Industries");
+    form.setModelName("FR-042");
+    form.setPreferentialHeaterHeatOutput("42");
+    form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("42");
+    form.setHasTemperatureControl(false);
+    form.setHasSupplementaryBoiler(false);
+    form.setHasSolarCollector(false);
+    form.setHasStorageTank(false);
+    form.setSpaceHeater(false);
+
+    assertThat(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(form)).isEqualTo(RatingClass.D);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)).isEqualTo(RatingClass.D);
+    assertThat(spaceHeaterPackagesCalculatorService.getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.42F);
+    assertThat(spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form)).isEqualTo(0);
+    assertThat(spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form)).isEqualTo(0);
+    assertThat(spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form)).isEqualTo(0);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.42F);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)).isEqualTo(0.089999974F);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)).isEqualTo(0.9499999F);
+  }
 }
