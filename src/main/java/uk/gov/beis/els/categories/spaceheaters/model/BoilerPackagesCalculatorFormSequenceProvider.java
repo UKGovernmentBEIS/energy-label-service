@@ -11,6 +11,7 @@ public class BoilerPackagesCalculatorFormSequenceProvider implements DefaultGrou
   public List<Class<?>> getValidationGroups(BoilerPackagesCalculatorForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
+    //need to repeat same checks as in SpaceHeaterPackagesCalculatorFormSequenceProvider because the sequence provider gets override by this
     if (form != null && BooleanUtils.isTrue(form.isHasTemperatureControl())) {
       sequence.add(TemperatureControlGroup.class);
     }
