@@ -11,6 +11,22 @@ public class BoilerPackagesCalculatorFormSequenceProvider implements DefaultGrou
   public List<Class<?>> getValidationGroups(BoilerPackagesCalculatorForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
+    if (form != null && BooleanUtils.isTrue(form.isHasTemperatureControl())) {
+      sequence.add(TemperatureControlGroup.class);
+    }
+
+    if (form != null && BooleanUtils.isTrue(form.isHasSupplementaryBoiler())) {
+      sequence.add(SupplementaryBoilerGroup.class);
+    }
+
+    if (form != null && BooleanUtils.isTrue(form.isHasSolarCollector())) {
+      sequence.add(SolarCollectorGroup.class);
+    }
+
+    if (form != null && BooleanUtils.isTrue(form.isHasStorageTank())) {
+      sequence.add(StorageTankGroup.class);
+    }
+
     if (form != null && BooleanUtils.isTrue(form.isHasSupplementaryHeatPump())) {
       sequence.add(SupplementaryHeatPumpGroup.class);
     }
