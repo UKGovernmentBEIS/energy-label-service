@@ -292,12 +292,12 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
-  @GetMapping("/packages-of-water-heater-and-solar-device/boiler/calculator")
+  @GetMapping("/package-space-heater/boiler/calculator")
   public ModelAndView renderSpaceHeaterPackagesBoilerCalculator(@ModelAttribute("form") BoilerPackagesCalculatorForm form) {
     return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.BOILER);
   }
 
-  @PostMapping("/packages-of-water-heater-and-solar-device/boiler/calculator")
+  @PostMapping("/package-space-heater/boiler/calculator")
   @ResponseBody
   public Object handleSpaceHeaterPackagesBoilerCalculatorSubmit(@Valid @ModelAttribute("form") BoilerPackagesCalculatorForm form,
                                                                 BindingResult bindingResult) {
@@ -310,12 +310,12 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
-  @GetMapping("/packages-of-water-heater-and-solar-device/heat-pump/calculator")
+  @GetMapping("/package-space-heater/heat-pump/calculator")
   public ModelAndView renderSpaceHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpPackagesCalculatorForm form) {
     return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
   }
 
-  @PostMapping("/packages-of-water-heater-and-solar-device/heat-pump/calculator")
+  @PostMapping("/package-space-heater/heat-pump/calculator")
   @ResponseBody
   public Object handleSpaceHeaterPackagesHeatPumpCalculatorSubmit(@Valid @ModelAttribute("form") HeatPumpPackagesCalculatorForm form,
                                                                   BindingResult bindingResult) {
@@ -327,12 +327,12 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
-  @GetMapping("/packages-of-water-heater-and-solar-device/cogeneration-heater/calculator")
+  @GetMapping("/package-space-heater/cogeneration-heater/calculator")
   public ModelAndView renderSpaceHeaterPackagesCogenerationCalculator(@ModelAttribute("form") CogenerationPackagesCalculatorForm form) {
     return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.COGENERATION_HEATER);
   }
 
-  @PostMapping("/packages-of-water-heater-and-solar-device/cogeneration-heater/calculator")
+  @PostMapping("/package-space-heater/cogeneration-heater/calculator")
   @ResponseBody
   public Object handleSpaceHeaterPackagesCogenerationCalculatorSubmit(@Valid @ModelAttribute("form") CogenerationPackagesCalculatorForm form,
                                                                       BindingResult bindingResult) {
