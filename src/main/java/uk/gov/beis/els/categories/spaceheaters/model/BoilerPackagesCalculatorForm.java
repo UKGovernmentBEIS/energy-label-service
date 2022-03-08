@@ -14,7 +14,7 @@ public class BoilerPackagesCalculatorForm extends SpaceHeaterPackagesCalculatorF
   @NotNull(message = "Specify if the package includes a supplementary heat pump")
   private boolean hasSupplementaryHeatPump;
 
-  @FieldPrompt("Rated heat output (Prated) of the supplementary heat pump (in kW")
+  @FieldPrompt("Rated heat output (Prated) of the supplementary heat pump (in kW)")
   @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the supplementary heat pump",
             groups = SupplementaryHeatPumpGroup.class)
   private String supplementaryHeatPumpHeatOutput;

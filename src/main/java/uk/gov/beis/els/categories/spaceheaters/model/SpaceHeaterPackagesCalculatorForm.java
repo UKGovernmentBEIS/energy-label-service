@@ -13,7 +13,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the preferential heater")
   private String preferentialHeaterHeatOutput;
 
-  @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater (in %")
+  @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater (in %)")
   @Digits(integer = 3, fraction = 0, message = "Enter the space heating energy efficiency of the preferential heater")
   private String preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
 
