@@ -247,13 +247,13 @@ public class SpaceHeatersController extends CategoryController {
   }
 
   @GetMapping("/packages-preferential-heater-type")
-  public ModelAndView renderSpaceHeaterPackagesPrimaryHeaterSortQuestion(@ModelAttribute("form") StandardCategoryForm form) {
+  public ModelAndView renderSpaceHeaterPackagesPreferentialHeaterSortQuestion(@ModelAttribute("form") StandardCategoryForm form) {
     return getSpaceHeaterPackagesPreferentialHeaterQuestion(Collections.emptyList());
   }
 
   @PostMapping("/packages-preferential-heater-type")
   @ResponseBody
-  public ModelAndView handleSpaceHeaterPackagesPrimaryHeaterSortQuestionSubmit(
+  public ModelAndView handleSpaceHeaterPackagesPreferentialHeaterSortQuestionSubmit(
       @Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
     if (StringUtils.isBlank(form.getCategory())) {
       ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required",
@@ -473,7 +473,7 @@ public class SpaceHeatersController extends CategoryController {
                 .collect(StreamUtils.toLinkedHashMap(CategoryItem::getId, CategoryItem::getName))
         )
         .addObject("submitUrl", ReverseRouter.route(
-            on(SpaceHeatersController.class).handleSpaceHeaterPackagesPrimaryHeaterSortQuestionSubmit(null,
+            on(SpaceHeatersController.class).handleSpaceHeaterPackagesPreferentialHeaterSortQuestionSubmit(null,
                 ReverseRouter.emptyBindingResult())));
     ControllerUtils.addErrorSummary(modelAndView, errors);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT,
@@ -516,7 +516,7 @@ public class SpaceHeatersController extends CategoryController {
     breadcrumbService.pushBreadcrumb(modelAndView, "Package space heaters",
         ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesSortQuestion(null)));
     breadcrumbService.pushBreadcrumb(modelAndView, "Preferential heater",
-        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesPrimaryHeaterSortQuestion(null)));
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesPreferentialHeaterSortQuestion(null)));
     breadcrumbService.pushLastBreadcrumb(modelAndView, "Calculator");
     return modelAndView;
   }

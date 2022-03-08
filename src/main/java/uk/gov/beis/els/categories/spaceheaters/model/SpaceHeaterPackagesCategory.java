@@ -17,7 +17,7 @@ public class SpaceHeaterPackagesCategory implements Category {
       .add(new CategoryItem(
           "PACKAGE_SPACE_HEATERS_CALCULATOR",
           "Yes, help me calculate the energy rating",
-          ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesPrimaryHeaterSortQuestion(null))))
+          ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesPreferentialHeaterSortQuestion(null))))
       .add(new CategoryItem(
           "PACKAGE_SPACE_HEATERS",
           "No, I already know the energy rating",
