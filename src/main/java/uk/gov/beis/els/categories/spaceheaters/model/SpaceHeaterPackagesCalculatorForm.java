@@ -1,57 +1,75 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
+@GroupSequenceProvider(SpaceHeaterPackagesCalculatorFormSequenceProvider.class)
 public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplateForm50Char {
 
-  @FieldPrompt("Rated heat output (Prated) of the preferential heater type (in kW)")
+  @FieldPrompt("Rated heat output (Prated) of the preferential heater (in kW)")
+  @NotBlank(message = "Enter the heat output of the preferential heater")
   private String preferentialHeaterHeatOutput;
 
-  @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater type (in %")
+  @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater (in %")
+  @NotBlank(message = "Enter the space heating energy efficiency of the preferential heater")
   private String preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
 
   @FieldPrompt("Temperature control installed?")
+  @NotNull(message = "Specify if this package includes temperature control")
   private boolean hasTemperatureControl;
 
-  //if hasTemperatureControl == true
   @FieldPrompt("Temperature control class")
+  @NotNull(message = "Select the temperature control class",
+      groups = TemperatureControlGroup.class)
   private TemperatureControlClass temperatureControlClass;
 
   @FieldPrompt("Supplementary boiler installed?")
+  @NotNull(message = "Specify if this package includes a supplementary boiler")
   private boolean hasSupplementaryBoiler;
 
-  //if hasSupplementaryBoiler == true
   @FieldPrompt("Rated heat output (Prated) of the supplementary boiler (in kW)")
+  @NotBlank(message = "Enter the rated heat output of the supplementary boiler",
+      groups = SupplementaryBoilerGroup.class)
   private String supplementaryBoilerHeatOutput;
 
-  //if hasSupplementaryBoiler == true
   @FieldPrompt("Seasonal space heating energy efficiency of supplementary boiler (in %)")
+  @NotBlank(message = "Enter the seasonal space heating energy efficiency of supplementary boiler",
+      groups = SupplementaryBoilerGroup.class)
   private String supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage;
 
   @FieldPrompt("Solar collector installed?")
+  @NotNull(message = "Specify if this package includes a solar collector")
   private boolean hasSolarCollector;
 
-  //if hasSolarCollector == true
   @FieldPrompt("Solar collector area (in m2)")
+  @NotBlank(message = "Enter the solar collector area",
+      groups = SolarCollectorGroup.class)
   private String solarCollectorSize;
 
-  //if hasSolarCollector == true
   @FieldPrompt("Solar collector efficiency (in %)")
+  @NotBlank(message = "Enter the solar collector efficiency",
+      groups = SolarCollectorGroup.class)
   private String solarCollectorEfficiencyPercentage;
 
   @FieldPrompt("Heat storage tank installed?")
+  @NotNull(message = "Specify if this package includes a storage tank")
   private boolean hasStorageTank;
 
-  //if hasStorageTank == true
   @FieldPrompt("Volume of the heat storage tank (in l)")
+  @NotBlank(message = "Enter the storage tank volume",
+      groups = StorageTankGroup.class)
   private String storageTankVolume;
 
-  //if hasStorageTank == true
   @FieldPrompt("Tank label class")
+  @NotNull(message = "Enter the storage tank label class",
+      groups = StorageTankGroup.class)
   private TankLabelClass storageTankRating;
 
   @FieldPrompt("Does this package include a supplementary space heater?")
+  @NotNull(message = "Specify if the package includes a supplementary space heater")
   private boolean spaceHeater;
 
   public abstract PreferentialHeaterTypes getPreferentialHeaterType();
