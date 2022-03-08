@@ -31,5 +31,7 @@
     </@govukRadios.radioYesNo>
   </@govukFieldset.fieldset>
 
-  <@govukRadios.radioYesNo path="form.spaceHeater"/>
+  <@govukFieldset.fieldset legendHeading="Space heater" legendSize="h2">
+    <@govukRadios.radioYesNo path="form.spaceHeater"/>
+  </@govukFieldset.fieldset>
 </#macro>
