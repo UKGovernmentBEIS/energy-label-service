@@ -1,6 +1,6 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
@@ -10,11 +10,11 @@ import uk.gov.beis.els.model.meta.FieldPrompt;
 public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Rated heat output (Prated) of the preferential heater (in kW)")
-  @NotBlank(message = "Enter the heat output of the preferential heater")
+  @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the preferential heater")
   private String preferentialHeaterHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater (in %")
-  @NotBlank(message = "Enter the space heating energy efficiency of the preferential heater")
+  @Digits(integer = 3, fraction = 0, message = "Enter the space heating energy efficiency of the preferential heater")
   private String preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
 
   @FieldPrompt("Temperature control installed?")
@@ -31,12 +31,12 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   private boolean hasSupplementaryBoiler;
 
   @FieldPrompt("Rated heat output (Prated) of the supplementary boiler (in kW)")
-  @NotBlank(message = "Enter the rated heat output of the supplementary boiler",
+  @Digits(integer = 4, fraction = 0, message = "Enter the rated heat output of the supplementary boiler",
       groups = SupplementaryBoilerGroup.class)
   private String supplementaryBoilerHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of supplementary boiler (in %)")
-  @NotBlank(message = "Enter the seasonal space heating energy efficiency of supplementary boiler",
+  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary boiler",
       groups = SupplementaryBoilerGroup.class)
   private String supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage;
 
@@ -45,12 +45,12 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   private boolean hasSolarCollector;
 
   @FieldPrompt("Solar collector area (in m2)")
-  @NotBlank(message = "Enter the solar collector area",
+  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector area",
       groups = SolarCollectorGroup.class)
   private String solarCollectorSize;
 
   @FieldPrompt("Solar collector efficiency (in %)")
-  @NotBlank(message = "Enter the solar collector efficiency",
+  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector efficiency",
       groups = SolarCollectorGroup.class)
   private String solarCollectorEfficiencyPercentage;
 
@@ -59,7 +59,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   private boolean hasStorageTank;
 
   @FieldPrompt("Volume of the heat storage tank (in l)")
-  @NotBlank(message = "Enter the storage tank volume",
+  @Digits(integer = 4, fraction = 0, message = "Enter the storage tank volume",
       groups = StorageTankGroup.class)
   private String storageTankVolume;
 

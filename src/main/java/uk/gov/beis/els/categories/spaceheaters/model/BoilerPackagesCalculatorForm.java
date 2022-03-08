@@ -1,6 +1,6 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.model.meta.FieldPrompt;
@@ -15,12 +15,12 @@ public class BoilerPackagesCalculatorForm extends SpaceHeaterPackagesCalculatorF
   private boolean hasSupplementaryHeatPump;
 
   @FieldPrompt("Rated heat output (Prated) of the supplementary heat pump (in kW")
-  @NotBlank(message = "Enter the heat output of the supplementary heat pump",
+  @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the supplementary heat pump",
             groups = SupplementaryHeatPumpGroup.class)
   private String supplementaryHeatPumpHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of supplementary heat pump (in %)")
-  @NotBlank(message = "Enter the seasonal space heating energy efficiency of supplementary heat pump",
+  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary heat pump",
             groups = SupplementaryHeatPumpGroup.class)
   private String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage;
 

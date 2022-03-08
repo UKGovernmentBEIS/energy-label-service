@@ -1,6 +1,6 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
@@ -9,11 +9,11 @@ public class HeatPumpPackagesCalculatorForm extends SpaceHeaterPackagesCalculato
   private final PreferentialHeaterTypes preferentialHeaterType = PreferentialHeaterTypes.HEAT_PUMP;
 
   @FieldPrompt("Seasonal space heating energy efficiency of the heat pump in colder climate (in %)")
-  @NotBlank(message = "Enter the seasonal space heating energy efficiency of heat pump in colder climate")
+  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of heat pump in colder climate")
   private String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage;
 
   @FieldPrompt("Seasonal space heating energy efficiency of heat pump in warmer climate (in %)")
-  @NotBlank(message = "Enter the seasonal space heating energy efficiency of heat pump in warmer climate")
+  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of heat pump in warmer climate")
   private String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage;
 
   @FieldPrompt("Is this a low temperature heat pump?")
