@@ -123,12 +123,12 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.hasTemperatureControl = hasTemperatureControl;
   }
 
-  public TemperatureControlClass getTemperatureControlClass() {
+  public String getTemperatureControlClass() {
     return temperatureControlClass;
   }
 
   public void setTemperatureControlClass(
-      TemperatureControlClass temperatureControlClass) {
+      String temperatureControlClass) {
     this.temperatureControlClass = temperatureControlClass;
   }
 
@@ -197,11 +197,11 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.storageTankVolume = storageTankVolume;
   }
 
-  public TankLabelClass getStorageTankRating() {
+  public String getStorageTankRating() {
     return storageTankRating;
   }
 
-  public void setStorageTankRating(TankLabelClass storageTankRating) {
+  public void setStorageTankRating(String storageTankRating) {
     this.storageTankRating = storageTankRating;
   }
 
