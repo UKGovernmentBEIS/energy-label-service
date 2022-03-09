@@ -1,8 +1,10 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
@@ -11,10 +13,14 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
 
   @FieldPrompt("Rated heat output (Prated) of the preferential heater (in kW)")
   @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the preferential heater")
+  @Schema(type = "integer")
+  @NotNull
   private String preferentialHeaterHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater (in %)")
   @Digits(integer = 3, fraction = 0, message = "Enter the space heating energy efficiency of the preferential heater")
+  @Schema(type = "integer")
+  @NotNull
   private String preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
 
   @FieldPrompt("Temperature control installed?")
@@ -22,6 +28,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   private boolean hasTemperatureControl;
 
   @FieldPrompt("Temperature control class")
+  @ApiValuesFromEnum(value = TemperatureControlClass.class)
   @NotNull(message = "Select the temperature control class",
       groups = TemperatureControlGroup.class)
   private String temperatureControlClass;
@@ -33,11 +40,15 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @FieldPrompt("Rated heat output (Prated) of the supplementary boiler (in kW)")
   @Digits(integer = 4, fraction = 0, message = "Enter the rated heat output of the supplementary boiler",
       groups = SupplementaryBoilerGroup.class)
+  @Schema(type = "integer")
+  @NotNull(groups = SupplementaryBoilerGroup.class, message = "Enter the rated heat output of the supplementary boiler")
   private String supplementaryBoilerHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of supplementary boiler (in %)")
   @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary boiler",
       groups = SupplementaryBoilerGroup.class)
+  @Schema(type = "integer")
+  @NotNull(groups = SupplementaryBoilerGroup.class, message = "Enter the seasonal space heating energy efficiency of supplementary boiler")
   private String supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage;
 
   @FieldPrompt("Solar collector installed?")
@@ -47,11 +58,15 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @FieldPrompt("Solar collector area (in m2)")
   @Digits(integer = 3, fraction = 0, message = "Enter the solar collector area",
       groups = SolarCollectorGroup.class)
+  @Schema(type = "integer")
+  @NotNull(groups = SolarCollectorGroup.class, message = "Enter the solar collector area")
   private String solarCollectorSize;
 
   @FieldPrompt("Solar collector efficiency (in %)")
   @Digits(integer = 3, fraction = 0, message = "Enter the solar collector efficiency",
       groups = SolarCollectorGroup.class)
+  @Schema(type = "integer")
+  @NotNull(groups = SolarCollectorGroup.class, message = "Enter the solar collector efficiency")
   private String solarCollectorEfficiencyPercentage;
 
   @FieldPrompt("Heat storage tank installed?")
@@ -61,11 +76,14 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @FieldPrompt("Volume of the heat storage tank (in l)")
   @Digits(integer = 4, fraction = 0, message = "Enter the storage tank volume",
       groups = StorageTankGroup.class)
+  @Schema(type = "integer")
+  @NotNull(groups = StorageTankGroup.class, message = "Enter the storage tank volume")
   private String storageTankVolume;
 
   @FieldPrompt("Tank label class")
   @NotNull(message = "Enter the storage tank label class",
       groups = StorageTankGroup.class)
+  @ApiValuesFromEnum(TankLabelClass.class)
   private String storageTankRating;
 
   @FieldPrompt("Does this package include a supplementary space heater?")
@@ -123,12 +141,12 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.hasTemperatureControl = hasTemperatureControl;
   }
 
-  public TemperatureControlClass getTemperatureControlClass() {
+  public String getTemperatureControlClass() {
     return temperatureControlClass;
   }
 
   public void setTemperatureControlClass(
-      TemperatureControlClass temperatureControlClass) {
+      String temperatureControlClass) {
     this.temperatureControlClass = temperatureControlClass;
   }
 
@@ -197,11 +215,11 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.storageTankVolume = storageTankVolume;
   }
 
-  public TankLabelClass getStorageTankRating() {
+  public String getStorageTankRating() {
     return storageTankRating;
   }
 
-  public void setStorageTankRating(TankLabelClass storageTankRating) {
+  public void setStorageTankRating(String storageTankRating) {
     this.storageTankRating = storageTankRating;
   }
 
