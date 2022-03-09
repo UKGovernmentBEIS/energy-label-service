@@ -1,5 +1,6 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
+import java.util.Arrays;
 import uk.gov.beis.els.model.Displayable;
 
 public enum TankLabelClass implements Displayable {
@@ -39,5 +40,12 @@ public enum TankLabelClass implements Displayable {
 
   public float getRatingValue() {
     return ratingValue;
+  }
+
+  public static TankLabelClass getEnum(String tankLabelClass) {
+    return Arrays.stream(TankLabelClass.values())
+        .filter(e -> e.getDisplayName().equals(tankLabelClass) || e.name().equals(tankLabelClass))
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException(String.format("Can't resolve RatingClass from string %s", tankLabelClass)));
   }
 }

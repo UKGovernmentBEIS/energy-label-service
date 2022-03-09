@@ -24,7 +24,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @FieldPrompt("Temperature control class")
   @NotNull(message = "Select the temperature control class",
       groups = TemperatureControlGroup.class)
-  private TemperatureControlClass temperatureControlClass;
+  private String temperatureControlClass;
 
   @FieldPrompt("Supplementary boiler installed?")
   @NotNull(message = "Specify if this package includes a supplementary boiler")
@@ -66,7 +66,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @FieldPrompt("Tank label class")
   @NotNull(message = "Enter the storage tank label class",
       groups = StorageTankGroup.class)
-  private TankLabelClass storageTankRating;
+  private String storageTankRating;
 
   @FieldPrompt("Does this package include a supplementary space heater?")
   @NotNull(message = "Specify if the package includes a supplementary space heater")

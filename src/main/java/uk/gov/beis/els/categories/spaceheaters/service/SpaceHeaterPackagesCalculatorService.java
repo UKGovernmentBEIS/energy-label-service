@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.spaceheaters.model.PreferentialHeaterTypes;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCalculatorForm;
+import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
+import uk.gov.beis.els.categories.spaceheaters.model.TemperatureControlClass;
 import uk.gov.beis.els.model.RatingClass;
 
 @Service
@@ -62,7 +64,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getTemperatureControlEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return form.isHasTemperatureControl() ? form.getTemperatureControlClass().getClassValue() / 100 : 0;
+    return form.isHasTemperatureControl() ? TemperatureControlClass.valueOf(form.getTemperatureControlClass()).getClassValue() / 100 : 0;
   }
 
   public float getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
@@ -137,6 +139,10 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getStorageTankVolumeMetersCubed(SpaceHeaterPackagesCalculatorForm form) {
+    if (!form.isHasStorageTank()) {
+      return 0;
+    }
+
     return Float.parseFloat(form.getStorageTankVolume()) / 1000;
   }
 
@@ -156,7 +162,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSolarContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.isHasSolarCollector()) {
+    if (!form.isHasSolarCollector() || !form.isHasStorageTank()) {
       return 0;
     }
 
@@ -164,7 +170,7 @@ public class SpaceHeaterPackagesCalculatorService {
         getTankVolumeFactor(form) * getStorageTankVolumeMetersCubed(form)) *
         getSolarContributionScalingFactor(form) *
         (Float.parseFloat(form.getSolarCollectorEfficiencyPercentage()) / 100) *
-        form.getStorageTankRating().getRatingValue()) / 100;
+        TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()) / 100;
   }
 
   public float getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {

@@ -28,7 +28,7 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setPreferentialHeaterHeatOutput("1235");
     form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("85");
     form.setHasTemperatureControl(true);
-    form.setTemperatureControlClass(TemperatureControlClass.I);
+    form.setTemperatureControlClass(TemperatureControlClass.I.name());
     form.setHasSupplementaryBoiler(true);
     form.setSupplementaryBoilerHeatOutput("1500");
     form.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("42");
@@ -37,7 +37,7 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setSolarCollectorEfficiencyPercentage("89");
     form.setHasStorageTank(true);
     form.setStorageTankVolume("42");
-    form.setStorageTankRating(TankLabelClass.A);
+    form.setStorageTankRating(TankLabelClass.A.name());
     form.setSpaceHeater(true);
     form.setHasSupplementaryHeatPump(true);
     form.setSupplementaryHeatPumpHeatOutput("2000");
@@ -66,7 +66,7 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setPreferentialHeaterHeatOutput("42");
     form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("42");
     form.setHasTemperatureControl(true);
-    form.setTemperatureControlClass(TemperatureControlClass.V);
+    form.setTemperatureControlClass(TemperatureControlClass.V.name());
     form.setHasSupplementaryBoiler(true);
     form.setSupplementaryBoilerHeatOutput("42");
     form.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("42");
@@ -75,7 +75,7 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setSolarCollectorEfficiencyPercentage("42");
     form.setHasStorageTank(true);
     form.setStorageTankVolume("42");
-    form.setStorageTankRating(TankLabelClass.B);
+    form.setStorageTankRating(TankLabelClass.B.name());
     form.setSpaceHeater(true);
 
     assertThat(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(form)).isEqualTo(RatingClass.D);
