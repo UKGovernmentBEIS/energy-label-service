@@ -45,7 +45,7 @@
 
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
-<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="" packageCalculatorForm=false>
+<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="" isPackageCalculatorForm=false>
 
   <@defaultPage pageHeading=title showInsetText=showInsetText beforeStandardInsetText=beforeStandardInsetText>
     <@form.govukForm submitUrl + modeQueryParam!"">
@@ -91,7 +91,7 @@ Includes the wrapping form element, the generate label button and optionally the
           </div>
         </#if>
 
-        <#if packageCalculatorForm>
+        <#if isPackageCalculatorForm>
           <@packageCalculatorDownloadButtons/>
          <#else>
            <@generateLabelButton/>
