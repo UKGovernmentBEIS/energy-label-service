@@ -10,7 +10,7 @@
   </#if>
 </#macro>
 
-<#macro buttonWithSecondaryAction primaryButtonText secondaryButtonText primaryButtonClass="" primaryButtonUrl="#" secondaryButtonClass="govuk-button--secondary" secondaryButtonUrl="#" buttonsDisabled=false>
+<#macro buttonWithSecondaryAction primaryButtonText secondaryButtonText primaryButtonClass="" primaryButtonUrl="#" secondaryButtonClass="govuk-button--tertiary" secondaryButtonUrl="#" buttonsDisabled=false>
     <@button buttonText=primaryButtonText buttonClass=primaryButtonClass buttonUrl=primaryButtonUrl disabled=buttonsDisabled/>
     <@button buttonText=secondaryButtonText buttonClass=secondaryButtonClass buttonUrl=secondaryButtonUrl disabled=buttonsDisabled/>
 </#macro>
