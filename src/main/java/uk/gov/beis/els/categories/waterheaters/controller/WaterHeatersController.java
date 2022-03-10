@@ -235,13 +235,26 @@ public class WaterHeatersController extends CategoryController {
     return getWaterSolarPackages(Collections.emptyList());
   }
 
-  @PostMapping("/packages-of-water-heater-and-solar-device")
+  @PostMapping(value = "/packages-of-water-heater-and-solar-device", params = "Download label")
   @ResponseBody
-  public Object handleWaterSolarPackagesSubmit(@Valid @ModelAttribute("form") WaterSolarPackagesForm form,
+  public Object handleWaterSolarPackagesCalculatedLabelDownload(@Valid @ModelAttribute("form") WaterSolarPackagesForm form,
                                                BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getWaterSolarPackages(bindingResult.getFieldErrors());
     } else {
+      return documentRendererService.processPdfResponse(
+          waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
+    }
+  }
+
+  @PostMapping(value = "/packages-of-water-heater-and-solar-device", params = "Download fiche")
+  @ResponseBody
+  public Object handleWaterSolarPackagesFicheDownload(@Valid @ModelAttribute("form") WaterSolarPackagesForm form,
+                                               BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getWaterSolarPackages(bindingResult.getFieldErrors());
+    } else {
+      //TODO render the fiche instead
       return documentRendererService.processPdfResponse(
           waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
     }

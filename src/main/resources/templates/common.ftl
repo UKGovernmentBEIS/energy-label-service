@@ -13,6 +13,10 @@
   <@govukButton.button buttonText="Download arrow image" buttonClass="govuk-button"/>
 </#macro>
 
+<#macro packageCalculatorDownloadButtons>
+  <@govukButton.buttonWithSecondaryAction primaryButtonText="Download arrow image" secondaryButtonText="Download fiche"/>
+</#macro>
+
 <#macro preMarch2021RadioItem legislationCategories>
   <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"PRE_MAR2021": legislationCategories["PRE_MAR2021"]}>
     <#nested>
@@ -41,7 +45,7 @@
 
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
-<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="">
+<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="" packageCalculatorForm=false>
 
   <@defaultPage pageHeading=title showInsetText=showInsetText beforeStandardInsetText=beforeStandardInsetText>
     <@form.govukForm submitUrl + modeQueryParam!"">
@@ -87,7 +91,11 @@ Includes the wrapping form element, the generate label button and optionally the
           </div>
         </#if>
 
-        <@generateLabelButton/>
+        <#if packageCalculatorForm>
+          <@packageCalculatorDownloadButtons/>
+         <#else>
+           <@generateLabelButton/>
+        </#if>
       </#if>
 
     <input type="hidden" id="googleAnalyticsClientId" name="googleAnalyticsClientId" value="">

@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<@common.standardProductForm title="Packages of water heater and solar device">
+<@common.standardProductForm title="Packages of water heater and solar device" packageCalculatorForm=true>
 
     <@govukSelect.select path="form.declaredLoadProfile" options=loadProfile/>
 
