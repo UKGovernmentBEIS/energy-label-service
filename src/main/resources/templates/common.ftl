@@ -14,7 +14,7 @@
 </#macro>
 
 <#macro packageCalculatorDownloadButtons>
-  <@govukButton.buttonWithSecondaryAction primaryButtonText="Download arrow image" secondaryButtonText="Download fiche"/>
+  <@govukButton.buttonWithSecondaryAction primaryButtonText="Download label" secondaryButtonText="Download fiche"/>
 </#macro>
 
 <#macro preMarch2021RadioItem legislationCategories>
