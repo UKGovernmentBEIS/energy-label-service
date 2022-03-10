@@ -250,7 +250,7 @@ public class WaterHeatersController extends CategoryController {
     return getWaterSolarPackages(Collections.emptyList());
   }
 
-  @PostMapping(value = "/packages-of-water-heater-and-solar-device")
+  @PostMapping("/packages-of-water-heater-and-solar-device")
   @ResponseBody
   public Object handleWaterSolarPackagesSubmit(@Valid @ModelAttribute("form") WaterSolarPackagesForm form,
                                                BindingResult bindingResult) {
