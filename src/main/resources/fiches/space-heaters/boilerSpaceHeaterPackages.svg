@@ -729,7 +729,34 @@
 
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickD"><tspan id="tspan8000" x="291.89355" y="756.60974">×</tspan></text>
+        x="291.89355" y="756.60974" id="labelClassTickG"><tspan id="spaceHeatingEfficiencyXG" x="148.49355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickF"><tspan id="spaceHeatingEfficiencyXF" x="196.59355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickE"><tspan id="spaceHeatingEfficiencyXE" x="244.69355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickD"><tspan id="spaceHeatingEfficiencyXD" x="291.89355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickC"><tspan id="spaceHeatingEfficiencyXC" x="339.99355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickB"><tspan id="spaceHeatingEfficiencyXB" x="388.09355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickA"><tspan id="spaceHeatingEfficiencyXA" x="435.79355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickAP"><tspan id="spaceHeatingEfficiencyXAP" x="483.69355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickAPP"><tspan id="spaceHeatingEfficiencyXAPP" x="531.29355" y="756.60974" visibility="hidden">×</tspan></text>
+  <text xml:space="preserve"
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+        x="291.89355" y="756.60974" id="labelClassTickAPPP"><tspan id="spaceHeatingEfficiencyXAPPP" x="579.129355" y="756.60974" visibility="hidden">×</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         x="319.93808" y="900.35217" id="heatPumpLowEmitter"><tspan y="900.35217" x="319.93808" id="packageSpaceHeatingEfficiency2">packageSpaceHeatingEfficiency2</tspan></text>
@@ -790,7 +817,7 @@
         x="366.87598" y="1020.3622" id="text12137"><tspan y="1020.3622" x="366.87598" id="tspan12139" style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"> </tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="425.98267" y="237.60046" id="text6881"><tspan y="237.60046" x="425.98267" id="tspan6289" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Seasonal space heating energy efficiency (in %)</tspan></text>
+        x="425.98267" y="237.60046" id="text6881"><tspan y="238.40046" x="300.98267" id="tspan6289" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Seasonal space heating energy efficiency (in %)</tspan></text>
   <text id="text4569" y="232.77235" x="425.98267"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle" id="tspan4571" x="425.98267" y="232.77235"> </tspan></text>
@@ -799,7 +826,7 @@
         x="425.98267" y="244.75632" id="text4573"><tspan y="244.75632" x="425.98267" id="tspan4575" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"> </tspan></text>
   <text id="text4577" y="466.42914" x="425.98267"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle" id="tspan4579" x="425.98267" y="466.42914">Seasonal space heating energy efficiency (in %)</tspan></text>
+        xml:space="preserve"><tspan style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle" id="tspan4579" x="300.98267" y="467.92914">Seasonal space heating energy efficiency (in %)</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         x="425.98267" y="461.60101" id="text4581"><tspan y="461.60101" x="425.98267" id="tspan4583" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"> </tspan></text>
@@ -814,17 +841,17 @@
         xml:space="preserve"><tspan id="tspan5489" x="71.068268" y="881.3623"> </tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="507.96863" y="327.68759" id="text5491"><tspan id="tspan5493" x="507.96863" y="327.68759">Tank rating</tspan></text>
+        x="507.96863" y="327.68759" id="text5491"><tspan id="tspan5493" x="457.96863" y="327.68759">Tank rating</tspan></text>
   <text id="text3747" y="340.07162" x="507.96863"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="340.07162" x="507.96863" id="tspan3757"> </tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="508.24115" y="352.86441" id="text8173"><tspan y="352.86441" x="508.24115" id="tspan3773">A+ = 0,95, A = 0,91,</tspan></text>
+        x="508.24115" y="352.86441" id="text8173"><tspan y="347.86441" x="457.96863" id="tspan3773">A+ = 0,95, A = 0,91,</tspan></text>
   <text id="text3762" y="365.30356" x="507.79758"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan y="365.30356" x="507.79758" id="tspan3775">B = 0,86, C = 0,83,</tspan></text>
+        xml:space="preserve"><tspan y="360.30356" x="457.96863" id="tspan3775">B = 0,86, C = 0,83,</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="508.34262" y="377.68759" id="text3768"><tspan y="377.68759" x="508.34262" id="tspan3777">D-G = 0,81</tspan></text>
+        x="508.34262" y="377.68759" id="text3768"><tspan y="372.68759" x="457.96863" id="tspan3777">D-G = 0,81</tspan></text>
 </svg>
