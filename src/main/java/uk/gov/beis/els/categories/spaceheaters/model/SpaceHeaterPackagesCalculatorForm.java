@@ -54,7 +54,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
       groups = SolarCollectorGroup.class)
   private String solarCollectorEfficiencyPercentage;
 
-  @FieldPrompt("Does this package include a hot water storage tank")
+  @FieldPrompt("Does this package include a hot water storage tank?")
   @NotNull(message = "Specify if this package includes a hot water storage tank")
   private Boolean hasStorageTank;
 
