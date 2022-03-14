@@ -6,7 +6,10 @@ title="Packages of space heater, temperature control and solar device energy lab
 showInsetText=false
 >
   <@commonFields.commonSpaceHeaterPackagesCalculatorFields/>
-  <@govukTextInput.textInput path="form.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage"/>
-  <@govukTextInput.textInput path="form.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage"/>
-  <@govukRadios.radioYesNo path="form.lowTemperatureHeatPump"/>
+
+  <@govukFieldset.fieldset legendHeading="Heat pump" legendSize="h2">
+    <@govukTextInput.textInput path="form.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage"/>
+    <@govukTextInput.textInput path="form.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage"/>
+    <@govukRadios.radioYesNo path="form.lowTemperatureHeatPump"/>
+  </@govukFieldset.fieldset>
 </@common.standardProductForm>

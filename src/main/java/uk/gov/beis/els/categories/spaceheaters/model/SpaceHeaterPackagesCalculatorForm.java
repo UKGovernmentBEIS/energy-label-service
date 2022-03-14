@@ -10,14 +10,14 @@ import uk.gov.beis.els.model.meta.FieldPrompt;
 public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Rated heat output (Prated) of the preferential heater (in kW)")
-  @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the preferential heater")
+  @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the preferential heater, up to 4 digits long")
   private String preferentialHeaterHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of the preferential heater (in %)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the space heating energy efficiency of the preferential heater")
+  @Digits(integer = 3, fraction = 0, message = "Enter the space heating energy efficiency of the preferential heater, up to 3 digits long")
   private String preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
 
-  @FieldPrompt("Temperature control installed?")
+  @FieldPrompt("Does this package include a temperature control?")
   @NotNull(message = "Specify if this package includes temperature control")
   private Boolean hasTemperatureControl;
 
@@ -26,40 +26,40 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
       groups = TemperatureControlGroup.class)
   private String temperatureControlClass;
 
-  @FieldPrompt("Supplementary boiler installed?")
+  @FieldPrompt("Does this package include a supplementary boiler?")
   @NotNull(message = "Specify if this package includes a supplementary boiler")
   private Boolean hasSupplementaryBoiler;
 
   @FieldPrompt("Rated heat output (Prated) of the supplementary boiler (in kW)")
-  @Digits(integer = 4, fraction = 0, message = "Enter the rated heat output of the supplementary boiler",
+  @Digits(integer = 4, fraction = 0, message = "Enter the rated heat output of the supplementary boiler, up to 4 digits long",
       groups = SupplementaryBoilerGroup.class)
   private String supplementaryBoilerHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of supplementary boiler (in %)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary boiler",
+  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary boiler, up to 3 digits long",
       groups = SupplementaryBoilerGroup.class)
   private String supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage;
 
-  @FieldPrompt("Solar collector installed?")
+  @FieldPrompt("Does this package include a solar collector?")
   @NotNull(message = "Specify if this package includes a solar collector")
   private Boolean hasSolarCollector;
 
   @FieldPrompt("Solar collector area (in m2)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector area",
+  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector area, up to 3 digits long",
       groups = SolarCollectorGroup.class)
   private String solarCollectorSize;
 
   @FieldPrompt("Solar collector efficiency (in %)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector efficiency",
+  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector efficiency, up to 3 digits long",
       groups = SolarCollectorGroup.class)
   private String solarCollectorEfficiencyPercentage;
 
-  @FieldPrompt("Heat storage tank installed?")
-  @NotNull(message = "Specify if this package includes a storage tank")
+  @FieldPrompt("Does this package include a hot water storage tank")
+  @NotNull(message = "Specify if this package includes a hot water storage tank")
   private Boolean hasStorageTank;
 
   @FieldPrompt("Volume of the heat storage tank (in l)")
-  @Digits(integer = 4, fraction = 0, message = "Enter the storage tank volume",
+  @Digits(integer = 4, fraction = 0, message = "Enter the storage tank volume, up to 4 digits long",
       groups = StorageTankGroup.class)
   private String storageTankVolume;
 
