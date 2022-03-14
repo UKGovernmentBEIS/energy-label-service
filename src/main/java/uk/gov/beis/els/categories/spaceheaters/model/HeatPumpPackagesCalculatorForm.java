@@ -18,73 +18,36 @@ public class HeatPumpPackagesCalculatorForm extends SpaceHeaterPackagesCalculato
 
   @FieldPrompt("Is this a low temperature heat pump?")
   @NotNull(message = "Specify if this a low temperature heat pump")
-  private boolean lowTemperatureHeatPump;
+  private Boolean lowTemperatureHeatPump;
 
   @Override
   public PreferentialHeaterTypes getPreferentialHeaterType() {
     return preferentialHeaterType;
   }
 
-  @Override
   public String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage() {
     return preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage;
   }
 
-  @Override
   public void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage(
       String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage) {
     this.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage = preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage;
   }
 
-  @Override
   public String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage() {
     return preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage;
   }
 
-  @Override
   public void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage(
       String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage) {
     this.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage = preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage;
   }
 
-  @Override
-  public boolean isLowTemperatureHeatPump() {
+  public Boolean getLowTemperatureHeatPump() {
     return lowTemperatureHeatPump;
   }
 
-  @Override
-  public void setLowTemperatureHeatPump(boolean lowTemperatureHeatPump) {
+  public void setLowTemperatureHeatPump(Boolean lowTemperatureHeatPump) {
     this.lowTemperatureHeatPump = lowTemperatureHeatPump;
-  }
-
-  @Override
-  public boolean isHasSupplementaryHeatPump() {
-    return false;
-  }
-
-  @Override
-  public void setHasSupplementaryHeatPump(boolean hasSupplementaryHeatPump) {
-
-  }
-
-  @Override
-  public String getSupplementaryHeatPumpHeatOutput() {
-    return null;
-  }
-
-  @Override
-  public void setSupplementaryHeatPumpHeatOutput(String supplementaryHeatPumpHeatOutput) {
-
-  }
-
-  @Override
-  public String getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage() {
-    return null;
-  }
-
-  @Override
-  public void setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage(
-      String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage) {
-
   }
 }

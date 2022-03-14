@@ -258,7 +258,7 @@ public class SpaceHeatersController extends CategoryController {
     if (StringUtils.isBlank(form.getCategory())) {
       ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required",
           spaceHeaterPackagesPreferentialHeaterCategory.getNoSelectionErrorMessage());
-      return getSpaceHeaterPackagesSortingQuestion(bindingResult.getFieldErrors());
+      return getSpaceHeaterPackagesPreferentialHeaterQuestion(bindingResult.getFieldErrors());
     } else {
       CategoryItem categoryItem = spaceHeaterPackagesPreferentialHeaterCategory.getCategoryItem(form.getCategory());
       return new ModelAndView("redirect:" + categoryItem.getNextStateUrl());
