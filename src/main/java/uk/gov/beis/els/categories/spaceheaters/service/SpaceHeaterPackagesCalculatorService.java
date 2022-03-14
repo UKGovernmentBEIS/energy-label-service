@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.PreferentialHeaterTypes;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
@@ -64,7 +66,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getTemperatureControlEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return form.isHasTemperatureControl() ? TemperatureControlClass.valueOf(form.getTemperatureControlClass()).getClassValue() / 100 : 0;
+    return form.getHasTemperatureControl() ? TemperatureControlClass.valueOf(form.getTemperatureControlClass()).getClassValue() / 100 : 0;
   }
 
   public float getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
@@ -81,10 +83,10 @@ public class SpaceHeaterPackagesCalculatorService {
             Float.parseFloat(form.getSupplementaryBoilerHeatOutput()));
 
     // Figures from Table 6 of Annex IV of EU reg 811/2013
-    if (form.isHasStorageTank()) {
+    if (form.getHasStorageTank()) {
       if (x <= 0.1F) {
-        return interpolate(0, 01F, 1, 0.63F, x);
-      } else if (x < 0.2F) {
+        return interpolate(0, 0.1F, 1, 0.63F, x);
+      } else if (x <= 0.2F) {
         return interpolate(0.1F, 0.2F, 0.63F, 0.3F, x);
       } else if (x <= 0.3F) {
         return this.interpolate(0.2F, 0.3F, 0.3F, 0.15F, x);
@@ -121,7 +123,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSupplementaryBoilerContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.isHasSupplementaryBoiler()) {
+    if (!form.getHasSupplementaryBoiler()) {
       return 0;
     }
 
@@ -139,7 +141,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getStorageTankVolumeMetersCubed(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.isHasStorageTank()) {
+    if (!form.getHasStorageTank()) {
       return 0;
     }
 
@@ -162,7 +164,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSolarContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.isHasSolarCollector() || !form.isHasStorageTank()) {
+    if (!form.getHasSolarCollector() || !form.getHasStorageTank()) {
       return 0;
     }
 
@@ -173,17 +175,17 @@ public class SpaceHeaterPackagesCalculatorService {
         TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()) / 100;
   }
 
-  public float getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
+  public float getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyDecimal(BoilerPackagesCalculatorForm form) {
     return Float.parseFloat(form.getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage()) / 100;
   }
 
-  public float getSupplementaryHeatPumpFactor(SpaceHeaterPackagesCalculatorForm form) {
+  public float getSupplementaryHeatPumpFactor(BoilerPackagesCalculatorForm form) {
     float x = Float.parseFloat(form.getSupplementaryHeatPumpHeatOutput()) /
         (Float.parseFloat(form.getPreferentialHeaterHeatOutput()) +
             Float.parseFloat(form.getSupplementaryHeatPumpHeatOutput()));
 
     // Figures from Table 5 of Annex IV of EU reg 811/2013
-    if (form.isHasStorageTank()) {
+    if (form.getHasStorageTank()) {
       if (x <= 0.1) {
         return this.interpolate(0, 0.1F, 0, 0.37F, x);
       } else if (x <= 0.2F) {
@@ -221,13 +223,19 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSupplementaryHeatPumpContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.isHasSupplementaryHeatPump() || form.getPreferentialHeaterType() != PreferentialHeaterTypes.BOILER) {
+    if (!(form instanceof BoilerPackagesCalculatorForm)) {
       return 0;
     }
 
-    return (getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyDecimal(form) -
+    BoilerPackagesCalculatorForm boilerForm = (BoilerPackagesCalculatorForm) form;
+
+    if (!boilerForm.getHasSupplementaryHeatPump() || boilerForm.getPreferentialHeaterType() != PreferentialHeaterTypes.BOILER) {
+      return 0;
+    }
+
+    return (getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyDecimal(boilerForm) -
         getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form)) *
-        getSupplementaryHeatPumpFactor(form);
+        getSupplementaryHeatPumpFactor(boilerForm);
   }
 
   public float getSolarContributionAndHeatPumpDecimal(SpaceHeaterPackagesCalculatorForm form) {
@@ -240,27 +248,27 @@ public class SpaceHeaterPackagesCalculatorService {
 
   public float getLowTemperatureHeatEmitters(SpaceHeaterPackagesCalculatorForm form) {
     return getPackageSpaceHeatingEfficiencyDecimal(form) +
-        0.5F * getSupplementaryHeatPumpFactor(form);
+        0.5F * getSupplementaryHeatPumpFactor((BoilerPackagesCalculatorForm) form);
   }
 
   public float getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderDecimal(
-      SpaceHeaterPackagesCalculatorForm form) {
+      HeatPumpPackagesCalculatorForm form) {
     return Float.parseFloat(form.getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage()) / 100;
   }
 
   public float getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerDecimal(
-      SpaceHeaterPackagesCalculatorForm form) {
+      HeatPumpPackagesCalculatorForm form) {
     return Float.parseFloat(form.getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage()) / 100;
   }
 
   public float getPreferentialHeatPumpColderDifferenceDecimal(SpaceHeaterPackagesCalculatorForm form) {
     return Math.abs(getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) -
-        getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderDecimal(form));
+        getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderDecimal((HeatPumpPackagesCalculatorForm) form));
   }
 
   public float getPreferentialHeatPumpWarmerDifferenceDecimal(SpaceHeaterPackagesCalculatorForm form) {
     return Math.abs(getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) -
-        getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerDecimal(form));
+        getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerDecimal((HeatPumpPackagesCalculatorForm) form));
   }
 
   public float getPackageSpaceHeatingEfficiencyColderDecimal(SpaceHeaterPackagesCalculatorForm form) {

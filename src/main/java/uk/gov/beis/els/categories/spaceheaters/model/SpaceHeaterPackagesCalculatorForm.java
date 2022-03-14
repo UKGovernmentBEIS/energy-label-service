@@ -25,7 +25,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
 
   @FieldPrompt("Temperature control installed?")
   @NotNull(message = "Specify if this package includes temperature control")
-  private boolean hasTemperatureControl;
+  private Boolean hasTemperatureControl;
 
   @FieldPrompt("Temperature control class")
   @ApiValuesFromEnum(value = TemperatureControlClass.class)
@@ -35,7 +35,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
 
   @FieldPrompt("Supplementary boiler installed?")
   @NotNull(message = "Specify if this package includes a supplementary boiler")
-  private boolean hasSupplementaryBoiler;
+  private Boolean hasSupplementaryBoiler;
 
   @FieldPrompt("Rated heat output (Prated) of the supplementary boiler (in kW)")
   @Digits(integer = 4, fraction = 0, message = "Enter the rated heat output of the supplementary boiler",
@@ -53,7 +53,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
 
   @FieldPrompt("Solar collector installed?")
   @NotNull(message = "Specify if this package includes a solar collector")
-  private boolean hasSolarCollector;
+  private Boolean hasSolarCollector;
 
   @FieldPrompt("Solar collector area (in m2)")
   @Digits(integer = 3, fraction = 0, message = "Enter the solar collector area",
@@ -71,7 +71,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
 
   @FieldPrompt("Heat storage tank installed?")
   @NotNull(message = "Specify if this package includes a storage tank")
-  private boolean hasStorageTank;
+  private Boolean hasStorageTank;
 
   @FieldPrompt("Volume of the heat storage tank (in l)")
   @Digits(integer = 4, fraction = 0, message = "Enter the storage tank volume",
@@ -88,7 +88,7 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
 
   @FieldPrompt("Does this package include a supplementary space heater?")
   @NotNull(message = "Specify if the package includes a supplementary space heater")
-  private boolean spaceHeater;
+  private Boolean spaceHeater;
 
   public abstract PreferentialHeaterTypes getPreferentialHeaterType();
 
@@ -109,35 +109,11 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage = preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage;
   }
 
-  public abstract String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage();
-
-  public abstract void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage(String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage);
-
-  public abstract String getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage();
-
-  public abstract void setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage(String preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage);
-
-  public abstract boolean isLowTemperatureHeatPump();
-
-  public abstract void setLowTemperatureHeatPump(boolean isLowTemperatureHeatPump);
-
-  public abstract boolean isHasSupplementaryHeatPump();
-
-  public abstract void setHasSupplementaryHeatPump(boolean hasSupplementaryHeatPump);
-
-  public abstract String getSupplementaryHeatPumpHeatOutput();
-
-  public abstract void setSupplementaryHeatPumpHeatOutput(String supplementaryHeatPumpHeatOutput);
-
-  public abstract String getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage();
-
-  public abstract void setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage(String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage);
-
-  public boolean isHasTemperatureControl() {
+  public Boolean getHasTemperatureControl() {
     return hasTemperatureControl;
   }
 
-  public void setHasTemperatureControl(boolean hasTemperatureControl) {
+  public void setHasTemperatureControl(Boolean hasTemperatureControl) {
     this.hasTemperatureControl = hasTemperatureControl;
   }
 
@@ -150,11 +126,11 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.temperatureControlClass = temperatureControlClass;
   }
 
-  public boolean isHasSupplementaryBoiler() {
+  public Boolean getHasSupplementaryBoiler() {
     return hasSupplementaryBoiler;
   }
 
-  public void setHasSupplementaryBoiler(boolean hasSupplementaryBoiler) {
+  public void setHasSupplementaryBoiler(Boolean hasSupplementaryBoiler) {
     this.hasSupplementaryBoiler = hasSupplementaryBoiler;
   }
 
@@ -175,11 +151,11 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage = supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage;
   }
 
-  public boolean isHasSolarCollector() {
+  public Boolean getHasSolarCollector() {
     return hasSolarCollector;
   }
 
-  public void setHasSolarCollector(boolean hasSolarCollector) {
+  public void setHasSolarCollector(Boolean hasSolarCollector) {
     this.hasSolarCollector = hasSolarCollector;
   }
 
@@ -199,11 +175,11 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.solarCollectorEfficiencyPercentage = solarCollectorEfficiencyPercentage;
   }
 
-  public boolean isHasStorageTank() {
+  public Boolean getHasStorageTank() {
     return hasStorageTank;
   }
 
-  public void setHasStorageTank(boolean hasStorageTank) {
+  public void setHasStorageTank(Boolean hasStorageTank) {
     this.hasStorageTank = hasStorageTank;
   }
 
@@ -223,11 +199,11 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
     this.storageTankRating = storageTankRating;
   }
 
-  public boolean isSpaceHeater() {
+  public Boolean getSpaceHeater() {
     return spaceHeater;
   }
 
-  public void setSpaceHeater(boolean spaceHeater) {
+  public void setSpaceHeater(Boolean spaceHeater) {
     this.spaceHeater = spaceHeater;
   }
 }

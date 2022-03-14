@@ -229,10 +229,10 @@ public class SpaceHeatersService {
       SpaceHeaterPackagesCalculatorForm calculatorForm) {
     SpaceHeaterPackagesForm form = new SpaceHeaterPackagesForm();
     form.setHeaterEfficiencyRating(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(calculatorForm).name());
-    form.setSolarCollector(calculatorForm.isHasSolarCollector());
-    form.setHotWaterStorageTank(calculatorForm.isHasStorageTank());
-    form.setTemperatureControl(calculatorForm.isHasTemperatureControl());
-    form.setSpaceHeater(calculatorForm.isSpaceHeater());
+    form.setSolarCollector(calculatorForm.getHasSolarCollector());
+    form.setHotWaterStorageTank(calculatorForm.getHasStorageTank());
+    form.setTemperatureControl(calculatorForm.getHasTemperatureControl());
+    form.setSpaceHeater(calculatorForm.getSpaceHeater());
     form.setPackageEfficiencyRating(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(calculatorForm).name());
     form.setSupplierName(calculatorForm.getSupplierName());
     form.setModelName(calculatorForm.getModelName());
