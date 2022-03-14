@@ -6,10 +6,10 @@ $govuk-button-hover-colour-secondary: darken($govuk-button-colour-secondary, 5%)
 $govuk-button-shadow-colour-secondary: darken($govuk-button-colour-secondary, 15%);
 $govuk-button-text-colour-secondary: govuk-colour("white");
 // tertiary button
-$govuk-button-colour-tertiary: govuk-colour("light-grey");
-$govuk-button-hover-colour-tertiary: darken($govuk-button-colour-tertiary, 5%);
-$govuk-button-shadow-colour-tertiary: darken($govuk-button-colour-tertiary, 15%);
-$govuk-button-text-colour-tertiary: govuk-colour("blue");
+$govuk-button-colour-tertiary: govuk-colour("light-grey", $legacy: "grey-3");
+$govuk-button-hover-colour-tertiary: darken($govuk-button-colour-tertiary, 10%);
+$govuk-button-shadow-colour-tertiary: darken($govuk-button-colour-tertiary, 40%);
+$govuk-button-text-colour-tertiary: govuk-colour("black");
 
 $button-shadow-size: $govuk-border-width-form-element;
 

@@ -46,6 +46,6 @@ public enum TankLabelClass implements Displayable {
     return Arrays.stream(TankLabelClass.values())
         .filter(e -> e.getDisplayName().equals(tankLabelClass) || e.name().equals(tankLabelClass))
         .findFirst()
-        .orElseThrow(() -> new RuntimeException(String.format("Can't resolve RatingClass from string %s", tankLabelClass)));
+        .orElseThrow(() -> new RuntimeException(String.format("Can't resolve TankLabelClass from string %s", tankLabelClass)));
   }
 }

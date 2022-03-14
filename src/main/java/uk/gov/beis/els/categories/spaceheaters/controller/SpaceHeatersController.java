@@ -492,16 +492,19 @@ public class SpaceHeatersController extends CategoryController {
         modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesBoilerCalculator");
         addCommonObjects(modelAndView, errors,
             ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesBoilerCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "boilers");
         break;
       case HEAT_PUMP:
         modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesHeatPumpCalculator");
         addCommonObjects(modelAndView, errors,
             ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesHeatPumpCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "heat pumps");
         break;
       case COGENERATION_HEATER:
         modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesCogenerationCalculator");
         addCommonObjects(modelAndView, errors,
             ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesCogenerationCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "cogeneration heaters");
         break;
       default:
         throw new IllegalStateException("Unexpected value: " + preferentialHeaterType);

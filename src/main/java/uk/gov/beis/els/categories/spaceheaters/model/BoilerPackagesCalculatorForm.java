@@ -13,19 +13,19 @@ public class BoilerPackagesCalculatorForm extends SpaceHeaterPackagesCalculatorF
   @Schema(hidden = true)
   private final PreferentialHeaterTypes preferentialHeaterType = PreferentialHeaterTypes.BOILER;
 
-  @FieldPrompt("Supplementary heat pump installed?")
+  @FieldPrompt("Does this package include a supplementary heat pump?")
   @NotNull(message = "Specify if the package includes a supplementary heat pump")
   private Boolean hasSupplementaryHeatPump;
 
   @FieldPrompt("Rated heat output (Prated) of the supplementary heat pump (in kW)")
-  @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the supplementary heat pump",
+  @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the supplementary heat pump, up to 4 digits long",
             groups = SupplementaryHeatPumpGroup.class)
   @Schema(type = "integer")
   @NotNull(groups = SupplementaryHeatPumpGroup.class, message = "Enter the heat output of the supplementary heat pump")
   private String supplementaryHeatPumpHeatOutput;
 
   @FieldPrompt("Seasonal space heating energy efficiency of supplementary heat pump (in %)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary heat pump",
+  @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary heat pump, up to 3 digits long",
             groups = SupplementaryHeatPumpGroup.class)
   @Schema(type = "integer")
   @NotNull(groups = SupplementaryHeatPumpGroup.class, message = "Enter the seasonal space heating energy efficiency of supplementary heat pum")
