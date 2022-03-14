@@ -9,3 +9,10 @@
     </button>
   </#if>
 </#macro>
+
+<#macro buttonWithSecondaryAction primaryButtonText secondaryButtonText primaryButtonClass="" primaryButtonUrl="#" secondaryButtonClass="govuk-button--tertiary" secondaryButtonUrl="#" buttonsDisabled=false>
+  <div class="govuk-button-group">
+    <@button buttonText=primaryButtonText buttonClass=primaryButtonClass buttonUrl=primaryButtonUrl disabled=buttonsDisabled/>
+    <@button buttonText=secondaryButtonText buttonClass=secondaryButtonClass buttonUrl=secondaryButtonUrl disabled=buttonsDisabled/>
+  </div>
+</#macro>
