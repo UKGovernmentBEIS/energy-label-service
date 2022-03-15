@@ -1,7 +1,15 @@
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" enable-background="new" version="1.1"
-     id="svg4375" viewBox="0 0 744.09448819 1052.3622047" width="744.09448819" height="1052.3622047">>
+<svg xmlns="http://www.w3.org/2000/svg" enable-background="new" version="1.1"
+     id="Layer_1" data-name="Layer 1" viewBox="0 0 744 1052" width="744" height="1052">
 
   <defs id="defs4377">
+    <style>
+      .ficheTick {
+      visibility: hidden;
+      }
+      .ficheTick.shown {
+      visibility: visible;
+      }
+    </style>
     <marker style="overflow:visible" id="marker8055" refX="0.0" refY="0.0" orient="auto">
       <path transform="scale(0.4) translate(7.4, 1)"
             style="fill-rule:evenodd;stroke:#40acdd;stroke-width:1pt;stroke-opacity:1;fill:#40acdd;fill-opacity:1"
@@ -742,36 +750,36 @@
   <text xml:space="preserve" x="608.79114" y="647.71667" id="packageSpaceHeatingEfficiency"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="647.71667" x="608.79114" id="packageSpaceHeatingEfficiency1">packageSpaceHeatingEfficiency1</tspan></text>
 
-  <text xml:space="preserve"
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickG"><tspan id="spaceHeatingEfficiencyXG" x="148.49355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickG"><tspan id="spaceHeatingEfficiencyXG" x="148.49355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickF"><tspan id="spaceHeatingEfficiencyXF" x="196.59355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickF"><tspan id="spaceHeatingEfficiencyXF" x="196.59355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickE"><tspan id="spaceHeatingEfficiencyXE" x="244.69355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickE"><tspan id="spaceHeatingEfficiencyXE" x="244.69355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickD"><tspan id="spaceHeatingEfficiencyXD" x="291.89355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickD"><tspan id="spaceHeatingEfficiencyXD" x="291.89355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickC"><tspan id="spaceHeatingEfficiencyXC" x="339.99355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickC"><tspan id="spaceHeatingEfficiencyXC" x="339.99355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickB"><tspan id="spaceHeatingEfficiencyXB" x="388.09355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickB"><tspan id="spaceHeatingEfficiencyXB" x="388.09355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickA"><tspan id="spaceHeatingEfficiencyXA" x="435.79355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickA"><tspan id="spaceHeatingEfficiencyXA" x="435.79355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickAP"><tspan id="spaceHeatingEfficiencyXAP" x="483.69355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickAP"><tspan id="spaceHeatingEfficiencyXAP" x="483.69355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickAPP"><tspan id="spaceHeatingEfficiencyXAPP" x="531.29355" y="756.60974" visibility="hidden">×</tspan></text>
-  <text xml:space="preserve"
+        x="291.89355" y="756.60974" id="labelClassTickAPP"><tspan id="spaceHeatingEfficiencyXAPP" x="531.29355" y="756.60974" >×</tspan></text>
+  <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickAPPP"><tspan id="spaceHeatingEfficiencyXAPPP" x="579.129355" y="756.60974" visibility="hidden">×</tspan></text>
+        x="291.89355" y="756.60974" id="labelClassTickAPPP"><tspan id="spaceHeatingEfficiencyXAPPP" x="579.129355" y="756.60974" >×</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         x="319.93808" y="900.35217" id="heatPumpLowEmitter"><tspan y="900.35217" x="319.93808" id="packageSpaceHeatingEfficiency2">packageSpaceHeatingEfficiency2</tspan></text>
