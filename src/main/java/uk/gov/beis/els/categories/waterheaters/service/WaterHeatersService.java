@@ -276,7 +276,7 @@ public class WaterHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
   }
 
-  public ProcessedEnergyLabelDocument generateFicheHtml(WaterSolarPackagesCalculatorForm form, LegislationCategory legislationCategory){
+  public ProcessedEnergyLabelDocument generateFicheHtml(WaterSolarPackagesCalculatorForm form){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("fiches/water-heaters/packages-of-water-heater-and-solar-device-fiche.svg"));
 
     String waterHeatingEfficiency = form.getWaterHeatingEfficiencyPercentage();
