@@ -758,13 +758,13 @@
         x="291.89355" y="756.60974" id="labelClassTickA"><tspan id="spaceHeatingEfficiencyXA" x="435.79355" y="756.60974" >×</tspan></text>
   <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickAP"><tspan id="spaceHeatingEfficiencyXAP" x="483.69355" y="756.60974" >×</tspan></text>
+        x="291.89355" y="756.60974" id="labelClassTickA+"><tspan id="spaceHeatingEfficiencyXAP" x="483.69355" y="756.60974" >×</tspan></text>
   <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickAPP"><tspan id="spaceHeatingEfficiencyXAPP" x="531.29355" y="756.60974" >×</tspan></text>
+        x="291.89355" y="756.60974" id="labelClassTickA++"><tspan id="spaceHeatingEfficiencyXAPP" x="531.29355" y="756.60974" >×</tspan></text>
   <text xml:space="preserve" class="ficheTick"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="291.89355" y="756.60974" id="labelClassTickAPPP"><tspan id="spaceHeatingEfficiencyXAPPP" x="579.129355" y="756.60974" >×</tspan></text>
+        x="291.89355" y="756.60974" id="labelClassTickA+++"><tspan id="spaceHeatingEfficiencyXAPPP" x="579.129355" y="756.60974" >×</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         x="319.93808" y="900.35217" id="heatPumpLowEmitter"><tspan y="900.35217" x="319.93808" id="packageSpaceHeatingEfficiency2">packageSpaceHeatingEfficiency2</tspan></text>

@@ -79,6 +79,8 @@ public class SpaceHeaterPackagesCalculatorService {
   public float getSupplementaryBoilerFactor(SpaceHeaterPackagesCalculatorForm form) {
     if (form.getPreferentialHeaterType() == PreferentialHeaterTypes.BOILER) {
       return 0.1F;
+    } else if (!form.getHasSupplementaryBoiler()) {
+      return 0;
     }
 
     float x = Float.parseFloat(form.getPreferentialHeaterHeatOutput()) /
