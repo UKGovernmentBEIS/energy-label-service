@@ -70,6 +70,9 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
+    if (!form.getHasSupplementaryBoiler()) {
+      return 0;
+    }
     return Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage()) / 100;
   }
 
@@ -180,6 +183,10 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSupplementaryHeatPumpFactor(BoilerPackagesCalculatorForm form) {
+    if (!form.getHasSupplementaryHeatPump()) {
+      return 0;
+    }
+
     float x = Float.parseFloat(form.getSupplementaryHeatPumpHeatOutput()) /
         (Float.parseFloat(form.getPreferentialHeaterHeatOutput()) +
             Float.parseFloat(form.getSupplementaryHeatPumpHeatOutput()));

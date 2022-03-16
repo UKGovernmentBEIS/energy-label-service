@@ -502,7 +502,7 @@
     id="rect4199" width="52.440262" height="29.167337" x="582.87634" y="145.02974"></rect>
   <text xml:space="preserve" x="638.09485" y="167.50708" id="text4201"><tspan id="tspan4203" x="638.09485" y="167.50708" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#40acdd">%</tspan></text>
   <text xml:space="preserve" x="609.12085" y="166.12708" id="tempControlRating"
-        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="166.12708" x="609.12085" id="temperatureControlEfficiency1">temperatureControlEfficiency1</tspan></text>
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="166.12708" x="609.12085" id="temperatureControlEfficiency">temperatureControlEfficiency</tspan></text>
   <text xml:space="preserve" x="563.34357" y="167.54004" id="text6097"><tspan id="tspan6099" x="563.34357" y="167.54004" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#40acdd">+</tspan></text>
   <path
     style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -530,12 +530,9 @@
         xml:space="preserve"><tspan y="276.58203" x="366.16376" id="supplementaryBoilerSeasonalSpaceHeatingEfficiency">supplementaryBoilerSeasonalSpaceHeatingEfficiency</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="471.2973" y="275.14868" id="supplBoilerCalc"><tspan y="275.14868" x="471.2973" id="tspan6321">–            )   x   0,1   =</tspan></text>
-  <text xml:space="preserve"
-        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="471.2973" y="275.14868" id="supplBoilerCalc2"><tspan y="275.14868" x="471.2973" id="preferentialHeaterSeasonalSpaceHeatingEfficiency2">preferentialHeaterSeasonalSpaceHeatingEfficiency2</tspan></text>
+        x="471.2973" y="275.14868" id="supplBoilerCalc"><tspan y="275.14868" x="471.2973" id="tspan6321">–    <tspan id="preferentialHeaterSeasonalSpaceHeatingEfficiency2">preferentialHeaterSeasonalSpaceHeatingEfficiency2</tspan>    )   x   0,1   =</tspan></text>
   <text xml:space="preserve" x="609.8576" y="277.97461" id="supplementaryBoilerContributionEfficiency"
-        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="277.97461" x="609.8576" id="supplementaryBoilerContribution1">-supplementaryBoilerContribution1</tspan></text>
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="277.97461" x="609.8576" id="supplementaryBoilerContribution">-supplementaryBoilerContribution</tspan></text>
   <text id="text6323" y="275.14868" x="329.2973"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="275.14868" x="329.2973" id="tspan6327">(</tspan></text>
@@ -591,7 +588,7 @@
     style="opacity:1;fill:none;fill-opacity:1;stroke:#40acdd;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
     id="rect8145" width="116.44241" height="31.4424" x="320.26346" y="352.29352" rx="5" ry="5"></rect>
   <text id="solarContributionEfficiency" y="417.60159" x="609.8576" xml:space="preserve"
-        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan id="solarContribution" x="609.8576" y="417.60159" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd">solarContribution</tspan></text>
+        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan id="solarContribution1" x="609.8576" y="417.60159" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd">solarContribution1</tspan></text>
   <rect y="396.50424" x="582.87634" height="29.167337" width="52.440262" id="rect6771"
         style="opacity:1;fill:none;fill-opacity:1;stroke:#40acdd;stroke-width:3;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"></rect>
   <text id="text6781" y="418.9816" x="638.09485" xml:space="preserve"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#40acdd" y="418.9816" x="638.09485" id="tspan6783">%</tspan></text>
@@ -636,16 +633,10 @@
         x="315.2973" y="415.94754" id="solarContribCalcIII"><tspan y="415.94754" x="315.2973" id="tspan8209">)  x  0,9  x  (</tspan></text>
   <text id="solarContribCalcII" y="416.20901" x="196.72588"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan y="416.20901" x="196.72588" id="tspan8215">+      x</tspan></text>
-  <text id="solarContribCalcI2" y="416.20901" x="196.72588"
-        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan y="416.20901" x="196.72588" id="tankVolumeFactor">tankVolumeFactor</tspan></text>
+        xml:space="preserve"><tspan y="416.20901" x="196.72588" id="tspan8215">+ <tspan id="tankVolumeFactor">tankVolumeFactor</tspan> x</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="92.297318" y="415.94754" id="solarContribCalcI"><tspan y="415.94754" x="92.297318" id="tspan8221">(        x</tspan></text>
-  <text xml:space="preserve"
-        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="92.297318" y="415.94754" id="solarContribCalcI2"><tspan y="415.94754" x="92.297318" id="solarCollectorSizeFactor"></tspan>solarCollectorSizeFactor</text>
+        x="92.297318" y="415.94754" id="solarContribCalcI"><tspan y="415.94754" x="92.297318" id="tspan8221">(  <tspan id="solarCollectorSizeFactor">solarCollectorSizeFactor</tspan> x</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         x="548.72589" y="415.81064" id="text8223"><tspan y="415.81064" x="550.70197" id="tspan8227">= </tspan></text>
@@ -730,18 +721,12 @@
         x="365.65234" y="506.43915" id="supplementaryHeatPumpI"><tspan y="506.43915" x="365.65234" id="supplementaryHeatPumpSeasonalSpaceHeatingEfficiency">supplementaryHeatPumpSeasonalSpaceHeatingEfficiency</tspan></text>
   <text id="supplementarHeatPumpCalc" y="506.17767" x="459.1543"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="tspan8433" x="459.1543" y="506.17767"> –          )  x         =</tspan></text>
-  <text id="supplementarHeatPumpCalc2" y="506.17767" x="459.1543"
-        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="preferentialHeaterSeasonalSpaceHeatingEfficiency3" x="429.1543" y="506.17767">preferentialHeaterSeasonalSpaceHeatingEfficiency3</tspan></text>
-  <text id="supplementarHeatPumpCalc3" y="506.17767" x="459.1543"
-        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="supplementaryBoilerFactor1" x="489.1543" y="506.17767">supplementaryBoilerFactor1</tspan></text>
+        xml:space="preserve"><tspan id="tspan8433" x="459.1543" y="506.17767"> –  <tspan id="preferentialHeaterSeasonalSpaceHeatingEfficiency3">preferentialHeaterSeasonalSpaceHeatingEfficiency3</tspan>  )  x  <tspan id="supplementaryHeatPumpFactor1">supplementaryHeatPumpFactor1</tspan>  =</tspan></text>
   <text xml:space="preserve" x="608.59204" y="507.83173" id="supplementaryHeatPumpContributionEfficiency"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="507.83173" x="608.59204" id="supplementaryHeatPumpContribution1">supplementaryHeatPumpContribution1</tspan></text>
   <text id="solarOfSolarAndHeatPump" y="576.35217" x="339.42667"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan y="576.35217" x="339.42667" id="solarContributionDecimal2">solarContributionDecimal2</tspan></text>
+        xml:space="preserve"><tspan y="576.35217" x="339.42667" id="solarContribution2">solarContribution2</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         x="505.46841" y="576.35217" id="heatPumpOfSolarAndHeatPump"><tspan y="576.35217" x="505.46841" id="supplementaryHeatPumpContribution2">supplementaryHeatPumpContribution2</tspan></text>
@@ -788,7 +773,7 @@
         xml:space="preserve"><tspan y="900.17719" x="372.44907" id="tspan3802">+     (   50    x            )      =</tspan></text>
   <text id="heatPumpLowTempEmittersCald2" y="900.17719" x="372.44907"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan y="900.17719" x="467.44907" id="supplementaryBoilerFactor2">supplementaryBoilerFactor2</tspan></text>
+        xml:space="preserve"><tspan y="900.17719" x="467.44907" id="supplementaryHeatPumpFactor2">supplementaryHeatPumpFactor2</tspan></text>
   <text xml:space="preserve" x="609.8576" y="901.83173" id="lowTempHeatEmitters"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="901.83173" x="609.8576" id="lowTemperatureHeatEmitters">lowTemperatureHeatEmitters</tspan></text>
   <text xml:space="preserve"

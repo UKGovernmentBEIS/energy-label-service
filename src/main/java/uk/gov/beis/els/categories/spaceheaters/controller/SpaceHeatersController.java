@@ -310,6 +310,17 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/package-space-heater/boiler/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesBoilerFicheSubmit(@Valid @ModelAttribute("form") BoilerPackagesCalculatorForm form,
+                                                                BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form));
+    }
+  }
+
   @GetMapping("/package-space-heater/heat-pump/calculator")
   public ModelAndView renderSpaceHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpPackagesCalculatorForm form) {
     return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
