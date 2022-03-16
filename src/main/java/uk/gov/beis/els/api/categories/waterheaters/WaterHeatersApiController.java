@@ -130,4 +130,12 @@ public class WaterHeatersApiController {
         waterHeatersService.generateHtml(waterHeatersService.toWaterSolarPackagesForm(form),
             WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
   }
+
+  @Operation(summary = "Packages of water heater and solar device: fiche")
+  @PostMapping("/packages-of-water-heater-and-solar-device/calculate/fiche")
+  public Object waterHeaterSolarDevicePackageFiche(@RequestBody @Valid WaterSolarPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        waterHeatersService.generateFicheHtml(form)
+    );
+  }
 }
