@@ -104,13 +104,13 @@
   <text id="tempControlRating" y="196.01645" x="608.65839" xml:space="preserve" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd"><tspan id="temperatureControlEfficiency" x="608.65839" y="196.01645" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd">temperatureControlEfficiency</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="396.23422" y="176.45758" id="text6085"><tspan  id="tspan9323" x="276.23422" y="176.45758">Class I = 1 %, Class II = 2 %, Class III = 1,5 %,</tspan></text>
+        x="396.23422" y="176.45758" id="text6085"><tspan  id="tspan9323" x="276.23422" y="176.45758">Class I = 1 %, Class II = 2 %, Class III = 1.5 %,</tspan></text>
   <text id="text9305" y="191.66931" x="396.23422"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan  id="tspan9325" x="276.23422" y="191.66931">Class IV = 2 %, Class V = 3%, Class VI =4 %,</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="396.07187" y="206.09277" id="text9313"><tspan  id="tspan9321" x="276.23422" y="206.09277">Class VII = 3,5 %, Class VIII = 5%</tspan></text>
+        x="396.07187" y="206.09277" id="text9313"><tspan  id="tspan9321" x="276.23422" y="206.09277">Class VII = 3.5 %, Class VIII = 5%</tspan></text>
   <text id="text6097" y="197.54004" x="563.34357" xml:space="preserve"><tspan style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#40acdd" y="197.54004" x="563.34357" id="tspan6099">+</tspan></text>
   <path id="path6401" d="m 66.285716,236.21933 600.714304,0"
         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
@@ -241,7 +241,7 @@
           xml:space="preserve"><tspan y="414.77563" x="447.27338" id="tspan8193">/ 100 )   x   </tspan></text>
     <text xml:space="preserve"
           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-          x="315.2973" y="414.77563" id="solarContribCalcIII"><tspan y="414.77563" x="315.2973" id="tspan8209">)  x  0,7  x  (</tspan></text>
+          x="315.2973" y="414.77563" id="solarContribCalcIII"><tspan y="414.77563" x="315.2973" id="tspan8209">)  x  0.7  x  (</tspan></text>
     <text id="solarContribCalcII" y="416.18811" x="196.72588"
           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
           xml:space="preserve"><tspan y="416.18811" x="196.72588" id="tspan8215">+ <tspan id="tankVolumeFactor">tankVolumeFactor</tspan> x</tspan></text>
@@ -297,13 +297,13 @@
         x="507.96863" y="370.06729" id="text3747"><tspan id="tspan3757" x="507.96863" y="370.06729"> </tspan></text>
   <text id="text8173" y="382.87308" x="508.24115"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="tspan3773" x="508.24115" y="382.87308">A+ = 0,95, A = 0,91,</tspan></text>
+        xml:space="preserve"><tspan id="tspan3773" x="508.24115" y="382.87308">A+ = 0.95, A = 0.91,</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="507.79758" y="395.30789" id="text3762"><tspan id="tspan3775" x="507.79758" y="395.30789">B = 0,86, C = 0,83,</tspan></text>
+        x="507.79758" y="395.30789" id="text3762"><tspan id="tspan3775" x="507.79758" y="395.30789">B = 0.86, C = 0.83,</tspan></text>
   <text id="text3768" y="407.68759" x="508.34262"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.875px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="tspan3777" x="508.34262" y="407.68759">D-G = 0,81</tspan></text>
+        xml:space="preserve"><tspan id="tspan3777" x="508.34262" y="407.68759">D-G = 0.81</tspan></text>
   <g id="g10363">
     <text xml:space="preserve"
           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
