@@ -16,40 +16,56 @@ import uk.gov.beis.els.model.RatingClass;
 public class SpaceHeaterPackagesCalculatorService {
 
   private static final Map<Integer, RatingClass> RATING_THRESHOLDS;
+  private static final Map<Integer, RatingClass> LOW_TEMPERATURE_HEAT_PUMP_RATING_THRESHOLDS;
 
   static {
-    Map<Integer, RatingClass> aMap = new LinkedHashMap<>();
-    aMap.put(150, RatingClass.APPP);
-    aMap.put(125, RatingClass.APP);
-    aMap.put(98, RatingClass.AP);
-    aMap.put(90, RatingClass.A);
-    aMap.put(82, RatingClass.B);
-    aMap.put(75, RatingClass.C);
-    aMap.put(36, RatingClass.D);
-    aMap.put(34, RatingClass.E);
-    aMap.put(30, RatingClass.F);
-    aMap.put(0, RatingClass.G);
-    RATING_THRESHOLDS = Collections.unmodifiableMap(aMap);
+    Map<Integer, RatingClass> thresholds = new LinkedHashMap<>();
+    thresholds.put(150, RatingClass.APPP);
+    thresholds.put(125, RatingClass.APP);
+    thresholds.put(98, RatingClass.AP);
+    thresholds.put(90, RatingClass.A);
+    thresholds.put(82, RatingClass.B);
+    thresholds.put(75, RatingClass.C);
+    thresholds.put(36, RatingClass.D);
+    thresholds.put(34, RatingClass.E);
+    thresholds.put(30, RatingClass.F);
+    thresholds.put(0, RatingClass.G);
+    RATING_THRESHOLDS = Collections.unmodifiableMap(thresholds);
+
+    Map<Integer, RatingClass> lowTemperatureHeatPumpThresholds = new LinkedHashMap<>();
+    lowTemperatureHeatPumpThresholds.put(175, RatingClass.APPP);
+    lowTemperatureHeatPumpThresholds.put(150, RatingClass.APP);
+    lowTemperatureHeatPumpThresholds.put(123, RatingClass.AP);
+    lowTemperatureHeatPumpThresholds.put(115, RatingClass.A);
+    lowTemperatureHeatPumpThresholds.put(107, RatingClass.B);
+    lowTemperatureHeatPumpThresholds.put(100, RatingClass.C);
+    lowTemperatureHeatPumpThresholds.put(61, RatingClass.D);
+    lowTemperatureHeatPumpThresholds.put(59, RatingClass.E);
+    lowTemperatureHeatPumpThresholds.put(55, RatingClass.F);
+    lowTemperatureHeatPumpThresholds.put(0, RatingClass.G);
+    LOW_TEMPERATURE_HEAT_PUMP_RATING_THRESHOLDS = Collections.unmodifiableMap(lowTemperatureHeatPumpThresholds);
   }
 
   public RatingClass gePreferentialHeaterEfficiencyClass(SpaceHeaterPackagesCalculatorForm form) {
-    int key = RATING_THRESHOLDS.keySet()
+    Map<Integer, RatingClass> thresholdMap = thresholdMapSelector(form);
+    int key = thresholdMap.keySet()
         .stream()
         .filter(integer -> getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) * 100 >= integer)
         .findFirst()
         .orElse(0);
 
-    return RATING_THRESHOLDS.get(key);
+    return thresholdMap.get(key);
   }
 
   public RatingClass getPackageSpaceHeatingEfficiencyClass(SpaceHeaterPackagesCalculatorForm form) {
-    int key = RATING_THRESHOLDS.keySet()
+    Map<Integer, RatingClass> thresholdMap = thresholdMapSelector(form);
+    int key = thresholdMap.keySet()
         .stream()
         .filter(integer -> getPackageSpaceHeatingEfficiencyDecimal(form) * 100 >= integer)
         .findFirst()
         .orElse(0);
 
-    return RATING_THRESHOLDS.get(key);
+    return thresholdMap.get(key);
   }
 
   public float getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
@@ -281,12 +297,12 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getPackageSpaceHeatingEfficiencyColderDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) -
+    return getPackageSpaceHeatingEfficiencyDecimal(form) -
         getPreferentialHeatPumpColderDifferenceDecimal(form);
   }
 
   public float getPackageSpaceHeatingEfficiencyWarmerDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) +
+    return getPackageSpaceHeatingEfficiencyDecimal(form) +
         getPreferentialHeatPumpWarmerDifferenceDecimal(form);
   }
 
@@ -297,5 +313,15 @@ public class SpaceHeaterPackagesCalculatorService {
   private float interpolate(float fromA, float toA, float fromB, float toB, float value) {
     float proportionOfRange = (value - fromA) / (toA - fromA);
     return fromB + (toB - fromB) * proportionOfRange;
+  }
+
+  private Map<Integer, RatingClass> thresholdMapSelector(SpaceHeaterPackagesCalculatorForm form) {
+    if (form instanceof HeatPumpPackagesCalculatorForm) {
+      HeatPumpPackagesCalculatorForm heatPumpForm = (HeatPumpPackagesCalculatorForm) form;
+      if (heatPumpForm.getLowTemperatureHeatPump()) {
+        return LOW_TEMPERATURE_HEAT_PUMP_RATING_THRESHOLDS;
+      }
+    }
+    return RATING_THRESHOLDS;
   }
 }
