@@ -291,11 +291,6 @@ public class SpaceHeatersService {
             Math.abs(spaceHeaterPackagesCalculatorService.getSolarContributionAndHeatPumpDecimal(form)), 1))
         .setText("packageSpaceHeatingEfficiency1",
             uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency))
-        .setText("packageSpaceHeatingEfficiency2",
-            uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency, 2))
-        .setText("supplementaryHeatPumpFactor2", supplementaryHeatPumpFactor)
-        .setText("lowTemperatureHeatEmitters", uk.gov.beis.els.util.StringUtils.toPercentage(
-            spaceHeaterPackagesCalculatorService.getLowTemperatureHeatEmitters(form)))
         .applyCssClassToId(
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
@@ -323,10 +318,18 @@ public class SpaceHeatersService {
     if (form.getHasSupplementaryHeatPump()) {
       templatePopulator
           .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", String.format("%.2f",
-              Float.parseFloat(form.getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage())));
+              Float.parseFloat(form.getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage())))
+          .setText("packageSpaceHeatingEfficiency2",
+              uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency, 2))
+          .setText("supplementaryHeatPumpFactor2", supplementaryHeatPumpFactor)
+          .setText("lowTemperatureHeatEmitters", uk.gov.beis.els.util.StringUtils.toPercentage(
+              spaceHeaterPackagesCalculatorService.getLowTemperatureHeatEmitters(form)));
     } else {
       templatePopulator
-          .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", "0.00");
+          .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", "0.00")
+          .setText("packageSpaceHeatingEfficiency2","")
+          .setText("supplementaryHeatPumpFactor2", "")
+          .setText("lowTemperatureHeatEmitters", "");
     }
 
     return templatePopulator.asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE, form);
