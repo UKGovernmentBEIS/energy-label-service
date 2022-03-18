@@ -131,6 +131,16 @@
         to see what's changed and update your application if necessary.
       </p>
 
+      <h2 class="govuk-heading-m" id="cors">
+        Cross-origin requests
+      </h2>
+      <p class="govuk-body">
+        Cross-origin requests are not supported by the API, so you can't make API requests directly from client side code in a web browser.
+      </p>
+      <p class="govuk-body">
+        If you want to integrate the API with a web application, please route requests through a back-end service.
+      </p>
+
       <h2 class="govuk-heading-m" id="availability">
         Availability
       </h2>
