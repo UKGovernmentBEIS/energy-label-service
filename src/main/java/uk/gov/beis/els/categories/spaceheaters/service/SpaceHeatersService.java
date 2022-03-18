@@ -441,9 +441,9 @@ public class SpaceHeatersService {
         .setText("packageSpaceHeatingEfficiency3",
             uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency, 2))
         .setText("preferentialHeatPumpColderDifference", uk.gov.beis.els.util.StringUtils.toPercentage(
-            preferentialHeatPumpColderDifference, 2))
+            Math.abs(preferentialHeatPumpColderDifference), 2))
         .setText("preferentialHeatPumpWarmerDifference", uk.gov.beis.els.util.StringUtils.toPercentage(
-            preferentialHeatPumpWarmerDifference, 2))
+            Math.abs(preferentialHeatPumpWarmerDifference), 2))
         .setText("packageSpaceHeatingEfficiencyColder", uk.gov.beis.els.util.StringUtils.toPercentage(
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)))
         .setText("packageSpaceHeatingEfficiencyWarmer", uk.gov.beis.els.util.StringUtils.toPercentage(
@@ -481,8 +481,8 @@ public class SpaceHeatersService {
           .setText("storageTankRating", "");
     }
 
-    if (preferentialHeatPumpColderDifference < 0) {
-      templatePopulator.setText("signColder", "-");
+    if (preferentialHeatPumpColderDifference >= 0) {
+      templatePopulator.setText("signColder", "+");
     } else {
       templatePopulator.setText("signColder", "-");
     }
@@ -490,7 +490,7 @@ public class SpaceHeatersService {
     if (preferentialHeatPumpWarmerDifference >= 0) {
       templatePopulator.setText("signWarmer", "+");
     } else {
-      templatePopulator.setText("signWarmer", "+");
+      templatePopulator.setText("signWarmer", "-");
     }
 
     return templatePopulator.asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE, form);

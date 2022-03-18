@@ -112,7 +112,7 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     assertThat(spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form)).isEqualTo(0);
     assertThat(spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form)).isEqualTo(0);
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.42F);
-    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)).isEqualTo(0.089999974F);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)).isEqualTo(0.75F);
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)).isEqualTo(0.9499999F);
   }
 }
