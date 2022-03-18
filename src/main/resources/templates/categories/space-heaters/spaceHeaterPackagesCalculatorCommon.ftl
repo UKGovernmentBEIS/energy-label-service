@@ -1,8 +1,10 @@
 <#include '../../layout.ftl'>
 
-<#macro commonSpaceHeaterPackagesCalculatorFields>
-  <@govukTextInput.textInput path="form.preferentialHeaterHeatOutput"/>
-  <@govukTextInput.textInput path="form.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage"/>
+<#macro commonSpaceHeaterPackagesCalculatorFields showPreferentialHeaterInputs=true>
+  <#if showPreferentialHeaterInputs>
+    <@govukTextInput.textInput path="form.preferentialHeaterHeatOutput"/>
+    <@govukTextInput.textInput path="form.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage"/>
+  </#if>
 
   <@govukRadios.radioYesNo path="form.hasTemperatureControl" hiddenQuestionsWithYesSelected=true legendSize="h3">
     <@govukSelect.select path="form.temperatureControlClass" options=temperatureControlClass/>
