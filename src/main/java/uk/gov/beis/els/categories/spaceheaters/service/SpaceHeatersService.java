@@ -412,6 +412,8 @@ public class SpaceHeatersService {
         form);
     float packageSpaceHeatingEfficiency = spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(
         form);
+    float preferentialHeatPumpWarmerDifference = spaceHeaterPackagesCalculatorService.getPreferentialHeatPumpWarmerDifferenceDecimal(form);
+    float preferentialHeatPumpColderDifference = spaceHeaterPackagesCalculatorService.getPreferentialHeatPumpColderDifferenceDecimal(form);
 
     templatePopulator
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency1",
@@ -439,13 +441,13 @@ public class SpaceHeatersService {
         .setText("packageSpaceHeatingEfficiency3",
             uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency, 2))
         .setText("preferentialHeatPumpColderDifference", uk.gov.beis.els.util.StringUtils.toPercentage(
-            spaceHeaterPackagesCalculatorService.getPreferentialHeatPumpColderDifferenceDecimal(form), 2))
+            preferentialHeatPumpColderDifference, 2))
         .setText("preferentialHeatPumpWarmerDifference", uk.gov.beis.els.util.StringUtils.toPercentage(
-            spaceHeaterPackagesCalculatorService.getPreferentialHeatPumpWarmerDifferenceDecimal(form), 2))
+            preferentialHeatPumpWarmerDifference, 2))
         .setText("packageSpaceHeatingEfficiencyColder", uk.gov.beis.els.util.StringUtils.toPercentage(
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)))
         .setText("packageSpaceHeatingEfficiencyWarmer", uk.gov.beis.els.util.StringUtils.toPercentage(
-            spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form))) //wrong
+            spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)))
         .applyCssClassToId(
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
@@ -477,6 +479,18 @@ public class SpaceHeatersService {
     } else {
       templatePopulator
           .setText("storageTankRating", "");
+    }
+
+    if (preferentialHeatPumpColderDifference < 0) {
+      templatePopulator.setText("signColder", "-");
+    } else {
+      templatePopulator.setText("signColder", "-");
+    }
+
+    if (preferentialHeatPumpWarmerDifference >= 0) {
+      templatePopulator.setText("signWarmer", "+");
+    } else {
+      templatePopulator.setText("signWarmer", "+");
     }
 
     return templatePopulator.asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE, form);
