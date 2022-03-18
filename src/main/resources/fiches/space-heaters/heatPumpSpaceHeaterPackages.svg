@@ -714,10 +714,7 @@
         x="71.499664" y="823.68304" id="text4128"><tspan id="tspan4130" x="71.499664" y="823.68304" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:start;writing-mode:lr-tb;text-anchor:start">Colder:</tspan></text>
   <text id="text4164" y="823.61694" x="276.74368"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="tspan4166" x="276.74368" y="823.61694">–        =</tspan></text>
-  <text id="text41642" y="823.61694" x="276.74368"
-        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="preferentialHeatPumpColderDifference" x="276.74368" y="823.61694">preferentialHeatPumpColderDifference</tspan></text>
+        xml:space="preserve"><tspan id="tspan4166" x="276.74368" y="823.61694">–  <tspan id="preferentialHeatPumpColderDifference">preferentialHeatPumpColderDifference</tspan>  =</tspan></text>
   <text id="text4180" y="863.59955" x="71.499664"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start" y="863.59955" x="71.499664" id="tspan4182">Warmer:</tspan></text>
@@ -726,10 +723,7 @@
     id="rect4184" width="39.098366" height="18.861153" x="193.79846" y="849.15222"></rect>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="276.33316" y="863.61694" id="text4186"><tspan y="863.61694" x="276.33316" id="tspan4188">+        =</tspan></text>
-  <text xml:space="preserve"
-        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="276.33316" y="863.61694" id="text41862"><tspan y="863.61694" x="276.33316" id="preferentialHeatPumpWarmerDifference">preferentialHeatPumpWarmerDifference</tspan></text>
+        x="276.33316" y="863.61694" id="text4186"><tspan y="863.61694" x="276.33316" id="tspan4188">+  <tspan id="preferentialHeatPumpWarmerDifference">preferentialHeatPumpWarmerDifference</tspan>  =</tspan></text>
   <rect y="843.99915" x="326.99774" height="29.167337" width="52.440262" id="rect4190"
         style="opacity:1;fill:none;fill-opacity:1;stroke:#40acdd;stroke-width:3;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"></rect>
   <text id="text4192" y="864.13123" x="382.63058" xml:space="preserve"

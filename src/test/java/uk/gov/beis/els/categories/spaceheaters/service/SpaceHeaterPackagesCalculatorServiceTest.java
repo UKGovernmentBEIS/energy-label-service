@@ -58,13 +58,13 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
   @Test
   public void heatPumpPackage_givenValues_assertValues() {
     HeatPumpPackagesCalculatorForm form = new HeatPumpPackagesCalculatorForm();
-    form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage("75");
-    form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage("95");
+    form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage("70");
+    form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage("90");
     form.setLowTemperatureHeatPump(true);
     form.setSupplierName("FR Industries");
     form.setModelName("FR-042");
     form.setPreferentialHeaterHeatOutput("42");
-    form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("42");
+    form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("80");
     form.setHasTemperatureControl(true);
     form.setTemperatureControlClass(TemperatureControlClass.V.name());
     form.setHasSupplementaryBoiler(true);
@@ -80,13 +80,13 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
 
     assertThat(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(form)).isEqualTo(RatingClass.D);
     assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)).isEqualTo(RatingClass.D);
-    assertThat(spaceHeaterPackagesCalculatorService.getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.42F);
+    assertThat(spaceHeaterPackagesCalculatorService.getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.8F);
     assertThat(spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form)).isEqualTo(0.03F);
-    assertThat(spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form)).isEqualTo(0.0F);
+    assertThat(spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form)).isEqualTo(-0.0076F);
     assertThat(spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form)).isEqualTo(0.0434595F);
-    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.4934595F);
-    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)).isEqualTo(0.089999974F);
-    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)).isEqualTo(0.9499999F);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)).isEqualTo(0.86585945F);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)).isEqualTo(0.7658594F);
+    assertThat(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)).isEqualTo(0.9658594F);
   }
 
   @Test
@@ -94,7 +94,7 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     HeatPumpPackagesCalculatorForm form = new HeatPumpPackagesCalculatorForm();
     form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage("75");
     form.setPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage("95");
-    form.setLowTemperatureHeatPump(true);
+    form.setLowTemperatureHeatPump(false);
     form.setSupplierName("FR Industries");
     form.setModelName("FR-042");
     form.setPreferentialHeaterHeatOutput("42");
