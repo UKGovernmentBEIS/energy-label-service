@@ -28,7 +28,7 @@ public class BoilerPackagesCalculatorForm extends SpaceHeaterPackagesCalculatorF
   @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary heat pump, up to 3 digits long",
             groups = SupplementaryHeatPumpGroup.class)
   @Schema(type = "integer")
-  @NotNull(groups = SupplementaryHeatPumpGroup.class, message = "Enter the seasonal space heating energy efficiency of supplementary heat pum")
+  @NotNull(groups = SupplementaryHeatPumpGroup.class, message = "Enter the seasonal space heating energy efficiency of supplementary heat pump")
   private String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage;
 
   @Override
