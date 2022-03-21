@@ -256,7 +256,7 @@ public class SpaceHeatersService {
     float solarContribution = spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form);
     String supplementaryHeatPumpFactor =
         String.format("%.2f", spaceHeaterPackagesCalculatorService.getSupplementaryHeatPumpFactor(form));
-    String supplementaryHeatPumpContribution = uk.gov.beis.els.util.StringUtils.toPercentage(
+    String supplementaryHeatPumpContribution = TemplatePopulator.decimalToPercentage(
         spaceHeaterPackagesCalculatorService.getSupplementaryHeatPumpContributionDecimal(form)
         ,1
     );
@@ -265,14 +265,14 @@ public class SpaceHeatersService {
 
     templatePopulator
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency1",
-            uk.gov.beis.els.util.StringUtils.toPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
-        .setText("temperatureControlEfficiency", uk.gov.beis.els.util.StringUtils.toPercentage(
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
+        .setText("temperatureControlEfficiency", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form), 1))
-        .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyDecimal(form), 2))
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency2",
-            uk.gov.beis.els.util.StringUtils.toPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
-        .setText("supplementaryBoilerContribution", uk.gov.beis.els.util.StringUtils.toPercentage(
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+        .setText("supplementaryBoilerContribution", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form), 1))
         .setText("solarCollectorSizeFactor",
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getSolarCollectorSizeFactor(form)))
@@ -280,17 +280,17 @@ public class SpaceHeatersService {
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getTankVolumeFactor(form)))
         .setText("storageTankVolumeMetersCubed",
             String.format("%.3f", spaceHeaterPackagesCalculatorService.getStorageTankVolumeMetersCubed(form)))
-        .setText("solarContribution1", uk.gov.beis.els.util.StringUtils.toPercentage(solarContribution, 1))
+        .setText("solarContribution1", TemplatePopulator.decimalToPercentage(solarContribution, 1))
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency3",
-            uk.gov.beis.els.util.StringUtils.toPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
         .setText("supplementaryHeatPumpFactor1", supplementaryHeatPumpFactor)
         .setText("supplementaryHeatPumpContribution1", supplementaryHeatPumpContribution)
-        .setText("solarContribution2", uk.gov.beis.els.util.StringUtils.toPercentage(solarContribution, 2))
+        .setText("solarContribution2", TemplatePopulator.decimalToPercentage(solarContribution, 2))
         .setText("supplementaryHeatPumpContribution2", supplementaryHeatPumpContribution)
-        .setText("solarContributionAndHeatPump", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("solarContributionAndHeatPump", TemplatePopulator.decimalToPercentage(
             Math.abs(spaceHeaterPackagesCalculatorService.getSolarContributionAndHeatPumpDecimal(form)), 1))
         .setText("packageSpaceHeatingEfficiency1",
-            uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency))
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency))
         .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
         .setText("solarCollectorEfficiencyPercentage",
             String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
@@ -312,9 +312,9 @@ public class SpaceHeatersService {
           .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", String.format("%.2f",
               Float.parseFloat(form.getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage())))
           .setText("packageSpaceHeatingEfficiency2",
-              uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency, 2))
+              TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency, 2))
           .setText("supplementaryHeatPumpFactor2", supplementaryHeatPumpFactor)
-          .setText("lowTemperatureHeatEmitters", uk.gov.beis.els.util.StringUtils.toPercentage(
+          .setText("lowTemperatureHeatEmitters", TemplatePopulator.decimalToPercentage(
               spaceHeaterPackagesCalculatorService.getLowTemperatureHeatEmitters(form)));
     } else {
       templatePopulator
@@ -335,14 +335,14 @@ public class SpaceHeatersService {
 
     templatePopulator
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency1",
-            uk.gov.beis.els.util.StringUtils.toPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
-        .setText("temperatureControlEfficiency", uk.gov.beis.els.util.StringUtils.toPercentage(
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
+        .setText("temperatureControlEfficiency", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form), 1))
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency2",
-            uk.gov.beis.els.util.StringUtils.toPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
         .setText("supplementaryBoilerFactor",
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getSupplementaryBoilerFactor(form)))
-        .setText("supplementaryBoilerContribution", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("supplementaryBoilerContribution", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form), 1))
         .setText("solarCollectorSizeFactor",
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getSolarCollectorSizeFactor(form)))
@@ -350,9 +350,9 @@ public class SpaceHeatersService {
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getTankVolumeFactor(form)))
         .setText("storageTankVolumeMetersCubed",
             String.format("%.3f", spaceHeaterPackagesCalculatorService.getStorageTankVolumeMetersCubed(form)))
-        .setText("solarContribution", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("solarContribution", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form), 1))
-        .setText("packageSpaceHeatingEfficiency", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("packageSpaceHeatingEfficiency", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)))
         .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
         .setText("solarCollectorEfficiencyPercentage",
@@ -401,14 +401,14 @@ public class SpaceHeatersService {
 
     templatePopulator
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency1",
-            uk.gov.beis.els.util.StringUtils.toPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
-        .setText("temperatureControlEfficiency", uk.gov.beis.els.util.StringUtils.toPercentage(
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
+        .setText("temperatureControlEfficiency", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form), 1))
         .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency2",
-            uk.gov.beis.els.util.StringUtils.toPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
         .setText("supplementaryBoilerFactor",
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getSupplementaryBoilerFactor(form)))
-        .setText("supplementaryBoilerContribution", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("supplementaryBoilerContribution", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form), 1))
         .setText("solarCollectorSizeFactor",
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getSolarCollectorSizeFactor(form)))
@@ -416,21 +416,21 @@ public class SpaceHeatersService {
             String.format("%.2f", spaceHeaterPackagesCalculatorService.getTankVolumeFactor(form)))
         .setText("storageTankVolumeMetersCubed",
             String.format("%.3f", spaceHeaterPackagesCalculatorService.getStorageTankVolumeMetersCubed(form)))
-        .setText("solarContribution", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("solarContribution", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form), 1))
         .setText("packageSpaceHeatingEfficiency1",
-            uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency))
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency))
         .setText("packageSpaceHeatingEfficiency2",
-            uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency, 2))
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency, 2))
         .setText("packageSpaceHeatingEfficiency3",
-            uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency, 2))
-        .setText("preferentialHeatPumpColderDifference", uk.gov.beis.els.util.StringUtils.toPercentage(
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency, 2))
+        .setText("preferentialHeatPumpColderDifference", TemplatePopulator.decimalToPercentage(
             Math.abs(preferentialHeatPumpColderDifference), 2))
-        .setText("preferentialHeatPumpWarmerDifference", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("preferentialHeatPumpWarmerDifference", TemplatePopulator.decimalToPercentage(
             Math.abs(preferentialHeatPumpWarmerDifference), 2))
-        .setText("packageSpaceHeatingEfficiencyColder", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("packageSpaceHeatingEfficiencyColder", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)))
-        .setText("packageSpaceHeatingEfficiencyWarmer", uk.gov.beis.els.util.StringUtils.toPercentage(
+        .setText("packageSpaceHeatingEfficiencyWarmer", TemplatePopulator.decimalToPercentage(
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)))
         .setText("solarCollectorEfficiencyPercentage",
             String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
