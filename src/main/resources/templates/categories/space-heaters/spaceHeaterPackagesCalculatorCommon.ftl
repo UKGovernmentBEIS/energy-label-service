@@ -6,10 +6,10 @@
     <@govukTextInput.textInput path="form.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage"/>
   </#if>
 
-    <@govukFieldset.fieldset legendHeading="Solar Collector" legendSize="h2">
-      <@govukTextInput.textInput path="form.solarCollectorSize"/>
-      <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
-    </@govukFieldset.fieldset>
+  <@govukFieldset.fieldset legendHeading="Solar Collector" legendSize="h2">
+    <@govukTextInput.textInput path="form.solarCollectorSize"/>
+    <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
+  </@govukFieldset.fieldset>
 
   <@govukRadios.radioYesNo path="form.hasTemperatureControl" hiddenQuestionsWithYesSelected=true legendSize="h3">
     <@govukSelect.select path="form.temperatureControlClass" options=temperatureControlClass/>
