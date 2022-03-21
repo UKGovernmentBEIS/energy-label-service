@@ -287,17 +287,17 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getPreferentialHeatPumpColderDifferenceDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return Math.abs(getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) -
-        getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderDecimal((HeatPumpPackagesCalculatorForm) form));
+    return getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderDecimal((HeatPumpPackagesCalculatorForm) form) -
+        getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form);
   }
 
   public float getPreferentialHeatPumpWarmerDifferenceDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return Math.abs(getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form) -
-        getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerDecimal((HeatPumpPackagesCalculatorForm) form));
+    return getPreferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerDecimal((HeatPumpPackagesCalculatorForm) form) -
+        getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form);
   }
 
   public float getPackageSpaceHeatingEfficiencyColderDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return getPackageSpaceHeatingEfficiencyDecimal(form) -
+    return getPackageSpaceHeatingEfficiencyDecimal(form) +
         getPreferentialHeatPumpColderDifferenceDecimal(form);
   }
 
