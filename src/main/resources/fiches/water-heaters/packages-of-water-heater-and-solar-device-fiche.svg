@@ -1,6 +1,15 @@
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1"
-     id="svg4375" viewBox="0 0 744.09448819 1052.3622047" width="744.09448819" height="1052.3622047">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+     id="Layer_1" data-name="Layer 1" viewBox="0 0 744 1052" width="744" height="1052">
   <defs id="defs4377">
+    <style>
+      .ficheTick {
+        visibility: hidden;
+      }
+
+      .ficheTick.shown {
+        visibility: visible;
+      }
+    </style>
     <marker style="overflow:visible" id="DotM" refX="0.0" refY="0.0" orient="auto">
       <path transform="scale(0.4) translate(7.4, 1)"
             style="fill-rule:evenodd;stroke:#40acdd;stroke-width:1pt;stroke-opacity:1;fill:#40acdd;fill-opacity:1"
@@ -681,16 +690,16 @@
         x="331.51144" y="149.67673"><tspan y="149.67673" x="331.51144" id="declaredLoadProfile">declaredLoadProfile</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="323.15442" y="285.95898" id="whCalcI"><tspan y="285.95898" x="323.15442" id="tspan6801">(1.1   x    <tspan id="waterHeatingEfficiency2">waterHeatingEfficiency2</tspan>   –    10 %)   x     <tspan>nonSolarScalingFactor</tspan>   –</tspan></text>
+        x="323.15442" y="285.95898" id="whCalcI"><tspan y="285.95898" x="323.15442" id="tspan6801">(1.1   x    <tspan id="waterHeatingEfficiency2">waterHeatingEfficiency2</tspan>   –    10 %)   x     <tspan id="nonSolarScalingFactor">nonSolarScalingFactor</tspan>   –</tspan></text>
   <text y="287.37146" x="379.93805"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan id="auxElectricityConsumptionProportion" x="379.93805" y="287.37146">auxElectricityConsumptionProportion</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="429.2973" y="287.37146" id="whCalcII"><tspan y="287.37146" x="429.2973" id="tspan8044">–    100     =</tspan></text>
+        x="429.2973" y="287.37146" id="whCalcII"><tspan y="287.37146" x="429.2973" id="tspan8044">–    <tspan id="waterHeatingEfficiency3">waterHeatingEfficiency3</tspan>     =</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        x="597.12085" y="288.78491" id="waterHeaterSolarContributionEfficiency"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="288.78491" x="597.12085" id="solarContribution">solarContribution</tspan></text>
+        x="597.12085" y="288.78491"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" y="288.78491" x="597.12085" id="solarContribution1">solarContribution1</tspan></text>
   <text y="373.30798" x="597.13495"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan id="packageWaterHeatingEfficiency" x="597.13495" y="373.30798" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd">packageWaterHeatingEfficiency</tspan></text>
@@ -702,58 +711,58 @@
         x="311.2634" y="812.45697" id="colder2"><tspan id="solarContribution2" x="311.2634" y="812.45697" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle">solarContribution2</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        y="813.823" x="393.68073" id="packageWaterHeatingEfficiencyColder"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" x="393.68073" y="813.823" id="tspan6833">packageWaterHeatingEfficiencyColder</tspan></text>
+        y="813.823" x="393.68073"><tspan id="packageWaterHeatingEfficiencyColder" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" x="393.68073" y="813.823">packageWaterHeatingEfficiencyColder</tspan></text>
   <text x="186.08481" y="868.58563"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="packageWaterHeatingEfficiency2" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle" x="186.08481" y="868.58563">packageWaterHeatingEfficiency3</tspan></text>
+        xml:space="preserve"><tspan id="packageWaterHeatingEfficiency3" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle" x="186.08481" y="868.58563">packageWaterHeatingEfficiency3</tspan></text>
   <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         y="868.67609" x="311.2634" id="warmer2"><tspan id="solarContribution3" y="868.67609" x="311.2634" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.24999905px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle">solarContribution3</tspan></text>
-  <text id="warmerWaterHeaterPackageEfficiency" y="870.04211" x="393.68073"
+  <text xml:space="preserve"
         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-        xml:space="preserve"><tspan id="packageWaterHeatingEfficiencyWarmer" y="870.04211" x="393.68073" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd">packageWaterHeatingEfficiencyWarmer</tspan></text>
+        y="870.04211" x="393.68073"><tspan id="packageWaterHeatingEfficiencyWarmer" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.125px;line-height:125%;font-family:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#40acdd" x="393.68073" y="870.04211">packageWaterHeatingEfficiencyWarmer</tspan></text>
 
-  <text id="labelClassTickA+++" y="516.60974" x="590.38477"
+  <text id="labelClassTickA+++" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="590.38477">×</tspan></text>
-  <text id="labelClassTickA++" y="516.60974" x="590.38477"
+  <text id="labelClassTickA++" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="543">×</tspan></text>
-  <text id="labelClassTickA+" y="516.60974" x="590.38477"
+  <text id="labelClassTickA+" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="495">×</tspan></text>
-  <text id="labelClassTickA" y="516.60974" x="590.38477"
+  <text id="labelClassTickA" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="447.5">×</tspan></text>
-  <text id="labelClassTickB" y="516.60974" x="590.38477"
+  <text id="labelClassTickB" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="400">×</tspan></text>
-  <text id="labelClassTickC" y="516.60974" x="590.38477"
+  <text id="labelClassTickC" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="352">×</tspan></text>
-  <text id="labelClassTickD" y="516.60974" x="590.38477"
+  <text id="labelClassTickD" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="304">×</tspan></text>
-  <text id="labelClassTickE" y="516.60974" x="590.38477"
+  <text id="labelClassTickE" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="256.5">×</tspan></text>
-  <text id="labelClassTickF" y="516.60974" x="590.38477"
+  <text id="labelClassTickF" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="208.5">×</tspan></text>
-  <text id="labelClassTickG" y="516.60974" x="590.38477"
+  <text id="labelClassTickG" class="ficheTick" y="516.60974" x="590.38477"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="516.60974" x="161">×</tspan></text>
 
-  <text id="loadProfileTickM" y="612.70154" x="69.26268"
+  <text id="loadProfileTickM" class="ficheTick" y="612.70154" x="69.26268"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="582" x="69.26268">×</tspan></text>
-  <text id="loadProfileTickL" y="612.70154" x="69.26268"
+  <text id="loadProfileTickL" class="ficheTick" y="612.70154" x="69.26268"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="612.70154" x="69.26268">×</tspan></text>
-  <text id="loadProfileTickXL" y="612.70154" x="69.26268"
+  <text id="loadProfileTickXL" class="ficheTick" y="612.70154" x="69.26268"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="643.5" x="69.26268">×</tspan></text>
-  <text id="loadProfileTickXXL" y="612.70154" x="69.26268"
+  <text id="loadProfileTickXXL" class="ficheTick" y="612.70154" x="69.26268"
         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
         xml:space="preserve"><tspan y="674" x="69.26268">×</tspan></text>
   <text xml:space="preserve"
