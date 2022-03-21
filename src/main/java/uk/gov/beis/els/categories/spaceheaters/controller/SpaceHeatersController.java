@@ -47,6 +47,7 @@ import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesPreferen
 import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
 import uk.gov.beis.els.categories.spaceheaters.model.TemperatureControlClass;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
+import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.controller.CategoryController;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -417,7 +418,6 @@ public class SpaceHeatersController extends CategoryController {
   }
 
   @PostMapping("/package-combination-heater-sort-question")
-  @ResponseBody
   public ModelAndView handleCombinationHeaterPackagesSortQuestionSubmit(
       @Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
     if (StringUtils.isBlank(form.getCategory())) {
@@ -436,7 +436,6 @@ public class SpaceHeatersController extends CategoryController {
   }
 
   @PostMapping("/package-combination-heater-preferential-heater-type")
-  @ResponseBody
   public ModelAndView handleCombinationHeaterPackagesPreferentialHeaterSortQuestionSubmit(
       @Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
     if (StringUtils.isBlank(form.getCategory())) {
@@ -452,6 +451,17 @@ public class SpaceHeatersController extends CategoryController {
   @GetMapping("/package-combination-heater/boiler/calculator")
   public ModelAndView renderCombinationHeaterPackagesBoilerCalculator(@ModelAttribute("form") BoilerCombinationCalculatorForm form) {
     return getCombinationHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.BOILER);
+  }
+
+  @PostMapping("/package-combination-heater/boiler/calculator")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesBoilerCalculatorSubmit(@ModelAttribute("form") @Valid BoilerCombinationCalculatorForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toCombinationHeaterPackagesForm(form)));
+    }
   }
 
   @GetMapping("/package-combination-heater/heat-pump/calculator")
@@ -655,13 +665,13 @@ public class SpaceHeatersController extends CategoryController {
         modelAndView = new ModelAndView("categories/space-heaters/boilerCombinationCalculator");
         addCommonObjects(modelAndView, errorList,
             ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesBoilerCalculator(null)));
-        modelAndView.addObject("preferentialHeater", "boilers");
+        modelAndView.addObject("preferentialHeater", "boiler");
         break;
       case HEAT_PUMP:
         modelAndView = new ModelAndView("categories/space-heaters/heatPumpCombinationCalculator");
         addCommonObjects(modelAndView, errorList,
             ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesHeatPumpCalculator(null)));
-        modelAndView.addObject("preferentialHeater", "heat pumps");
+        modelAndView.addObject("preferentialHeater", "heat pump");
         break;
       default:
         throw new IllegalStateException("Unexpected value: " + preferentialHeaterType);
@@ -669,10 +679,13 @@ public class SpaceHeatersController extends CategoryController {
 
     modelAndView.addObject("temperatureControlClass",
         Arrays.stream(TemperatureControlClass.values())
-            .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name)));
-    modelAndView.addObject("storageTankRating",
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name)))
+        .addObject("storageTankRating",
         Arrays.stream(TankLabelClass.values())
-            .collect(StreamUtils.toLinkedHashMap(Enum::name, TankLabelClass::getDisplayName)));
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, TankLabelClass::getDisplayName)))
+        .addObject("loadProfile", WaterHeatersService.WATER_SOLAR_PACKAGES_LOAD_PROFILES.stream()
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
+
     breadcrumbService.pushBreadcrumb(modelAndView, "Package combination heaters",
         ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesSortQuestion(null)));
     breadcrumbService.pushBreadcrumb(modelAndView, "Preferential heater",

@@ -24,10 +24,6 @@ public class BoilerCombinationCalculatorForm extends BoilerPackagesCalculatorFor
   )
   private String declaredLoadProfile;
 
-  @FieldPrompt("Is a hot water storage tank included in this package?")
-  @NotNull(message = "Specify if a hot water storage tank is included")
-  private Boolean storageTank;
-
   @FieldPrompt("Annual non-solar heat contribution (kWh)")
   @Digits(integer = 4, fraction = 0, message = "Enter the annual non-solar heat contribution (kWh), up to 4 digits long")
   @Schema(type = "integer")
@@ -54,14 +50,6 @@ public class BoilerCombinationCalculatorForm extends BoilerPackagesCalculatorFor
 
   public void setDeclaredLoadProfile(String declaredLoadProfile) {
     this.declaredLoadProfile = declaredLoadProfile;
-  }
-
-  public Boolean getStorageTank() {
-    return storageTank;
-  }
-
-  public void setStorageTank(Boolean storageTank) {
-    this.storageTank = storageTank;
   }
 
   public String getAnnualNonSolarHeatContribution() {

@@ -11,7 +11,7 @@
       <@govukTextInput.textInput path="form.solarCollectorSize"/>
       <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
     </@govukFieldset.fieldset>
-  <#if showSolarCollector>
+  </#if>
 
   <@govukRadios.radioYesNo path="form.hasTemperatureControl" hiddenQuestionsWithYesSelected=true legendSize="h3">
     <@govukSelect.select path="form.temperatureControlClass" options=temperatureControlClass/>
