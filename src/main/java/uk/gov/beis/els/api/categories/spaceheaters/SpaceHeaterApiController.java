@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.CogenerationPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
@@ -179,5 +182,26 @@ public class SpaceHeaterApiController {
     return documentRendererService.processImageApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION));
+  }
+
+  @Operation(summary = "Packages of space heater, temperature control and solar device - Boiler: energy label calculator")
+  @PostMapping("/package-space-heater/calculate/boiler/energy-label")
+  public Object packageSpaceHeaterBoilerCalculator(@RequestBody @Valid BoilerPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+  }
+
+  @Operation(summary = "Packages of space heater, temperature control and solar device - Heat pump: energy label calculator")
+  @PostMapping("/package-space-heater/calculate/heat-pump/energy-label")
+  public Object packageSpaceHeaterHeatPumpCalculator(@RequestBody @Valid HeatPumpPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+  }
+
+  @Operation(summary = "Packages of space heater, temperature control and solar device - Cogeneration heater: energy label calculator")
+  @PostMapping("/package-space-heater/calculate/cogeneration-heater/energy-label")
+  public Object packageSpaceHeaterCogenerationCalculator(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
   }
 }
