@@ -21,6 +21,11 @@ import uk.gov.beis.els.renderer.Renderer;
 @Service
 public class DocumentRendererService {
 
+  private enum ResponseType {
+    ATTACHMENT,
+    DIRECT
+  }
+
   private final PdfRenderer pdfRenderer;
   private final PngRenderer pngRenderer;
   private final JpegRenderer jpegRenderer;
@@ -36,86 +41,82 @@ public class DocumentRendererService {
   }
 
   public ResponseEntity processPdfResponse(ProcessedEnergyLabelDocument processedDocument) {
-    Resource pdf = pdfRenderer.render(processedDocument.getDocument());
-
-    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
-        GoogleAnalyticsEventCategory.ENERGY_LABEL,
-        processedDocument.getAnalyticsEventAction(),
-        processedDocument.getProductMetadata().getAnalyticsLabel());
-
-    return serveResource(pdf, generatePdfFilename(processedDocument));
+    return processPdf(processedDocument, ResponseType.ATTACHMENT, GoogleAnalyticsEventCategory.ENERGY_LABEL);
   }
 
   public ResponseEntity processPdfResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
-    List<Document> htmlDocuments = processedDocuments.stream()
-        .map(ProcessedEnergyLabelDocument::getDocument)
-        .collect(Collectors.toList());
-
-    ProcessedEnergyLabelDocument primaryDocument = processedDocuments.get(0);
-    analyticsService.sendGoogleAnalyticsEvent(primaryDocument.getClientAnalyticsToken(),
-        GoogleAnalyticsEventCategory.ENERGY_LABEL,
-        primaryDocument.getAnalyticsEventAction(),
-        primaryDocument.getProductMetadata().getAnalyticsLabel());
-
-    return serveResource(pdfRenderer.render(htmlDocuments), generatePdfFilename(primaryDocument));
+    return processPdf(processedDocuments, ResponseType.ATTACHMENT, GoogleAnalyticsEventCategory.ENERGY_LABEL);
   }
 
   public ResponseEntity processPdfApiResponse(ProcessedEnergyLabelDocument processedDocument) {
-    Resource pdf = pdfRenderer.render(processedDocument.getDocument());
-
-    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
-        GoogleAnalyticsEventCategory.ENERGY_LABEL_API,
-        processedDocument.getAnalyticsEventAction(),
-        processedDocument.getProductMetadata().getAnalyticsLabel());
-
-    return serveWithContentType(pdf, pdfRenderer.getTargetContentType());
+    return processPdf(processedDocument, ResponseType.DIRECT, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
   }
 
   public ResponseEntity processPdfApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
+    return processPdf(processedDocuments, ResponseType.DIRECT, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
+  }
+
+  public ResponseEntity processImageResponse(ProcessedInternetLabelDocument processedDocument) {
+    return processImage(processedDocument, ResponseType.ATTACHMENT, GoogleAnalyticsEventCategory.INTERNET_LABEL);
+  }
+
+  public ResponseEntity processImageApiResponse(ProcessedInternetLabelDocument processedDocument) {
+    return processImage(processedDocument, ResponseType.DIRECT, GoogleAnalyticsEventCategory.INTERNET_LABEL_API);
+  }
+
+  private ResponseEntity processPdf(ProcessedEnergyLabelDocument processedDocument, ResponseType responseType, GoogleAnalyticsEventCategory eventCategory) {
+    Resource pdf = pdfRenderer.render(processedDocument.getDocument());
+
+    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
+        eventCategory,
+        processedDocument.getAnalyticsEventAction(),
+        processedDocument.getProductMetadata().getAnalyticsLabel());
+
+    if (responseType == ResponseType.ATTACHMENT) {
+      return serveResource(pdf, generatePdfFilename(processedDocument));
+    } else {
+      return serveWithContentType(pdf, pdfRenderer.getTargetContentType());
+    }
+  }
+
+  private ResponseEntity processPdf(List<ProcessedEnergyLabelDocument> processedDocuments, ResponseType responseType, GoogleAnalyticsEventCategory eventCategory) {
     List<Document> htmlDocuments = processedDocuments.stream()
         .map(ProcessedEnergyLabelDocument::getDocument)
         .collect(Collectors.toList());
 
+    Resource pdf = pdfRenderer.render(htmlDocuments);
+
+    // Use the first document for metadata
     ProcessedEnergyLabelDocument primaryDocument = processedDocuments.get(0);
     analyticsService.sendGoogleAnalyticsEvent(primaryDocument.getClientAnalyticsToken(),
-        GoogleAnalyticsEventCategory.ENERGY_LABEL_API,
+        eventCategory,
         primaryDocument.getAnalyticsEventAction(),
         primaryDocument.getProductMetadata().getAnalyticsLabel());
 
-    return serveResource(pdfRenderer.render(htmlDocuments), generatePdfFilename(primaryDocument));
-  }
-
-  public ResponseEntity processImageApiResponse(ProcessedInternetLabelDocument processedDocument) {
-
-    Renderer renderer = getImageRenderer(processedDocument);
-
-    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
-        GoogleAnalyticsEventCategory.INTERNET_LABEL_API,
-        processedDocument.getAnalyticsEventAction(),
-        processedDocument.getProductMetadata().getAnalyticsLabel());
-
-
-    return serveWithContentType(renderer.render(processedDocument.getDocument()), renderer.getTargetContentType());
-  }
-
-  public ResponseEntity processImageResponse(ProcessedInternetLabelDocument processedDocument) {
-
-    Renderer renderer = getImageRenderer(processedDocument);
-
-    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
-        GoogleAnalyticsEventCategory.INTERNET_LABEL,
-        processedDocument.getAnalyticsEventAction(),
-        processedDocument.getProductMetadata().getAnalyticsLabel());
-
-
-    return serveResource(renderer.render(processedDocument.getDocument()), generateImageFilename(processedDocument));
-  }
-
-  private Renderer getImageRenderer(ProcessedInternetLabelDocument processedDocument) {
-    if (processedDocument.getInternetLabelFormat() == InternetLabelFormat.PNG) {
-      return pngRenderer;
+    if (responseType == ResponseType.ATTACHMENT) {
+      return serveResource(pdf, generatePdfFilename(primaryDocument));
     } else {
-      return jpegRenderer;
+      return serveWithContentType(pdf, pdfRenderer.getTargetContentType());
+    }
+  }
+
+  private ResponseEntity processImage(ProcessedInternetLabelDocument processedDocument, ResponseType responseType, GoogleAnalyticsEventCategory eventCategory) {
+    Renderer renderer;
+    if (processedDocument.getInternetLabelFormat() == InternetLabelFormat.PNG) {
+      renderer = pngRenderer;
+    } else {
+      renderer = jpegRenderer;
+    }
+
+    analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
+        eventCategory,
+        processedDocument.getAnalyticsEventAction(),
+        processedDocument.getProductMetadata().getAnalyticsLabel());
+
+    if (responseType == ResponseType.ATTACHMENT) {
+      return serveResource(renderer.render(processedDocument.getDocument()), generateImageFilename(processedDocument));
+    } else {
+      return serveWithContentType(renderer.render(processedDocument.getDocument()), renderer.getTargetContentType());
     }
   }
 
