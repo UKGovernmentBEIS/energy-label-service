@@ -280,8 +280,8 @@ public class WaterHeatersService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("fiches/water-heaters/packages-of-water-heater-and-solar-device-fiche.svg"));
 
     String waterHeatingEfficiency = form.getWaterHeatingEfficiencyPercentage();
-    String solarContribution = uk.gov.beis.els.util.StringUtils.toPercentage(waterSolarPackagesCalculatorService.getSolarContributionDecimal(form), 1);
-    String packageWaterHeatingEfficiency = uk.gov.beis.els.util.StringUtils.toPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyDecimal(form));
+    String solarContribution = TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getSolarContributionDecimal(form), 1);
+    String packageWaterHeatingEfficiency = TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyDecimal(form));
 
     return templatePopulator
         .setText("ficheType", "water heater")
@@ -290,15 +290,15 @@ public class WaterHeatersService {
         .setText("waterHeatingEfficiency2", waterHeatingEfficiency)
         .setText("waterHeatingEfficiency3", waterHeatingEfficiency)
         .setText("nonSolarScalingFactor", String.format("%.2f", waterSolarPackagesCalculatorService.getNonSolarScalingFactor(form)))
-        .setText("auxElectricityConsumptionProportion", uk.gov.beis.els.util.StringUtils.toPercentage(waterSolarPackagesCalculatorService.getAuxElectricityConsumptionProportionDecimal(form), 2))
+        .setText("auxElectricityConsumptionProportion", TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getAuxElectricityConsumptionProportionDecimal(form), 2))
         .setText("solarContribution1", solarContribution)
         .setText("solarContribution2", solarContribution)
         .setText("solarContribution3", solarContribution)
         .setText("packageWaterHeatingEfficiency", packageWaterHeatingEfficiency)
         .setText("packageWaterHeatingEfficiency2", packageWaterHeatingEfficiency)
         .setText("packageWaterHeatingEfficiency3", packageWaterHeatingEfficiency)
-        .setText("packageWaterHeatingEfficiencyColder", uk.gov.beis.els.util.StringUtils.toPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyColderDecimal(form)))
-        .setText("packageWaterHeatingEfficiencyWarmer", uk.gov.beis.els.util.StringUtils.toPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyWarmerDecimal(form)))
+        .setText("packageWaterHeatingEfficiencyColder", TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyColderDecimal(form)))
+        .setText("packageWaterHeatingEfficiencyWarmer", TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyWarmerDecimal(form)))
         .applyCssClassToId(LOAD_PROFILE_SVG_IDS.get(LoadProfile.getEnum(form.getDeclaredLoadProfile())), "shown")
         .applyCssClassToId(RATING_CLASS_SVG_IDS.get(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(form)), "shown")
         .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);

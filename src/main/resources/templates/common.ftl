@@ -17,6 +17,17 @@
   <@govukButton.buttonWithSecondaryAction primaryButtonText="Download label" secondaryButtonText="Download fiche"/>
 </#macro>
 
+<#macro packageCalculatorDisclaimer>
+  <div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive">Warning</span>
+      You're responsible for making sure the energy label and fiche are calculated accurately. You must check the label
+      and fiche carefully before you provide them to your customers.
+    </strong>
+  </div>
+</#macro>
+
 <#macro preMarch2021RadioItem legislationCategories>
   <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"PRE_MAR2021": legislationCategories["PRE_MAR2021"]}>
     <#nested>
@@ -92,6 +103,7 @@ Includes the wrapping form element, the generate label button and optionally the
         </#if>
 
         <#if isPackageCalculatorForm>
+          <@packageCalculatorDisclaimer/>
           <@packageCalculatorDownloadButtons/>
          <#else>
            <@generateLabelButton/>

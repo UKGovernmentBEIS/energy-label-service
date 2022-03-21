@@ -209,9 +209,11 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     } else if (schema.getType().equals("number")) { // process numbers (i.e. those that allow decimal places
       schema.setExample("1.1");
     } else if (propertyName.equals("qrCodeUrl")) {
-      schema.setExample("http://www.example-energy.co.uk"); // default example for QR code website fields
+      schema.setExample("https://example.com"); // default example for QR code website fields
     } else if (schema.getType().equals("string")) {
       schema.setExample("string"); // process all other strings
+    } else if (schema.getType().equals("boolean")) {
+      schema.setExample("true");
     }
 
     // process enum objects (these have type "string" so this will overwrite the default string value above)
