@@ -1,7 +1,10 @@
 package uk.gov.beis.els.categories.waterheaters.service;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,32 @@ public class WaterHeatersService {
     RatingClassRange.of(RatingClass.APPP, RatingClass.G),
     RatingClassRange.of(RatingClass.AP, RatingClass.G)
   );
+
+  private static final Map<LoadProfile, String> LOAD_PROFILE_SVG_IDS;
+  private static final Map<RatingClass, String> RATING_CLASS_SVG_IDS;
+
+  static {
+    Map<LoadProfile, String> loadProfileSvgIdMap = new HashMap<>();
+    loadProfileSvgIdMap.put(LoadProfile.M, "loadProfileTickM");
+    loadProfileSvgIdMap.put(LoadProfile.L, "loadProfileTickL");
+    loadProfileSvgIdMap.put(LoadProfile.XL, "loadProfileTickXL");
+    loadProfileSvgIdMap.put(LoadProfile.XXL, "loadProfileTickXXL");
+    LOAD_PROFILE_SVG_IDS = Collections.unmodifiableMap(loadProfileSvgIdMap);
+
+    Map<RatingClass, String> ratingClassSvgIdMap = new HashMap<>();
+    ratingClassSvgIdMap.put(RatingClass.APPP, "labelClassTickA+++");
+    ratingClassSvgIdMap.put(RatingClass.APP, "labelClassTickA++");
+    ratingClassSvgIdMap.put(RatingClass.AP, "labelClassTickA+");
+    ratingClassSvgIdMap.put(RatingClass.A, "labelClassTickA");
+    ratingClassSvgIdMap.put(RatingClass.B, "labelClassTickB");
+    ratingClassSvgIdMap.put(RatingClass.C, "labelClassTickC");
+    ratingClassSvgIdMap.put(RatingClass.D, "labelClassTickD");
+    ratingClassSvgIdMap.put(RatingClass.E, "labelClassTickE");
+    ratingClassSvgIdMap.put(RatingClass.F, "labelClassTickF");
+    ratingClassSvgIdMap.put(RatingClass.G, "labelClassTickG");
+    RATING_CLASS_SVG_IDS = Collections.unmodifiableMap(ratingClassSvgIdMap);
+  }
+
 
   private final TemplateParserService templateParserService;
   private final WaterSolarPackagesCalculatorService waterSolarPackagesCalculatorService;
@@ -212,8 +241,7 @@ public class WaterHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_STORAGE_TANKS, form);
   }
 
-  public WaterSolarPackagesForm toWaterSolarPackagesForm(
-      WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm) {
+  public WaterSolarPackagesForm toWaterSolarPackagesForm(WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm) {
     WaterSolarPackagesForm form = new WaterSolarPackagesForm();
     form.setDeclaredLoadProfile(waterSolarPackagesCalculatorForm.getDeclaredLoadProfile());
     form.setHeaterEfficiencyRating(waterSolarPackagesCalculatorService.getWaterHeatingEfficiencyClass(
@@ -246,6 +274,33 @@ public class WaterHeatersService {
       .setText("waterHeatingRatingLetter", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getLetter())
       .setText("waterHeatingRatingPlusses", RatingClass.getEnum(form.getHeaterEfficiencyRating()).getPlusses())
       .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
+  }
+
+  public ProcessedEnergyLabelDocument generateFicheHtml(WaterSolarPackagesCalculatorForm form){
+    TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("fiches/water-heaters/packages-of-water-heater-and-solar-device-fiche.svg"));
+
+    String waterHeatingEfficiency = form.getWaterHeatingEfficiencyPercentage();
+    String solarContribution = TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getSolarContributionDecimal(form), 1);
+    String packageWaterHeatingEfficiency = TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyDecimal(form));
+
+    return templatePopulator
+        .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
+        .setText("waterHeatingEfficiency1", waterHeatingEfficiency)
+        .setText("waterHeatingEfficiency2", waterHeatingEfficiency)
+        .setText("waterHeatingEfficiency3", waterHeatingEfficiency)
+        .setText("nonSolarScalingFactor", String.format("%.2f", waterSolarPackagesCalculatorService.getNonSolarScalingFactor(form)))
+        .setText("auxElectricityConsumptionProportion", TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getAuxElectricityConsumptionProportionDecimal(form), 2))
+        .setText("solarContribution1", solarContribution)
+        .setText("solarContribution2", solarContribution)
+        .setText("solarContribution3", solarContribution)
+        .setText("packageWaterHeatingEfficiency", packageWaterHeatingEfficiency)
+        .setText("packageWaterHeatingEfficiency2", packageWaterHeatingEfficiency)
+        .setText("packageWaterHeatingEfficiency3", packageWaterHeatingEfficiency)
+        .setText("packageWaterHeatingEfficiencyColder", TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyColderDecimal(form)))
+        .setText("packageWaterHeatingEfficiencyWarmer", TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyWarmerDecimal(form)))
+        .applyCssClassToId(LOAD_PROFILE_SVG_IDS.get(LoadProfile.getEnum(form.getDeclaredLoadProfile())), "shown")
+        .applyCssClassToId(RATING_CLASS_SVG_IDS.get(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(form)), "shown")
+        .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
   }
 
   private void populateClimateConditions(ClimateConditionForm form, TemplatePopulator templatePopulator) {
