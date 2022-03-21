@@ -27,7 +27,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import uk.gov.beis.els.api.common.ApiDocumentationController;
 import uk.gov.beis.els.api.common.TagNotFoundException;
 import uk.gov.beis.els.api.model.OperationWithSchema;
-import uk.gov.beis.els.api.model.SchemaPropertyExample;
 import uk.gov.beis.els.api.model.TagLink;
 import uk.gov.beis.els.mvc.ReverseRouter;
 import uk.gov.beis.els.util.StreamUtils;
@@ -37,12 +36,14 @@ public class OpenApiService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(OpenApiService.class);
   private final ServletWebServerApplicationContext context;
+  private final ObjectMapper objectMapper;
   private OpenAPI openAPISpec;
   private Map<String, OperationWithSchema> operationMap;
 
   @Autowired
-  public OpenApiService(ServletWebServerApplicationContext context) {
+  public OpenApiService(ServletWebServerApplicationContext context, ObjectMapper objectMapper) {
     this.context = context;
+    this.objectMapper = objectMapper.setDefaultPrettyPrinter(new JsonPrettyPrinter());
   }
 
   @EventListener(ApplicationReadyEvent.class)
@@ -103,28 +104,36 @@ public class OpenApiService {
 
   @SuppressWarnings("rawtypes")
   private String getExampleJsonBody(Schema schema, String schemaRef) {
-    String example = "";
     try {
-      ObjectMapper objectMapper = new ObjectMapper();
       ObjectNode objectNode = objectMapper.createObjectNode();
       Map<String, Schema<?>> properties = schema.getProperties();
 
-      List<SchemaPropertyExample> schemaPropertyExamples = properties.entrySet().stream()
-          .map(p -> new SchemaPropertyExample(
-              p.getKey(),
-              p.getValue().getExample() != null ? p.getValue().getExample().toString() : "")
-          ).collect(Collectors.toList());
+      properties.forEach((key, value) ->  {
+        if (value.getExample() == null) {
+          objectNode.put(key, "");
+        } else {
+          switch (value.getType()) {
+            case "integer":
+              objectNode.put(key, (int) value.getExample());
+              break;
+            case "number":
+              objectNode.put(key, (double) value.getExample());
+              break;
+            case "boolean":
+              objectNode.put(key, (boolean) value.getExample());
+              break;
+            default:
+              objectNode.put(key, value.getExample().toString());
+              break;
+          }
+        }
+      });
 
-      for (SchemaPropertyExample schemaPropertyExample : schemaPropertyExamples) {
-        objectNode.put(schemaPropertyExample.getPropertyName(), schemaPropertyExample.getExampleInput());
-      }
-
-      example = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(objectNode);
+      return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(objectNode);
     } catch (JsonProcessingException e) {
       LOGGER.warn("Could not create API request body example for schema ref: {}. {}", schemaRef, e.getMessage());
+      return "";
     }
-
-    return example;
   }
 
   public List<TagLink> getTagLinks() {
