@@ -185,7 +185,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSolarContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.getHasSolarCollector() || !form.getHasStorageTank()) {
+    if (!form.getHasStorageTank()) {
       return 0;
     }
 
