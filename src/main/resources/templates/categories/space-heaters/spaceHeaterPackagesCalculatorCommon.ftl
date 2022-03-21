@@ -1,6 +1,6 @@
 <#include '../../layout.ftl'>
 
-<#macro commonSpaceHeaterPackagesCalculatorFields showPreferentialHeaterInputs=true>
+<#macro commonSpaceHeaterPackagesCalculatorFields showPreferentialHeaterInputs=true showSolarCollector=true>
   <#if showPreferentialHeaterInputs>
     <@govukTextInput.textInput path="form.preferentialHeaterHeatOutput"/>
     <@govukTextInput.textInput path="form.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage"/>
@@ -15,10 +15,12 @@
     <@govukTextInput.textInput path="form.supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage"/>
   </@govukRadios.radioYesNo>
 
-  <@govukRadios.radioYesNo path="form.hasSolarCollector" hiddenQuestionsWithYesSelected=true legendSize="h3">
-    <@govukTextInput.textInput path="form.solarCollectorSize"/>
-    <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
-  </@govukRadios.radioYesNo>
+  <#if showSolarCollector>
+    <@govukRadios.radioYesNo path="form.hasSolarCollector" hiddenQuestionsWithYesSelected=true legendSize="h3">
+      <@govukTextInput.textInput path="form.solarCollectorSize"/>
+      <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
+    </@govukRadios.radioYesNo>
+  </#if>
 
   <@govukRadios.radioYesNo path="form.hasStorageTank" hiddenQuestionsWithYesSelected=true legendSize="h3">
     <@govukTextInput.textInput path="form.storageTankVolume"/>
