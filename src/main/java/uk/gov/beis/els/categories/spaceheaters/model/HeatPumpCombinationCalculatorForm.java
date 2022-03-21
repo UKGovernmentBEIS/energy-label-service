@@ -8,7 +8,7 @@ import uk.gov.beis.els.api.common.ApiValuesFromLoadProfileList;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
-public class HeaPumpCombinationCalculatorForm extends HeatPumpPackagesCalculatorForm {
+public class HeatPumpCombinationCalculatorForm extends HeatPumpPackagesCalculatorForm {
 
   @FieldPrompt("Water heating energy efficiency of water heater (%)")
   @Digits(integer = 3, fraction = 0, message = "Enter the water heating efficiency (%), up to 3 digits long")
@@ -23,10 +23,6 @@ public class HeaPumpCombinationCalculatorForm extends HeatPumpPackagesCalculator
       loadProfilesFieldName = "WATER_SOLAR_PACKAGES_LOAD_PROFILES"
   )
   private String declaredLoadProfile;
-
-  @FieldPrompt("Is a hot water storage tank included in this package?")
-  @NotNull(message = "Specify if a hot water storage tank is included")
-  private Boolean storageTank;
 
   @FieldPrompt("Annual non-solar heat contribution (kWh)")
   @Digits(integer = 4, fraction = 0, message = "Enter the annual non-solar heat contribution (kWh), up to 4 digits long")
@@ -54,14 +50,6 @@ public class HeaPumpCombinationCalculatorForm extends HeatPumpPackagesCalculator
 
   public void setDeclaredLoadProfile(String declaredLoadProfile) {
     this.declaredLoadProfile = declaredLoadProfile;
-  }
-
-  public Boolean getStorageTank() {
-    return storageTank;
-  }
-
-  public void setStorageTank(Boolean storageTank) {
-    this.storageTank = storageTank;
   }
 
   public String getAnnualNonSolarHeatContribution() {

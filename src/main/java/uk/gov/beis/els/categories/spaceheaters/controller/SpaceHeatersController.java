@@ -34,7 +34,7 @@ import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersFor
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesCategory;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesPreferentialHeaterCategory;
-import uk.gov.beis.els.categories.spaceheaters.model.HeaPumpCombinationCalculatorForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
@@ -455,7 +455,8 @@ public class SpaceHeatersController extends CategoryController {
 
   @PostMapping("/package-combination-heater/boiler/calculator")
   @ResponseBody
-  public Object handleCombinationHeaterPackagesBoilerCalculatorSubmit(@ModelAttribute("form") @Valid BoilerCombinationCalculatorForm form, BindingResult bindingResult) {
+  public Object handleCombinationHeaterPackagesBoilerCalculatorSubmit(@ModelAttribute("form") @Valid BoilerCombinationCalculatorForm form,
+                                                                      BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
     } else {
@@ -465,8 +466,20 @@ public class SpaceHeatersController extends CategoryController {
   }
 
   @GetMapping("/package-combination-heater/heat-pump/calculator")
-  public ModelAndView renderCombinationHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeaPumpCombinationCalculatorForm form) {
+  public ModelAndView renderCombinationHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpCombinationCalculatorForm form) {
     return getCombinationHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
+  }
+
+  @PostMapping("/package-combination-heater/heat-pump/calculator")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesHeatPumpCalculatorSubmit(@ModelAttribute("form") @Valid HeatPumpCombinationCalculatorForm form,
+                                                                        BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toCombinationHeaterPackagesForm(form)));
+    }
   }
 
   private ModelAndView getBoilerSpaceHeaters(List<FieldError> errorList) {
