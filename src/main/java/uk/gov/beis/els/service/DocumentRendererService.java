@@ -1,5 +1,8 @@
 package uk.gov.beis.els.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -42,6 +45,21 @@ public class DocumentRendererService {
 
     return serveResource(pdf, generatePdfFilename(processedDocument));
   }
+
+  public ResponseEntity processPdfResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
+    List<Document> htmlDocuments = processedDocuments.stream()
+        .map(ProcessedEnergyLabelDocument::getDocument)
+        .collect(Collectors.toList());
+
+    ProcessedEnergyLabelDocument primaryDocument = processedDocuments.get(0);
+    analyticsService.sendGoogleAnalyticsEvent(primaryDocument.getClientAnalyticsToken(),
+        GoogleAnalyticsEventCategory.ENERGY_LABEL,
+        primaryDocument.getAnalyticsEventAction(),
+        primaryDocument.getProductMetadata().getAnalyticsLabel());
+
+    return serveResource(pdfRenderer.render(htmlDocuments), generatePdfFilename(primaryDocument));
+  }
+
   public ResponseEntity processPdfApiResponse(ProcessedEnergyLabelDocument processedDocument) {
     Resource pdf = pdfRenderer.render(processedDocument.getDocument());
 
@@ -51,6 +69,20 @@ public class DocumentRendererService {
         processedDocument.getProductMetadata().getAnalyticsLabel());
 
     return serveWithContentType(pdf, pdfRenderer.getTargetContentType());
+  }
+
+  public ResponseEntity processPdfApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
+    List<Document> htmlDocuments = processedDocuments.stream()
+        .map(ProcessedEnergyLabelDocument::getDocument)
+        .collect(Collectors.toList());
+
+    ProcessedEnergyLabelDocument primaryDocument = processedDocuments.get(0);
+    analyticsService.sendGoogleAnalyticsEvent(primaryDocument.getClientAnalyticsToken(),
+        GoogleAnalyticsEventCategory.ENERGY_LABEL_API,
+        primaryDocument.getAnalyticsEventAction(),
+        primaryDocument.getProductMetadata().getAnalyticsLabel());
+
+    return serveResource(pdfRenderer.render(htmlDocuments), generatePdfFilename(primaryDocument));
   }
 
   public ResponseEntity processImageApiResponse(ProcessedInternetLabelDocument processedDocument) {
