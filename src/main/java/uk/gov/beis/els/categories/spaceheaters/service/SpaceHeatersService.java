@@ -496,21 +496,13 @@ public class SpaceHeatersService {
 
   public CombinationHeaterPackagesForm toCombinationHeaterPackagesForm(BoilerCombinationCalculatorForm boilerCombinationCalculatorForm) {
     CombinationHeaterPackagesForm combinationHeaterPackagesForm = new CombinationHeaterPackagesForm();
+    fillCombinationHeaterPackagesFormFromSpaceHeaterPackageCalculatorForm(combinationHeaterPackagesForm, boilerCombinationCalculatorForm);
     WaterSolarPackagesForm waterSolarForm = waterHeatersService.toWaterSolarPackagesForm(boilerCombinationCalculatorForm);
-    SpaceHeaterPackagesForm spaceHeaterPackagesForm = toSpaceHeaterPackagesForm(boilerCombinationCalculatorForm);
 
-    combinationHeaterPackagesForm.setSpaceHeaterEfficiencyRating(spaceHeaterPackagesForm.getHeaterEfficiencyRating());
     combinationHeaterPackagesForm.setWaterHeaterEfficiencyRating(waterSolarForm.getHeaterEfficiencyRating());
     combinationHeaterPackagesForm.setHeaterDeclaredLoadProfile(boilerCombinationCalculatorForm.getDeclaredLoadProfile());
-    combinationHeaterPackagesForm.setSolarCollector(true);
-    combinationHeaterPackagesForm.setHotWaterStorageTank(boilerCombinationCalculatorForm.getHasStorageTank());
-    combinationHeaterPackagesForm.setTemperatureControl(boilerCombinationCalculatorForm.getHasTemperatureControl());
-    combinationHeaterPackagesForm.setSpaceHeater(boilerCombinationCalculatorForm.getSpaceHeater());
-    combinationHeaterPackagesForm.setPackageSpaceHeatingEfficiencyRating(spaceHeaterPackagesForm.getPackageEfficiencyRating());
     combinationHeaterPackagesForm.setPackageWaterHeatingEfficiencyRating(waterSolarForm.getPackageEfficiencyRating());
     combinationHeaterPackagesForm.setPackageDeclaredLoadProfile(boilerCombinationCalculatorForm.getDeclaredLoadProfile());
-    combinationHeaterPackagesForm.setSupplierName(boilerCombinationCalculatorForm.getSupplierName());
-    combinationHeaterPackagesForm.setModelName(boilerCombinationCalculatorForm.getModelName());
 
     return combinationHeaterPackagesForm;
   }
@@ -518,22 +510,29 @@ public class SpaceHeatersService {
   public CombinationHeaterPackagesForm toCombinationHeaterPackagesForm(
       HeatPumpCombinationCalculatorForm heatPumpCombinationCalculatorForm) {
     CombinationHeaterPackagesForm combinationHeaterPackagesForm = new CombinationHeaterPackagesForm();
+    fillCombinationHeaterPackagesFormFromSpaceHeaterPackageCalculatorForm(combinationHeaterPackagesForm, heatPumpCombinationCalculatorForm);
     WaterSolarPackagesForm waterSolarForm = waterHeatersService.toWaterSolarPackagesForm(heatPumpCombinationCalculatorForm);
-    SpaceHeaterPackagesForm spaceHeaterPackagesForm = toSpaceHeaterPackagesForm(heatPumpCombinationCalculatorForm);
 
-    combinationHeaterPackagesForm.setSpaceHeaterEfficiencyRating(spaceHeaterPackagesForm.getHeaterEfficiencyRating());
     combinationHeaterPackagesForm.setWaterHeaterEfficiencyRating(waterSolarForm.getHeaterEfficiencyRating());
     combinationHeaterPackagesForm.setHeaterDeclaredLoadProfile(heatPumpCombinationCalculatorForm.getDeclaredLoadProfile());
-    combinationHeaterPackagesForm.setSolarCollector(true);
-    combinationHeaterPackagesForm.setHotWaterStorageTank(heatPumpCombinationCalculatorForm.getHasStorageTank());
-    combinationHeaterPackagesForm.setTemperatureControl(heatPumpCombinationCalculatorForm.getHasTemperatureControl());
-    combinationHeaterPackagesForm.setSpaceHeater(heatPumpCombinationCalculatorForm.getSpaceHeater());
-    combinationHeaterPackagesForm.setPackageSpaceHeatingEfficiencyRating(spaceHeaterPackagesForm.getPackageEfficiencyRating());
     combinationHeaterPackagesForm.setPackageWaterHeatingEfficiencyRating(waterSolarForm.getPackageEfficiencyRating());
     combinationHeaterPackagesForm.setPackageDeclaredLoadProfile(heatPumpCombinationCalculatorForm.getDeclaredLoadProfile());
-    combinationHeaterPackagesForm.setSupplierName(heatPumpCombinationCalculatorForm.getSupplierName());
-    combinationHeaterPackagesForm.setModelName(heatPumpCombinationCalculatorForm.getModelName());
 
     return combinationHeaterPackagesForm;
+  }
+
+  private void fillCombinationHeaterPackagesFormFromSpaceHeaterPackageCalculatorForm(
+      CombinationHeaterPackagesForm combinationHeaterPackagesForm,
+      SpaceHeaterPackagesCalculatorForm spaceHeaterPackagesCalculatorForm) {
+    SpaceHeaterPackagesForm spaceHeaterPackagesForm = toSpaceHeaterPackagesForm(spaceHeaterPackagesCalculatorForm);
+
+    combinationHeaterPackagesForm.setSpaceHeaterEfficiencyRating(spaceHeaterPackagesForm.getHeaterEfficiencyRating());
+    combinationHeaterPackagesForm.setSolarCollector(true);
+    combinationHeaterPackagesForm.setHotWaterStorageTank(spaceHeaterPackagesCalculatorForm.getHasStorageTank());
+    combinationHeaterPackagesForm.setTemperatureControl(spaceHeaterPackagesCalculatorForm.getHasTemperatureControl());
+    combinationHeaterPackagesForm.setSpaceHeater(spaceHeaterPackagesCalculatorForm.getSpaceHeater());
+    combinationHeaterPackagesForm.setPackageSpaceHeatingEfficiencyRating(spaceHeaterPackagesForm.getPackageEfficiencyRating());
+    combinationHeaterPackagesForm.setSupplierName(spaceHeaterPackagesCalculatorForm.getSupplierName());
+    combinationHeaterPackagesForm.setModelName(spaceHeaterPackagesCalculatorForm.getModelName());
   }
 }
