@@ -334,6 +334,14 @@ public class TemplatePopulator {
     return new ProcessedInternetLabelDocument(template, ratingClass, label, analyticsForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat(), analyticsAction);
   }
 
+  public static String decimalToPercentage(float number) {
+    return decimalToPercentage(number, 0);
+  }
+
+  public static String decimalToPercentage(float number, int decimalPlaces) {
+    return String.format("%." + decimalPlaces + "f", number * 100);
+  }
+
   private double getRatingIncrementValue(String ratingIncrementAttrName) {
     String ratingIncrementAttr = TemplateUtils.getAttributeByName(TemplateUtils.getSvgElement(template), ratingIncrementAttrName);
     return Double.parseDouble(ratingIncrementAttr);
