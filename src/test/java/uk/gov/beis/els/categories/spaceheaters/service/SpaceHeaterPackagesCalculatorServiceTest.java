@@ -32,7 +32,6 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setHasSupplementaryBoiler(true);
     form.setSupplementaryBoilerHeatOutput("1500");
     form.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("42");
-    form.setHasSolarCollector(true);
     form.setSolarCollectorSize("8");
     form.setSolarCollectorEfficiencyPercentage("89");
     form.setHasStorageTank(true);
@@ -70,7 +69,6 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setHasSupplementaryBoiler(true);
     form.setSupplementaryBoilerHeatOutput("42");
     form.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("42");
-    form.setHasSolarCollector(true);
     form.setSolarCollectorSize("42");
     form.setSolarCollectorEfficiencyPercentage("42");
     form.setHasStorageTank(true);
@@ -101,7 +99,6 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("42");
     form.setHasTemperatureControl(false);
     form.setHasSupplementaryBoiler(false);
-    form.setHasSolarCollector(false);
     form.setHasStorageTank(false);
     form.setSpaceHeater(false);
 
