@@ -291,20 +291,12 @@ public class SpaceHeatersService {
             Math.abs(spaceHeaterPackagesCalculatorService.getSolarContributionAndHeatPumpDecimal(form)), 1))
         .setText("packageSpaceHeatingEfficiency1",
             uk.gov.beis.els.util.StringUtils.toPercentage(packageSpaceHeatingEfficiency))
+        .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
+        .setText("solarCollectorEfficiencyPercentage",
+            String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
         .applyCssClassToId(
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
-
-    if (form.getHasSolarCollector()) {
-      templatePopulator
-          .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
-          .setText("solarCollectorEfficiencyPercentage",
-              String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())));
-    } else {
-      templatePopulator
-          .setText("solarCollectorSize", "0.00")
-          .setText("solarCollectorEfficiencyPercentage", "0.00");
-    }
 
     if (form.getHasStorageTank()) {
       templatePopulator
@@ -362,6 +354,9 @@ public class SpaceHeatersService {
             spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form), 1))
         .setText("packageSpaceHeatingEfficiency", uk.gov.beis.els.util.StringUtils.toPercentage(
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)))
+        .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
+        .setText("solarCollectorEfficiencyPercentage",
+            String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
         .applyCssClassToId(
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
@@ -373,17 +368,6 @@ public class SpaceHeatersService {
     } else {
       templatePopulator
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
-    }
-
-    if (form.getHasSolarCollector()) {
-      templatePopulator
-          .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
-          .setText("solarCollectorEfficiencyPercentage",
-              String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())));
-    } else {
-      templatePopulator
-          .setText("solarCollectorSize", "0.00")
-          .setText("solarCollectorEfficiencyPercentage", "0.00");
     }
 
     if (form.getHasStorageTank()) {
@@ -448,6 +432,9 @@ public class SpaceHeatersService {
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)))
         .setText("packageSpaceHeatingEfficiencyWarmer", uk.gov.beis.els.util.StringUtils.toPercentage(
             spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)))
+        .setText("solarCollectorEfficiencyPercentage",
+            String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
+        .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
         .applyCssClassToId(
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
@@ -459,17 +446,6 @@ public class SpaceHeatersService {
     } else {
       templatePopulator
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
-    }
-
-    if (form.getHasSolarCollector()) {
-      templatePopulator
-          .setText("solarCollectorEfficiencyPercentage",
-              String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
-          .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())));
-    } else {
-      templatePopulator
-          .setText("solarCollectorEfficiencyPercentage", "0.00")
-          .setText("solarCollectorSize", "0.00");
     }
 
     if (form.getHasStorageTank()) {
@@ -500,7 +476,7 @@ public class SpaceHeatersService {
       SpaceHeaterPackagesCalculatorForm calculatorForm) {
     SpaceHeaterPackagesForm form = new SpaceHeaterPackagesForm();
     form.setHeaterEfficiencyRating(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(calculatorForm).name());
-    form.setSolarCollector(calculatorForm.getHasSolarCollector());
+    form.setSolarCollector(true);
     form.setHotWaterStorageTank(calculatorForm.getHasStorageTank());
     form.setTemperatureControl(calculatorForm.getHasTemperatureControl());
     form.setSpaceHeater(calculatorForm.getSpaceHeater());
