@@ -191,6 +191,13 @@ public class SpaceHeaterApiController {
         spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
   }
 
+  @Operation(summary = "Packages of space heater, temperature control and solar device - Boiler: fiche")
+  @PostMapping("/package-space-heater/calculate/boiler/fiche")
+  public Object packageSpaceHeaterBoilerFiche(@RequestBody @Valid BoilerPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateFicheHtml(form));
+  }
+
   @Operation(summary = "Packages of space heater, temperature control and solar device - Heat pump: energy label calculator")
   @PostMapping("/package-space-heater/calculate/heat-pump/energy-label")
   public Object packageSpaceHeaterHeatPumpCalculator(@RequestBody @Valid HeatPumpPackagesCalculatorForm form) {
@@ -198,10 +205,24 @@ public class SpaceHeaterApiController {
         spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
   }
 
+  @Operation(summary = "Packages of space heater, temperature control and solar device - Heat pump: fiche")
+  @PostMapping("/package-space-heater/calculate/heat-pump/fiche")
+  public Object packageSpaceHeaterHeatPumpFiche(@RequestBody @Valid HeatPumpPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateFicheHtml(form));
+  }
+
   @Operation(summary = "Packages of space heater, temperature control and solar device - Cogeneration heater: energy label calculator")
   @PostMapping("/package-space-heater/calculate/cogeneration-heater/energy-label")
   public Object packageSpaceHeaterCogenerationCalculator(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
     return documentRendererService.processPdfApiResponse(
         spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+  }
+
+  @Operation(summary = "Packages of space heater, temperature control and solar device - Cogeneration heater: fiche")
+  @PostMapping("/package-space-heater/calculate/cogeneration-heater/fiche")
+  public Object packageSpaceHeaterCogenerationCFiche(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateFicheHtml(form));
   }
 }
