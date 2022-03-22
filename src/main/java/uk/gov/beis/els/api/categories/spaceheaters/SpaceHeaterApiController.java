@@ -221,7 +221,7 @@ public class SpaceHeaterApiController {
 
   @Operation(summary = "Packages of space heater, temperature control and solar device - Cogeneration heater: fiche")
   @PostMapping("/package-space-heater/calculate/cogeneration-heater/fiche")
-  public Object packageSpaceHeaterCogenerationCFiche(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
+  public Object packageSpaceHeaterCogenerationFiche(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
     return documentRendererService.processPdfApiResponse(
         spaceHeatersService.generateFicheHtml(form));
   }
