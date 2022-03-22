@@ -310,6 +310,17 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/package-space-heater/boiler/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesBoilerFicheSubmit(@Valid @ModelAttribute("form") BoilerPackagesCalculatorForm form,
+                                                                BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form));
+    }
+  }
+
   @GetMapping("/package-space-heater/heat-pump/calculator")
   public ModelAndView renderSpaceHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpPackagesCalculatorForm form) {
     return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
@@ -324,6 +335,17 @@ public class SpaceHeatersController extends CategoryController {
     } else {
       return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+    }
+  }
+
+  @PostMapping(value = "/package-space-heater/heat-pump/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesHeatPumpFicheSubmit(@Valid @ModelAttribute("form") HeatPumpPackagesCalculatorForm form,
+                                                                 BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form));
     }
   }
 
@@ -342,6 +364,17 @@ public class SpaceHeatersController extends CategoryController {
     } else {
       return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+    }
+  }
+
+  @PostMapping(value = "/package-space-heater/cogeneration-heater/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesCogenerationFicheSubmit(@Valid @ModelAttribute("form") CogenerationPackagesCalculatorForm form,
+                                                           BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.COGENERATION_HEATER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form));
     }
   }
 

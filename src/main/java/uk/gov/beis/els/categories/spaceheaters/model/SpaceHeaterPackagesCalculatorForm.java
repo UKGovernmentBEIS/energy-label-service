@@ -51,25 +51,19 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   @NotNull(groups = SupplementaryBoilerGroup.class, message = "Enter the seasonal space heating energy efficiency of supplementary boiler")
   private String supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage;
 
-  @FieldPrompt("Does this package include a solar collector?")
-  @NotNull(message = "Specify if this package includes a solar collector")
-  private Boolean hasSolarCollector;
-
   @FieldPrompt("Solar collector area (in m2)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector area, up to 3 digits long",
-      groups = SolarCollectorGroup.class)
+  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector area, up to 3 digits long")
   @Schema(type = "integer")
-  @NotNull(groups = SolarCollectorGroup.class, message = "Enter the solar collector area")
+  @NotNull(message = "Enter the solar collector area")
   private String solarCollectorSize;
 
   @FieldPrompt("Solar collector efficiency (in %)")
-  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector efficiency, up to 3 digits long",
-      groups = SolarCollectorGroup.class)
+  @Digits(integer = 3, fraction = 0, message = "Enter the solar collector efficiency, up to 3 digits long")
   @Schema(type = "integer")
-  @NotNull(groups = SolarCollectorGroup.class, message = "Enter the solar collector efficiency")
+  @NotNull(message = "Enter the solar collector efficiency")
   private String solarCollectorEfficiencyPercentage;
 
-  @FieldPrompt("Does this package include a hot water storage tank")
+  @FieldPrompt("Does this package include a hot water storage tank?")
   @NotNull(message = "Specify if this package includes a hot water storage tank")
   private Boolean hasStorageTank;
 
@@ -149,14 +143,6 @@ public abstract class SpaceHeaterPackagesCalculatorForm extends StandardTemplate
   public void setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage(
       String supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage) {
     this.supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage = supplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage;
-  }
-
-  public Boolean getHasSolarCollector() {
-    return hasSolarCollector;
-  }
-
-  public void setHasSolarCollector(Boolean hasSolarCollector) {
-    this.hasSolarCollector = hasSolarCollector;
   }
 
   public String getSolarCollectorSize() {

@@ -1,19 +1,26 @@
 package uk.gov.beis.els.categories.spaceheaters.service;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.CogenerationPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
+import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
@@ -31,6 +38,22 @@ public class SpaceHeatersService {
   public static final LegislationCategory LEGISLATION_CATEGORY_PACKAGES = LegislationCategory.of(
     RatingClassRange.of(RatingClass.APPP, RatingClass.G)
   );
+  private static final Map<RatingClass, String> RATING_CLASS_SVG_IDS;
+
+  static {
+    Map<RatingClass, String> ratingClassSvgIdMap = new HashMap<>();
+    ratingClassSvgIdMap.put(RatingClass.APPP, "labelClassTickA+++");
+    ratingClassSvgIdMap.put(RatingClass.APP, "labelClassTickA++");
+    ratingClassSvgIdMap.put(RatingClass.AP, "labelClassTickA+");
+    ratingClassSvgIdMap.put(RatingClass.A, "labelClassTickA");
+    ratingClassSvgIdMap.put(RatingClass.B, "labelClassTickB");
+    ratingClassSvgIdMap.put(RatingClass.C, "labelClassTickC");
+    ratingClassSvgIdMap.put(RatingClass.D, "labelClassTickD");
+    ratingClassSvgIdMap.put(RatingClass.E, "labelClassTickE");
+    ratingClassSvgIdMap.put(RatingClass.F, "labelClassTickF");
+    ratingClassSvgIdMap.put(RatingClass.G, "labelClassTickG");
+    RATING_CLASS_SVG_IDS = Collections.unmodifiableMap(ratingClassSvgIdMap);
+  }
 
   private final TemplateParserService templateParserService;
   private final SpaceHeaterPackagesCalculatorService spaceHeaterPackagesCalculatorService;
@@ -225,11 +248,235 @@ public class SpaceHeatersService {
       .asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION, form);
   }
 
+  public ProcessedEnergyLabelDocument generateFicheHtml(BoilerPackagesCalculatorForm form) {
+    TemplatePopulator templatePopulator = new TemplatePopulator(
+        templateParserService.parseTemplate("fiches/space-heaters/boilerSpaceHeaterPackages.svg"));
+    float preferentialHeaterSeasonalSpaceHeatingEfficiency =
+        spaceHeaterPackagesCalculatorService.getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form);
+    float solarContribution = spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form);
+    String supplementaryHeatPumpFactor =
+        String.format("%.2f", spaceHeaterPackagesCalculatorService.getSupplementaryHeatPumpFactor(form));
+    String supplementaryHeatPumpContribution = TemplatePopulator.decimalToPercentage(
+        spaceHeaterPackagesCalculatorService.getSupplementaryHeatPumpContributionDecimal(form)
+        ,1
+    );
+    float packageSpaceHeatingEfficiency =
+        spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form);
+
+    templatePopulator
+        .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency1",
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
+        .setText("temperatureControlEfficiency", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form), 1))
+        .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyDecimal(form), 2))
+        .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency2",
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+        .setText("supplementaryBoilerContribution", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form), 1))
+        .setText("solarCollectorSizeFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getSolarCollectorSizeFactor(form)))
+        .setText("tankVolumeFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getTankVolumeFactor(form)))
+        .setText("storageTankVolumeMetersCubed",
+            String.format("%.3f", spaceHeaterPackagesCalculatorService.getStorageTankVolumeMetersCubed(form)))
+        .setText("solarContribution1", TemplatePopulator.decimalToPercentage(solarContribution, 1))
+        .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency3",
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+        .setText("supplementaryHeatPumpFactor1", supplementaryHeatPumpFactor)
+        .setText("supplementaryHeatPumpContribution1", supplementaryHeatPumpContribution)
+        .setText("solarContribution2", TemplatePopulator.decimalToPercentage(solarContribution, 2))
+        .setText("supplementaryHeatPumpContribution2", supplementaryHeatPumpContribution)
+        .setText("solarContributionAndHeatPump", TemplatePopulator.decimalToPercentage(
+            Math.abs(spaceHeaterPackagesCalculatorService.getSolarContributionAndHeatPumpDecimal(form)), 1))
+        .setText("packageSpaceHeatingEfficiency1",
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency))
+        .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
+        .setText("solarCollectorEfficiencyPercentage",
+            String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
+        .applyCssClassToId(
+            RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
+            "shown");
+
+    if (form.getHasStorageTank()) {
+      templatePopulator
+          .setText("storageTankRating",
+              String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
+    } else {
+      templatePopulator
+          .setText("storageTankRating", "");
+    }
+
+    if (form.getHasSupplementaryHeatPump()) {
+      templatePopulator
+          .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", String.format("%.2f",
+              Float.parseFloat(form.getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage())))
+          .setText("packageSpaceHeatingEfficiency2",
+              TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency, 2))
+          .setText("supplementaryHeatPumpFactor2", supplementaryHeatPumpFactor)
+          .setText("lowTemperatureHeatEmitters", TemplatePopulator.decimalToPercentage(
+              spaceHeaterPackagesCalculatorService.getLowTemperatureHeatEmitters(form)));
+    } else {
+      templatePopulator
+          .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", "0.00")
+          .setText("packageSpaceHeatingEfficiency2","")
+          .setText("supplementaryHeatPumpFactor2", "")
+          .setText("lowTemperatureHeatEmitters", "");
+    }
+
+    return templatePopulator.asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE, form);
+  }
+
+  public ProcessedEnergyLabelDocument generateFicheHtml(CogenerationPackagesCalculatorForm form) {
+    TemplatePopulator templatePopulator = new TemplatePopulator(
+        templateParserService.parseTemplate("fiches/space-heaters/cogenerationSpaceHeaterPackages.svg"));
+    float preferentialHeaterSeasonalSpaceHeatingEfficiency =
+        spaceHeaterPackagesCalculatorService.getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(form);
+
+    templatePopulator
+        .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency1",
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
+        .setText("temperatureControlEfficiency", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form), 1))
+        .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency2",
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+        .setText("supplementaryBoilerFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getSupplementaryBoilerFactor(form)))
+        .setText("supplementaryBoilerContribution", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form), 1))
+        .setText("solarCollectorSizeFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getSolarCollectorSizeFactor(form)))
+        .setText("tankVolumeFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getTankVolumeFactor(form)))
+        .setText("storageTankVolumeMetersCubed",
+            String.format("%.3f", spaceHeaterPackagesCalculatorService.getStorageTankVolumeMetersCubed(form)))
+        .setText("solarContribution", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form), 1))
+        .setText("packageSpaceHeatingEfficiency", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(form)))
+        .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
+        .setText("solarCollectorEfficiencyPercentage",
+            String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
+        .applyCssClassToId(
+            RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
+            "shown");
+
+    if (form.getHasSupplementaryBoiler()) {
+      templatePopulator
+          .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", String.format("%.2f",
+              Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage())));
+    } else {
+      templatePopulator
+          .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
+    }
+
+    if (form.getHasStorageTank()) {
+      templatePopulator
+          .setText("storageTankRating",
+              String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
+    } else {
+      templatePopulator
+          .setText("storageTankRating", "");
+    }
+
+    return templatePopulator.asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE, form);
+  }
+
+  public ProcessedEnergyLabelDocument generateFicheHtml(HeatPumpPackagesCalculatorForm form) {
+    TemplatePopulator templatePopulator;
+    if (form.getLowTemperatureHeatPump()) {
+      templatePopulator = new TemplatePopulator(
+          templateParserService.parseTemplate("fiches/space-heaters/lowTemperatureHeatPumpSpaceHeaterPackages.svg"));
+    } else {
+      templatePopulator = new TemplatePopulator(
+          templateParserService.parseTemplate("fiches/space-heaters/heatPumpSpaceHeaterPackages.svg"));
+    }
+
+    float preferentialHeaterSeasonalSpaceHeatingEfficiency = spaceHeaterPackagesCalculatorService.getPreferentialHeaterSeasonalSpaceHeatingEfficiencyDecimal(
+        form);
+    float packageSpaceHeatingEfficiency = spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyDecimal(
+        form);
+    float preferentialHeatPumpWarmerDifference = spaceHeaterPackagesCalculatorService.getPreferentialHeatPumpWarmerDifferenceDecimal(form);
+    float preferentialHeatPumpColderDifference = spaceHeaterPackagesCalculatorService.getPreferentialHeatPumpColderDifferenceDecimal(form);
+
+    templatePopulator
+        .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency1",
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 1))
+        .setText("temperatureControlEfficiency", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getTemperatureControlEfficiencyDecimal(form), 1))
+        .setText("preferentialHeaterSeasonalSpaceHeatingEfficiency2",
+            TemplatePopulator.decimalToPercentage(preferentialHeaterSeasonalSpaceHeatingEfficiency, 2))
+        .setText("supplementaryBoilerFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getSupplementaryBoilerFactor(form)))
+        .setText("supplementaryBoilerContribution", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getSupplementaryBoilerContributionDecimal(form), 1))
+        .setText("solarCollectorSizeFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getSolarCollectorSizeFactor(form)))
+        .setText("tankVolumeFactor",
+            String.format("%.2f", spaceHeaterPackagesCalculatorService.getTankVolumeFactor(form)))
+        .setText("storageTankVolumeMetersCubed",
+            String.format("%.3f", spaceHeaterPackagesCalculatorService.getStorageTankVolumeMetersCubed(form)))
+        .setText("solarContribution", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getSolarContributionDecimal(form), 1))
+        .setText("packageSpaceHeatingEfficiency1",
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency))
+        .setText("packageSpaceHeatingEfficiency2",
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency, 2))
+        .setText("packageSpaceHeatingEfficiency3",
+            TemplatePopulator.decimalToPercentage(packageSpaceHeatingEfficiency, 2))
+        .setText("preferentialHeatPumpColderDifference", TemplatePopulator.decimalToPercentage(
+            Math.abs(preferentialHeatPumpColderDifference), 2))
+        .setText("preferentialHeatPumpWarmerDifference", TemplatePopulator.decimalToPercentage(
+            Math.abs(preferentialHeatPumpWarmerDifference), 2))
+        .setText("packageSpaceHeatingEfficiencyColder", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyColderDecimal(form)))
+        .setText("packageSpaceHeatingEfficiencyWarmer", TemplatePopulator.decimalToPercentage(
+            spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyWarmerDecimal(form)))
+        .setText("solarCollectorEfficiencyPercentage",
+            String.format("%.2f", Float.parseFloat(form.getSolarCollectorEfficiencyPercentage())))
+        .setText("solarCollectorSize", String.format("%.2f", Float.parseFloat(form.getSolarCollectorSize())))
+        .applyCssClassToId(
+            RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
+            "shown");
+
+    if (form.getHasSupplementaryBoiler()) {
+      templatePopulator
+          .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", String.format("%.2f",
+              Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage())));
+    } else {
+      templatePopulator
+          .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
+    }
+
+    if (form.getHasStorageTank()) {
+      templatePopulator
+          .setText("storageTankRating",
+              String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
+    } else {
+      templatePopulator
+          .setText("storageTankRating", "");
+    }
+
+    if (preferentialHeatPumpColderDifference >= 0) {
+      templatePopulator.setText("signColder", "+");
+    } else {
+      templatePopulator.setText("signColder", "-");
+    }
+
+    if (preferentialHeatPumpWarmerDifference >= 0) {
+      templatePopulator.setText("signWarmer", "+");
+    } else {
+      templatePopulator.setText("signWarmer", "-");
+    }
+
+    return templatePopulator.asProcessedEnergyLabel(ProductMetadata.SPACE_HEATER_PACKAGE, form);
+  }
+
   public SpaceHeaterPackagesForm toSpaceHeaterPackagesForm(
       SpaceHeaterPackagesCalculatorForm calculatorForm) {
     SpaceHeaterPackagesForm form = new SpaceHeaterPackagesForm();
     form.setHeaterEfficiencyRating(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(calculatorForm).name());
-    form.setSolarCollector(calculatorForm.getHasSolarCollector());
+    form.setSolarCollector(true);
     form.setHotWaterStorageTank(calculatorForm.getHasStorageTank());
     form.setTemperatureControl(calculatorForm.getHasTemperatureControl());
     form.setSpaceHeater(calculatorForm.getSpaceHeater());

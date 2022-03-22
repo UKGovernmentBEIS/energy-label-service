@@ -19,10 +19,6 @@ public class SpaceHeaterPackagesCalculatorFormSequenceProvider implements Defaul
       sequence.add(SupplementaryBoilerGroup.class);
     }
 
-    if (form != null && BooleanUtils.isTrue(form.getHasSolarCollector())) {
-      sequence.add(SolarCollectorGroup.class);
-    }
-
     if (form != null && BooleanUtils.isTrue(form.getHasStorageTank())) {
       sequence.add(StorageTankGroup.class);
     }
