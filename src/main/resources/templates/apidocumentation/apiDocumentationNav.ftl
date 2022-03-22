@@ -8,6 +8,7 @@
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#testing" linkName="Testing" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#validation" linkName="Request validation" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#versioning" linkName="Versioning" currentItemHref="dummy"/>
+      <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#cors" linkName="Cross-origin requests" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#availability" linkName="Availability" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#support" linkName="Support" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#email-updates" linkName="Email updates" currentItemHref="dummy"/>
