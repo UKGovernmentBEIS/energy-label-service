@@ -40,7 +40,7 @@
                     Send a <code class="els-code els-code--inline">POST</code> request to the path above. The body of the request must be a JSON object with the following properties:
                   </p>
 
-                  <table class="govuk-table">
+                  <table class="govuk-table els-api-schema-table">
                     <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
                       <th scope="col" class="govuk-table__header">Property</th>
@@ -52,15 +52,15 @@
                       <#list operationWithSchema.getSchema().getProperties() as propertyName, schema>
                         <tr class="govuk-table__row">
                           <td class="govuk-table__cell">
-                            <code class="els-code els-code--inline">${propertyName}</code>
+                            <code>${propertyName}</code>
                           </td>
                           <td class="govuk-table__cell">
-                            ${schema.getDescription()}
+                            ${schema.getDescription()?no_esc}
                             <#if schema.getEnum()?has_content>
                               <br/>
                               Must be one of:<br/>
                               <#list schema.getEnum() as enum>
-                                <code class="els-code els-code--inline">${enum}</code><br/>
+                                <code>${enum}</code><br/>
                               </#list>
                             </#if>
                           </td>

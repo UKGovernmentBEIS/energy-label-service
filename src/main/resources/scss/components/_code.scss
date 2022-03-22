@@ -15,3 +15,8 @@
     overflow-x: scroll;
   }
 }
+
+.els-api-schema-table code {
+  @extend .els-code;
+  @extend .els-code--inline;
+}
