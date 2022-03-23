@@ -19,7 +19,7 @@ public class GasOvensForm extends DomesticOvensForm {
   @FieldPrompt("Energy consumption of the fan-forced heating function per cycle, in MJ/cycle")
   @Digits(groups = FanOvenGroup.class, integer = 1, fraction = 2, message = "Enter the energy consumption of the fan-forced heating function per cycle as 1 digit with up to 2 decimal places")
   @NotNull(groups = FanOvenGroup.class)
-  @Schema(type = "number")
+  @Schema(type = "number", description = "Energy consumption of the fan-forced heating function per cycle, in MJ/cycle. Only required if <code>isFanOven</code> is <code>true</code>.")
   private String convectionMjConsumption;
 
   public String getConventionalMjConsumption() {

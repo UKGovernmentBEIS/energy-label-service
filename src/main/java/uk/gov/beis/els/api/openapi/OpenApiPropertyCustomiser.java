@@ -228,8 +228,8 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
 
   private String combineText(String text1, String text2) {
     if (text2.isEmpty()) {
-      return text1;
+      return text1 + (text1.endsWith(".") || text1.endsWith("?") ? "" : ".");
     }
-    return text1 + (text1.endsWith(".") ? " " : ". ") + text2;
+    return text1 + (text1.endsWith(".") || text1.endsWith("?") ? " " : ". ") + text2;
   }
 }
