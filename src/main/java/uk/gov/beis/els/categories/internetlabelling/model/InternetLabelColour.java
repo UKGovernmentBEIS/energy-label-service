@@ -2,7 +2,7 @@ package uk.gov.beis.els.categories.internetlabelling.model;
 
 public enum InternetLabelColour {
   COLOUR("Colour"),
-  BW("Black and white");
+  BLACK_AND_WHITE("Black and white");
 
   private final String displayName;
 
