@@ -300,6 +300,7 @@ public class WaterHeatersService {
     String packageWaterHeatingEfficiency = TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyDecimal(form));
 
     return templatePopulator
+        .setText("ficheType", "water heater")
         .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
         .setText("waterHeatingEfficiency1", waterHeatingEfficiency)
         .setText("waterHeatingEfficiency2", waterHeatingEfficiency)
