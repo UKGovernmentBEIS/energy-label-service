@@ -10,7 +10,7 @@ isPackageCalculatorForm=true
     <@govukTextInput.textInput path="form.preferentialHeaterHeatOutput"/>
     <@govukTextInput.textInput path="form.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage"/>
 
-    <@govukFieldset.fieldset legendHeading="Solar Collector" legendSize="h2">
+    <@govukFieldset.fieldset legendHeading="Solar collector" legendSize="h2">
         <@govukTextInput.textInput path="form.solarCollectorSize"/>
         <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
         <@govukTextInput.textInput path="form.annualNonSolarHeatContribution"/>

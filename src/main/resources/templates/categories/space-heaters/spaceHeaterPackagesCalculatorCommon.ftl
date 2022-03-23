@@ -7,7 +7,7 @@
   </#if>
 
   <#if showSolarCollector>
-    <@govukFieldset.fieldset legendHeading="Solar Collector" legendSize="h2">
+    <@govukFieldset.fieldset legendHeading="Solar collector" legendSize="h2">
       <@govukTextInput.textInput path="form.solarCollectorSize"/>
       <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
     </@govukFieldset.fieldset>
