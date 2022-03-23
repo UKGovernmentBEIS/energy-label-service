@@ -13,7 +13,7 @@ public class DisplayCabinetsFormSequenceProvider implements DefaultGroupSequence
     List<Class<?>> sequence = new ArrayList<>();
 
     if (form != null) {
-      if (BooleanUtils.isTrue(form.getChilledCompartment())) {
+      if (BooleanUtils.isTrue(form.getFridgeCompartment())) {
         sequence.add(FridgeGroup.class);
       }
       if (BooleanUtils.isTrue(form.getFrozenCompartment())) {

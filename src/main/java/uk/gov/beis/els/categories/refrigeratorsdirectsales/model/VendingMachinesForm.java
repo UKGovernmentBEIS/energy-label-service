@@ -48,7 +48,7 @@ public class VendingMachinesForm extends StandardTemplateForm40Char {
 
   @FieldPrompt("The maximum measured product temperature, expressed in degrees Celsius, of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter the maximum measured product temperature in the frozen compartments, up to 2 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "The maximum measured product temperature, expressed in degrees Celsius, of the compartment(s) with frozen operating temperatures. Only required if <code>frozenCompartment</code> is <code>true</code>.")
   @NotNull(groups = FreezerGroup.class)
   private String freezerMaxTemp;
 
