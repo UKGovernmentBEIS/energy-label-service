@@ -38,23 +38,23 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
 
   @FieldPrompt(value = "Does the model have any chill or unfrozen compartments?", hintText = "A chill compartment has a target temperature of 2 degrees Celsius and storage conditions between minus 3 degrees Celsius and 3 degrees Celsius. An unfrozen compartment has a target temperature of 4 degrees Celsius or above.")
   @NotNull(message = "Specify if the model has any chill or unfrozen compartments")
-  private Boolean nonRatedCompartment;
+  private Boolean chillCompartment;
 
   @FieldPrompt("Total volume of chill and unfrozen compartments in litres (l)")
   @Digits(groups = FridgeGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of chill and unfrozen compartments in litres up to 3 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Total volume of chill and unfrozen compartments in litres (l). Only required if <code>chillCompartment</code> is <code>true</code>.")
   @NotNull(groups = FridgeGroup.class)
-  private String nonRatedVolume;
+  private String chillVolume;
 
   @FieldPrompt(value = "Does the model have any frozen compartments?", hintText = "A frozen compartment has a target temperature of 0 degrees Celsius or below")
   @NotNull(message = "Specify if the model has any frozen compartments")
-  private Boolean ratedCompartment;
+  private Boolean frozenCompartment;
 
   @FieldPrompt("Total volume of frozen compartments in litres (l)")
   @Digits(groups = FreezerGroup.class, integer = 3, fraction = 0, message = "Enter the total volume of frozen compartments in litres, up to 3 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Total volume of frozen compartments in litres (l). Only required if <code>frozenCompartment</code> is <code>true</code>.")
   @NotNull(groups = FreezerGroup.class)
-  private String ratedVolume;
+  private String frozenVolume;
 
   @FieldPrompt("Airborne acoustic noise emission class")
   @NotBlank(message = "Select an airborne acoustic noise emission class")
@@ -97,36 +97,36 @@ public class FridgesFreezersForm extends StandardTemplateForm30Char {
     this.noiseEmissions = noiseEmissions;
   }
 
-  public Boolean getNonRatedCompartment() {
-    return nonRatedCompartment;
+  public Boolean getChillCompartment() {
+    return chillCompartment;
   }
 
-  public void setNonRatedCompartment(Boolean nonRatedCompartment) {
-    this.nonRatedCompartment = nonRatedCompartment;
+  public void setChillCompartment(Boolean chillCompartment) {
+    this.chillCompartment = chillCompartment;
   }
 
-  public String getNonRatedVolume() {
-    return nonRatedVolume;
+  public String getChillVolume() {
+    return chillVolume;
   }
 
-  public void setNonRatedVolume(String nonRatedVolume) {
-    this.nonRatedVolume = nonRatedVolume;
+  public void setChillVolume(String chillVolume) {
+    this.chillVolume = chillVolume;
   }
 
-  public Boolean getRatedCompartment() {
-    return ratedCompartment;
+  public Boolean getFrozenCompartment() {
+    return frozenCompartment;
   }
 
-  public void setRatedCompartment(Boolean ratedCompartment) {
-    this.ratedCompartment = ratedCompartment;
+  public void setFrozenCompartment(Boolean frozenCompartment) {
+    this.frozenCompartment = frozenCompartment;
   }
 
-  public String getRatedVolume() {
-    return ratedVolume;
+  public String getFrozenVolume() {
+    return frozenVolume;
   }
 
-  public void setRatedVolume(String ratedVolume) {
-    this.ratedVolume = ratedVolume;
+  public void setFrozenVolume(String frozenVolume) {
+    this.frozenVolume = frozenVolume;
   }
 
   public String getNoiseEmissionsClass() {
