@@ -1,15 +1,12 @@
 <#include '../../layout.ftl'>
 <#import 'spaceHeaterPackagesCalculatorCommon.ftl' as commonFields>
+<#import 'heatPumpPackageAndCombinationCommon.ftl' as heatPumpCommon>
 
 <@common.standardProductForm
 title="Packages of space heater, temperature control and solar device energy label calculator: ${preferentialHeater}"
 showInsetText=false
 isPackageCalculatorForm=true
 >
-  <@govukTextInput.textInput path="form.preferentialHeaterHeatOutput"/>
-  <@govukTextInput.textInput path="form.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage"/>
-  <@govukTextInput.textInput path="form.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyColderPercentage"/>
-  <@govukTextInput.textInput path="form.preferentialHeatPumpSeasonalSpaceHeatingEfficiencyWarmerPercentage"/>
-  <@govukRadios.radioYesNo path="form.lowTemperatureHeatPump"/>
+  <@heatPumpCommon.commonHeatPumpPackageAndCombinationFields/>
   <@commonFields.commonSpaceHeaterPackagesCalculatorFields showPreferentialHeaterInputs=false/>
 </@common.standardProductForm>

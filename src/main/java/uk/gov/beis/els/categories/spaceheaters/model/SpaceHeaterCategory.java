@@ -45,7 +45,7 @@ public class SpaceHeaterCategory implements Category {
       .add(new CategoryItem(
         "PACKAGE_COMBINATION_HEATERS",
         "Packages of combination heater, temperature control and solar device",
-        ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackages(null))))
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesSortQuestion(null))))
       .build();
 
   private SpaceHeaterCategory(){}

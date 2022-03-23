@@ -1,15 +1,17 @@
 <#include '../../layout.ftl'>
 
-<#macro commonSpaceHeaterPackagesCalculatorFields showPreferentialHeaterInputs=true>
+<#macro commonSpaceHeaterPackagesCalculatorFields showPreferentialHeaterInputs=true showSolarCollector=true>
   <#if showPreferentialHeaterInputs>
     <@govukTextInput.textInput path="form.preferentialHeaterHeatOutput"/>
     <@govukTextInput.textInput path="form.preferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage"/>
   </#if>
 
-  <@govukFieldset.fieldset legendHeading="Solar Collector" legendSize="h2">
-    <@govukTextInput.textInput path="form.solarCollectorSize"/>
-    <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
-  </@govukFieldset.fieldset>
+  <#if showSolarCollector>
+    <@govukFieldset.fieldset legendHeading="Solar collector" legendSize="h2">
+      <@govukTextInput.textInput path="form.solarCollectorSize"/>
+      <@govukTextInput.textInput path="form.solarCollectorEfficiencyPercentage"/>
+    </@govukFieldset.fieldset>
+  </#if>
 
   <@govukRadios.radioYesNo path="form.hasTemperatureControl" hiddenQuestionsWithYesSelected=true legendSize="h3">
     <@govukSelect.select path="form.temperatureControlClass" options=temperatureControlClass/>
