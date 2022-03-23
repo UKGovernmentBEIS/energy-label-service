@@ -43,9 +43,9 @@
                   <table class="govuk-table els-api-schema-table">
                     <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
-                      <th scope="col" class="govuk-table__header">Property</th>
-                      <th scope="col" class="govuk-table__header">Description</th>
-                      <th scope="col" class="govuk-table__header">Type</th>
+                      <th scope="col" class="govuk-table__header property-header">Property</th>
+                      <th scope="col" class="govuk-table__header description-header">Description</th>
+                      <th scope="col" class="govuk-table__header type-header">Type</th>
                     </tr>
                     </thead>
                     <tbody class="govuk-table__body">
