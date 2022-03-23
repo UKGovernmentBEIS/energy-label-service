@@ -8,6 +8,7 @@ import uk.gov.beis.els.api.common.ApiValuesFromLoadProfileList;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
+@Schema(name = "Packages of combination heater, temperature control and solar device energy label calculator - Heat pump")
 public class HeatPumpCombinationCalculatorForm extends HeatPumpPackagesCalculatorForm {
 
   @FieldPrompt("Water heating energy efficiency of water heater (%)")
