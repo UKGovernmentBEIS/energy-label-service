@@ -33,22 +33,22 @@ public class RefrigeratingAppliancesService {
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate(
         "labels/household-refrigerating-appliances/household-refrigerating-appliances-2021.svg"));
 
-    if (form.getRatedCompartment()) {
+    if (form.getFrozenCompartment()) {
       templatePopulator
-          .setText("freezerLitres", form.getRatedVolume())
+          .setText("freezerLitres", form.getFrozenVolume())
           .applyCssClassToId("freezerSection", "hasFreezerSection");
 
-      if (!form.getNonRatedCompartment()) {
+      if (!form.getChillCompartment()) {
         templatePopulator.setElementTranslate("freezerSection", 65.3, 0);
       }
     }
 
-    if (form.getNonRatedCompartment()) {
+    if (form.getChillCompartment()) {
       templatePopulator
-          .setText("fridgeLitres", form.getNonRatedVolume())
+          .setText("fridgeLitres", form.getChillVolume())
           .applyCssClassToId("fridgeSection", "hasFridgeSection");
 
-      if (!form.getRatedCompartment()) {
+      if (!form.getFrozenCompartment()) {
         templatePopulator.setElementTranslate("fridgeSection", -63.5, 0);
       }
     }

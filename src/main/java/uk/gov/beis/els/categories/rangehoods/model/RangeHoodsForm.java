@@ -50,6 +50,7 @@ public class RangeHoodsForm extends StandardTemplateForm30Char {
       serviceClass = RangeHoodsService.class,
       useSecondaryRange = true
   )
+  @Schema(description = "The Lighting Efficiency class. Only required if <code>lightingSystem</code> is <code>true</code>.")
   private String lightingClass;
 
   @FieldPrompt("The Grease Filtering Efficiency class")

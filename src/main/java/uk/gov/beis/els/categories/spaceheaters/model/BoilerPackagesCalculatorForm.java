@@ -15,19 +15,19 @@ public class BoilerPackagesCalculatorForm extends SpaceHeaterPackagesCalculatorF
 
   @FieldPrompt("Does this package include a supplementary heat pump?")
   @NotNull(message = "Specify if the package includes a supplementary heat pump")
-  private Boolean hasSupplementaryHeatPump;
+  private Boolean supplementaryHeatPump;
 
   @FieldPrompt("Rated heat output (Prated) of the supplementary heat pump (in kW)")
   @Digits(integer = 4, fraction = 0, message = "Enter the heat output of the supplementary heat pump, up to 4 digits long",
             groups = SupplementaryHeatPumpGroup.class)
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Rated heat output (Prated) of the supplementary heat pump (in kW). Only required if <code>supplementaryHeatPump</code> is <code>true</code>.")
   @NotNull(groups = SupplementaryHeatPumpGroup.class, message = "Enter the heat output of the supplementary heat pump")
   private String supplementaryHeatPumpHeatOutput;
 
-  @FieldPrompt("Seasonal space heating energy efficiency of supplementary heat pump (in %)")
+  @FieldPrompt("Seasonal space heating energy efficiency of the supplementary heat pump (in %)")
   @Digits(integer = 3, fraction = 0, message = "Enter the seasonal space heating energy efficiency of supplementary heat pump, up to 3 digits long",
             groups = SupplementaryHeatPumpGroup.class)
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Seasonal space heating energy efficiency of the supplementary heat pump (in %). Only required if <code>supplementaryHeatPump</code> is <code>true</code>.")
   @NotNull(groups = SupplementaryHeatPumpGroup.class, message = "Enter the seasonal space heating energy efficiency of supplementary heat pump")
   private String supplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage;
 
@@ -36,12 +36,12 @@ public class BoilerPackagesCalculatorForm extends SpaceHeaterPackagesCalculatorF
     return preferentialHeaterType;
   }
 
-  public Boolean getHasSupplementaryHeatPump() {
-    return hasSupplementaryHeatPump;
+  public Boolean getSupplementaryHeatPump() {
+    return supplementaryHeatPump;
   }
 
-  public void setHasSupplementaryHeatPump(Boolean hasSupplementaryHeatPump) {
-    this.hasSupplementaryHeatPump = hasSupplementaryHeatPump;
+  public void setSupplementaryHeatPump(Boolean supplementaryHeatPump) {
+    this.supplementaryHeatPump = supplementaryHeatPump;
   }
 
   public String getSupplementaryHeatPumpHeatOutput() {

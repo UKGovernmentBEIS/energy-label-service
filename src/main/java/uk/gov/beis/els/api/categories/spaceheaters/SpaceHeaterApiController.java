@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
@@ -224,5 +226,19 @@ public class SpaceHeaterApiController {
   public Object packageSpaceHeaterCogenerationFiche(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
     return documentRendererService.processPdfApiResponse(
         spaceHeatersService.generateFicheHtml(form));
+  }
+
+  @Operation(summary = "Packages of combination heater, temperature control and solar device - Boiler: energy label calculator")
+  @PostMapping("/package-combination-heater/calculate/boiler/energy-label")
+  public Object combinationPackagesSpaceHeaterBoilerCalculator(@RequestBody @Valid BoilerCombinationCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(spaceHeatersService.toCombinationHeaterPackagesForm(form)));
+  }
+
+  @Operation(summary = "Packages of combination heater, temperature control and solar device - Heat pump: energy label calculator")
+  @PostMapping("/package-combination-heater/calculate/heat-pump/energy-label")
+  public Object combinationPackagesSpaceHeaterHeatPumpCalculator(@RequestBody @Valid HeatPumpCombinationCalculatorForm form) {
+    return documentRendererService.processPdfApiResponse(
+        spaceHeatersService.generateHtml(spaceHeatersService.toCombinationHeaterPackagesForm(form)));
   }
 }

@@ -32,23 +32,23 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
 
   @FieldPrompt("Does this model have any display areas functioning at chilled operating temperature?")
   @NotNull(message = "Select whether this model has chilled display areas")
-  private Boolean chilledCompartment;
+  private Boolean fridgeCompartment;
 
   @FieldPrompt("The sum of the display areas, expressed in square metres, of all compartments functioning at chilled operating temperature")
   @Digits(groups = FridgeGroup.class, integer = 4, fraction = 2, message = "Enter the total display area of chilled compartments, up to 4 digits long with up to 2 decimal places")
-  @Schema(type = "number")
+  @Schema(type = "number", description = "The sum of the display areas, expressed in square metres, of all compartments functioning at chilled operating temperature. Only required if <code>fridgeCompartment</code> is <code>true</code>.")
   @NotNull(groups = FridgeGroup.class)
   private String fridgeCapacity;
 
   @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with chilled operating temperatures")
   @Digits(groups = FridgeGroup.class, integer = 2, fraction = 0, message = "Enter the highest temperature of the warmest M-package in the chilled compartments, up to 2 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with chilled operating temperatures. Only required if <code>fridgeCompartment</code> is <code>true</code>.")
   @NotNull(groups = FridgeGroup.class)
   private String fridgeMaxTemp;
 
   @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with chilled operating temperatures")
   @Digits(groups = FridgeGroup.class, integer = 2, fraction = 0, message = "Enter lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages in the chilled compartments, up to 2 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with chilled operating temperatures. Only required if <code>fridgeCompartment</code> is <code>true</code>.")
   @NotNull(groups = FridgeGroup.class)
   private String fridgeMinTemp;
 
@@ -58,19 +58,19 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
 
   @FieldPrompt("The sum of the display areas, expressed in square metres, of all display areas functioning at frozen operating temperature")
   @Digits(groups = FreezerGroup.class, integer = 4, fraction = 2, message = "Enter the total display area of frozen compartments, up to 4 digits long with up to 2 decimal places")
-  @Schema(type = "number")
+  @Schema(type = "number", description = "The sum of the display areas, expressed in square metres, of all display areas functioning at frozen operating temperature. Only required if <code>frozenCompartment</code> is <code>true</code>.")
   @NotNull(groups = FreezerGroup.class)
   private String freezerCapacity;
 
   @FieldPrompt("The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter the highest temperature of the warmest M-package in the frozen compartments, up to 2 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "The highest temperature, expressed in degrees Celsius, of the warmest M-package of the compartment(s) with frozen operating temperatures. Only required if <code>frozenCompartment</code> is <code>true</code>.")
   @NotNull(groups = FreezerGroup.class)
   private String freezerMaxTemp;
 
   @FieldPrompt("The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with frozen operating temperatures")
   @Digits(groups = FreezerGroup.class, integer = 2, fraction = 0, message = "Enter lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages in the frozen compartments, up to 2 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "The lowest temperature of the coldest M-package, or the highest minimum temperature of all M-packages, expressed in degrees Celsius of the compartment(s) with frozen operating temperatures. Only required if <code>frozenCompartment</code> is <code>true</code>.")
   @NotNull(groups = FreezerGroup.class)
   private String freezerMinTemp;
 
@@ -98,12 +98,12 @@ public class DisplayCabinetsForm extends StandardTemplateForm40Char {
     this.annualEnergyConsumption = annualEnergyConsumption;
   }
 
-  public Boolean getChilledCompartment() {
-    return chilledCompartment;
+  public Boolean getFridgeCompartment() {
+    return fridgeCompartment;
   }
 
-  public void setChilledCompartment(Boolean chilledCompartment) {
-    this.chilledCompartment = chilledCompartment;
+  public void setFridgeCompartment(Boolean fridgeCompartment) {
+    this.fridgeCompartment = fridgeCompartment;
   }
 
   public String getFridgeCapacity() {

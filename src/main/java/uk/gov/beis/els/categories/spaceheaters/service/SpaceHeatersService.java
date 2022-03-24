@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
@@ -21,6 +23,8 @@ import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpace
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
 import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
+import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
+import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
@@ -57,12 +61,15 @@ public class SpaceHeatersService {
 
   private final TemplateParserService templateParserService;
   private final SpaceHeaterPackagesCalculatorService spaceHeaterPackagesCalculatorService;
+  private final WaterHeatersService waterHeatersService;
 
   @Autowired
   public SpaceHeatersService(TemplateParserService templateParserService,
-                             SpaceHeaterPackagesCalculatorService spaceHeaterPackagesCalculatorService) {
+                             SpaceHeaterPackagesCalculatorService spaceHeaterPackagesCalculatorService,
+                             WaterHeatersService waterHeatersService) {
     this.templateParserService = templateParserService;
     this.spaceHeaterPackagesCalculatorService = spaceHeaterPackagesCalculatorService;
+    this.waterHeatersService = waterHeatersService;
   }
 
   public ProcessedEnergyLabelDocument generateHtml(BoilerSpaceHeatersForm form, LegislationCategory legislationCategory) {
@@ -298,7 +305,7 @@ public class SpaceHeatersService {
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
 
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       templatePopulator
           .setText("storageTankRating",
               String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
@@ -307,7 +314,7 @@ public class SpaceHeatersService {
           .setText("storageTankRating", "");
     }
 
-    if (form.getHasSupplementaryHeatPump()) {
+    if (form.getSupplementaryHeatPump()) {
       templatePopulator
           .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", String.format("%.2f",
               Float.parseFloat(form.getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage())))
@@ -361,7 +368,7 @@ public class SpaceHeatersService {
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
 
-    if (form.getHasSupplementaryBoiler()) {
+    if (form.getSupplementaryBoiler()) {
       templatePopulator
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", String.format("%.2f",
               Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage())));
@@ -370,7 +377,7 @@ public class SpaceHeatersService {
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
     }
 
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       templatePopulator
           .setText("storageTankRating",
               String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
@@ -439,7 +446,7 @@ public class SpaceHeatersService {
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
 
-    if (form.getHasSupplementaryBoiler()) {
+    if (form.getSupplementaryBoiler()) {
       templatePopulator
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", String.format("%.2f",
               Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage())));
@@ -448,7 +455,7 @@ public class SpaceHeatersService {
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
     }
 
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       templatePopulator
           .setText("storageTankRating",
               String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
@@ -477,13 +484,55 @@ public class SpaceHeatersService {
     SpaceHeaterPackagesForm form = new SpaceHeaterPackagesForm();
     form.setHeaterEfficiencyRating(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(calculatorForm).name());
     form.setSolarCollector(true);
-    form.setHotWaterStorageTank(calculatorForm.getHasStorageTank());
-    form.setTemperatureControl(calculatorForm.getHasTemperatureControl());
+    form.setHotWaterStorageTank(calculatorForm.getStorageTank());
+    form.setTemperatureControl(calculatorForm.getTemperatureControl());
     form.setSpaceHeater(calculatorForm.getSpaceHeater());
     form.setPackageEfficiencyRating(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(calculatorForm).name());
     form.setSupplierName(calculatorForm.getSupplierName());
     form.setModelName(calculatorForm.getModelName());
 
     return form;
+  }
+
+  public CombinationHeaterPackagesForm toCombinationHeaterPackagesForm(BoilerCombinationCalculatorForm boilerCombinationCalculatorForm) {
+    CombinationHeaterPackagesForm combinationHeaterPackagesForm = new CombinationHeaterPackagesForm();
+    fillCombinationHeaterPackagesFormFromSpaceHeaterPackageCalculatorForm(combinationHeaterPackagesForm, boilerCombinationCalculatorForm);
+    WaterSolarPackagesForm waterSolarForm = waterHeatersService.toWaterSolarPackagesForm(boilerCombinationCalculatorForm);
+
+    combinationHeaterPackagesForm.setWaterHeaterEfficiencyRating(waterSolarForm.getHeaterEfficiencyRating());
+    combinationHeaterPackagesForm.setHeaterDeclaredLoadProfile(boilerCombinationCalculatorForm.getDeclaredLoadProfile());
+    combinationHeaterPackagesForm.setPackageWaterHeatingEfficiencyRating(waterSolarForm.getPackageEfficiencyRating());
+    combinationHeaterPackagesForm.setPackageDeclaredLoadProfile(boilerCombinationCalculatorForm.getDeclaredLoadProfile());
+
+    return combinationHeaterPackagesForm;
+  }
+
+  public CombinationHeaterPackagesForm toCombinationHeaterPackagesForm(
+      HeatPumpCombinationCalculatorForm heatPumpCombinationCalculatorForm) {
+    CombinationHeaterPackagesForm combinationHeaterPackagesForm = new CombinationHeaterPackagesForm();
+    fillCombinationHeaterPackagesFormFromSpaceHeaterPackageCalculatorForm(combinationHeaterPackagesForm, heatPumpCombinationCalculatorForm);
+    WaterSolarPackagesForm waterSolarForm = waterHeatersService.toWaterSolarPackagesForm(heatPumpCombinationCalculatorForm);
+
+    combinationHeaterPackagesForm.setWaterHeaterEfficiencyRating(waterSolarForm.getHeaterEfficiencyRating());
+    combinationHeaterPackagesForm.setHeaterDeclaredLoadProfile(heatPumpCombinationCalculatorForm.getDeclaredLoadProfile());
+    combinationHeaterPackagesForm.setPackageWaterHeatingEfficiencyRating(waterSolarForm.getPackageEfficiencyRating());
+    combinationHeaterPackagesForm.setPackageDeclaredLoadProfile(heatPumpCombinationCalculatorForm.getDeclaredLoadProfile());
+
+    return combinationHeaterPackagesForm;
+  }
+
+  private void fillCombinationHeaterPackagesFormFromSpaceHeaterPackageCalculatorForm(
+      CombinationHeaterPackagesForm combinationHeaterPackagesForm,
+      SpaceHeaterPackagesCalculatorForm spaceHeaterPackagesCalculatorForm) {
+    SpaceHeaterPackagesForm spaceHeaterPackagesForm = toSpaceHeaterPackagesForm(spaceHeaterPackagesCalculatorForm);
+
+    combinationHeaterPackagesForm.setSpaceHeaterEfficiencyRating(spaceHeaterPackagesForm.getHeaterEfficiencyRating());
+    combinationHeaterPackagesForm.setSolarCollector(true);
+    combinationHeaterPackagesForm.setHotWaterStorageTank(spaceHeaterPackagesCalculatorForm.getStorageTank());
+    combinationHeaterPackagesForm.setTemperatureControl(spaceHeaterPackagesCalculatorForm.getTemperatureControl());
+    combinationHeaterPackagesForm.setSpaceHeater(spaceHeaterPackagesCalculatorForm.getSpaceHeater());
+    combinationHeaterPackagesForm.setPackageSpaceHeatingEfficiencyRating(spaceHeaterPackagesForm.getPackageEfficiencyRating());
+    combinationHeaterPackagesForm.setSupplierName(spaceHeaterPackagesCalculatorForm.getSupplierName());
+    combinationHeaterPackagesForm.setModelName(spaceHeaterPackagesCalculatorForm.getModelName());
   }
 }

@@ -14,6 +14,8 @@ import uk.gov.beis.els.api.categories.waterheaters.HeatPumpWaterHeatersApiForm;
 import uk.gov.beis.els.api.categories.waterheaters.SolarWaterHeatersApiForm;
 import uk.gov.beis.els.categories.common.LoadProfile;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationCalculatorForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationCalculatorForm;
 import uk.gov.beis.els.categories.waterheaters.model.ClimateConditionForm;
 import uk.gov.beis.els.categories.waterheaters.model.ConventionalWaterHeatersForm;
 import uk.gov.beis.els.categories.waterheaters.model.EnergyConsumptionUnit;
@@ -255,6 +257,20 @@ public class WaterHeatersService {
     return form;
   }
 
+  public WaterSolarPackagesForm toWaterSolarPackagesForm(
+      BoilerCombinationCalculatorForm boilerCombinationCalculatorForm) {
+    WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm = toWaterSolarPackagesCalculatorForm(
+        boilerCombinationCalculatorForm);
+    return toWaterSolarPackagesForm(waterSolarPackagesCalculatorForm);
+  }
+
+  public WaterSolarPackagesForm toWaterSolarPackagesForm(
+      HeatPumpCombinationCalculatorForm heatPumpCombinationCalculatorForm) {
+    WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm = toWaterSolarPackagesCalculatorForm(
+        heatPumpCombinationCalculatorForm);
+    return toWaterSolarPackagesForm(waterSolarPackagesCalculatorForm);
+  }
+
   public ProcessedEnergyLabelDocument generateHtml(WaterSolarPackagesForm form, LegislationCategory legislationCategory){
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/water-heaters/packages-of-water-heater-and-solar-device.svg"));
 
@@ -284,6 +300,7 @@ public class WaterHeatersService {
     String packageWaterHeatingEfficiency = TemplatePopulator.decimalToPercentage(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyDecimal(form));
 
     return templatePopulator
+        .setText("ficheType", "water heater")
         .setText("declaredLoadProfile", LoadProfile.getEnum(form.getDeclaredLoadProfile()).getDisplayName())
         .setText("waterHeatingEfficiency1", waterHeatingEfficiency)
         .setText("waterHeatingEfficiency2", waterHeatingEfficiency)
@@ -301,6 +318,38 @@ public class WaterHeatersService {
         .applyCssClassToId(LOAD_PROFILE_SVG_IDS.get(LoadProfile.getEnum(form.getDeclaredLoadProfile())), "shown")
         .applyCssClassToId(RATING_CLASS_SVG_IDS.get(waterSolarPackagesCalculatorService.getPackageWaterHeatingEfficiencyClass(form)), "shown")
         .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
+  }
+
+  private WaterSolarPackagesCalculatorForm toWaterSolarPackagesCalculatorForm(
+      BoilerCombinationCalculatorForm boilerCombinationCalculatorForm) {
+    WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm = new WaterSolarPackagesCalculatorForm();
+    waterSolarPackagesCalculatorForm.setWaterHeatingEfficiencyPercentage(
+        boilerCombinationCalculatorForm.getWaterHeatingEfficiencyPercentage());
+    waterSolarPackagesCalculatorForm.setDeclaredLoadProfile(boilerCombinationCalculatorForm.getDeclaredLoadProfile());
+    waterSolarPackagesCalculatorForm.setStorageTank(boilerCombinationCalculatorForm.getStorageTank());
+    waterSolarPackagesCalculatorForm.setAnnualNonSolarHeatContribution(
+        boilerCombinationCalculatorForm.getAnnualNonSolarHeatContribution());
+    waterSolarPackagesCalculatorForm.setAuxElectricityConsumption(
+        boilerCombinationCalculatorForm.getAuxElectricityConsumption());
+    waterSolarPackagesCalculatorForm.setSupplierName(boilerCombinationCalculatorForm.getSupplierName());
+    waterSolarPackagesCalculatorForm.setModelName(boilerCombinationCalculatorForm.getModelName());
+    return waterSolarPackagesCalculatorForm;
+  }
+
+  private WaterSolarPackagesCalculatorForm toWaterSolarPackagesCalculatorForm(
+      HeatPumpCombinationCalculatorForm heatPumpCombinationCalculatorForm) {
+    WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm = new WaterSolarPackagesCalculatorForm();
+    waterSolarPackagesCalculatorForm.setWaterHeatingEfficiencyPercentage(
+        heatPumpCombinationCalculatorForm.getWaterHeatingEfficiencyPercentage());
+    waterSolarPackagesCalculatorForm.setDeclaredLoadProfile(heatPumpCombinationCalculatorForm.getDeclaredLoadProfile());
+    waterSolarPackagesCalculatorForm.setStorageTank(heatPumpCombinationCalculatorForm.getStorageTank());
+    waterSolarPackagesCalculatorForm.setAnnualNonSolarHeatContribution(
+        heatPumpCombinationCalculatorForm.getAnnualNonSolarHeatContribution());
+    waterSolarPackagesCalculatorForm.setAuxElectricityConsumption(
+        heatPumpCombinationCalculatorForm.getAuxElectricityConsumption());
+    waterSolarPackagesCalculatorForm.setSupplierName(heatPumpCombinationCalculatorForm.getSupplierName());
+    waterSolarPackagesCalculatorForm.setModelName(heatPumpCombinationCalculatorForm.getModelName());
+    return waterSolarPackagesCalculatorForm;
   }
 
   private void populateClimateConditions(ClimateConditionForm form, TemplatePopulator templatePopulator) {
@@ -329,5 +378,4 @@ public class WaterHeatersService {
     }
 
   }
-
 }
