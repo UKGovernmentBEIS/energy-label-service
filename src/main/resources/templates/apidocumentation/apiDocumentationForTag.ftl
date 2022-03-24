@@ -11,8 +11,6 @@
       <span class="govuk-caption-xl">API endpoints</span>
       <h1 class="govuk-heading-xl">${tagName}</h1>
 
-      <h2 class="govuk-heading-l">Endpoints</h2>
-
       <div class="govuk-inset-text">
         The base URL for all paths is <code class="els-code els-code--inline">${baseUrl}</code>.
         No authentication is required for any endpoints.
@@ -21,7 +19,7 @@
       <#assign tagNameSanitised=tagName?replace(" ", "-")>
       <@govukAccordion.accordion accordionId="elg-api-operations-${tagNameSanitised}">
           <#list operationListWithPath as path, operationWithSchema>
-                <@govukAccordion.accordionSection sectionHeading="${operationWithSchema.getOperation().getSummary()}" sectionHeadingSize="h3">
+                <@govukAccordion.accordionSection sectionHeading="${operationWithSchema.getOperation().getSummary()}" sectionHeadingSize="h2">
                     <#if operationWithSchema.getOperation().getDescription()?has_content>
                       <p class="govuk-body">
                           ${operationWithSchema.getOperation().getDescription()}
@@ -43,21 +41,21 @@
                   <table class="govuk-table els-api-schema-table">
                     <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
-                      <th scope="col" class="govuk-table__header property-header">Property</th>
-                      <th scope="col" class="govuk-table__header description-header">Description</th>
-                      <th scope="col" class="govuk-table__header type-header">Type</th>
+                      <th scope="col" class="govuk-table__header els-api-schema-table__property-header">Property</th>
+                      <th scope="col" class="govuk-table__header els-api-schema-table__description-header">Description</th>
+                      <th scope="col" class="govuk-table__header els-api-schema-table__type-header">Type</th>
                     </tr>
                     </thead>
                     <tbody class="govuk-table__body">
                       <#list operationWithSchema.getSchema().getProperties() as propertyName, schema>
                         <tr class="govuk-table__row">
-                          <td class="govuk-table__cell">
+                          <td class="govuk-table__cell els-api-schema-table__property-cell">
                             <code>${propertyName}</code>
                           </td>
                           <td class="govuk-table__cell">
                             ${schema.getDescription()?no_esc}
                             <#if schema.getEnum()?has_content>
-                              <br/>
+                              <br/><br/>
                               Must be one of:<br/>
                               <#list schema.getEnum() as enum>
                                 <code>${enum}</code><br/>

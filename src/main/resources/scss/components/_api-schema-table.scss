@@ -1,0 +1,24 @@
+.els-api-schema-table {
+  table-layout: fixed;
+
+  code {
+    @extend .els-code;
+    @extend .els-code--inline;
+  }
+
+  &__property-header {
+    width: 30%;
+  }
+
+  &__property-cell {
+    word-break: break-word;
+  }
+
+  &__description-header {
+    width: 58%;
+  }
+
+  &__type-header {
+    width: 12%;
+  }
+}

@@ -5,7 +5,6 @@ $govuk-assets-path: "/assets/govuk-frontend/govuk/assets/";
 
 // GOVUK Patterns
 @import "patterns/task-list";
-@import "patterns/api-schema-table";
 
 // Components
 @import "components/buttons";
@@ -13,3 +12,4 @@ $govuk-assets-path: "/assets/govuk-frontend/govuk/assets/";
 @import "components/arrow-icon";
 @import "components/sub-navigation";
 @import "components/code";
+@import "components/api-schema-table";
