@@ -82,11 +82,11 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getTemperatureControlEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    return form.getHasTemperatureControl() ? TemperatureControlClass.valueOf(form.getTemperatureControlClass()).getClassValue() / 100 : 0;
+    return form.getTemperatureControl() ? TemperatureControlClass.valueOf(form.getTemperatureControlClass()).getClassValue() / 100 : 0;
   }
 
   public float getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.getHasSupplementaryBoiler()) {
+    if (!form.getSupplementaryBoiler()) {
       return 0;
     }
     return Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage()) / 100;
@@ -95,7 +95,7 @@ public class SpaceHeaterPackagesCalculatorService {
   public float getSupplementaryBoilerFactor(SpaceHeaterPackagesCalculatorForm form) {
     if (form.getPreferentialHeaterType() == PreferentialHeaterTypes.BOILER) {
       return 0.1F;
-    } else if (!form.getHasSupplementaryBoiler()) {
+    } else if (!form.getSupplementaryBoiler()) {
       return 0;
     }
 
@@ -104,7 +104,7 @@ public class SpaceHeaterPackagesCalculatorService {
             Float.parseFloat(form.getSupplementaryBoilerHeatOutput()));
 
     // Figures from Table 6 of Annex IV of EU reg 811/2013
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       if (x <= 0.1F) {
         return interpolate(0, 0.1F, 1, 0.63F, x);
       } else if (x <= 0.2F) {
@@ -144,7 +144,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSupplementaryBoilerContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.getHasSupplementaryBoiler()) {
+    if (!form.getSupplementaryBoiler()) {
       return 0;
     }
 
@@ -162,7 +162,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getStorageTankVolumeMetersCubed(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.getHasStorageTank()) {
+    if (!form.getStorageTank()) {
       return 0;
     }
 
@@ -185,7 +185,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSolarContributionDecimal(SpaceHeaterPackagesCalculatorForm form) {
-    if (!form.getHasStorageTank()) {
+    if (!form.getStorageTank()) {
       return 0;
     }
 
@@ -201,7 +201,7 @@ public class SpaceHeaterPackagesCalculatorService {
   }
 
   public float getSupplementaryHeatPumpFactor(BoilerPackagesCalculatorForm form) {
-    if (!form.getHasSupplementaryHeatPump()) {
+    if (!form.getSupplementaryHeatPump()) {
       return 0;
     }
 
@@ -210,7 +210,7 @@ public class SpaceHeaterPackagesCalculatorService {
             Float.parseFloat(form.getSupplementaryHeatPumpHeatOutput()));
 
     // Figures from Table 5 of Annex IV of EU reg 811/2013
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       if (x <= 0.1) {
         return this.interpolate(0, 0.1F, 0, 0.37F, x);
       } else if (x <= 0.2F) {
@@ -254,7 +254,7 @@ public class SpaceHeaterPackagesCalculatorService {
 
     BoilerPackagesCalculatorForm boilerForm = (BoilerPackagesCalculatorForm) form;
 
-    if (!boilerForm.getHasSupplementaryHeatPump() || boilerForm.getPreferentialHeaterType() != PreferentialHeaterTypes.BOILER) {
+    if (!boilerForm.getSupplementaryHeatPump() || boilerForm.getPreferentialHeaterType() != PreferentialHeaterTypes.BOILER) {
       return 0;
     }
 

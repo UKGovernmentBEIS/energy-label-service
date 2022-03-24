@@ -326,7 +326,7 @@ public class WaterHeatersService {
     waterSolarPackagesCalculatorForm.setWaterHeatingEfficiencyPercentage(
         boilerCombinationCalculatorForm.getWaterHeatingEfficiencyPercentage());
     waterSolarPackagesCalculatorForm.setDeclaredLoadProfile(boilerCombinationCalculatorForm.getDeclaredLoadProfile());
-    waterSolarPackagesCalculatorForm.setStorageTank(boilerCombinationCalculatorForm.getHasStorageTank());
+    waterSolarPackagesCalculatorForm.setStorageTank(boilerCombinationCalculatorForm.getStorageTank());
     waterSolarPackagesCalculatorForm.setAnnualNonSolarHeatContribution(
         boilerCombinationCalculatorForm.getAnnualNonSolarHeatContribution());
     waterSolarPackagesCalculatorForm.setAuxElectricityConsumption(
@@ -342,7 +342,7 @@ public class WaterHeatersService {
     waterSolarPackagesCalculatorForm.setWaterHeatingEfficiencyPercentage(
         heatPumpCombinationCalculatorForm.getWaterHeatingEfficiencyPercentage());
     waterSolarPackagesCalculatorForm.setDeclaredLoadProfile(heatPumpCombinationCalculatorForm.getDeclaredLoadProfile());
-    waterSolarPackagesCalculatorForm.setStorageTank(heatPumpCombinationCalculatorForm.getHasStorageTank());
+    waterSolarPackagesCalculatorForm.setStorageTank(heatPumpCombinationCalculatorForm.getStorageTank());
     waterSolarPackagesCalculatorForm.setAnnualNonSolarHeatContribution(
         heatPumpCombinationCalculatorForm.getAnnualNonSolarHeatContribution());
     waterSolarPackagesCalculatorForm.setAuxElectricityConsumption(

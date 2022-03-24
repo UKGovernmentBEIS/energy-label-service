@@ -11,15 +11,15 @@ public class SpaceHeaterPackagesCalculatorFormSequenceProvider implements Defaul
   public List<Class<?>> getValidationGroups(SpaceHeaterPackagesCalculatorForm form) {
     List<Class<?>> sequence = new ArrayList<>();
 
-    if (form != null && BooleanUtils.isTrue(form.getHasTemperatureControl())) {
+    if (form != null && BooleanUtils.isTrue(form.getTemperatureControl())) {
       sequence.add(TemperatureControlGroup.class);
     }
 
-    if (form != null && BooleanUtils.isTrue(form.getHasSupplementaryBoiler())) {
+    if (form != null && BooleanUtils.isTrue(form.getSupplementaryBoiler())) {
       sequence.add(SupplementaryBoilerGroup.class);
     }
 
-    if (form != null && BooleanUtils.isTrue(form.getHasStorageTank())) {
+    if (form != null && BooleanUtils.isTrue(form.getStorageTank())) {
       sequence.add(StorageTankGroup.class);
     }
 

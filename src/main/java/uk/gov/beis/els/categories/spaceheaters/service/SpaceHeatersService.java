@@ -305,7 +305,7 @@ public class SpaceHeatersService {
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
 
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       templatePopulator
           .setText("storageTankRating",
               String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
@@ -314,7 +314,7 @@ public class SpaceHeatersService {
           .setText("storageTankRating", "");
     }
 
-    if (form.getHasSupplementaryHeatPump()) {
+    if (form.getSupplementaryHeatPump()) {
       templatePopulator
           .setText("supplementaryHeatPumpSeasonalSpaceHeatingEfficiency", String.format("%.2f",
               Float.parseFloat(form.getSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage())))
@@ -368,7 +368,7 @@ public class SpaceHeatersService {
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
 
-    if (form.getHasSupplementaryBoiler()) {
+    if (form.getSupplementaryBoiler()) {
       templatePopulator
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", String.format("%.2f",
               Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage())));
@@ -377,7 +377,7 @@ public class SpaceHeatersService {
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
     }
 
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       templatePopulator
           .setText("storageTankRating",
               String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
@@ -446,7 +446,7 @@ public class SpaceHeatersService {
             RATING_CLASS_SVG_IDS.get(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(form)),
             "shown");
 
-    if (form.getHasSupplementaryBoiler()) {
+    if (form.getSupplementaryBoiler()) {
       templatePopulator
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", String.format("%.2f",
               Float.parseFloat(form.getSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage())));
@@ -455,7 +455,7 @@ public class SpaceHeatersService {
           .setText("supplementaryBoilerSeasonalSpaceHeatingEfficiency", "0.00");
     }
 
-    if (form.getHasStorageTank()) {
+    if (form.getStorageTank()) {
       templatePopulator
           .setText("storageTankRating",
               String.format("%.2f", TankLabelClass.getEnum(form.getStorageTankRating()).getRatingValue()));
@@ -484,8 +484,8 @@ public class SpaceHeatersService {
     SpaceHeaterPackagesForm form = new SpaceHeaterPackagesForm();
     form.setHeaterEfficiencyRating(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(calculatorForm).name());
     form.setSolarCollector(true);
-    form.setHotWaterStorageTank(calculatorForm.getHasStorageTank());
-    form.setTemperatureControl(calculatorForm.getHasTemperatureControl());
+    form.setHotWaterStorageTank(calculatorForm.getStorageTank());
+    form.setTemperatureControl(calculatorForm.getTemperatureControl());
     form.setSpaceHeater(calculatorForm.getSpaceHeater());
     form.setPackageEfficiencyRating(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(calculatorForm).name());
     form.setSupplierName(calculatorForm.getSupplierName());
@@ -528,8 +528,8 @@ public class SpaceHeatersService {
 
     combinationHeaterPackagesForm.setSpaceHeaterEfficiencyRating(spaceHeaterPackagesForm.getHeaterEfficiencyRating());
     combinationHeaterPackagesForm.setSolarCollector(true);
-    combinationHeaterPackagesForm.setHotWaterStorageTank(spaceHeaterPackagesCalculatorForm.getHasStorageTank());
-    combinationHeaterPackagesForm.setTemperatureControl(spaceHeaterPackagesCalculatorForm.getHasTemperatureControl());
+    combinationHeaterPackagesForm.setHotWaterStorageTank(spaceHeaterPackagesCalculatorForm.getStorageTank());
+    combinationHeaterPackagesForm.setTemperatureControl(spaceHeaterPackagesCalculatorForm.getTemperatureControl());
     combinationHeaterPackagesForm.setSpaceHeater(spaceHeaterPackagesCalculatorForm.getSpaceHeater());
     combinationHeaterPackagesForm.setPackageSpaceHeatingEfficiencyRating(spaceHeaterPackagesForm.getPackageEfficiencyRating());
     combinationHeaterPackagesForm.setSupplierName(spaceHeaterPackagesCalculatorForm.getSupplierName());

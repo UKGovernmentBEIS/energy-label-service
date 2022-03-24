@@ -12,19 +12,19 @@ public class BoilerPackagesCalculatorFormSequenceProvider implements DefaultGrou
     List<Class<?>> sequence = new ArrayList<>();
 
     //need to repeat same checks as in SpaceHeaterPackagesCalculatorFormSequenceProvider because the sequence provider gets override by this
-    if (form != null && BooleanUtils.isTrue(form.getHasTemperatureControl())) {
+    if (form != null && BooleanUtils.isTrue(form.getTemperatureControl())) {
       sequence.add(TemperatureControlGroup.class);
     }
 
-    if (form != null && BooleanUtils.isTrue(form.getHasSupplementaryBoiler())) {
+    if (form != null && BooleanUtils.isTrue(form.getSupplementaryBoiler())) {
       sequence.add(SupplementaryBoilerGroup.class);
     }
 
-    if (form != null && BooleanUtils.isTrue(form.getHasStorageTank())) {
+    if (form != null && BooleanUtils.isTrue(form.getStorageTank())) {
       sequence.add(StorageTankGroup.class);
     }
 
-    if (form != null && BooleanUtils.isTrue(form.getHasSupplementaryHeatPump())) {
+    if (form != null && BooleanUtils.isTrue(form.getSupplementaryHeatPump())) {
       sequence.add(SupplementaryHeatPumpGroup.class);
     }
 
