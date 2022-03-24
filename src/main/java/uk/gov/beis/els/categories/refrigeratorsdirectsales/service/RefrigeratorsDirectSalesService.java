@@ -92,7 +92,7 @@ public class RefrigeratorsDirectSalesService {
 
     TemplatePopulator templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/refrigerators-direct-sales/refrigerators-direct-sales.svg"));
 
-    if (form.getChilledCompartment()) {
+    if (form.getFridgeCompartment()) {
       templatePopulator.applyCssClassToId("fridgeSection", "hasFridgeSection")
           .setText("fridgeCapacity", form.getFridgeCapacity())
           .applyCssClassToId("fridgeCapacityUnits", "fridgeCapacityUnitsm2")
@@ -111,7 +111,7 @@ public class RefrigeratorsDirectSalesService {
           .setText("freezerMaxTemp", form.getFreezerMaxTemp())
           .setText("freezerMinTemp", form.getFreezerMinTemp());
 
-      if(!form.getChilledCompartment()) {
+      if(!form.getFridgeCompartment()) {
         templatePopulator.setElementTranslate("freezerSection", 0, -44.5);
       }
     }

@@ -39,13 +39,13 @@ public enum InternetLabelTemplate {
     if(orientation == InternetLabelOrientation.LEFT) {
       if(colour == InternetLabelColour.COLOUR) {
         templatePath = this.leftColourTemplatePath;
-      } else if(colour == InternetLabelColour.BW) {
+      } else if(colour == InternetLabelColour.BLACK_AND_WHITE) {
         templatePath = this.leftBWTemplatePath;
       }
     } else if(orientation == InternetLabelOrientation.RIGHT) {
       if(colour == InternetLabelColour.COLOUR) {
         templatePath = this.rightColourTemplatePath;
-      } else if(colour == InternetLabelColour.BW) {
+      } else if(colour == InternetLabelColour.BLACK_AND_WHITE) {
         templatePath = this.rightBWTemplatePath;
       }
     }

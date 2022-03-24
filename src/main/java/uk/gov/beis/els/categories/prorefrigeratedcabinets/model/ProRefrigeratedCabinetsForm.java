@@ -38,7 +38,7 @@ public class ProRefrigeratedCabinetsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("The sum of the net volumes, expressed in litres, of all chilled compartments functioning at chilled operating temperature")
   @Digits(groups = FridgeGroup.class, integer = 4, fraction = 0, message = "Enter the total volume of chilled compartments, up to 4 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "The sum of the net volumes, expressed in litres, of all chilled compartments functioning at chilled operating temperature. Only required if <code>chilledCompartment</code> is <code>true</code>.")
   @NotNull(groups = FridgeGroup.class)
   private String chilledVolume;
 
@@ -48,7 +48,7 @@ public class ProRefrigeratedCabinetsForm extends StandardTemplateForm30Char {
 
   @FieldPrompt("The sum of the net volumes, expressed in litres, of all compartments functioning at frozen operating temperature (and of all compartments declared as multi-use)")
   @Digits(groups = FreezerGroup.class, integer = 4, fraction = 0, message = "Enter the total volume of frozen or multi-use compartments, up to 4 digits long")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "The sum of the net volumes, expressed in litres, of all compartments functioning at frozen operating temperature (and of all compartments declared as multi-use). Only required if <code>frozenCompartment</code> is <code>true</code>.")
   @NotNull(groups = FreezerGroup.class)
   private String frozenVolume;
 

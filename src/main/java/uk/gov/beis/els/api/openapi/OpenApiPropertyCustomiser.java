@@ -30,7 +30,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
   public Schema customize(Schema schema, AnnotatedType type) {
     List<Annotation> annotations = Arrays.asList(type.getCtxAnnotations());
 
-    processFieldPrompts(annotations, schema);
+    processFieldDescriptions(annotations, schema);
     processLegislationCategoryValues(annotations, schema);
     processRatingClassRangeValues(annotations, schema);
     processEnumValues(annotations, schema);
@@ -49,18 +49,22 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
   }
 
   /**
-   * Sets the description field based on the FieldPrompt and optional Digits annotations, if it has not been overridden
-   * by a description defined by the Schema annotation.
+   * Sets the schema description field, based on the FieldPrompt or Schema annotation. If both are set, the Schema
+   * annotation takes precedence. Digits validation rules are appended to the end of the description.
    * @param annotations the annotations on the element
    * @param schema the OpenAPI schema
    */
-  private void processFieldPrompts(List<Annotation> annotations, Schema schema) {
+  private void processFieldDescriptions(List<Annotation> annotations, Schema schema) {
     getAnnotation(annotations, FieldPrompt.class)
         .ifPresent(fieldPrompt -> {
-          Optional<io.swagger.v3.oas.annotations.media.Schema> schemaAnnotation = getAnnotation(annotations, io.swagger.v3.oas.annotations.media.Schema.class);
-          if(!schemaAnnotation.isPresent() || schemaAnnotation.get().description().isEmpty()) {
-            // Only set description if it has not been overridden by a Schema description
-            schema.description(fieldPrompt.value() + stringifyDigitsConstraint(getAnnotation(annotations, Digits.class)));
+          schema.description(combineText(fieldPrompt.value(), stringifyDigitsConstraint(getAnnotation(annotations, Digits.class))));
+        });
+
+    // Schema takes precedence if both are set
+    getAnnotation(annotations, io.swagger.v3.oas.annotations.media.Schema.class)
+        .ifPresent(schemaAnnotation -> {
+          if (!schemaAnnotation.description().isEmpty()) {
+            schema.description(combineText(schemaAnnotation.description(), stringifyDigitsConstraint(getAnnotation(annotations, Digits.class))));
           }
         });
   }
@@ -79,14 +83,14 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     int fractions = digits.get().fraction();
 
     if (ints > 0 && fractions > 0) {
-      return String.format(". This may be up to %d %s long with an optional %d decimal %s.",
+      return String.format("This may be up to %d %s long with an optional %d decimal %s.",
           ints,
           pluralise(ints, "digit"),
           fractions,
           pluralise(fractions, "place")
       );
     } else if (ints > 0){
-      return String.format(". This may be up to %d %s long.", ints, pluralise(ints, "digit"));
+      return String.format("This may be up to %d %s long.", ints, pluralise(ints, "digit"));
     } else {
       return "";
     }
@@ -220,5 +224,12 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     if (schema.getEnum() != null) {
       schema.setExample(schema.getEnum().get(0)); // set the example to the first enum value in the list
     }
+  }
+
+  private String combineText(String text1, String text2) {
+    if (text2.isEmpty()) {
+      return text1 + (text1.endsWith(".") || text1.endsWith("?") ? "" : ".");
+    }
+    return text1 + (text1.endsWith(".") || text1.endsWith("?") ? " " : ". ") + text2;
   }
 }

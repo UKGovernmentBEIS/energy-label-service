@@ -63,20 +63,20 @@ public class SpaceHeatersServiceTest {
     sourceForm.setWaterHeatingEfficiencyPercentage("80");
     sourceForm.setDeclaredLoadProfile("XL");
 
-    sourceForm.setHasTemperatureControl(true);
+    sourceForm.setTemperatureControl(true);
     sourceForm.setTemperatureControlClass("IV");
 
-    sourceForm.setHasSupplementaryBoiler(true);
+    sourceForm.setSupplementaryBoiler(true);
     sourceForm.setSupplementaryBoilerHeatOutput("500");
     sourceForm.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("70");
 
-    sourceForm.setHasStorageTank(true);
+    sourceForm.setStorageTank(true);
     sourceForm.setStorageTankVolume("50");
     sourceForm.setStorageTankRating("B");
 
     sourceForm.setSpaceHeater(true);
 
-    sourceForm.setHasSupplementaryHeatPump(true);
+    sourceForm.setSupplementaryHeatPump(true);
     sourceForm.setSupplementaryHeatPumpHeatOutput("400");
     sourceForm.setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage("65");
 
@@ -110,11 +110,11 @@ public class SpaceHeatersServiceTest {
     sourceForm.setWaterHeatingEfficiencyPercentage("80");
     sourceForm.setDeclaredLoadProfile("M");
 
-    sourceForm.setHasTemperatureControl(false);
-    sourceForm.setHasSupplementaryBoiler(false);
-    sourceForm.setHasStorageTank(false);
+    sourceForm.setTemperatureControl(false);
+    sourceForm.setSupplementaryBoiler(false);
+    sourceForm.setStorageTank(false);
     sourceForm.setSpaceHeater(false);
-    sourceForm.setHasSupplementaryHeatPump(false);
+    sourceForm.setSupplementaryHeatPump(false);
 
     CombinationHeaterPackagesForm targetForm = spaceHeatersService.toCombinationHeaterPackagesForm(sourceForm);
 
@@ -150,14 +150,14 @@ public class SpaceHeatersServiceTest {
     sourceForm.setWaterHeatingEfficiencyPercentage("80");
     sourceForm.setDeclaredLoadProfile("XL");
 
-    sourceForm.setHasTemperatureControl(true);
+    sourceForm.setTemperatureControl(true);
     sourceForm.setTemperatureControlClass("IV");
 
-    sourceForm.setHasSupplementaryBoiler(true);
+    sourceForm.setSupplementaryBoiler(true);
     sourceForm.setSupplementaryBoilerHeatOutput("500");
     sourceForm.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("70");
 
-    sourceForm.setHasStorageTank(true);
+    sourceForm.setStorageTank(true);
     sourceForm.setStorageTankVolume("50");
     sourceForm.setStorageTankRating("B");
 
@@ -197,9 +197,9 @@ public class SpaceHeatersServiceTest {
     sourceForm.setWaterHeatingEfficiencyPercentage("80");
     sourceForm.setDeclaredLoadProfile("XL");
 
-    sourceForm.setHasTemperatureControl(false);
-    sourceForm.setHasSupplementaryBoiler(false);
-    sourceForm.setHasStorageTank(false);
+    sourceForm.setTemperatureControl(false);
+    sourceForm.setSupplementaryBoiler(false);
+    sourceForm.setStorageTank(false);
     sourceForm.setSpaceHeater(false);
 
     CombinationHeaterPackagesForm targetForm = spaceHeatersService.toCombinationHeaterPackagesForm(sourceForm);

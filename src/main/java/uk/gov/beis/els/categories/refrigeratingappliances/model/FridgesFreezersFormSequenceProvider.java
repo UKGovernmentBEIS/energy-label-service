@@ -11,10 +11,10 @@ public class FridgesFreezersFormSequenceProvider implements DefaultGroupSequence
     List<Class<?>> sequence = new ArrayList<>();
 
     if (form != null) {
-      if (BooleanUtils.isTrue(form.getNonRatedCompartment())) {
+      if (BooleanUtils.isTrue(form.getChillCompartment())) {
         sequence.add(FridgeGroup.class);
       }
-      if (BooleanUtils.isTrue(form.getRatedCompartment())) {
+      if (BooleanUtils.isTrue(form.getFrozenCompartment())) {
         sequence.add(FreezerGroup.class);
       }
     }

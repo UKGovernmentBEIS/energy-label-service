@@ -16,6 +16,7 @@ public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
   private Boolean warmerConditions;
 
   @FieldPrompt("Energy efficiency class for Warmer heating season")
+  @Schema(description = "Energy efficiency class for Warmer heating season. Only required if <code>warmerConditions</code> is <code>true</code>.")
   @NotBlank(groups = WarmerClimateGroup.class, message = "Select an energy efficiency indicator for warmer climate conditions")
   @ApiValuesFromLegislationCategory(serviceClass = AirConditionersService.class)
   private String warmerHeatingEfficiencyRating;
@@ -23,19 +24,19 @@ public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
   @FieldPrompt("Design load for heating in warmer climate conditions in kW")
   @NotNull(groups = WarmerClimateGroup.class)
   @Digits(groups = WarmerClimateGroup.class, integer = 2, fraction = 1, message = "Enter the design load for warmer climate conditions, up to 2 digits with an optional decimal place")
-  @Schema(type = "number")
+  @Schema(type = "number", description = "Design load for heating in warmer climate conditions in kW. Only required if <code>warmerConditions</code> is <code>true</code>.")
   private String warmerHeatingDesignLoad;
 
   @FieldPrompt("Seasonal coefficient of performance in warmer climate conditions (SCOP value)")
   @NotNull(groups = WarmerClimateGroup.class)
   @Digits(groups = WarmerClimateGroup.class, integer = 1, fraction = 1, message = "Enter the SCOP value for warmer climate conditions, 1 digit with an optional decimal place")
-  @Schema(type = "number")
+  @Schema(type = "number", description = "Seasonal coefficient of performance in warmer climate conditions (SCOP value). Only required if <code>warmerConditions</code> is <code>true</code>.")
   private String warmerScop;
 
   @FieldPrompt("Annual energy consumption in kWh per year in warmer climate conditions")
   @NotNull(groups = WarmerClimateGroup.class)
   @Digits(groups = WarmerClimateGroup.class, integer = 4, fraction = 0,message = "Enter the annual energy consumption for warmer climate conditions, up to 4 digits")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual energy consumption in kWh per year in warmer climate conditions. Only required if <code>warmerConditions</code> is <code>true</code>.")
   private String warmerAnnualEnergyConsumption;
 
   @FieldPrompt("Is data available for colder climate conditions?")
@@ -43,6 +44,7 @@ public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
   private Boolean colderConditions;
 
   @FieldPrompt("Energy efficiency class for Colder heating season")
+  @Schema(description = "Energy efficiency class for Colder heating season. Only required if <code>colderConditions</code> is <code>true</code>.")
   @NotBlank(groups = ColderClimateGroup.class, message = "Select an energy efficiency indicator for colder climate conditions")
   @ApiValuesFromLegislationCategory(serviceClass = AirConditionersService.class)
   private String colderHeatingEfficiencyRating;
@@ -50,19 +52,19 @@ public class MultipleClimateGroupForm extends StandardTemplateForm50Char {
   @FieldPrompt("Design load for heating in colder climate conditions in kW")
   @NotNull(groups = ColderClimateGroup.class)
   @Digits(groups = ColderClimateGroup.class, integer = 2, fraction = 1, message = "Enter the design load for colder climate conditions, up to 2 digits with an optional decimal place")
-  @Schema(type = "number")
+  @Schema(type = "number", description = "Design load for heating in colder climate conditions in kW. Only required if <code>colderConditions</code> is <code>true</code>.")
   private String colderHeatingDesignLoad;
 
   @FieldPrompt("Seasonal coefficient of performance in colder climate conditions (SCOP value)")
   @NotNull(groups = ColderClimateGroup.class)
   @Digits(groups = ColderClimateGroup.class, integer = 1, fraction = 1, message = "Enter the SCOP value for colder climate conditions, 1 digit with an optional decimal place")
-  @Schema(type = "number")
+  @Schema(type = "number", description = "Seasonal coefficient of performance in colder climate conditions (SCOP value). Only required if <code>colderConditions</code> is <code>true</code>.")
   private String colderScop;
 
   @FieldPrompt("Annual energy consumption in kWh per year in colder climate conditions")
   @NotNull(groups = ColderClimateGroup.class)
   @Digits(groups = ColderClimateGroup.class, integer = 4, fraction = 0,message = "Enter the annual energy consumption for colder climate conditions, up to 4 digits")
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual energy consumption in kWh per year in colder climate conditions. Only required if <code>colderConditions</code> is <code>true</code>.")
   private String colderAnnualEnergyConsumption;
 
 

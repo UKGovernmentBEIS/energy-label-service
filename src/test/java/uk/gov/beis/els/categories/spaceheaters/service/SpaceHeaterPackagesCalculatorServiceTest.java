@@ -27,18 +27,18 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setModelName("FR-042");
     form.setPreferentialHeaterHeatOutput("1235");
     form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("85");
-    form.setHasTemperatureControl(true);
+    form.setTemperatureControl(true);
     form.setTemperatureControlClass(TemperatureControlClass.I.name());
-    form.setHasSupplementaryBoiler(true);
+    form.setSupplementaryBoiler(true);
     form.setSupplementaryBoilerHeatOutput("1500");
     form.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("42");
     form.setSolarCollectorSize("8");
     form.setSolarCollectorEfficiencyPercentage("89");
-    form.setHasStorageTank(true);
+    form.setStorageTank(true);
     form.setStorageTankVolume("42");
     form.setStorageTankRating(TankLabelClass.A.name());
     form.setSpaceHeater(true);
-    form.setHasSupplementaryHeatPump(true);
+    form.setSupplementaryHeatPump(true);
     form.setSupplementaryHeatPumpHeatOutput("2000");
     form.setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage("42");
 
@@ -64,14 +64,14 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setModelName("FR-042");
     form.setPreferentialHeaterHeatOutput("42");
     form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("80");
-    form.setHasTemperatureControl(true);
+    form.setTemperatureControl(true);
     form.setTemperatureControlClass(TemperatureControlClass.V.name());
-    form.setHasSupplementaryBoiler(true);
+    form.setSupplementaryBoiler(true);
     form.setSupplementaryBoilerHeatOutput("42");
     form.setSupplementaryBoilerSeasonalSpaceHeatingEfficiencyPercentage("42");
     form.setSolarCollectorSize("42");
     form.setSolarCollectorEfficiencyPercentage("42");
-    form.setHasStorageTank(true);
+    form.setStorageTank(true);
     form.setStorageTankVolume("42");
     form.setStorageTankRating(TankLabelClass.B.name());
     form.setSpaceHeater(true);
@@ -97,9 +97,9 @@ public class SpaceHeaterPackagesCalculatorServiceTest {
     form.setModelName("FR-042");
     form.setPreferentialHeaterHeatOutput("42");
     form.setPreferentialHeaterSeasonalSpaceHeatingEfficiencyPercentage("42");
-    form.setHasTemperatureControl(false);
-    form.setHasSupplementaryBoiler(false);
-    form.setHasStorageTank(false);
+    form.setTemperatureControl(false);
+    form.setSupplementaryBoiler(false);
+    form.setStorageTank(false);
     form.setSpaceHeater(false);
 
     assertThat(spaceHeaterPackagesCalculatorService.gePreferentialHeaterEfficiencyClass(form)).isEqualTo(RatingClass.D);

@@ -42,13 +42,13 @@ public class ConventionalWaterHeaterApiForm extends StandardTemplateForm30Char {
     @FieldPrompt("Annual electricity consumption in kWh/annum")
     @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption, up to 4 digits long", groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
     @NotNull(groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
-    @Schema(type = "integer")
+    @Schema(type = "integer", description = "Annual electricity consumption in kWh/annum. Only required if <code>consumptionUnit</code> is <code>KWH</code> or <code>BOTH</code>.")
     private String kwhAnnum;
 
     @FieldPrompt("Annual fuel consumption in GJ/annum")
     @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption, up to 2 digits long", groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
     @NotNull(groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
-    @Schema(type = "integer")
+    @Schema(type = "integer", description = "Annual fuel consumption in GJ/annum. Only required if <code>consumptionUnit</code> is <code>GJ</code> or <code>BOTH</code>.")
     private String gjAnnum;
 
     @FieldPrompt("Sound power level, indoors dB")

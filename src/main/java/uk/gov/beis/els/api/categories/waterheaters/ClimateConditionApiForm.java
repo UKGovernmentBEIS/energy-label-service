@@ -22,37 +22,37 @@ public class ClimateConditionApiForm extends StandardTemplateForm30Char {
   @FieldPrompt("Colder climate conditions")
   @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for colder climate conditions, up to 4 digits long", groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
   @NotNull(groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual electricity consumption in kWh/annum for colder climate conditions. Only required if <code>consumptionUnit</code> is <code>KWH</code> or <code>BOTH</code>.")
   private String colderKwhAnnum;
 
   @FieldPrompt("Average climate conditions")
   @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for average climate conditions, up to 4 digits long", groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
   @NotNull(groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual electricity consumption in kWh/annum for average climate conditions. Only required if <code>consumptionUnit</code> is <code>KWH</code> or <code>BOTH</code>.")
   private String averageKwhAnnum;
 
   @FieldPrompt("Warmer climate conditions")
   @Digits(integer = 4, fraction = 0, message = "Enter the annual electricity consumption for warmer climate conditions, up to 4 digits long", groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
   @NotNull(groups = {ConsumptionUnitKw.class, ConsumptionUnitBoth.class})
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual electricity consumption in kWh/annum for warmer climate conditions. Only required if <code>consumptionUnit</code> is <code>KWH</code> or <code>BOTH</code>.")
   private String warmerKwhAnnum;
 
   @FieldPrompt("Colder climate conditions")
   @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for colder climate conditions, up to 2 digits long", groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
   @NotNull(groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual fuel consumption in GJ/annum for colder climate conditions. Only required if <code>consumptionUnit</code> is <code>GJ</code> or <code>BOTH</code>.")
   private String colderGjAnnum;
 
   @FieldPrompt("Average climate conditions")
   @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for average climate conditions, up to 2 digits long", groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
   @NotNull(groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual fuel consumption in GJ/annum for average climate conditions. Only required if <code>consumptionUnit</code> is <code>GJ</code> or <code>BOTH</code>.")
   private String averageGjAnnum;
 
   @FieldPrompt("Warmer climate conditions")
   @Digits(integer = 2, fraction = 0, message = "Enter the annual fuel consumption for warmer climate conditions, up to 2 digits long", groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
   @NotNull(groups = {ConsumptionUnitGj.class, ConsumptionUnitBoth.class})
-  @Schema(type = "integer")
+  @Schema(type = "integer", description = "Annual fuel consumption in GJ/annum for warmer climate conditions. Only required if <code>consumptionUnit</code> is <code>GJ</code> or <code>BOTH</code>.")
   private String warmerGjAnnum;
 
   public String getConsumptionUnit() {

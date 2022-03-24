@@ -3,12 +3,12 @@
 <@common.standardProductForm "Household fridges and freezers">
   <@govukTextInput.textInput path="form.qrCodeUrl"/>
 
-  <@govukRadios.radioYesNo path="form.nonRatedCompartment" hiddenQuestionsWithYesSelected=true>
-    <@govukTextInput.textInput path="form.nonRatedVolume"/>
+  <@govukRadios.radioYesNo path="form.chillCompartment" hiddenQuestionsWithYesSelected=true>
+    <@govukTextInput.textInput path="form.chillVolume"/>
   </@govukRadios.radioYesNo>
 
-  <@govukRadios.radioYesNo path="form.ratedCompartment" hiddenQuestionsWithYesSelected=true>
-      <@govukTextInput.textInput path="form.ratedVolume"/>
+  <@govukRadios.radioYesNo path="form.frozenCompartment" hiddenQuestionsWithYesSelected=true>
+      <@govukTextInput.textInput path="form.frozenVolume"/>
   </@govukRadios.radioYesNo>
 
   <@govukSelect.select path="form.noiseEmissionsClass" options=noiseEmissionsRating/>
