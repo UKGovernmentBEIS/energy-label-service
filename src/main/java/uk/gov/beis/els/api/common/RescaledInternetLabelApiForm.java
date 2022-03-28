@@ -8,13 +8,14 @@ public class RescaledInternetLabelApiForm extends BaseInternetLabelApiForm {
 
   @Schema(description = "The colour of the arrow image. Use a colour arrow if you can. You can use a black and white arrow if your material is being printed in black and white. You shouldn't use black and white arrows on the internet.")
   @NotNull
-  private InternetLabelColour labelColour;
+  @ApiValuesFromEnum(value = InternetLabelColour.class)
+  private String labelColour;
 
-  public InternetLabelColour getLabelColour() {
+  public String getLabelColour() {
     return labelColour;
   }
 
-  public void setLabelColour(InternetLabelColour labelColour) {
+  public void setLabelColour(String labelColour) {
     this.labelColour = labelColour;
   }
 }

@@ -92,8 +92,8 @@ public class ApiValuesFromLegislationCategoryValidatorTest {
     AirConditionersInternetLabelApiForm form = new AirConditionersInternetLabelApiForm();
     form.setEfficiencyRating(RatingClass.D.name());
     form.setProductPriceHeightPx(10);
-    form.setLabelFormat(InternetLabelFormat.JPEG);
-    form.setLabelOrientation(InternetLabelOrientation.RIGHT);
+    form.setLabelFormat(InternetLabelFormat.JPEG.name());
+    form.setLabelOrientation(InternetLabelOrientation.RIGHT.name());
     return form;
   }
 }
