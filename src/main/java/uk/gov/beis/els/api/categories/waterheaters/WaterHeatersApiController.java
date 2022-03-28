@@ -13,6 +13,7 @@ import uk.gov.beis.els.categories.waterheaters.model.HotWaterStorageTanksForm;
 import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCalculatorForm;
 import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
+import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
 
@@ -135,7 +136,8 @@ public class WaterHeatersApiController {
   @PostMapping("/packages-of-water-heater-and-solar-device/calculate/fiche")
   public Object waterHeaterSolarDevicePackageFiche(@RequestBody @Valid WaterSolarPackagesCalculatorForm form) {
     return documentRendererService.processPdfApiResponse(
-        waterHeatersService.generateFicheHtml(form)
+        waterHeatersService.generateFicheHtml(form),
+        GoogleAnalyticsEventCategory.FICHE_API
     );
   }
 }

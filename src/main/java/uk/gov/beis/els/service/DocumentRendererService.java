@@ -41,19 +41,35 @@ public class DocumentRendererService {
   }
 
   public ResponseEntity processPdfResponse(ProcessedEnergyLabelDocument processedDocument) {
-    return processPdf(processedDocument, ResponseType.ATTACHMENT, GoogleAnalyticsEventCategory.ENERGY_LABEL);
+    return processPdfResponse(processedDocument, GoogleAnalyticsEventCategory.ENERGY_LABEL);
+  }
+
+  public ResponseEntity processPdfResponse(ProcessedEnergyLabelDocument processedDocument, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processPdf(processedDocument, ResponseType.ATTACHMENT, analyticsCategory);
   }
 
   public ResponseEntity processPdfResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
-    return processPdf(processedDocuments, ResponseType.ATTACHMENT, GoogleAnalyticsEventCategory.ENERGY_LABEL);
+    return processPdfResponse(processedDocuments, GoogleAnalyticsEventCategory.ENERGY_LABEL);
+  }
+
+  public ResponseEntity processPdfResponse(List<ProcessedEnergyLabelDocument> processedDocuments, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processPdf(processedDocuments, ResponseType.ATTACHMENT, analyticsCategory);
   }
 
   public ResponseEntity processPdfApiResponse(ProcessedEnergyLabelDocument processedDocument) {
-    return processPdf(processedDocument, ResponseType.DIRECT, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
+    return processPdfApiResponse(processedDocument, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
+  }
+
+  public ResponseEntity processPdfApiResponse(ProcessedEnergyLabelDocument processedDocument, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processPdf(processedDocument, ResponseType.DIRECT, analyticsCategory);
   }
 
   public ResponseEntity processPdfApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
-    return processPdf(processedDocuments, ResponseType.DIRECT, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
+    return processPdfApiResponse(processedDocuments, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
+  }
+
+  public ResponseEntity processPdfApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processPdf(processedDocuments, ResponseType.DIRECT, analyticsCategory);
   }
 
   public ResponseEntity processImageResponse(ProcessedInternetLabelDocument processedDocument) {
