@@ -24,20 +24,20 @@ public class InternetLabelService {
 
   public ProcessedInternetLabelDocument generateInternetLabel(BaseInternetLabelApiForm apiForm, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
     InternetLabellingForm standardForm = new InternetLabellingForm();
-    standardForm.setLabelFormat(apiForm.getLabelFormat().name());
-    standardForm.setLabelOrientation(apiForm.getLabelOrientation().name());
+    standardForm.setLabelFormat(apiForm.getLabelFormat());
+    standardForm.setLabelOrientation(apiForm.getLabelOrientation());
     standardForm.setProductPriceHeightPx(String.valueOf(apiForm.getProductPriceHeightPx()));
     return generateInternetLabel(standardForm, ratingClass, legislationCategory, analyticsLabel);
   }
 
   public ProcessedInternetLabelDocument generateInternetLabel(RescaledInternetLabelApiForm apiForm, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
     InternetLabellingForm standardForm = new InternetLabellingForm();
-    standardForm.setLabelFormat(apiForm.getLabelFormat().name());
-    standardForm.setLabelOrientation(apiForm.getLabelOrientation().name());
+    standardForm.setLabelFormat(apiForm.getLabelFormat());
+    standardForm.setLabelOrientation(apiForm.getLabelOrientation());
 
     InternetLabelColour colour;
     if(legislationCategory.getInternetLabelTemplate().getHasBWOption()) {
-      colour = apiForm.getLabelColour();
+      colour = InternetLabelColour.valueOf(apiForm.getLabelColour());
     } else {
       colour = InternetLabelColour.COLOUR;
     }

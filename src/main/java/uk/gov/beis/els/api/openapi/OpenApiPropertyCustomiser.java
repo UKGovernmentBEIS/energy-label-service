@@ -215,7 +215,7 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
     } else if (propertyName.equals("qrCodeUrl")) {
       schema.setExample("https://example.com"); // default example for QR code website fields
     } else if (schema.getType().equals("string")) {
-      schema.setExample("string"); // process all other strings
+      schema.setExample("example"); // process all other strings
     } else if (schema.getType().equals("boolean")) {
       schema.setExample("true");
     }

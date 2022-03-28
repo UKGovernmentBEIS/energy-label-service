@@ -19,11 +19,13 @@ public class BaseInternetLabelApiForm {
 
   @FieldPrompt("Arrow direction")
   @NotNull
-  private InternetLabelOrientation labelOrientation;
+  @ApiValuesFromEnum(value = InternetLabelOrientation.class)
+  private String labelOrientation;
 
   @FieldPrompt("Image format")
   @NotNull
-  private InternetLabelFormat labelFormat;
+  @ApiValuesFromEnum(value = InternetLabelFormat.class)
+  private String labelFormat;
 
   public int getProductPriceHeightPx() {
     return productPriceHeightPx;
@@ -33,19 +35,19 @@ public class BaseInternetLabelApiForm {
     this.productPriceHeightPx = productPriceHeightPx;
   }
 
-  public InternetLabelOrientation getLabelOrientation() {
+  public String getLabelOrientation() {
     return labelOrientation;
   }
 
-  public void setLabelOrientation(InternetLabelOrientation labelOrientation) {
+  public void setLabelOrientation(String labelOrientation) {
     this.labelOrientation = labelOrientation;
   }
 
-  public InternetLabelFormat getLabelFormat() {
+  public String getLabelFormat() {
     return labelFormat;
   }
 
-  public void setLabelFormat(InternetLabelFormat labelFormat) {
+  public void setLabelFormat(String labelFormat) {
     this.labelFormat = labelFormat;
   }
 
