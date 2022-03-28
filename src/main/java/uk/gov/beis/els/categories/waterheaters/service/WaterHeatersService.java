@@ -320,7 +320,7 @@ public class WaterHeatersService {
         .asProcessedEnergyLabel(ProductMetadata.WATER_HEATERS_PACKAGE, form);
   }
 
-  private WaterSolarPackagesCalculatorForm toWaterSolarPackagesCalculatorForm(
+  public WaterSolarPackagesCalculatorForm toWaterSolarPackagesCalculatorForm(
       BoilerCombinationCalculatorForm boilerCombinationCalculatorForm) {
     WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm = new WaterSolarPackagesCalculatorForm();
     waterSolarPackagesCalculatorForm.setWaterHeatingEfficiencyPercentage(
@@ -336,7 +336,7 @@ public class WaterHeatersService {
     return waterSolarPackagesCalculatorForm;
   }
 
-  private WaterSolarPackagesCalculatorForm toWaterSolarPackagesCalculatorForm(
+  public WaterSolarPackagesCalculatorForm toWaterSolarPackagesCalculatorForm(
       HeatPumpCombinationCalculatorForm heatPumpCombinationCalculatorForm) {
     WaterSolarPackagesCalculatorForm waterSolarPackagesCalculatorForm = new WaterSolarPackagesCalculatorForm();
     waterSolarPackagesCalculatorForm.setWaterHeatingEfficiencyPercentage(

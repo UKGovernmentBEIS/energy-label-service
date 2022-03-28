@@ -2,6 +2,7 @@ package uk.gov.beis.els.categories.spaceheaters.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.gov.beis.els.categories.common.Category;
 import uk.gov.beis.els.categories.common.CategoryItem;
 import uk.gov.beis.els.categories.common.LoadProfile;
+import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.StandardCategoryForm;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
@@ -64,6 +66,7 @@ public class SpaceHeatersController extends CategoryController {
   private static final String BREADCRUMB_STAGE_TEXT = "Space heaters";
 
   private final SpaceHeatersService spaceHeatersService;
+  private final WaterHeatersService waterHeatersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
   private final DocumentRendererService documentRendererService;
@@ -74,11 +77,13 @@ public class SpaceHeatersController extends CategoryController {
 
   @Autowired
   public SpaceHeatersController(SpaceHeatersService spaceHeatersService,
+                                WaterHeatersService waterHeatersService,
                                 BreadcrumbService breadcrumbService,
                                 InternetLabelService internetLabelService,
                                 DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, SpaceHeaterCategory.GET, SpaceHeatersController.class);
     this.spaceHeatersService = spaceHeatersService;
+    this.waterHeatersService = waterHeatersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
     this.documentRendererService = documentRendererService;
@@ -453,7 +458,7 @@ public class SpaceHeatersController extends CategoryController {
     return getCombinationHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.BOILER);
   }
 
-  @PostMapping("/package-combination-heater/boiler/calculator")
+  @PostMapping(value = "/package-combination-heater/boiler/calculator", params = "Download label")
   @ResponseBody
   public Object handleCombinationHeaterPackagesBoilerCalculatorSubmit(@ModelAttribute("form") @Valid BoilerCombinationCalculatorForm form,
                                                                       BindingResult bindingResult) {
@@ -465,12 +470,26 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @PostMapping(value = "/package-combination-heater/boiler/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesBoilerFicheSubmit(@ModelAttribute("form") @Valid BoilerCombinationCalculatorForm form,
+                                                                 BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
+      ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
+      ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
+      return documentRendererService.processPdfResponse(ficheDocuments);
+    }
+  }
+
   @GetMapping("/package-combination-heater/heat-pump/calculator")
   public ModelAndView renderCombinationHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpCombinationCalculatorForm form) {
     return getCombinationHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
   }
 
-  @PostMapping("/package-combination-heater/heat-pump/calculator")
+  @PostMapping(value = "/package-combination-heater/heat-pump/calculator", params = "Download label")
   @ResponseBody
   public Object handleCombinationHeaterPackagesHeatPumpCalculatorSubmit(@ModelAttribute("form") @Valid HeatPumpCombinationCalculatorForm form,
                                                                         BindingResult bindingResult) {
@@ -479,6 +498,20 @@ public class SpaceHeatersController extends CategoryController {
     } else {
       return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toCombinationHeaterPackagesForm(form)));
+    }
+  }
+
+  @PostMapping(value = "/package-combination-heater/heat-pump/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesHeatPumpFicheSubmit(@ModelAttribute("form") @Valid HeatPumpCombinationCalculatorForm form,
+                                                                   BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
+      ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
+      ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
+      return documentRendererService.processPdfResponse(ficheDocuments);
     }
   }
 
