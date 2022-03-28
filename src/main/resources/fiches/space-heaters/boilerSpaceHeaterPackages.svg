@@ -4,10 +4,10 @@
   <defs id="defs4377">
     <style>
       .ficheTick {
-      visibility: hidden;
+        display: none;
       }
       .ficheTick.shown {
-      visibility: visible;
+        display: inline;
       }
     </style>
     <marker style="overflow:visible" id="marker8055" refX="0.0" refY="0.0" orient="auto">

@@ -4,10 +4,10 @@
 
     <style>
       .ficheTick {
-      visibility: hidden;
+        display: none;
       }
       .ficheTick.shown {
-      visibility: visible;
+        display: inline;
       }
     </style>
     <marker orient="auto" refY="0.0" refX="0.0" id="marker8055" style="overflow:visible">
