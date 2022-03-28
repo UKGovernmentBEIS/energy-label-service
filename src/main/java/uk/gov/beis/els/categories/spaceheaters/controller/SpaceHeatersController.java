@@ -51,6 +51,7 @@ import uk.gov.beis.els.categories.spaceheaters.model.TemperatureControlClass;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.controller.CategoryController;
+import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClassRange;
 import uk.gov.beis.els.mvc.ReverseRouter;
@@ -329,7 +330,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form));
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -357,7 +358,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form));
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -386,7 +387,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.COGENERATION_HEATER);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form));
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -480,7 +481,7 @@ public class SpaceHeatersController extends CategoryController {
       List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
       ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
       ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-      return documentRendererService.processPdfResponse(ficheDocuments);
+      return documentRendererService.processPdfResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -511,7 +512,7 @@ public class SpaceHeatersController extends CategoryController {
       List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
       ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
       ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-      return documentRendererService.processPdfResponse(ficheDocuments);
+      return documentRendererService.processPdfResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
     }
   }
 

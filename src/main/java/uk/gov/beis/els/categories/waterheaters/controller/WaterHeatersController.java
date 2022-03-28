@@ -36,6 +36,7 @@ import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesCategory;
 import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.controller.CategoryController;
+import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.LegislationCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.mvc.ReverseRouter;
@@ -238,7 +239,8 @@ public class WaterHeatersController extends CategoryController {
       return getWaterSolarPackagesCalculator(bindingResult.getFieldErrors());
     } else {
       return documentRendererService.processPdfResponse(
-          waterHeatersService.generateFicheHtml(form)
+          waterHeatersService.generateFicheHtml(form),
+          GoogleAnalyticsEventCategory.FICHE
       );
     }
   }

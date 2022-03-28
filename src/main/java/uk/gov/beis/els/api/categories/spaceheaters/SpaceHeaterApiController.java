@@ -26,6 +26,7 @@ import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpace
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
+import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.service.DocumentRendererService;
 
@@ -204,7 +205,9 @@ public class SpaceHeaterApiController {
   @PostMapping("/package-space-heater/calculate/boiler/fiche")
   public Object packageSpaceHeaterBoilerFiche(@RequestBody @Valid BoilerPackagesCalculatorForm form) {
     return documentRendererService.processPdfApiResponse(
-        spaceHeatersService.generateFicheHtml(form));
+        spaceHeatersService.generateFicheHtml(form),
+        GoogleAnalyticsEventCategory.FICHE_API
+    );
   }
 
   @Operation(summary = "Packages of space heater, temperature control and solar device - Heat pump: energy label calculator")
@@ -218,7 +221,9 @@ public class SpaceHeaterApiController {
   @PostMapping("/package-space-heater/calculate/heat-pump/fiche")
   public Object packageSpaceHeaterHeatPumpFiche(@RequestBody @Valid HeatPumpPackagesCalculatorForm form) {
     return documentRendererService.processPdfApiResponse(
-        spaceHeatersService.generateFicheHtml(form));
+        spaceHeatersService.generateFicheHtml(form),
+        GoogleAnalyticsEventCategory.FICHE_API
+    );
   }
 
   @Operation(summary = "Packages of space heater, temperature control and solar device - Cogeneration heater: energy label calculator")
@@ -232,7 +237,9 @@ public class SpaceHeaterApiController {
   @PostMapping("/package-space-heater/calculate/cogeneration-heater/fiche")
   public Object packageSpaceHeaterCogenerationFiche(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
     return documentRendererService.processPdfApiResponse(
-        spaceHeatersService.generateFicheHtml(form));
+        spaceHeatersService.generateFicheHtml(form),
+        GoogleAnalyticsEventCategory.FICHE_API
+    );
   }
 
   @Operation(summary = "Packages of combination heater, temperature control and solar device - Boiler: energy label calculator")
@@ -248,7 +255,7 @@ public class SpaceHeaterApiController {
     List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
     ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
     ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-    return documentRendererService.processPdfApiResponse(ficheDocuments);
+    return documentRendererService.processPdfApiResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE_API);
   }
 
   @Operation(summary = "Packages of combination heater, temperature control and solar device - Heat pump: energy label calculator")
@@ -264,6 +271,6 @@ public class SpaceHeaterApiController {
     List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
     ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
     ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-    return documentRendererService.processPdfApiResponse(ficheDocuments);
+    return documentRendererService.processPdfApiResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE_API);
   }
 }
