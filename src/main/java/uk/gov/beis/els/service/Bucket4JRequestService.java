@@ -52,6 +52,12 @@ public class Bucket4JRequestService {
       }
     }
     else {
+      String hostHeader = request.getHeader("host");
+      if (hostHeader != null && hostHeader.startsWith("localhost:")) {
+        // Return a static value for loopback requests. All these requests will be considered to be from the same client.
+        // This is required as the app requests the OpenAPI json from itself on start, and this request won't have a XFF header.
+        return "localhost";
+      }
       throw new RuntimeException("Request for " + request.getRequestURI() + " found with no IP addresses in the X-Forwarded-For header");
     }
   }

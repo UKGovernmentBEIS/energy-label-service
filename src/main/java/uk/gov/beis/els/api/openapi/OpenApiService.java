@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.context.event.EventListener;
@@ -39,16 +40,20 @@ public class OpenApiService {
   private final ObjectMapper objectMapper;
   private OpenAPI openAPISpec;
   private Map<String, OperationWithSchema> operationMap;
+  private String openApiJsonPath;
 
   @Autowired
-  public OpenApiService(ServletWebServerApplicationContext context, ObjectMapper objectMapper) {
+  public OpenApiService(ServletWebServerApplicationContext context,
+                        ObjectMapper objectMapper,
+                        @Value("${springdoc.api-docs.path}") String openApiJsonPath) {
     this.context = context;
     this.objectMapper = objectMapper.setDefaultPrettyPrinter(new JsonPrettyPrinter());
+    this.openApiJsonPath = openApiJsonPath;
   }
 
   @EventListener(ApplicationReadyEvent.class)
   public void parseOpenApi() {
-    String openApiUrl = String.format("http://localhost:%s/v3/api-docs", context.getWebServer().getPort());
+    String openApiUrl = String.format("http://localhost:%s%s", context.getWebServer().getPort(), openApiJsonPath);
     LOGGER.info("Parsing OpenAPI spec from {}", openApiUrl);
     RestTemplate restTemplate = new RestTemplate();
     openAPISpec = restTemplate.getForEntity(openApiUrl, OpenAPI.class).getBody();
@@ -57,7 +62,7 @@ public class OpenApiService {
   }
 
   public String getApiSpecUrl(HttpServletRequest request) {
-    return getBaseUrl(request) + "/v3/api-docs/";
+    return getBaseUrl(request) + openApiJsonPath;
   }
 
   public String getBaseUrl(HttpServletRequest request) {
