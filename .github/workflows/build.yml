@@ -72,7 +72,7 @@ jobs:
           cf logout
 
       - name: Deploy QA
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/api-qa' }}
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
