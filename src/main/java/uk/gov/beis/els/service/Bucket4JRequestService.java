@@ -29,8 +29,10 @@ public class Bucket4JRequestService {
 
 
   /**
-   * Checks the X-Forwarded-For header sent after load balancing and returns the last IP address in the list
-   * This will be the origin IP address of the request.
+   * Get the client IP address from the X-Forwarded-For header.
+   * The GOV.UK PaaS router removes the IPs of any upstream load balancer 'hops' from the XFF header. Therefore, the value of this header
+   * is the just client IP. In the case of a pre-existing (i.e. spoofed) XFF header, the router will append the true client IP to the end of this list.
+   * Therefore, in contrast to typical XFF parsing, to get the true client IP we use the last (or only) IP listed in the header.
    * This is used as the unique identifier for the rate-limiting of API requests so that a single origin IP can't make too many requests at one time.
    * The rate-limiting amount and time frame are controlled in the application.properties file.
    * @return the last IP address found in the X-Forwarded-For request header
