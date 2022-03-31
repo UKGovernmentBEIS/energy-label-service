@@ -4,6 +4,7 @@
   <@fdsSubNavigation.subNavigation>
     <@fdsSubNavigation.subNavigationSection>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation" linkName="About the API" currentItemHref="dummy"/>
+      <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#endpoints" linkName="Endpoints" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#rate-limits" linkName="Rate limits" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#testing" linkName="Testing" currentItemHref="dummy"/>
       <@fdsSubNavigation.subNavigationSectionItem linkAction="/api-documentation#validation" linkName="Request validation" currentItemHref="dummy"/>

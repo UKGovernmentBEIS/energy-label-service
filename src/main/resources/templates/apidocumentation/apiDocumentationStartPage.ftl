@@ -30,7 +30,7 @@
         <a class="govuk-link" href="#">sign up to receive email updates</a>.
       </p>
 
-      <h2 class="govuk-heading-m" id="rate-limits">
+      <h2 class="govuk-heading-m" id="endpoints">
         Endpoints
       </h2>
       <p class="govuk-body">
