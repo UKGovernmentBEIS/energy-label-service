@@ -31,6 +31,19 @@
       </p>
 
       <h2 class="govuk-heading-m" id="rate-limits">
+        Endpoints
+      </h2>
+      <p class="govuk-body">
+        Use the 'Endpoints' section of the menu <span class="els-non-mobile-only">on the left</span>
+        <span class="els-mobile-only">at the top</span> of this page to see what endpoints are available and
+        how to use them.
+      </p>
+
+      <p class="govuk-body">
+        The endpoints are also listed in <a href="${apiSpecUrl}" class="govuk-link" download>the energy label API OpenAPI 3 document</a>.
+      </p>
+
+      <h2 class="govuk-heading-m" id="rate-limits">
         Rate limits
       </h2>
       <p class="govuk-body">
@@ -55,7 +68,7 @@
         sandbox environment for testing. You can use the live API URL for development, testing and production.
       </p>
       <p class="govuk-body">
-        You can import <a href="${apiSpecUrl}" class="govuk-link">the energy label API OpenAPI 3 document</a> into API testing tools
+        You can import <a href="${apiSpecUrl}" class="govuk-link" download>the energy label API OpenAPI 3 document</a> into API testing tools
         like Postman to test all of our API endpoints.
       </p>
 
@@ -66,7 +79,7 @@
         These endpoints return data in PDF format for energy labels, PNG or JPEG for arrow images and JSON for errors.
       </p>
       <p class="govuk-body">
-        You can import <a href="${apiSpecUrl}" class="govuk-link">the energy label API OpenAPI 3 document</a> into API testing tools
+        You can import <a href="${apiSpecUrl}" class="govuk-link" download>the energy label API OpenAPI 3 document</a> into API testing tools
         like Postman to test all of our API endpoints.
       </p>
       <p class="govuk-body">

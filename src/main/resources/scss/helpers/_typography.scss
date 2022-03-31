@@ -1,0 +1,13 @@
+.els-mobile-only {
+  @include govuk-media-query($from: tablet) {
+    display: none;
+  }
+}
+
+span.els-non-mobile-only { // Scoped to spans only because other elements would need different display values
+  display: none;
+
+  @include govuk-media-query($from: tablet) {
+    display: inline;
+  }
+}
