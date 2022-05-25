@@ -27,7 +27,7 @@
       </p>
       <p class="govuk-body">
         The energy label API is free to use and you don't need to register, but you can
-        <a class="govuk-link" href="#">sign up to receive email updates</a>.
+        <a class="govuk-link" href="#email-updates">sign up to receive email updates</a>.
       </p>
 
       <h2 class="govuk-heading-m" id="endpoints">
@@ -194,7 +194,7 @@
         Email updates
       </h2>
       <p class="govuk-body">
-        You can <a class="govuk-link" href="#">sign up to receive email updates about the energy label API</a>. We'll
+        You can <a class="govuk-link" href="https://eepurl.com/h2MDDL">sign up to receive email updates about the energy label API</a>. We'll
         notify you about any downtime and let you know when we make important changes.
       </p>
       <p class="govuk-body">
