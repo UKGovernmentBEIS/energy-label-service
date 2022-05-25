@@ -194,7 +194,7 @@
         Email updates
       </h2>
       <p class="govuk-body">
-        You can <a class="govuk-link" href="http://eepurl.com/h2MDDL">sign up to receive email updates about the energy label API</a>. We'll
+        You can <a class="govuk-link" href="https://eepurl.com/h2MDDL">sign up to receive email updates about the energy label API</a>. We'll
         notify you about any downtime and let you know when we make important changes.
       </p>
       <p class="govuk-body">
