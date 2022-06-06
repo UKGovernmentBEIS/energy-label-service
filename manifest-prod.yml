@@ -1,7 +1,7 @@
 applications:
   - name: energy-label-service-prod
     memory: 1G
-    instances: 2
+    instances: 3
     buildpack: java_buildpack
     stack: cflinuxfs3
     path: build/libs/energy-label-service-SNAPSHOT.jar
