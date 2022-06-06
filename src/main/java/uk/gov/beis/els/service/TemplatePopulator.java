@@ -8,7 +8,10 @@ import org.jsoup.parser.ParseSettings;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.gov.beis.els.categories.common.*;
+import uk.gov.beis.els.categories.common.AnalyticsForm;
+import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
+import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
+import uk.gov.beis.els.categories.common.SupplierNameForm;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
@@ -212,8 +215,8 @@ public class TemplatePopulator {
     return this;
   }
 
-  public TemplatePopulator setQrCode(BaseForm form) {
-    Element qrCode = generateQrCode(form.getQrCodeUrl());
+  public TemplatePopulator setQrCode(String qrCodeUrl) {
+    Element qrCode = generateQrCode(qrCodeUrl);
     Element qrCodeTemplateDom = TemplateUtils.getElementById(template, "qrCode");
     Element qrCodePlaceholder = TemplateUtils.getElementByTag(qrCodeTemplateDom, "rect");
 
@@ -305,7 +308,7 @@ public class TemplatePopulator {
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata analyticsLabel, LampsFormPackagingArrow form) {
     String analyticsAction = String.format("%s - %s - %s",
-        RatingClass.valueOf(form.getEfficiencyRating()).getDisplayValue(),
+        RatingClass.getEnum(form.getEfficiencyRating()).getDisplayValue(),
         LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
         TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
 
@@ -319,16 +322,24 @@ public class TemplatePopulator {
 
     if(internetLabellingForm.getLabelColour() == null) {
       analyticsAction = String.format("%s - %s",
-          RatingClass.valueOf(ratingClass).getDisplayValue(),
+          RatingClass.getEnum(ratingClass).getDisplayValue(),
           InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName());
     } else {
       analyticsAction = String.format("%s - %s - %s",
-          RatingClass.valueOf(ratingClass).getDisplayValue(),
+          RatingClass.getEnum(ratingClass).getDisplayValue(),
           InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName(),
           InternetLabelColour.valueOf(internetLabellingForm.getLabelColour()).getDisplayName());
     }
 
     return new ProcessedInternetLabelDocument(template, ratingClass, label, analyticsForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat(), analyticsAction);
+  }
+
+  public static String decimalToPercentage(float number) {
+    return decimalToPercentage(number, 0);
+  }
+
+  public static String decimalToPercentage(float number, int decimalPlaces) {
+    return String.format("%." + decimalPlaces + "f", number * 100);
   }
 
   private double getRatingIncrementValue(String ratingIncrementAttrName) {

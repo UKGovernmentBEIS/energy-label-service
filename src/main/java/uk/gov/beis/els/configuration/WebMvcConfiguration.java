@@ -50,6 +50,16 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
       LOGGER.info("Verdana-bold loaded {}", verdanaBoldLoaded);
 
+      boolean arialLoaded = GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(
+          Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource("fonts/arial.ttf").getInputStream()));
+
+      LOGGER.info("Arial loaded {}", arialLoaded);
+
+      boolean arialBoldLoaded = GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(
+          Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource("fonts/arial-bold.ttf").getInputStream()));
+
+      LOGGER.info("Arial-bold loaded {}", arialBoldLoaded);
+
       LOGGER.info("Available system fonts are:");
       Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()).forEach(f ->
           LOGGER.info("Font: {}", f)

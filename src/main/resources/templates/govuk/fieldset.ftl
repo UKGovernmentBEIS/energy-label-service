@@ -22,9 +22,9 @@
     </#if>
     </legend>
       <#if hintText?has_content>
-        <span id="${hintTextId}-hint" class="govuk-hint">
+        <div id="${hintTextId}-hint" class="govuk-hint">
           ${hintText}
-        </span>
+        </div>
       </#if>
     <#if productGuidanceText?has_content>
       <div class="govuk-inset-text">

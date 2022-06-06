@@ -13,6 +13,21 @@
   <@govukButton.button buttonText="Download arrow image" buttonClass="govuk-button"/>
 </#macro>
 
+<#macro packageCalculatorDownloadButtons>
+  <@govukButton.buttonWithSecondaryAction primaryButtonText="Download label" secondaryButtonText="Download fiche"/>
+</#macro>
+
+<#macro packageCalculatorDisclaimer>
+  <div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive">Warning</span>
+      You're responsible for making sure the energy label and fiche are calculated accurately. You must check the label
+      and fiche carefully before you provide them to your customers.
+    </strong>
+  </div>
+</#macro>
+
 <#macro preMarch2021RadioItem legislationCategories>
   <@govukRadios.radioItem path="form.applicableLegislation" itemMap={"PRE_MAR2021": legislationCategories["PRE_MAR2021"]}>
     <#nested>
@@ -41,7 +56,7 @@
 
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
-<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="">
+<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="" isPackageCalculatorForm=false>
 
   <@defaultPage pageHeading=title showInsetText=showInsetText beforeStandardInsetText=beforeStandardInsetText>
     <@form.govukForm submitUrl + modeQueryParam!"">
@@ -87,7 +102,12 @@ Includes the wrapping form element, the generate label button and optionally the
           </div>
         </#if>
 
-        <@generateLabelButton/>
+        <#if isPackageCalculatorForm>
+          <@packageCalculatorDisclaimer/>
+          <@packageCalculatorDownloadButtons/>
+         <#else>
+           <@generateLabelButton/>
+        </#if>
       </#if>
 
     <input type="hidden" id="googleAnalyticsClientId" name="googleAnalyticsClientId" value="">

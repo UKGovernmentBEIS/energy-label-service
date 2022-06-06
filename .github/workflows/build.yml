@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: '10'
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
       - name: Build frontend
         run: |
           npm install
@@ -30,6 +35,22 @@ jobs:
           chmod +x gradlew
           ./gradlew test bootJar
 
+      - name: Detached run test app
+        run: |
+          ./gradlew bootRun &
+
+      # Wait up to 30s for the app to start
+      - name: Wait for test app start
+        run:  |
+          export START_TIME=$(date +%s)
+          until curl http://localhost:8080/health > /dev/null || test "$(($(date +%s) - $START_TIME))" -gt 30; do sleep 5 | echo "Waiting..."; done
+        shell: bash
+
+      - name: Run OpenAPI tests
+        run: |
+          pip install schemathesis
+          schemathesis run --hypothesis-phases=explicit http://localhost:8080/api/v1/energy-labels-openapi.json
+
       - name: Install cf client
         env:
           CF_CLI_VERSION: v6
@@ -39,7 +60,7 @@ jobs:
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
       - name: Deploy dev
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/api-develop' }}
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
@@ -51,7 +72,7 @@ jobs:
           cf logout
 
       - name: Deploy QA
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/api-qa' }}
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}

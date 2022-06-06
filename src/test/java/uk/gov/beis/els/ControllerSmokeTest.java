@@ -3,8 +3,10 @@ package uk.gov.beis.els;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {
     "app.show_start_page=true"
 })
@@ -30,6 +32,7 @@ public class ControllerSmokeTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(ControllerSmokeTest.class);
 
   private MockMvc mockMvc;
+  private List<String> ignoredEndpointPrefixes;
 
   @Autowired
   public RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -42,13 +45,20 @@ public class ControllerSmokeTest {
     mockMvc = MockMvcBuilders
         .webAppContextSetup(context)
         .build();
+
+    ignoredEndpointPrefixes = Arrays.asList(
+        "/swagger-ui.html",
+        "/api-documentation");
+
   }
 
   @Test
   public void testAllGets() throws Exception {
+
     List<String> getRoutes = requestMappingHandlerMapping.getHandlerMethods().keySet().stream()
         .filter(r -> r.getMethodsCondition().getMethods().contains(RequestMethod.GET))
-        .map(r -> (String) r.getPatternsCondition().getPatterns().toArray()[0])
+        .map(r -> (String) r.getPatternValues().toArray()[0])
+        .filter(path -> !StringUtils.startsWithAny(path, ignoredEndpointPrefixes.toArray(new CharSequence[0])))
         .collect(Collectors.toList());
 
     for (String route : getRoutes) {

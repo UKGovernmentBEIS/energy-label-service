@@ -25,6 +25,7 @@ import uk.gov.beis.els.model.LabelMode;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.InternetLabelModeField;
+import uk.gov.beis.els.model.meta.ResolvedFieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 import uk.gov.beis.els.util.StreamUtils;
 
@@ -111,15 +112,18 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
     return hiddenFields;
   }
 
-  private Map<String, FieldPrompt> getFieldPromptMapping(Object form) {
-    Map<String, FieldPrompt> fieldPrompts = new HashMap<>();
+  private Map<String, ResolvedFieldPrompt> getFieldPromptMapping(Object form) {
+    Map<String, ResolvedFieldPrompt> fieldPrompts = new HashMap<>();
     Class<?> formClass = form.getClass();
 
     ReflectionUtils.doWithFields(formClass, (field -> {
       String name = field.getName();
       FieldPrompt fieldPromptAnnotation = field.getAnnotation(FieldPrompt.class);
       if(fieldPromptAnnotation != null) {
-        fieldPrompts.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, fieldPromptAnnotation);
+        fieldPrompts.put(
+          FORM_MODEL_ATTRIBUTE_NAME + "." + name,
+          new ResolvedFieldPrompt(fieldPromptAnnotation.value(), fieldPromptAnnotation.hintText())
+        );
       }
     }));
 

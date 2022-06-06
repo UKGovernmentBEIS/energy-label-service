@@ -41,11 +41,11 @@ public class SpaceHeaterCategory implements Category {
       .add(new CategoryItem(
           "PACKAGE_SPACE_HEATERS",
           "Packages of space heater, temperature control and solar device",
-          ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackages(null))))
+          ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesSortQuestion(null))))
       .add(new CategoryItem(
         "PACKAGE_COMBINATION_HEATERS",
         "Packages of combination heater, temperature control and solar device",
-        ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackages(null))))
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesSortQuestion(null))))
       .build();
 
   private SpaceHeaterCategory(){}

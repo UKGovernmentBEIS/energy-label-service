@@ -20,7 +20,7 @@ import uk.gov.beis.els.service.TemplatePopulator;
 @Service
 public class AirConditionersService {
 
-  public static final LegislationCategory LEGISLATION_CATEGORY_JAN2019 = LegislationCategory.of(
+  public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
       RatingClassRange.of(RatingClass.APPP, RatingClass.D));
 
   private final TemplateParserService templateParserService;
@@ -40,7 +40,7 @@ public class AirConditionersService {
       .setText("kw", form.getCoolingModeDesignLoad())
       .setText("seer", form.getCoolingModeSeer())
       .setText("kwhAnnum", form.getCoolingAnnualEnergyConsumption())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .asProcessedEnergyLabel(ProductMetadata.AC_COOLING_ONLY_NON_DUCT, form);
@@ -58,7 +58,7 @@ public class AirConditionersService {
       .setText("averageKw", form.getAverageHeatingDesignLoad())
       .setText("averageScop", form.getAverageScop())
       .setText("averageKwhAnnum", form.getAverageAnnualEnergyConsumption())
-      .setRatingArrow("averageRating", RatingClass.valueOf(form.getAverageHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("averageRating", RatingClass.getEnum(form.getAverageHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .asProcessedEnergyLabel(ProductMetadata.AC_HEATING_ONLY_NON_DUCT, form);
@@ -76,11 +76,11 @@ public class AirConditionersService {
       .setText("seerKw", form.getCoolingModeDesignLoad())
       .setText("seer", form.getCoolingModeSeer())
       .setText("seerKwhAnnum", form.getCoolingAnnualEnergyConsumption())
-      .setRatingArrow("seerRating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("seerRating", RatingClass.getEnum(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("averageScopKw", form.getAverageHeatingDesignLoad())
       .setText("averageScop", form.getAverageScop())
       .setText("averageScopKwhAnnum", form.getAverageAnnualEnergyConsumption())
-      .setRatingArrow("averageScopRating", RatingClass.valueOf(form.getAverageHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("averageScopRating", RatingClass.getEnum(form.getAverageHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("insideDb", form.getSoundPowerLevelIndoors())
       .setText("outsideDb", form.getSoundPowerLevelOutdoors())
       .asProcessedEnergyLabel(ProductMetadata.AC_REVERSIBLE_NON_DUCT, form);
@@ -96,7 +96,7 @@ public class AirConditionersService {
       .setText("kw", form.getCoolingKw())
       .setText("eer", form.getEerRated())
       .setText("kwhHour", form.getCoolingHourlyEnergyConsumption())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("db", form.getSoundPowerLevelIndoors())
       .asProcessedEnergyLabel(ProductMetadata.AC_COOLING_ONLY_DUCT, form);
   }
@@ -111,7 +111,7 @@ public class AirConditionersService {
       .setText("kw", form.getHeatingKw())
       .setText("cop", form.getCopRated())
       .setText("kwhHour", form.getHeatingHourlyEnergyConsumption())
-      .setRatingArrow("rating", RatingClass.valueOf(form.getHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("db", form.getSoundPowerLevelIndoors())
       .asProcessedEnergyLabel(ProductMetadata.AC_HEATING_ONLY_DUCT, form);
   }
@@ -126,11 +126,11 @@ public class AirConditionersService {
       .setText("copKw", form.getHeatingKw())
       .setText("cop", form.getCopRated())
       .setText("copKwhHour", form.getHeatingHourlyEnergyConsumption())
-      .setRatingArrow("copRating", RatingClass.valueOf(form.getHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("copRating", RatingClass.getEnum(form.getHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("eerKw", form.getCoolingKw())
       .setText("eer", form.getEerRated())
       .setText("eerKwhHour", form.getCoolingHourlyEnergyConsumption())
-      .setRatingArrow("eerRating", RatingClass.valueOf(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
+      .setRatingArrow("eerRating", RatingClass.getEnum(form.getCoolingEfficiencyRating()), legislationCategory.getPrimaryRatingRange())
       .setText("db", form.getSoundPowerLevelIndoors())
       .asProcessedEnergyLabel(ProductMetadata.AC_REVERSIBLE_DUCT, form);
   }
@@ -141,7 +141,7 @@ public class AirConditionersService {
           .setText("colderScopKw", form.getColderHeatingDesignLoad())
           .setText("colderScop", form.getColderScop())
           .setText("colderScopKwhAnnum", form.getColderAnnualEnergyConsumption())
-          .setRatingArrow("colderScopRating", RatingClass.valueOf(form.getColderHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
+          .setRatingArrow("colderScopRating", RatingClass.getEnum(form.getColderHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
     }
     else {
       templatePopulator.removeElementById("colderScopRating");
@@ -152,7 +152,7 @@ public class AirConditionersService {
           .setText("warmerScopKw", form.getWarmerHeatingDesignLoad())
           .setText("warmerScop", form.getWarmerScop())
           .setText("warmerScopKwhAnnum", form.getWarmerAnnualEnergyConsumption())
-          .setRatingArrow("warmerScopRating", RatingClass.valueOf(form.getWarmerHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
+          .setRatingArrow("warmerScopRating", RatingClass.getEnum(form.getWarmerHeatingEfficiencyRating()), legislationCategory.getPrimaryRatingRange());
     }
     else {
       templatePopulator.removeElementById("warmerScopRating");

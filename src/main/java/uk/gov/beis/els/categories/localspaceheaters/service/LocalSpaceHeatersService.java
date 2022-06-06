@@ -30,15 +30,15 @@ public class LocalSpaceHeatersService {
 
 
     if (form.getFluidTransfer()) {
-      templatePopulator.applyCssClassToId("indirectHeatSection", "hasIndirectHeatSection");
+      templatePopulator.applyCssClassToId("indirectHeatSection", "hasIndirectHeatSection")
+          .setText("indirectHeatKw", form.getIndirectHeatOutput());
     }
 
     return templatePopulator
-      .setRatingArrow("rating", RatingClass.valueOf(form.getEfficiencyRating()), LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
+      .setRatingArrow("rating", RatingClass.getEnum(form.getEfficiencyRating()), LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange())
       .setMultilineText("supplier", form.getSupplierName())
       .setMultilineText("model", form.getModelName())
       .setText("directHeatKw", form.getDirectHeatOutput())
-      .setText("indirectHeatKw", form.getIndirectHeatOutput())
       .asProcessedEnergyLabel(ProductMetadata.LOCAL_SPACE_HEATERS, form);
   }
 }

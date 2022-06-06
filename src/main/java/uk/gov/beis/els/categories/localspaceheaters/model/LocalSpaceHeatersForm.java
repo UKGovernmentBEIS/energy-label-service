@@ -1,16 +1,20 @@
 package uk.gov.beis.els.categories.localspaceheaters.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
+import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.localspaceheaters.service.LocalSpaceHeatersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
+@Schema(name = "Local space heaters energy label")
 @StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 105mm x 200mm when printed.")
 @GroupSequenceProvider(LocalSpaceHeatersFormSequenceProvider.class)
 public class LocalSpaceHeatersForm extends StandardTemplateForm50Char {
@@ -18,10 +22,13 @@ public class LocalSpaceHeatersForm extends StandardTemplateForm50Char {
   @FieldPrompt("The energy efficiency class of the model")
   @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @ApiValuesFromLegislationCategory(serviceClass = LocalSpaceHeatersService.class)
   private String efficiencyRating;
 
   @FieldPrompt("The direct heat output in kW")
   @Digits(integer = 2, fraction = 1, message = "Enter the direct heat output, up to 2 digits long with an optional decimal place")
+  @Schema(type = "number")
+  @NotNull
   private String directHeatOutput;
 
   @FieldPrompt("Is this model a local space heater with transfer to a fluid?")
@@ -30,6 +37,8 @@ public class LocalSpaceHeatersForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("The indirect heat output in kW")
   @Digits(groups = HeatTransferGroup.class, integer = 2, fraction = 1, message = "Enter the indirect heat output, up to 2 digits long with an optional decimal place")
+  @Schema(type = "number", description = "The indirect heat output in kW. Only required if <code>fluidTransfer</code> is <code>true</code>.")
+  @NotNull(groups = HeatTransferGroup.class)
   private String indirectHeatOutput;
 
   public String getEfficiencyRating() {

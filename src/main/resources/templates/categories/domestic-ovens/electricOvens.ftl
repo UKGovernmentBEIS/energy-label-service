@@ -5,7 +5,7 @@
   <@govukTextInput.textInput path="form.volume"/>
 
   <@govukTextInput.textInput path="form.conventionalKwhConsumption"/>
-  <@govukRadios.radioYesNo path="form.isFanOven" inline=false hiddenQuestionsWithYesSelected=true>
+  <@govukRadios.radioYesNo path="form.isFanOven" hiddenQuestionsWithYesSelected=true>
     <@govukTextInput.textInput path="form.convectionKwhConsumption"/>
   </@govukRadios.radioYesNo>
 

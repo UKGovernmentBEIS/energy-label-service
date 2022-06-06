@@ -2,14 +2,17 @@ package uk.gov.beis.els.categories.spaceheaters.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,20 +20,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import uk.gov.beis.els.categories.common.Category;
+import uk.gov.beis.els.categories.common.CategoryItem;
 import uk.gov.beis.els.categories.common.LoadProfile;
+import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
+import uk.gov.beis.els.categories.common.StandardCategoryForm;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.service.InternetLabelService;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerCombinationHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.BoilerPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.BoilerSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.CogenerationPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.CogenerationSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesCategory;
 import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesForm;
+import uk.gov.beis.els.categories.spaceheaters.model.CombinationHeaterPackagesPreferentialHeaterCategory;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpCombinationHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpPackagesCalculatorForm;
 import uk.gov.beis.els.categories.spaceheaters.model.HeatPumpSpaceHeatersForm;
 import uk.gov.beis.els.categories.spaceheaters.model.LowTemperatureHeatPumpSpaceHeatersForm;
+import uk.gov.beis.els.categories.spaceheaters.model.PreferentialHeaterTypes;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterCategory;
+import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesCategory;
 import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesForm;
+import uk.gov.beis.els.categories.spaceheaters.model.SpaceHeaterPackagesPreferentialHeaterCategory;
+import uk.gov.beis.els.categories.spaceheaters.model.TankLabelClass;
+import uk.gov.beis.els.categories.spaceheaters.model.TemperatureControlClass;
 import uk.gov.beis.els.categories.spaceheaters.service.SpaceHeatersService;
+import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.controller.CategoryController;
+import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClassRange;
 import uk.gov.beis.els.mvc.ReverseRouter;
@@ -46,17 +67,24 @@ public class SpaceHeatersController extends CategoryController {
   private static final String BREADCRUMB_STAGE_TEXT = "Space heaters";
 
   private final SpaceHeatersService spaceHeatersService;
+  private final WaterHeatersService waterHeatersService;
   private final BreadcrumbService breadcrumbService;
   private final InternetLabelService internetLabelService;
   private final DocumentRendererService documentRendererService;
+  private final Category spaceHeaterPackagesCategory = SpaceHeaterPackagesCategory.GET;
+  private final Category spaceHeaterPackagesPreferentialHeaterCategory = SpaceHeaterPackagesPreferentialHeaterCategory.GET;
+  private final Category combinationHeaterPackagesCategory = CombinationHeaterPackagesCategory.GET;
+  private final Category combinationHeaterPackagesPreferentialHeaterCategory = CombinationHeaterPackagesPreferentialHeaterCategory.GET;
 
   @Autowired
   public SpaceHeatersController(SpaceHeatersService spaceHeatersService,
+                                WaterHeatersService waterHeatersService,
                                 BreadcrumbService breadcrumbService,
                                 InternetLabelService internetLabelService,
                                 DocumentRendererService documentRendererService) {
     super(BREADCRUMB_STAGE_TEXT, breadcrumbService, SpaceHeaterCategory.GET, SpaceHeatersController.class);
     this.spaceHeatersService = spaceHeatersService;
+    this.waterHeatersService = waterHeatersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
     this.documentRendererService = documentRendererService;
@@ -212,6 +240,44 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/packages-sort-question")
+  public ModelAndView renderSpaceHeaterPackagesSortQuestion(@ModelAttribute("form") StandardCategoryForm form) {
+    return getSpaceHeaterPackagesSortingQuestion(Collections.emptyList());
+  }
+
+  @PostMapping("/packages-sort-question")
+  @ResponseBody
+  public ModelAndView handleSpaceHeaterPackagesSortQuestionSubmit(
+      @Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required",
+          spaceHeaterPackagesCategory.getNoSelectionErrorMessage());
+      return getSpaceHeaterPackagesSortingQuestion(bindingResult.getFieldErrors());
+    } else {
+      CategoryItem categoryItem = spaceHeaterPackagesCategory.getCategoryItem(form.getCategory());
+      return new ModelAndView("redirect:" + categoryItem.getNextStateUrl());
+    }
+  }
+
+  @GetMapping("/packages-preferential-heater-type")
+  public ModelAndView renderSpaceHeaterPackagesPreferentialHeaterSortQuestion(@ModelAttribute("form") StandardCategoryForm form) {
+    return getSpaceHeaterPackagesPreferentialHeaterQuestion(Collections.emptyList());
+  }
+
+  @PostMapping("/packages-preferential-heater-type")
+  @ResponseBody
+  public ModelAndView handleSpaceHeaterPackagesPreferentialHeaterSortQuestionSubmit(
+      @Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required",
+          spaceHeaterPackagesPreferentialHeaterCategory.getNoSelectionErrorMessage());
+      return getSpaceHeaterPackagesPreferentialHeaterQuestion(bindingResult.getFieldErrors());
+    } else {
+      CategoryItem categoryItem = spaceHeaterPackagesPreferentialHeaterCategory.getCategoryItem(form.getCategory());
+      return new ModelAndView("redirect:" + categoryItem.getNextStateUrl());
+    }
+  }
+
   @GetMapping("/package-space-heater")
   public ModelAndView renderSpaceHeaterPackages(@ModelAttribute("form") SpaceHeaterPackagesForm form) {
     return getSpaceHeaterPackages(Collections.emptyList());
@@ -239,6 +305,92 @@ public class SpaceHeatersController extends CategoryController {
     }
   }
 
+  @GetMapping("/package-space-heater/boiler/calculator")
+  public ModelAndView renderSpaceHeaterPackagesBoilerCalculator(@ModelAttribute("form") BoilerPackagesCalculatorForm form) {
+    return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.BOILER);
+  }
+
+  @PostMapping("/package-space-heater/boiler/calculator")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesBoilerCalculatorSubmit(@Valid @ModelAttribute("form") BoilerPackagesCalculatorForm form,
+                                                                BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toSpaceHeaterPackagesForm(form))
+      );
+    }
+  }
+
+  @PostMapping(value = "/package-space-heater/boiler/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesBoilerFicheSubmit(@Valid @ModelAttribute("form") BoilerPackagesCalculatorForm form,
+                                                                BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
+    }
+  }
+
+  @GetMapping("/package-space-heater/heat-pump/calculator")
+  public ModelAndView renderSpaceHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpPackagesCalculatorForm form) {
+    return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
+  }
+
+  @PostMapping("/package-space-heater/heat-pump/calculator")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesHeatPumpCalculatorSubmit(@Valid @ModelAttribute("form") HeatPumpPackagesCalculatorForm form,
+                                                                  BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+    }
+  }
+
+  @PostMapping(value = "/package-space-heater/heat-pump/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesHeatPumpFicheSubmit(@Valid @ModelAttribute("form") HeatPumpPackagesCalculatorForm form,
+                                                                 BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
+    }
+  }
+
+  @GetMapping("/package-space-heater/cogeneration-heater/calculator")
+  public ModelAndView renderSpaceHeaterPackagesCogenerationCalculator(@ModelAttribute("form") CogenerationPackagesCalculatorForm form) {
+    return getSpaceHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.COGENERATION_HEATER);
+  }
+
+  @PostMapping("/package-space-heater/cogeneration-heater/calculator")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesCogenerationCalculatorSubmit(@Valid @ModelAttribute("form") CogenerationPackagesCalculatorForm form,
+                                                                      BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(),
+          PreferentialHeaterTypes.COGENERATION_HEATER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toSpaceHeaterPackagesForm(form)));
+    }
+  }
+
+  @PostMapping(value = "/package-space-heater/cogeneration-heater/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleSpaceHeaterPackagesCogenerationFicheSubmit(@Valid @ModelAttribute("form") CogenerationPackagesCalculatorForm form,
+                                                           BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.COGENERATION_HEATER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
+    }
+  }
+
   @GetMapping("/package-combination-heater")
   public ModelAndView renderCombinationHeaterPackages(@ModelAttribute("form") CombinationHeaterPackagesForm form) {
     return getCombinationHeaterPackages(Collections.emptyList());
@@ -263,6 +415,104 @@ public class SpaceHeatersController extends CategoryController {
     }
     else {
       return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getPackageSpaceHeatingEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES, ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION));
+    }
+  }
+
+  @GetMapping("/package-combination-heater-sort-question")
+  public ModelAndView renderCombinationHeaterPackagesSortQuestion(@ModelAttribute("form") StandardCategoryForm form) {
+    return getCombinationHeaterPackagesSortingQuestion(Collections.emptyList());
+  }
+
+  @PostMapping("/package-combination-heater-sort-question")
+  public ModelAndView handleCombinationHeaterPackagesSortQuestionSubmit(
+      @Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required",
+          combinationHeaterPackagesCategory.getNoSelectionErrorMessage());
+      return getCombinationHeaterPackagesSortingQuestion(bindingResult.getFieldErrors());
+    } else {
+      CategoryItem categoryItem = combinationHeaterPackagesCategory.getCategoryItem(form.getCategory());
+      return new ModelAndView("redirect:" + categoryItem.getNextStateUrl());
+    }
+  }
+
+  @GetMapping("/package-combination-heater-preferential-heater-type")
+  public ModelAndView renderCombinationHeaterPackagesPreferentialHeaterSortQuestion(@ModelAttribute("form") StandardCategoryForm form) {
+    return getCombinationHeaterPackagesPreferentialHeaterQuestion(Collections.emptyList());
+  }
+
+  @PostMapping("/package-combination-heater-preferential-heater-type")
+  public ModelAndView handleCombinationHeaterPackagesPreferentialHeaterSortQuestionSubmit(
+      @Valid @ModelAttribute("form") StandardCategoryForm form, BindingResult bindingResult) {
+    if (StringUtils.isBlank(form.getCategory())) {
+      ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "category", "category.required",
+          combinationHeaterPackagesPreferentialHeaterCategory.getNoSelectionErrorMessage());
+      return getCombinationHeaterPackagesPreferentialHeaterQuestion(bindingResult.getFieldErrors());
+    } else {
+      CategoryItem categoryItem = combinationHeaterPackagesPreferentialHeaterCategory.getCategoryItem(form.getCategory());
+      return new ModelAndView("redirect:" + categoryItem.getNextStateUrl());
+    }
+  }
+
+  @GetMapping("/package-combination-heater/boiler/calculator")
+  public ModelAndView renderCombinationHeaterPackagesBoilerCalculator(@ModelAttribute("form") BoilerCombinationCalculatorForm form) {
+    return getCombinationHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.BOILER);
+  }
+
+  @PostMapping(value = "/package-combination-heater/boiler/calculator", params = "Download label")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesBoilerCalculatorSubmit(@ModelAttribute("form") @Valid BoilerCombinationCalculatorForm form,
+                                                                      BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toCombinationHeaterPackagesForm(form)));
+    }
+  }
+
+  @PostMapping(value = "/package-combination-heater/boiler/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesBoilerFicheSubmit(@ModelAttribute("form") @Valid BoilerCombinationCalculatorForm form,
+                                                                 BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
+    } else {
+      List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
+      ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
+      ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
+      return documentRendererService.processPdfResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
+    }
+  }
+
+  @GetMapping("/package-combination-heater/heat-pump/calculator")
+  public ModelAndView renderCombinationHeaterPackagesHeatPumpCalculator(@ModelAttribute("form") HeatPumpCombinationCalculatorForm form) {
+    return getCombinationHeatersPackagesCalculator(Collections.emptyList(), PreferentialHeaterTypes.HEAT_PUMP);
+  }
+
+  @PostMapping(value = "/package-combination-heater/heat-pump/calculator", params = "Download label")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesHeatPumpCalculatorSubmit(@ModelAttribute("form") @Valid HeatPumpCombinationCalculatorForm form,
+                                                                        BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+          spaceHeatersService.toCombinationHeaterPackagesForm(form)));
+    }
+  }
+
+  @PostMapping(value = "/package-combination-heater/heat-pump/calculator", params = "Download fiche")
+  @ResponseBody
+  public Object handleCombinationHeaterPackagesHeatPumpFicheSubmit(@ModelAttribute("form") @Valid HeatPumpCombinationCalculatorForm form,
+                                                                   BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
+    } else {
+      List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
+      ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
+      ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
+      return documentRendererService.processPdfResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -311,7 +561,9 @@ public class SpaceHeatersController extends CategoryController {
   private ModelAndView getSpaceHeaterPackages(List<FieldError> errorList) {
     ModelAndView modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackages");
     addCommonObjects(modelAndView, errorList, ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackages(null)));
-    breadcrumbService.pushLastBreadcrumb(modelAndView, "Package space heaters");
+    breadcrumbService.pushBreadcrumb(modelAndView, "Package space heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Label");
     return modelAndView;
   }
 
@@ -333,9 +585,160 @@ public class SpaceHeatersController extends CategoryController {
         .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName))
     );
     modelAndView.addObject("submitUrl", submitUrl);
+    RatingClassRange packageEfficiencyRatingRange = SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES.getPrimaryRatingRange();
+    modelAndView.addObject("packageEfficiencyRating", ControllerUtils.ratingRangeToSelectionMap(packageEfficiencyRatingRange));
     super.addCommonProductGuidance(modelAndView);
     breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(
         SpaceHeatersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
+  }
+
+  private ModelAndView getSpaceHeaterPackagesSortingQuestion(List<FieldError> errors) {
+    ModelAndView modelAndView = new ModelAndView("calculatorQuestion")
+        .addObject("categories",
+            spaceHeaterPackagesCategory.getCategoryItems()
+                .stream()
+                .collect(StreamUtils.toLinkedHashMap(CategoryItem::getId, CategoryItem::getName))
+        )
+        .addObject("submitUrl", ReverseRouter.route(
+            on(SpaceHeatersController.class).handleSpaceHeaterPackagesSortQuestionSubmit(null,
+                ReverseRouter.emptyBindingResult())));
+    ControllerUtils.addErrorSummary(modelAndView, errors);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT,
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCategories(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Package space heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getSpaceHeaterPackagesPreferentialHeaterQuestion(List<FieldError> errors) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/preferentialHeaterQuestion")
+        .addObject("categories",
+            spaceHeaterPackagesPreferentialHeaterCategory.getCategoryItems()
+                .stream()
+                .collect(StreamUtils.toLinkedHashMap(CategoryItem::getId, CategoryItem::getName))
+        )
+        .addObject("submitUrl", ReverseRouter.route(
+            on(SpaceHeatersController.class).handleSpaceHeaterPackagesPreferentialHeaterSortQuestionSubmit(null,
+                ReverseRouter.emptyBindingResult())));
+    ControllerUtils.addErrorSummary(modelAndView, errors);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT,
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCategories(null)));
+    breadcrumbService.pushBreadcrumb(modelAndView, "Package space heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Preferential heater");
+    return modelAndView;
+  }
+
+  private ModelAndView getSpaceHeatersPackagesCalculator(List<FieldError> errors, PreferentialHeaterTypes preferentialHeaterType) {
+    ModelAndView modelAndView;
+
+    switch (preferentialHeaterType) {
+      case BOILER:
+        modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesBoilerCalculator");
+        addCommonObjects(modelAndView, errors,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesBoilerCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "boilers");
+        break;
+      case HEAT_PUMP:
+        modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesHeatPumpCalculator");
+        addCommonObjects(modelAndView, errors,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesHeatPumpCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "heat pumps");
+        break;
+      case COGENERATION_HEATER:
+        modelAndView = new ModelAndView("categories/space-heaters/spaceHeaterPackagesCogenerationCalculator");
+        addCommonObjects(modelAndView, errors,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesCogenerationCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "cogeneration heaters");
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + preferentialHeaterType);
+    }
+
+    modelAndView.addObject("temperatureControlClass",
+        Arrays.stream(TemperatureControlClass.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name)));
+    modelAndView.addObject("storageTankRating",
+        Arrays.stream(TankLabelClass.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, TankLabelClass::getDisplayName)));
+    breadcrumbService.pushBreadcrumb(modelAndView, "Package space heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesSortQuestion(null)));
+    breadcrumbService.pushBreadcrumb(modelAndView, "Preferential heater",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderSpaceHeaterPackagesPreferentialHeaterSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Calculator");
+    return modelAndView;
+  }
+
+  private ModelAndView getCombinationHeaterPackagesSortingQuestion(List<FieldError> errors) {
+    ModelAndView modelAndView = new ModelAndView("calculatorQuestion")
+        .addObject("categories",
+            combinationHeaterPackagesCategory.getCategoryItems()
+                .stream()
+                .collect(StreamUtils.toLinkedHashMap(CategoryItem::getId, CategoryItem::getName))
+        )
+        .addObject("submitUrl", ReverseRouter.route(
+            on(SpaceHeatersController.class).handleCombinationHeaterPackagesSortQuestionSubmit(null,
+                ReverseRouter.emptyBindingResult())));
+    ControllerUtils.addErrorSummary(modelAndView, errors);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT,
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCategories(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Package combination heaters");
+    return modelAndView;
+  }
+
+  private ModelAndView getCombinationHeaterPackagesPreferentialHeaterQuestion(List<FieldError> errors) {
+    ModelAndView modelAndView = new ModelAndView("categories/space-heaters/preferentialHeaterQuestion")
+        .addObject("categories",
+            combinationHeaterPackagesPreferentialHeaterCategory.getCategoryItems()
+                .stream()
+                .collect(StreamUtils.toLinkedHashMap(CategoryItem::getId, CategoryItem::getName))
+        )
+        .addObject("submitUrl", ReverseRouter.route(
+            on(SpaceHeatersController.class).handleCombinationHeaterPackagesPreferentialHeaterSortQuestionSubmit(null,
+                ReverseRouter.emptyBindingResult())));
+    ControllerUtils.addErrorSummary(modelAndView, errors);
+    breadcrumbService.addBreadcrumbToModel(modelAndView, BREADCRUMB_STAGE_TEXT,
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCategories(null)));
+    breadcrumbService.pushBreadcrumb(modelAndView, "Package combination heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Preferential heater");
+    return modelAndView;
+  }
+
+  private ModelAndView getCombinationHeatersPackagesCalculator(List<FieldError> errorList, PreferentialHeaterTypes preferentialHeaterType) {
+    ModelAndView modelAndView;
+
+    switch (preferentialHeaterType) {
+      case BOILER:
+        modelAndView = new ModelAndView("categories/space-heaters/boilerCombinationCalculator");
+        addCommonObjects(modelAndView, errorList,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesBoilerCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "boiler");
+        break;
+      case HEAT_PUMP:
+        modelAndView = new ModelAndView("categories/space-heaters/heatPumpCombinationCalculator");
+        addCommonObjects(modelAndView, errorList,
+            ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesHeatPumpCalculator(null)));
+        modelAndView.addObject("preferentialHeater", "heat pump");
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + preferentialHeaterType);
+    }
+
+    modelAndView.addObject("temperatureControlClass",
+        Arrays.stream(TemperatureControlClass.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name)))
+        .addObject("storageTankRating",
+        Arrays.stream(TankLabelClass.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, TankLabelClass::getDisplayName)))
+        .addObject("loadProfile", WaterHeatersService.WATER_SOLAR_PACKAGES_LOAD_PROFILES.stream()
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, LoadProfile::getDisplayName)));
+
+    breadcrumbService.pushBreadcrumb(modelAndView, "Package combination heaters",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesSortQuestion(null)));
+    breadcrumbService.pushBreadcrumb(modelAndView, "Preferential heater",
+        ReverseRouter.route(on(SpaceHeatersController.class).renderCombinationHeaterPackagesPreferentialHeaterSortQuestion(null)));
+    breadcrumbService.pushLastBreadcrumb(modelAndView, "Calculator");
+    return modelAndView;
   }
 
 }

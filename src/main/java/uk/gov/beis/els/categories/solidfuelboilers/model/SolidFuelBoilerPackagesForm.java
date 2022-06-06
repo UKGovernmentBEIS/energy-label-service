@@ -1,19 +1,24 @@
 package uk.gov.beis.els.categories.solidfuelboilers.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
+import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
+import uk.gov.beis.els.categories.solidfuelboilers.service.SolidFuelBoilersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
+@Schema(name = "Package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices energy label")
 @StaticProductText("You must display the label at the point of sale so that it’s easy to see and clearly related to the product. It must be at least 210mm x 297mm when printed.")
 public class SolidFuelBoilerPackagesForm extends StandardTemplateForm50Char {
 
   @FieldPrompt("Energy efficiency class of the solid fuel boiler")
   @NotBlank(message = "Select an energy efficiency indicator for the boiler")
+  @ApiValuesFromLegislationCategory(serviceClass = SolidFuelBoilersService.class, legislationCategoryFieldName = "LEGISLATION_CATEGORY_PACKAGES_CURRENT")
   private String boilerEfficiencyRating;
 
   @FieldPrompt("Does this package include a solar collector?")
@@ -35,6 +40,7 @@ public class SolidFuelBoilerPackagesForm extends StandardTemplateForm50Char {
   @FieldPrompt("Energy efficiency class of the package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices")
   @NotBlank(message = "Select an energy efficiency indicator for the complete package", groups = {Default.class, InternetLabellingGroup.class})
   @DualModeField
+  @ApiValuesFromLegislationCategory(serviceClass = SolidFuelBoilersService.class, legislationCategoryFieldName = "LEGISLATION_CATEGORY_PACKAGES_CURRENT")
   private String packageEfficiencyRating;
 
   public String getBoilerEfficiencyRating() {

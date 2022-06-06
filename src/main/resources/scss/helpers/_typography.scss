@@ -1,0 +1,11 @@
+.els-mobile-only {
+  @include govuk-media-query($from: tablet) {
+    display: none;
+  }
+}
+
+.els-non-mobile-only {
+  @include govuk-media-query($until: tablet) {
+    display: none;
+  }
+}

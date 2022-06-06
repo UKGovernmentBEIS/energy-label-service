@@ -33,7 +33,7 @@ public class WaterHeaterCategory implements Category {
       .add(new CategoryItem(
         "WATER_SOLAR_PACKAGES",
         "Packages of water heater and solar device",
-        ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackages(null))))
+          ReverseRouter.route(on(WaterHeatersController.class).renderWaterSolarPackagesSortQuestion(null))))
       .build();
 
   private WaterHeaterCategory(){}

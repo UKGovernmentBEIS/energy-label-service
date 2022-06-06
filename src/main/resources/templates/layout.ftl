@@ -40,6 +40,7 @@
   pageScripts=blankMacro
   notificationBanner=blankMacro
   beforeStandardInsetText=""
+  robotsMeta="noindex, nofollow"
   >
 
   <#--Checks if the heading has content in order to not display an empty <h1>-->
@@ -54,7 +55,7 @@
   <title><#if errorList?has_content>Error: </#if><#if pageTitle?has_content>${pageTitle} - <#elseif pageHeading?has_content>${pageHeading} - </#if>Create an energy label - GOV.UK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0c0c" />
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="${robotsMeta}" />
   <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/favicon.ico'/>" type="image/x-icon" />
   <link rel="mask-icon" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-mask-icon.svg'/>" color="#0b0c0c">
   <link rel="apple-touch-icon" sizes="180x180" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-180x180.png'/>">
@@ -78,7 +79,7 @@
 
   <@govukCookieBanner.cookieBanner/>
 
-  <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+  <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
 
   <@govukHeader.header currentUserView/>
 
@@ -119,6 +120,13 @@
               </#if>
               </span>
             </#if>
+
+            <#if caption?has_content>
+              <span class="${captionClass}">
+                ${caption}
+              </span>
+            </#if>
+
             <#--GOVUK heading class names https://design-system.service.gov.uk/styles/typography/-->
             <#if heading>
               <h1 class="${headingCssClass}">${pageHeading}</h1>

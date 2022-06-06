@@ -2,9 +2,9 @@
 
 <@common.standardProductForm title="Packages of space heater, temperature control and solar device">
 
-    <@govukSelect.select path="form.heaterEfficiencyRating" options=efficiencyRating/>
+    <@govukSelect.select path="form.heaterEfficiencyRating" options=packageEfficiencyRating/>
 
-    <@govukSelect.select path="form.packageEfficiencyRating" options=efficiencyRating/>
+    <@govukSelect.select path="form.packageEfficiencyRating" options=packageEfficiencyRating/>
 
     <@govukRadios.radioYesNo path="form.solarCollector"/>
     <@govukRadios.radioYesNo path="form.hotWaterStorageTank"/>

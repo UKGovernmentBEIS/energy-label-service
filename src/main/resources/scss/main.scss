@@ -3,11 +3,16 @@ $govuk-assets-path: "/assets/govuk-frontend/govuk/assets/";
 // import ALL GOVUK components
 @import '../public/assets/govuk-frontend/govuk/all';
 
+// Helpers
+@import "helpers/typography";
+
 // GOVUK Patterns
 @import "patterns/task-list";
-
 
 // Components
 @import "components/buttons";
 @import "components/input";
 @import "components/arrow-icon";
+@import "components/sub-navigation";
+@import "components/code";
+@import "components/api-schema-table";

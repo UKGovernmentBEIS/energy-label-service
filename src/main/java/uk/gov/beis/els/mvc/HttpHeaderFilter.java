@@ -31,4 +31,14 @@ public class HttpHeaderFilter extends OncePerRequestFilter {
     filterChain.doFilter(request, response);
   }
 
+  @Override
+  protected boolean shouldNotFilter(HttpServletRequest request) {
+    if (request.getRequestURI().startsWith("/assets/")) {
+      return true;
+    }
+
+    // Do not add CSP etc. to Swagger UI
+    return "/swagger-ui/index.html".equals(request.getRequestURI());
+  }
+
 }

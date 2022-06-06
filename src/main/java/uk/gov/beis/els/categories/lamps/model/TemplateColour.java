@@ -2,7 +2,7 @@ package uk.gov.beis.els.categories.lamps.model;
 
 public enum TemplateColour {
   COLOUR("Colour"),
-  BW("Black and white");
+  BLACK_AND_WHITE("Black and white");
 
   private final String displayName;
 

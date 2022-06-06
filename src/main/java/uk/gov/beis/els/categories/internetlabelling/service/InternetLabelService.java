@@ -8,6 +8,8 @@ import org.jsoup.parser.ParseSettings;
 import org.jsoup.parser.Parser;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import uk.gov.beis.els.api.common.BaseInternetLabelApiForm;
+import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
@@ -19,6 +21,31 @@ import uk.gov.beis.els.service.TemplatePopulator;
 
 @Service
 public class InternetLabelService {
+
+  public ProcessedInternetLabelDocument generateInternetLabel(BaseInternetLabelApiForm apiForm, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
+    InternetLabellingForm standardForm = new InternetLabellingForm();
+    standardForm.setLabelFormat(apiForm.getLabelFormat());
+    standardForm.setLabelOrientation(apiForm.getLabelOrientation());
+    standardForm.setProductPriceHeightPx(String.valueOf(apiForm.getProductPriceHeightPx()));
+    return generateInternetLabel(standardForm, ratingClass, legislationCategory, analyticsLabel);
+  }
+
+  public ProcessedInternetLabelDocument generateInternetLabel(RescaledInternetLabelApiForm apiForm, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
+    InternetLabellingForm standardForm = new InternetLabellingForm();
+    standardForm.setLabelFormat(apiForm.getLabelFormat());
+    standardForm.setLabelOrientation(apiForm.getLabelOrientation());
+
+    InternetLabelColour colour;
+    if(legislationCategory.getInternetLabelTemplate().getHasBWOption()) {
+      colour = InternetLabelColour.valueOf(apiForm.getLabelColour());
+    } else {
+      colour = InternetLabelColour.COLOUR;
+    }
+    standardForm.setLabelColour(colour.name());
+
+    standardForm.setProductPriceHeightPx(String.valueOf(apiForm.getProductPriceHeightPx()));
+    return generateInternetLabel(standardForm, ratingClass, legislationCategory, analyticsLabel);
+  }
 
   public ProcessedInternetLabelDocument generateInternetLabel(InternetLabellingForm form, String ratingClass, LegislationCategory legislationCategory, ProductMetadata analyticsLabel) {
     Parser parser = Parser.htmlParser();
@@ -50,7 +77,7 @@ public class InternetLabelService {
 
     return templatePopulator
         .scaleSvg(scaleFactor)
-        .transformInternetLabel(RatingClass.valueOf(ratingClass), legislationCategory.getPrimaryRatingRange())
+        .transformInternetLabel(RatingClass.getEnum(ratingClass), legislationCategory.getPrimaryRatingRange())
         .asProcessedInternetLabel(form, form, ratingClass, analyticsLabel);
   }
 
