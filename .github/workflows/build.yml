@@ -60,7 +60,7 @@ jobs:
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
       - name: Deploy dev
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/api-develop' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
@@ -72,7 +72,7 @@ jobs:
           cf logout
 
       - name: Deploy QA
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/api-qa' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
