@@ -11,7 +11,6 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
@@ -69,14 +68,13 @@ public class JpegRenderer implements Renderer {
 
   private void writeJpeg(Document svg, OutputStream outputStream) {
     try {
-      Element svgElement = TemplateUtils.getSvgElement(svg);
-      TranscoderInput transcoderInput = new TranscoderInput(IOUtils.toInputStream(svgElement.outerHtml(), "UTF-8"));
+      TranscoderInput transcoderInput = new TranscoderInput(IOUtils.toInputStream(TemplateUtils.getSvgElement(svg).outerHtml(), "UTF-8"));
       TranscoderOutput transcoderOutput = new TranscoderOutput(outputStream);
       JPEGTranscoder jpegTranscoder = new JPEGTranscoder();
       jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, 1f);
 
       // If it's an energy label or fiche, set additional transcoder keys
-      if (!"internet-label".equals(svgElement.attr("data-type"))) {
+      if (!TemplateUtils.isInternetLabel(svg)) {
         RendererUtils.setRenderDimensions(jpegTranscoder, svg);
       }
 

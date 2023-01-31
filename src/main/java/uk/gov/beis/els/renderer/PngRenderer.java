@@ -13,7 +13,6 @@ import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
@@ -73,13 +72,12 @@ public class PngRenderer implements Renderer {
 
   private void writePng(Document svg, OutputStream outputStream) {
     try {
-      Element svgElement = TemplateUtils.getSvgElement(svg);
-      TranscoderInput transcoderInput = new TranscoderInput(IOUtils.toInputStream(svgElement.outerHtml(), "UTF-8"));
+      TranscoderInput transcoderInput = new TranscoderInput(IOUtils.toInputStream(TemplateUtils.getSvgElement(svg).outerHtml(), "UTF-8"));
       TranscoderOutput transcoderOutput = new TranscoderOutput(outputStream);
       PNGTranscoder pngTranscoder = new PNGTranscoder();
 
       // If it's an energy label or fiche, set additional transcoder keys
-      if (!"internet-label".equals(svgElement.attr("data-type"))) {
+      if (!TemplateUtils.isInternetLabel(svg)) {
         pngTranscoder.addTranscodingHint(ImageTranscoder.KEY_BACKGROUND_COLOR, Color.WHITE);
         RendererUtils.setRenderDimensions(pngTranscoder, svg);
       }
