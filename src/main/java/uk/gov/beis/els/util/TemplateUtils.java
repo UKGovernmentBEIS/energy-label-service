@@ -40,4 +40,12 @@ public class TemplateUtils {
     }
   }
 
+  public static float getWidth(Document doc) {
+    return Float.parseFloat(doc.body().attr("data-width"));
+  }
+
+  public static float getHeight(Document doc) {
+    return Float.parseFloat(doc.body().attr("data-height"));
+  }
+
 }
