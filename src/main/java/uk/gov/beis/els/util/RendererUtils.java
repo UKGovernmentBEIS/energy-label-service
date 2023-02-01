@@ -15,7 +15,7 @@ public class RendererUtils {
 
   /**
    * Collate a list of SVG documents into a single image, using the provided image writer function.
-   * All images must be of the same dimension. They will be appended vertically.
+   * All images must be of the same dimension. They will be appended horizontally.
    * Image data is held in memory so care should be taken when calling this with a large number of images.
    * @param documents List of SVG documents
    * @param bufferedImageType The type of BufferedImage to create. E.g. BufferedImage.TYPE_INT_RGB
@@ -33,10 +33,10 @@ public class RendererUtils {
       float scaledWidth = mmToPixels(width);
       float scaledHeight = mmToPixels(height);
 
-      // Create a container image 'tall' enough for all documents
+      // Create a container image wide enough for all documents
       BufferedImage container = new BufferedImage(
-          Math.round(scaledWidth),
-          Math.round(scaledHeight * documents.size()),
+          Math.round(scaledWidth * documents.size()),
+          Math.round(scaledHeight),
           bufferedImageType
       );
 
@@ -48,7 +48,7 @@ public class RendererUtils {
           writerFunction.accept(doc, imageOs);
 
           BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageOs.toByteArray()));
-          containerGraphics.drawImage(image, 0, Math.round(idx * scaledHeight), null);
+          containerGraphics.drawImage(image, Math.round(idx * scaledWidth), 0, null);
           idx++;
         }
       }
