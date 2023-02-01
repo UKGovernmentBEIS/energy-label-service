@@ -60,7 +60,7 @@ public class RangeHoodsController {
       return getRangeHoodsForm(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(rangeHoodsService.generateHtml(form, RangeHoodsService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(rangeHoodsService.generateHtml(form, RangeHoodsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -70,7 +70,7 @@ public class RangeHoodsController {
     if (bindingResult.hasErrors()) {
       return getRangeHoodsForm(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RangeHoodsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.RANGE_HOODS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RangeHoodsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.RANGE_HOODS));
     }
   }
 

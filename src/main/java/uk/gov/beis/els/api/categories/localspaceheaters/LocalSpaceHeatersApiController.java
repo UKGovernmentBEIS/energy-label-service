@@ -38,13 +38,13 @@ public class LocalSpaceHeatersApiController {
   )
   @PostMapping("/energy-label")
   public Object localSpaceHeaters(@RequestBody @Valid LocalSpaceHeatersForm form) {
-    return documentRendererService.processPdfApiResponse(localSpaceHeatersService.generateHtml(form));
+    return documentRendererService.processApiResponse(localSpaceHeatersService.generateHtml(form));
   }
 
   @Operation(summary = "Local space heaters: arrow image")
   @PostMapping("/arrow-image")
   public Object localSpaceHeatersInternetLabel(@RequestBody @Valid LocalSpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             LocalSpaceHeatersService.LEGISLATION_CATEGORY_CURRENT,

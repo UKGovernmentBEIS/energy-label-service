@@ -101,7 +101,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getBoilerSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -111,7 +111,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getBoilerSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_BOILER));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_BOILER));
     }
   }
 
@@ -126,7 +126,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getBoilerCombinationHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -136,7 +136,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getBoilerCombinationHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_BOILER_COMBI));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_BOILER_COMBI));
     }
   }
 
@@ -151,7 +151,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getCogenerationSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -161,7 +161,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getCogenerationSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_COGEN));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_COGEN));
     }
   }
 
@@ -176,7 +176,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getLowTemperatureHeatPumpSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -186,7 +186,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getLowTemperatureHeatPumpSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getLowTempEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_LOW_TEMP));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getLowTempEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_LOW_TEMP));
     }
   }
 
@@ -201,7 +201,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHeatPumpSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -211,7 +211,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHeatPumpSpaceHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getLowTempEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getLowTempEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP));
     }
   }
 
@@ -226,7 +226,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHeatPumpCombinationHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -236,7 +236,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHeatPumpCombinationHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getSpaceHeatingEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP_COMBINATION));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getSpaceHeatingEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP_COMBINATION));
     }
   }
 
@@ -290,7 +290,7 @@ public class SpaceHeatersController extends CategoryController {
       return getSpaceHeaterPackages(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form));
     }
   }
 
@@ -301,7 +301,7 @@ public class SpaceHeatersController extends CategoryController {
       return getSpaceHeaterPackages(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES, ProductMetadata.SPACE_HEATER_PACKAGE));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES, ProductMetadata.SPACE_HEATER_PACKAGE));
     }
   }
 
@@ -317,7 +317,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toSpaceHeaterPackagesForm(form))
       );
     }
@@ -330,7 +330,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
+      return documentRendererService.processResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -346,7 +346,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toSpaceHeaterPackagesForm(form)));
     }
   }
@@ -358,7 +358,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
+      return documentRendererService.processResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -375,7 +375,7 @@ public class SpaceHeatersController extends CategoryController {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(),
           PreferentialHeaterTypes.COGENERATION_HEATER);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toSpaceHeaterPackagesForm(form)));
     }
   }
@@ -387,7 +387,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSpaceHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.COGENERATION_HEATER);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
+      return documentRendererService.processResponse(spaceHeatersService.generateFicheHtml(form), GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -403,7 +403,7 @@ public class SpaceHeatersController extends CategoryController {
       return getCombinationHeaterPackages(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(form));
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(form));
     }
   }
 
@@ -414,7 +414,7 @@ public class SpaceHeatersController extends CategoryController {
       return getCombinationHeaterPackages(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getPackageSpaceHeatingEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES, ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getPackageSpaceHeatingEfficiencyRating(), SpaceHeatersService.LEGISLATION_CATEGORY_PACKAGES, ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION));
     }
   }
 
@@ -466,7 +466,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.BOILER);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toCombinationHeaterPackagesForm(form)));
     }
   }
@@ -481,7 +481,7 @@ public class SpaceHeatersController extends CategoryController {
       List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
       ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
       ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-      return documentRendererService.processPdfResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
+      return documentRendererService.processResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
     }
   }
 
@@ -497,7 +497,7 @@ public class SpaceHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getCombinationHeatersPackagesCalculator(bindingResult.getFieldErrors(), PreferentialHeaterTypes.HEAT_PUMP);
     } else {
-      return documentRendererService.processPdfResponse(spaceHeatersService.generateHtml(
+      return documentRendererService.processResponse(spaceHeatersService.generateHtml(
           spaceHeatersService.toCombinationHeaterPackagesForm(form)));
     }
   }
@@ -512,7 +512,7 @@ public class SpaceHeatersController extends CategoryController {
       List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
       ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
       ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-      return documentRendererService.processPdfResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
+      return documentRendererService.processResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE);
     }
   }
 

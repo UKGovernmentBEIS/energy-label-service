@@ -38,13 +38,13 @@ public class DishwashersApiController {
   )
   @PostMapping("/energy-label")
   public Object dishwashers(@RequestBody @Valid DishwashersForm form) {
-    return documentRendererService.processPdfApiResponse(dishwashersService.generateHtml(form));
+    return documentRendererService.processApiResponse(dishwashersService.generateHtml(form));
   }
 
   @Operation(summary = "Dishwashers: arrow image")
   @PostMapping("/arrow-image")
   public Object dishwashersInternetLabel(@RequestBody @Valid DishwashersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             DishwashersService.LEGISLATION_CATEGORY_CURRENT,

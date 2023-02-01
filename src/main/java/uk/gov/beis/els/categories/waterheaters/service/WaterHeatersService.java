@@ -333,6 +333,7 @@ public class WaterHeatersService {
         boilerCombinationCalculatorForm.getAuxElectricityConsumption());
     waterSolarPackagesCalculatorForm.setSupplierName(boilerCombinationCalculatorForm.getSupplierName());
     waterSolarPackagesCalculatorForm.setModelName(boilerCombinationCalculatorForm.getModelName());
+    waterSolarPackagesCalculatorForm.setOutputFormat(boilerCombinationCalculatorForm.getOutputFormat());
     return waterSolarPackagesCalculatorForm;
   }
 
@@ -349,6 +350,7 @@ public class WaterHeatersService {
         heatPumpCombinationCalculatorForm.getAuxElectricityConsumption());
     waterSolarPackagesCalculatorForm.setSupplierName(heatPumpCombinationCalculatorForm.getSupplierName());
     waterSolarPackagesCalculatorForm.setModelName(heatPumpCombinationCalculatorForm.getModelName());
+    waterSolarPackagesCalculatorForm.setOutputFormat(heatPumpCombinationCalculatorForm.getOutputFormat());
     return waterSolarPackagesCalculatorForm;
   }
 

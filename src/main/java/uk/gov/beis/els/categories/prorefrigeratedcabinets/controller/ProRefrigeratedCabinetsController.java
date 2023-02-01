@@ -63,7 +63,7 @@ public class ProRefrigeratedCabinetsController {
       return getProfessionalRefrigeratedStorageCabinetsForm(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(proRefrigeratedCabinets.generateHtml(form, ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(proRefrigeratedCabinets.generateHtml(form, ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -73,7 +73,7 @@ public class ProRefrigeratedCabinetsController {
     if (bindingResult.hasErrors()) {
       return getProfessionalRefrigeratedStorageCabinetsForm(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.PRO_REFRIGERATED_CABINETS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.PRO_REFRIGERATED_CABINETS));
     }
   }
 

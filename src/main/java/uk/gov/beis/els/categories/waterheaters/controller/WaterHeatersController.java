@@ -81,7 +81,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHeatPumpWaterHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(
+      return documentRendererService.processResponse(
           waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
@@ -94,7 +94,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHeatPumpWaterHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
               WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_HEAT_PUMP));
     }
@@ -112,7 +112,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getConventionalWaterHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(
+      return documentRendererService.processResponse(
           waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
@@ -125,7 +125,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getConventionalWaterHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
               WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_CONVENTIONAL));
     }
@@ -143,7 +143,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSolarWaterHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(
+      return documentRendererService.processResponse(
           waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
@@ -156,7 +156,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSolarWaterHeaters(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
               WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_SOLAR));
     }
@@ -174,7 +174,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHotWaterStorageTanks(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(
+      return documentRendererService.processResponse(
           waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
@@ -187,7 +187,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getHotWaterStorageTanks(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
               WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_STORAGE_TANKS));
     }
@@ -224,7 +224,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWaterSolarPackagesCalculator(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(
+      return documentRendererService.processResponse(
           waterHeatersService.generateHtml(waterHeatersService.toWaterSolarPackagesForm(form),
               WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES)
       );
@@ -238,7 +238,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWaterSolarPackagesCalculator(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(
+      return documentRendererService.processResponse(
           waterHeatersService.generateFicheHtml(form),
           GoogleAnalyticsEventCategory.FICHE
       );
@@ -257,7 +257,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWaterSolarPackages(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(
+      return documentRendererService.processResponse(
           waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
     }
   }
@@ -270,7 +270,7 @@ public class WaterHeatersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWaterSolarPackages(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(),
               WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES, ProductMetadata.WATER_HEATERS_PACKAGE));
     }

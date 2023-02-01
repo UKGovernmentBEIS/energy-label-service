@@ -64,7 +64,7 @@ public class SolidFuelBoilersController extends CategoryController {
       return getSolidFuelBoilers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(solidFuelBoilersService.generateHtml(form, SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(solidFuelBoilersService.generateHtml(form, SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -74,7 +74,7 @@ public class SolidFuelBoilersController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getSolidFuelBoilers(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SOLID_FUEL_BOILER));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SOLID_FUEL_BOILER));
     }
   }
 
@@ -90,7 +90,7 @@ public class SolidFuelBoilersController extends CategoryController {
       return getSolidFuelBoilerPackages(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(solidFuelBoilersService.generateHtml(form));
+      return documentRendererService.processResponse(solidFuelBoilersService.generateHtml(form));
     }
   }
 
@@ -101,7 +101,7 @@ public class SolidFuelBoilersController extends CategoryController {
       return getSolidFuelBoilerPackages(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_PACKAGES_CURRENT, ProductMetadata.SOLID_FUEL_BOILER_PACKAGE));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getPackageEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_PACKAGES_CURRENT, ProductMetadata.SOLID_FUEL_BOILER_PACKAGE));
     }
   }
 

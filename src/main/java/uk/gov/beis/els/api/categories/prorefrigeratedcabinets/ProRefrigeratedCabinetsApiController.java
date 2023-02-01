@@ -39,7 +39,7 @@ public class ProRefrigeratedCabinetsApiController {
   )
   @PostMapping("/energy-label")
   public Object proRefrigeratedCabinets(@RequestBody @Valid ProRefrigeratedCabinetsForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         proRefrigeratedCabinetsService.generateHtml(form, ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
@@ -47,7 +47,7 @@ public class ProRefrigeratedCabinetsApiController {
   @PostMapping("/arrow-image")
   public Object proRefrigeratedCabinetsInternetLabel(
       @RequestBody @Valid ProRefrigeratedCabinetsInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             ProRefrigeratedCabinetsService.LEGISLATION_CATEGORY_CURRENT,

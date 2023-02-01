@@ -65,7 +65,7 @@ public class DomesticOvensController extends CategoryController {
       return getElectricOvens(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(domesticOvensService.generateHtml(form));
+      return documentRendererService.processResponse(domesticOvensService.generateHtml(form));
     }
   }
 
@@ -76,7 +76,7 @@ public class DomesticOvensController extends CategoryController {
       return getElectricOvens(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_ELECTRIC));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_ELECTRIC));
     }
   }
 
@@ -92,7 +92,7 @@ public class DomesticOvensController extends CategoryController {
       return getGasOvens(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(domesticOvensService.generateHtml(form));
+      return documentRendererService.processResponse(domesticOvensService.generateHtml(form));
     }
   }
 
@@ -103,7 +103,7 @@ public class DomesticOvensController extends CategoryController {
       return getElectricOvens(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_GAS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_GAS));
     }
   }
 

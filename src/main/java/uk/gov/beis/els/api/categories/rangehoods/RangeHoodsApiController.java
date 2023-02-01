@@ -38,14 +38,14 @@ public class RangeHoodsApiController {
   )
   @PostMapping("/energy-label")
   public Object rangeHoods(@RequestBody @Valid RangeHoodsForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         rangeHoodsService.generateHtml(form, RangeHoodsService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Range hoods: arrow image")
   @PostMapping("/arrow-image")
   public Object rangeHoodsInternetLabel(@RequestBody @Valid RangeHoodsInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             RangeHoodsService.LEGISLATION_CATEGORY_CURRENT,
             ProductMetadata.RANGE_HOODS));

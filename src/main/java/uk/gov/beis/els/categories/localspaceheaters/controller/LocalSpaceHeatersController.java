@@ -58,7 +58,7 @@ public class LocalSpaceHeatersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(localSpaceHeatersService.generateHtml(form));
+      return documentRendererService.processResponse(localSpaceHeatersService.generateHtml(form));
     }
   }
 
@@ -68,7 +68,7 @@ public class LocalSpaceHeatersController {
     if (bindingResult.hasErrors()) {
       return getModelAndView(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LocalSpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LOCAL_SPACE_HEATERS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LocalSpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.LOCAL_SPACE_HEATERS));
     }
   }
 

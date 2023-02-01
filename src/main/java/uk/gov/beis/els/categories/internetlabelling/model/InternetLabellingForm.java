@@ -3,11 +3,11 @@ package uk.gov.beis.els.categories.internetlabelling.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import uk.gov.beis.els.categories.common.AnalyticsForm;
+import uk.gov.beis.els.categories.common.BaseForm;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.InternetLabelModeField;
 
-public class InternetLabellingForm extends AnalyticsForm {
+public class InternetLabellingForm extends BaseForm {
 
   @FieldPrompt(value = "Enter height of the product's price (in pixels)", hintText = "You might need to ask your web or marketing team for this")
   @Digits(integer = 3, fraction = 0, groups = InternetLabellingGroup.class, message = "Enter the height of the product price, up to 3 digits long")

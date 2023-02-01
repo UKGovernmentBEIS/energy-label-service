@@ -18,6 +18,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
+import uk.gov.beis.els.model.EnergyLabelFormat;
 import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.renderer.JpegRenderer;
@@ -40,9 +41,9 @@ public class DocumentRendererServiceTest {
   @Test
   public void testProcessPdfResponse() throws IOException {
     ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<html><head><title>Dishwashers - name - model</title></head><body>foo</body></html>"), ProductMetadata.DISHWASHERS, "x", "name - model");
+        Jsoup.parse("<html><head><title>Dishwashers - name - model</title></head><body>foo</body></html>"), ProductMetadata.DISHWASHERS, "x", "name - model", EnergyLabelFormat.PDF);
 
-    ResponseEntity responseEntity = documentRendererService.processPdfResponse(doc);
+    ResponseEntity responseEntity = documentRendererService.processResponse(doc);
 
     PDDocument generatedPdf = PDDocument.load(((ByteArrayResource)responseEntity.getBody()).getByteArray());
     assertThat(generatedPdf.getNumberOfPages()).isEqualTo(1);
@@ -58,11 +59,11 @@ public class DocumentRendererServiceTest {
     List<ProcessedEnergyLabelDocument> docs = new ArrayList<>();
 
     docs.add(new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<title>Fiche 1</title>"), ProductMetadata.DISHWASHERS, "x", "name - model"));
+        Jsoup.parse("<title>Fiche 1</title>"), ProductMetadata.DISHWASHERS, "x", "name - model", EnergyLabelFormat.PDF));
     docs.add(new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<title>Fiche 2</title>"), ProductMetadata.OVENS_ELECTRIC, "x", "name - model"));
+        Jsoup.parse("<title>Fiche 2</title>"), ProductMetadata.OVENS_ELECTRIC, "x", "name - model", EnergyLabelFormat.PDF));
 
-    ResponseEntity responseEntity = documentRendererService.processPdfResponse(docs);
+    ResponseEntity responseEntity = documentRendererService.processResponse(docs);
 
     PDDocument generatedPdf = PDDocument.load(((ByteArrayResource)responseEntity.getBody()).getByteArray());
     assertThat(generatedPdf.getNumberOfPages()).isEqualTo(2);
@@ -76,9 +77,9 @@ public class DocumentRendererServiceTest {
   @Test
   public void testProcessPdfResponse_SanitiseFilename() {
     ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<title>Dishwashers - b/a\\d?f%i*l:e|n\"a&lt;m&gt;e - model</title>"), ProductMetadata.DISHWASHERS, "x", "b/a\\d?f%i*l:e|n\"a<m>e - model");
+        Jsoup.parse("<title>Dishwashers - b/a\\d?f%i*l:e|n\"a&lt;m&gt;e - model</title>"), ProductMetadata.DISHWASHERS, "x", "b/a\\d?f%i*l:e|n\"a<m>e - model", EnergyLabelFormat.PDF);
 
-    ResponseEntity responseEntity = documentRendererService.processPdfResponse(doc);
+    ResponseEntity responseEntity = documentRendererService.processResponse(doc);
 
     assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers - b_a_d_f_i_l_e_n_a_m_e - model.pdf");
 
@@ -91,7 +92,7 @@ public class DocumentRendererServiceTest {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
         Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" data-type=\"internet-label\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "PNG", "y");
 
-    ResponseEntity responseEntity = documentRendererService.processImageResponse(doc);
+    ResponseEntity responseEntity = documentRendererService.processInternetLabelResponse(doc);
 
     assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers internet arrow A+.png");
 
@@ -104,7 +105,7 @@ public class DocumentRendererServiceTest {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
         Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" data-type=\"internet-label\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "JPEG", "y");
 
-    ResponseEntity responseEntity = documentRendererService.processImageResponse(doc);
+    ResponseEntity responseEntity = documentRendererService.processInternetLabelResponse(doc);
 
     assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers internet arrow A+.jpg");
 

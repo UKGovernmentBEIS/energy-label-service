@@ -100,6 +100,7 @@ public class ApiValuesFromRatingClassRangeValidatorTest {
     form.setNoiseEmissionClass(RatingClass.B.name());
     form.setNoiseEmissionValue("10");
     form.setQrCodeUrl("http://google.com");
+    form.setOutputFormat("PDF");
     return form;
   }
 }

@@ -37,13 +37,13 @@ public class DomesticOvensApiController {
   )
   @PostMapping("/electric-ovens/energy-label")
   public Object electricOvens(@RequestBody @Valid DomesticOvensForm form) {
-    return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
+    return documentRendererService.processApiResponse(domesticOvensService.generateHtml(form));
   }
 
   @Operation(summary = "Electric ovens: arrow image")
   @PostMapping("/electric-ovens/arrow-image")
   public Object electricOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_ELECTRIC)
     );
   }
@@ -54,13 +54,13 @@ public class DomesticOvensApiController {
   )
   @PostMapping("/gas-ovens/energy-label")
   public Object gasOvens(@RequestBody @Valid GasOvensForm form) {
-    return documentRendererService.processPdfApiResponse(domesticOvensService.generateHtml(form));
+    return documentRendererService.processApiResponse(domesticOvensService.generateHtml(form));
   }
 
   @Operation(summary = "Gas ovens: arrow image")
   @PostMapping("/gas-ovens/arrow-image")
   public Object gasOvensInternetLabel(@Valid @RequestBody DomesticOvenInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DomesticOvensService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.OVENS_GAS)
     );
   }

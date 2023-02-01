@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelFormat;
+import uk.gov.beis.els.model.EnergyLabelFormat;
 import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.renderer.JpegRenderer;
 import uk.gov.beis.els.renderer.PdfRenderer;
@@ -40,48 +41,50 @@ public class DocumentRendererService {
     this.analyticsService = analyticsService;
   }
 
-  public ResponseEntity processPdfResponse(ProcessedEnergyLabelDocument processedDocument) {
-    return processPdfResponse(processedDocument, GoogleAnalyticsEventCategory.ENERGY_LABEL);
+  public ResponseEntity processResponse(ProcessedEnergyLabelDocument processedDocument) {
+    return processResponse(processedDocument, GoogleAnalyticsEventCategory.ENERGY_LABEL);
   }
 
-  public ResponseEntity processPdfResponse(ProcessedEnergyLabelDocument processedDocument, GoogleAnalyticsEventCategory analyticsCategory) {
-    return processPdf(processedDocument, ResponseType.ATTACHMENT, analyticsCategory);
+  public ResponseEntity processResponse(ProcessedEnergyLabelDocument processedDocument, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processResponse(processedDocument, ResponseType.ATTACHMENT, analyticsCategory);
   }
 
-  public ResponseEntity processPdfResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
-    return processPdfResponse(processedDocuments, GoogleAnalyticsEventCategory.ENERGY_LABEL);
+  public ResponseEntity processResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
+    return processResponse(processedDocuments, GoogleAnalyticsEventCategory.ENERGY_LABEL);
   }
 
-  public ResponseEntity processPdfResponse(List<ProcessedEnergyLabelDocument> processedDocuments, GoogleAnalyticsEventCategory analyticsCategory) {
-    return processPdf(processedDocuments, ResponseType.ATTACHMENT, analyticsCategory);
+  public ResponseEntity processResponse(List<ProcessedEnergyLabelDocument> processedDocuments, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processResponse(processedDocuments, ResponseType.ATTACHMENT, analyticsCategory);
   }
 
-  public ResponseEntity processPdfApiResponse(ProcessedEnergyLabelDocument processedDocument) {
-    return processPdfApiResponse(processedDocument, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
+  public ResponseEntity processApiResponse(ProcessedEnergyLabelDocument processedDocument) {
+    return processApiResponse(processedDocument, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
   }
 
-  public ResponseEntity processPdfApiResponse(ProcessedEnergyLabelDocument processedDocument, GoogleAnalyticsEventCategory analyticsCategory) {
-    return processPdf(processedDocument, ResponseType.DIRECT, analyticsCategory);
+  public ResponseEntity processApiResponse(ProcessedEnergyLabelDocument processedDocument, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processResponse(processedDocument, ResponseType.DIRECT, analyticsCategory);
   }
 
-  public ResponseEntity processPdfApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
-    return processPdfApiResponse(processedDocuments, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
+  public ResponseEntity processApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments) {
+    return processApiResponse(processedDocuments, GoogleAnalyticsEventCategory.ENERGY_LABEL_API);
   }
 
-  public ResponseEntity processPdfApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments, GoogleAnalyticsEventCategory analyticsCategory) {
-    return processPdf(processedDocuments, ResponseType.DIRECT, analyticsCategory);
+  public ResponseEntity processApiResponse(List<ProcessedEnergyLabelDocument> processedDocuments, GoogleAnalyticsEventCategory analyticsCategory) {
+    return processResponse(processedDocuments, ResponseType.DIRECT, analyticsCategory);
   }
 
-  public ResponseEntity processImageResponse(ProcessedInternetLabelDocument processedDocument) {
+  public ResponseEntity processInternetLabelResponse(ProcessedInternetLabelDocument processedDocument) {
     return processImage(processedDocument, ResponseType.ATTACHMENT, GoogleAnalyticsEventCategory.INTERNET_LABEL);
   }
 
-  public ResponseEntity processImageApiResponse(ProcessedInternetLabelDocument processedDocument) {
+  public ResponseEntity processInternetLabelApiResponse(ProcessedInternetLabelDocument processedDocument) {
     return processImage(processedDocument, ResponseType.DIRECT, GoogleAnalyticsEventCategory.INTERNET_LABEL_API);
   }
 
-  private ResponseEntity processPdf(ProcessedEnergyLabelDocument processedDocument, ResponseType responseType, GoogleAnalyticsEventCategory eventCategory) {
-    Resource pdf = pdfRenderer.render(processedDocument.getDocument());
+  public ResponseEntity processResponse(ProcessedEnergyLabelDocument processedDocument, ResponseType responseType, GoogleAnalyticsEventCategory eventCategory) {
+    Renderer renderer = getRenderer(processedDocument.getLabelFormat());
+
+    Resource resource = renderer.render(processedDocument.getDocument());
 
     analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
         eventCategory,
@@ -89,30 +92,47 @@ public class DocumentRendererService {
         processedDocument.getProductMetadata().getAnalyticsLabel());
 
     if (responseType == ResponseType.ATTACHMENT) {
-      return serveResource(pdf, generatePdfFilename(processedDocument));
+      return serveResource(resource, generateFilename(processedDocument));
     } else {
-      return serveWithContentType(pdf, pdfRenderer.getTargetContentType());
+      return serveWithContentType(resource, renderer.getTargetContentType());
     }
+
   }
 
-  private ResponseEntity processPdf(List<ProcessedEnergyLabelDocument> processedDocuments, ResponseType responseType, GoogleAnalyticsEventCategory eventCategory) {
+  private ResponseEntity processResponse(List<ProcessedEnergyLabelDocument> processedDocuments, ResponseType responseType, GoogleAnalyticsEventCategory eventCategory) {
     List<Document> htmlDocuments = processedDocuments.stream()
         .map(ProcessedEnergyLabelDocument::getDocument)
         .collect(Collectors.toList());
 
-    Resource pdf = pdfRenderer.render(htmlDocuments);
+    ProcessedEnergyLabelDocument primaryDocument = processedDocuments.get(0);
+
+    Renderer renderer = getRenderer(primaryDocument.getLabelFormat());
+
+    Resource resource = renderer.render(htmlDocuments);
 
     // Use the first document for metadata
-    ProcessedEnergyLabelDocument primaryDocument = processedDocuments.get(0);
     analyticsService.sendGoogleAnalyticsEvent(primaryDocument.getClientAnalyticsToken(),
         eventCategory,
         primaryDocument.getAnalyticsEventAction(),
         primaryDocument.getProductMetadata().getAnalyticsLabel());
 
     if (responseType == ResponseType.ATTACHMENT) {
-      return serveResource(pdf, generatePdfFilename(primaryDocument));
+      return serveResource(resource, generateFilename(primaryDocument));
     } else {
-      return serveWithContentType(pdf, pdfRenderer.getTargetContentType());
+      return serveWithContentType(resource, renderer.getTargetContentType());
+    }
+  }
+
+  private Renderer getRenderer(EnergyLabelFormat format) {
+    switch (format) {
+      case PDF:
+        return pdfRenderer;
+      case PNG:
+        return pngRenderer;
+      case JPEG:
+        return jpegRenderer;
+      default:
+        throw new RuntimeException("No renderer found for format " + format);
     }
   }
 
@@ -136,8 +156,8 @@ public class DocumentRendererService {
     }
   }
 
-  private String generatePdfFilename(ProcessedEnergyLabelDocument processedDocument) {
-    String filename = processedDocument.getDocument().title()+".pdf";
+  private String generateFilename(ProcessedEnergyLabelDocument processedDocument) {
+    String filename = processedDocument.getDocument().title() + processedDocument.getLabelFormat().getFileExtension();
     return sanitiseFilename(filename);
   }
 
