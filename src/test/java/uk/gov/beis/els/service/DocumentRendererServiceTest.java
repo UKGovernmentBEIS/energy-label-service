@@ -4,9 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.jsoup.Jsoup;
 import org.junit.Before;
@@ -15,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
@@ -39,9 +43,8 @@ public class DocumentRendererServiceTest {
   }
 
   @Test
-  public void testProcessPdfResponse() throws IOException {
-    ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
-        Jsoup.parse("<html><head><title>Dishwashers - name - model</title></head><body>foo</body></html>"), ProductMetadata.DISHWASHERS, "x", "name - model", EnergyLabelFormat.PDF);
+  public void testProcessResponse_Pdf() throws IOException {
+    ProcessedEnergyLabelDocument doc = getPdfEnergyLabelDocument();
 
     ResponseEntity responseEntity = documentRendererService.processResponse(doc);
 
@@ -55,7 +58,7 @@ public class DocumentRendererServiceTest {
   }
 
   @Test
-  public void testProcessPdfResponse_MultiplePages() throws IOException {
+  public void testProcessResponse_Pdf_MultiplePages() throws IOException {
     List<ProcessedEnergyLabelDocument> docs = new ArrayList<>();
 
     docs.add(new ProcessedEnergyLabelDocument(
@@ -75,7 +78,37 @@ public class DocumentRendererServiceTest {
   }
 
   @Test
-  public void testProcessPdfResponse_SanitiseFilename() {
+  public void testProcessResponse_Png() throws IOException {
+    ProcessedEnergyLabelDocument doc = getPngEnergyLabelDocument();
+    ResponseEntity responseEntity = documentRendererService.processResponse(doc);
+
+    ByteArrayResource response = (ByteArrayResource)responseEntity.getBody();
+    BufferedImage image = ImageIO.read(new ByteArrayInputStream(response.getByteArray()));
+
+    assertThat(image.getType()).isEqualTo(BufferedImage.TYPE_4BYTE_ABGR);
+    assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers - name - model.png");
+
+    verify(analyticsService, times(1))
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL, "name - model - PNG", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+  }
+
+  @Test
+  public void testProcessResponse_Jpeg() throws IOException {
+    ProcessedEnergyLabelDocument doc = getJpegEnergyLabelDocument();
+    ResponseEntity responseEntity = documentRendererService.processResponse(doc);
+
+    ByteArrayResource response = (ByteArrayResource)responseEntity.getBody();
+    BufferedImage image = ImageIO.read(new ByteArrayInputStream(response.getByteArray()));
+
+    assertThat(image.getType()).isEqualTo(BufferedImage.TYPE_3BYTE_BGR);
+    assertThat(responseEntity.getHeaders().getContentDisposition().getFilename()).isEqualTo("Dishwashers - name - model.jpeg");
+
+    verify(analyticsService, times(1))
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL, "name - model - JPEG", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+  }
+
+  @Test
+  public void testProcessResponse_SanitiseFilename() {
     ProcessedEnergyLabelDocument doc = new ProcessedEnergyLabelDocument(
         Jsoup.parse("<title>Dishwashers - b/a\\d?f%i*l:e|n\"a&lt;m&gt;e - model</title>"), ProductMetadata.DISHWASHERS, "x", "b/a\\d?f%i*l:e|n\"a<m>e - model", EnergyLabelFormat.PDF);
 
@@ -88,7 +121,7 @@ public class DocumentRendererServiceTest {
   }
 
   @Test
-  public void testProcessImageResponse_Png() {
+  public void testProcessInternetLabelResponse_Png() {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
         Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" data-type=\"internet-label\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "PNG", "y");
 
@@ -101,7 +134,7 @@ public class DocumentRendererServiceTest {
   }
 
   @Test
-  public void testProcessImageResponse_Jpeg() {
+  public void testProcessInternetLabelResponse_Jpeg() {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
         Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" data-type=\"internet-label\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "JPEG", "y");
 
@@ -111,6 +144,82 @@ public class DocumentRendererServiceTest {
 
     verify(analyticsService, times(1))
         .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.INTERNET_LABEL, "y", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+  }
+
+  @Test
+  public void testProcessApiResponse_Pdf() throws IOException {
+    ProcessedEnergyLabelDocument doc = getPdfEnergyLabelDocument();
+
+    ResponseEntity responseEntity = documentRendererService.processApiResponse(doc);
+
+    PDDocument generatedPdf = PDDocument.load(((ByteArrayResource)responseEntity.getBody()).getByteArray());
+    assertThat(generatedPdf.getNumberOfPages()).isEqualTo(1);
+
+    assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_PDF);
+
+    verify(analyticsService, times(1))
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL_API, "name - model", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+  }
+
+  @Test
+  public void testProcessApiResponse_Png() throws IOException {
+    ProcessedEnergyLabelDocument doc = getPngEnergyLabelDocument();
+    ResponseEntity responseEntity = documentRendererService.processApiResponse(doc);
+
+    ByteArrayResource response = (ByteArrayResource)responseEntity.getBody();
+    BufferedImage image = ImageIO.read(new ByteArrayInputStream(response.getByteArray()));
+
+    assertThat(image.getType()).isEqualTo(BufferedImage.TYPE_4BYTE_ABGR);
+    assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.IMAGE_PNG);
+
+    verify(analyticsService, times(1))
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL_API, "name - model - PNG", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+  }
+
+  @Test
+  public void testProcessApiResponse_Jpeg() throws IOException {
+    ProcessedEnergyLabelDocument doc = getJpegEnergyLabelDocument();
+    ResponseEntity responseEntity = documentRendererService.processApiResponse(doc);
+
+    ByteArrayResource response = (ByteArrayResource)responseEntity.getBody();
+    BufferedImage image = ImageIO.read(new ByteArrayInputStream(response.getByteArray()));
+
+    assertThat(image.getType()).isEqualTo(BufferedImage.TYPE_3BYTE_BGR);
+    assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.IMAGE_JPEG);
+
+    verify(analyticsService, times(1))
+        .sendGoogleAnalyticsEvent("x", GoogleAnalyticsEventCategory.ENERGY_LABEL_API, "name - model - JPEG", ProductMetadata.DISHWASHERS.getAnalyticsLabel());
+  }
+
+
+  private ProcessedEnergyLabelDocument getPdfEnergyLabelDocument() {
+    return new ProcessedEnergyLabelDocument(
+        Jsoup.parse("<html><head><title>Dishwashers - name - model</title></head><body>foo</body></html>"),
+        ProductMetadata.DISHWASHERS,
+        "x",
+        "name - model",
+        EnergyLabelFormat.PDF
+    );
+  }
+
+  private ProcessedEnergyLabelDocument getPngEnergyLabelDocument() {
+    return new ProcessedEnergyLabelDocument(
+        Jsoup.parse("<html><head><title>Dishwashers - name - model</title></head><body data-width=\"50\" data-height=\"50\"><svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg></body></html>"),
+        ProductMetadata.DISHWASHERS,
+        "x",
+        "name - model - PNG",
+        EnergyLabelFormat.PNG
+    );
+  }
+
+  private ProcessedEnergyLabelDocument getJpegEnergyLabelDocument() {
+    return new ProcessedEnergyLabelDocument(
+        Jsoup.parse("<html><head><title>Dishwashers - name - model</title></head><body data-width=\"50\" data-height=\"50\"><svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg></body></html>"),
+        ProductMetadata.DISHWASHERS,
+        "x",
+        "name - model - JPEG",
+        EnergyLabelFormat.JPEG
+    );
   }
 
 }
