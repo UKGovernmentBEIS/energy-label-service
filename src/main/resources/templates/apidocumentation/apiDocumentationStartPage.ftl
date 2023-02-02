@@ -207,6 +207,10 @@
       </h2>
       <h3 class="govuk-heading-s">${apiVersion}</h3>
       <p class="govuk-body">
+        In addition to PDF, energy labels can now be generated in PNG and JPEG formats.
+      </p>
+      <h3 class="govuk-heading-s">v1</h3>
+      <p class="govuk-body">
         This is the first version of the energy label API.
       </p>
     </div>

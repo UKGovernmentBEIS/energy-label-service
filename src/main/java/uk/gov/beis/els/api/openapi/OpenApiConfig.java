@@ -20,7 +20,7 @@ public class OpenApiConfig {
         new Info()
             .title("Create an energy label")
             .description("Create a label for an energy-related product (ErP) that you make or sell to UK customers, for example white goods, boilers and other household appliances.")
-            .version("v1")
+            .version("v1.1")
       );
   }
   @Bean
