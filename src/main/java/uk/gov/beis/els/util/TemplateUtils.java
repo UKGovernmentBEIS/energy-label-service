@@ -40,4 +40,16 @@ public class TemplateUtils {
     }
   }
 
+  public static float getWidth(Document document) {
+    return Float.parseFloat(document.body().attr("data-width"));
+  }
+
+  public static float getHeight(Document document) {
+    return Float.parseFloat(document.body().attr("data-height"));
+  }
+
+  public static boolean isInternetLabel(Document document) {
+    return "internet-label".equals(getSvgElement(document).attr("data-type"));
+  }
+
 }

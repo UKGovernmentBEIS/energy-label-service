@@ -89,7 +89,7 @@ public class DocumentRendererServiceTest {
   @Test
   public void testProcessImageResponse_Png() {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
-        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "PNG", "y");
+        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" data-type=\"internet-label\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "PNG", "y");
 
     ResponseEntity responseEntity = documentRendererService.processImageResponse(doc);
 
@@ -102,7 +102,7 @@ public class DocumentRendererServiceTest {
   @Test
   public void testProcessImageResponse_Jpeg() {
     ProcessedInternetLabelDocument doc = new ProcessedInternetLabelDocument(
-        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "JPEG", "y");
+        Jsoup.parse("<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" data-type=\"internet-label\"></svg>"), "AP", ProductMetadata.DISHWASHERS, "x", "JPEG", "y");
 
     ResponseEntity responseEntity = documentRendererService.processImageResponse(doc);
 
