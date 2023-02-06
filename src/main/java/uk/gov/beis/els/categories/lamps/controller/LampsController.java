@@ -69,14 +69,14 @@ public class LampsController extends CategoryController {
   @PostMapping("/lamps")
   @ResponseBody
   public Object handleLampsSubmit(@Validated @ModelAttribute("form") LampsForm form, BindingResult bindingResult) {
-    return doIfValid(form, bindingResult, (category -> documentRendererService.processPdfResponse(lampsService.generateHtml(form, category))));
+    return doIfValid(form, bindingResult, (category -> documentRendererService.processResponse(lampsService.generateHtml(form, category))));
   }
 
   @PostMapping(value = "/lamps", params = "mode=INTERNET")
   @ResponseBody
   public Object handleInternetLabelLampsSubmit(@Validated(InternetLabellingGroup.class) @ModelAttribute("form") LampsForm form, BindingResult bindingResult) {
     ControllerUtils.validateInternetLabelColour(form.getApplicableLegislation(), LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021, bindingResult);
-    return doIfValid(form, bindingResult, (category -> documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.LAMPS_FULL))));
+    return doIfValid(form, bindingResult, (category -> documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), category, ProductMetadata.LAMPS_FULL))));
   }
 
   private Object doIfValid(LampsForm form, BindingResult bindingResult, Function<SelectableLegislationCategory, ResponseEntity> function) {
@@ -101,7 +101,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
+      return documentRendererService.processResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
     }
   }
 
@@ -112,7 +112,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModel(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021, ProductMetadata.LAMPS_RATING_CONSUMPTION));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021, ProductMetadata.LAMPS_RATING_CONSUMPTION));
     }
   }
 
@@ -128,7 +128,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
+      return documentRendererService.processResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
     }
   }
 
@@ -139,7 +139,7 @@ public class LampsController extends CategoryController {
       return getLampsExNameModelConsumption(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021, ProductMetadata.LAMPS_RATING));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021, ProductMetadata.LAMPS_RATING));
     }
   }
 
@@ -155,7 +155,7 @@ public class LampsController extends CategoryController {
       return getLampsPackagingArrow(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021));
+      return documentRendererService.processResponse(lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021));
     }
   }
 

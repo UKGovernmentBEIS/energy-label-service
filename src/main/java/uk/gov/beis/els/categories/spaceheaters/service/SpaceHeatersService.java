@@ -490,7 +490,7 @@ public class SpaceHeatersService {
     form.setPackageEfficiencyRating(spaceHeaterPackagesCalculatorService.getPackageSpaceHeatingEfficiencyClass(calculatorForm).name());
     form.setSupplierName(calculatorForm.getSupplierName());
     form.setModelName(calculatorForm.getModelName());
-
+    form.setOutputFormat(calculatorForm.getOutputFormat());
     return form;
   }
 

@@ -1,5 +1,6 @@
 package uk.gov.beis.els.service;
 
+import com.google.common.base.Strings;
 import io.nayuki.qrcodegen.QrCode;
 import org.apache.commons.lang3.text.WordUtils;
 import org.jsoup.nodes.Document;
@@ -8,7 +9,7 @@ import org.jsoup.parser.ParseSettings;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.gov.beis.els.categories.common.AnalyticsForm;
+import uk.gov.beis.els.categories.common.BaseForm;
 import uk.gov.beis.els.categories.common.ProcessedEnergyLabelDocument;
 import uk.gov.beis.els.categories.common.ProcessedInternetLabelDocument;
 import uk.gov.beis.els.categories.common.SupplierNameForm;
@@ -18,6 +19,7 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.gov.beis.els.categories.lamps.model.LampsFormPackagingArrow;
 import uk.gov.beis.els.categories.lamps.model.LightSourceArrowOrientation;
 import uk.gov.beis.els.categories.lamps.model.TemplateColour;
+import uk.gov.beis.els.model.EnergyLabelFormat;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -292,46 +294,52 @@ public class TemplatePopulator {
     return template;
   }
 
-  public <T extends AnalyticsForm & SupplierNameForm> ProcessedEnergyLabelDocument asProcessedEnergyLabel(
+  public <T extends BaseForm & SupplierNameForm> ProcessedEnergyLabelDocument asProcessedEnergyLabel(
       ProductMetadata analyticsLabel, T form) {
-    String analyticsAction = String.format("%s - %s", form.getSupplierName(), form.getModelName());
-    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), analyticsAction);
+    EnergyLabelFormat labelFormat = getOutputFormatOrDefault(form);
+    String analyticsAction = String.format("%s - %s - %s", form.getSupplierName(), form.getModelName(), labelFormat);
+    String title = String.format("%s - %s - %s", analyticsLabel.getProductFileName(), form.getSupplierName(), form.getModelName());
     TemplateUtils.getElementById(template, "html-title").text(title);
-
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction);
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
   }
 
-  public ProcessedEnergyLabelDocument asProcessedEnergyLabelNoSupplier(ProductMetadata analyticsLabel, AnalyticsForm form) {
+  public ProcessedEnergyLabelDocument asProcessedEnergyLabelNoSupplier(ProductMetadata analyticsLabel, BaseForm form) {
     TemplateUtils.getElementById(template, "html-title").text(analyticsLabel.getProductFileName());
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), "No supplier or model");
+    EnergyLabelFormat labelFormat = getOutputFormatOrDefault(form);
+    String analyticsAction = String.format("No supplier or model - %s", labelFormat);
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
   }
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata analyticsLabel, LampsFormPackagingArrow form) {
-    String analyticsAction = String.format("%s - %s - %s",
+    EnergyLabelFormat labelFormat = getOutputFormatOrDefault(form);
+
+    String labelProperties = String.format("%s - %s - %s",
         RatingClass.getEnum(form.getEfficiencyRating()).getDisplayValue(),
         LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
         TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
 
-    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), analyticsAction);
+    String analyticsAction = String.format("%s - %s", labelProperties, labelFormat);
+
+    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), labelProperties);
     TemplateUtils.getElementById(template, "html-title").text(title);
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction);
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
   }
 
-  public ProcessedInternetLabelDocument asProcessedInternetLabel(AnalyticsForm analyticsForm, InternetLabellingForm internetLabellingForm, String ratingClass, ProductMetadata label) {
+  public ProcessedInternetLabelDocument asProcessedInternetLabel(InternetLabellingForm form, String ratingClass, ProductMetadata label) {
     String analyticsAction;
 
-    if(internetLabellingForm.getLabelColour() == null) {
+    if(form.getLabelColour() == null) {
       analyticsAction = String.format("%s - %s",
           RatingClass.getEnum(ratingClass).getDisplayValue(),
-          InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName());
+          InternetLabelOrientation.valueOf(form.getLabelOrientation()).getShortName());
     } else {
       analyticsAction = String.format("%s - %s - %s",
           RatingClass.getEnum(ratingClass).getDisplayValue(),
-          InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName(),
-          InternetLabelColour.valueOf(internetLabellingForm.getLabelColour()).getDisplayName());
+          InternetLabelOrientation.valueOf(form.getLabelOrientation()).getShortName(),
+          InternetLabelColour.valueOf(form.getLabelColour()).getDisplayName());
     }
 
-    return new ProcessedInternetLabelDocument(template, ratingClass, label, analyticsForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat(), analyticsAction);
+    return new ProcessedInternetLabelDocument(template, ratingClass, label, form.getGoogleAnalyticsClientId(), form.getLabelFormat(), analyticsAction);
   }
 
   public static String decimalToPercentage(float number) {
@@ -384,6 +392,14 @@ public class TemplatePopulator {
     Document svgDocument = parser.parseInput(qrCode.toSvgString(0), "");
 
     return TemplateUtils.getElementByTag(svgDocument, "svg");
+  }
+
+  private EnergyLabelFormat getOutputFormatOrDefault(BaseForm form) {
+    String format = form.getOutputFormat();
+    if (Strings.isNullOrEmpty(format)) {
+      return EnergyLabelFormat.PDF;
+    }
+    return EnergyLabelFormat.valueOf(format);
   }
 
 }

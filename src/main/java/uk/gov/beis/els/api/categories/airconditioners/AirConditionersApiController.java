@@ -44,13 +44,13 @@ public class AirConditionersApiController {
   )
   @PostMapping("/non-duct/cooling-only-air-conditioners/energy-label")
   public Object coolingOnlyDuctlessAirConditioners(@RequestBody @Valid CoolingDuctlessAirConditionersForm form) {
-    return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Cooling-only ductless air conditioners: arrow image")
   @PostMapping("/non-duct/cooling-only-air-conditioners/arrow-image")
   public Object coolingOnlyDuctlessInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.AC_COOLING_ONLY_NON_DUCT)
     );
   }
@@ -61,13 +61,13 @@ public class AirConditionersApiController {
   )
   @PostMapping("/non-duct/heating-only-air-conditioners/energy-label")
   public Object heatingOnlyDuctlessAirConditioners(@RequestBody @Valid HeatingDuctlessAirConditionersForm form) {
-    return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Heating-only ductless air conditioners: arrow image")
   @PostMapping("/non-duct/heating-only-air-conditioners/arrow-image")
   public Object heatingOnlyDuctlessInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.AC_HEATING_ONLY_NON_DUCT)
     );
   }
@@ -78,13 +78,13 @@ public class AirConditionersApiController {
   )
   @PostMapping("/non-duct/reversible-air-conditioners/energy-label")
   public Object reversibleDuctlessAirConditioners(@RequestBody @Valid ReversibleDuctlessAirConditionersForm form) {
-    return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Reversible ductless air conditioners: arrow image")
   @PostMapping("/non-duct/reversible-air-conditioners/arrow-image")
   public Object reversibleDuctlessInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.AC_REVERSIBLE_NON_DUCT)
     );
   }
@@ -95,13 +95,13 @@ public class AirConditionersApiController {
   )
   @PostMapping("/single-or-double-duct/cooling-only-air-conditioners/energy-label")
   public Object coolingOnlyDuctedAirConditioners(@RequestBody @Valid CoolingDuctedAirConditionersForm form) {
-    return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Cooling-only single or double duct air conditioners: arrow image")
   @PostMapping("/single-or-double-duct/cooling-only-air-conditioners/arrow-image")
   public Object coolingOnlyDuctedInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.AC_COOLING_ONLY_DUCT)
     );
   }
@@ -112,13 +112,13 @@ public class AirConditionersApiController {
   )
   @PostMapping("/single-or-double-duct/heating-only-air-conditioners/energy-label")
   public Object heatingOnlyDuctedAirConditioners(@RequestBody @Valid HeatingDuctedAirConditionersForm form) {
-    return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Heating-only single or double duct air conditioners: arrow image")
   @PostMapping("/single-or-double-duct/heating-only-air-conditioners/arrow-image")
   public Object heatingOnlyDuctedInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.AC_HEATING_ONLY_DUCT)
     );
   }
@@ -129,13 +129,13 @@ public class AirConditionersApiController {
   )
   @PostMapping("/single-or-double-duct/reversible-air-conditioners/energy-label")
   public Object reversibleDuctedAirConditioners(@RequestBody @Valid ReversibleDuctedAirConditionersForm form) {
-    return documentRendererService.processPdfApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(airConditionersService.generateHtml(form, AirConditionersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Reversible single or double duct air conditioners: arrow image")
   @PostMapping("/single-or-double-duct/reversible-air-conditioners/arrow-image")
   public Object reversibleDuctedInternetLabel(@Valid @RequestBody AirConditionersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), AirConditionersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.AC_REVERSIBLE_DUCT)
     );
   }

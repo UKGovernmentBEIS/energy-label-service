@@ -42,14 +42,14 @@ public class RefrigeratorsDirectSalesApiController {
   )
   @PostMapping("/vending-machines/energy-label")
   public Object vendingMachines(@RequestBody @Valid VendingMachinesForm form) {
-    return documentRendererService.processPdfApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
+    return documentRendererService.processApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Refrigerated vending machines: arrow image")
   @PostMapping("/vending-machines/arrow-image")
   public Object vendingMachinesInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
+    return documentRendererService.processInternetLabelApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.VENDING_MACHINES));
   }
@@ -60,14 +60,14 @@ public class RefrigeratorsDirectSalesApiController {
   )
   @PostMapping("/ice-cream-freezers/energy-label")
   public Object iceCreamFreezers(@RequestBody @Valid IceCreamFreezersForm form) {
-    return documentRendererService.processPdfApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
+    return documentRendererService.processApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Ice cream freezers: arrow image")
   @PostMapping("/ice-cream-freezers/arrow-image")
   public Object iceCreamFreezersInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
+    return documentRendererService.processInternetLabelApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.ICE_CREAM_FREEZERS));
   }
@@ -78,14 +78,14 @@ public class RefrigeratorsDirectSalesApiController {
   )
   @PostMapping("/beverage-coolers/energy-label")
   public Object beverageCoolers(@RequestBody @Valid BeverageCoolersForm form) {
-    return documentRendererService.processPdfApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
+    return documentRendererService.processApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Beverage coolers: arrow image")
   @PostMapping("/beverage-coolers/arrow-image")
   public Object beverageCoolersInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
+    return documentRendererService.processInternetLabelApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.BEVERAGE_COOLERS));
   }
@@ -96,14 +96,14 @@ public class RefrigeratorsDirectSalesApiController {
   )
   @PostMapping("/display-cabinets/energy-label")
   public Object displayCabinets(@RequestBody @Valid DisplayCabinetsForm form) {
-    return documentRendererService.processPdfApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
+    return documentRendererService.processApiResponse(refrigeratorsDirectSalesService.generateHtml(form,
         RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Supermarket refrigerator or freezer cabinets or gelato-scooping cabinets: arrow image")
   @PostMapping("/display-cabinets/arrow-image")
   public Object displayCabinetsInternetLabel(@RequestBody @Valid RefrigeratorsDirectSalesInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(internetLabelService.generateInternetLabel(form,
+    return documentRendererService.processInternetLabelApiResponse(internetLabelService.generateInternetLabel(form,
         form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT,
         ProductMetadata.DISPLAY_CABINETS));
   }

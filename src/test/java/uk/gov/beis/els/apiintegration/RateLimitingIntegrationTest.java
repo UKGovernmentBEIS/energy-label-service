@@ -131,7 +131,8 @@ public class RateLimitingIntegrationTest {
         "  \"isFanOven\": true,\n" +
         "  \"convectionKwhConsumption\": 0,\n" +
         "  \"conventionalMjConsumption\": 0,\n" +
-        "  \"convectionMjConsumption\": 0\n" +
+        "  \"convectionMjConsumption\": 0\n," +
+        "  \"outputFormat\": \"PDF\"" +
         "}";
   }
 

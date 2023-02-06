@@ -56,14 +56,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/boiler-space-heaters/energy-label")
   public Object boilerSpaceHeater(@RequestBody @Valid BoilerSpaceHeatersForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Boiler space heater: arrow image")
   @PostMapping("/boiler-space-heaters/arrow-image")
   public Object boilerSpaceHeater(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_BOILER));
   }
@@ -74,14 +74,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/boiler-combination-heaters/energy-label")
   public Object boilerCombinationHeaters(@RequestBody @Valid BoilerCombinationHeatersForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Boiler combination heater: arrow image")
   @PostMapping("/boiler-combination-heaters/arrow-image")
   public Object boilerCombinationHeatersInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_BOILER_COMBI));
   }
@@ -92,14 +92,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/cogeneration-space-heaters/energy-label")
   public Object cogenerationSpaceHeaters(@RequestBody @Valid CogenerationSpaceHeatersForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Cogeneration space heaters: arrow image")
   @PostMapping("/cogeneration-space-heaters/arrow-image")
   public Object cogenerationSpaceHeatersInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_COGEN));
   }
@@ -110,14 +110,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/low-temperature-heat-pump-space-heaters/energy-label")
   public Object lowTempertatureHeatPumpSpaceHeater(@RequestBody @Valid LowTemperatureHeatPumpSpaceHeatersForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Low-temperature heat pump space heaters: arrow image")
   @PostMapping("/low-temperature-heat-pump-space-heaters/arrow-image")
   public Object lowTempertatureHeatPumpSpaceHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_LOW_TEMP));
   }
@@ -128,14 +128,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/heat-pump-space-heaters/energy-label")
   public Object heatPumpSpaceHeater(@RequestBody @Valid HeatPumpSpaceHeatersForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Heat pump space heaters (except low-temperature heat pumps): arrow image")
   @PostMapping("/heat-pump-space-heaters/arrow-image")
   public Object heatPumpSpaceHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP));
   }
@@ -146,14 +146,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/heat-pump-combination-heaters/energy-label")
   public Object heatPumpCombinationHeater(@RequestBody @Valid HeatPumpCombinationHeatersForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form, SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Heat pump combination heaters: arrow image")
   @PostMapping("/heat-pump-combination-heaters/arrow-image")
   public Object heatPumpCombinationHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_HEAT_PUMP_COMBINATION));
   }
@@ -164,14 +164,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/package-space-heater/energy-label")
   public Object packageSpaceHeater(@RequestBody @Valid SpaceHeaterPackagesForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form));
   }
 
   @Operation(summary = "Packages of space heater, temperature control and solar device: arrow image")
   @PostMapping("/package-space-heater/arrow-image")
   public Object packageSpaceHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_PACKAGE));
   }
@@ -182,14 +182,14 @@ public class SpaceHeaterApiController {
   )
   @PostMapping("/package-combination-heater/energy-label")
   public Object combinationPackageSpaceHeater(@RequestBody @Valid CombinationHeaterPackagesForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(form));
   }
 
   @Operation(summary = "Packages of combination heater, temperature control and solar device: arrow image")
   @PostMapping("/package-combination-heater/arrow-image")
   public Object combinationPackageSpaceHeaterInternetLabel(@RequestBody @Valid SpaceHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             SpaceHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SPACE_HEATER_PACKAGE_COMBINATION));
   }
@@ -197,14 +197,14 @@ public class SpaceHeaterApiController {
   @Operation(summary = "Packages of space heater, temperature control and solar device - Boiler: energy label calculator")
   @PostMapping("/package-space-heater/calculate/boiler/energy-label")
   public Object packageSpaceHeaterBoilerCalculator(@RequestBody @Valid BoilerPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
   }
 
   @Operation(summary = "Packages of space heater, temperature control and solar device - Boiler: fiche")
   @PostMapping("/package-space-heater/calculate/boiler/fiche")
   public Object packageSpaceHeaterBoilerFiche(@RequestBody @Valid BoilerPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateFicheHtml(form),
         GoogleAnalyticsEventCategory.FICHE_API
     );
@@ -213,14 +213,14 @@ public class SpaceHeaterApiController {
   @Operation(summary = "Packages of space heater, temperature control and solar device - Heat pump: energy label calculator")
   @PostMapping("/package-space-heater/calculate/heat-pump/energy-label")
   public Object packageSpaceHeaterHeatPumpCalculator(@RequestBody @Valid HeatPumpPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
   }
 
   @Operation(summary = "Packages of space heater, temperature control and solar device - Heat pump: fiche")
   @PostMapping("/package-space-heater/calculate/heat-pump/fiche")
   public Object packageSpaceHeaterHeatPumpFiche(@RequestBody @Valid HeatPumpPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateFicheHtml(form),
         GoogleAnalyticsEventCategory.FICHE_API
     );
@@ -229,14 +229,14 @@ public class SpaceHeaterApiController {
   @Operation(summary = "Packages of space heater, temperature control and solar device - Cogeneration heater: energy label calculator")
   @PostMapping("/package-space-heater/calculate/cogeneration-heater/energy-label")
   public Object packageSpaceHeaterCogenerationCalculator(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(spaceHeatersService.toSpaceHeaterPackagesForm(form)));
   }
 
   @Operation(summary = "Packages of space heater, temperature control and solar device - Cogeneration heater: fiche")
   @PostMapping("/package-space-heater/calculate/cogeneration-heater/fiche")
   public Object packageSpaceHeaterCogenerationFiche(@RequestBody @Valid CogenerationPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateFicheHtml(form),
         GoogleAnalyticsEventCategory.FICHE_API
     );
@@ -245,7 +245,7 @@ public class SpaceHeaterApiController {
   @Operation(summary = "Packages of combination heater, temperature control and solar device - Boiler: energy label calculator")
   @PostMapping("/package-combination-heater/calculate/boiler/energy-label")
   public Object combinationPackagesSpaceHeaterBoilerCalculator(@RequestBody @Valid BoilerCombinationCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(spaceHeatersService.toCombinationHeaterPackagesForm(form)));
   }
 
@@ -255,13 +255,13 @@ public class SpaceHeaterApiController {
     List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
     ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
     ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-    return documentRendererService.processPdfApiResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE_API);
+    return documentRendererService.processApiResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE_API);
   }
 
   @Operation(summary = "Packages of combination heater, temperature control and solar device - Heat pump: energy label calculator")
   @PostMapping("/package-combination-heater/calculate/heat-pump/energy-label")
   public Object combinationPackagesSpaceHeaterHeatPumpCalculator(@RequestBody @Valid HeatPumpCombinationCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         spaceHeatersService.generateHtml(spaceHeatersService.toCombinationHeaterPackagesForm(form)));
   }
 
@@ -271,6 +271,6 @@ public class SpaceHeaterApiController {
     List<ProcessedEnergyLabelDocument> ficheDocuments = new ArrayList<>();
     ficheDocuments.add(spaceHeatersService.generateFicheHtml(form));
     ficheDocuments.add(waterHeatersService.generateFicheHtml(waterHeatersService.toWaterSolarPackagesCalculatorForm(form)));
-    return documentRendererService.processPdfApiResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE_API);
+    return documentRendererService.processApiResponse(ficheDocuments, GoogleAnalyticsEventCategory.FICHE_API);
   }
 }

@@ -59,7 +59,7 @@ public class DishwashersController {
       return getModelAndView(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(dishwashersService.generateHtml(form));
+      return documentRendererService.processResponse(dishwashersService.generateHtml(form));
     }
   }
 
@@ -70,7 +70,7 @@ public class DishwashersController {
       return getModelAndView(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.DISHWASHERS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), DishwashersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.DISHWASHERS));
     }
   }
 

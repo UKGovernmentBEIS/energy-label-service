@@ -65,7 +65,7 @@ public class TumbleDryersController extends CategoryController {
       return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -76,7 +76,7 @@ public class TumbleDryersController extends CategoryController {
       return getAirVentedTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_AIR_VENTED));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_AIR_VENTED));
     }
   }
 
@@ -92,7 +92,7 @@ public class TumbleDryersController extends CategoryController {
       return getCondenserTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -103,7 +103,7 @@ public class TumbleDryersController extends CategoryController {
       return getCondenserTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_CONDENSER));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_CONDENSER));
     }
   }
 
@@ -119,7 +119,7 @@ public class TumbleDryersController extends CategoryController {
       return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -130,7 +130,7 @@ public class TumbleDryersController extends CategoryController {
       return getGasFiredTumbleDryers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_GAS_FIRED));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_GAS_FIRED));
     }
   }
 

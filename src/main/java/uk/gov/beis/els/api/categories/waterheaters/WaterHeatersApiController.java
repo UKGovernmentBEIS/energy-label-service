@@ -42,14 +42,14 @@ public class WaterHeatersApiController {
   )
   @PostMapping("/conventional-water-heaters/energy-label")
   public Object conventionalWaterHeater(@RequestBody @Valid ConventionalWaterHeaterApiForm form) {
-    return documentRendererService.processPdfApiResponse(waterHeatersService.generateHtml(
+    return documentRendererService.processApiResponse(waterHeatersService.generateHtml(
         waterHeatersService.toConventionWaterHeatersForm(form), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Conventional water heater: arrow image")
   @PostMapping("/conventional-water-heaters/arrow-image")
   public Object conventionalWaterHeaterInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_CONVENTIONAL)
     );
   }
@@ -60,14 +60,14 @@ public class WaterHeatersApiController {
   )
   @PostMapping("/heat-pump-water-heaters/energy-label")
   public Object heatPumpWaterHeater(@RequestBody @Valid HeatPumpWaterHeatersApiForm form) {
-    return documentRendererService.processPdfApiResponse(waterHeatersService.generateHtml(
+    return documentRendererService.processApiResponse(waterHeatersService.generateHtml(
         waterHeatersService.toHeatPumpWaterHeatersForm(form), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Heat pump water heater: arrow image")
   @PostMapping("/heat-pump-water-heaters/arrow-image")
   public Object heatPumpWaterInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_HEAT_PUMP)
     );
   }
@@ -78,14 +78,14 @@ public class WaterHeatersApiController {
   )
   @PostMapping("/solar-water-heaters/energy-label")
   public Object solarWaterHeater(@RequestBody @Valid SolarWaterHeatersApiForm form) {
-    return documentRendererService.processPdfApiResponse(waterHeatersService.generateHtml(
+    return documentRendererService.processApiResponse(waterHeatersService.generateHtml(
         waterHeatersService.toSolarWaterHeatersForm(form), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Solar water heater: arrow image")
   @PostMapping("/solar-water-heaters/arrow-image")
   public Object solarWaterHeaterInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_SOLAR)
     );
   }
@@ -96,13 +96,13 @@ public class WaterHeatersApiController {
   )
   @PostMapping("/hot-water-storage-tanks/energy-label")
   public Object hotWaterStorageTank(@RequestBody @Valid HotWaterStorageTanksForm form) {
-    return documentRendererService.processPdfApiResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Hot water storage tank: arrow image")
   @PostMapping("/hot-water-storage-tanks/arrow-image")
   public Object hotWaterStorageTankInternetLabel(@Valid @RequestBody WaterHeatersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WATER_HEATERS_STORAGE_TANKS)
     );
   }
@@ -113,13 +113,13 @@ public class WaterHeatersApiController {
   )
   @PostMapping("/packages-of-water-heater-and-solar-device/energy-label")
   public Object waterHeaterSolarDevicePackage(@RequestBody @Valid WaterSolarPackagesForm form) {
-    return documentRendererService.processPdfApiResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
+    return documentRendererService.processApiResponse(waterHeatersService.generateHtml(form, WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
   }
 
   @Operation(summary = "Package of a water heater and solar device: arrow image")
   @PostMapping("/packages-of-water-heater-and-solar-device/arrow-image")
   public Object waterHeaterSolarDevicePackageInternetLabel(@Valid @RequestBody WaterSolarPackageInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES, ProductMetadata.WATER_HEATERS_PACKAGE)
     );
   }
@@ -127,7 +127,7 @@ public class WaterHeatersApiController {
   @Operation(summary = "Packages of water heater and solar device: energy label calculator")
   @PostMapping("/packages-of-water-heater-and-solar-device/calculate/energy-label")
   public Object waterHeaterSolarDevicePackageCalculator(@RequestBody @Valid WaterSolarPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         waterHeatersService.generateHtml(waterHeatersService.toWaterSolarPackagesForm(form),
             WaterHeatersService.LEGISLATION_CATEGORY_SOLAR_PACKAGES));
   }
@@ -135,7 +135,7 @@ public class WaterHeatersApiController {
   @Operation(summary = "Packages of water heater and solar device: fiche")
   @PostMapping("/packages-of-water-heater-and-solar-device/calculate/fiche")
   public Object waterHeaterSolarDevicePackageFiche(@RequestBody @Valid WaterSolarPackagesCalculatorForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         waterHeatersService.generateFicheHtml(form),
         GoogleAnalyticsEventCategory.FICHE_API
     );

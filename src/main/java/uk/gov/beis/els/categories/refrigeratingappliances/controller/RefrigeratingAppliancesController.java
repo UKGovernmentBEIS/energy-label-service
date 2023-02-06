@@ -69,7 +69,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getFridgesFreezers(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
+      return documentRendererService.processResponse(householdRefrigeratingAppliancesService.generateHtml(form));
     }
   }
 
@@ -81,7 +81,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getFridgesFreezers(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
               RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.HRA_FRIDGE_FREEZER));
     }
@@ -99,7 +99,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(householdRefrigeratingAppliancesService.generateHtml(form));
+      return documentRendererService.processResponse(householdRefrigeratingAppliancesService.generateHtml(form));
     }
   }
 
@@ -111,7 +111,7 @@ public class RefrigeratingAppliancesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWineStorageAppliances(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form,
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form,
           form.getEfficiencyRating(), RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT,
           ProductMetadata.HRA_WINE_STORAGE));
     }

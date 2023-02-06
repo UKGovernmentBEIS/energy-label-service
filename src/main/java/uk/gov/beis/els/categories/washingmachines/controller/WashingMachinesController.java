@@ -65,7 +65,7 @@ public class WashingMachinesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWashingMachinesModelAndView(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(washingMachinesService.generateHtml(form));
+      return documentRendererService.processResponse(washingMachinesService.generateHtml(form));
     }
   }
 
@@ -77,7 +77,7 @@ public class WashingMachinesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWashingMachinesModelAndView(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
               WashingMachinesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WASHING_MACHINES));
     }
@@ -96,7 +96,7 @@ public class WashingMachinesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWasherDryerModelAndView(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(washingMachinesService.generateHtml(form));
+      return documentRendererService.processResponse(washingMachinesService.generateHtml(form));
     }
   }
 
@@ -108,7 +108,7 @@ public class WashingMachinesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getWasherDryerModelAndView(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getCompleteCycleEfficiencyRating(),
               WashingMachinesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.WASHING_MACHINES_WASHER_DRYER));
     }

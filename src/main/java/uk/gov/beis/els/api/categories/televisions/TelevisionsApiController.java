@@ -38,13 +38,13 @@ public class TelevisionsApiController {
   )
   @PostMapping("/energy-label")
   public Object televisions(@RequestBody @Valid TelevisionsForm form) {
-    return documentRendererService.processPdfApiResponse(televisionsService.generateHtml(form));
+    return documentRendererService.processApiResponse(televisionsService.generateHtml(form));
   }
 
   @Operation(summary = "Televisions and electronic displays: arrow image")
   @PostMapping("/arrow-image")
   public Object televisionsInternetLabel(@RequestBody @Valid TelevisionsInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             TelevisionsService.LEGISLATION_CATEGORY_CURRENT,

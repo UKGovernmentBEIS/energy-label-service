@@ -62,7 +62,7 @@ public class TelevisionController {
     if (bindingResult.hasErrors()) {
       return getTelevisionsForm(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processPdfResponse(televisionsService.generateHtml(form));
+      return documentRendererService.processResponse(televisionsService.generateHtml(form));
     }
   }
 
@@ -76,7 +76,7 @@ public class TelevisionController {
     if (bindingResult.hasErrors()) {
       return getTelevisionsForm(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(
+      return documentRendererService.processInternetLabelResponse(
           internetLabelService.generateInternetLabel(form, form.getEfficiencyRatingSdr(),
               TelevisionsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TV));
     }

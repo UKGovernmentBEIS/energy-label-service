@@ -39,13 +39,13 @@ public class RefrigeratingAppliancesApiController {
   )
   @PostMapping("/household-fridges-and-freezers/energy-label")
   public Object fridgesFreezers(@RequestBody @Valid FridgesFreezersForm form) {
-    return documentRendererService.processPdfApiResponse(refrigeratingAppliancesService.generateHtml(form));
+    return documentRendererService.processApiResponse(refrigeratingAppliancesService.generateHtml(form));
   }
 
   @Operation(summary = "Household fridges and freezers: arrow image")
   @PostMapping("/household-fridges-and-freezers/arrow-image")
   public Object fridgesFreezersInternetLabel(@RequestBody @Valid RefrigeratingAppliancesInternetLapelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT,
@@ -59,13 +59,13 @@ public class RefrigeratingAppliancesApiController {
   )
   @PostMapping("/wine-storage-appliances/energy-label")
   public Object wineStorageAppliances(@RequestBody @Valid WineStorageAppliancesForm form) {
-    return documentRendererService.processPdfApiResponse(refrigeratingAppliancesService.generateHtml(form));
+    return documentRendererService.processApiResponse(refrigeratingAppliancesService.generateHtml(form));
   }
 
   @Operation(summary = "Wine storage appliances: arrow image")
   @PostMapping("/wine-storage-appliances/arrow-image")
   public Object wineStorageAppliancesInternetLabel(@RequestBody @Valid RefrigeratingAppliancesInternetLapelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             RefrigeratingAppliancesService.LEGISLATION_CATEGORY_CURRENT,

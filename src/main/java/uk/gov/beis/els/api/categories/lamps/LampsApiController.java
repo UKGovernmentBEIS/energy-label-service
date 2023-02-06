@@ -40,7 +40,7 @@ public class LampsApiController {
   )
   @PostMapping("/energy-rating-only/energy-label")
   public Object lampsExNameModelConsumption(@RequestBody @Valid LampsFormNoSupplierModelConsumption form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
   }
 
@@ -50,7 +50,7 @@ public class LampsApiController {
   )
   @PostMapping("/energy-rating-and-consumption-only/energy-label")
   public Object lampsExNameModel(@RequestBody @Valid LampsFormNoSupplierModel form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021));
   }
 
@@ -62,7 +62,7 @@ public class LampsApiController {
   )
   @PostMapping("/all-fields/old-style/energy-label")
   public Object lampsAllFieldsOldStyle(@RequestBody @Valid LampsPreSeptember2021ApiForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         lampsService.generateHtml(lampsService.toStandardLampsForm(form),
             LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021)
     );
@@ -74,7 +74,7 @@ public class LampsApiController {
   )
   @PostMapping("/all-fields/new-style/energy-label")
   public Object lampsAllFields(@RequestBody @Valid LampsPostSeptember2021ApiForm form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         lampsService.generateHtml(lampsService.toStandardLampsForm(form),
             LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021)
     );
@@ -83,7 +83,7 @@ public class LampsApiController {
   @Operation(summary = "Lamps and light sources: new style arrow image")
   @PostMapping("/new-style/arrow-image")
   public Object lampsNewStyleInternetLabel(@RequestBody @Valid LampsNewStyleInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021, ProductMetadata.LAMPS_FULL)
     );
@@ -92,7 +92,7 @@ public class LampsApiController {
   @Operation(summary = "Lamps and light sources: old style arrow image")
   @PostMapping("/old-style/arrow-image")
   public Object lampsOldStyleInternetLabel(@RequestBody @Valid LampsOldStyleInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(),
             LampsService.LEGISLATION_CATEGORY_PRE_SEPTEMBER_2021, ProductMetadata.LAMPS_FULL)
     );
@@ -104,7 +104,7 @@ public class LampsApiController {
   )
   @PostMapping("/new-style/packaging-arrow")
   public Object packagingArrow(@RequestBody @Valid LampsFormPackagingArrow form) {
-    return documentRendererService.processPdfApiResponse(
+    return documentRendererService.processApiResponse(
         lampsService.generateHtml(form, LampsService.LEGISLATION_CATEGORY_POST_SEPTEMBER_2021));
   }
 }

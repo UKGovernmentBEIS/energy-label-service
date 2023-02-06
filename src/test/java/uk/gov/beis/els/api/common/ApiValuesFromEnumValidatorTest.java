@@ -70,6 +70,7 @@ public class ApiValuesFromEnumValidatorTest {
     form.setClimateClass(ClimateClass.THREE.name());
     form.setSupplierName("Energy Co");
     form.setModelName("FR-2022");
+    form.setOutputFormat("PDF");
     return form;
   }
 }

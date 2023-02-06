@@ -69,7 +69,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
       return getIceCreamFreezers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -79,7 +79,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getIceCreamFreezers(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.ICE_CREAM_FREEZERS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.ICE_CREAM_FREEZERS));
     }
   }
 
@@ -95,7 +95,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
       return getBeverageCoolers(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -105,7 +105,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getBeverageCoolers(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.BEVERAGE_COOLERS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.BEVERAGE_COOLERS));
     }
   }
 
@@ -121,7 +121,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
       return getVendingMachines(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -131,7 +131,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getVendingMachines(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENDING_MACHINES));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENDING_MACHINES));
     }
   }
 
@@ -147,7 +147,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
       return getDisplayCabinets(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(refrigeratorsDirectSales.generateHtml(form, RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -157,7 +157,7 @@ public class RefrigeratorsDirectSalesController extends CategoryController {
     if (bindingResult.hasErrors()) {
       return getDisplayCabinets(bindingResult.getFieldErrors());
     } else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.DISPLAY_CABINETS));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), RefrigeratorsDirectSalesService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.DISPLAY_CABINETS));
     }
   }
 

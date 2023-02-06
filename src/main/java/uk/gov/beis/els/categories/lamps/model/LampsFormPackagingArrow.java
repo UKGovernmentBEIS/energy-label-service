@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.groups.Default;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
-import uk.gov.beis.els.categories.common.AnalyticsForm;
+import uk.gov.beis.els.categories.common.BaseForm;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.lamps.service.LampsService;
 import uk.gov.beis.els.model.meta.FieldPrompt;
@@ -13,7 +13,7 @@ import uk.gov.beis.els.model.meta.StaticProductText;
 
 @Schema(name = "Energy rating arrow for light source packaging")
 @StaticProductText("The arrow must be shown on the front of the packaging if the energy label isn't on the front. It must be clearly visible and legible. You don't need to include this arrow on the packaging if the energy label is on the front.")
-public class LampsFormPackagingArrow extends AnalyticsForm {
+public class LampsFormPackagingArrow extends BaseForm {
 
   @FieldPrompt("Energy efficiency class of the application")
   @NotBlank(message = "Select an energy efficiency class", groups = {Default.class, InternetLabellingGroup.class})

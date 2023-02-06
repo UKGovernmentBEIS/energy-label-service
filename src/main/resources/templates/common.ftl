@@ -92,6 +92,8 @@ Includes the wrapping form element, the generate label button and optionally the
         <@generateInternetLabelButton/>
       <#else>
 
+        <@govukRadios.radio path="form.outputFormat" radioItems=energyLabelFormatOptions/>
+
         <#if staticProductText?has_content>
           <div class="govuk-inset-text">
             ${staticProductText?no_esc}
@@ -106,6 +108,7 @@ Includes the wrapping form element, the generate label button and optionally the
           <@packageCalculatorDisclaimer/>
           <@packageCalculatorDownloadButtons/>
          <#else>
+
            <@generateLabelButton/>
         </#if>
       </#if>

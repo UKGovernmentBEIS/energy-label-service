@@ -40,13 +40,13 @@ public class SolidFuelBoilersApiController {
   )
   @PostMapping("/solid-fuel-boilers/energy-label")
   public Object solidFuelBoilers(@RequestBody @Valid SolidFuelBoilersForm form) {
-    return documentRendererService.processPdfApiResponse(solidFuelBoilersService.generateHtml(form, SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(solidFuelBoilersService.generateHtml(form, SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Solid fuel boilers: arrow image")
   @PostMapping("/solid-fuel-boilers/arrow-image")
   public Object solidFuelBoilersInternetLabel(@Valid @RequestBody SolidFuelBoilersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.SOLID_FUEL_BOILER)
     );
   }
@@ -57,7 +57,7 @@ public class SolidFuelBoilersApiController {
   )
   @PostMapping("/package-solid-fuel-boiler/energy-label")
   public Object solidFuelBoilerPackages(@RequestBody @Valid SolidFuelBoilerPackagesForm form) {
-    return documentRendererService.processPdfApiResponse(solidFuelBoilersService.generateHtml(form));
+    return documentRendererService.processApiResponse(solidFuelBoilersService.generateHtml(form));
   }
 
 
@@ -65,7 +65,7 @@ public class SolidFuelBoilersApiController {
   @Operation(summary = "Package of a solid fuel boiler, supplementary heaters, temperature controls and solar devices: arrow image")
   @PostMapping("/package-solid-fuel-boiler/arrow-image")
   public Object solidFuelBoilerPackagesInternetLabel(@Valid @RequestBody SolidFuelBoilersInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), SolidFuelBoilersService.LEGISLATION_CATEGORY_PACKAGES_CURRENT, ProductMetadata.SOLID_FUEL_BOILER_PACKAGE)
     );
   }

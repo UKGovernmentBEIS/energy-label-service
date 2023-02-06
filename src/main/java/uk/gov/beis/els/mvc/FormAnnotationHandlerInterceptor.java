@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelColour;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelFormat;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
+import uk.gov.beis.els.model.EnergyLabelFormat;
 import uk.gov.beis.els.model.LabelMode;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
@@ -48,6 +49,8 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
         addInternetLabelModelObjects(request, modelAndView);
         modelAndView.addObject("hiddenFields", getHiddenFields(form, modelAndView));
         modelAndView.addObject("numericFields", getNumericFields(form));
+        modelAndView.addObject("energyLabelFormatOptions", Arrays.stream(EnergyLabelFormat.values())
+            .collect(StreamUtils.toLinkedHashMap(Enum::name, Enum::name)));
       }
     }
   }

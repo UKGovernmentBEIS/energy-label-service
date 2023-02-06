@@ -95,6 +95,7 @@ public class ApiValuesFromLoadProfileListValidatorTest {
     form.setAuxElectricityConsumption("4242");
     form.setSupplierName("FR Industries");
     form.setModelName("FR-0042");
+    form.setOutputFormat("PDF");
     return form;
   }
 }

@@ -40,13 +40,13 @@ public class TumbleDryerApiController {
   )
   @PostMapping("/air-vented-tumble-dryers/energy-label")
   public Object airVentedTumbleDryer(@RequestBody @Valid TumbleDryersForm form) {
-    return documentRendererService.processPdfApiResponse(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(tumbleDryersService.generateHtmlAirVented(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Air vented tumble dryers: arrow image")
   @PostMapping("/air-vented-tumble-dryers/arrow-image")
   public Object airVentedTumbleDryerInternetLabel(@Valid @RequestBody TumbleDryerInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_AIR_VENTED)
     );
   }
@@ -57,13 +57,13 @@ public class TumbleDryerApiController {
   )
   @PostMapping("/gas-fired-tumble-dryers/energy-label")
   public Object gasFiredTumbleDryer(@RequestBody @Valid TumbleDryersForm form) {
-    return documentRendererService.processPdfApiResponse(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(tumbleDryersService.generateHtmlGasFired(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Gas fired tumble dryers: arrow image")
   @PostMapping("/gas-fired-tumble-dryers/arrow-image")
   public Object gasFiredTumbleDryerInternetLabel(@Valid @RequestBody TumbleDryerInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_GAS_FIRED)
     );
   }
@@ -74,13 +74,13 @@ public class TumbleDryerApiController {
   )
   @PostMapping("/condenser-tumble-dryers/energy-label")
   public Object condenserTumbleDryer(@RequestBody @Valid CondenserTumbleDryersForm form) {
-    return documentRendererService.processPdfApiResponse(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
+    return documentRendererService.processApiResponse(tumbleDryersService.generateHtmlCondenser(form, TumbleDryersService.LEGISLATION_CATEGORY_CURRENT));
   }
 
   @Operation(summary = "Condenser tumble dryers: arrow image")
   @PostMapping("/condenser-tumble-dryers/arrow-image")
   public Object condenserTumbleDryerInternetLabel(@Valid @RequestBody TumbleDryerInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), TumbleDryersService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.TUMBLE_DRYERS_CONDENSER)
     );
   }

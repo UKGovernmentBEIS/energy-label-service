@@ -40,13 +40,13 @@ public class WashingMachinesApiController {
   )
   @PostMapping("/washing-machines/energy-label")
   public Object washingMachines(@RequestBody @Valid WashingMachinesForm form) {
-    return documentRendererService.processPdfApiResponse(washingMachinesService.generateHtml(form));
+    return documentRendererService.processApiResponse(washingMachinesService.generateHtml(form));
   }
 
   @Operation(summary = "Washing machines: arrow image")
   @PostMapping("/washing-machines/arrow-image")
   public Object washingMachinesInternetLabel(@RequestBody @Valid WashingMachinesInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             WashingMachinesService.LEGISLATION_CATEGORY_CURRENT,
@@ -60,13 +60,13 @@ public class WashingMachinesApiController {
   )
   @PostMapping("/washer-dryer/energy-label")
   public Object washerDryer(@RequestBody @Valid WasherDryerForm form) {
-    return documentRendererService.processPdfApiResponse(washingMachinesService.generateHtml(form));
+    return documentRendererService.processApiResponse(washingMachinesService.generateHtml(form));
   }
 
   @Operation(summary = "Washer-dryers: arrow image")
   @PostMapping("/washer-dryer/arrow-image")
   public Object washerDryerInternetLabel(@RequestBody @Valid WashingMachinesInternetLabelApiForm form) {
-    return documentRendererService.processImageApiResponse(
+    return documentRendererService.processInternetLabelApiResponse(
         internetLabelService.generateInternetLabel(form,
             form.getEfficiencyRating(),
             WashingMachinesService.LEGISLATION_CATEGORY_CURRENT,

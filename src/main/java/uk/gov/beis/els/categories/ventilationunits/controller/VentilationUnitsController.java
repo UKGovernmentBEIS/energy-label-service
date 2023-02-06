@@ -64,7 +64,7 @@ public class VentilationUnitsController extends CategoryController {
       return getUnidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(ventilationUnitsService.generateHtmlUnidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(ventilationUnitsService.generateHtmlUnidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -75,7 +75,7 @@ public class VentilationUnitsController extends CategoryController {
       return getUnidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENTILATION_UNITS_UNIDIRECTIONAL));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENTILATION_UNITS_UNIDIRECTIONAL));
     }
   }
 
@@ -91,7 +91,7 @@ public class VentilationUnitsController extends CategoryController {
       return getBidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processPdfResponse(ventilationUnitsService.generateHtmlBidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
+      return documentRendererService.processResponse(ventilationUnitsService.generateHtmlBidirectional(form, VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT));
     }
   }
 
@@ -102,7 +102,7 @@ public class VentilationUnitsController extends CategoryController {
       return getBidirectionalVentilationUnits(bindingResult.getFieldErrors());
     }
     else {
-      return documentRendererService.processImageResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENTILATION_UNITS_BIDIRECTIONAL));
+      return documentRendererService.processInternetLabelResponse(internetLabelService.generateInternetLabel(form, form.getEfficiencyRating(), VentilationUnitsService.LEGISLATION_CATEGORY_CURRENT, ProductMetadata.VENTILATION_UNITS_BIDIRECTIONAL));
     }
   }
 
