@@ -78,7 +78,7 @@ public class InternetLabelService {
     return templatePopulator
         .scaleSvg(scaleFactor)
         .transformInternetLabel(RatingClass.getEnum(ratingClass), legislationCategory.getPrimaryRatingRange())
-        .asProcessedInternetLabel(form, form, ratingClass, analyticsLabel);
+        .asProcessedInternetLabel(form, ratingClass, analyticsLabel);
   }
 
 }

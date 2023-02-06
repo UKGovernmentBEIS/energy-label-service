@@ -34,7 +34,7 @@ public class TumbleDryersForm extends StandardTemplateForm30Char {
   private String cycleTime;
 
   @FieldPrompt("Rated capacity, for the standard cotton programme at full load in kg")
-  @Digits(integer = 1, fraction = 1, message = "Enter the capacity, as 1 digit and with an optional decimal place")
+  @Digits(integer = 2, fraction = 1, message = "Enter the capacity, as up to 2 digits and with an optional decimal place")
   @NotNull
   @Schema(type = "number")
   private String ratedCapacity;

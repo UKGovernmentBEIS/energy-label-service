@@ -298,7 +298,7 @@ public class TemplatePopulator {
       ProductMetadata analyticsLabel, T form) {
     EnergyLabelFormat labelFormat = getOutputFormatOrDefault(form);
     String analyticsAction = String.format("%s - %s - %s", form.getSupplierName(), form.getModelName(), labelFormat);
-    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), analyticsAction);
+    String title = String.format("%s - %s - %s", analyticsLabel.getProductFileName(), form.getSupplierName(), form.getModelName());
     TemplateUtils.getElementById(template, "html-title").text(title);
     return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
   }
@@ -312,32 +312,34 @@ public class TemplatePopulator {
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata analyticsLabel, LampsFormPackagingArrow form) {
     EnergyLabelFormat labelFormat = getOutputFormatOrDefault(form);
-    String analyticsAction = String.format("%s - %s - %s - %s",
+
+    String labelProperties = String.format("%s - %s - %s",
         RatingClass.getEnum(form.getEfficiencyRating()).getDisplayValue(),
         LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
-        TemplateColour.valueOf(form.getTemplateColour()).getDisplayName(),
-        labelFormat);
+        TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
 
-    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), analyticsAction);
+    String analyticsAction = String.format("%s - %s", labelProperties, labelFormat);
+
+    String title = String.format("%s - %s", analyticsLabel.getProductFileName(), labelProperties);
     TemplateUtils.getElementById(template, "html-title").text(title);
     return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
   }
 
-  public ProcessedInternetLabelDocument asProcessedInternetLabel(BaseForm baseForm, InternetLabellingForm internetLabellingForm, String ratingClass, ProductMetadata label) {
+  public ProcessedInternetLabelDocument asProcessedInternetLabel(InternetLabellingForm form, String ratingClass, ProductMetadata label) {
     String analyticsAction;
 
-    if(internetLabellingForm.getLabelColour() == null) {
+    if(form.getLabelColour() == null) {
       analyticsAction = String.format("%s - %s",
           RatingClass.getEnum(ratingClass).getDisplayValue(),
-          InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName());
+          InternetLabelOrientation.valueOf(form.getLabelOrientation()).getShortName());
     } else {
       analyticsAction = String.format("%s - %s - %s",
           RatingClass.getEnum(ratingClass).getDisplayValue(),
-          InternetLabelOrientation.valueOf(internetLabellingForm.getLabelOrientation()).getShortName(),
-          InternetLabelColour.valueOf(internetLabellingForm.getLabelColour()).getDisplayName());
+          InternetLabelOrientation.valueOf(form.getLabelOrientation()).getShortName(),
+          InternetLabelColour.valueOf(form.getLabelColour()).getDisplayName());
     }
 
-    return new ProcessedInternetLabelDocument(template, ratingClass, label, baseForm.getGoogleAnalyticsClientId(), internetLabellingForm.getLabelFormat(), analyticsAction);
+    return new ProcessedInternetLabelDocument(template, ratingClass, label, form.getGoogleAnalyticsClientId(), form.getLabelFormat(), analyticsAction);
   }
 
   public static String decimalToPercentage(float number) {
