@@ -113,7 +113,7 @@
         The current version of the energy label API is ${apiVersion}.
       </p>
       <p class="govuk-body">
-        We'll only change the version number of the API if we make changes that might break applications using the API.
+        We'll only change the major version number of the API if we make changes that might break applications using the API.
         These changes include:
       </p>
       <ul class="govuk-list govuk-list--bullet">
@@ -121,7 +121,7 @@
         <li>removing endpoints</li>
       </ul>
       <p class="govuk-body">
-        We will not change the version number of the API for changes that:
+        We will not change the major version number of the API for changes that:
       </p>
       <ul class="govuk-list govuk-list--bullet">
         <li>add new endpoints</li>
@@ -132,15 +132,15 @@
         we make changes to the API or release a new version. We'll also add a notice to this page.
       </p>
       <p class="govuk-body">
-        After we've released a new version of the API, the previous version will keep working for at least 6 months.
-        This will give you time to update your application to use the new version. When we announce a new version, we'll
-        tell you when the old version will stop working.
+        After we've released a new major version of the API, the previous major version will keep working for at least 6 months.
+        This will give you time to update your application to use the new major version. When we announce a new major version, we'll
+        tell you when the old major version will stop working.
       </p>
       <p class="govuk-body">
-        When we release a new version of the API, all of our endpoint paths will change to include the new version number.
+        When we release a new major version of the API, all of our endpoint paths will change to include the new major version number.
         You'll need to update the endpoint URLs your application uses to access the API. You'll need to test that your
-        application still works with the new version. You should read the
-        <a class="govuk-link" href="#version-history-release-notes">release notes for the current version</a>
+        application still works with the new major version. You should read the
+        <a class="govuk-link" href="#version-history-release-notes">release notes for the current major version</a>
         to see what's changed and update your application if necessary.
       </p>
 
