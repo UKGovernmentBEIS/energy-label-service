@@ -9,6 +9,7 @@ applications:
     health-check-http-endpoint: /health
     services:
       - syslog-drain
+      - ga-credentials
     env:
       SHOW_START_PAGE: true
       HOME_PAGE_URL: /
