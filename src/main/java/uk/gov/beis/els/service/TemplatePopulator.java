@@ -20,6 +20,7 @@ import uk.gov.beis.els.categories.lamps.model.LampsFormPackagingArrow;
 import uk.gov.beis.els.categories.lamps.model.LightSourceArrowOrientation;
 import uk.gov.beis.els.categories.lamps.model.TemplateColour;
 import uk.gov.beis.els.model.EnergyLabelFormat;
+import uk.gov.beis.els.model.GoogleAnalyticsEventParams;
 import uk.gov.beis.els.model.ProductMetadata;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.model.RatingClassRange;
@@ -297,17 +298,29 @@ public class TemplatePopulator {
   public <T extends BaseForm & SupplierNameForm> ProcessedEnergyLabelDocument asProcessedEnergyLabel(
       ProductMetadata analyticsLabel, T form) {
     EnergyLabelFormat labelFormat = getOutputFormatOrDefault(form);
-    String analyticsAction = String.format("%s - %s - %s", form.getSupplierName(), form.getModelName(), labelFormat);
+
+    GoogleAnalyticsEventParams analyticsEventParams = new GoogleAnalyticsEventParams();
+    analyticsEventParams.addParam("product_type", analyticsLabel.getAnalyticsProductType());
+    analyticsEventParams.addParam("product_subtype", analyticsLabel.getAnalyticsProductSubtype());
+    analyticsEventParams.addParam("supplier", form.getSupplierName());
+    analyticsEventParams.addParam("model", form.getModelName());
+    analyticsEventParams.addParam("output_format", labelFormat.toString());
+
     String title = String.format("%s - %s - %s", analyticsLabel.getProductFileName(), form.getSupplierName(), form.getModelName());
     TemplateUtils.getElementById(template, "html-title").text(title);
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsEventParams, labelFormat);
   }
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelNoSupplier(ProductMetadata analyticsLabel, BaseForm form) {
     TemplateUtils.getElementById(template, "html-title").text(analyticsLabel.getProductFileName());
     EnergyLabelFormat labelFormat = getOutputFormatOrDefault(form);
-    String analyticsAction = String.format("No supplier or model - %s", labelFormat);
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
+
+    GoogleAnalyticsEventParams analyticsEventParams = new GoogleAnalyticsEventParams();
+    analyticsEventParams.addParam("product_type", analyticsLabel.getAnalyticsProductType());
+    analyticsEventParams.addParam("product_subtype", analyticsLabel.getAnalyticsProductSubtype());
+    analyticsEventParams.addParam("output_format", labelFormat.toString());
+
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsEventParams, labelFormat);
   }
 
   public ProcessedEnergyLabelDocument asProcessedEnergyLabelLampsPackagingArrow(ProductMetadata analyticsLabel, LampsFormPackagingArrow form) {
@@ -320,26 +333,32 @@ public class TemplatePopulator {
 
     String analyticsAction = String.format("%s - %s", labelProperties, labelFormat);
 
+    GoogleAnalyticsEventParams analyticsEventParams = new GoogleAnalyticsEventParams();
+    analyticsEventParams.addParam("product_type", analyticsLabel.getAnalyticsProductType());
+    analyticsEventParams.addParam("product_subtype", analyticsLabel.getAnalyticsProductSubtype());
+    analyticsEventParams.addParam("efficiency_rating", RatingClass.getEnum(form.getEfficiencyRating()).getDisplayValue());
+    analyticsEventParams.addParam("orientation", LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName());
+    analyticsEventParams.addParam("colour", TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
+    analyticsEventParams.addParam("output_format", labelFormat.toString());
+
     String title = String.format("%s - %s", analyticsLabel.getProductFileName(), labelProperties);
     TemplateUtils.getElementById(template, "html-title").text(title);
-    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsAction, labelFormat);
+    return new ProcessedEnergyLabelDocument(template, analyticsLabel, form.getGoogleAnalyticsClientId(), analyticsEventParams, labelFormat);
   }
 
   public ProcessedInternetLabelDocument asProcessedInternetLabel(InternetLabellingForm form, String ratingClass, ProductMetadata label) {
-    String analyticsAction;
+    GoogleAnalyticsEventParams analyticsEventParams = new GoogleAnalyticsEventParams();
+    analyticsEventParams.addParam("product_type", label.getAnalyticsProductType());
+    analyticsEventParams.addParam("product_subtype", label.getAnalyticsProductSubtype());
+    analyticsEventParams.addParam("efficiency_rating", RatingClass.getEnum(ratingClass).getDisplayValue());
+    analyticsEventParams.addParam("orientation", InternetLabelOrientation.valueOf(form.getLabelOrientation()).getShortName());
+    analyticsEventParams.addParam("output_format", form.getLabelFormat());
 
-    if(form.getLabelColour() == null) {
-      analyticsAction = String.format("%s - %s",
-          RatingClass.getEnum(ratingClass).getDisplayValue(),
-          InternetLabelOrientation.valueOf(form.getLabelOrientation()).getShortName());
-    } else {
-      analyticsAction = String.format("%s - %s - %s",
-          RatingClass.getEnum(ratingClass).getDisplayValue(),
-          InternetLabelOrientation.valueOf(form.getLabelOrientation()).getShortName(),
-          InternetLabelColour.valueOf(form.getLabelColour()).getDisplayName());
+    if(form.getLabelColour() != null) {
+      analyticsEventParams.addParam("colour", InternetLabelColour.valueOf(form.getLabelColour()).getDisplayName());
     }
 
-    return new ProcessedInternetLabelDocument(template, ratingClass, label, form.getGoogleAnalyticsClientId(), form.getLabelFormat(), analyticsAction);
+    return new ProcessedInternetLabelDocument(template, ratingClass, label, form.getGoogleAnalyticsClientId(), form.getLabelFormat(), analyticsEventParams);
   }
 
   public static String decimalToPercentage(float number) {

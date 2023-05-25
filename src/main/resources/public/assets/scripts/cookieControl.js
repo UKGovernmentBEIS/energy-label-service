@@ -1,46 +1,47 @@
 (function() {
+  var measurementId = 'G-MXY8G0TL9D';
   var elsCookieControl = {
     prefsCookieName: 'els-cookies-allowed',
     nonEssentialCookies: [
-      { name: '_gat_govuk_shared', path: '/'},
       { name: '_ga', path: '/'},
-      { name: '_gat', path: '/'},
-      { name: '_gid', path: '/'}
+      { name: '_ga_'+measurementId.replace('G-',''), path: '/'},
     ],
     cookieScripts: [
       // Google Analytics
       function() {
         if(window.ELS.googleAnalyticsEnabled) {
-          (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-              (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-              m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-          })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+          var gaScript = document.createElement("script");
+          gaScript.src = "https://www.googletagmanager.com/gtag/js?id=" + measurementId;
+          document.head.appendChild(gaScript);
 
-          ga('create', 'UA-145652997-1', 'auto', 'govuk_shared', {'allowLinker': true});
-          ga('govuk_shared.require', 'linker');
-          ga('govuk_shared.linker.set', 'anonymizeIp', true);
-          ga('govuk_shared.linker:autoLink', ['www.gov.uk']);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-          ga('create', 'UA-136887405-1', 'auto');
-          ga('send', 'pageview');
-          ga('govuk_shared.send', 'pageview');
+          gtag('config', measurementId);
 
           if(document.getElementById('googleAnalyticsClientId')) {
-            ga(function (tracker) {
-              var clientId = tracker.get('clientId');
+            gtag('get', measurementId, 'client_id', function (clientId)  {
               document.getElementById('googleAnalyticsClientId').value = clientId;
-            });
+            })
           }
         } else {
           console.warn("You've consented to analytics cookies but Google Analytics integration is disabled on this environment, so the Google Analytics script won't be loaded.");
         }
+      }
+    ],
+    denyConsentScripts: [
+      // Google Analytics
+      function() {
+        function gtag(){dataLayer.push(arguments);}
+
+        gtag("consent", "default", {
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          functionality_storage: "denied",
+          personalization_storage: "denied",
+          security_storage: "denied"
+        });
       }
     ],
     setCookie: function (name,value,days) {
@@ -114,11 +115,17 @@
     rejectCookies: function() {
       elsCookieControl.setCookie(elsCookieControl.prefsCookieName, 'false', 365);
       elsCookieControl.deleteNonEssentialCookies();
+      elsCookieControl.runDenyConsentScripts();
     },
     deleteNonEssentialCookies: function () {
       for(var i = 0; i < elsCookieControl.nonEssentialCookies.length; i++) {
         var cookie = elsCookieControl.nonEssentialCookies[i];
         elsCookieControl.eraseCookie(cookie.name, cookie.path);
+      }
+    },
+    runDenyConsentScripts: function () {
+      for(var i = 0; i < elsCookieControl.denyConsentScripts.length; i++) {
+        elsCookieControl.denyConsentScripts[i]();
       }
     },
     cookiesAllowed: function() {

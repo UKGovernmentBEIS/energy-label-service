@@ -88,8 +88,7 @@ public class DocumentRendererService {
 
     analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
         eventCategory,
-        processedDocument.getAnalyticsEventAction(),
-        processedDocument.getProductMetadata().getAnalyticsLabel());
+        processedDocument.getAnalyticsEventParams());
 
     if (responseType == ResponseType.ATTACHMENT) {
       return serveResource(resource, generateFilename(processedDocument));
@@ -113,8 +112,7 @@ public class DocumentRendererService {
     // Use the first document for metadata
     analyticsService.sendGoogleAnalyticsEvent(primaryDocument.getClientAnalyticsToken(),
         eventCategory,
-        primaryDocument.getAnalyticsEventAction(),
-        primaryDocument.getProductMetadata().getAnalyticsLabel());
+        primaryDocument.getAnalyticsEventParams());
 
     if (responseType == ResponseType.ATTACHMENT) {
       return serveResource(resource, generateFilename(primaryDocument));
@@ -146,8 +144,7 @@ public class DocumentRendererService {
 
     analyticsService.sendGoogleAnalyticsEvent(processedDocument.getClientAnalyticsToken(),
         eventCategory,
-        processedDocument.getAnalyticsEventAction(),
-        processedDocument.getProductMetadata().getAnalyticsLabel());
+        processedDocument.getAnalyticsEventParams());
 
     if (responseType == ResponseType.ATTACHMENT) {
       return serveResource(renderer.render(processedDocument.getDocument()), generateImageFilename(processedDocument));

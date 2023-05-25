@@ -23,7 +23,8 @@ public class StaticContentController {
   @GetMapping("/cookies")
   public ModelAndView renderCookiePolicy(
       @RequestHeader(value = "referer", required = false) final String referer,
-      @Value("${app.valid_referer_domain}") String validRefererDomain
+      @Value("${app.valid_referer_domain}") String validRefererDomain,
+      @Value("${app.analytics_measurement_id}") String measurementId
   ) {
     ModelAndView modelAndView = new ModelAndView("staticContent/cookiePolicy");
     if(referer != null && referer.startsWith(validRefererDomain)) {
@@ -31,6 +32,7 @@ public class StaticContentController {
     } else {
       modelAndView.addObject("referer", null);
     }
+    modelAndView.addObject("measurementId", measurementId);
     return modelAndView;
   }
 
