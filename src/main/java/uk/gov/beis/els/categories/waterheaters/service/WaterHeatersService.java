@@ -134,6 +134,8 @@ public class WaterHeatersService {
       form.setWarmerGjAnnumBoth(heatPumpWaterHeatersApiForm.getWarmerGjAnnum());
     }
     form.setCanRunOffPeakOnly(heatPumpWaterHeatersApiForm.getCanRunOffPeakOnly());
+    form.setOutputFormat(heatPumpWaterHeatersApiForm.getOutputFormat());
+    form.setGoogleAnalyticsClientId(heatPumpWaterHeatersApiForm.getGoogleAnalyticsClientId());
     return form;
   }
 
@@ -187,6 +189,8 @@ public class WaterHeatersService {
     }
     form.setSoundPowerLevelIndoors(conventionalWaterHeaterApiForm.getSoundPowerLevelIndoors());
     form.setOffPeak(conventionalWaterHeaterApiForm.getOffPeak());
+    form.setOutputFormat(conventionalWaterHeaterApiForm.getOutputFormat());
+    form.setGoogleAnalyticsClientId(conventionalWaterHeaterApiForm.getGoogleAnalyticsClientId());
     return form;
   }
 
@@ -228,6 +232,8 @@ public class WaterHeatersService {
       form.setAverageGjAnnumBoth(solarWaterHeatersApiForm.getAverageGjAnnum());
       form.setWarmerGjAnnumBoth(solarWaterHeatersApiForm.getWarmerGjAnnum());
     }
+    form.setOutputFormat(solarWaterHeatersApiForm.getOutputFormat());
+    form.setGoogleAnalyticsClientId(solarWaterHeatersApiForm.getGoogleAnalyticsClientId());
     return form;
   }
 
@@ -254,6 +260,8 @@ public class WaterHeatersService {
     form.setStorageTank(waterSolarPackagesCalculatorForm.getStorageTank());
     form.setSupplierName(waterSolarPackagesCalculatorForm.getSupplierName());
     form.setModelName(waterSolarPackagesCalculatorForm.getModelName());
+    form.setOutputFormat(waterSolarPackagesCalculatorForm.getOutputFormat());
+    form.setGoogleAnalyticsClientId(waterSolarPackagesCalculatorForm.getGoogleAnalyticsClientId());
     return form;
   }
 
@@ -334,6 +342,8 @@ public class WaterHeatersService {
     waterSolarPackagesCalculatorForm.setSupplierName(boilerCombinationCalculatorForm.getSupplierName());
     waterSolarPackagesCalculatorForm.setModelName(boilerCombinationCalculatorForm.getModelName());
     waterSolarPackagesCalculatorForm.setOutputFormat(boilerCombinationCalculatorForm.getOutputFormat());
+    waterSolarPackagesCalculatorForm.setGoogleAnalyticsClientId(
+        boilerCombinationCalculatorForm.getGoogleAnalyticsClientId());
     return waterSolarPackagesCalculatorForm;
   }
 
@@ -351,6 +361,8 @@ public class WaterHeatersService {
     waterSolarPackagesCalculatorForm.setSupplierName(heatPumpCombinationCalculatorForm.getSupplierName());
     waterSolarPackagesCalculatorForm.setModelName(heatPumpCombinationCalculatorForm.getModelName());
     waterSolarPackagesCalculatorForm.setOutputFormat(heatPumpCombinationCalculatorForm.getOutputFormat());
+    waterSolarPackagesCalculatorForm.setGoogleAnalyticsClientId(
+        heatPumpCombinationCalculatorForm.getGoogleAnalyticsClientId());
     return waterSolarPackagesCalculatorForm;
   }
 

@@ -491,6 +491,7 @@ public class SpaceHeatersService {
     form.setSupplierName(calculatorForm.getSupplierName());
     form.setModelName(calculatorForm.getModelName());
     form.setOutputFormat(calculatorForm.getOutputFormat());
+    form.setGoogleAnalyticsClientId(calculatorForm.getGoogleAnalyticsClientId());
     return form;
   }
 
@@ -534,5 +535,7 @@ public class SpaceHeatersService {
     combinationHeaterPackagesForm.setPackageSpaceHeatingEfficiencyRating(spaceHeaterPackagesForm.getPackageEfficiencyRating());
     combinationHeaterPackagesForm.setSupplierName(spaceHeaterPackagesCalculatorForm.getSupplierName());
     combinationHeaterPackagesForm.setModelName(spaceHeaterPackagesCalculatorForm.getModelName());
+    combinationHeaterPackagesForm.setOutputFormat(spaceHeaterPackagesForm.getOutputFormat());
+    combinationHeaterPackagesForm.setGoogleAnalyticsClientId(spaceHeaterPackagesForm.getGoogleAnalyticsClientId());
   }
 }
