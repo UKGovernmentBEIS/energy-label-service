@@ -93,50 +93,28 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        _ga
-      </td>
-      <td width="50%" class="govuk-table__cell">
-        Checks if you’ve visited this service before. This helps us count how many people use the service.
-      </td>
-      <td class="govuk-table__cell">
-        2 years
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        _gid
-      </td>
-      <td width="50%" class="govuk-table__cell">
-        Checks if you’ve visited this service before. This helps us count how many people use the service.
-      </td>
-      <td class="govuk-table__cell">
-        24 hours
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        _gat
-      </td>
-      <td width="50%" class="govuk-table__cell">
-        Limits how often data is sent to Google Analytics
-      </td>
-      <td class="govuk-table__cell">
-        1 minute
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        _gat_govuk_shared
-      </td>
-      <td width="50%" class="govuk-table__cell">
-        Limits how often data is sent to Google Analytics
-      </td>
-      <td class="govuk-table__cell">
-        1 minute
-      </td>
-    </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          _ga
+        </td>
+        <td width="50%" class="govuk-table__cell">
+          Helps us count how many people visit this service by tracking if you’ve visited before
+        </td>
+        <td class="govuk-table__cell">
+          2 years
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          _ga_${measurementId?replace("G-", "")}
+        </td>
+        <td width="50%" class="govuk-table__cell">
+          Used by Google Analytics to find and track an individual session with your device
+        </td>
+        <td class="govuk-table__cell">
+          2 years
+        </td>
+      </tr>
     </tbody>
   </table>
 

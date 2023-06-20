@@ -20,7 +20,7 @@ public class HttpHeaderFilter extends OncePerRequestFilter {
     response.addHeader("pragma", "no-cache");
 
     // CSP
-    response.addHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' www.google-analytics.com; connect-src 'self' www.google-analytics.com; img-src 'self' www.google-analytics.com; object-src 'none'");
+    response.addHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' www.googletagmanager.com; connect-src 'self' www.googletagmanager.com *.google-analytics.com; img-src 'self' www.google-analytics.com; object-src 'none'");
 
     // Force browser XSS filter
     response.addHeader("X-XSS-Protection", "1; mode=block");

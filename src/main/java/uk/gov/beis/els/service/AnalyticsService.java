@@ -1,8 +1,6 @@
 package uk.gov.beis.els.service;
 
 import com.google.common.base.Strings;
-import java.time.Duration;
-import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,27 +10,38 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
+import uk.gov.beis.els.model.GoogleAnalyticsEventParams;
+
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class AnalyticsService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AnalyticsService.class);
 
-  private static final String GOOGLE_ANALYTICS_ENDPOINT = "https://www.google-analytics.com/collect";
+  private static final String GOOGLE_ANALYTICS_ENDPOINT = "https://www.google-analytics.com/mp/collect?api_secret={api_secret}&measurement_id={measurement_id}";
 
-  private boolean analyticsEnabled;
-  private int connectionTimeoutMs;
+  private final boolean analyticsEnabled;
+  private final int connectionTimeoutMs;
+  private final String apiSecret;
+  private final String measurementId;
 
-  public AnalyticsService(@Value("${app.enable_google_analytics}") boolean analyticsEnabled, @Value("${app.analytics_connection_timeout_ms}") int connectionTimeoutMs) {
+  public AnalyticsService(@Value("${app.enable_google_analytics}") boolean analyticsEnabled,
+                          @Value("${app.analytics_connection_timeout_ms}") int connectionTimeoutMs,
+                          @Value("${app.analytics_api_secret}") String apiSecret,
+                          @Value("${app.analytics_measurement_id}") String measurementId) {
     this.analyticsEnabled = analyticsEnabled;
     this.connectionTimeoutMs = connectionTimeoutMs;
+    this.apiSecret = apiSecret;
+    this.measurementId = measurementId;
   }
 
-  public void sendGoogleAnalyticsEvent(String jsClientId, GoogleAnalyticsEventCategory eventCategory, String action, String eventLabel) {
+  public void sendGoogleAnalyticsEvent(String jsClientId, GoogleAnalyticsEventCategory eventCategory, GoogleAnalyticsEventParams eventParams) {
     if (analyticsEnabled) {
       try {
         // We might not get a client ID if the user has JavaScript disabled or blocks the Google Analytics JS.
@@ -49,22 +58,21 @@ public class AnalyticsService {
             .build();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        Map<String, Object> event = new HashMap<>();
+        event.put("name", eventCategory.getDisplayValue());
+        event.put("params", eventParams.getParamsAsMap());
 
-        // See https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#event for information on the
+        Map<String, Object> map = new HashMap<>();
+
+        // See https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag for information on the
         // params we're sending
-        map.add("v", "1");
-        map.add("tid", "UA-136887405-1");
-        map.add("cid", clientId);
-        map.add("t", "event");
-        map.add("ec", eventCategory.getDisplayValue());
-        map.add("ea", action);
-        map.add("el", eventLabel);
+        map.put("client_id", clientId);
+        map.put("events", new Map[]{event});
 
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(GOOGLE_ANALYTICS_ENDPOINT, request, String.class);
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(map, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(GOOGLE_ANALYTICS_ENDPOINT, request, String.class, apiSecret, measurementId);
 
         if (!response.getStatusCode().is2xxSuccessful()) {
           LOGGER.error("Non 2xx code returned for google analytics event send (was {}). Response was still served to user.", response.getStatusCodeValue());
