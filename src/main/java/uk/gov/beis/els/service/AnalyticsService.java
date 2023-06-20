@@ -1,10 +1,6 @@
 package uk.gov.beis.els.service;
 
 import com.google.common.base.Strings;
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +14,11 @@ import org.springframework.web.client.RestTemplate;
 import uk.gov.beis.els.model.GoogleAnalyticsEventCategory;
 import uk.gov.beis.els.model.GoogleAnalyticsEventParams;
 
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 @Service
 public class AnalyticsService {
 
@@ -25,10 +26,10 @@ public class AnalyticsService {
 
   private static final String GOOGLE_ANALYTICS_ENDPOINT = "https://www.google-analytics.com/mp/collect?api_secret={api_secret}&measurement_id={measurement_id}";
 
-  private boolean analyticsEnabled;
-  private int connectionTimeoutMs;
-  private String apiSecret;
-  private String measurementId;
+  private final boolean analyticsEnabled;
+  private final int connectionTimeoutMs;
+  private final String apiSecret;
+  private final String measurementId;
 
   public AnalyticsService(@Value("${app.enable_google_analytics}") boolean analyticsEnabled, @Value("${app.analytics_connection_timeout_ms}") int connectionTimeoutMs, @Value("${app.analytics_api_secret}") String apiSecret, @Value("${app.analytics_measurement_id}") String measurementId) {
     this.analyticsEnabled = analyticsEnabled;
