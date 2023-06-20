@@ -90,8 +90,9 @@ public class AnalyticsService {
   private String parseGaApiSecret() {
     if (System.getenv("VCAP_SERVICES") == null) {
       // Allow running locally when PaaS vars don't exist
-      LOGGER.warn("No Gov PaaS VCAP_SERVICES env var found. Unable to extract GA api secret.");
-      return "not-set";
+      LOGGER.warn("No Gov PaaS VCAP_SERVICES env var found, unable to extract GA api secret. Falling back to LOCAL_DEV_ANALYTICS_API_SECRET");
+      String localSecretValue = System.getenv("LOCAL_DEV_ANALYTICS_API_SECRET");
+      return (localSecretValue == null)? "not-set" : localSecretValue;
     }
     try {
       CfEnv cfEnv = new CfEnv();
