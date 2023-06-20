@@ -150,6 +150,7 @@ public class LampsService {
     lampsForm.setEnergyConsumption(form.getEnergyConsumption());
     lampsForm.setSupplierName(form.getSupplierName());
     lampsForm.setModelName(form.getModelName());
+    lampsForm.setOutputFormat(form.getOutputFormat());
     return lampsForm;
   }
 
@@ -163,6 +164,7 @@ public class LampsService {
     lampsForm.setQrCodeUrl(form.getQrCodeUrl());
     lampsForm.setSupplierName(form.getSupplierName());
     lampsForm.setModelName(form.getModelName());
+    lampsForm.setOutputFormat(form.getOutputFormat());
     return lampsForm;
   }
 }

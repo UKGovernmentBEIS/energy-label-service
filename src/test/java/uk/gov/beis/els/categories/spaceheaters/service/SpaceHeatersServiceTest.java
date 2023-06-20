@@ -1,10 +1,6 @@
 package uk.gov.beis.els.categories.spaceheaters.service;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +13,10 @@ import uk.gov.beis.els.categories.waterheaters.model.WaterSolarPackagesForm;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;
 import uk.gov.beis.els.model.RatingClass;
 import uk.gov.beis.els.service.TemplateParserService;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SpaceHeatersServiceTest {
@@ -80,6 +80,9 @@ public class SpaceHeatersServiceTest {
     sourceForm.setSupplementaryHeatPumpHeatOutput("400");
     sourceForm.setSupplementaryHeatPumpSeasonalSpaceHeatingEfficiencyPercentage("65");
 
+    sourceForm.setOutputFormat("PNG");
+    sourceForm.setGoogleAnalyticsClientId("123");
+
     CombinationHeaterPackagesForm targetForm = spaceHeatersService.toCombinationHeaterPackagesForm(sourceForm);
 
     assertThat(targetForm.getSupplierName()).isEqualTo("supplier-name");
@@ -94,6 +97,8 @@ public class SpaceHeatersServiceTest {
     assertThat(targetForm.getHeaterDeclaredLoadProfile()).isEqualTo("XL");
     assertThat(targetForm.getPackageWaterHeatingEfficiencyRating()).isEqualTo("D");
     assertThat(targetForm.getPackageDeclaredLoadProfile()).isEqualTo("XL");
+    assertThat(targetForm.getOutputFormat()).isEqualTo("PNG");
+    assertThat(targetForm.getGoogleAnalyticsClientId()).isEqualTo("123");
   }
 
   @Test
@@ -116,6 +121,9 @@ public class SpaceHeatersServiceTest {
     sourceForm.setSpaceHeater(false);
     sourceForm.setSupplementaryHeatPump(false);
 
+    sourceForm.setOutputFormat("PNG");
+    sourceForm.setGoogleAnalyticsClientId("123");
+
     CombinationHeaterPackagesForm targetForm = spaceHeatersService.toCombinationHeaterPackagesForm(sourceForm);
 
     assertThat(targetForm.getSupplierName()).isEqualTo("supplier-name");
@@ -130,6 +138,8 @@ public class SpaceHeatersServiceTest {
     assertThat(targetForm.getHeaterDeclaredLoadProfile()).isEqualTo("M");
     assertThat(targetForm.getPackageWaterHeatingEfficiencyRating()).isEqualTo("D");
     assertThat(targetForm.getPackageDeclaredLoadProfile()).isEqualTo("M");
+    assertThat(targetForm.getOutputFormat()).isEqualTo("PNG");
+    assertThat(targetForm.getGoogleAnalyticsClientId()).isEqualTo("123");
   }
 
   @Test
@@ -163,6 +173,9 @@ public class SpaceHeatersServiceTest {
 
     sourceForm.setSpaceHeater(true);
 
+    sourceForm.setOutputFormat("PNG");
+    sourceForm.setGoogleAnalyticsClientId("123");
+
     CombinationHeaterPackagesForm targetForm = spaceHeatersService.toCombinationHeaterPackagesForm(sourceForm);
 
     assertThat(targetForm.getSupplierName()).isEqualTo("supplier-name");
@@ -177,6 +190,8 @@ public class SpaceHeatersServiceTest {
     assertThat(targetForm.getHeaterDeclaredLoadProfile()).isEqualTo("XL");
     assertThat(targetForm.getPackageWaterHeatingEfficiencyRating()).isEqualTo("D");
     assertThat(targetForm.getPackageDeclaredLoadProfile()).isEqualTo("XL");
+    assertThat(targetForm.getOutputFormat()).isEqualTo("PNG");
+    assertThat(targetForm.getGoogleAnalyticsClientId()).isEqualTo("123");
   }
 
   @Test
@@ -202,6 +217,9 @@ public class SpaceHeatersServiceTest {
     sourceForm.setStorageTank(false);
     sourceForm.setSpaceHeater(false);
 
+    sourceForm.setOutputFormat("PNG");
+    sourceForm.setGoogleAnalyticsClientId("123");
+
     CombinationHeaterPackagesForm targetForm = spaceHeatersService.toCombinationHeaterPackagesForm(sourceForm);
 
     assertThat(targetForm.getSupplierName()).isEqualTo("supplier-name");
@@ -216,6 +234,8 @@ public class SpaceHeatersServiceTest {
     assertThat(targetForm.getHeaterDeclaredLoadProfile()).isEqualTo("XL");
     assertThat(targetForm.getPackageWaterHeatingEfficiencyRating()).isEqualTo("D");
     assertThat(targetForm.getPackageDeclaredLoadProfile()).isEqualTo("XL");
+    assertThat(targetForm.getOutputFormat()).isEqualTo("PNG");
+    assertThat(targetForm.getGoogleAnalyticsClientId()).isEqualTo("123");
   }
 
 }
