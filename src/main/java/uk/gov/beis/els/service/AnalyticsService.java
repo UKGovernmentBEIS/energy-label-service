@@ -31,7 +31,10 @@ public class AnalyticsService {
   private final String apiSecret;
   private final String measurementId;
 
-  public AnalyticsService(@Value("${app.enable_google_analytics}") boolean analyticsEnabled, @Value("${app.analytics_connection_timeout_ms}") int connectionTimeoutMs, @Value("${app.analytics_api_secret}") String apiSecret, @Value("${app.analytics_measurement_id}") String measurementId) {
+  public AnalyticsService(@Value("${app.enable_google_analytics}") boolean analyticsEnabled,
+                          @Value("${app.analytics_connection_timeout_ms}") int connectionTimeoutMs,
+                          @Value("${app.analytics_api_secret}") String apiSecret,
+                          @Value("${app.analytics_measurement_id}") String measurementId) {
     this.analyticsEnabled = analyticsEnabled;
     this.connectionTimeoutMs = connectionTimeoutMs;
     this.apiSecret = apiSecret;

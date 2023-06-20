@@ -10,7 +10,7 @@ public class GoogleAnalyticsEventParams {
     params = new HashMap<>();
   }
 
-  public void addParam(String name, String value) throws RuntimeException {
+  public void addParam(String name, String value) {
     if(value == null) {
       // Null parameter values will cause the whole event to be rejected by GA, so discard them
       return;

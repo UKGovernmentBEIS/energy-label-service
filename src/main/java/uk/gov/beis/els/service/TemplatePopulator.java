@@ -331,8 +331,6 @@ public class TemplatePopulator {
         LightSourceArrowOrientation.valueOf(form.getLabelOrientation()).getShortName(),
         TemplateColour.valueOf(form.getTemplateColour()).getDisplayName());
 
-    String analyticsAction = String.format("%s - %s", labelProperties, labelFormat);
-
     GoogleAnalyticsEventParams analyticsEventParams = new GoogleAnalyticsEventParams();
     analyticsEventParams.addParam("product_type", analyticsLabel.getAnalyticsProductType());
     analyticsEventParams.addParam("product_subtype", analyticsLabel.getAnalyticsProductSubtype());
