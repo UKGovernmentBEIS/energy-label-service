@@ -28,6 +28,7 @@ dependencies {
   implementation 'org.jsoup:jsoup:1.11.3'
   implementation 'com.google.guava:guava:27.1-jre'
   implementation 'io.nayuki:qrcodegen:1.6.0'
+  implementation 'io.pivotal.cfenv:java-cfenv:2.4.2'
 
   //Bucket4j dependencies
   implementation 'com.giffing.bucket4j.spring.boot.starter:bucket4j-spring-boot-starter:0.5.2'
