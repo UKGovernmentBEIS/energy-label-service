@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-alpine
+FROM public.ecr.aws/docker/library/eclipse-temurin:17-alpine
 COPY ./build/libs/energy-label-service-SNAPSHOT.jar app.jar
 
 RUN apk update && apk upgrade && rm -rf /var/cache/apk/*
