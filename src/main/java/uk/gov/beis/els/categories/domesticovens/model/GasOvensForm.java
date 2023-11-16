@@ -1,8 +1,8 @@
 package uk.gov.beis.els.categories.domesticovens.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 

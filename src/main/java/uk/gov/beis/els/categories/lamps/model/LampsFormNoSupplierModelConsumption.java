@@ -1,8 +1,8 @@
 package uk.gov.beis.els.categories.lamps.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
-import javax.validation.groups.Default;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.groups.Default;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;

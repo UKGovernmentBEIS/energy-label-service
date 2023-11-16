@@ -1,6 +1,6 @@
 package uk.gov.beis.els.categories.common;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.gov.beis.els.model.meta.FieldPrompt;

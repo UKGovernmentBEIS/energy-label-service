@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.validation.constraints.Digits;
+import jakarta.validation.constraints.Digits;
 import org.springdoc.core.customizers.PropertyCustomizer;
 import org.springframework.stereotype.Component;
 import uk.gov.beis.els.api.common.ApiValuesFromEnum;

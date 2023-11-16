@@ -5,7 +5,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.Schema;
 import java.util.Map;
 import java.util.TreeMap;
-import org.springdoc.core.customizers.OpenApiCustomiser;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,7 +24,7 @@ public class OpenApiConfig {
       );
   }
   @Bean
-  public OpenApiCustomiser sortSchemasAlphabetically() {
+  public OpenApiCustomizer sortSchemasAlphabetically() {
     return openApi -> {
       Map<String, Schema> schemas = openApi.getComponents().getSchemas();
       openApi.getComponents().setSchemas(new TreeMap<>(schemas));

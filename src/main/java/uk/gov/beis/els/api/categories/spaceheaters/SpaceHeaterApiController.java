@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +32,7 @@ import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
 @RequestMapping("${api.v1.base_path}/space-heaters")
-@Tag(name = "Space heaters")
+@Tag(name = "Space heaters", description = "Generate labels for space heaters")
 public class SpaceHeaterApiController {
 
   private final SpaceHeatersService spaceHeatersService;

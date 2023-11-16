@@ -1,9 +1,9 @@
 package uk.gov.beis.els.categories.waterheaters.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import uk.gov.beis.els.api.common.ApiValuesFromLoadProfileList;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.waterheaters.service.WaterHeatersService;

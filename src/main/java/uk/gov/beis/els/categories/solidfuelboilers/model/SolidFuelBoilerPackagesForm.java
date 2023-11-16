@@ -1,9 +1,9 @@
 package uk.gov.beis.els.categories.solidfuelboilers.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.groups.Default;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.categories.common.StandardTemplateForm50Char;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;

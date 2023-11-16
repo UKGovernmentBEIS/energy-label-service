@@ -2,7 +2,7 @@ package uk.gov.beis.els.api.categories.lamps;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
 @RequestMapping("${api.v1.base_path}/lamps")
-@Tag(name = "Lamps and light sources")
+@Tag(name = "Lamps and light sources", description = "Generate labels for lamps and light sources")
 public class LampsApiController {
 
   private final LampsService lampsService;

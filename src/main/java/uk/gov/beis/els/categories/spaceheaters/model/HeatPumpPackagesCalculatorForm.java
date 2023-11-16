@@ -1,8 +1,8 @@
 package uk.gov.beis.els.categories.spaceheaters.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 
 @Schema(name = "Packages of space heater, temperature control and solar device energy label calculator - Heat pump")
