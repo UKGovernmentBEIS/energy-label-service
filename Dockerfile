@@ -1,5 +1,16 @@
+# Build steps
+FROM public.ecr.aws/docker/library/node:10 as build-frontend
+WORKDIR /build
+COPY . .
+RUN npm install && npx gulp buildAll
+
+FROM public.ecr.aws/docker/library/eclipse-temurin:17 as build-backend
+COPY --from=build-frontend /build .
+RUN chmod +x gradlew && ./gradlew test bootJar
+
+# Runtime image
 FROM public.ecr.aws/docker/library/eclipse-temurin:17-alpine
-COPY ./build/libs/energy-label-service-SNAPSHOT.jar app.jar
+COPY --from=build-backend ./build/libs/energy-label-service-SNAPSHOT.jar app.jar
 
 RUN apk update && apk upgrade && rm -rf /var/cache/apk/*
 
