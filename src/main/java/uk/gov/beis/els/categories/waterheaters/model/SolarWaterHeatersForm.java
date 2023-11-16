@@ -1,8 +1,8 @@
 package uk.gov.beis.els.categories.waterheaters.model;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.groups.Default;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.groups.Default;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.waterheaters.model.validation.SolarWaterHeatersFormSequenceProvider;

@@ -1,9 +1,9 @@
 package uk.gov.beis.els.api.common;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelFormat;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.model.meta.FieldPrompt;

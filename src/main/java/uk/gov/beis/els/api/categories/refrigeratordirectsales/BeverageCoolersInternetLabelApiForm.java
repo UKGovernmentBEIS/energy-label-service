@@ -1,7 +1,7 @@
 package uk.gov.beis.els.api.categories.refrigeratordirectsales;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
 import uk.gov.beis.els.api.common.RescaledInternetLabelApiForm;
 import uk.gov.beis.els.categories.refrigeratorsdirectsales.service.RefrigeratorsDirectSalesService;

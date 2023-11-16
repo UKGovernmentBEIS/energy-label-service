@@ -1,8 +1,8 @@
 package uk.gov.beis.els.categories.internetlabelling.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
 import uk.gov.beis.els.categories.common.BaseForm;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.InternetLabelModeField;

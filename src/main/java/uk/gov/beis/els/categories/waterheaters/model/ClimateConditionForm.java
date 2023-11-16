@@ -1,7 +1,7 @@
 package uk.gov.beis.els.categories.waterheaters.model;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
 import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
 import uk.gov.beis.els.categories.waterheaters.model.validation.ConsumptionUnitBoth;
 import uk.gov.beis.els.categories.waterheaters.model.validation.ConsumptionUnitGj;

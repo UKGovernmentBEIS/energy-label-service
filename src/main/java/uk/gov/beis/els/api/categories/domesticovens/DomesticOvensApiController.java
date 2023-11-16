@@ -2,7 +2,7 @@ package uk.gov.beis.els.api.categories.domesticovens;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
 @RequestMapping("${api.v1.base_path}/domestic-ovens")
-@Tag(name = "Domestic ovens")
+@Tag(name = "Domestic ovens", description = "Generate labels for domestic ovens")
 public class DomesticOvensApiController {
 
   private final DomesticOvensService domesticOvensService;

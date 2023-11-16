@@ -2,8 +2,8 @@ package uk.gov.beis.els.api.common;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
 
 public class ApiValuesFromEnumValidator implements ConstraintValidator<ApiValuesFromEnum, String> {

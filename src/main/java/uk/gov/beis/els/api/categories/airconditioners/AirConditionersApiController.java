@@ -2,7 +2,7 @@ package uk.gov.beis.els.api.categories.airconditioners;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +21,7 @@ import uk.gov.beis.els.service.DocumentRendererService;
 
 @RestController
 @RequestMapping("${api.v1.base_path}/air-conditioners")
-@Tag(name = "Air conditioners")
+@Tag(name = "Air conditioners", description = "Generate labels for air conditioners")
 public class AirConditionersApiController {
 
   private final AirConditionersService airConditionersService;
