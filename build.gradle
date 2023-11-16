@@ -33,7 +33,7 @@ dependencies {
   implementation 'com.google.guava:guava:32.1.3-jre'
   implementation 'io.nayuki:qrcodegen:1.6.0'
   implementation 'io.pivotal.cfenv:java-cfenv:2.4.2'
-
+  implementation 'org.yaml:snakeyaml:2.2' // shade older 1.33 provided by Spring Boot 3.1 to fix CVEs. Can be removed when going to Spring Boot 3.2
   implementation 'org.slf4j:slf4j-api:2.0.7'
 
   //Bucket4j dependencies
@@ -45,9 +45,4 @@ dependencies {
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-configurations.implementation {
-  // Exclude snakeyaml as it has critical vulns, and Spring only uses it to parse .yaml config files which we don't have.
-  exclude group:"org.yaml", module: "snakeyaml"
 }
