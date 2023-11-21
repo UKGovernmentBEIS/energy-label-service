@@ -33,15 +33,21 @@
     denyConsentScripts: [
       // Google Analytics
       function() {
-        function gtag(){dataLayer.push(arguments);}
+        // dataLayer will only exist on window if they've already consented to analytics. If that's the case, we update
+        // consent preferences in the Google tag to ensure cookies aren't recreated
+        if(window.hasOwnProperty("dataLayer")) {
+          function gtag() {
+            dataLayer.push(arguments);
+          }
 
-        gtag("consent", "default", {
-          ad_storage: "denied",
-          analytics_storage: "denied",
-          functionality_storage: "denied",
-          personalization_storage: "denied",
-          security_storage: "denied"
-        });
+          gtag("consent", "default", {
+            ad_storage: "denied",
+            analytics_storage: "denied",
+            functionality_storage: "denied",
+            personalization_storage: "denied",
+            security_storage: "denied"
+          });
+        }
       }
     ],
     setCookie: function (name,value,days) {
