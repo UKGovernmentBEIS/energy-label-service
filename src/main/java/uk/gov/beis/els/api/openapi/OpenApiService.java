@@ -23,6 +23,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 import uk.gov.beis.els.api.common.ApiDocumentationController;
 import uk.gov.beis.els.api.common.TagNotFoundException;
 import uk.gov.beis.els.api.model.OperationWithSchema;
@@ -66,9 +67,15 @@ public class OpenApiService {
   }
 
   public String getBaseUrl(HttpServletRequest request) {
-    return ServletUriComponentsBuilder.fromRequestUri(request)
-        .replacePath(null)
-        .build()
+    UriComponentsBuilder builder = ServletUriComponentsBuilder.fromRequestUri(request)
+        .replacePath(null);
+
+    String xForwardedProto = request.getHeader("X-Forwarded-Proto");
+    if (xForwardedProto != null) {
+      builder.scheme(xForwardedProto);
+    }
+
+    return builder.build()
         .toUriString();
   }
 
