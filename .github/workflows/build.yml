@@ -59,18 +59,6 @@ jobs:
           curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=${CF_CLI_VERSION}" | tar -zx -C $GITHUB_WORKSPACE/bin
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
-      - name: Deploy dev
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
-        env:
-          CF_USERNAME: ${{ secrets.CF_USERNAME }}
-          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
-        run: |
-          cf api api.london.cloud.service.gov.uk
-          cf auth
-          cf target -o beis-energy-label-service -s energy-label-service-dev
-          cf push -f manifest-dev.yml
-          cf logout
-
       - name: Deploy QA
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
         env:
