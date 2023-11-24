@@ -1,7 +1,6 @@
 package uk.gov.beis.els.service;
 
 import com.google.common.base.Strings;
-import io.pivotal.cfenv.core.CfEnv;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,10 +32,11 @@ public class AnalyticsService {
 
   public AnalyticsService(@Value("${app.enable_google_analytics}") boolean analyticsEnabled,
                           @Value("${app.analytics_connection_timeout_ms}") int connectionTimeoutMs,
-                          @Value("${app.analytics_measurement_id}") String measurementId) {
+                          @Value("${app.analytics_measurement_id}") String measurementId,
+                          @Value("${app.analytics_api_secret}") String apiSecret) {
     this.analyticsEnabled = analyticsEnabled;
     this.connectionTimeoutMs = connectionTimeoutMs;
-    this.apiSecret = parseGaApiSecret();
+    this.apiSecret = apiSecret;
     this.measurementId = measurementId;
   }
 
@@ -82,27 +82,6 @@ public class AnalyticsService {
       }
     }
 
-  }
-
-  // Handle secrets set via GovUk PaaS. Can be removed once migrated to BEIS AWS platform
-  // See https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#VCAP-SERVICES and
-  // https://docs.cloudfoundry.org/devguide/services/user-provided.html
-  private String parseGaApiSecret() {
-    if (System.getenv("VCAP_SERVICES") == null) {
-      // Allow running locally when PaaS vars don't exist
-      LOGGER.warn("No Gov PaaS VCAP_SERVICES env var found, unable to extract GA api secret. Falling back to LOCAL_DEV_ANALYTICS_API_SECRET");
-      String localSecretValue = System.getenv("LOCAL_DEV_ANALYTICS_API_SECRET");
-      return (localSecretValue == null)? "not-set" : localSecretValue;
-    }
-    try {
-      CfEnv cfEnv = new CfEnv();
-      return cfEnv
-          .findServiceByName("ga-credentials")
-          .getCredentials()
-          .getString("api_key");
-    } catch (Exception e) {
-      throw new RuntimeException("Failed to parse Gov PaaS VCAP_SERVICES env var");
-    }
   }
 
 }
