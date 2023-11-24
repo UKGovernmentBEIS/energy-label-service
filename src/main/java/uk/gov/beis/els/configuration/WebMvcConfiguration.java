@@ -60,6 +60,21 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
       LOGGER.info("Arial-bold loaded {}", arialBoldLoaded);
 
+      boolean myriadProLoaded = GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(
+          Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource("fonts/myriad-pro.ttf").getInputStream()));
+
+      LOGGER.info("Myriad Pro loaded {}", myriadProLoaded);
+
+      boolean myriadProBoldLoaded = GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(
+          Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource("fonts/myriad-pro-bold.ttf").getInputStream()));
+
+      LOGGER.info("Myriad Pro Bold loaded {}", myriadProBoldLoaded);
+
+      boolean myriadProSemiBoldLoaded = GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(
+          Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource("fonts/myriad-pro-semibold.ttf").getInputStream()));
+
+      LOGGER.info("Myriad Pro Semi Bold loaded {}", myriadProSemiBoldLoaded);
+
       LOGGER.info("Available system fonts are:");
       Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()).forEach(f ->
           LOGGER.info("Font: {}", f)
