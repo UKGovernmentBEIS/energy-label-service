@@ -8,7 +8,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "combine-image": "^1.0.3",
     "swagger-parser": "^10.0.3",
     "node-fetch": "^3.3.2",
