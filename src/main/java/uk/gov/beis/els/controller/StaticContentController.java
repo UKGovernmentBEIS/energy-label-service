@@ -44,4 +44,10 @@ public class StaticContentController {
     return "OK";
   }
 
+  @GetMapping(value = "/throw-error")
+  @ResponseBody
+  public String throwError() {
+    throw new RuntimeException("Example error");
+  }
+
 }
