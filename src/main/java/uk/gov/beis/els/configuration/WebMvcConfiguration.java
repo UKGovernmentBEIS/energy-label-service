@@ -85,4 +85,21 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
   }
 
+  @EventListener(ApplicationReadyEvent.class)
+  public void tempDebug() {
+    logVar("ANALYTICS_CONN_TIMEOUT_MS");
+    logVar("ENABLE_GOOGLE_ANALYTICS");
+    logVar("ENABLE_RATE_LIMITING");
+    logVar("ENABLE_GOOGLE_ANALYTICS");
+    logVar("HOME_PAGE_URL");
+    logVar("RATE_LIMIT_CAPACITY");
+    logVar("RATE_LIMIT_TIME_UNIT");
+    logVar("RATE_LIMIT_TIME_VALUE");
+    logVar("SHOW_START_PAGE");
+  }
+
+  private void logVar(String name) {
+    LOGGER.info("var {} is {}", name, System.getenv(name));
+  }
+
 }
