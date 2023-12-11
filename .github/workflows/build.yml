@@ -51,39 +51,39 @@ jobs:
           pip install schemathesis
           schemathesis run --hypothesis-phases=explicit http://localhost:8080/api/v1/energy-labels-openapi.json
 
-      - name: Install cf client
-        env:
-          CF_CLI_VERSION: v6
-        run: |
-          mkdir -p $GITHUB_WORKSPACE/bin
-          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=${CF_CLI_VERSION}" | tar -zx -C $GITHUB_WORKSPACE/bin
-          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
-
-      - name: Deploy QA
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
-        env:
-          CF_USERNAME: ${{ secrets.CF_USERNAME }}
-          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
-        run: |
-          cf api api.london.cloud.service.gov.uk
-          cf auth
-          cf target -o beis-energy-label-service -s energy-label-service-qa
-          cf push -f manifest-qa.yml
-          cf logout
-
-      - name: Deploy prod
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        env:
-          API: api.london.cloud.service.gov.uk
-          APP: energy-label-service-prod
-          ORG: beis-energy-label-service
-          SPACE: energy-label-service-prod
-          MANIFEST: manifest-prod.yml
-          SMOKE_TEST: ci/smoke-test.sh
-          DELETE_OLD_APPS: true
-          USER: ${{ secrets.CF_USERNAME }}
-          CF_PASS: ${{ secrets.CF_PASSWORD }}
-        run: |
-          chmod +x ci/blue-green-deploy.sh
-          chmod +x ci/smoke-test.sh
-          ci/blue-green-deploy.sh
+#      - name: Install cf client
+#        env:
+#          CF_CLI_VERSION: v6
+#        run: |
+#          mkdir -p $GITHUB_WORKSPACE/bin
+#          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=${CF_CLI_VERSION}" | tar -zx -C $GITHUB_WORKSPACE/bin
+#          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+#
+#      - name: Deploy QA
+#        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/qa' }}
+#        env:
+#          CF_USERNAME: ${{ secrets.CF_USERNAME }}
+#          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+#        run: |
+#          cf api api.london.cloud.service.gov.uk
+#          cf auth
+#          cf target -o beis-energy-label-service -s energy-label-service-qa
+#          cf push -f manifest-qa.yml
+#          cf logout
+#
+#      - name: Deploy prod
+#        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+#        env:
+#          API: api.london.cloud.service.gov.uk
+#          APP: energy-label-service-prod
+#          ORG: beis-energy-label-service
+#          SPACE: energy-label-service-prod
+#          MANIFEST: manifest-prod.yml
+#          SMOKE_TEST: ci/smoke-test.sh
+#          DELETE_OLD_APPS: true
+#          USER: ${{ secrets.CF_USERNAME }}
+#          CF_PASS: ${{ secrets.CF_PASSWORD }}
+#        run: |
+#          chmod +x ci/blue-green-deploy.sh
+#          chmod +x ci/smoke-test.sh
+#          ci/blue-green-deploy.sh
