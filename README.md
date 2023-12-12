@@ -1,6 +1,12 @@
 # Energy Label Service
-[![Build Status](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg)](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/44d631203c5a49d79e2fe3ed828d3c6c)](https://www.codacy.com/app/jamesbarnett91/energy-label-service?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=UKGovernmentBEIS/energy-label-service&amp;utm_campaign=Badge_Grade)
+
+| Deployment      | Status                                                                                                                                                                                    |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Automated tests | [![Build Status](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg)](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg) |
+| Dev    | [![Dev Status](https://7uqlzn70fa.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://7uqlzn70fa.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)               |
+| Staging | [![Dev Status](https://umym7pnse0.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://umym7pnse0.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)               |
+| Prod  | [![Dev Status](https://lmn5053vxi.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://lmn5053vxi.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)               |
+
 
 Digital service allowing users to create energy labels for a variety of products, such as light bulbs, heaters, televisions and ovens.
 
