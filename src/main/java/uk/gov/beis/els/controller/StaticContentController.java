@@ -1,13 +1,11 @@
 package uk.gov.beis.els.controller;
 
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -34,20 +32,6 @@ public class StaticContentController {
     }
     modelAndView.addObject("measurementId", measurementId);
     return modelAndView;
-  }
-
-  @GetMapping(value = "/print-headers")
-  @ResponseBody
-  public String printHeaders(@RequestHeader Map<String, String> headers) {
-    LOGGER.info("Forwarded headers:");
-    headers.forEach((k, v) -> LOGGER.info("{} = {}", k, v));
-    return "OK";
-  }
-
-  @GetMapping(value = "/throw-error")
-  @ResponseBody
-  public String throwError() {
-    throw new RuntimeException("Example error");
   }
 
 }

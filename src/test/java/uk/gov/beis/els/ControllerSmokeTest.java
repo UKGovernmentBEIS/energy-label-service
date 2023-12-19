@@ -48,8 +48,7 @@ public class ControllerSmokeTest {
 
     ignoredEndpointPrefixes = Arrays.asList(
         "/swagger-ui.html",
-        "/api-documentation",
-        "/throw-error");
+        "/api-documentation");
 
   }
 
