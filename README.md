@@ -3,9 +3,9 @@
 | Deployment      | Status                                                                                                                                                                                    |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Automated tests | [![Build Status](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg)](https://github.com/UKGovernmentBEIS/energy-label-service/workflows/Build/badge.svg) |
-| Dev    | [![Dev Status](https://7uqlzn70fa.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://7uqlzn70fa.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)               |
-| Staging | [![Dev Status](https://umym7pnse0.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://umym7pnse0.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)               |
-| Prod  | [![Dev Status](https://lmn5053vxi.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://lmn5053vxi.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)               |
+| Dev    | [![Dev Status](https://7uqlzn70fa.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://eu-west-2.console.aws.amazon.com/codesuite/codepipeline/pipelines/dev-els-prepare-docker-image/view?region=eu-west-2)               |
+| Staging | [![Dev Status](https://umym7pnse0.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://eu-west-2.console.aws.amazon.com/codesuite/codepipeline/pipelines/staging-els-prepare-docker-image/view?region=eu-west-2)               |
+| Prod  | [![Dev Status](https://lmn5053vxi.execute-api.eu-west-2.amazonaws.com/badges/pipelineStatus)](https://eu-west-2.console.aws.amazon.com/codesuite/codepipeline/pipelines/production-els-prepare-docker-image/view?region=eu-west-2)               |
 
 
 Digital service allowing users to create energy labels for a variety of products, such as light bulbs, heaters, televisions and ovens.
@@ -15,7 +15,7 @@ Digital service allowing users to create energy labels for a variety of products
 The service is built using the [Spring Boot](https://spring.io/projects/spring-boot) framework.
 
 First, ensure you have the following prerequisites installed: 
-* Java 8 (or higher)
+* Java 17 (or higher)
 * NPM
 
 Then:
@@ -37,7 +37,7 @@ Then:
     
 ## Deployment
 
-Any code committed to the `develop`, `qa`, or `master` branch (via PR merge or direct commit) will automatically trigger a GitHub Actions workflow to build and deploy to the `dev`, `qa` and `prod` environments respectively.
+Any code committed to the `develop`, `qa`, or `master` branch (via PR merge or direct commit) will automatically trigger a AWS CodePipeline workflow to build and deploy to the `dev`, `staging` and `prod` environments respectively.
 
 Changes should first be made on `develop`, merged to `qa` and then finally `master` once completed and QA'd. Merges should be done using the `--ff-only` option in order to avoid merge commits which will de-sync the branches.
 
@@ -47,8 +47,7 @@ git checkout qa
 git merge develop --ff-only
 git push
 ```
-
-Note that only the production environment has blue/green deployments enabled. Pushes to `develop` or `qa` will briefly take down the respective environment as the application is redeployed.
+The badges at the top of the readme show the current deployment status for each environment. Click them to view the full pipeline (you will need to be logged in to the BEIS AWS PaaS).
 
 ## Modifying existing products
 The vast majority of product 'config' (e.g. field prompts, hint text, validation rules etc) resides in the form object for the given product. 
