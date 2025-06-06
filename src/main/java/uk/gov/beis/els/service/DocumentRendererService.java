@@ -1,10 +1,12 @@
 package uk.gov.beis.els.service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -181,7 +183,7 @@ public class DocumentRendererService {
           .contentType(MediaType.APPLICATION_OCTET_STREAM)
           .contentLength(resource.contentLength())
           .header(
-              HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=\"%s\"", fileName))
+              HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename(fileName, StandardCharsets.UTF_8).build().toString())
           .body(resource);
     } catch (Exception e) {
       throw new RuntimeException(String.format("Error serving file '%s'", fileName), e);
