@@ -6,10 +6,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ValidationUtils;
@@ -20,19 +16,6 @@ import uk.gov.beis.els.model.RatingClassRange;
 import uk.gov.beis.els.model.SelectableLegislationCategory;
 
 public class ControllerUtils {
-
-  public static ResponseEntity serveResource(Resource resource, String filename) {
-    try {
-      return ResponseEntity.ok()
-          .contentType(MediaType.APPLICATION_OCTET_STREAM)
-          .contentLength(resource.contentLength())
-          .header(
-              HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=\"%s\"", filename))
-          .body(resource);
-    } catch (Exception e) {
-      throw new RuntimeException(String.format("Error serving PDF file '%s'", filename), e);
-    }
-  }
 
   public static void addErrorSummary(ModelAndView modelAndView, List<FieldError> errorList) {
     modelAndView.addObject("errorList", errorList.stream()
