@@ -13,7 +13,7 @@
 
   <h2 class="govuk-heading-m">Using this service</h2>
   <p class="govuk-body">
-    This service is run by the Department for Business, Energy and Industrial Strategy. We want as many people as
+    This service is run by the Department for Energy Security and Net Zero. We want as many people as
     possible to be able to use this service. For example, that means you should be able to:
   </p>
   <ul class="govuk-list govuk-list--bullet">
@@ -39,7 +39,7 @@
   <h2 class="govuk-heading-m">Reporting accessibility problems with this service</h2>
   <p class="govuk-body">
     If you do come across problems or find the service difficult to use, please let us know by emailing us at
-    <a class="govuk-link" href="mailto:efficientproducts@beis.gov.uk?subject=Accessibility problem">efficientproducts@beis.gov.uk</a>.
+    <a class="govuk-link" href="mailto:efficientproducts@energysecurity.gov.uk?subject=Accessibility problem">efficientproducts@energysecurity.gov.uk</a>.
     We aim to respond to all queries within 72 hours.
   </p>
 
@@ -53,7 +53,7 @@
 
   <h2 class="govuk-heading-m">Technical information about this service’s accessibility</h2>
   <p class="govuk-body">
-    The Department for Business, Energy and Industrial Strategy is committed to making this service accessible, in
+    The Department for Energy Security and Net Zero is committed to making this service accessible, in
     accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
   </p>
   <p class="govuk-body">
@@ -75,7 +75,7 @@
     We are not aware of any accessibility problems with the ‘Create an energy label’ service at the moment. We will
     update this section shortly if the accessibility audit report recommends any improvements. If you think
     anything could be improved to make the service more accessible, please let us know by emailing
-    <a class="govuk-link" href="mailto:efficientproducts@beis.gov.uk?subject=Accessibility problem">efficientproducts@beis.gov.uk</a>
+    <a class="govuk-link" href="mailto:efficientproducts@energysecurity.gov.uk?subject=Accessibility problem">efficientproducts@energysecurity.gov.uk</a>
   </p>
   <p class="govuk-body">
     This statement was prepared on 1 October 2019. It was last updated on 1 October 2019.

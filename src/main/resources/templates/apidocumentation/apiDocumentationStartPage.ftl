@@ -76,7 +76,7 @@
         Request validation
       </h2>
       <p class="govuk-body">
-        These endpoints return data in PDF format for energy labels, PNG or JPEG for arrow images and JSON for errors.
+        These endpoints return data in PDF, PNG or JPEG formats for energy labels, PNG or JPEG for arrow images and JSON for errors.
       </p>
       <p class="govuk-body">
         You can import <a href="${apiSpecUrl}" class="govuk-link" download>the energy label API OpenAPI 3 document</a> into API testing tools
@@ -185,8 +185,8 @@
       <p class="govuk-body">
         If you've found a bug or you have issues accessing the energy label API, suggestions for new features or any
         other feedback, please contact
-        <a class="govuk-link" href="mailto:efficientproducts@beis.gov.uk?subject=Energy label API feedback">
-          efficientproducts@beis.gov.uk
+        <a class="govuk-link" href="mailto:efficientproducts@energysecurity.gov.uk?subject=Energy label API feedback">
+          efficientproducts@energysecurity.gov.uk
         </a>
       </p>
 

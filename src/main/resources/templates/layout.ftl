@@ -47,7 +47,7 @@
   <#local heading=pageHeading?has_content>
 
 <!DOCTYPE html>
-<html lang="en" class="govuk-template ">
+<html lang="en" class="govuk-template govuk-template--rebranded">
 
 <head>
 
@@ -56,22 +56,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0c0c" />
   <meta name="robots" content="${robotsMeta}" />
-  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/favicon.ico'/>" type="image/x-icon" />
-  <link rel="mask-icon" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-mask-icon.svg'/>" color="#0b0c0c">
-  <link rel="apple-touch-icon" sizes="180x180" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-180x180.png'/>">
-  <link rel="apple-touch-icon" sizes="167x167" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-167x167.png'/>">
-  <link rel="apple-touch-icon" sizes="152x152" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-152x152.png'/>">
-  <link rel="apple-touch-icon" href="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-apple-touch-icon.png'/>">
+  <link rel="icon" sizes="48x48" href="<@spring.url'/assets/govuk-frontend/dist/govuk/assets/rebrand/images/favicon.ico'/>" type="image/x-icon">
+  <link rel="icon" sizes="any" href="<@spring.url'/assets/govuk-frontend/dist/govuk/assets/rebrand/images/favicon.svg'/>" type="image/svg+xml">
+  <link rel="mask-icon" href="<@spring.url'/assets/govuk-frontend/dist/govuk/assets/rebrand/images/govuk-icon-mask.svg'/>" color="#0b0c0c">
+  <link rel="apple-touch-icon" sizes="180x180" href="<@spring.url'/assets/govuk-frontend/dist/govuk/assets/rebrand/images/govuk-icon-180.png'/>">
+  <link rel="manifest" href="<@spring.url'/assets/govuk-frontend/dist/govuk/assets/rebrand/manifest.json'/>">
 
-  <!--[if !IE 8]><!-->
   <link rel="stylesheet" href="<@spring.url'/assets/static/css/main.css'/>">
-  <!--<![endif]-->
 
-  <!--[if IE 8]>
-  <link rel="stylesheet" href="<@spring.url'/assets/static/css/main-ie8.css'/>">
-  <![endif]-->
-
-  <meta property="og:image" content="<@spring.url'/assets/govuk-frontend/govuk/assets/images/govuk-opengraph-image.png'/>">
+  <meta property="og:image" content="<@spring.url'/assets/govuk-frontend/dist/govuk/assets/rebrand/images/govuk-opengraph-image.png'/>">
 </head>
 
 <body class="govuk-template__body ">
@@ -88,8 +81,8 @@
     <#if phaseBanner>
       <div class="govuk-phase-banner">
         <p class="govuk-phase-banner__content">
-          <strong class="govuk-tag govuk-phase-banner__content__tag ">beta</strong>
-          <span class="govuk-phase-banner__text">This is a new service – you can <a class="govuk-link" href="mailto:efficientproducts@beis.gov.uk">email your feedback</a> to help us improve it.</span>
+          <strong class="govuk-tag govuk-phase-banner__content__tag ">Beta</strong>
+          <span class="govuk-phase-banner__text">This is a new service – you can <a class="govuk-link" href="mailto:efficientproducts@energysecurity.gov.uk">email your feedback</a> to help us improve it.</span>
         </p>
       </div>
     </#if>
@@ -192,8 +185,8 @@
 
   <@govukFooter.footer/>
 
-  <script src="<@spring.url'/assets/govuk-frontend/govuk/all.js'/>"></script>
-  <script src="<@spring.url'/assets/scripts/frontendInit.js'/>"></script>
+  <script type="module" src="<@spring.url'/assets/govuk-frontend/dist/govuk/govuk-frontend.min.js'/>"></script>
+  <script id="els-init-script" data-govuk-js-url="<@spring.url'/assets/govuk-frontend/dist/govuk/govuk-frontend.min.js'/>" type="module" src="<@spring.url'/assets/scripts/frontendInit.js'/>"></script>
   <#if googleAnalyticsEnabled>
     <script src="<@spring.url'/assets/scripts/googleAnalytics/analyticsEnabled.js'/>"></script>
   <#else>
