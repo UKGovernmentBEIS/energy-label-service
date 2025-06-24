@@ -19,6 +19,6 @@
     "gulp-sourcemaps": "^3.0.0"
   },
   "dependencies": {
-    "govuk-frontend": "^5.10.2"
+    "govuk-frontend": "^5.11.0"
   }
 }
