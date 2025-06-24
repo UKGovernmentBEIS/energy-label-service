@@ -21,7 +21,7 @@
   <div class="govuk-warning-text">
     <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
     <strong class="govuk-warning-text__text">
-      <span class="govuk-warning-text__assistive">Warning</span>
+      <span class="govuk-visually-hidden">Warning</span>
       You're responsible for making sure the energy label and fiche are calculated accurately. You must check the label
       and fiche carefully before you provide them to your customers.
     </strong>

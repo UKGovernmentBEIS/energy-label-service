@@ -1,4 +1,4 @@
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const postcss = require('gulp-postcss');
 const gulp = require('gulp');
 const sourcemaps = require('gulp-sourcemaps');
@@ -6,8 +6,8 @@ const autoprefixer = require('autoprefixer');
 const rename = require("gulp-rename");
 
 const sassOptions = {
-  outputStyle: 'expanded',
-  includePath: 'src/main/resources/scss'
+  style: 'expanded',
+  loadPaths: ['src/main/resources/scss']
 };
 
 function compileSass(exitOnError) {
@@ -43,7 +43,7 @@ function compileSass(exitOnError) {
 }
 
 gulp.task('copyGovukResources', () => {
-  return gulp.src(['node_modules/govuk-frontend/**/*']).pipe(gulp.dest('src/main/resources/public/assets/govuk-frontend'))
+  return gulp.src(['node_modules/govuk-frontend/dist/govuk/**/*'], { encoding: false }).pipe(gulp.dest('src/main/resources/public/assets/govuk-frontend/dist/govuk'))
 });
 
 gulp.task('sass', gulp.series(['copyGovukResources'], () => {

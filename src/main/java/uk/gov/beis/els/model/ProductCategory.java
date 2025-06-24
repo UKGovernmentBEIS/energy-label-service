@@ -99,12 +99,12 @@ public class ProductCategory implements Category {
 
   @Override
   public String getCategoryQuestionText() {
-    return "What type of item do you need a label for?";
+    return "What type of product do you need a label for?";
   }
 
   @Override
   public String getNoSelectionErrorMessage() {
-    return "Select a type of item";
+    return "Select a type of product";
   }
 
   @Override

@@ -2,7 +2,7 @@
 <#--https://design-system.service.gov.uk/components/breadcrumbs/-->
 <#macro breadcrumbs crumbMap>
   <#if crumbMap?size gt 1 >
-    <div class="govuk-breadcrumbs">
+    <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
       <ol class="govuk-breadcrumbs__list">
       <#list crumbMap as key, value>
         <#if key?is_last>
@@ -15,6 +15,6 @@
       </#list>
       <#--<li class="govuk-breadcrumbs__list-item" aria-current="${currentPage}">${currentPage}</li>-->
       </ol>
-    </div>
+    </nav>
   </#if>
 </#macro>

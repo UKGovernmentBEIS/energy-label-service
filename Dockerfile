@@ -1,5 +1,5 @@
 # Build steps
-FROM public.ecr.aws/docker/library/node:10 as build-frontend
+FROM public.ecr.aws/docker/library/node:22 as build-frontend
 WORKDIR /build
 COPY . .
 RUN npm install && npx gulp buildAll
