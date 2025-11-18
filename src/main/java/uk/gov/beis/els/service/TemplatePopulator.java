@@ -250,6 +250,12 @@ public class TemplatePopulator {
     return this;
   }
 
+  public TemplatePopulator applyRatingCssClassToId(String ratingClassNamePrefix, String targetElementId,  RatingClass ratingClass) {
+    TemplateUtils.getElementById(template, targetElementId).addClass(ratingClassNamePrefix + ratingClass.name());
+
+    return this;
+  }
+
   public TemplatePopulator applyCssClassToId(String elementId, String addedClass) {
     TemplateUtils.getElementById(template, elementId).addClass(addedClass);
 

@@ -56,7 +56,7 @@
 
 <#-- Template for standard product forms.
 Includes the wrapping form element, the generate label button and optionally the supplier name and model fields -->
-<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="" isPackageCalculatorForm=false>
+<#macro standardProductForm title includeSupplierNameModel=true includeRescaledInternetLabellingFields=false showInsetText=true beforeStandardInsetText="" isPackageCalculatorForm=false showInternetLabelOrientation=true>
 
   <@defaultPage pageHeading=title showInsetText=showInsetText beforeStandardInsetText=beforeStandardInsetText>
     <@form.govukForm submitUrl + modeQueryParam!"">
@@ -87,7 +87,11 @@ Includes the wrapping form element, the generate label button and optionally the
         <#if includeRescaledInternetLabellingFields>
           <@common.rescaledInternetLabellingFields/>
         </#if>
-        <@govukRadios.radio path="form.labelOrientation" radioItems=internetLabelOrientationOptions/>
+          
+        <#if showInternetLabelOrientation>
+          <@govukRadios.radio path="form.labelOrientation" radioItems=internetLabelOrientationOptions/>
+        </#if>
+        
         <@govukRadios.radio path="form.labelFormat" radioItems=internetLabelFormatOptions/>
         <@generateInternetLabelButton/>
       <#else>

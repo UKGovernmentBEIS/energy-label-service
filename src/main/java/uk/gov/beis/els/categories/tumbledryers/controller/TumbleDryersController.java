@@ -2,9 +2,9 @@ package uk.gov.beis.els.categories.tumbledryers.controller;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import jakarta.validation.Valid;
 import java.util.Collections;
 import java.util.List;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -31,10 +31,10 @@ import uk.gov.beis.els.service.DocumentRendererService;
 import uk.gov.beis.els.util.ControllerUtils;
 
 @Controller
-@RequestMapping("/categories/tumble-dryers")
+@RequestMapping("/categories/tumble-dryers/old")
 public class TumbleDryersController extends CategoryController {
 
-  private static final String BREADCRUMB_STAGE_TEXT = "Tumble dryers";
+  private static final String BREADCRUMB_STAGE_TEXT = "Old scale";
 
   private final TumbleDryersService tumbleDryersService;
   private final BreadcrumbService breadcrumbService;
@@ -46,7 +46,14 @@ public class TumbleDryersController extends CategoryController {
                                 BreadcrumbService breadcrumbService,
                                 InternetLabelService internetLabelService,
                                 DocumentRendererService documentRendererService) {
-    super(BREADCRUMB_STAGE_TEXT, breadcrumbService, TumbleDryerCategory.GET, TumbleDryersController.class);
+    super(
+        BREADCRUMB_STAGE_TEXT,
+        breadcrumbService,
+        TumbleDryerCategory.GET,
+        TumbleDryersController.class,
+        TumbleDryerTypeController.BREADCRUMB_STAGE_TEXT,
+        ReverseRouter.route(on(TumbleDryerTypeController.class).renderTumbleDryerTypeForm(null))
+    );
     this.tumbleDryersService = tumbleDryersService;
     this.breadcrumbService = breadcrumbService;
     this.internetLabelService = internetLabelService;
@@ -163,7 +170,8 @@ public class TumbleDryersController extends CategoryController {
     ControllerUtils.addErrorSummary(modelAndView, errorList);
     modelAndView.addObject("submitUrl", submitUrl);
     super.addCommonProductGuidance(modelAndView);
-    breadcrumbService.addBreadcrumbToModel(modelAndView, "Tumble dryers", ReverseRouter.route(on(TumbleDryersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
+    breadcrumbService.addBreadcrumbToModel(modelAndView, TumbleDryerTypeController.BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(TumbleDryerTypeController.class).renderTumbleDryerTypeForm(null)));
+    breadcrumbService.pushBreadcrumb(modelAndView, BREADCRUMB_STAGE_TEXT, ReverseRouter.route(on(TumbleDryersController.class).renderCategories(null)));
   }
 
 }
