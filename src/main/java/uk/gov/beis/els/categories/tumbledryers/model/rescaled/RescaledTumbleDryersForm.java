@@ -53,8 +53,8 @@ public class RescaledTumbleDryersForm extends StandardTemplateForm30Char {
   private String noiseEmissions;
 
   @FieldPrompt("Rated capacity for the eco programme at full load, in kg")
-  @Digits(integer = 2, fraction = 0, message = "Enter a rated capacity, up to 2 digits long")
-  @Schema(type = "integer")
+  @Digits(integer = 2, fraction = 1, message = "Enter a rated capacity, up to 2 digits with an optional decimal place")
+  @Schema(type = "number")
   @NotNull
   private String ecoCapacity;
 
