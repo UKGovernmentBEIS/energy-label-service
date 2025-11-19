@@ -93,7 +93,7 @@ public class TumbleDryerApiController {
 
   @Operation(
       summary = "Rescaled tumble dryers: energy label",
-      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 110mm x 220mm when printed."
+      description = "You must attach the label to the front or top of the product so that it’s easy to see. It must be at least 96mm x 192mm when printed."
   )
   @PostMapping("/rescaled/energy-label")
   public Object rescaledTumbleDryer(@RequestBody @Valid RescaledTumbleDryersForm form) {

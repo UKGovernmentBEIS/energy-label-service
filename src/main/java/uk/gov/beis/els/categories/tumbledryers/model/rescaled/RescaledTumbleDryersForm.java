@@ -14,7 +14,9 @@ import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup
 import uk.gov.beis.els.categories.tumbledryers.service.RescaledTumbleDryersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
+import uk.gov.beis.els.model.meta.StaticProductText;
 
+@StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in tumble dryer it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed.")
 @GroupSequenceProvider(RescaledTumbleDryerFromSequenceProvider.class)
 public class RescaledTumbleDryersForm extends StandardTemplateForm30Char {
 
@@ -53,8 +55,12 @@ public class RescaledTumbleDryersForm extends StandardTemplateForm30Char {
   private String noiseEmissions;
 
   @FieldPrompt("Rated capacity for the eco programme at full load, in kg")
-  @Digits(integer = 2, fraction = 1, message = "Enter a rated capacity, up to 2 digits with an optional decimal place")
-  @Schema(type = "number")
+  @Pattern(regexp = "^[1-9]?[0-9](\\.[05])?$",
+      message = "Enter a rated capacity, up to 2 digits, with an optional decimal place of either .0 or .5")
+  @Schema(
+      type = "number",
+      description = "The rated capacity, up to 2 digits, with an optional decimal place of either .0 or .5"
+  )
   @NotNull
   private String ecoCapacity;
 
