@@ -34,7 +34,7 @@ public class OpenApiConfig {
 
   @Bean
   ServerBaseUrlCustomizer serverBaseUrlCustomizer() {
-    return baseUrl -> {
+    return (baseUrl, request) -> {
       if (baseUrl.startsWith("http://localhost")) {
         return baseUrl;
       }
