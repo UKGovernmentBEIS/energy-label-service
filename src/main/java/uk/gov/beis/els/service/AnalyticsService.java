@@ -52,8 +52,8 @@ public class AnalyticsService {
         }
 
         RestTemplate restTemplate = new RestTemplateBuilder()
-            .setConnectTimeout(Duration.ofMillis(connectionTimeoutMs))
-            .setReadTimeout(Duration.ofMillis(connectionTimeoutMs))
+            .connectTimeout(Duration.ofMillis(connectionTimeoutMs))
+            .readTimeout(Duration.ofMillis(connectionTimeoutMs))
             .build();
 
         HttpHeaders headers = new HttpHeaders();
