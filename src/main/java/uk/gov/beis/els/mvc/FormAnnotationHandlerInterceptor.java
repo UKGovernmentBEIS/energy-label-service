@@ -210,6 +210,10 @@ public class FormAnnotationHandlerInterceptor implements HandlerInterceptor {
       if ("[0-9]{0,2}".equals(pattern)) {
         fieldWidths.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, "2");
       }
+      // 2 digits with optional .0 or .5 decimal
+      if ("^[1-9]?[0-9](\\.[05])?$".equals(pattern)) {
+        fieldWidths.put(FORM_MODEL_ATTRIBUTE_NAME + "." + name, "4");
+      }
     }
   }
 
