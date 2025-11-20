@@ -18,7 +18,7 @@ import uk.gov.beis.els.categories.refrigeratorsdirectsales.controller.Refrigerat
 import uk.gov.beis.els.categories.solidfuelboilers.controller.SolidFuelBoilersController;
 import uk.gov.beis.els.categories.spaceheaters.controller.SpaceHeatersController;
 import uk.gov.beis.els.categories.televisions.controller.TelevisionController;
-import uk.gov.beis.els.categories.tumbledryers.controller.TumbleDryersController;
+import uk.gov.beis.els.categories.tumbledryers.controller.TumbleDryerTypeController;
 import uk.gov.beis.els.categories.ventilationunits.controller.VentilationUnitsController;
 import uk.gov.beis.els.categories.washingmachines.controller.WashingMachinesController;
 import uk.gov.beis.els.categories.waterheaters.controller.WaterHeatersController;
@@ -80,7 +80,7 @@ public class ProductCategory implements Category {
       .add(new CategoryItem(
           "TUMBLE_DRYERS",
           "Tumble dryers",
-          ReverseRouter.route(on(TumbleDryersController.class).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult()))))
+          ReverseRouter.route(on(TumbleDryerTypeController.class).renderTumbleDryerTypeForm(null))))
       .add(new CategoryItem(
           "VENTILATION_UNITS",
           "Ventilation units",

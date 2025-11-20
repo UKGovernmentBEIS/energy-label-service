@@ -27,6 +27,8 @@ public class CategoryController {
   private final String stageText;
   private final BreadcrumbService breadcrumbService;
   private final Category category;
+  private final String previousBreadcrumbText;
+  private final String previousBreadcrumbUrl;
   private Class<? extends CategoryController> controllerClass;
 
   public CategoryController(String stageText, BreadcrumbService breadcrumbService,
@@ -35,6 +37,19 @@ public class CategoryController {
     this.breadcrumbService = breadcrumbService;
     this.category = category;
     this.controllerClass = controllerClass;
+    this.previousBreadcrumbText = null;
+    this.previousBreadcrumbUrl = null;
+  }
+
+  public CategoryController(String stageText, BreadcrumbService breadcrumbService,
+                            Category category, Class<? extends CategoryController> controllerClass,
+                            String previousBreadcrumbText, String previousBreadcrumbUrl) {
+    this.stageText = stageText;
+    this.breadcrumbService = breadcrumbService;
+    this.category = category;
+    this.controllerClass = controllerClass;
+    this.previousBreadcrumbText = previousBreadcrumbText;
+    this.previousBreadcrumbUrl = previousBreadcrumbUrl;
   }
 
   @GetMapping("")
@@ -68,7 +83,13 @@ public class CategoryController {
     ControllerUtils.addErrorSummary(modelAndView, errors);
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(controllerClass).handleCategoriesSubmit(null, ReverseRouter.emptyBindingResult())));
     modelAndView.addObject("categoryGuidanceText", category.getCategoryPageGuidanceText());
-    breadcrumbService.addLastBreadcrumbToModel(modelAndView, stageText);
+    if (previousBreadcrumbText != null && previousBreadcrumbUrl != null) {
+      breadcrumbService.addBreadcrumbToModel(modelAndView, previousBreadcrumbText, previousBreadcrumbUrl);
+      breadcrumbService.pushLastBreadcrumb(modelAndView, stageText);
+    } else {
+      breadcrumbService.addLastBreadcrumbToModel(modelAndView, stageText);
+    }
+
     return modelAndView;
   }
 }

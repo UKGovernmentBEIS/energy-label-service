@@ -49,6 +49,7 @@ public enum ProductMetadata {
   TUMBLE_DRYERS_AIR_VENTED("Tumble dryers", "Air vented tumble dryers", "Tumble dryers"),
   TUMBLE_DRYERS_CONDENSER("Tumble dryers", "Condenser tumble dryers", "Tumble dryers"),
   TUMBLE_DRYERS_GAS_FIRED("Tumble dryers", "Gas-fired tumble dryers", "Tumble dryers"),
+  TUMBLE_DRYERS_RESCALED("Tumble dryers", "Rescaled tumble dryers", "Tumble dryers"),
 
   TV("Televisions and electronic displays", "Televisions and electronic displays"),
 
