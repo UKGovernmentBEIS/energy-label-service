@@ -67,8 +67,8 @@ public class TumbleDryerTypeController {
   }
   
   public enum TumbleDryerLabelType{
-    RESCALED("A new-style rescaled label, with an energy rating from A to G"),
-    OLD("An old-style label, with an energy rating from A+++ to D");
+    RESCALED("A rescaled energy label with an energy rating from from A to G (the “easement label”). The supply of this label is covered by the enforcement easement."),
+    OLD("A label with an energy rating from A+++ to D, under assimilated Commission Delegated Regulation (EU) No 392/2012 (the “2012 label”).");
     
     private final String displayText;
     TumbleDryerLabelType(String displayText) {

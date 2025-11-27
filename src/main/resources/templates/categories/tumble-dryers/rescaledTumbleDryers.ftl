@@ -1,5 +1,9 @@
 <#include '../../layout.ftl'>
-<@common.standardProductForm title="Tumble dryers" includeRescaledInternetLabellingFields=true showInternetLabelOrientation=false>
+<#assign easementInsetText>
+  Now you have chosen to use the easement label, you will also need to use the product information sheet which accords with it.
+  You can <a href="<@spring.url'/assets/files/example.txt'/>" class="govuk-link" target="_blank">download a template product information sheet</a> to complete.
+</#assign>
+<@common.standardProductForm title="Tumble dryers" includeRescaledInternetLabellingFields=true showInternetLabelOrientation=false beforeStandardInsetText=easementInsetText>
     <@govukTextInput.textInput path="form.qrCodeUrl"/>
     <@govukSelect.select path="form.efficiencyRating" options=efficiencyRating/>
     <@govukSelect.select path="form.noiseEmissionsClass" options=noiseEmissionsClass/>
