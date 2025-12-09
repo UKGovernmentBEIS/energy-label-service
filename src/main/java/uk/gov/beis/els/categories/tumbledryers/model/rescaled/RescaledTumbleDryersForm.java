@@ -6,19 +6,33 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.groups.Default;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.group.GroupSequenceProvider;
 import uk.gov.beis.els.api.common.ApiValuesFromLegislationCategory;
-import uk.gov.beis.els.categories.common.StandardTemplateForm30Char;
+import uk.gov.beis.els.categories.common.SupplierNameForm;
+import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingForm;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.tumbledryers.service.RescaledTumbleDryersService;
 import uk.gov.beis.els.model.meta.DualModeField;
 import uk.gov.beis.els.model.meta.FieldPrompt;
 import uk.gov.beis.els.model.meta.StaticProductText;
 
+// This does not extend one of the StandardTemplateForms because the supplier name prompt has to read
+// "Supplier's trademark", unlike other products, so we have to reimplement supplierName and modelName in this form
 @StaticProductText("You must attach the label to the front or top of the product so that it’s easy to see. If it's a built-in tumble dryer it doesn't have to be attached to the product, but it must still be easy to see. Labels must be at least 96mm x 192mm when printed.")
 @GroupSequenceProvider(RescaledTumbleDryerFromSequenceProvider.class)
-public class RescaledTumbleDryersForm extends StandardTemplateForm30Char {
+public class RescaledTumbleDryersForm extends InternetLabellingForm implements SupplierNameForm {
+
+  @FieldPrompt("Supplier's trademark")
+  @NotBlank(message = "Enter a supplier trademark")
+  @Length(max = 30, message = "Supplier trademark must be 30 characters or less")
+  private String supplierName;
+
+  @FieldPrompt("Supplier's model identification code")
+  @NotBlank(message = "Enter a supplier model identification code")
+  @Length(max = 30, message = "Supplier model identification code must be 30 characters or less")
+  private String modelName;
 
   @FieldPrompt(value = "Link to the product information sheet for this product on a publicly accessible website",
       hintText = "This link will be shown as a QR code on the label. Links should be under 300 characters to make sure they can be scanned reliably.")
@@ -100,6 +114,22 @@ public class RescaledTumbleDryersForm extends StandardTemplateForm30Char {
   @Schema(type = "integer", description = "Condensation efficiency, as a percentage, rounded to the nearest integer. Only required if <code>isCondensing</code> is <code>true</code>.")
   @NotNull(groups = CondensingTumbleDryerGroup.class)
   private String condensationEfficiencyPercentage;
+
+  public String getSupplierName() {
+    return supplierName;
+  }
+
+  public void setSupplierName(String supplierName) {
+    this.supplierName = supplierName;
+  }
+
+  public String getModelName() {
+    return modelName;
+  }
+
+  public void setModelName(String modelName) {
+    this.modelName = modelName;
+  }
   
   public String getQrCodeUrl() {
     return qrCodeUrl;

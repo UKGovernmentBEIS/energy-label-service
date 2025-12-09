@@ -9,7 +9,7 @@
           <p>
             Our <a href="https://www.legislation.gov.uk/eur/2012/392" class="govuk-link" target="_blank">current legislation (opens in a new tab)</a>
             still requires use of the 2012 label for all household tumble dryers placed on the GB market. Our
-            <a href="<@spring.url'/assets/files/example.txt'/>" class="govuk-link" download>easement (opens in a new tab)</a>,
+            <a href="<@spring.url'/assets/files/tumble-dryer-easement-notice.pdf'/>" class="govuk-link" target="_blank">easement (PDF, opens in a new tab)</a>,
             however, confirms that we will not take enforcement action if you choose to use the easement label instead.
           </p>
           <p>
@@ -26,7 +26,7 @@
           </p>
           <p>
             Further information is provided in the
-            <a href="<@spring.url'/assets/files/example.txt'/>" class="govuk-link" download>enforcement easement note  (opens in a new tab)</a>.
+            <a href="<@spring.url'/assets/files/tumble-dryer-easement-notice.pdf'/>" class="govuk-link" target="_blank">enforcement easement note (PDF, opens in a new tab)</a>.
           </p>
         </@govukDetails.details>
 
