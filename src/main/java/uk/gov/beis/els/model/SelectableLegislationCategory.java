@@ -47,13 +47,13 @@ public class SelectableLegislationCategory extends LegislationCategory {
   }
 
   public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
-    super(primaryRatingRange, secondaryRatingRange, InternetLabelTemplate.ORIGINAL);
+    super(primaryRatingRange, secondaryRatingRange, null, InternetLabelTemplate.ORIGINAL);
     this.id = id;
     this.displayName = displayName;
   }
 
   public SelectableLegislationCategory(String id, String displayName, RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
-    super(primaryRatingRange, secondaryRatingRange, internetLabelTemplate);
+    super(primaryRatingRange, secondaryRatingRange, null, internetLabelTemplate);
     this.id = id;
     this.displayName = displayName;
   }

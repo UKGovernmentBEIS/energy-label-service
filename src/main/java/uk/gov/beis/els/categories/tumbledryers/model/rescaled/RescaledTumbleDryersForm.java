@@ -53,6 +53,19 @@ public class RescaledTumbleDryersForm extends InternetLabellingForm implements S
   @Schema(type = "integer")
   @NotNull
   private String energyConsumptionPer100Cycles;
+
+  @FieldPrompt(value = "Does the model have a repairability rating?")
+  @NotNull(message = "Specify if the model has a repairability rating")
+  private Boolean hasRepairabilityRating;
+
+  @FieldPrompt("Repairability rating")
+  @NotBlank(message = "Select a repairability rating", groups = RepairabilityRatingTumbleDryerGroup.class)
+  @ApiValuesFromLegislationCategory(
+      serviceClass = RescaledTumbleDryersService.class,
+      useTertiaryRange = true
+  )
+  @Schema(description = "The repairability rating. Only required if <code>hasRepairabilityRating</code> is <code>true</code>.")
+  private String repairabilityRating;
   
   @FieldPrompt("Airborne acoustic noise emission class")
   @NotBlank(message = "Select an airborne acoustic noise emission class")
@@ -153,6 +166,22 @@ public class RescaledTumbleDryersForm extends InternetLabellingForm implements S
 
   public void setEnergyConsumptionPer100Cycles(String energyConsumptionPer100Cycles) {
     this.energyConsumptionPer100Cycles = energyConsumptionPer100Cycles;
+  }
+
+  public Boolean getHasRepairabilityRating() {
+    return hasRepairabilityRating;
+  }
+
+  public void setHasRepairabilityRating(Boolean hasRepairabilityRating) {
+    this.hasRepairabilityRating = hasRepairabilityRating;
+  }
+
+  public String getRepairabilityRating() {
+    return repairabilityRating;
+  }
+
+  public void setRepairabilityRating(String repairabilityRating) {
+    this.repairabilityRating = repairabilityRating;
   }
 
   public String getNoiseEmissionsClass() {

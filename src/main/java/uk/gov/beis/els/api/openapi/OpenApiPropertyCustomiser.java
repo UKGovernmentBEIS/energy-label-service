@@ -119,6 +119,8 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
 
             if (apiValueAnnotation.useSecondaryRange()) {
               range = legislationCategory.getSecondaryRatingRange();
+            } else if (apiValueAnnotation.useTertiaryRange()) {
+              range = legislationCategory.getTertiaryRatingRange();
             } else {
               range = legislationCategory.getPrimaryRatingRange();
             }

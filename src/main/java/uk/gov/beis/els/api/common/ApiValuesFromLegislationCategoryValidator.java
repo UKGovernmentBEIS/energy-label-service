@@ -24,6 +24,8 @@ public class ApiValuesFromLegislationCategoryValidator implements ConstraintVali
 
     if (constraintAnnotation.useSecondaryRange()) {
       range = legislationCategory.getSecondaryRatingRange();
+    } else if (constraintAnnotation.useTertiaryRange()) {
+      range = legislationCategory.getTertiaryRatingRange();
     } else {
       range = legislationCategory.getPrimaryRatingRange();
     }

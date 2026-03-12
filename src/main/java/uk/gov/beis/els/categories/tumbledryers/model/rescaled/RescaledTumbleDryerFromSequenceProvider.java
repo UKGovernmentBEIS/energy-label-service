@@ -13,6 +13,10 @@ public class RescaledTumbleDryerFromSequenceProvider implements DefaultGroupSequ
     if (form != null && BooleanUtils.isTrue(form.getIsCondensing())) {
       sequence.add(CondensingTumbleDryerGroup.class);
     }
+    
+    if (form != null && BooleanUtils.isTrue(form.getHasRepairabilityRating())) {
+      sequence.add(RepairabilityRatingTumbleDryerGroup.class);
+    }
 
     sequence.add(RescaledTumbleDryersForm.class);
     return sequence;

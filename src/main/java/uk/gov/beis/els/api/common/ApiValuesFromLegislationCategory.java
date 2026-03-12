@@ -36,4 +36,6 @@ public @interface ApiValuesFromLegislationCategory{
    * @return whether to use the second range of a LegislationCategory for efficiency ratings
    */
   boolean useSecondaryRange() default false;
+  
+  boolean useTertiaryRange() default false;
 }
