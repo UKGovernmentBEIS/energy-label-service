@@ -213,7 +213,11 @@ public class OpenApiPropertyCustomiser implements PropertyCustomizer {
         schema.setExample("1");
       }
     } else if (schema.getType().equals("number")) { // process numbers (i.e. those that allow decimal places
-      schema.setExample("1.1");
+      if (propertyName.equals("ecoCapacity")) {
+        schema.setExample("1.5"); // ecoCapacity is special and requires the decimal to be .0 or .5 
+      } else {
+        schema.setExample("1.1");
+      }
     } else if (propertyName.equals("qrCodeUrl")) {
       schema.setExample("https://example.com"); // default example for QR code website fields
     } else if (schema.getType().equals("string")) {
