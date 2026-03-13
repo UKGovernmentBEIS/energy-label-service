@@ -19,8 +19,8 @@
           </@govukFieldset.fieldset>
       </div>
     </#if>
-    <@govukRadios.radioYesNo path="form.hasRepairabilityRating" hiddenQuestionsWithYesSelected=true>
-        <@govukSelect.select path="form.repairabilityRating" options=repairabilityRating/>
+    <@govukRadios.radioYesNo path="form.hasRepairabilityClass" hiddenQuestionsWithYesSelected=true>
+        <@govukSelect.select path="form.repairabilityClass" options=repairabilityClass/>
     </@govukRadios.radioYesNo>
     <@govukTextInput.textInput path="form.noiseEmissions"/>
     <@govukRadios.radioYesNo path="form.isCondensing" hiddenQuestionsWithYesSelected=true>

@@ -54,18 +54,18 @@ public class RescaledTumbleDryersForm extends InternetLabellingForm implements S
   @NotNull
   private String energyConsumptionPer100Cycles;
 
-  @FieldPrompt(value = "Does the model have a repairability rating?")
-  @NotNull(message = "Specify if the model has a repairability rating")
-  private Boolean hasRepairabilityRating;
+  @FieldPrompt(value = "Does this tumble dryer have a repairability class?", hintText = "A repairability class is required for all tumble dryers first placed on the market after 19 January 2027")
+  @NotNull(message = "Specify if this tumble dryer has a repairability class")
+  private Boolean hasRepairabilityClass;
 
-  @FieldPrompt("Repairability rating")
-  @NotBlank(message = "Select a repairability rating", groups = RepairabilityRatingTumbleDryerGroup.class)
+  @FieldPrompt("Repairability class")
+  @NotBlank(message = "Select a repairability class", groups = RepairabilityClassTumbleDryerGroup.class)
   @ApiValuesFromLegislationCategory(
       serviceClass = RescaledTumbleDryersService.class,
       useTertiaryRange = true
   )
-  @Schema(description = "The repairability rating. Only required if <code>hasRepairabilityRating</code> is <code>true</code>.")
-  private String repairabilityRating;
+  @Schema(description = "The repairability class. Only required if <code>hasRepairabilityClass</code> is <code>true</code>.")
+  private String repairabilityClass;
   
   @FieldPrompt("Airborne acoustic noise emission class")
   @NotBlank(message = "Select an airborne acoustic noise emission class")
@@ -168,20 +168,20 @@ public class RescaledTumbleDryersForm extends InternetLabellingForm implements S
     this.energyConsumptionPer100Cycles = energyConsumptionPer100Cycles;
   }
 
-  public Boolean getHasRepairabilityRating() {
-    return hasRepairabilityRating;
+  public Boolean getHasRepairabilityClass() {
+    return hasRepairabilityClass;
   }
 
-  public void setHasRepairabilityRating(Boolean hasRepairabilityRating) {
-    this.hasRepairabilityRating = hasRepairabilityRating;
+  public void setHasRepairabilityClass(Boolean hasRepairabilityClass) {
+    this.hasRepairabilityClass = hasRepairabilityClass;
   }
 
-  public String getRepairabilityRating() {
-    return repairabilityRating;
+  public String getRepairabilityClass() {
+    return repairabilityClass;
   }
 
-  public void setRepairabilityRating(String repairabilityRating) {
-    this.repairabilityRating = repairabilityRating;
+  public void setRepairabilityClass(String repairabilityClass) {
+    this.repairabilityClass = repairabilityClass;
   }
 
   public String getNoiseEmissionsClass() {

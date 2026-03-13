@@ -96,7 +96,7 @@ public class RescaledTumbleDryersController {
     modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
     modelAndView.addObject("noiseEmissionsClass", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange()));
     modelAndView.addObject("condensationEfficiencyClass", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange()));
-    modelAndView.addObject("repairabilityRating", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getTertiaryRatingRange()));
+    modelAndView.addObject("repairabilityClass", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getTertiaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(RescaledTumbleDryersController.class).renderRescaledTumbleDryerForm(null)));
 
     ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);

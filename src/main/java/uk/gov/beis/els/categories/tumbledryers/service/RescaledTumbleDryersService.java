@@ -28,19 +28,19 @@ public class RescaledTumbleDryersService {
   public ProcessedEnergyLabelDocument generateHtml(RescaledTumbleDryersForm form) {
     var templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/tumble-dryers-2025.svg"));
     
-    if (form.getHasRepairabilityRating() && form.getIsCondensing()) {
+    if (form.getHasRepairabilityClass() && form.getIsCondensing()) {
         templatePopulator
             .applyRatingCssClassToId("subscale", "condensingClass", RatingClass.getEnum(form.getCondensationEfficiencyClass()))
-            .applyRatingCssClassToId("subscale", "repairabilityClass", RatingClass.getEnum(form.getRepairabilityRating()));
-    } else if (!form.getHasRepairabilityRating() && form.getIsCondensing()) {
+            .applyRatingCssClassToId("subscale", "repairabilityClass", RatingClass.getEnum(form.getRepairabilityClass()));
+    } else if (!form.getHasRepairabilityClass() && form.getIsCondensing()) {
       templatePopulator
           .applyRatingCssClassToId("subscale", "condensingClass", RatingClass.getEnum(form.getCondensationEfficiencyClass()))
           .removeElementById("repairabilityIcon")
           .setElementTranslate("condensingIcon", -42, 0)
           .setElementTranslate("soundIcon", -24, 0);
-    } else if (form.getHasRepairabilityRating() && !form.getIsCondensing()) {
+    } else if (form.getHasRepairabilityClass() && !form.getIsCondensing()) {
       templatePopulator
-          .applyRatingCssClassToId("subscale", "repairabilityClass", RatingClass.getEnum(form.getRepairabilityRating()))
+          .applyRatingCssClassToId("subscale", "repairabilityClass", RatingClass.getEnum(form.getRepairabilityClass()))
           .removeElementById("condensingIcon")
           .setElementTranslate("repairabilityIcon", 43, 0)
           .setElementTranslate("soundIcon", -24, 0);
