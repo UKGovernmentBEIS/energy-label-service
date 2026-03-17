@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import uk.gov.beis.els.categories.dishwashers.service.DishwashersService;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabelOrientation;
 import uk.gov.beis.els.categories.internetlabelling.model.InternetLabellingGroup;
 import uk.gov.beis.els.categories.internetlabelling.model.RescaledInternetLabellingGroup;
@@ -94,9 +93,10 @@ public class RescaledTumbleDryersController {
   private ModelAndView getRescaledTumbleDryerModelAndView(List<FieldError> errors) {
     var modelAndView = new ModelAndView("categories/tumble-dryers/rescaledTumbleDryers");
 
-    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(DishwashersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
-    modelAndView.addObject("noiseEmissionsClass", ControllerUtils.ratingRangeToSelectionMap(DishwashersService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange()));
-    modelAndView.addObject("condensationEfficiencyClass", ControllerUtils.ratingRangeToSelectionMap(DishwashersService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange()));
+    modelAndView.addObject("efficiencyRating", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getPrimaryRatingRange()));
+    modelAndView.addObject("noiseEmissionsClass", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange()));
+    modelAndView.addObject("condensationEfficiencyClass", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getSecondaryRatingRange()));
+    modelAndView.addObject("repairabilityClass", ControllerUtils.ratingRangeToSelectionMap(RescaledTumbleDryersService.LEGISLATION_CATEGORY_CURRENT.getTertiaryRatingRange()));
     modelAndView.addObject("submitUrl", ReverseRouter.route(on(RescaledTumbleDryersController.class).renderRescaledTumbleDryerForm(null)));
 
     ControllerUtils.addShowRescaledInternetLabelGuidance(modelAndView);

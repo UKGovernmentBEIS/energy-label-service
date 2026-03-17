@@ -53,6 +53,19 @@ public class RescaledTumbleDryersForm extends InternetLabellingForm implements S
   @Schema(type = "integer")
   @NotNull
   private String energyConsumptionPer100Cycles;
+
+  @FieldPrompt(value = "Does this tumble dryer have a repairability class?", hintText = "A repairability class is required for all tumble dryers first placed on the market after 19 January 2027")
+  @NotNull(message = "Specify if this tumble dryer has a repairability class")
+  private Boolean hasRepairabilityClass;
+
+  @FieldPrompt("Repairability class")
+  @NotBlank(message = "Select a repairability class", groups = RepairabilityClassTumbleDryerGroup.class)
+  @ApiValuesFromLegislationCategory(
+      serviceClass = RescaledTumbleDryersService.class,
+      useTertiaryRange = true
+  )
+  @Schema(description = "The repairability class. Only required if <code>hasRepairabilityClass</code> is <code>true</code>.")
+  private String repairabilityClass;
   
   @FieldPrompt("Airborne acoustic noise emission class")
   @NotBlank(message = "Select an airborne acoustic noise emission class")
@@ -153,6 +166,22 @@ public class RescaledTumbleDryersForm extends InternetLabellingForm implements S
 
   public void setEnergyConsumptionPer100Cycles(String energyConsumptionPer100Cycles) {
     this.energyConsumptionPer100Cycles = energyConsumptionPer100Cycles;
+  }
+
+  public Boolean getHasRepairabilityClass() {
+    return hasRepairabilityClass;
+  }
+
+  public void setHasRepairabilityClass(Boolean hasRepairabilityClass) {
+    this.hasRepairabilityClass = hasRepairabilityClass;
+  }
+
+  public String getRepairabilityClass() {
+    return repairabilityClass;
+  }
+
+  public void setRepairabilityClass(String repairabilityClass) {
+    this.repairabilityClass = repairabilityClass;
   }
 
   public String getNoiseEmissionsClass() {

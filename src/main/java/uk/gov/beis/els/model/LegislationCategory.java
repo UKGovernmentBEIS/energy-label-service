@@ -4,6 +4,7 @@ public class LegislationCategory {
 
   private final RatingClassRange primaryRatingRange;
   private final RatingClassRange secondaryRatingRange;
+  private final RatingClassRange tertiaryRatingRange;
   private final InternetLabelTemplate internetLabelTemplate;
 
   public static Boolean isPrimaryRatingClassValid(String ratingClass, LegislationCategory legislationCategory) {
@@ -17,24 +18,29 @@ public class LegislationCategory {
   }
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange) {
-    return new LegislationCategory(primaryRatingRange, null, InternetLabelTemplate.ORIGINAL);
+    return new LegislationCategory(primaryRatingRange, null, null, InternetLabelTemplate.ORIGINAL);
   }
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange) {
-    return new LegislationCategory( primaryRatingRange, secondaryRatingRange, InternetLabelTemplate.ORIGINAL);
+    return new LegislationCategory( primaryRatingRange, secondaryRatingRange, null, InternetLabelTemplate.ORIGINAL);
   }
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
-    return new LegislationCategory(primaryRatingRange, null, internetLabelTemplate);
+    return new LegislationCategory(primaryRatingRange, null, null, internetLabelTemplate);
   }
 
   public static LegislationCategory of(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
-    return new LegislationCategory( primaryRatingRange, secondaryRatingRange, internetLabelTemplate);
+    return new LegislationCategory( primaryRatingRange, secondaryRatingRange, null, internetLabelTemplate);
   }
 
-  public LegislationCategory(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
+  public static LegislationCategory of(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, RatingClassRange tertiaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
+    return new LegislationCategory( primaryRatingRange, secondaryRatingRange, tertiaryRatingRange, internetLabelTemplate);
+  }
+
+  public LegislationCategory(RatingClassRange primaryRatingRange, RatingClassRange secondaryRatingRange, RatingClassRange tertiaryRatingRange, InternetLabelTemplate internetLabelTemplate) {
     this.primaryRatingRange = primaryRatingRange;
     this.secondaryRatingRange = secondaryRatingRange;
+    this.tertiaryRatingRange = tertiaryRatingRange;
     this.internetLabelTemplate = internetLabelTemplate;
   }
 
@@ -44,6 +50,10 @@ public class LegislationCategory {
 
   public RatingClassRange getSecondaryRatingRange() {
     return secondaryRatingRange;
+  }
+  
+  public RatingClassRange getTertiaryRatingRange() {
+    return tertiaryRatingRange;
   }
 
   public InternetLabelTemplate getInternetLabelTemplate() { return internetLabelTemplate; }

@@ -16,6 +16,7 @@ public class RescaledTumbleDryersService {
   public static final LegislationCategory LEGISLATION_CATEGORY_CURRENT = LegislationCategory.of(
       RatingClassRange.of(RatingClass.A, RatingClass.G),
       RatingClassRange.of(RatingClass.A, RatingClass.D),
+      RatingClassRange.of(RatingClass.A, RatingClass.E),
       InternetLabelTemplate.RESCALED);
   
   private final TemplateParserService templateParserService;
@@ -27,17 +28,25 @@ public class RescaledTumbleDryersService {
   public ProcessedEnergyLabelDocument generateHtml(RescaledTumbleDryersForm form) {
     var templatePopulator = new TemplatePopulator(templateParserService.parseTemplate("labels/tumble-dryers/tumble-dryers-2025.svg"));
     
-    // Repairability omitted during easement period.
-    templatePopulator.removeElementById("repairabilityIcon");
-    
-    if (form.getIsCondensing()) {
+    if (form.getHasRepairabilityClass() && form.getIsCondensing()) {
         templatePopulator
             .applyRatingCssClassToId("subscale", "condensingClass", RatingClass.getEnum(form.getCondensationEfficiencyClass()))
-            .setText("condensingPercent", form.getCondensationEfficiencyPercentage())
-            .setElementTranslate("condensingIcon", -42, 0)
-            .setElementTranslate("soundIcon", -24, 0);
-    } else {
+            .applyRatingCssClassToId("subscale", "repairabilityClass", RatingClass.getEnum(form.getRepairabilityClass()));
+    } else if (!form.getHasRepairabilityClass() && form.getIsCondensing()) {
       templatePopulator
+          .applyRatingCssClassToId("subscale", "condensingClass", RatingClass.getEnum(form.getCondensationEfficiencyClass()))
+          .removeElementById("repairabilityIcon")
+          .setElementTranslate("condensingIcon", -42, 0)
+          .setElementTranslate("soundIcon", -24, 0);
+    } else if (form.getHasRepairabilityClass() && !form.getIsCondensing()) {
+      templatePopulator
+          .applyRatingCssClassToId("subscale", "repairabilityClass", RatingClass.getEnum(form.getRepairabilityClass()))
+          .removeElementById("condensingIcon")
+          .setElementTranslate("repairabilityIcon", 43, 0)
+          .setElementTranslate("soundIcon", -24, 0);
+    }  else {
+      templatePopulator
+          .removeElementById("repairabilityIcon")
           .removeElementById("condensingIcon")
           .setElementTranslate("soundIcon", -75.5, 0);
     }
