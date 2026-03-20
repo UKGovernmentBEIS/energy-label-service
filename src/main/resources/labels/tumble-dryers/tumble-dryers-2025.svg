@@ -1,11 +1,6 @@
 <svg  id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="96mm" height="192mm" viewBox="0 0 272.12601 544.25201" data-rating-increment="28.3333" data-supplier-model-chars-per-row="20">
   <defs>
     <style>
-      /* SI number not shown on labels until the SI is laid */
-      #siNumber {
-        display: none;
-      }
-
       .subscale {
         text-anchor: middle;
         letter-spacing: 0.45px;
@@ -322,6 +317,6 @@
     </g>
   </g>
   <g id="siNumber">
-    <text class="cls-27" transform="translate(259.06641 493.62747) rotate(90)">2025 No. XXX</text>
+    <text class="cls-27" transform="translate(259.06641 493.62747) rotate(90)">2026 No. 318</text>
   </g>
 </svg>
