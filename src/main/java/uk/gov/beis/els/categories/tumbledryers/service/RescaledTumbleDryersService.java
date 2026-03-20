@@ -31,10 +31,12 @@ public class RescaledTumbleDryersService {
     if (form.getHasRepairabilityClass() && form.getIsCondensing()) {
         templatePopulator
             .applyRatingCssClassToId("subscale", "condensingClass", RatingClass.getEnum(form.getCondensationEfficiencyClass()))
+            .setText("condensingPercent", form.getCondensationEfficiencyPercentage())
             .applyRatingCssClassToId("subscale", "repairabilityClass", RatingClass.getEnum(form.getRepairabilityClass()));
     } else if (!form.getHasRepairabilityClass() && form.getIsCondensing()) {
       templatePopulator
           .applyRatingCssClassToId("subscale", "condensingClass", RatingClass.getEnum(form.getCondensationEfficiencyClass()))
+          .setText("condensingPercent", form.getCondensationEfficiencyPercentage())
           .removeElementById("repairabilityIcon")
           .setElementTranslate("condensingIcon", -42, 0)
           .setElementTranslate("soundIcon", -24, 0);
