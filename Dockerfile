@@ -22,4 +22,4 @@ RUN apk add --update tzdata \
 RUN adduser -S elg
 USER elg
 
-ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
+ENTRYPOINT exec java $JAVA_OPTS -XX:-UseBASE64Intrinsics -jar app.jar
